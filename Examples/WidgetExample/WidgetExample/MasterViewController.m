@@ -10,6 +10,8 @@
 
 #import "DetailViewController.h"
 
+#import "UploadcareWidget.h"
+
 @interface MasterViewController () {
     NSMutableArray *_objects;
 }
@@ -29,10 +31,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showUploadCare:)];
     self.navigationItem.rightBarButtonItem = addButton;
 }
 
@@ -55,6 +57,15 @@
     [_objects insertObject:[NSDate date] atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+#pragma mark - Actions
+
+- (void)showUploadCare:(id)sender {
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[UploadcareWidget alloc] init]];
+    
+    [[self presentedViewController] setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    [self presentModalViewController:navigationController animated:YES];
 }
 
 #pragma mark - Table View
@@ -101,22 +112,6 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
 }
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

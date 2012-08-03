@@ -22,6 +22,9 @@
 		5424F42015CC122700394084 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5424F3FB15CC122600394084 /* Foundation.framework */; };
 		5424F42815CC122700394084 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5424F42615CC122700394084 /* InfoPlist.strings */; };
 		5424F42B15CC122700394084 /* WidgetExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5424F42A15CC122700394084 /* WidgetExampleTests.m */; };
+		5424F44015CC133600394084 /* UploadcareWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 5424F43E15CC133600394084 /* UploadcareWidget.m */; };
+		5424F44115CC133600394084 /* UploadcareWidget.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5424F43F15CC133600394084 /* UploadcareWidget.xib */; };
+		5424F44415CC2A2F00394084 /* UploadcareKit.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = 5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,10 @@
 		5424F42715CC122700394084 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5424F42915CC122700394084 /* WidgetExampleTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WidgetExampleTests.h; sourceTree = "<group>"; };
 		5424F42A15CC122700394084 /* WidgetExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WidgetExampleTests.m; sourceTree = "<group>"; };
+		5424F43D15CC133600394084 /* UploadcareWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UploadcareWidget.h; path = ../../../UploadcareWidget/UploadcareWidget.h; sourceTree = "<group>"; };
+		5424F43E15CC133600394084 /* UploadcareWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadcareWidget.m; path = ../../../UploadcareWidget/UploadcareWidget.m; sourceTree = "<group>"; };
+		5424F43F15CC133600394084 /* UploadcareWidget.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UploadcareWidget.xib; path = ../../../UploadcareWidget/UploadcareWidget.xib; sourceTree = "<group>"; };
+		5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = file; name = UploadcareKit.xcodeproj; path = ../../UploadcareKit/UploadcareKit.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +93,7 @@
 		5424F3EA15CC122600394084 = {
 			isa = PBXGroup;
 			children = (
+				5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */,
 				5424F3FF15CC122600394084 /* WidgetExample */,
 				5424F42315CC122700394084 /* WidgetExampleTests */,
 				5424F3F815CC122600394084 /* Frameworks */,
@@ -116,6 +124,7 @@
 		5424F3FF15CC122600394084 /* WidgetExample */ = {
 			isa = PBXGroup;
 			children = (
+				5424F44215CC134400394084 /* UploadcareWidget */,
 				5424F40815CC122700394084 /* AppDelegate.h */,
 				5424F40915CC122700394084 /* AppDelegate.m */,
 				5424F40B15CC122700394084 /* MasterViewController.h */,
@@ -157,6 +166,16 @@
 				5424F42615CC122700394084 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5424F44215CC134400394084 /* UploadcareWidget */ = {
+			isa = PBXGroup;
+			children = (
+				5424F43D15CC133600394084 /* UploadcareWidget.h */,
+				5424F43E15CC133600394084 /* UploadcareWidget.m */,
+				5424F43F15CC133600394084 /* UploadcareWidget.xib */,
+			);
+			name = UploadcareWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +252,8 @@
 				5424F40415CC122700394084 /* InfoPlist.strings in Resources */,
 				5424F41315CC122700394084 /* MasterViewController.xib in Resources */,
 				5424F41615CC122700394084 /* DetailViewController.xib in Resources */,
+				5424F44115CC133600394084 /* UploadcareWidget.xib in Resources */,
+				5424F44415CC2A2F00394084 /* UploadcareKit.xcodeproj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +292,7 @@
 				5424F40A15CC122700394084 /* AppDelegate.m in Sources */,
 				5424F40D15CC122700394084 /* MasterViewController.m in Sources */,
 				5424F41015CC122700394084 /* DetailViewController.m in Sources */,
+				5424F44015CC133600394084 /* UploadcareWidget.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +406,7 @@
 				GCC_PREFIX_HEADER = "WidgetExample/WidgetExample-Prefix.pch";
 				INFOPLIST_FILE = "WidgetExample/WidgetExample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ./../../UploadcareKit/UploadcareKit;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -395,6 +418,7 @@
 				GCC_PREFIX_HEADER = "WidgetExample/WidgetExample-Prefix.pch";
 				INFOPLIST_FILE = "WidgetExample/WidgetExample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ./../../UploadcareKit/UploadcareKit;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

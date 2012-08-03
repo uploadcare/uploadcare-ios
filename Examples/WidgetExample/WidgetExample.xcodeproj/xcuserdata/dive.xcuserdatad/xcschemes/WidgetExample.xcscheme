@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5424F3A715CC11B500394084"
+               BlueprintIdentifier = "5424F3F415CC122600394084"
                BuildableName = "WidgetExample.app"
                BlueprintName = "WidgetExample"
                ReferencedContainer = "container:WidgetExample.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5424F3C815CC11B500394084"
+               BlueprintIdentifier = "5424F41B15CC122700394084"
                BuildableName = "WidgetExampleTests.octest"
                BlueprintName = "WidgetExampleTests"
                ReferencedContainer = "container:WidgetExample.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5424F3A715CC11B500394084"
+            BlueprintIdentifier = "5424F3F415CC122600394084"
             BuildableName = "WidgetExample.app"
             BlueprintName = "WidgetExample"
             ReferencedContainer = "container:WidgetExample.xcodeproj">
@@ -57,12 +57,11 @@
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
-      enableOpenGLFrameCaptureMode = "0"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5424F3A715CC11B500394084"
+            BlueprintIdentifier = "5424F3F415CC122600394084"
             BuildableName = "WidgetExample.app"
             BlueprintName = "WidgetExample"
             ReferencedContainer = "container:WidgetExample.xcodeproj">
@@ -80,7 +79,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5424F3A715CC11B500394084"
+            BlueprintIdentifier = "5424F3F415CC122600394084"
             BuildableName = "WidgetExample.app"
             BlueprintName = "WidgetExample"
             ReferencedContainer = "container:WidgetExample.xcodeproj">
