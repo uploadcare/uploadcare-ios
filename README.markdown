@@ -4,10 +4,15 @@
 
 We've made it easy to setup the UploadcareKit iOS SDK for Xcode by including an example app that you can use as a template. Before you can get started, go to [Uploadcare Sign Up](http://uploadcare.com/accounts/create/) and register your new app. After registration you'll get public and secret keys that allow you to connect to Uploadcare API.
 
-####Build and run the example app
-The example project that included in the SDK contains all you need to understand basics of usage. The project is called SimpleExample and contains an example of how to upload file from your local storage, upload from URL, retrieve list of files from Uploadcare API, keep files, delete it and get file info.
+####Usage
+There are two ways to use UploadcareKit iOS SDK:
+ * add UploadcareKit project direct to your project (with all sources and dependencies), just read about it above;
+ * or connect it via [Static Library with Headers](#arc_static) (for non-ARC projects or for different reasons).
 
-Just open UploadcareKit.xcworkspace and select SimpleExample from build targets. Find ViewController.m in SimpleExample project, then goto viewDidLoad method and fill in the values for publicKey and secretKey with your app's key and secret.
+####Build and run the example app
+The example project that included in the SDK contains all you need to understand basics of usage. The project is called ``` SimpleExample ``` and contains an example of how to upload file from your local storage, upload from URL, retrieve list of files from Uploadcare API, keep files, delete it and get file info.
+
+Just open ```UploadcareKit.xcworkspace``` and select ```SimpleExample``` from build targets. Find ```ViewController.m``` in ```SimpleExample``` project, then goto ```viewDidLoad``` method and fill in the values for publicKey and secretKey with your app's key and secret.
 
 ``` objective-c
 - (void)viewDidLoad
@@ -25,16 +30,16 @@ Now you can build and run the example. Once running, make sure you can start the
 Warning! You must specify public key and secret key! All you need to know you can find in documentation.
 ```
 
-Once you've successfully can make a requests, you can investigate app with abilities to upload files, getting list of local history, retrieve file list from Uploadcare API, delete of keep files. So, just have fun, but do not forget to check out the source code of SimpleExample. It's really simple. You'll see.
+Once you can successfully make requests, you can investigate app with abilities to upload files, getting list of local history, retrieve file list from Uploadcare API, delete of keep files. So, just have fun, but do not forget to check out the source code of ```SimpleExample```. It's really simple. You'll see.
 
 ####Adding the Uploadcare SDK for iOS to your project
 Now, when we know that the Uploadcare SDK is working, you can add it to your own project. Just a few simple steps:
 
 - open your project in Xcode;
-- navigate to where you clone the SDK, goto UploadcareKit folder and drag the UploadcareKit.xcodeproj into your project in Xcode;
+- navigate to where you clone the SDK, goto ```UploadcareKit``` folder and drag the ```UploadcareKit.xcodeproj``` into your project in Xcode;
 - you can select Copy items into destination group's folder or not, as you want (if not, you can just update UploadcareKit SDK from Github and have fresh version in very easy way);
 - press Add button
-- add UploadcareKit.a file to project dependencies. To do this in Xcode 4, select your project file in the file explorer, select your target, and select the Build Phases sub-tab. Under Link Binary with Libraries, press the + button, select libUploadcareKit.a, and press Add.
+- add ```UploadcareKit.a``` file to project dependencies. To do this in Xcode 4, select your project file in the file explorer, select your target, and select the Build Phases sub-tab. Under Link Binary with Libraries, press the + button, select ```libUploadcareKit.a```, and press Add.
 
 ## Example Usage
 
@@ -152,17 +157,17 @@ Now that you've seen how to perform all the basic operations, you're ready to st
 
 ## Requirements
 
-UploadcareKit for iOS requires either iOS 4.3 and above. Project compatible with Xcode 4.3 and above. 
+UploadcareKit for iOS requires either ```iOS 4.3``` and above. Project compatible with ```Xcode 4.3``` and above. 
 
 UploadcareKit uses:
 
 * [AFNetworking](http://github.com/AFNetworking/AFNetworking/)
 * [JSONKit](https://github.com/johnezang/JSONKit)
 
-### ARC Support and Static Library
+### <a id="arc_static">ARC Support and Static Library</a>
 
 UploadcareKit use ARC feature. So, if you want to use it with non-ARC project or just want to use as static library, you can do it.   
-Navigate to #LIBRARY_DIR/UploadcareKit and you'll see build_uploadcarekit_ios_sdk_static_lib.sh script. Open your favourite terminal, goto #PROJECT_DIR/UploadcareKit and run ./build_uploadcarekit_ios_sdk_static_lib.sh, you'll see build log with some output:
+Navigate to ``` #LIBRARY_DIR/UploadcareKit ``` and you'll see ``` build_uploadcarekit_ios_sdk_static_lib.sh ``` script. Open your favourite terminal, goto ``` #PROJECT_DIR/UploadcareKit ``` and run ``` ./build_uploadcarekit_ios_sdk_static_lib.sh ```, you'll see build log with some output:
 
 ```` Shell
 ** BUILD SUCCEEDED **
