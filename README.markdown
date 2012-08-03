@@ -7,7 +7,7 @@ We've made it easy to setup the UploadcareKit iOS SDK for Xcode by including an 
 ####Usage
 There are two ways to use UploadcareKit iOS SDK:
  * add UploadcareKit project direct to your project (with all sources and dependencies), just read about it above;
- * or connect it via [Static Library with Headers](#arc_static) (for non-ARC projects or for different reasons).
+ * or connect it via [Static Library with Headers](#arc-support-and-static-library) (for non-ARC projects or for different reasons).
 
 ####Build and run the example app
 The example project that included in the SDK contains all you need to understand basics of usage. The project is called ``` SimpleExample ``` and contains an example of how to upload file from your local storage, upload from URL, retrieve list of files from Uploadcare API, keep files, delete it and get file info.
