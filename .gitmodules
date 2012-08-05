@@ -1,0 +1,6 @@
+[submodule "UploadcareKit/Vendors/AFNetworking"]
+	path = UploadcareKit/Vendors/AFNetworking
+	url = https://github.com/AFNetworking/AFNetworking.git
+[submodule "UploadcareKit/Vendors/JSONKit"]
+	path = UploadcareKit/Vendors/JSONKit
+	url = https://github.com/johnezang/JSONKit.git
