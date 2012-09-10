@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UploadcareWidget : UIViewController <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate>
+@interface UploadcareWidget : UIViewController <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UIAlertViewDelegate>
 
 @end

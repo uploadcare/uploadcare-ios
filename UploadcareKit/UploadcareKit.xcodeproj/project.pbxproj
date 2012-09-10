@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		544E322515F9263D00011290 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 544E322415F9263D00011290 /* UIKit.framework */; };
 		54D4F7FD15C96E8E0021A868 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D4F7FC15C96E8E0021A868 /* Foundation.framework */; };
 		54D4F80215C96E8E0021A868 /* UploadcareKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 54D4F80115C96E8E0021A868 /* UploadcareKit.h */; };
 		54D4F80415C96E8E0021A868 /* UploadcareKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 54D4F80315C96E8E0021A868 /* UploadcareKit.m */; };
 		54D4F80C15C96E8E0021A868 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D4F80B15C96E8E0021A868 /* SenTestingKit.framework */; };
-		54D4F80E15C96E8E0021A868 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D4F80D15C96E8E0021A868 /* UIKit.framework */; };
 		54D4F80F15C96E8E0021A868 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D4F7FC15C96E8E0021A868 /* Foundation.framework */; };
 		54D4F81215C96E8E0021A868 /* libUploadcareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D4F7F915C96E8E0021A868 /* libUploadcareKit.a */; };
 		54D4F81815C96E8E0021A868 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 54D4F81615C96E8E0021A868 /* InfoPlist.strings */; };
@@ -68,6 +68,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		544E322415F9263D00011290 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		54D4F7F915C96E8E0021A868 /* libUploadcareKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUploadcareKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D4F7FC15C96E8E0021A868 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		54D4F80015C96E8E0021A868 /* UploadcareKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UploadcareKit-Prefix.pch"; sourceTree = "<group>"; };
@@ -75,7 +76,6 @@
 		54D4F80315C96E8E0021A868 /* UploadcareKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadcareKit.m; sourceTree = "<group>"; };
 		54D4F80A15C96E8E0021A868 /* UploadcareKitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UploadcareKitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D4F80B15C96E8E0021A868 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		54D4F80D15C96E8E0021A868 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		54D4F81515C96E8E0021A868 /* UploadcareKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UploadcareKitTests-Info.plist"; sourceTree = "<group>"; };
 		54D4F81715C96E8E0021A868 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		54D4F81915C96E8E0021A868 /* UploadcareKitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadcareKitTests.h; sourceTree = "<group>"; };
@@ -114,6 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				544E322515F9263D00011290 /* UIKit.framework in Frameworks */,
 				54D4F7FD15C96E8E0021A868 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -123,7 +124,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				54D4F80C15C96E8E0021A868 /* SenTestingKit.framework in Frameworks */,
-				54D4F80E15C96E8E0021A868 /* UIKit.framework in Frameworks */,
 				54D4F80F15C96E8E0021A868 /* Foundation.framework in Frameworks */,
 				54D4F81215C96E8E0021A868 /* libUploadcareKit.a in Frameworks */,
 			);
@@ -155,9 +155,9 @@
 		54D4F7FB15C96E8E0021A868 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				544E322415F9263D00011290 /* UIKit.framework */,
 				54D4F7FC15C96E8E0021A868 /* Foundation.framework */,
 				54D4F80B15C96E8E0021A868 /* SenTestingKit.framework */,
-				54D4F80D15C96E8E0021A868 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -528,6 +528,7 @@
 				54D4F82015C96E8E0021A868 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		54D4F82115C96E8E0021A868 /* Build configuration list for PBXNativeTarget "UploadcareKitTests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +537,7 @@
 				54D4F82315C96E8E0021A868 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		541352A615FE5CC500E17A20 /* GrabKitLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B1EA4015D17EAA0000B20B /* GrabKitLib.a */; };
+		541352A715FE5CDE00E17A20 /* GrabKitBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 54B1EA4215D17EAA0000B20B /* GrabKitBundle.bundle */; };
 		5424F3FA15CC122600394084 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5424F3F915CC122600394084 /* UIKit.framework */; };
 		5424F3FC15CC122600394084 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5424F3FB15CC122600394084 /* Foundation.framework */; };
 		5424F3FE15CC122600394084 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5424F3FD15CC122600394084 /* CoreGraphics.framework */; };
@@ -25,9 +27,356 @@
 		5424F44015CC133600394084 /* UploadcareWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 5424F43E15CC133600394084 /* UploadcareWidget.m */; };
 		5424F44115CC133600394084 /* UploadcareWidget.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5424F43F15CC133600394084 /* UploadcareWidget.xib */; };
 		5424F44415CC2A2F00394084 /* UploadcareKit.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = 5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */; };
+		544E322915F9299400011290 /* libUploadcareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B1D76615D14FD90000B20B /* libUploadcareKit.a */; };
+		548077B415F90CFC00090D64 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 548077B315F90CFC00090D64 /* FacebookSDK.framework */; };
+		548077E415F9105C00090D64 /* UCAlbumsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 548077CD15F9105B00090D64 /* UCAlbumsList.m */; };
+		548077E515F9105C00090D64 /* UCAlbumsList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 548077CE15F9105B00090D64 /* UCAlbumsList.xib */; };
+		548077E615F9105C00090D64 /* UCAlbumsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 548077D015F9105B00090D64 /* UCAlbumsListCell.m */; };
+		548077E715F9105C00090D64 /* UCAlbumsListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 548077D115F9105B00090D64 /* UCAlbumsListCell.xib */; };
+		548077EA15F9105C00090D64 /* UCPhotosList.m in Sources */ = {isa = PBXBuildFile; fileRef = 548077D715F9105B00090D64 /* UCPhotosList.m */; };
+		548077EB15F9105C00090D64 /* UCPhotosList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 548077D815F9105B00090D64 /* UCPhotosList.xib */; };
+		548077EC15F9105C00090D64 /* UCPhotosListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 548077DA15F9105B00090D64 /* UCPhotosListCell.m */; };
+		548077ED15F9105C00090D64 /* UCPhotosListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 548077DB15F9105B00090D64 /* UCPhotosListCell.xib */; };
+		54A3C4B215FE6A87001F7E48 /* GrabKit.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C45A15FE6A87001F7E48 /* GrabKit.h */; };
+		54A3C4B315FE6A87001F7E48 /* GRKConstants.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C45B15FE6A87001F7E48 /* GRKConstants.h */; };
+		54A3C4B415FE6A87001F7E48 /* GRKConstants.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C45C15FE6A87001F7E48 /* GRKConstants.m */; };
+		54A3C4B515FE6A87001F7E48 /* GRKConfiguratorProtocol.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C45D15FE6A87001F7E48 /* GRKConfiguratorProtocol.h */; };
+		54A3C4B615FE6A87001F7E48 /* GRKConfiguration.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C45E15FE6A87001F7E48 /* GRKConfiguration.h */; };
+		54A3C4B715FE6A87001F7E48 /* GRKConfiguration.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C45F15FE6A87001F7E48 /* GRKConfiguration.m */; };
+		54A3C4B815FE6A87001F7E48 /* GRKErrorsConstants.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C46115FE6A87001F7E48 /* GRKErrorsConstants.h */; };
+		54A3C4B915FE6A87001F7E48 /* NSDictionary+URLEncoding.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C46315FE6A87001F7E48 /* NSDictionary+URLEncoding.h */; };
+		54A3C4BA15FE6A87001F7E48 /* NSDictionary+URLEncoding.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C46415FE6A87001F7E48 /* NSDictionary+URLEncoding.m */; };
+		54A3C4BB15FE6A87001F7E48 /* NSIndexSet+pagination.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C46515FE6A87001F7E48 /* NSIndexSet+pagination.h */; };
+		54A3C4BC15FE6A87001F7E48 /* NSIndexSet+pagination.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C46615FE6A87001F7E48 /* NSIndexSet+pagination.m */; };
+		54A3C4BD15FE6A87001F7E48 /* NSMutableArray+setObjectAtPosition.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C46715FE6A87001F7E48 /* NSMutableArray+setObjectAtPosition.h */; };
+		54A3C4BE15FE6A87001F7E48 /* NSMutableArray+setObjectAtPosition.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C46815FE6A87001F7E48 /* NSMutableArray+setObjectAtPosition.m */; };
+		54A3C4BF15FE6A87001F7E48 /* NSString+date.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C46915FE6A87001F7E48 /* NSString+date.h */; };
+		54A3C4C015FE6A87001F7E48 /* NSString+date.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C46A15FE6A87001F7E48 /* NSString+date.m */; };
+		54A3C4C115FE6A87001F7E48 /* GRKAlbum.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C46C15FE6A87001F7E48 /* GRKAlbum.h */; };
+		54A3C4C215FE6A87001F7E48 /* GRKAlbum.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C46D15FE6A87001F7E48 /* GRKAlbum.m */; };
+		54A3C4C315FE6A87001F7E48 /* GRKImage.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C46E15FE6A87001F7E48 /* GRKImage.h */; };
+		54A3C4C415FE6A87001F7E48 /* GRKImage.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C46F15FE6A87001F7E48 /* GRKImage.m */; };
+		54A3C4C515FE6A87001F7E48 /* GRKPhoto.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C47015FE6A87001F7E48 /* GRKPhoto.h */; };
+		54A3C4C615FE6A87001F7E48 /* GRKPhoto.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C47115FE6A87001F7E48 /* GRKPhoto.m */; };
+		54A3C4C715FE6A87001F7E48 /* GRKConnectorsDispatcher.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C47315FE6A87001F7E48 /* GRKConnectorsDispatcher.h */; };
+		54A3C4C815FE6A87001F7E48 /* GRKConnectorsDispatcher.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C47415FE6A87001F7E48 /* GRKConnectorsDispatcher.m */; };
+		54A3C4C915FE6A87001F7E48 /* GRKServiceConnector.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C47515FE6A87001F7E48 /* GRKServiceConnector.h */; };
+		54A3C4CA15FE6A87001F7E48 /* GRKServiceConnector.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C47615FE6A87001F7E48 /* GRKServiceConnector.m */; };
+		54A3C4CB15FE6A87001F7E48 /* GRKServiceGrabber.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C47715FE6A87001F7E48 /* GRKServiceGrabber.h */; };
+		54A3C4CC15FE6A87001F7E48 /* GRKServiceGrabber.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C47815FE6A87001F7E48 /* GRKServiceGrabber.m */; };
+		54A3C4CD15FE6A87001F7E48 /* GRKDeviceGrabber.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C47915FE6A87001F7E48 /* GRKDeviceGrabber.h */; };
+		54A3C4CE15FE6A87001F7E48 /* GRKDeviceGrabber.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C47A15FE6A87001F7E48 /* GRKDeviceGrabber.m */; };
+		54A3C4CF15FE6A87001F7E48 /* GRKFacebookConnector.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C47C15FE6A87001F7E48 /* GRKFacebookConnector.h */; };
+		54A3C4D015FE6A87001F7E48 /* GRKFacebookConnector.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C47D15FE6A87001F7E48 /* GRKFacebookConnector.m */; };
+		54A3C4D115FE6A87001F7E48 /* GRKFacebookGrabber.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C47E15FE6A87001F7E48 /* GRKFacebookGrabber.h */; };
+		54A3C4D215FE6A87001F7E48 /* GRKFacebookGrabber.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C47F15FE6A87001F7E48 /* GRKFacebookGrabber.m */; };
+		54A3C4D315FE6A87001F7E48 /* GRKFacebookQuery.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48015FE6A87001F7E48 /* GRKFacebookQuery.h */; };
+		54A3C4D415FE6A87001F7E48 /* GRKFacebookQuery.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48115FE6A87001F7E48 /* GRKFacebookQuery.m */; };
+		54A3C4D515FE6A87001F7E48 /* GRKFacebookBatchQuery.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48215FE6A87001F7E48 /* GRKFacebookBatchQuery.h */; };
+		54A3C4D615FE6A87001F7E48 /* GRKFacebookBatchQuery.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48315FE6A87001F7E48 /* GRKFacebookBatchQuery.m */; };
+		54A3C4D715FE6A87001F7E48 /* GRKFacebookSingleton.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48415FE6A87001F7E48 /* GRKFacebookSingleton.h */; };
+		54A3C4D815FE6A87001F7E48 /* GRKFacebookSingleton.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48515FE6A87001F7E48 /* GRKFacebookSingleton.m */; };
+		54A3C4D915FE6A87001F7E48 /* GRKFlickrConnector.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48715FE6A87001F7E48 /* GRKFlickrConnector.h */; };
+		54A3C4DA15FE6A87001F7E48 /* GRKFlickrConnector.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48815FE6A87001F7E48 /* GRKFlickrConnector.m */; };
+		54A3C4DB15FE6A87001F7E48 /* GRKFlickrGrabber.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48915FE6A87001F7E48 /* GRKFlickrGrabber.h */; };
+		54A3C4DC15FE6A87001F7E48 /* GRKFlickrGrabber.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48A15FE6A87001F7E48 /* GRKFlickrGrabber.m */; };
+		54A3C4DD15FE6A87001F7E48 /* GRKFlickrQuery.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48B15FE6A87001F7E48 /* GRKFlickrQuery.h */; };
+		54A3C4DE15FE6A87001F7E48 /* GRKFlickrQuery.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48C15FE6A87001F7E48 /* GRKFlickrQuery.m */; };
+		54A3C4DF15FE6A87001F7E48 /* GRKFlickrQueriesQueue.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48D15FE6A87001F7E48 /* GRKFlickrQueriesQueue.h */; };
+		54A3C4E015FE6A87001F7E48 /* GRKFlickrQueriesQueue.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48E15FE6A87001F7E48 /* GRKFlickrQueriesQueue.m */; };
+		54A3C4E115FE6A87001F7E48 /* GRKFlickrSingleton.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C48F15FE6A87001F7E48 /* GRKFlickrSingleton.h */; };
+		54A3C4E215FE6A87001F7E48 /* GRKFlickrSingleton.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C49015FE6A87001F7E48 /* GRKFlickrSingleton.m */; };
+		54A3C4E315FE6A87001F7E48 /* GRKInstagramConnector.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C49215FE6A87001F7E48 /* GRKInstagramConnector.h */; };
+		54A3C4E415FE6A87001F7E48 /* GRKInstagramConnector.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C49315FE6A87001F7E48 /* GRKInstagramConnector.m */; };
+		54A3C4E515FE6A87001F7E48 /* GRKInstagramGrabber.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C49415FE6A87001F7E48 /* GRKInstagramGrabber.h */; };
+		54A3C4E615FE6A87001F7E48 /* GRKInstagramGrabber.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C49515FE6A87001F7E48 /* GRKInstagramGrabber.m */; };
+		54A3C4E715FE6A87001F7E48 /* GRKInstagramQuery.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C49615FE6A87001F7E48 /* GRKInstagramQuery.h */; };
+		54A3C4E815FE6A87001F7E48 /* GRKInstagramQuery.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C49715FE6A87001F7E48 /* GRKInstagramQuery.m */; };
+		54A3C4E915FE6A87001F7E48 /* GRKInstagramSingleton.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C49815FE6A87001F7E48 /* GRKInstagramSingleton.h */; };
+		54A3C4EA15FE6A87001F7E48 /* GRKInstagramSingleton.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C49915FE6A87001F7E48 /* GRKInstagramSingleton.m */; };
+		54A3C4EB15FE6A87001F7E48 /* GRKPicasaConnector.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C49B15FE6A87001F7E48 /* GRKPicasaConnector.h */; };
+		54A3C4EC15FE6A87001F7E48 /* GRKPicasaConnector.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C49C15FE6A87001F7E48 /* GRKPicasaConnector.m */; };
+		54A3C4ED15FE6A87001F7E48 /* GRKPicasaGrabber.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C49D15FE6A87001F7E48 /* GRKPicasaGrabber.h */; };
+		54A3C4EE15FE6A87001F7E48 /* GRKPicasaGrabber.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C49E15FE6A87001F7E48 /* GRKPicasaGrabber.m */; };
+		54A3C4EF15FE6A87001F7E48 /* GRKPicasaQuery.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C49F15FE6A87001F7E48 /* GRKPicasaQuery.h */; };
+		54A3C4F015FE6A87001F7E48 /* GRKPicasaQuery.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4A015FE6A87001F7E48 /* GRKPicasaQuery.m */; };
+		54A3C4F115FE6A87001F7E48 /* GRKPicasaQueriesQueue.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4A115FE6A87001F7E48 /* GRKPicasaQueriesQueue.h */; };
+		54A3C4F215FE6A87001F7E48 /* GRKPicasaQueriesQueue.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4A215FE6A87001F7E48 /* GRKPicasaQueriesQueue.m */; };
+		54A3C4F315FE6A87001F7E48 /* GRKPicasaSingleton.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4A315FE6A87001F7E48 /* GRKPicasaSingleton.h */; };
+		54A3C4F415FE6A87001F7E48 /* GRKPicasaSingleton.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4A415FE6A87001F7E48 /* GRKPicasaSingleton.m */; };
+		54A3C4F515FE6A87001F7E48 /* GRKServiceConnectorProtocol.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4A615FE6A87001F7E48 /* GRKServiceConnectorProtocol.h */; };
+		54A3C4F615FE6A87001F7E48 /* GRKServiceGrabberConnectionProtocol.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4A715FE6A87001F7E48 /* GRKServiceGrabberConnectionProtocol.h */; };
+		54A3C4F715FE6A87001F7E48 /* GRKServiceGrabberProtocol.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4A815FE6A87001F7E48 /* GRKServiceGrabberProtocol.h */; };
+		54A3C4F815FE6A87001F7E48 /* GRKServiceQueryProtocol.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4A915FE6A87001F7E48 /* GRKServiceQueryProtocol.h */; };
+		54A3C4F915FE6A87001F7E48 /* GRKTokenStore.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4AB15FE6A87001F7E48 /* GRKTokenStore.h */; };
+		54A3C4FA15FE6A87001F7E48 /* GRKTokenStore.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4AC15FE6A87001F7E48 /* GRKTokenStore.m */; };
+		54A3C4FB15FE6A87001F7E48 /* GRKTokenStoreUserDefaults.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4AD15FE6A87001F7E48 /* GRKTokenStoreUserDefaults.h */; };
+		54A3C4FC15FE6A87001F7E48 /* GRKTokenStoreUserDefaults.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4AE15FE6A87001F7E48 /* GRKTokenStoreUserDefaults.m */; };
+		54A3C5EE15FE6AD1001F7E48 /* ISO8601DateFormatter.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4FD15FE6AD1001F7E48 /* ISO8601DateFormatter.h */; };
+		54A3C5EF15FE6AD1001F7E48 /* ISO8601DateFormatter.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C4FE15FE6AD1001F7E48 /* ISO8601DateFormatter.m */; };
+		54A3C5F015FE6AD1001F7E48 /* LFHTTPRequest.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C50115FE6AD1001F7E48 /* LFHTTPRequest.h */; };
+		54A3C5F115FE6AD1001F7E48 /* LFHTTPRequest.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C50215FE6AD1001F7E48 /* LFHTTPRequest.m */; };
+		54A3C5F215FE6AD1001F7E48 /* LFSiteReachability.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C50315FE6AD1001F7E48 /* LFSiteReachability.h */; };
+		54A3C5F315FE6AD1001F7E48 /* LFSiteReachability.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C50415FE6AD1001F7E48 /* LFSiteReachability.m */; };
+		54A3C5F415FE6AD1001F7E48 /* LFWebAPIKit.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C50515FE6AD1001F7E48 /* LFWebAPIKit.h */; };
+		54A3C5F515FE6AD1001F7E48 /* NSData+LFHTTPFormExtensions.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C50615FE6AD1001F7E48 /* NSData+LFHTTPFormExtensions.h */; };
+		54A3C5F615FE6AD1001F7E48 /* NSData+LFHTTPFormExtensions.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C50715FE6AD1001F7E48 /* NSData+LFHTTPFormExtensions.m */; };
+		54A3C5F715FE6AD1001F7E48 /* ObjectiveFlickr.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C50915FE6AD1001F7E48 /* ObjectiveFlickr.h */; };
+		54A3C5F815FE6AD1001F7E48 /* ObjectiveFlickr.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C50A15FE6AD1001F7E48 /* ObjectiveFlickr.m */; };
+		54A3C5F915FE6AD1001F7E48 /* OFUtilities.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C50B15FE6AD1001F7E48 /* OFUtilities.h */; };
+		54A3C5FA15FE6AD1001F7E48 /* OFUtilities.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C50C15FE6AD1001F7E48 /* OFUtilities.m */; };
+		54A3C5FB15FE6AD1001F7E48 /* OFXMLMapper.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C50D15FE6AD1001F7E48 /* OFXMLMapper.h */; };
+		54A3C5FC15FE6AD1001F7E48 /* OFXMLMapper.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C50E15FE6AD1001F7E48 /* OFXMLMapper.m */; };
+		54A3C5FD15FE6AD1001F7E48 /* GDataEntryBase.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C51115FE6AD1001F7E48 /* GDataEntryBase.h */; };
+		54A3C5FE15FE6AD1001F7E48 /* GDataEntryBase.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C51215FE6AD1001F7E48 /* GDataEntryBase.m */; };
+		54A3C5FF15FE6AD1001F7E48 /* GDataFeedBase.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C51315FE6AD1001F7E48 /* GDataFeedBase.h */; };
+		54A3C60015FE6AD1001F7E48 /* GDataFeedBase.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C51415FE6AD1001F7E48 /* GDataFeedBase.m */; };
+		54A3C60115FE6AD1001F7E48 /* GDataObject.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C51515FE6AD1001F7E48 /* GDataObject.h */; };
+		54A3C60215FE6AD1001F7E48 /* GDataObject.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C51615FE6AD1001F7E48 /* GDataObject.m */; };
+		54A3C60315FE6AD1001F7E48 /* GDataQuery.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C51715FE6AD1001F7E48 /* GDataQuery.h */; };
+		54A3C60415FE6AD1001F7E48 /* GDataQuery.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C51815FE6AD1001F7E48 /* GDataQuery.m */; };
+		54A3C60515FE6AD1001F7E48 /* GDataServiceBase.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C51915FE6AD1001F7E48 /* GDataServiceBase.h */; };
+		54A3C60615FE6AD1001F7E48 /* GDataServiceBase.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C51A15FE6AD1001F7E48 /* GDataServiceBase.m */; };
+		54A3C60715FE6AD1001F7E48 /* GDataServiceGoogle.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C51B15FE6AD1001F7E48 /* GDataServiceGoogle.h */; };
+		54A3C60815FE6AD1001F7E48 /* GDataServiceGoogle.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C51C15FE6AD1001F7E48 /* GDataServiceGoogle.m */; };
+		54A3C60915FE6AD1001F7E48 /* GDataAtomPubControl.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C51E15FE6AD1001F7E48 /* GDataAtomPubControl.h */; };
+		54A3C60A15FE6AD1001F7E48 /* GDataAtomPubControl.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C51F15FE6AD1001F7E48 /* GDataAtomPubControl.m */; };
+		54A3C60B15FE6AD1001F7E48 /* GDataBaseElements.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52015FE6AD1001F7E48 /* GDataBaseElements.h */; };
+		54A3C60C15FE6AD1001F7E48 /* GDataBaseElements.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52115FE6AD1001F7E48 /* GDataBaseElements.m */; };
+		54A3C60D15FE6AD1001F7E48 /* GDataBatchID.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52215FE6AD1001F7E48 /* GDataBatchID.h */; };
+		54A3C60E15FE6AD1001F7E48 /* GDataBatchID.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52315FE6AD1001F7E48 /* GDataBatchID.m */; };
+		54A3C60F15FE6AD1001F7E48 /* GDataBatchInterrupted.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52415FE6AD1001F7E48 /* GDataBatchInterrupted.h */; };
+		54A3C61015FE6AD1001F7E48 /* GDataBatchInterrupted.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52515FE6AD1001F7E48 /* GDataBatchInterrupted.m */; };
+		54A3C61115FE6AD1001F7E48 /* GDataBatchOperation.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52615FE6AD1001F7E48 /* GDataBatchOperation.h */; };
+		54A3C61215FE6AD1001F7E48 /* GDataBatchOperation.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52715FE6AD1001F7E48 /* GDataBatchOperation.m */; };
+		54A3C61315FE6AD1001F7E48 /* GDataBatchStatus.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52815FE6AD1001F7E48 /* GDataBatchStatus.h */; };
+		54A3C61415FE6AD1001F7E48 /* GDataBatchStatus.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52915FE6AD1001F7E48 /* GDataBatchStatus.m */; };
+		54A3C61515FE6AD1001F7E48 /* GDataCategory.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52A15FE6AD1001F7E48 /* GDataCategory.h */; };
+		54A3C61615FE6AD1001F7E48 /* GDataCategory.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52B15FE6AD1001F7E48 /* GDataCategory.m */; };
+		54A3C61715FE6AD1001F7E48 /* GDataComment.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52C15FE6AD1001F7E48 /* GDataComment.h */; };
+		54A3C61815FE6AD1001F7E48 /* GDataComment.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52D15FE6AD1001F7E48 /* GDataComment.m */; };
+		54A3C61915FE6AD1001F7E48 /* GDataCustomProperty.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52E15FE6AD1001F7E48 /* GDataCustomProperty.h */; };
+		54A3C61A15FE6AD1001F7E48 /* GDataCustomProperty.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C52F15FE6AD1001F7E48 /* GDataCustomProperty.m */; };
+		54A3C61B15FE6AD1001F7E48 /* GDataDateTime.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53015FE6AD1001F7E48 /* GDataDateTime.h */; };
+		54A3C61C15FE6AD1001F7E48 /* GDataDateTime.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53115FE6AD1001F7E48 /* GDataDateTime.m */; };
+		54A3C61D15FE6AD1001F7E48 /* GDataDeleted.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53215FE6AD1001F7E48 /* GDataDeleted.h */; };
+		54A3C61E15FE6AD1001F7E48 /* GDataDeleted.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53315FE6AD1001F7E48 /* GDataDeleted.m */; };
+		54A3C61F15FE6AD1001F7E48 /* GDataElements.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53415FE6AD1001F7E48 /* GDataElements.h */; };
+		54A3C62015FE6AD1001F7E48 /* GDataEmail.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53515FE6AD1001F7E48 /* GDataEmail.h */; };
+		54A3C62115FE6AD1001F7E48 /* GDataEmail.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53615FE6AD1001F7E48 /* GDataEmail.m */; };
+		54A3C62215FE6AD1001F7E48 /* GDataEntryContent.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53715FE6AD1001F7E48 /* GDataEntryContent.h */; };
+		54A3C62315FE6AD1001F7E48 /* GDataEntryContent.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53815FE6AD1001F7E48 /* GDataEntryContent.m */; };
+		54A3C62415FE6AD1001F7E48 /* GDataEntryLink.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53915FE6AD1001F7E48 /* GDataEntryLink.h */; };
+		54A3C62515FE6AD1001F7E48 /* GDataEntryLink.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53A15FE6AD1001F7E48 /* GDataEntryLink.m */; };
+		54A3C62615FE6AD1001F7E48 /* GDataExtendedProperty.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53B15FE6AD1001F7E48 /* GDataExtendedProperty.h */; };
+		54A3C62715FE6AD1001F7E48 /* GDataExtendedProperty.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53C15FE6AD1001F7E48 /* GDataExtendedProperty.m */; };
+		54A3C62815FE6AD1001F7E48 /* GDataFeedLink.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53D15FE6AD1001F7E48 /* GDataFeedLink.h */; };
+		54A3C62915FE6AD1001F7E48 /* GDataFeedLink.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53E15FE6AD1001F7E48 /* GDataFeedLink.m */; };
+		54A3C62A15FE6AD1001F7E48 /* GDataGenerator.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C53F15FE6AD1001F7E48 /* GDataGenerator.h */; };
+		54A3C62B15FE6AD1001F7E48 /* GDataGenerator.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54015FE6AD1001F7E48 /* GDataGenerator.m */; };
+		54A3C62C15FE6AD1001F7E48 /* GDataGeoPt.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54115FE6AD1001F7E48 /* GDataGeoPt.h */; };
+		54A3C62D15FE6AD1001F7E48 /* GDataGeoPt.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54215FE6AD1001F7E48 /* GDataGeoPt.m */; };
+		54A3C62E15FE6AD1001F7E48 /* GDataIM.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54315FE6AD1001F7E48 /* GDataIM.h */; };
+		54A3C62F15FE6AD1001F7E48 /* GDataIM.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54415FE6AD1001F7E48 /* GDataIM.m */; };
+		54A3C63015FE6AD1001F7E48 /* GDataLink.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54515FE6AD1001F7E48 /* GDataLink.h */; };
+		54A3C63115FE6AD1001F7E48 /* GDataLink.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54615FE6AD1001F7E48 /* GDataLink.m */; };
+		54A3C63215FE6AD1001F7E48 /* GDataMoney.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54715FE6AD1001F7E48 /* GDataMoney.h */; };
+		54A3C63315FE6AD1001F7E48 /* GDataMoney.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54815FE6AD1001F7E48 /* GDataMoney.m */; };
+		54A3C63415FE6AD1001F7E48 /* GDataName.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54915FE6AD1001F7E48 /* GDataName.h */; };
+		54A3C63515FE6AD1001F7E48 /* GDataName.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54A15FE6AD1001F7E48 /* GDataName.m */; };
+		54A3C63615FE6AD1001F7E48 /* GDataOrganization.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54B15FE6AD1001F7E48 /* GDataOrganization.h */; };
+		54A3C63715FE6AD1001F7E48 /* GDataOrganization.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54C15FE6AD1001F7E48 /* GDataOrganization.m */; };
+		54A3C63815FE6AD1001F7E48 /* GDataOrganizationName.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54D15FE6AD1001F7E48 /* GDataOrganizationName.h */; };
+		54A3C63915FE6AD1001F7E48 /* GDataOrganizationName.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54E15FE6AD1001F7E48 /* GDataOrganizationName.m */; };
+		54A3C63A15FE6AD1001F7E48 /* GDataPerson.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C54F15FE6AD1001F7E48 /* GDataPerson.h */; };
+		54A3C63B15FE6AD1001F7E48 /* GDataPerson.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55015FE6AD1001F7E48 /* GDataPerson.m */; };
+		54A3C63C15FE6AD1001F7E48 /* GDataPhoneNumber.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55115FE6AD1001F7E48 /* GDataPhoneNumber.h */; };
+		54A3C63D15FE6AD1001F7E48 /* GDataPhoneNumber.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55215FE6AD1001F7E48 /* GDataPhoneNumber.m */; };
+		54A3C63E15FE6AD1001F7E48 /* GDataPostalAddress.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55315FE6AD1001F7E48 /* GDataPostalAddress.h */; };
+		54A3C63F15FE6AD1001F7E48 /* GDataPostalAddress.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55415FE6AD1001F7E48 /* GDataPostalAddress.m */; };
+		54A3C64015FE6AD1001F7E48 /* GDataRating.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55515FE6AD1001F7E48 /* GDataRating.h */; };
+		54A3C64115FE6AD1001F7E48 /* GDataRating.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55615FE6AD1001F7E48 /* GDataRating.m */; };
+		54A3C64215FE6AD1001F7E48 /* GDataStructuredPostalAddress.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55715FE6AD1001F7E48 /* GDataStructuredPostalAddress.h */; };
+		54A3C64315FE6AD1001F7E48 /* GDataStructuredPostalAddress.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55815FE6AD1001F7E48 /* GDataStructuredPostalAddress.m */; };
+		54A3C64415FE6AD1001F7E48 /* GDataTextConstruct.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55915FE6AD1001F7E48 /* GDataTextConstruct.h */; };
+		54A3C64515FE6AD1001F7E48 /* GDataTextConstruct.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55A15FE6AD1001F7E48 /* GDataTextConstruct.m */; };
+		54A3C64615FE6AD1001F7E48 /* GDataValueConstruct.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55B15FE6AD1001F7E48 /* GDataValueConstruct.h */; };
+		54A3C64715FE6AD1001F7E48 /* GDataValueConstruct.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55C15FE6AD1001F7E48 /* GDataValueConstruct.m */; };
+		54A3C64815FE6AD1001F7E48 /* GDataWhen.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55D15FE6AD1001F7E48 /* GDataWhen.h */; };
+		54A3C64915FE6AD1001F7E48 /* GDataWhen.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55E15FE6AD1001F7E48 /* GDataWhen.m */; };
+		54A3C64A15FE6AD1001F7E48 /* GDataWhere.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C55F15FE6AD1001F7E48 /* GDataWhere.h */; };
+		54A3C64B15FE6AD1001F7E48 /* GDataWhere.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C56015FE6AD1001F7E48 /* GDataWhere.m */; };
+		54A3C64C15FE6AD1001F7E48 /* GDataWho.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C56115FE6AD1001F7E48 /* GDataWho.h */; };
+		54A3C64D15FE6AD1001F7E48 /* GDataWho.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C56215FE6AD1001F7E48 /* GDataWho.m */; };
+		54A3C64E15FE6AD1001F7E48 /* GData.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C56415FE6AD1001F7E48 /* GData.h */; };
+		54A3C64F15FE6AD1001F7E48 /* GDataDefines.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C56515FE6AD1001F7E48 /* GDataDefines.h */; };
+		54A3C65015FE6AD1001F7E48 /* GDataFramework.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C56615FE6AD1001F7E48 /* GDataFramework.h */; };
+		54A3C65115FE6AD1001F7E48 /* GDataFramework.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C56715FE6AD1001F7E48 /* GDataFramework.m */; };
+		54A3C65215FE6AD1001F7E48 /* GDataTargetNamespace.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C56815FE6AD1001F7E48 /* GDataTargetNamespace.h */; };
+		54A3C65315FE6AD1001F7E48 /* GDataUtilities.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C56915FE6AD1001F7E48 /* GDataUtilities.h */; };
+		54A3C65415FE6AD1001F7E48 /* GDataUtilities.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C56A15FE6AD1001F7E48 /* GDataUtilities.m */; };
+		54A3C65515FE6AD1001F7E48 /* GDataGeo.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C56B15FE6AD1001F7E48 /* GDataGeo.h */; };
+		54A3C65615FE6AD1001F7E48 /* GDataGeo.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C56C15FE6AD1001F7E48 /* GDataGeo.m */; };
+		54A3C65715FE6AD1001F7E48 /* GTMGatherInputStream.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C56E15FE6AD1001F7E48 /* GTMGatherInputStream.h */; };
+		54A3C65815FE6AD1001F7E48 /* GTMGatherInputStream.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C56F15FE6AD1001F7E48 /* GTMGatherInputStream.m */; };
+		54A3C65915FE6AD1001F7E48 /* GTMHTTPFetcher.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57015FE6AD1001F7E48 /* GTMHTTPFetcher.h */; };
+		54A3C65A15FE6AD1001F7E48 /* GTMHTTPFetcher.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57115FE6AD1001F7E48 /* GTMHTTPFetcher.m */; };
+		54A3C65B15FE6AD1001F7E48 /* GTMHTTPFetcherLogging.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57215FE6AD1001F7E48 /* GTMHTTPFetcherLogging.h */; };
+		54A3C65C15FE6AD1001F7E48 /* GTMHTTPFetcherLogging.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57315FE6AD1001F7E48 /* GTMHTTPFetcherLogging.m */; };
+		54A3C65D15FE6AD1001F7E48 /* GTMHTTPFetcherService.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57415FE6AD1001F7E48 /* GTMHTTPFetcherService.h */; };
+		54A3C65E15FE6AD1001F7E48 /* GTMHTTPFetcherService.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57515FE6AD1001F7E48 /* GTMHTTPFetcherService.m */; };
+		54A3C65F15FE6AD1001F7E48 /* GTMHTTPFetchHistory.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57615FE6AD1001F7E48 /* GTMHTTPFetchHistory.h */; };
+		54A3C66015FE6AD1001F7E48 /* GTMHTTPFetchHistory.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57715FE6AD1001F7E48 /* GTMHTTPFetchHistory.m */; };
+		54A3C66115FE6AD1001F7E48 /* GTMHTTPUploadFetcher.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57815FE6AD1001F7E48 /* GTMHTTPUploadFetcher.h */; };
+		54A3C66215FE6AD1001F7E48 /* GTMHTTPUploadFetcher.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57915FE6AD1001F7E48 /* GTMHTTPUploadFetcher.m */; };
+		54A3C66315FE6AD1001F7E48 /* GTMMIMEDocument.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57A15FE6AD1001F7E48 /* GTMMIMEDocument.h */; };
+		54A3C66415FE6AD1001F7E48 /* GTMMIMEDocument.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57B15FE6AD1001F7E48 /* GTMMIMEDocument.m */; };
+		54A3C66515FE6AD1001F7E48 /* GTMReadMonitorInputStream.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57C15FE6AD1001F7E48 /* GTMReadMonitorInputStream.h */; };
+		54A3C66615FE6AD1001F7E48 /* GTMReadMonitorInputStream.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57D15FE6AD1001F7E48 /* GTMReadMonitorInputStream.m */; };
+		54A3C66715FE6AD1001F7E48 /* GDataMedia.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C57F15FE6AD1001F7E48 /* GDataMedia.h */; };
+		54A3C66815FE6AD1001F7E48 /* GDataMediaCategory.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58015FE6AD1001F7E48 /* GDataMediaCategory.h */; };
+		54A3C66915FE6AD1001F7E48 /* GDataMediaCategory.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58115FE6AD1001F7E48 /* GDataMediaCategory.m */; };
+		54A3C66A15FE6AD1001F7E48 /* GDataMediaContent.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58215FE6AD1001F7E48 /* GDataMediaContent.h */; };
+		54A3C66B15FE6AD1001F7E48 /* GDataMediaContent.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58315FE6AD1001F7E48 /* GDataMediaContent.m */; };
+		54A3C66C15FE6AD1001F7E48 /* GDataMediaCredit.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58415FE6AD1001F7E48 /* GDataMediaCredit.h */; };
+		54A3C66D15FE6AD1001F7E48 /* GDataMediaCredit.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58515FE6AD1001F7E48 /* GDataMediaCredit.m */; };
+		54A3C66E15FE6AD1001F7E48 /* GDataMediaGroup.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58615FE6AD1001F7E48 /* GDataMediaGroup.h */; };
+		54A3C66F15FE6AD1001F7E48 /* GDataMediaGroup.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58715FE6AD1001F7E48 /* GDataMediaGroup.m */; };
+		54A3C67015FE6AD1001F7E48 /* GDataMediaKeywords.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58815FE6AD1001F7E48 /* GDataMediaKeywords.h */; };
+		54A3C67115FE6AD1001F7E48 /* GDataMediaKeywords.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58915FE6AD1001F7E48 /* GDataMediaKeywords.m */; };
+		54A3C67215FE6AD1001F7E48 /* GDataMediaPlayer.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58A15FE6AD1001F7E48 /* GDataMediaPlayer.h */; };
+		54A3C67315FE6AD1001F7E48 /* GDataMediaPlayer.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58B15FE6AD1001F7E48 /* GDataMediaPlayer.m */; };
+		54A3C67415FE6AD1001F7E48 /* GDataMediaRating.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58C15FE6AD1001F7E48 /* GDataMediaRating.h */; };
+		54A3C67515FE6AD1001F7E48 /* GDataMediaRating.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58D15FE6AD1001F7E48 /* GDataMediaRating.m */; };
+		54A3C67615FE6AD1001F7E48 /* GDataMediaRestriction.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58E15FE6AD1001F7E48 /* GDataMediaRestriction.h */; };
+		54A3C67715FE6AD1001F7E48 /* GDataMediaRestriction.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C58F15FE6AD1001F7E48 /* GDataMediaRestriction.m */; };
+		54A3C67815FE6AD1001F7E48 /* GDataMediaThumbnail.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C59015FE6AD1001F7E48 /* GDataMediaThumbnail.h */; };
+		54A3C67915FE6AD1001F7E48 /* GDataMediaThumbnail.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C59115FE6AD1001F7E48 /* GDataMediaThumbnail.m */; };
+		54A3C67A15FE6AD1001F7E48 /* GDataNormalPlayTime.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C59215FE6AD1001F7E48 /* GDataNormalPlayTime.h */; };
+		54A3C67B15FE6AD1001F7E48 /* GDataNormalPlayTime.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C59315FE6AD1001F7E48 /* GDataNormalPlayTime.m */; };
+		54A3C67C15FE6AD1001F7E48 /* GDataAuthenticationFetcher.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C59515FE6AD1001F7E48 /* GDataAuthenticationFetcher.h */; };
+		54A3C67D15FE6AD1001F7E48 /* GDataAuthenticationFetcher.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C59615FE6AD1001F7E48 /* GDataAuthenticationFetcher.m */; };
+		54A3C67E15FE6AD1001F7E48 /* GDataServerError.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C59715FE6AD1001F7E48 /* GDataServerError.h */; };
+		54A3C67F15FE6AD1001F7E48 /* GDataServerError.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C59815FE6AD1001F7E48 /* GDataServerError.m */; };
+		54A3C68015FE6AD1001F7E48 /* GDataACL.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C59A15FE6AD1001F7E48 /* GDataACL.h */; };
+		54A3C68115FE6AD1001F7E48 /* GDataACLKeyedRole.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C59B15FE6AD1001F7E48 /* GDataACLKeyedRole.h */; };
+		54A3C68215FE6AD1001F7E48 /* GDataACLKeyedRole.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C59C15FE6AD1001F7E48 /* GDataACLKeyedRole.m */; };
+		54A3C68315FE6AD1001F7E48 /* GDataACLRole.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C59D15FE6AD1001F7E48 /* GDataACLRole.h */; };
+		54A3C68415FE6AD1001F7E48 /* GDataACLRole.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C59E15FE6AD1001F7E48 /* GDataACLRole.m */; };
+		54A3C68515FE6AD1001F7E48 /* GDataACLScope.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C59F15FE6AD1001F7E48 /* GDataACLScope.h */; };
+		54A3C68615FE6AD1001F7E48 /* GDataACLScope.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5A015FE6AD1001F7E48 /* GDataACLScope.m */; };
+		54A3C68715FE6AD1001F7E48 /* GDataEntryACL.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5A115FE6AD1001F7E48 /* GDataEntryACL.h */; };
+		54A3C68815FE6AD1001F7E48 /* GDataEntryACL.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5A215FE6AD1001F7E48 /* GDataEntryACL.m */; };
+		54A3C68915FE6AD1001F7E48 /* GDataFeedACL.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5A315FE6AD1001F7E48 /* GDataFeedACL.h */; };
+		54A3C68A15FE6AD1001F7E48 /* GDataFeedACL.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5A415FE6AD1001F7E48 /* GDataFeedACL.m */; };
+		54A3C68B15FE6AD1001F7E48 /* GDataServiceACL.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5A515FE6AD1001F7E48 /* GDataServiceACL.h */; };
+		54A3C68C15FE6AD1001F7E48 /* GDataServiceACL.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5A615FE6AD1001F7E48 /* GDataServiceACL.m */; };
+		54A3C68D15FE6AD1001F7E48 /* GDataAtomCategoryGroup.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5A815FE6AD1001F7E48 /* GDataAtomCategoryGroup.h */; };
+		54A3C68E15FE6AD1001F7E48 /* GDataAtomCategoryGroup.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5A915FE6AD1001F7E48 /* GDataAtomCategoryGroup.m */; };
+		54A3C68F15FE6AD1001F7E48 /* GDataAtomCollection.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5AA15FE6AD1001F7E48 /* GDataAtomCollection.h */; };
+		54A3C69015FE6AD1001F7E48 /* GDataAtomCollection.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5AB15FE6AD1001F7E48 /* GDataAtomCollection.m */; };
+		54A3C69115FE6AD1001F7E48 /* GDataAtomServiceDocument.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5AC15FE6AD1001F7E48 /* GDataAtomServiceDocument.h */; };
+		54A3C69215FE6AD1001F7E48 /* GDataAtomServiceDocument.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5AD15FE6AD1001F7E48 /* GDataAtomServiceDocument.m */; };
+		54A3C69315FE6AD1001F7E48 /* GDataAtomWorkspace.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5AE15FE6AD1001F7E48 /* GDataAtomWorkspace.h */; };
+		54A3C69415FE6AD1001F7E48 /* GDataAtomWorkspace.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5AF15FE6AD1001F7E48 /* GDataAtomWorkspace.m */; };
+		54A3C69515FE6AD1001F7E48 /* GDataServiceIntrospection.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5B015FE6AD1001F7E48 /* GDataServiceIntrospection.h */; };
+		54A3C69615FE6AD1001F7E48 /* GTMOAuth2Authentication.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5B215FE6AD1001F7E48 /* GTMOAuth2Authentication.h */; };
+		54A3C69715FE6AD1001F7E48 /* GTMOAuth2Authentication.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5B315FE6AD1001F7E48 /* GTMOAuth2Authentication.m */; };
+		54A3C69815FE6AD1001F7E48 /* GTMOAuth2SignIn.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5B415FE6AD1001F7E48 /* GTMOAuth2SignIn.h */; };
+		54A3C69915FE6AD1001F7E48 /* GTMOAuth2SignIn.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5B515FE6AD1001F7E48 /* GTMOAuth2SignIn.m */; };
+		54A3C69A15FE6AD1001F7E48 /* SBJsonBase.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5B615FE6AD1001F7E48 /* SBJsonBase.h */; };
+		54A3C69B15FE6AD1001F7E48 /* SBJsonBase.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5B715FE6AD1001F7E48 /* SBJsonBase.m */; };
+		54A3C69C15FE6AD1001F7E48 /* SBJsonParser.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5B815FE6AD1001F7E48 /* SBJsonParser.h */; };
+		54A3C69D15FE6AD1001F7E48 /* SBJsonParser.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5B915FE6AD1001F7E48 /* SBJsonParser.m */; };
+		54A3C69E15FE6AD1001F7E48 /* SBJsonWriter.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5BA15FE6AD1001F7E48 /* SBJsonWriter.h */; };
+		54A3C69F15FE6AD1001F7E48 /* SBJsonWriter.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5BB15FE6AD1001F7E48 /* SBJsonWriter.m */; };
+		54A3C6A015FE6AD1001F7E48 /* GTMOAuth2Framework-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5BD15FE6AD1001F7E48 /* GTMOAuth2Framework-Info.plist */; };
+		54A3C6A115FE6AD1001F7E48 /* GTMOAuth2Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5BE15FE6AD1001F7E48 /* GTMOAuth2Window.xib */; };
+		54A3C6A215FE6AD1001F7E48 /* GTMOAuth2WindowController.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5BF15FE6AD1001F7E48 /* GTMOAuth2WindowController.h */; };
+		54A3C6A315FE6AD1001F7E48 /* GTMOAuth2WindowController.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5C015FE6AD1001F7E48 /* GTMOAuth2WindowController.m */; };
+		54A3C6A415FE6AD1001F7E48 /* GTMOAuth2ViewControllerTouch.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5C215FE6AD1001F7E48 /* GTMOAuth2ViewControllerTouch.h */; };
+		54A3C6A515FE6AD1001F7E48 /* GTMOAuth2ViewControllerTouch.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5C315FE6AD1001F7E48 /* GTMOAuth2ViewControllerTouch.m */; };
+		54A3C6A615FE6AD1001F7E48 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5C415FE6AD1001F7E48 /* GTMOAuth2ViewTouch.xib */; };
+		54A3C6A715FE6AD1001F7E48 /* GDataXMLNode.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5C715FE6AD1001F7E48 /* GDataXMLNode.h */; };
+		54A3C6A815FE6AD1001F7E48 /* GDataXMLNode.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5C815FE6AD1001F7E48 /* GDataXMLNode.m */; };
+		54A3C6A915FE6AD1001F7E48 /* GDataEntryPhoto.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5CC15FE6AD1001F7E48 /* GDataEntryPhoto.h */; };
+		54A3C6AA15FE6AD1001F7E48 /* GDataEntryPhoto.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5CD15FE6AD1001F7E48 /* GDataEntryPhoto.m */; };
+		54A3C6AB15FE6AD1001F7E48 /* GDataEntryPhotoAlbum.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5CE15FE6AD1001F7E48 /* GDataEntryPhotoAlbum.h */; };
+		54A3C6AC15FE6AD1001F7E48 /* GDataEntryPhotoAlbum.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5CF15FE6AD1001F7E48 /* GDataEntryPhotoAlbum.m */; };
+		54A3C6AD15FE6AD1001F7E48 /* GDataEntryPhotoBase.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5D015FE6AD1001F7E48 /* GDataEntryPhotoBase.h */; };
+		54A3C6AE15FE6AD1001F7E48 /* GDataEntryPhotoBase.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5D115FE6AD1001F7E48 /* GDataEntryPhotoBase.m */; };
+		54A3C6AF15FE6AD1001F7E48 /* GDataEntryPhotoComment.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5D215FE6AD1001F7E48 /* GDataEntryPhotoComment.h */; };
+		54A3C6B015FE6AD1001F7E48 /* GDataEntryPhotoComment.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5D315FE6AD1001F7E48 /* GDataEntryPhotoComment.m */; };
+		54A3C6B115FE6AD1001F7E48 /* GDataEntryPhotoTag.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5D415FE6AD1001F7E48 /* GDataEntryPhotoTag.h */; };
+		54A3C6B215FE6AD1001F7E48 /* GDataEntryPhotoTag.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5D515FE6AD1001F7E48 /* GDataEntryPhotoTag.m */; };
+		54A3C6B315FE6AD1001F7E48 /* GDataEntryPhotoUser.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5D615FE6AD1001F7E48 /* GDataEntryPhotoUser.h */; };
+		54A3C6B415FE6AD1001F7E48 /* GDataEntryPhotoUser.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5D715FE6AD1001F7E48 /* GDataEntryPhotoUser.m */; };
+		54A3C6B515FE6AD1001F7E48 /* GDataEXIFTags.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5D815FE6AD1001F7E48 /* GDataEXIFTags.h */; };
+		54A3C6B615FE6AD1001F7E48 /* GDataEXIFTags.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5D915FE6AD1001F7E48 /* GDataEXIFTags.m */; };
+		54A3C6B715FE6AD1001F7E48 /* GDataFeedPhoto.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5DA15FE6AD1001F7E48 /* GDataFeedPhoto.h */; };
+		54A3C6B815FE6AD1001F7E48 /* GDataFeedPhoto.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5DB15FE6AD1001F7E48 /* GDataFeedPhoto.m */; };
+		54A3C6B915FE6AD1001F7E48 /* GDataFeedPhotoAlbum.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5DC15FE6AD1001F7E48 /* GDataFeedPhotoAlbum.h */; };
+		54A3C6BA15FE6AD1001F7E48 /* GDataFeedPhotoAlbum.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5DD15FE6AD1001F7E48 /* GDataFeedPhotoAlbum.m */; };
+		54A3C6BB15FE6AD1001F7E48 /* GDataFeedPhotoBase.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5DE15FE6AD1001F7E48 /* GDataFeedPhotoBase.h */; };
+		54A3C6BC15FE6AD1001F7E48 /* GDataFeedPhotoBase.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5DF15FE6AD1001F7E48 /* GDataFeedPhotoBase.m */; };
+		54A3C6BD15FE6AD1001F7E48 /* GDataFeedPhotoUser.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5E015FE6AD1001F7E48 /* GDataFeedPhotoUser.h */; };
+		54A3C6BE15FE6AD1001F7E48 /* GDataFeedPhotoUser.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5E115FE6AD1001F7E48 /* GDataFeedPhotoUser.m */; };
+		54A3C6BF15FE6AD1001F7E48 /* GDataPhotoConstants.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5E215FE6AD1001F7E48 /* GDataPhotoConstants.h */; };
+		54A3C6C015FE6AD1001F7E48 /* GDataPhotoConstants.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5E315FE6AD1001F7E48 /* GDataPhotoConstants.m */; };
+		54A3C6C115FE6AD1001F7E48 /* GDataPhotoElements.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5E415FE6AD1001F7E48 /* GDataPhotoElements.h */; };
+		54A3C6C215FE6AD1001F7E48 /* GDataPhotoElements.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5E515FE6AD1001F7E48 /* GDataPhotoElements.m */; };
+		54A3C6C315FE6AD1001F7E48 /* GDataPhotos.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5E615FE6AD1001F7E48 /* GDataPhotos.h */; };
+		54A3C6C415FE6AD1001F7E48 /* GDataQueryGooglePhotos.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5E715FE6AD1001F7E48 /* GDataQueryGooglePhotos.h */; };
+		54A3C6C515FE6AD1001F7E48 /* GDataQueryGooglePhotos.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5E815FE6AD1001F7E48 /* GDataQueryGooglePhotos.m */; };
+		54A3C6C615FE6AD1001F7E48 /* GDataServiceGooglePhotos.h in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5E915FE6AD1001F7E48 /* GDataServiceGooglePhotos.h */; };
+		54A3C6C715FE6AD1001F7E48 /* GDataServiceGooglePhotos.m in Resources */ = {isa = PBXBuildFile; fileRef = 54A3C5EA15FE6AD1001F7E48 /* GDataServiceGooglePhotos.m */; };
+		54B1DDB815D155860000B20B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B1DDB715D155860000B20B /* CFNetwork.framework */; };
+		54B1DDBA15D155900000B20B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B1DDB915D155900000B20B /* AssetsLibrary.framework */; };
+		54B1DDBC15D155970000B20B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B1DDBB15D155970000B20B /* Security.framework */; };
+		54B1DDBE15D1559F0000B20B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B1DDBD15D1559F0000B20B /* SystemConfiguration.framework */; };
+		54B1EA5A15D1876A0000B20B /* UploadcareServicesConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B1EA5915D1876A0000B20B /* UploadcareServicesConfigurator.m */; };
+		54B1EA5B15D1876A0000B20B /* UploadcareServicesConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B1EA5915D1876A0000B20B /* UploadcareServicesConfigurator.m */; };
+		54EE2B6615FE0B580053C97E /* button_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2B5E15FE0B580053C97E /* button_background.png */; };
+		54EE2B6715FE0B580053C97E /* icon_dropbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2B5F15FE0B580053C97E /* icon_dropbox.png */; };
+		54EE2B6815FE0B580053C97E /* icon_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2B6015FE0B580053C97E /* icon_facebook.png */; };
+		54EE2B6915FE0B580053C97E /* icon_flickr.png in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2B6115FE0B580053C97E /* icon_flickr.png */; };
+		54EE2B6A15FE0B580053C97E /* icon_google_drive.png in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2B6215FE0B580053C97E /* icon_google_drive.png */; };
+		54EE2B6B15FE0B580053C97E /* icon_instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2B6315FE0B580053C97E /* icon_instagram.png */; };
+		54EE2B6C15FE0B580053C97E /* icon_picasa.png in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2B6415FE0B580053C97E /* icon_picasa.png */; };
+		54EE2B6D15FE0B580053C97E /* icon_url.png in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2B6515FE0B580053C97E /* icon_url.png */; };
+		54EE2B7315FE1FD40053C97E /* UploadedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2B7115FE1FD40053C97E /* UploadedViewController.m */; };
+		54EE2B7415FE1FD40053C97E /* UploadedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2B7215FE1FD40053C97E /* UploadedViewController.xib */; };
+		54EE2B7815FE1FE00053C97E /* DisclosureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2B7615FE1FE00053C97E /* DisclosureViewController.m */; };
+		54EE2B7915FE1FE00053C97E /* DisclosureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2B7715FE1FE00053C97E /* DisclosureViewController.xib */; };
+		54EE2B9A15FE30420053C97E /* UploadCareProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2B9915FE30420053C97E /* UploadCareProgressView.m */; };
+		54EE2B9B15FE30420053C97E /* UploadCareProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2B9915FE30420053C97E /* UploadCareProgressView.m */; };
+		54EE2BCB15FE363B0053C97E /* AJNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2BAC15FE363B0053C97E /* AJNotificationView.m */; };
+		54EE2BCC15FE363B0053C97E /* AJNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2BAC15FE363B0053C97E /* AJNotificationView.m */; };
+		54EE2BDF15FE363B0053C97E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2BC115FE363B0053C97E /* LICENSE */; };
+		54EE2BE015FE363B0053C97E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2BC115FE363B0053C97E /* LICENSE */; };
+		54EE2BE115FE363B0053C97E /* Readme.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2BC215FE363B0053C97E /* Readme.markdown */; };
+		54EE2BE215FE363B0053C97E /* Readme.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2BC215FE363B0053C97E /* Readme.markdown */; };
+		54EE2BED15FE43AC0053C97E /* UCPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2BEB15FE43AC0053C97E /* UCPhotoViewController.m */; };
+		54EE2BEE15FE43AC0053C97E /* UCPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2BEB15FE43AC0053C97E /* UCPhotoViewController.m */; };
+		54EE2BEF15FE43AC0053C97E /* UCPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2BEC15FE43AC0053C97E /* UCPhotoViewController.xib */; };
+		54EE2BF015FE43AC0053C97E /* UCPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2BEC15FE43AC0053C97E /* UCPhotoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		541352A215FE5CAB00E17A20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54B1EA3215D17EA90000B20B /* grabKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5FD3999615BF1E2B0063542C;
+			remoteInfo = GrabKitLib;
+		};
+		541352A415FE5CAB00E17A20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54B1EA3215D17EA90000B20B /* grabKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5F89F1C015BFC18B00B8739D;
+			remoteInfo = GrabKitBundle;
+		};
 		5424F42115CC122700394084 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5424F3EC15CC122600394084 /* Project object */;
@@ -35,9 +384,61 @@
 			remoteGlobalIDString = 5424F3F415CC122600394084;
 			remoteInfo = WidgetExample;
 		};
+		544E322715F9298F00011290 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 54D4F7F815C96E8E0021A868;
+			remoteInfo = UploadcareKit;
+		};
+		54B1D76515D14FD90000B20B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 54D4F7F915C96E8E0021A868;
+			remoteInfo = UploadcareKit;
+		};
+		54B1D76715D14FD90000B20B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 54D4F80A15C96E8E0021A868;
+			remoteInfo = UploadcareKitTests;
+		};
+		54B1EA3D15D17EAA0000B20B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54B1EA3215D17EA90000B20B /* grabKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5F3C2B4A15B9F7FC008D894A;
+			remoteInfo = "grabKit Demo";
+		};
+		54B1EA3F15D17EAA0000B20B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54B1EA3215D17EA90000B20B /* grabKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5FD3999715BF1E2B0063542C;
+			remoteInfo = GrabKitLib;
+		};
+		54B1EA4115D17EAA0000B20B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54B1EA3215D17EA90000B20B /* grabKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5F89F1C115BFC18B00B8739D;
+			remoteInfo = GrabKitBundle;
+		};
+		54B1EA4315D17EAA0000B20B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54B1EA3215D17EA90000B20B /* grabKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5F3C2B6515B9F7FC008D894A;
+			remoteInfo = "grabKit Tests";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5413529915FE5C1100E17A20 /* GTMOAuth2Framework-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GTMOAuth2Framework-Info.plist"; path = "../../UploadcareWidget/vendors/GrabKit/grabKit/grabKit/externalLibraries/Picasa/Common/Optional/OAuth2/Mac/GTMOAuth2Framework-Info.plist"; sourceTree = "<group>"; };
+		5413529B15FE5C2000E17A20 /* GTMOAuth2Window.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GTMOAuth2Window.xib; path = ../../UploadcareWidget/vendors/GrabKit/grabKit/grabKit/externalLibraries/Picasa/Common/Optional/OAuth2/Mac/GTMOAuth2Window.xib; sourceTree = "<group>"; };
+		5413529D15FE5C2A00E17A20 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GTMOAuth2ViewTouch.xib; path = ../../UploadcareWidget/vendors/GrabKit/grabKit/grabKit/externalLibraries/Picasa/Common/Optional/OAuth2/Touch/GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		5424F3F515CC122600394084 /* WidgetExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WidgetExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5424F3F915CC122600394084 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5424F3FB15CC122600394084 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -63,7 +464,343 @@
 		5424F43D15CC133600394084 /* UploadcareWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UploadcareWidget.h; path = ../../../UploadcareWidget/UploadcareWidget.h; sourceTree = "<group>"; };
 		5424F43E15CC133600394084 /* UploadcareWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadcareWidget.m; path = ../../../UploadcareWidget/UploadcareWidget.m; sourceTree = "<group>"; };
 		5424F43F15CC133600394084 /* UploadcareWidget.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UploadcareWidget.xib; path = ../../../UploadcareWidget/UploadcareWidget.xib; sourceTree = "<group>"; };
-		5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = file; name = UploadcareKit.xcodeproj; path = ../../UploadcareKit/UploadcareKit.xcodeproj; sourceTree = "<group>"; };
+		5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UploadcareKit.xcodeproj; path = ../../UploadcareKit/UploadcareKit.xcodeproj; sourceTree = "<group>"; };
+		548077B315F90CFC00090D64 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		548077CC15F9105B00090D64 /* UCAlbumsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCAlbumsList.h; sourceTree = "<group>"; };
+		548077CD15F9105B00090D64 /* UCAlbumsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCAlbumsList.m; sourceTree = "<group>"; };
+		548077CE15F9105B00090D64 /* UCAlbumsList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCAlbumsList.xib; sourceTree = "<group>"; };
+		548077CF15F9105B00090D64 /* UCAlbumsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCAlbumsListCell.h; sourceTree = "<group>"; };
+		548077D015F9105B00090D64 /* UCAlbumsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCAlbumsListCell.m; sourceTree = "<group>"; };
+		548077D115F9105B00090D64 /* UCAlbumsListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCAlbumsListCell.xib; sourceTree = "<group>"; };
+		548077D615F9105B00090D64 /* UCPhotosList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotosList.h; sourceTree = "<group>"; };
+		548077D715F9105B00090D64 /* UCPhotosList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotosList.m; sourceTree = "<group>"; };
+		548077D815F9105B00090D64 /* UCPhotosList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCPhotosList.xib; sourceTree = "<group>"; };
+		548077D915F9105B00090D64 /* UCPhotosListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotosListCell.h; sourceTree = "<group>"; };
+		548077DA15F9105B00090D64 /* UCPhotosListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotosListCell.m; sourceTree = "<group>"; };
+		548077DB15F9105B00090D64 /* UCPhotosListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCPhotosListCell.xib; sourceTree = "<group>"; };
+		54A3C45A15FE6A87001F7E48 /* GrabKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GrabKit.h; sourceTree = "<group>"; };
+		54A3C45B15FE6A87001F7E48 /* GRKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKConstants.h; sourceTree = "<group>"; };
+		54A3C45C15FE6A87001F7E48 /* GRKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKConstants.m; sourceTree = "<group>"; };
+		54A3C45D15FE6A87001F7E48 /* GRKConfiguratorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKConfiguratorProtocol.h; sourceTree = "<group>"; };
+		54A3C45E15FE6A87001F7E48 /* GRKConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKConfiguration.h; sourceTree = "<group>"; };
+		54A3C45F15FE6A87001F7E48 /* GRKConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKConfiguration.m; sourceTree = "<group>"; };
+		54A3C46115FE6A87001F7E48 /* GRKErrorsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKErrorsConstants.h; sourceTree = "<group>"; };
+		54A3C46315FE6A87001F7E48 /* NSDictionary+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = "NSDictionary+URLEncoding.h"; sourceTree = "<group>"; };
+		54A3C46415FE6A87001F7E48 /* NSDictionary+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = "NSDictionary+URLEncoding.m"; sourceTree = "<group>"; };
+		54A3C46515FE6A87001F7E48 /* NSIndexSet+pagination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = "NSIndexSet+pagination.h"; sourceTree = "<group>"; };
+		54A3C46615FE6A87001F7E48 /* NSIndexSet+pagination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = "NSIndexSet+pagination.m"; sourceTree = "<group>"; };
+		54A3C46715FE6A87001F7E48 /* NSMutableArray+setObjectAtPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = "NSMutableArray+setObjectAtPosition.h"; sourceTree = "<group>"; };
+		54A3C46815FE6A87001F7E48 /* NSMutableArray+setObjectAtPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = "NSMutableArray+setObjectAtPosition.m"; sourceTree = "<group>"; };
+		54A3C46915FE6A87001F7E48 /* NSString+date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = "NSString+date.h"; sourceTree = "<group>"; };
+		54A3C46A15FE6A87001F7E48 /* NSString+date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = "NSString+date.m"; sourceTree = "<group>"; };
+		54A3C46C15FE6A87001F7E48 /* GRKAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKAlbum.h; sourceTree = "<group>"; };
+		54A3C46D15FE6A87001F7E48 /* GRKAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKAlbum.m; sourceTree = "<group>"; };
+		54A3C46E15FE6A87001F7E48 /* GRKImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKImage.h; sourceTree = "<group>"; };
+		54A3C46F15FE6A87001F7E48 /* GRKImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKImage.m; sourceTree = "<group>"; };
+		54A3C47015FE6A87001F7E48 /* GRKPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKPhoto.h; sourceTree = "<group>"; };
+		54A3C47115FE6A87001F7E48 /* GRKPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKPhoto.m; sourceTree = "<group>"; };
+		54A3C47315FE6A87001F7E48 /* GRKConnectorsDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKConnectorsDispatcher.h; sourceTree = "<group>"; };
+		54A3C47415FE6A87001F7E48 /* GRKConnectorsDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKConnectorsDispatcher.m; sourceTree = "<group>"; };
+		54A3C47515FE6A87001F7E48 /* GRKServiceConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKServiceConnector.h; sourceTree = "<group>"; };
+		54A3C47615FE6A87001F7E48 /* GRKServiceConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKServiceConnector.m; sourceTree = "<group>"; };
+		54A3C47715FE6A87001F7E48 /* GRKServiceGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKServiceGrabber.h; sourceTree = "<group>"; };
+		54A3C47815FE6A87001F7E48 /* GRKServiceGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKServiceGrabber.m; sourceTree = "<group>"; };
+		54A3C47915FE6A87001F7E48 /* GRKDeviceGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKDeviceGrabber.h; sourceTree = "<group>"; };
+		54A3C47A15FE6A87001F7E48 /* GRKDeviceGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; lineEnding = 0; path = GRKDeviceGrabber.m; sourceTree = "<group>"; };
+		54A3C47C15FE6A87001F7E48 /* GRKFacebookConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFacebookConnector.h; sourceTree = "<group>"; };
+		54A3C47D15FE6A87001F7E48 /* GRKFacebookConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFacebookConnector.m; sourceTree = "<group>"; };
+		54A3C47E15FE6A87001F7E48 /* GRKFacebookGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFacebookGrabber.h; sourceTree = "<group>"; };
+		54A3C47F15FE6A87001F7E48 /* GRKFacebookGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFacebookGrabber.m; sourceTree = "<group>"; };
+		54A3C48015FE6A87001F7E48 /* GRKFacebookQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFacebookQuery.h; sourceTree = "<group>"; };
+		54A3C48115FE6A87001F7E48 /* GRKFacebookQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFacebookQuery.m; sourceTree = "<group>"; };
+		54A3C48215FE6A87001F7E48 /* GRKFacebookBatchQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFacebookBatchQuery.h; sourceTree = "<group>"; };
+		54A3C48315FE6A87001F7E48 /* GRKFacebookBatchQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFacebookBatchQuery.m; sourceTree = "<group>"; };
+		54A3C48415FE6A87001F7E48 /* GRKFacebookSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFacebookSingleton.h; sourceTree = "<group>"; };
+		54A3C48515FE6A87001F7E48 /* GRKFacebookSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFacebookSingleton.m; sourceTree = "<group>"; };
+		54A3C48715FE6A87001F7E48 /* GRKFlickrConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFlickrConnector.h; sourceTree = "<group>"; };
+		54A3C48815FE6A87001F7E48 /* GRKFlickrConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFlickrConnector.m; sourceTree = "<group>"; };
+		54A3C48915FE6A87001F7E48 /* GRKFlickrGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFlickrGrabber.h; sourceTree = "<group>"; };
+		54A3C48A15FE6A87001F7E48 /* GRKFlickrGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFlickrGrabber.m; sourceTree = "<group>"; };
+		54A3C48B15FE6A87001F7E48 /* GRKFlickrQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFlickrQuery.h; sourceTree = "<group>"; };
+		54A3C48C15FE6A87001F7E48 /* GRKFlickrQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFlickrQuery.m; sourceTree = "<group>"; };
+		54A3C48D15FE6A87001F7E48 /* GRKFlickrQueriesQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFlickrQueriesQueue.h; sourceTree = "<group>"; };
+		54A3C48E15FE6A87001F7E48 /* GRKFlickrQueriesQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFlickrQueriesQueue.m; sourceTree = "<group>"; };
+		54A3C48F15FE6A87001F7E48 /* GRKFlickrSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFlickrSingleton.h; sourceTree = "<group>"; };
+		54A3C49015FE6A87001F7E48 /* GRKFlickrSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKFlickrSingleton.m; sourceTree = "<group>"; };
+		54A3C49215FE6A87001F7E48 /* GRKInstagramConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKInstagramConnector.h; sourceTree = "<group>"; };
+		54A3C49315FE6A87001F7E48 /* GRKInstagramConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKInstagramConnector.m; sourceTree = "<group>"; };
+		54A3C49415FE6A87001F7E48 /* GRKInstagramGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKInstagramGrabber.h; sourceTree = "<group>"; };
+		54A3C49515FE6A87001F7E48 /* GRKInstagramGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKInstagramGrabber.m; sourceTree = "<group>"; };
+		54A3C49615FE6A87001F7E48 /* GRKInstagramQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKInstagramQuery.h; sourceTree = "<group>"; };
+		54A3C49715FE6A87001F7E48 /* GRKInstagramQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKInstagramQuery.m; sourceTree = "<group>"; };
+		54A3C49815FE6A87001F7E48 /* GRKInstagramSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKInstagramSingleton.h; sourceTree = "<group>"; };
+		54A3C49915FE6A87001F7E48 /* GRKInstagramSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKInstagramSingleton.m; sourceTree = "<group>"; };
+		54A3C49B15FE6A87001F7E48 /* GRKPicasaConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKPicasaConnector.h; sourceTree = "<group>"; };
+		54A3C49C15FE6A87001F7E48 /* GRKPicasaConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKPicasaConnector.m; sourceTree = "<group>"; };
+		54A3C49D15FE6A87001F7E48 /* GRKPicasaGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKPicasaGrabber.h; sourceTree = "<group>"; };
+		54A3C49E15FE6A87001F7E48 /* GRKPicasaGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKPicasaGrabber.m; sourceTree = "<group>"; };
+		54A3C49F15FE6A87001F7E48 /* GRKPicasaQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKPicasaQuery.h; sourceTree = "<group>"; };
+		54A3C4A015FE6A87001F7E48 /* GRKPicasaQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKPicasaQuery.m; sourceTree = "<group>"; };
+		54A3C4A115FE6A87001F7E48 /* GRKPicasaQueriesQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKPicasaQueriesQueue.h; sourceTree = "<group>"; };
+		54A3C4A215FE6A87001F7E48 /* GRKPicasaQueriesQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKPicasaQueriesQueue.m; sourceTree = "<group>"; };
+		54A3C4A315FE6A87001F7E48 /* GRKPicasaSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKPicasaSingleton.h; sourceTree = "<group>"; };
+		54A3C4A415FE6A87001F7E48 /* GRKPicasaSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKPicasaSingleton.m; sourceTree = "<group>"; };
+		54A3C4A615FE6A87001F7E48 /* GRKServiceConnectorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKServiceConnectorProtocol.h; sourceTree = "<group>"; };
+		54A3C4A715FE6A87001F7E48 /* GRKServiceGrabberConnectionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKServiceGrabberConnectionProtocol.h; sourceTree = "<group>"; };
+		54A3C4A815FE6A87001F7E48 /* GRKServiceGrabberProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKServiceGrabberProtocol.h; sourceTree = "<group>"; };
+		54A3C4A915FE6A87001F7E48 /* GRKServiceQueryProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKServiceQueryProtocol.h; sourceTree = "<group>"; };
+		54A3C4AB15FE6A87001F7E48 /* GRKTokenStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKTokenStore.h; sourceTree = "<group>"; };
+		54A3C4AC15FE6A87001F7E48 /* GRKTokenStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKTokenStore.m; sourceTree = "<group>"; };
+		54A3C4AD15FE6A87001F7E48 /* GRKTokenStoreUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKTokenStoreUserDefaults.h; sourceTree = "<group>"; };
+		54A3C4AE15FE6A87001F7E48 /* GRKTokenStoreUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GRKTokenStoreUserDefaults.m; sourceTree = "<group>"; };
+		54A3C4FD15FE6AD1001F7E48 /* ISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = ISO8601DateFormatter.h; sourceTree = "<group>"; };
+		54A3C4FE15FE6AD1001F7E48 /* ISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = ISO8601DateFormatter.m; sourceTree = "<group>"; };
+		54A3C50115FE6AD1001F7E48 /* LFHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = LFHTTPRequest.h; sourceTree = "<group>"; };
+		54A3C50215FE6AD1001F7E48 /* LFHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = LFHTTPRequest.m; sourceTree = "<group>"; };
+		54A3C50315FE6AD1001F7E48 /* LFSiteReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = LFSiteReachability.h; sourceTree = "<group>"; };
+		54A3C50415FE6AD1001F7E48 /* LFSiteReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = LFSiteReachability.m; sourceTree = "<group>"; };
+		54A3C50515FE6AD1001F7E48 /* LFWebAPIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = LFWebAPIKit.h; sourceTree = "<group>"; };
+		54A3C50615FE6AD1001F7E48 /* NSData+LFHTTPFormExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = "NSData+LFHTTPFormExtensions.h"; sourceTree = "<group>"; };
+		54A3C50715FE6AD1001F7E48 /* NSData+LFHTTPFormExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = "NSData+LFHTTPFormExtensions.m"; sourceTree = "<group>"; };
+		54A3C50915FE6AD1001F7E48 /* ObjectiveFlickr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = ObjectiveFlickr.h; sourceTree = "<group>"; };
+		54A3C50A15FE6AD1001F7E48 /* ObjectiveFlickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = ObjectiveFlickr.m; sourceTree = "<group>"; };
+		54A3C50B15FE6AD1001F7E48 /* OFUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = OFUtilities.h; sourceTree = "<group>"; };
+		54A3C50C15FE6AD1001F7E48 /* OFUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = OFUtilities.m; sourceTree = "<group>"; };
+		54A3C50D15FE6AD1001F7E48 /* OFXMLMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = OFXMLMapper.h; sourceTree = "<group>"; };
+		54A3C50E15FE6AD1001F7E48 /* OFXMLMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = OFXMLMapper.m; sourceTree = "<group>"; };
+		54A3C51115FE6AD1001F7E48 /* GDataEntryBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryBase.h; sourceTree = "<group>"; };
+		54A3C51215FE6AD1001F7E48 /* GDataEntryBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryBase.m; sourceTree = "<group>"; };
+		54A3C51315FE6AD1001F7E48 /* GDataFeedBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFeedBase.h; sourceTree = "<group>"; };
+		54A3C51415FE6AD1001F7E48 /* GDataFeedBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFeedBase.m; sourceTree = "<group>"; };
+		54A3C51515FE6AD1001F7E48 /* GDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataObject.h; sourceTree = "<group>"; };
+		54A3C51615FE6AD1001F7E48 /* GDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataObject.m; sourceTree = "<group>"; };
+		54A3C51715FE6AD1001F7E48 /* GDataQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataQuery.h; sourceTree = "<group>"; };
+		54A3C51815FE6AD1001F7E48 /* GDataQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataQuery.m; sourceTree = "<group>"; };
+		54A3C51915FE6AD1001F7E48 /* GDataServiceBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataServiceBase.h; sourceTree = "<group>"; };
+		54A3C51A15FE6AD1001F7E48 /* GDataServiceBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataServiceBase.m; sourceTree = "<group>"; };
+		54A3C51B15FE6AD1001F7E48 /* GDataServiceGoogle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataServiceGoogle.h; sourceTree = "<group>"; };
+		54A3C51C15FE6AD1001F7E48 /* GDataServiceGoogle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataServiceGoogle.m; sourceTree = "<group>"; };
+		54A3C51E15FE6AD1001F7E48 /* GDataAtomPubControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataAtomPubControl.h; sourceTree = "<group>"; };
+		54A3C51F15FE6AD1001F7E48 /* GDataAtomPubControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataAtomPubControl.m; sourceTree = "<group>"; };
+		54A3C52015FE6AD1001F7E48 /* GDataBaseElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataBaseElements.h; sourceTree = "<group>"; };
+		54A3C52115FE6AD1001F7E48 /* GDataBaseElements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataBaseElements.m; sourceTree = "<group>"; };
+		54A3C52215FE6AD1001F7E48 /* GDataBatchID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataBatchID.h; sourceTree = "<group>"; };
+		54A3C52315FE6AD1001F7E48 /* GDataBatchID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataBatchID.m; sourceTree = "<group>"; };
+		54A3C52415FE6AD1001F7E48 /* GDataBatchInterrupted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataBatchInterrupted.h; sourceTree = "<group>"; };
+		54A3C52515FE6AD1001F7E48 /* GDataBatchInterrupted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataBatchInterrupted.m; sourceTree = "<group>"; };
+		54A3C52615FE6AD1001F7E48 /* GDataBatchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataBatchOperation.h; sourceTree = "<group>"; };
+		54A3C52715FE6AD1001F7E48 /* GDataBatchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataBatchOperation.m; sourceTree = "<group>"; };
+		54A3C52815FE6AD1001F7E48 /* GDataBatchStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataBatchStatus.h; sourceTree = "<group>"; };
+		54A3C52915FE6AD1001F7E48 /* GDataBatchStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataBatchStatus.m; sourceTree = "<group>"; };
+		54A3C52A15FE6AD1001F7E48 /* GDataCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataCategory.h; sourceTree = "<group>"; };
+		54A3C52B15FE6AD1001F7E48 /* GDataCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataCategory.m; sourceTree = "<group>"; };
+		54A3C52C15FE6AD1001F7E48 /* GDataComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataComment.h; sourceTree = "<group>"; };
+		54A3C52D15FE6AD1001F7E48 /* GDataComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataComment.m; sourceTree = "<group>"; };
+		54A3C52E15FE6AD1001F7E48 /* GDataCustomProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataCustomProperty.h; sourceTree = "<group>"; };
+		54A3C52F15FE6AD1001F7E48 /* GDataCustomProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataCustomProperty.m; sourceTree = "<group>"; };
+		54A3C53015FE6AD1001F7E48 /* GDataDateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataDateTime.h; sourceTree = "<group>"; };
+		54A3C53115FE6AD1001F7E48 /* GDataDateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataDateTime.m; sourceTree = "<group>"; };
+		54A3C53215FE6AD1001F7E48 /* GDataDeleted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataDeleted.h; sourceTree = "<group>"; };
+		54A3C53315FE6AD1001F7E48 /* GDataDeleted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataDeleted.m; sourceTree = "<group>"; };
+		54A3C53415FE6AD1001F7E48 /* GDataElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataElements.h; sourceTree = "<group>"; };
+		54A3C53515FE6AD1001F7E48 /* GDataEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEmail.h; sourceTree = "<group>"; };
+		54A3C53615FE6AD1001F7E48 /* GDataEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEmail.m; sourceTree = "<group>"; };
+		54A3C53715FE6AD1001F7E48 /* GDataEntryContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryContent.h; sourceTree = "<group>"; };
+		54A3C53815FE6AD1001F7E48 /* GDataEntryContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryContent.m; sourceTree = "<group>"; };
+		54A3C53915FE6AD1001F7E48 /* GDataEntryLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryLink.h; sourceTree = "<group>"; };
+		54A3C53A15FE6AD1001F7E48 /* GDataEntryLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryLink.m; sourceTree = "<group>"; };
+		54A3C53B15FE6AD1001F7E48 /* GDataExtendedProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataExtendedProperty.h; sourceTree = "<group>"; };
+		54A3C53C15FE6AD1001F7E48 /* GDataExtendedProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataExtendedProperty.m; sourceTree = "<group>"; };
+		54A3C53D15FE6AD1001F7E48 /* GDataFeedLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFeedLink.h; sourceTree = "<group>"; };
+		54A3C53E15FE6AD1001F7E48 /* GDataFeedLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFeedLink.m; sourceTree = "<group>"; };
+		54A3C53F15FE6AD1001F7E48 /* GDataGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataGenerator.h; sourceTree = "<group>"; };
+		54A3C54015FE6AD1001F7E48 /* GDataGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataGenerator.m; sourceTree = "<group>"; };
+		54A3C54115FE6AD1001F7E48 /* GDataGeoPt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataGeoPt.h; sourceTree = "<group>"; };
+		54A3C54215FE6AD1001F7E48 /* GDataGeoPt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataGeoPt.m; sourceTree = "<group>"; };
+		54A3C54315FE6AD1001F7E48 /* GDataIM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataIM.h; sourceTree = "<group>"; };
+		54A3C54415FE6AD1001F7E48 /* GDataIM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataIM.m; sourceTree = "<group>"; };
+		54A3C54515FE6AD1001F7E48 /* GDataLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataLink.h; sourceTree = "<group>"; };
+		54A3C54615FE6AD1001F7E48 /* GDataLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataLink.m; sourceTree = "<group>"; };
+		54A3C54715FE6AD1001F7E48 /* GDataMoney.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMoney.h; sourceTree = "<group>"; };
+		54A3C54815FE6AD1001F7E48 /* GDataMoney.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMoney.m; sourceTree = "<group>"; };
+		54A3C54915FE6AD1001F7E48 /* GDataName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataName.h; sourceTree = "<group>"; };
+		54A3C54A15FE6AD1001F7E48 /* GDataName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataName.m; sourceTree = "<group>"; };
+		54A3C54B15FE6AD1001F7E48 /* GDataOrganization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataOrganization.h; sourceTree = "<group>"; };
+		54A3C54C15FE6AD1001F7E48 /* GDataOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataOrganization.m; sourceTree = "<group>"; };
+		54A3C54D15FE6AD1001F7E48 /* GDataOrganizationName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataOrganizationName.h; sourceTree = "<group>"; };
+		54A3C54E15FE6AD1001F7E48 /* GDataOrganizationName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataOrganizationName.m; sourceTree = "<group>"; };
+		54A3C54F15FE6AD1001F7E48 /* GDataPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataPerson.h; sourceTree = "<group>"; };
+		54A3C55015FE6AD1001F7E48 /* GDataPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataPerson.m; sourceTree = "<group>"; };
+		54A3C55115FE6AD1001F7E48 /* GDataPhoneNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataPhoneNumber.h; sourceTree = "<group>"; };
+		54A3C55215FE6AD1001F7E48 /* GDataPhoneNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataPhoneNumber.m; sourceTree = "<group>"; };
+		54A3C55315FE6AD1001F7E48 /* GDataPostalAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataPostalAddress.h; sourceTree = "<group>"; };
+		54A3C55415FE6AD1001F7E48 /* GDataPostalAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataPostalAddress.m; sourceTree = "<group>"; };
+		54A3C55515FE6AD1001F7E48 /* GDataRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataRating.h; sourceTree = "<group>"; };
+		54A3C55615FE6AD1001F7E48 /* GDataRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataRating.m; sourceTree = "<group>"; };
+		54A3C55715FE6AD1001F7E48 /* GDataStructuredPostalAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataStructuredPostalAddress.h; sourceTree = "<group>"; };
+		54A3C55815FE6AD1001F7E48 /* GDataStructuredPostalAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataStructuredPostalAddress.m; sourceTree = "<group>"; };
+		54A3C55915FE6AD1001F7E48 /* GDataTextConstruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataTextConstruct.h; sourceTree = "<group>"; };
+		54A3C55A15FE6AD1001F7E48 /* GDataTextConstruct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataTextConstruct.m; sourceTree = "<group>"; };
+		54A3C55B15FE6AD1001F7E48 /* GDataValueConstruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataValueConstruct.h; sourceTree = "<group>"; };
+		54A3C55C15FE6AD1001F7E48 /* GDataValueConstruct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataValueConstruct.m; sourceTree = "<group>"; };
+		54A3C55D15FE6AD1001F7E48 /* GDataWhen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataWhen.h; sourceTree = "<group>"; };
+		54A3C55E15FE6AD1001F7E48 /* GDataWhen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataWhen.m; sourceTree = "<group>"; };
+		54A3C55F15FE6AD1001F7E48 /* GDataWhere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataWhere.h; sourceTree = "<group>"; };
+		54A3C56015FE6AD1001F7E48 /* GDataWhere.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataWhere.m; sourceTree = "<group>"; };
+		54A3C56115FE6AD1001F7E48 /* GDataWho.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataWho.h; sourceTree = "<group>"; };
+		54A3C56215FE6AD1001F7E48 /* GDataWho.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataWho.m; sourceTree = "<group>"; };
+		54A3C56415FE6AD1001F7E48 /* GData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GData.h; sourceTree = "<group>"; };
+		54A3C56515FE6AD1001F7E48 /* GDataDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataDefines.h; sourceTree = "<group>"; };
+		54A3C56615FE6AD1001F7E48 /* GDataFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFramework.h; sourceTree = "<group>"; };
+		54A3C56715FE6AD1001F7E48 /* GDataFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFramework.m; sourceTree = "<group>"; };
+		54A3C56815FE6AD1001F7E48 /* GDataTargetNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataTargetNamespace.h; sourceTree = "<group>"; };
+		54A3C56915FE6AD1001F7E48 /* GDataUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataUtilities.h; sourceTree = "<group>"; };
+		54A3C56A15FE6AD1001F7E48 /* GDataUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataUtilities.m; sourceTree = "<group>"; };
+		54A3C56B15FE6AD1001F7E48 /* GDataGeo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataGeo.h; sourceTree = "<group>"; };
+		54A3C56C15FE6AD1001F7E48 /* GDataGeo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataGeo.m; sourceTree = "<group>"; };
+		54A3C56E15FE6AD1001F7E48 /* GTMGatherInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMGatherInputStream.h; sourceTree = "<group>"; };
+		54A3C56F15FE6AD1001F7E48 /* GTMGatherInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMGatherInputStream.m; sourceTree = "<group>"; };
+		54A3C57015FE6AD1001F7E48 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
+		54A3C57115FE6AD1001F7E48 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMHTTPFetcher.m; sourceTree = "<group>"; };
+		54A3C57215FE6AD1001F7E48 /* GTMHTTPFetcherLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMHTTPFetcherLogging.h; sourceTree = "<group>"; };
+		54A3C57315FE6AD1001F7E48 /* GTMHTTPFetcherLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMHTTPFetcherLogging.m; sourceTree = "<group>"; };
+		54A3C57415FE6AD1001F7E48 /* GTMHTTPFetcherService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMHTTPFetcherService.h; sourceTree = "<group>"; };
+		54A3C57515FE6AD1001F7E48 /* GTMHTTPFetcherService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMHTTPFetcherService.m; sourceTree = "<group>"; };
+		54A3C57615FE6AD1001F7E48 /* GTMHTTPFetchHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMHTTPFetchHistory.h; sourceTree = "<group>"; };
+		54A3C57715FE6AD1001F7E48 /* GTMHTTPFetchHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMHTTPFetchHistory.m; sourceTree = "<group>"; };
+		54A3C57815FE6AD1001F7E48 /* GTMHTTPUploadFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMHTTPUploadFetcher.h; sourceTree = "<group>"; };
+		54A3C57915FE6AD1001F7E48 /* GTMHTTPUploadFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMHTTPUploadFetcher.m; sourceTree = "<group>"; };
+		54A3C57A15FE6AD1001F7E48 /* GTMMIMEDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMMIMEDocument.h; sourceTree = "<group>"; };
+		54A3C57B15FE6AD1001F7E48 /* GTMMIMEDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMMIMEDocument.m; sourceTree = "<group>"; };
+		54A3C57C15FE6AD1001F7E48 /* GTMReadMonitorInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMReadMonitorInputStream.h; sourceTree = "<group>"; };
+		54A3C57D15FE6AD1001F7E48 /* GTMReadMonitorInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMReadMonitorInputStream.m; sourceTree = "<group>"; };
+		54A3C57F15FE6AD1001F7E48 /* GDataMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMedia.h; sourceTree = "<group>"; };
+		54A3C58015FE6AD1001F7E48 /* GDataMediaCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaCategory.h; sourceTree = "<group>"; };
+		54A3C58115FE6AD1001F7E48 /* GDataMediaCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaCategory.m; sourceTree = "<group>"; };
+		54A3C58215FE6AD1001F7E48 /* GDataMediaContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaContent.h; sourceTree = "<group>"; };
+		54A3C58315FE6AD1001F7E48 /* GDataMediaContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaContent.m; sourceTree = "<group>"; };
+		54A3C58415FE6AD1001F7E48 /* GDataMediaCredit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaCredit.h; sourceTree = "<group>"; };
+		54A3C58515FE6AD1001F7E48 /* GDataMediaCredit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaCredit.m; sourceTree = "<group>"; };
+		54A3C58615FE6AD1001F7E48 /* GDataMediaGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; lineEnding = 0; path = GDataMediaGroup.h; sourceTree = "<group>"; };
+		54A3C58715FE6AD1001F7E48 /* GDataMediaGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaGroup.m; sourceTree = "<group>"; };
+		54A3C58815FE6AD1001F7E48 /* GDataMediaKeywords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaKeywords.h; sourceTree = "<group>"; };
+		54A3C58915FE6AD1001F7E48 /* GDataMediaKeywords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaKeywords.m; sourceTree = "<group>"; };
+		54A3C58A15FE6AD1001F7E48 /* GDataMediaPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaPlayer.h; sourceTree = "<group>"; };
+		54A3C58B15FE6AD1001F7E48 /* GDataMediaPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaPlayer.m; sourceTree = "<group>"; };
+		54A3C58C15FE6AD1001F7E48 /* GDataMediaRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaRating.h; sourceTree = "<group>"; };
+		54A3C58D15FE6AD1001F7E48 /* GDataMediaRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaRating.m; sourceTree = "<group>"; };
+		54A3C58E15FE6AD1001F7E48 /* GDataMediaRestriction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaRestriction.h; sourceTree = "<group>"; };
+		54A3C58F15FE6AD1001F7E48 /* GDataMediaRestriction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaRestriction.m; sourceTree = "<group>"; };
+		54A3C59015FE6AD1001F7E48 /* GDataMediaThumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaThumbnail.h; sourceTree = "<group>"; };
+		54A3C59115FE6AD1001F7E48 /* GDataMediaThumbnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataMediaThumbnail.m; sourceTree = "<group>"; };
+		54A3C59215FE6AD1001F7E48 /* GDataNormalPlayTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataNormalPlayTime.h; sourceTree = "<group>"; };
+		54A3C59315FE6AD1001F7E48 /* GDataNormalPlayTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataNormalPlayTime.m; sourceTree = "<group>"; };
+		54A3C59515FE6AD1001F7E48 /* GDataAuthenticationFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataAuthenticationFetcher.h; sourceTree = "<group>"; };
+		54A3C59615FE6AD1001F7E48 /* GDataAuthenticationFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataAuthenticationFetcher.m; sourceTree = "<group>"; };
+		54A3C59715FE6AD1001F7E48 /* GDataServerError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; lineEnding = 0; path = GDataServerError.h; sourceTree = "<group>"; };
+		54A3C59815FE6AD1001F7E48 /* GDataServerError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataServerError.m; sourceTree = "<group>"; };
+		54A3C59A15FE6AD1001F7E48 /* GDataACL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataACL.h; sourceTree = "<group>"; };
+		54A3C59B15FE6AD1001F7E48 /* GDataACLKeyedRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataACLKeyedRole.h; sourceTree = "<group>"; };
+		54A3C59C15FE6AD1001F7E48 /* GDataACLKeyedRole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataACLKeyedRole.m; sourceTree = "<group>"; };
+		54A3C59D15FE6AD1001F7E48 /* GDataACLRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataACLRole.h; sourceTree = "<group>"; };
+		54A3C59E15FE6AD1001F7E48 /* GDataACLRole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataACLRole.m; sourceTree = "<group>"; };
+		54A3C59F15FE6AD1001F7E48 /* GDataACLScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataACLScope.h; sourceTree = "<group>"; };
+		54A3C5A015FE6AD1001F7E48 /* GDataACLScope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataACLScope.m; sourceTree = "<group>"; };
+		54A3C5A115FE6AD1001F7E48 /* GDataEntryACL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryACL.h; sourceTree = "<group>"; };
+		54A3C5A215FE6AD1001F7E48 /* GDataEntryACL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryACL.m; sourceTree = "<group>"; };
+		54A3C5A315FE6AD1001F7E48 /* GDataFeedACL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFeedACL.h; sourceTree = "<group>"; };
+		54A3C5A415FE6AD1001F7E48 /* GDataFeedACL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFeedACL.m; sourceTree = "<group>"; };
+		54A3C5A515FE6AD1001F7E48 /* GDataServiceACL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataServiceACL.h; sourceTree = "<group>"; };
+		54A3C5A615FE6AD1001F7E48 /* GDataServiceACL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataServiceACL.m; sourceTree = "<group>"; };
+		54A3C5A815FE6AD1001F7E48 /* GDataAtomCategoryGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; lineEnding = 0; path = GDataAtomCategoryGroup.h; sourceTree = "<group>"; };
+		54A3C5A915FE6AD1001F7E48 /* GDataAtomCategoryGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataAtomCategoryGroup.m; sourceTree = "<group>"; };
+		54A3C5AA15FE6AD1001F7E48 /* GDataAtomCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataAtomCollection.h; sourceTree = "<group>"; };
+		54A3C5AB15FE6AD1001F7E48 /* GDataAtomCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataAtomCollection.m; sourceTree = "<group>"; };
+		54A3C5AC15FE6AD1001F7E48 /* GDataAtomServiceDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataAtomServiceDocument.h; sourceTree = "<group>"; };
+		54A3C5AD15FE6AD1001F7E48 /* GDataAtomServiceDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataAtomServiceDocument.m; sourceTree = "<group>"; };
+		54A3C5AE15FE6AD1001F7E48 /* GDataAtomWorkspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataAtomWorkspace.h; sourceTree = "<group>"; };
+		54A3C5AF15FE6AD1001F7E48 /* GDataAtomWorkspace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataAtomWorkspace.m; sourceTree = "<group>"; };
+		54A3C5B015FE6AD1001F7E48 /* GDataServiceIntrospection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataServiceIntrospection.h; sourceTree = "<group>"; };
+		54A3C5B215FE6AD1001F7E48 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMOAuth2Authentication.h; sourceTree = "<group>"; };
+		54A3C5B315FE6AD1001F7E48 /* GTMOAuth2Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMOAuth2Authentication.m; sourceTree = "<group>"; };
+		54A3C5B415FE6AD1001F7E48 /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMOAuth2SignIn.h; sourceTree = "<group>"; };
+		54A3C5B515FE6AD1001F7E48 /* GTMOAuth2SignIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMOAuth2SignIn.m; sourceTree = "<group>"; };
+		54A3C5B615FE6AD1001F7E48 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = SBJsonBase.h; sourceTree = "<group>"; };
+		54A3C5B715FE6AD1001F7E48 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = SBJsonBase.m; sourceTree = "<group>"; };
+		54A3C5B815FE6AD1001F7E48 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = SBJsonParser.h; sourceTree = "<group>"; };
+		54A3C5B915FE6AD1001F7E48 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = SBJsonParser.m; sourceTree = "<group>"; };
+		54A3C5BA15FE6AD1001F7E48 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		54A3C5BB15FE6AD1001F7E48 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		54A3C5BD15FE6AD1001F7E48 /* GTMOAuth2Framework-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = "GTMOAuth2Framework-Info.plist"; sourceTree = "<group>"; };
+		54A3C5BE15FE6AD1001F7E48 /* GTMOAuth2Window.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMOAuth2Window.xib; sourceTree = "<group>"; };
+		54A3C5BF15FE6AD1001F7E48 /* GTMOAuth2WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMOAuth2WindowController.h; sourceTree = "<group>"; };
+		54A3C5C015FE6AD1001F7E48 /* GTMOAuth2WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMOAuth2WindowController.m; sourceTree = "<group>"; };
+		54A3C5C215FE6AD1001F7E48 /* GTMOAuth2ViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMOAuth2ViewControllerTouch.h; sourceTree = "<group>"; };
+		54A3C5C315FE6AD1001F7E48 /* GTMOAuth2ViewControllerTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMOAuth2ViewControllerTouch.m; sourceTree = "<group>"; };
+		54A3C5C415FE6AD1001F7E48 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
+		54A3C5C715FE6AD1001F7E48 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		54A3C5C815FE6AD1001F7E48 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		54A3C5CC15FE6AD1001F7E48 /* GDataEntryPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryPhoto.h; sourceTree = "<group>"; };
+		54A3C5CD15FE6AD1001F7E48 /* GDataEntryPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryPhoto.m; sourceTree = "<group>"; };
+		54A3C5CE15FE6AD1001F7E48 /* GDataEntryPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryPhotoAlbum.h; sourceTree = "<group>"; };
+		54A3C5CF15FE6AD1001F7E48 /* GDataEntryPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryPhotoAlbum.m; sourceTree = "<group>"; };
+		54A3C5D015FE6AD1001F7E48 /* GDataEntryPhotoBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryPhotoBase.h; sourceTree = "<group>"; };
+		54A3C5D115FE6AD1001F7E48 /* GDataEntryPhotoBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryPhotoBase.m; sourceTree = "<group>"; };
+		54A3C5D215FE6AD1001F7E48 /* GDataEntryPhotoComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryPhotoComment.h; sourceTree = "<group>"; };
+		54A3C5D315FE6AD1001F7E48 /* GDataEntryPhotoComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryPhotoComment.m; sourceTree = "<group>"; };
+		54A3C5D415FE6AD1001F7E48 /* GDataEntryPhotoTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryPhotoTag.h; sourceTree = "<group>"; };
+		54A3C5D515FE6AD1001F7E48 /* GDataEntryPhotoTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryPhotoTag.m; sourceTree = "<group>"; };
+		54A3C5D615FE6AD1001F7E48 /* GDataEntryPhotoUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryPhotoUser.h; sourceTree = "<group>"; };
+		54A3C5D715FE6AD1001F7E48 /* GDataEntryPhotoUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEntryPhotoUser.m; sourceTree = "<group>"; };
+		54A3C5D815FE6AD1001F7E48 /* GDataEXIFTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEXIFTags.h; sourceTree = "<group>"; };
+		54A3C5D915FE6AD1001F7E48 /* GDataEXIFTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataEXIFTags.m; sourceTree = "<group>"; };
+		54A3C5DA15FE6AD1001F7E48 /* GDataFeedPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFeedPhoto.h; sourceTree = "<group>"; };
+		54A3C5DB15FE6AD1001F7E48 /* GDataFeedPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFeedPhoto.m; sourceTree = "<group>"; };
+		54A3C5DC15FE6AD1001F7E48 /* GDataFeedPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFeedPhotoAlbum.h; sourceTree = "<group>"; };
+		54A3C5DD15FE6AD1001F7E48 /* GDataFeedPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFeedPhotoAlbum.m; sourceTree = "<group>"; };
+		54A3C5DE15FE6AD1001F7E48 /* GDataFeedPhotoBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFeedPhotoBase.h; sourceTree = "<group>"; };
+		54A3C5DF15FE6AD1001F7E48 /* GDataFeedPhotoBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFeedPhotoBase.m; sourceTree = "<group>"; };
+		54A3C5E015FE6AD1001F7E48 /* GDataFeedPhotoUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFeedPhotoUser.h; sourceTree = "<group>"; };
+		54A3C5E115FE6AD1001F7E48 /* GDataFeedPhotoUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataFeedPhotoUser.m; sourceTree = "<group>"; };
+		54A3C5E215FE6AD1001F7E48 /* GDataPhotoConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataPhotoConstants.h; sourceTree = "<group>"; };
+		54A3C5E315FE6AD1001F7E48 /* GDataPhotoConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataPhotoConstants.m; sourceTree = "<group>"; };
+		54A3C5E415FE6AD1001F7E48 /* GDataPhotoElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataPhotoElements.h; sourceTree = "<group>"; };
+		54A3C5E515FE6AD1001F7E48 /* GDataPhotoElements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataPhotoElements.m; sourceTree = "<group>"; };
+		54A3C5E615FE6AD1001F7E48 /* GDataPhotos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataPhotos.h; sourceTree = "<group>"; };
+		54A3C5E715FE6AD1001F7E48 /* GDataQueryGooglePhotos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataQueryGooglePhotos.h; sourceTree = "<group>"; };
+		54A3C5E815FE6AD1001F7E48 /* GDataQueryGooglePhotos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataQueryGooglePhotos.m; sourceTree = "<group>"; };
+		54A3C5E915FE6AD1001F7E48 /* GDataServiceGooglePhotos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataServiceGooglePhotos.h; sourceTree = "<group>"; };
+		54A3C5EA15FE6AD1001F7E48 /* GDataServiceGooglePhotos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = GDataServiceGooglePhotos.m; sourceTree = "<group>"; };
+		54B1DDB715D155860000B20B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		54B1DDB915D155900000B20B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		54B1DDBB15D155970000B20B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		54B1DDBD15D1559F0000B20B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		54B1EA3215D17EA90000B20B /* grabKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = grabKit.xcodeproj; path = GrabKit/grabKit/grabKit.xcodeproj; sourceTree = "<group>"; };
+		54B1EA5815D1876A0000B20B /* UploadcareServicesConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadcareServicesConfigurator.h; sourceTree = "<group>"; };
+		54B1EA5915D1876A0000B20B /* UploadcareServicesConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadcareServicesConfigurator.m; sourceTree = "<group>"; };
+		54EE2B5E15FE0B580053C97E /* button_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_background.png; sourceTree = "<group>"; };
+		54EE2B5F15FE0B580053C97E /* icon_dropbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_dropbox.png; sourceTree = "<group>"; };
+		54EE2B6015FE0B580053C97E /* icon_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_facebook.png; sourceTree = "<group>"; };
+		54EE2B6115FE0B580053C97E /* icon_flickr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_flickr.png; sourceTree = "<group>"; };
+		54EE2B6215FE0B580053C97E /* icon_google_drive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_google_drive.png; sourceTree = "<group>"; };
+		54EE2B6315FE0B580053C97E /* icon_instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_instagram.png; sourceTree = "<group>"; };
+		54EE2B6415FE0B580053C97E /* icon_picasa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_picasa.png; sourceTree = "<group>"; };
+		54EE2B6515FE0B580053C97E /* icon_url.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_url.png; sourceTree = "<group>"; };
+		54EE2B7015FE1FD40053C97E /* UploadedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UploadedViewController.h; path = ../../../Examples/SimpleExample/SimpleExample/UploadedViewController.h; sourceTree = "<group>"; };
+		54EE2B7115FE1FD40053C97E /* UploadedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadedViewController.m; path = ../../../Examples/SimpleExample/SimpleExample/UploadedViewController.m; sourceTree = "<group>"; };
+		54EE2B7215FE1FD40053C97E /* UploadedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UploadedViewController.xib; path = ../../../Examples/SimpleExample/SimpleExample/UploadedViewController.xib; sourceTree = "<group>"; };
+		54EE2B7515FE1FE00053C97E /* DisclosureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisclosureViewController.h; path = ../../../Examples/SimpleExample/SimpleExample/DisclosureViewController.h; sourceTree = "<group>"; };
+		54EE2B7615FE1FE00053C97E /* DisclosureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisclosureViewController.m; path = ../../../Examples/SimpleExample/SimpleExample/DisclosureViewController.m; sourceTree = "<group>"; };
+		54EE2B7715FE1FE00053C97E /* DisclosureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DisclosureViewController.xib; path = ../../../Examples/SimpleExample/SimpleExample/DisclosureViewController.xib; sourceTree = "<group>"; };
+		54EE2B9815FE30420053C97E /* UploadCareProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadCareProgressView.h; sourceTree = "<group>"; };
+		54EE2B9915FE30420053C97E /* UploadCareProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadCareProgressView.m; sourceTree = "<group>"; };
+		54EE2BAB15FE363B0053C97E /* AJNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJNotificationView.h; sourceTree = "<group>"; };
+		54EE2BAC15FE363B0053C97E /* AJNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJNotificationView.m; sourceTree = "<group>"; };
+		54EE2BC115FE363B0053C97E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		54EE2BC215FE363B0053C97E /* Readme.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.markdown; sourceTree = "<group>"; };
+		54EE2BEA15FE43AB0053C97E /* UCPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotoViewController.h; sourceTree = "<group>"; };
+		54EE2BEB15FE43AC0053C97E /* UCPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotoViewController.m; sourceTree = "<group>"; };
+		54EE2BEC15FE43AC0053C97E /* UCPhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCPhotoViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,9 +808,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				541352A615FE5CC500E17A20 /* GrabKitLib.a in Frameworks */,
+				544E322915F9299400011290 /* libUploadcareKit.a in Frameworks */,
+				54B1DDBE15D1559F0000B20B /* SystemConfiguration.framework in Frameworks */,
+				54B1DDBC15D155970000B20B /* Security.framework in Frameworks */,
+				54B1DDBA15D155900000B20B /* AssetsLibrary.framework in Frameworks */,
+				54B1DDB815D155860000B20B /* CFNetwork.framework in Frameworks */,
 				5424F3FA15CC122600394084 /* UIKit.framework in Frameworks */,
 				5424F3FC15CC122600394084 /* Foundation.framework in Frameworks */,
 				5424F3FE15CC122600394084 /* CoreGraphics.framework in Frameworks */,
+				548077B415F90CFC00090D64 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +837,14 @@
 		5424F3EA15CC122600394084 = {
 			isa = PBXGroup;
 			children = (
+				5413529D15FE5C2A00E17A20 /* GTMOAuth2ViewTouch.xib */,
+				5413529B15FE5C2000E17A20 /* GTMOAuth2Window.xib */,
+				5413529915FE5C1100E17A20 /* GTMOAuth2Framework-Info.plist */,
+				54B1DDBD15D1559F0000B20B /* SystemConfiguration.framework */,
+				54B1DDBB15D155970000B20B /* Security.framework */,
+				54B1DDB915D155900000B20B /* AssetsLibrary.framework */,
+				54B1DDB715D155860000B20B /* CFNetwork.framework */,
+				548077B315F90CFC00090D64 /* FacebookSDK.framework */,
 				5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */,
 				5424F3FF15CC122600394084 /* WidgetExample */,
 				5424F42315CC122700394084 /* WidgetExampleTests */,
@@ -171,11 +923,719 @@
 		5424F44215CC134400394084 /* UploadcareWidget */ = {
 			isa = PBXGroup;
 			children = (
+				54EE2B5D15FE0B580053C97E /* resources */,
+				54B1E3FD15D15C320000B20B /* vendors */,
+				54B1D78E15D154B60000B20B /* services */,
 				5424F43D15CC133600394084 /* UploadcareWidget.h */,
 				5424F43E15CC133600394084 /* UploadcareWidget.m */,
 				5424F43F15CC133600394084 /* UploadcareWidget.xib */,
 			);
 			name = UploadcareWidget;
+			sourceTree = "<group>";
+		};
+		548077C915F9105B00090D64 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				54EE2B6E15FE1F9C0053C97E /* history */,
+				548077CC15F9105B00090D64 /* UCAlbumsList.h */,
+				548077CD15F9105B00090D64 /* UCAlbumsList.m */,
+				548077CE15F9105B00090D64 /* UCAlbumsList.xib */,
+				548077CF15F9105B00090D64 /* UCAlbumsListCell.h */,
+				548077D015F9105B00090D64 /* UCAlbumsListCell.m */,
+				548077D115F9105B00090D64 /* UCAlbumsListCell.xib */,
+				548077D615F9105B00090D64 /* UCPhotosList.h */,
+				548077D715F9105B00090D64 /* UCPhotosList.m */,
+				548077D815F9105B00090D64 /* UCPhotosList.xib */,
+				548077D915F9105B00090D64 /* UCPhotosListCell.h */,
+				548077DA15F9105B00090D64 /* UCPhotosListCell.m */,
+				548077DB15F9105B00090D64 /* UCPhotosListCell.xib */,
+				54EE2B9815FE30420053C97E /* UploadCareProgressView.h */,
+				54EE2B9915FE30420053C97E /* UploadCareProgressView.m */,
+				54EE2BEA15FE43AB0053C97E /* UCPhotoViewController.h */,
+				54EE2BEB15FE43AC0053C97E /* UCPhotoViewController.m */,
+				54EE2BEC15FE43AC0053C97E /* UCPhotoViewController.xib */,
+			);
+			path = helpers;
+			sourceTree = "<group>";
+		};
+		54A3C46015FE6A87001F7E48 /* configuration */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C45D15FE6A87001F7E48 /* GRKConfiguratorProtocol.h */,
+				54A3C45E15FE6A87001F7E48 /* GRKConfiguration.h */,
+				54A3C45F15FE6A87001F7E48 /* GRKConfiguration.m */,
+			);
+			path = configuration;
+			sourceTree = "<group>";
+		};
+		54A3C46215FE6A87001F7E48 /* constants */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C46115FE6A87001F7E48 /* GRKErrorsConstants.h */,
+			);
+			path = constants;
+			sourceTree = "<group>";
+		};
+		54A3C46B15FE6A87001F7E48 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C46315FE6A87001F7E48 /* NSDictionary+URLEncoding.h */,
+				54A3C46415FE6A87001F7E48 /* NSDictionary+URLEncoding.m */,
+				54A3C46515FE6A87001F7E48 /* NSIndexSet+pagination.h */,
+				54A3C46615FE6A87001F7E48 /* NSIndexSet+pagination.m */,
+				54A3C46715FE6A87001F7E48 /* NSMutableArray+setObjectAtPosition.h */,
+				54A3C46815FE6A87001F7E48 /* NSMutableArray+setObjectAtPosition.m */,
+				54A3C46915FE6A87001F7E48 /* NSString+date.h */,
+				54A3C46A15FE6A87001F7E48 /* NSString+date.m */,
+			);
+			path = helpers;
+			sourceTree = "<group>";
+		};
+		54A3C47215FE6A87001F7E48 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C46C15FE6A87001F7E48 /* GRKAlbum.h */,
+				54A3C46D15FE6A87001F7E48 /* GRKAlbum.m */,
+				54A3C46E15FE6A87001F7E48 /* GRKImage.h */,
+				54A3C46F15FE6A87001F7E48 /* GRKImage.m */,
+				54A3C47015FE6A87001F7E48 /* GRKPhoto.h */,
+				54A3C47115FE6A87001F7E48 /* GRKPhoto.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		54A3C47B15FE6A87001F7E48 /* deviceGrabber */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C47915FE6A87001F7E48 /* GRKDeviceGrabber.h */,
+				54A3C47A15FE6A87001F7E48 /* GRKDeviceGrabber.m */,
+			);
+			path = deviceGrabber;
+			sourceTree = "<group>";
+		};
+		54A3C48615FE6A87001F7E48 /* facebookGrabber */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C47C15FE6A87001F7E48 /* GRKFacebookConnector.h */,
+				54A3C47D15FE6A87001F7E48 /* GRKFacebookConnector.m */,
+				54A3C47E15FE6A87001F7E48 /* GRKFacebookGrabber.h */,
+				54A3C47F15FE6A87001F7E48 /* GRKFacebookGrabber.m */,
+				54A3C48015FE6A87001F7E48 /* GRKFacebookQuery.h */,
+				54A3C48115FE6A87001F7E48 /* GRKFacebookQuery.m */,
+				54A3C48215FE6A87001F7E48 /* GRKFacebookBatchQuery.h */,
+				54A3C48315FE6A87001F7E48 /* GRKFacebookBatchQuery.m */,
+				54A3C48415FE6A87001F7E48 /* GRKFacebookSingleton.h */,
+				54A3C48515FE6A87001F7E48 /* GRKFacebookSingleton.m */,
+			);
+			path = facebookGrabber;
+			sourceTree = "<group>";
+		};
+		54A3C49115FE6A87001F7E48 /* flickrGrabber */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C48715FE6A87001F7E48 /* GRKFlickrConnector.h */,
+				54A3C48815FE6A87001F7E48 /* GRKFlickrConnector.m */,
+				54A3C48915FE6A87001F7E48 /* GRKFlickrGrabber.h */,
+				54A3C48A15FE6A87001F7E48 /* GRKFlickrGrabber.m */,
+				54A3C48B15FE6A87001F7E48 /* GRKFlickrQuery.h */,
+				54A3C48C15FE6A87001F7E48 /* GRKFlickrQuery.m */,
+				54A3C48D15FE6A87001F7E48 /* GRKFlickrQueriesQueue.h */,
+				54A3C48E15FE6A87001F7E48 /* GRKFlickrQueriesQueue.m */,
+				54A3C48F15FE6A87001F7E48 /* GRKFlickrSingleton.h */,
+				54A3C49015FE6A87001F7E48 /* GRKFlickrSingleton.m */,
+			);
+			path = flickrGrabber;
+			sourceTree = "<group>";
+		};
+		54A3C49A15FE6A87001F7E48 /* instagramGrabber */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C49215FE6A87001F7E48 /* GRKInstagramConnector.h */,
+				54A3C49315FE6A87001F7E48 /* GRKInstagramConnector.m */,
+				54A3C49415FE6A87001F7E48 /* GRKInstagramGrabber.h */,
+				54A3C49515FE6A87001F7E48 /* GRKInstagramGrabber.m */,
+				54A3C49615FE6A87001F7E48 /* GRKInstagramQuery.h */,
+				54A3C49715FE6A87001F7E48 /* GRKInstagramQuery.m */,
+				54A3C49815FE6A87001F7E48 /* GRKInstagramSingleton.h */,
+				54A3C49915FE6A87001F7E48 /* GRKInstagramSingleton.m */,
+			);
+			path = instagramGrabber;
+			sourceTree = "<group>";
+		};
+		54A3C4A515FE6A87001F7E48 /* picasaGrabber */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C49B15FE6A87001F7E48 /* GRKPicasaConnector.h */,
+				54A3C49C15FE6A87001F7E48 /* GRKPicasaConnector.m */,
+				54A3C49D15FE6A87001F7E48 /* GRKPicasaGrabber.h */,
+				54A3C49E15FE6A87001F7E48 /* GRKPicasaGrabber.m */,
+				54A3C49F15FE6A87001F7E48 /* GRKPicasaQuery.h */,
+				54A3C4A015FE6A87001F7E48 /* GRKPicasaQuery.m */,
+				54A3C4A115FE6A87001F7E48 /* GRKPicasaQueriesQueue.h */,
+				54A3C4A215FE6A87001F7E48 /* GRKPicasaQueriesQueue.m */,
+				54A3C4A315FE6A87001F7E48 /* GRKPicasaSingleton.h */,
+				54A3C4A415FE6A87001F7E48 /* GRKPicasaSingleton.m */,
+			);
+			path = picasaGrabber;
+			sourceTree = "<group>";
+		};
+		54A3C4AA15FE6A87001F7E48 /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C4A615FE6A87001F7E48 /* GRKServiceConnectorProtocol.h */,
+				54A3C4A715FE6A87001F7E48 /* GRKServiceGrabberConnectionProtocol.h */,
+				54A3C4A815FE6A87001F7E48 /* GRKServiceGrabberProtocol.h */,
+				54A3C4A915FE6A87001F7E48 /* GRKServiceQueryProtocol.h */,
+			);
+			path = protocols;
+			sourceTree = "<group>";
+		};
+		54A3C4AF15FE6A87001F7E48 /* tokenStores */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C4AB15FE6A87001F7E48 /* GRKTokenStore.h */,
+				54A3C4AC15FE6A87001F7E48 /* GRKTokenStore.m */,
+				54A3C4AD15FE6A87001F7E48 /* GRKTokenStoreUserDefaults.h */,
+				54A3C4AE15FE6A87001F7E48 /* GRKTokenStoreUserDefaults.m */,
+			);
+			path = tokenStores;
+			sourceTree = "<group>";
+		};
+		54A3C4B015FE6A87001F7E48 /* serviceGrabbers */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C47315FE6A87001F7E48 /* GRKConnectorsDispatcher.h */,
+				54A3C47415FE6A87001F7E48 /* GRKConnectorsDispatcher.m */,
+				54A3C47515FE6A87001F7E48 /* GRKServiceConnector.h */,
+				54A3C47615FE6A87001F7E48 /* GRKServiceConnector.m */,
+				54A3C47715FE6A87001F7E48 /* GRKServiceGrabber.h */,
+				54A3C47815FE6A87001F7E48 /* GRKServiceGrabber.m */,
+				54A3C47B15FE6A87001F7E48 /* deviceGrabber */,
+				54A3C48615FE6A87001F7E48 /* facebookGrabber */,
+				54A3C49115FE6A87001F7E48 /* flickrGrabber */,
+				54A3C49A15FE6A87001F7E48 /* instagramGrabber */,
+				54A3C4A515FE6A87001F7E48 /* picasaGrabber */,
+				54A3C4AA15FE6A87001F7E48 /* protocols */,
+				54A3C4AF15FE6A87001F7E48 /* tokenStores */,
+			);
+			path = serviceGrabbers;
+			sourceTree = "<group>";
+		};
+		54A3C4B115FE6A87001F7E48 /* grabKitSources */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C45A15FE6A87001F7E48 /* GrabKit.h */,
+				54A3C45B15FE6A87001F7E48 /* GRKConstants.h */,
+				54A3C45C15FE6A87001F7E48 /* GRKConstants.m */,
+				54A3C46015FE6A87001F7E48 /* configuration */,
+				54A3C46215FE6A87001F7E48 /* constants */,
+				54A3C46B15FE6A87001F7E48 /* helpers */,
+				54A3C47215FE6A87001F7E48 /* model */,
+				54A3C4B015FE6A87001F7E48 /* serviceGrabbers */,
+			);
+			name = grabKitSources;
+			path = GrabKit/grabKit/grabKit/grabKitSources;
+			sourceTree = "<group>";
+		};
+		54A3C4FF15FE6AD1001F7E48 /* ISO8691DateFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C4FD15FE6AD1001F7E48 /* ISO8601DateFormatter.h */,
+				54A3C4FE15FE6AD1001F7E48 /* ISO8601DateFormatter.m */,
+			);
+			path = ISO8691DateFormatter;
+			sourceTree = "<group>";
+		};
+		54A3C50015FE6AD1001F7E48 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C4FF15FE6AD1001F7E48 /* ISO8691DateFormatter */,
+			);
+			path = Facebook;
+			sourceTree = "<group>";
+		};
+		54A3C50815FE6AD1001F7E48 /* LFWebAPIKit */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C50115FE6AD1001F7E48 /* LFHTTPRequest.h */,
+				54A3C50215FE6AD1001F7E48 /* LFHTTPRequest.m */,
+				54A3C50315FE6AD1001F7E48 /* LFSiteReachability.h */,
+				54A3C50415FE6AD1001F7E48 /* LFSiteReachability.m */,
+				54A3C50515FE6AD1001F7E48 /* LFWebAPIKit.h */,
+				54A3C50615FE6AD1001F7E48 /* NSData+LFHTTPFormExtensions.h */,
+				54A3C50715FE6AD1001F7E48 /* NSData+LFHTTPFormExtensions.m */,
+			);
+			path = LFWebAPIKit;
+			sourceTree = "<group>";
+		};
+		54A3C50F15FE6AD1001F7E48 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C50915FE6AD1001F7E48 /* ObjectiveFlickr.h */,
+				54A3C50A15FE6AD1001F7E48 /* ObjectiveFlickr.m */,
+				54A3C50B15FE6AD1001F7E48 /* OFUtilities.h */,
+				54A3C50C15FE6AD1001F7E48 /* OFUtilities.m */,
+				54A3C50D15FE6AD1001F7E48 /* OFXMLMapper.h */,
+				54A3C50E15FE6AD1001F7E48 /* OFXMLMapper.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		54A3C51015FE6AD1001F7E48 /* FlickR */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C50815FE6AD1001F7E48 /* LFWebAPIKit */,
+				54A3C50F15FE6AD1001F7E48 /* Source */,
+			);
+			path = FlickR;
+			sourceTree = "<group>";
+		};
+		54A3C51D15FE6AD1001F7E48 /* BaseClasses */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C51115FE6AD1001F7E48 /* GDataEntryBase.h */,
+				54A3C51215FE6AD1001F7E48 /* GDataEntryBase.m */,
+				54A3C51315FE6AD1001F7E48 /* GDataFeedBase.h */,
+				54A3C51415FE6AD1001F7E48 /* GDataFeedBase.m */,
+				54A3C51515FE6AD1001F7E48 /* GDataObject.h */,
+				54A3C51615FE6AD1001F7E48 /* GDataObject.m */,
+				54A3C51715FE6AD1001F7E48 /* GDataQuery.h */,
+				54A3C51815FE6AD1001F7E48 /* GDataQuery.m */,
+				54A3C51915FE6AD1001F7E48 /* GDataServiceBase.h */,
+				54A3C51A15FE6AD1001F7E48 /* GDataServiceBase.m */,
+				54A3C51B15FE6AD1001F7E48 /* GDataServiceGoogle.h */,
+				54A3C51C15FE6AD1001F7E48 /* GDataServiceGoogle.m */,
+			);
+			path = BaseClasses;
+			sourceTree = "<group>";
+		};
+		54A3C56315FE6AD1001F7E48 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C51E15FE6AD1001F7E48 /* GDataAtomPubControl.h */,
+				54A3C51F15FE6AD1001F7E48 /* GDataAtomPubControl.m */,
+				54A3C52015FE6AD1001F7E48 /* GDataBaseElements.h */,
+				54A3C52115FE6AD1001F7E48 /* GDataBaseElements.m */,
+				54A3C52215FE6AD1001F7E48 /* GDataBatchID.h */,
+				54A3C52315FE6AD1001F7E48 /* GDataBatchID.m */,
+				54A3C52415FE6AD1001F7E48 /* GDataBatchInterrupted.h */,
+				54A3C52515FE6AD1001F7E48 /* GDataBatchInterrupted.m */,
+				54A3C52615FE6AD1001F7E48 /* GDataBatchOperation.h */,
+				54A3C52715FE6AD1001F7E48 /* GDataBatchOperation.m */,
+				54A3C52815FE6AD1001F7E48 /* GDataBatchStatus.h */,
+				54A3C52915FE6AD1001F7E48 /* GDataBatchStatus.m */,
+				54A3C52A15FE6AD1001F7E48 /* GDataCategory.h */,
+				54A3C52B15FE6AD1001F7E48 /* GDataCategory.m */,
+				54A3C52C15FE6AD1001F7E48 /* GDataComment.h */,
+				54A3C52D15FE6AD1001F7E48 /* GDataComment.m */,
+				54A3C52E15FE6AD1001F7E48 /* GDataCustomProperty.h */,
+				54A3C52F15FE6AD1001F7E48 /* GDataCustomProperty.m */,
+				54A3C53015FE6AD1001F7E48 /* GDataDateTime.h */,
+				54A3C53115FE6AD1001F7E48 /* GDataDateTime.m */,
+				54A3C53215FE6AD1001F7E48 /* GDataDeleted.h */,
+				54A3C53315FE6AD1001F7E48 /* GDataDeleted.m */,
+				54A3C53415FE6AD1001F7E48 /* GDataElements.h */,
+				54A3C53515FE6AD1001F7E48 /* GDataEmail.h */,
+				54A3C53615FE6AD1001F7E48 /* GDataEmail.m */,
+				54A3C53715FE6AD1001F7E48 /* GDataEntryContent.h */,
+				54A3C53815FE6AD1001F7E48 /* GDataEntryContent.m */,
+				54A3C53915FE6AD1001F7E48 /* GDataEntryLink.h */,
+				54A3C53A15FE6AD1001F7E48 /* GDataEntryLink.m */,
+				54A3C53B15FE6AD1001F7E48 /* GDataExtendedProperty.h */,
+				54A3C53C15FE6AD1001F7E48 /* GDataExtendedProperty.m */,
+				54A3C53D15FE6AD1001F7E48 /* GDataFeedLink.h */,
+				54A3C53E15FE6AD1001F7E48 /* GDataFeedLink.m */,
+				54A3C53F15FE6AD1001F7E48 /* GDataGenerator.h */,
+				54A3C54015FE6AD1001F7E48 /* GDataGenerator.m */,
+				54A3C54115FE6AD1001F7E48 /* GDataGeoPt.h */,
+				54A3C54215FE6AD1001F7E48 /* GDataGeoPt.m */,
+				54A3C54315FE6AD1001F7E48 /* GDataIM.h */,
+				54A3C54415FE6AD1001F7E48 /* GDataIM.m */,
+				54A3C54515FE6AD1001F7E48 /* GDataLink.h */,
+				54A3C54615FE6AD1001F7E48 /* GDataLink.m */,
+				54A3C54715FE6AD1001F7E48 /* GDataMoney.h */,
+				54A3C54815FE6AD1001F7E48 /* GDataMoney.m */,
+				54A3C54915FE6AD1001F7E48 /* GDataName.h */,
+				54A3C54A15FE6AD1001F7E48 /* GDataName.m */,
+				54A3C54B15FE6AD1001F7E48 /* GDataOrganization.h */,
+				54A3C54C15FE6AD1001F7E48 /* GDataOrganization.m */,
+				54A3C54D15FE6AD1001F7E48 /* GDataOrganizationName.h */,
+				54A3C54E15FE6AD1001F7E48 /* GDataOrganizationName.m */,
+				54A3C54F15FE6AD1001F7E48 /* GDataPerson.h */,
+				54A3C55015FE6AD1001F7E48 /* GDataPerson.m */,
+				54A3C55115FE6AD1001F7E48 /* GDataPhoneNumber.h */,
+				54A3C55215FE6AD1001F7E48 /* GDataPhoneNumber.m */,
+				54A3C55315FE6AD1001F7E48 /* GDataPostalAddress.h */,
+				54A3C55415FE6AD1001F7E48 /* GDataPostalAddress.m */,
+				54A3C55515FE6AD1001F7E48 /* GDataRating.h */,
+				54A3C55615FE6AD1001F7E48 /* GDataRating.m */,
+				54A3C55715FE6AD1001F7E48 /* GDataStructuredPostalAddress.h */,
+				54A3C55815FE6AD1001F7E48 /* GDataStructuredPostalAddress.m */,
+				54A3C55915FE6AD1001F7E48 /* GDataTextConstruct.h */,
+				54A3C55A15FE6AD1001F7E48 /* GDataTextConstruct.m */,
+				54A3C55B15FE6AD1001F7E48 /* GDataValueConstruct.h */,
+				54A3C55C15FE6AD1001F7E48 /* GDataValueConstruct.m */,
+				54A3C55D15FE6AD1001F7E48 /* GDataWhen.h */,
+				54A3C55E15FE6AD1001F7E48 /* GDataWhen.m */,
+				54A3C55F15FE6AD1001F7E48 /* GDataWhere.h */,
+				54A3C56015FE6AD1001F7E48 /* GDataWhere.m */,
+				54A3C56115FE6AD1001F7E48 /* GDataWho.h */,
+				54A3C56215FE6AD1001F7E48 /* GDataWho.m */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
+		54A3C56D15FE6AD1001F7E48 /* Geo */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C56B15FE6AD1001F7E48 /* GDataGeo.h */,
+				54A3C56C15FE6AD1001F7E48 /* GDataGeo.m */,
+			);
+			path = Geo;
+			sourceTree = "<group>";
+		};
+		54A3C57E15FE6AD1001F7E48 /* HTTPFetcher */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C56E15FE6AD1001F7E48 /* GTMGatherInputStream.h */,
+				54A3C56F15FE6AD1001F7E48 /* GTMGatherInputStream.m */,
+				54A3C57015FE6AD1001F7E48 /* GTMHTTPFetcher.h */,
+				54A3C57115FE6AD1001F7E48 /* GTMHTTPFetcher.m */,
+				54A3C57215FE6AD1001F7E48 /* GTMHTTPFetcherLogging.h */,
+				54A3C57315FE6AD1001F7E48 /* GTMHTTPFetcherLogging.m */,
+				54A3C57415FE6AD1001F7E48 /* GTMHTTPFetcherService.h */,
+				54A3C57515FE6AD1001F7E48 /* GTMHTTPFetcherService.m */,
+				54A3C57615FE6AD1001F7E48 /* GTMHTTPFetchHistory.h */,
+				54A3C57715FE6AD1001F7E48 /* GTMHTTPFetchHistory.m */,
+				54A3C57815FE6AD1001F7E48 /* GTMHTTPUploadFetcher.h */,
+				54A3C57915FE6AD1001F7E48 /* GTMHTTPUploadFetcher.m */,
+				54A3C57A15FE6AD1001F7E48 /* GTMMIMEDocument.h */,
+				54A3C57B15FE6AD1001F7E48 /* GTMMIMEDocument.m */,
+				54A3C57C15FE6AD1001F7E48 /* GTMReadMonitorInputStream.h */,
+				54A3C57D15FE6AD1001F7E48 /* GTMReadMonitorInputStream.m */,
+			);
+			path = HTTPFetcher;
+			sourceTree = "<group>";
+		};
+		54A3C59415FE6AD1001F7E48 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C57F15FE6AD1001F7E48 /* GDataMedia.h */,
+				54A3C58015FE6AD1001F7E48 /* GDataMediaCategory.h */,
+				54A3C58115FE6AD1001F7E48 /* GDataMediaCategory.m */,
+				54A3C58215FE6AD1001F7E48 /* GDataMediaContent.h */,
+				54A3C58315FE6AD1001F7E48 /* GDataMediaContent.m */,
+				54A3C58415FE6AD1001F7E48 /* GDataMediaCredit.h */,
+				54A3C58515FE6AD1001F7E48 /* GDataMediaCredit.m */,
+				54A3C58615FE6AD1001F7E48 /* GDataMediaGroup.h */,
+				54A3C58715FE6AD1001F7E48 /* GDataMediaGroup.m */,
+				54A3C58815FE6AD1001F7E48 /* GDataMediaKeywords.h */,
+				54A3C58915FE6AD1001F7E48 /* GDataMediaKeywords.m */,
+				54A3C58A15FE6AD1001F7E48 /* GDataMediaPlayer.h */,
+				54A3C58B15FE6AD1001F7E48 /* GDataMediaPlayer.m */,
+				54A3C58C15FE6AD1001F7E48 /* GDataMediaRating.h */,
+				54A3C58D15FE6AD1001F7E48 /* GDataMediaRating.m */,
+				54A3C58E15FE6AD1001F7E48 /* GDataMediaRestriction.h */,
+				54A3C58F15FE6AD1001F7E48 /* GDataMediaRestriction.m */,
+				54A3C59015FE6AD1001F7E48 /* GDataMediaThumbnail.h */,
+				54A3C59115FE6AD1001F7E48 /* GDataMediaThumbnail.m */,
+				54A3C59215FE6AD1001F7E48 /* GDataNormalPlayTime.h */,
+				54A3C59315FE6AD1001F7E48 /* GDataNormalPlayTime.m */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
+		54A3C59915FE6AD1001F7E48 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C59515FE6AD1001F7E48 /* GDataAuthenticationFetcher.h */,
+				54A3C59615FE6AD1001F7E48 /* GDataAuthenticationFetcher.m */,
+				54A3C59715FE6AD1001F7E48 /* GDataServerError.h */,
+				54A3C59815FE6AD1001F7E48 /* GDataServerError.m */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		54A3C5A715FE6AD1001F7E48 /* ACL */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C59A15FE6AD1001F7E48 /* GDataACL.h */,
+				54A3C59B15FE6AD1001F7E48 /* GDataACLKeyedRole.h */,
+				54A3C59C15FE6AD1001F7E48 /* GDataACLKeyedRole.m */,
+				54A3C59D15FE6AD1001F7E48 /* GDataACLRole.h */,
+				54A3C59E15FE6AD1001F7E48 /* GDataACLRole.m */,
+				54A3C59F15FE6AD1001F7E48 /* GDataACLScope.h */,
+				54A3C5A015FE6AD1001F7E48 /* GDataACLScope.m */,
+				54A3C5A115FE6AD1001F7E48 /* GDataEntryACL.h */,
+				54A3C5A215FE6AD1001F7E48 /* GDataEntryACL.m */,
+				54A3C5A315FE6AD1001F7E48 /* GDataFeedACL.h */,
+				54A3C5A415FE6AD1001F7E48 /* GDataFeedACL.m */,
+				54A3C5A515FE6AD1001F7E48 /* GDataServiceACL.h */,
+				54A3C5A615FE6AD1001F7E48 /* GDataServiceACL.m */,
+			);
+			path = ACL;
+			sourceTree = "<group>";
+		};
+		54A3C5B115FE6AD1001F7E48 /* Introspection */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C5A815FE6AD1001F7E48 /* GDataAtomCategoryGroup.h */,
+				54A3C5A915FE6AD1001F7E48 /* GDataAtomCategoryGroup.m */,
+				54A3C5AA15FE6AD1001F7E48 /* GDataAtomCollection.h */,
+				54A3C5AB15FE6AD1001F7E48 /* GDataAtomCollection.m */,
+				54A3C5AC15FE6AD1001F7E48 /* GDataAtomServiceDocument.h */,
+				54A3C5AD15FE6AD1001F7E48 /* GDataAtomServiceDocument.m */,
+				54A3C5AE15FE6AD1001F7E48 /* GDataAtomWorkspace.h */,
+				54A3C5AF15FE6AD1001F7E48 /* GDataAtomWorkspace.m */,
+				54A3C5B015FE6AD1001F7E48 /* GDataServiceIntrospection.h */,
+			);
+			path = Introspection;
+			sourceTree = "<group>";
+		};
+		54A3C5BC15FE6AD1001F7E48 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C5B615FE6AD1001F7E48 /* SBJsonBase.h */,
+				54A3C5B715FE6AD1001F7E48 /* SBJsonBase.m */,
+				54A3C5B815FE6AD1001F7E48 /* SBJsonParser.h */,
+				54A3C5B915FE6AD1001F7E48 /* SBJsonParser.m */,
+				54A3C5BA15FE6AD1001F7E48 /* SBJsonWriter.h */,
+				54A3C5BB15FE6AD1001F7E48 /* SBJsonWriter.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		54A3C5C115FE6AD1001F7E48 /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C5BD15FE6AD1001F7E48 /* GTMOAuth2Framework-Info.plist */,
+				54A3C5BE15FE6AD1001F7E48 /* GTMOAuth2Window.xib */,
+				54A3C5BF15FE6AD1001F7E48 /* GTMOAuth2WindowController.h */,
+				54A3C5C015FE6AD1001F7E48 /* GTMOAuth2WindowController.m */,
+			);
+			path = Mac;
+			sourceTree = "<group>";
+		};
+		54A3C5C515FE6AD1001F7E48 /* Touch */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C5C215FE6AD1001F7E48 /* GTMOAuth2ViewControllerTouch.h */,
+				54A3C5C315FE6AD1001F7E48 /* GTMOAuth2ViewControllerTouch.m */,
+				54A3C5C415FE6AD1001F7E48 /* GTMOAuth2ViewTouch.xib */,
+			);
+			path = Touch;
+			sourceTree = "<group>";
+		};
+		54A3C5C615FE6AD1001F7E48 /* OAuth2 */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C5B215FE6AD1001F7E48 /* GTMOAuth2Authentication.h */,
+				54A3C5B315FE6AD1001F7E48 /* GTMOAuth2Authentication.m */,
+				54A3C5B415FE6AD1001F7E48 /* GTMOAuth2SignIn.h */,
+				54A3C5B515FE6AD1001F7E48 /* GTMOAuth2SignIn.m */,
+				54A3C5BC15FE6AD1001F7E48 /* JSON */,
+				54A3C5C115FE6AD1001F7E48 /* Mac */,
+				54A3C5C515FE6AD1001F7E48 /* Touch */,
+			);
+			path = OAuth2;
+			sourceTree = "<group>";
+		};
+		54A3C5C915FE6AD1001F7E48 /* XMLSupport */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C5C715FE6AD1001F7E48 /* GDataXMLNode.h */,
+				54A3C5C815FE6AD1001F7E48 /* GDataXMLNode.m */,
+			);
+			path = XMLSupport;
+			sourceTree = "<group>";
+		};
+		54A3C5CA15FE6AD1001F7E48 /* Optional */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C5A715FE6AD1001F7E48 /* ACL */,
+				54A3C5B115FE6AD1001F7E48 /* Introspection */,
+				54A3C5C615FE6AD1001F7E48 /* OAuth2 */,
+				54A3C5C915FE6AD1001F7E48 /* XMLSupport */,
+			);
+			path = Optional;
+			sourceTree = "<group>";
+		};
+		54A3C5CB15FE6AD1001F7E48 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C51D15FE6AD1001F7E48 /* BaseClasses */,
+				54A3C56315FE6AD1001F7E48 /* Elements */,
+				54A3C56415FE6AD1001F7E48 /* GData.h */,
+				54A3C56515FE6AD1001F7E48 /* GDataDefines.h */,
+				54A3C56615FE6AD1001F7E48 /* GDataFramework.h */,
+				54A3C56715FE6AD1001F7E48 /* GDataFramework.m */,
+				54A3C56815FE6AD1001F7E48 /* GDataTargetNamespace.h */,
+				54A3C56915FE6AD1001F7E48 /* GDataUtilities.h */,
+				54A3C56A15FE6AD1001F7E48 /* GDataUtilities.m */,
+				54A3C56D15FE6AD1001F7E48 /* Geo */,
+				54A3C57E15FE6AD1001F7E48 /* HTTPFetcher */,
+				54A3C59415FE6AD1001F7E48 /* Media */,
+				54A3C59915FE6AD1001F7E48 /* Networking */,
+				54A3C5CA15FE6AD1001F7E48 /* Optional */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		54A3C5EB15FE6AD1001F7E48 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C5CC15FE6AD1001F7E48 /* GDataEntryPhoto.h */,
+				54A3C5CD15FE6AD1001F7E48 /* GDataEntryPhoto.m */,
+				54A3C5CE15FE6AD1001F7E48 /* GDataEntryPhotoAlbum.h */,
+				54A3C5CF15FE6AD1001F7E48 /* GDataEntryPhotoAlbum.m */,
+				54A3C5D015FE6AD1001F7E48 /* GDataEntryPhotoBase.h */,
+				54A3C5D115FE6AD1001F7E48 /* GDataEntryPhotoBase.m */,
+				54A3C5D215FE6AD1001F7E48 /* GDataEntryPhotoComment.h */,
+				54A3C5D315FE6AD1001F7E48 /* GDataEntryPhotoComment.m */,
+				54A3C5D415FE6AD1001F7E48 /* GDataEntryPhotoTag.h */,
+				54A3C5D515FE6AD1001F7E48 /* GDataEntryPhotoTag.m */,
+				54A3C5D615FE6AD1001F7E48 /* GDataEntryPhotoUser.h */,
+				54A3C5D715FE6AD1001F7E48 /* GDataEntryPhotoUser.m */,
+				54A3C5D815FE6AD1001F7E48 /* GDataEXIFTags.h */,
+				54A3C5D915FE6AD1001F7E48 /* GDataEXIFTags.m */,
+				54A3C5DA15FE6AD1001F7E48 /* GDataFeedPhoto.h */,
+				54A3C5DB15FE6AD1001F7E48 /* GDataFeedPhoto.m */,
+				54A3C5DC15FE6AD1001F7E48 /* GDataFeedPhotoAlbum.h */,
+				54A3C5DD15FE6AD1001F7E48 /* GDataFeedPhotoAlbum.m */,
+				54A3C5DE15FE6AD1001F7E48 /* GDataFeedPhotoBase.h */,
+				54A3C5DF15FE6AD1001F7E48 /* GDataFeedPhotoBase.m */,
+				54A3C5E015FE6AD1001F7E48 /* GDataFeedPhotoUser.h */,
+				54A3C5E115FE6AD1001F7E48 /* GDataFeedPhotoUser.m */,
+				54A3C5E215FE6AD1001F7E48 /* GDataPhotoConstants.h */,
+				54A3C5E315FE6AD1001F7E48 /* GDataPhotoConstants.m */,
+				54A3C5E415FE6AD1001F7E48 /* GDataPhotoElements.h */,
+				54A3C5E515FE6AD1001F7E48 /* GDataPhotoElements.m */,
+				54A3C5E615FE6AD1001F7E48 /* GDataPhotos.h */,
+				54A3C5E715FE6AD1001F7E48 /* GDataQueryGooglePhotos.h */,
+				54A3C5E815FE6AD1001F7E48 /* GDataQueryGooglePhotos.m */,
+				54A3C5E915FE6AD1001F7E48 /* GDataServiceGooglePhotos.h */,
+				54A3C5EA15FE6AD1001F7E48 /* GDataServiceGooglePhotos.m */,
+			);
+			path = Photos;
+			sourceTree = "<group>";
+		};
+		54A3C5EC15FE6AD1001F7E48 /* Picasa */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C5CB15FE6AD1001F7E48 /* Common */,
+				54A3C5EB15FE6AD1001F7E48 /* Photos */,
+			);
+			path = Picasa;
+			sourceTree = "<group>";
+		};
+		54A3C5ED15FE6AD1001F7E48 /* externalLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C50015FE6AD1001F7E48 /* Facebook */,
+				54A3C51015FE6AD1001F7E48 /* FlickR */,
+				54A3C5EC15FE6AD1001F7E48 /* Picasa */,
+			);
+			name = externalLibraries;
+			path = GrabKit/grabKit/grabKit/externalLibraries;
+			sourceTree = "<group>";
+		};
+		54B1D76115D14FD90000B20B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				54B1D76615D14FD90000B20B /* libUploadcareKit.a */,
+				54B1D76815D14FD90000B20B /* UploadcareKitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		54B1D78E15D154B60000B20B /* services */ = {
+			isa = PBXGroup;
+			children = (
+				548077C915F9105B00090D64 /* helpers */,
+				54B1EA5815D1876A0000B20B /* UploadcareServicesConfigurator.h */,
+				54B1EA5915D1876A0000B20B /* UploadcareServicesConfigurator.m */,
+			);
+			name = services;
+			path = ../../../UploadcareWidget/services;
+			sourceTree = "<group>";
+		};
+		54B1E3FD15D15C320000B20B /* vendors */ = {
+			isa = PBXGroup;
+			children = (
+				54A3C5ED15FE6AD1001F7E48 /* externalLibraries */,
+				54A3C4B115FE6A87001F7E48 /* grabKitSources */,
+				54EE2BA815FE363B0053C97E /* AJNotificationView */,
+				54B1EA3215D17EA90000B20B /* grabKit.xcodeproj */,
+			);
+			name = vendors;
+			path = ../../../UploadcareWidget/vendors;
+			sourceTree = "<group>";
+		};
+		54B1EA3315D17EA90000B20B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				54B1EA3E15D17EAA0000B20B /* grabKit Demo.app */,
+				54B1EA4015D17EAA0000B20B /* GrabKitLib.a */,
+				54B1EA4215D17EAA0000B20B /* GrabKitBundle.bundle */,
+				54B1EA4415D17EAA0000B20B /* grabKitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		54EE2B5D15FE0B580053C97E /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				54EE2B5E15FE0B580053C97E /* button_background.png */,
+				54EE2B5F15FE0B580053C97E /* icon_dropbox.png */,
+				54EE2B6015FE0B580053C97E /* icon_facebook.png */,
+				54EE2B6115FE0B580053C97E /* icon_flickr.png */,
+				54EE2B6215FE0B580053C97E /* icon_google_drive.png */,
+				54EE2B6315FE0B580053C97E /* icon_instagram.png */,
+				54EE2B6415FE0B580053C97E /* icon_picasa.png */,
+				54EE2B6515FE0B580053C97E /* icon_url.png */,
+			);
+			name = resources;
+			path = ../../../UploadcareWidget/resources;
+			sourceTree = "<group>";
+		};
+		54EE2B6E15FE1F9C0053C97E /* history */ = {
+			isa = PBXGroup;
+			children = (
+				54EE2B6F15FE1FBB0053C97E /* disclosure history */,
+				54EE2B7015FE1FD40053C97E /* UploadedViewController.h */,
+				54EE2B7115FE1FD40053C97E /* UploadedViewController.m */,
+				54EE2B7215FE1FD40053C97E /* UploadedViewController.xib */,
+			);
+			name = history;
+			sourceTree = "<group>";
+		};
+		54EE2B6F15FE1FBB0053C97E /* disclosure history */ = {
+			isa = PBXGroup;
+			children = (
+				54EE2B7515FE1FE00053C97E /* DisclosureViewController.h */,
+				54EE2B7615FE1FE00053C97E /* DisclosureViewController.m */,
+				54EE2B7715FE1FE00053C97E /* DisclosureViewController.xib */,
+			);
+			name = "disclosure history";
+			sourceTree = "<group>";
+		};
+		54EE2BA815FE363B0053C97E /* AJNotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				54EE2BAA15FE363B0053C97E /* AJNotificationView */,
+				54EE2BC115FE363B0053C97E /* LICENSE */,
+				54EE2BC215FE363B0053C97E /* Readme.markdown */,
+			);
+			path = AJNotificationView;
+			sourceTree = "<group>";
+		};
+		54EE2BAA15FE363B0053C97E /* AJNotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				54EE2BAB15FE363B0053C97E /* AJNotificationView.h */,
+				54EE2BAC15FE363B0053C97E /* AJNotificationView.m */,
+			);
+			path = AJNotificationView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +1652,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				541352A315FE5CAB00E17A20 /* PBXTargetDependency */,
+				541352A515FE5CAB00E17A20 /* PBXTargetDependency */,
+				544E322815F9298F00011290 /* PBXTargetDependency */,
 			);
 			name = WidgetExample;
 			productName = WidgetExample;
@@ -232,10 +1695,21 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				English,
 			);
 			mainGroup = 5424F3EA15CC122600394084;
 			productRefGroup = 5424F3F615CC122600394084 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 54B1EA3315D17EA90000B20B /* Products */;
+					ProjectRef = 54B1EA3215D17EA90000B20B /* grabKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 54B1D76115D14FD90000B20B /* Products */;
+					ProjectRef = 5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5424F3F415CC122600394084 /* WidgetExample */,
@@ -244,16 +1718,373 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		54B1D76615D14FD90000B20B /* libUploadcareKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libUploadcareKit.a;
+			remoteRef = 54B1D76515D14FD90000B20B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		54B1D76815D14FD90000B20B /* UploadcareKitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UploadcareKitTests.octest;
+			remoteRef = 54B1D76715D14FD90000B20B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		54B1EA3E15D17EAA0000B20B /* grabKit Demo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "grabKit Demo.app";
+			remoteRef = 54B1EA3D15D17EAA0000B20B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		54B1EA4015D17EAA0000B20B /* GrabKitLib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = GrabKitLib.a;
+			remoteRef = 54B1EA3F15D17EAA0000B20B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		54B1EA4215D17EAA0000B20B /* GrabKitBundle.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GrabKitBundle.bundle;
+			remoteRef = 54B1EA4115D17EAA0000B20B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		54B1EA4415D17EAA0000B20B /* grabKitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			name = grabKitTests.octest;
+			path = "grabKit Tests.octest";
+			remoteRef = 54B1EA4315D17EAA0000B20B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		5424F3F315CC122600394084 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				541352A715FE5CDE00E17A20 /* GrabKitBundle.bundle in Resources */,
 				5424F40415CC122700394084 /* InfoPlist.strings in Resources */,
 				5424F41315CC122700394084 /* MasterViewController.xib in Resources */,
 				5424F41615CC122700394084 /* DetailViewController.xib in Resources */,
 				5424F44115CC133600394084 /* UploadcareWidget.xib in Resources */,
 				5424F44415CC2A2F00394084 /* UploadcareKit.xcodeproj in Resources */,
+				548077E515F9105C00090D64 /* UCAlbumsList.xib in Resources */,
+				548077E715F9105C00090D64 /* UCAlbumsListCell.xib in Resources */,
+				548077EB15F9105C00090D64 /* UCPhotosList.xib in Resources */,
+				548077ED15F9105C00090D64 /* UCPhotosListCell.xib in Resources */,
+				54EE2B6615FE0B580053C97E /* button_background.png in Resources */,
+				54EE2B6715FE0B580053C97E /* icon_dropbox.png in Resources */,
+				54EE2B6815FE0B580053C97E /* icon_facebook.png in Resources */,
+				54EE2B6915FE0B580053C97E /* icon_flickr.png in Resources */,
+				54EE2B6A15FE0B580053C97E /* icon_google_drive.png in Resources */,
+				54EE2B6B15FE0B580053C97E /* icon_instagram.png in Resources */,
+				54EE2B6C15FE0B580053C97E /* icon_picasa.png in Resources */,
+				54EE2B6D15FE0B580053C97E /* icon_url.png in Resources */,
+				54EE2B7415FE1FD40053C97E /* UploadedViewController.xib in Resources */,
+				54EE2B7915FE1FE00053C97E /* DisclosureViewController.xib in Resources */,
+				54EE2BDF15FE363B0053C97E /* LICENSE in Resources */,
+				54EE2BE115FE363B0053C97E /* Readme.markdown in Resources */,
+				54EE2BEF15FE43AC0053C97E /* UCPhotoViewController.xib in Resources */,
+				54A3C4B215FE6A87001F7E48 /* GrabKit.h in Resources */,
+				54A3C4B315FE6A87001F7E48 /* GRKConstants.h in Resources */,
+				54A3C4B415FE6A87001F7E48 /* GRKConstants.m in Resources */,
+				54A3C4B515FE6A87001F7E48 /* GRKConfiguratorProtocol.h in Resources */,
+				54A3C4B615FE6A87001F7E48 /* GRKConfiguration.h in Resources */,
+				54A3C4B715FE6A87001F7E48 /* GRKConfiguration.m in Resources */,
+				54A3C4B815FE6A87001F7E48 /* GRKErrorsConstants.h in Resources */,
+				54A3C4B915FE6A87001F7E48 /* NSDictionary+URLEncoding.h in Resources */,
+				54A3C4BA15FE6A87001F7E48 /* NSDictionary+URLEncoding.m in Resources */,
+				54A3C4BB15FE6A87001F7E48 /* NSIndexSet+pagination.h in Resources */,
+				54A3C4BC15FE6A87001F7E48 /* NSIndexSet+pagination.m in Resources */,
+				54A3C4BD15FE6A87001F7E48 /* NSMutableArray+setObjectAtPosition.h in Resources */,
+				54A3C4BE15FE6A87001F7E48 /* NSMutableArray+setObjectAtPosition.m in Resources */,
+				54A3C4BF15FE6A87001F7E48 /* NSString+date.h in Resources */,
+				54A3C4C015FE6A87001F7E48 /* NSString+date.m in Resources */,
+				54A3C4C115FE6A87001F7E48 /* GRKAlbum.h in Resources */,
+				54A3C4C215FE6A87001F7E48 /* GRKAlbum.m in Resources */,
+				54A3C4C315FE6A87001F7E48 /* GRKImage.h in Resources */,
+				54A3C4C415FE6A87001F7E48 /* GRKImage.m in Resources */,
+				54A3C4C515FE6A87001F7E48 /* GRKPhoto.h in Resources */,
+				54A3C4C615FE6A87001F7E48 /* GRKPhoto.m in Resources */,
+				54A3C4C715FE6A87001F7E48 /* GRKConnectorsDispatcher.h in Resources */,
+				54A3C4C815FE6A87001F7E48 /* GRKConnectorsDispatcher.m in Resources */,
+				54A3C4C915FE6A87001F7E48 /* GRKServiceConnector.h in Resources */,
+				54A3C4CA15FE6A87001F7E48 /* GRKServiceConnector.m in Resources */,
+				54A3C4CB15FE6A87001F7E48 /* GRKServiceGrabber.h in Resources */,
+				54A3C4CC15FE6A87001F7E48 /* GRKServiceGrabber.m in Resources */,
+				54A3C4CD15FE6A87001F7E48 /* GRKDeviceGrabber.h in Resources */,
+				54A3C4CE15FE6A87001F7E48 /* GRKDeviceGrabber.m in Resources */,
+				54A3C4CF15FE6A87001F7E48 /* GRKFacebookConnector.h in Resources */,
+				54A3C4D015FE6A87001F7E48 /* GRKFacebookConnector.m in Resources */,
+				54A3C4D115FE6A87001F7E48 /* GRKFacebookGrabber.h in Resources */,
+				54A3C4D215FE6A87001F7E48 /* GRKFacebookGrabber.m in Resources */,
+				54A3C4D315FE6A87001F7E48 /* GRKFacebookQuery.h in Resources */,
+				54A3C4D415FE6A87001F7E48 /* GRKFacebookQuery.m in Resources */,
+				54A3C4D515FE6A87001F7E48 /* GRKFacebookBatchQuery.h in Resources */,
+				54A3C4D615FE6A87001F7E48 /* GRKFacebookBatchQuery.m in Resources */,
+				54A3C4D715FE6A87001F7E48 /* GRKFacebookSingleton.h in Resources */,
+				54A3C4D815FE6A87001F7E48 /* GRKFacebookSingleton.m in Resources */,
+				54A3C4D915FE6A87001F7E48 /* GRKFlickrConnector.h in Resources */,
+				54A3C4DA15FE6A87001F7E48 /* GRKFlickrConnector.m in Resources */,
+				54A3C4DB15FE6A87001F7E48 /* GRKFlickrGrabber.h in Resources */,
+				54A3C4DC15FE6A87001F7E48 /* GRKFlickrGrabber.m in Resources */,
+				54A3C4DD15FE6A87001F7E48 /* GRKFlickrQuery.h in Resources */,
+				54A3C4DE15FE6A87001F7E48 /* GRKFlickrQuery.m in Resources */,
+				54A3C4DF15FE6A87001F7E48 /* GRKFlickrQueriesQueue.h in Resources */,
+				54A3C4E015FE6A87001F7E48 /* GRKFlickrQueriesQueue.m in Resources */,
+				54A3C4E115FE6A87001F7E48 /* GRKFlickrSingleton.h in Resources */,
+				54A3C4E215FE6A87001F7E48 /* GRKFlickrSingleton.m in Resources */,
+				54A3C4E315FE6A87001F7E48 /* GRKInstagramConnector.h in Resources */,
+				54A3C4E415FE6A87001F7E48 /* GRKInstagramConnector.m in Resources */,
+				54A3C4E515FE6A87001F7E48 /* GRKInstagramGrabber.h in Resources */,
+				54A3C4E615FE6A87001F7E48 /* GRKInstagramGrabber.m in Resources */,
+				54A3C4E715FE6A87001F7E48 /* GRKInstagramQuery.h in Resources */,
+				54A3C4E815FE6A87001F7E48 /* GRKInstagramQuery.m in Resources */,
+				54A3C4E915FE6A87001F7E48 /* GRKInstagramSingleton.h in Resources */,
+				54A3C4EA15FE6A87001F7E48 /* GRKInstagramSingleton.m in Resources */,
+				54A3C4EB15FE6A87001F7E48 /* GRKPicasaConnector.h in Resources */,
+				54A3C4EC15FE6A87001F7E48 /* GRKPicasaConnector.m in Resources */,
+				54A3C4ED15FE6A87001F7E48 /* GRKPicasaGrabber.h in Resources */,
+				54A3C4EE15FE6A87001F7E48 /* GRKPicasaGrabber.m in Resources */,
+				54A3C4EF15FE6A87001F7E48 /* GRKPicasaQuery.h in Resources */,
+				54A3C4F015FE6A87001F7E48 /* GRKPicasaQuery.m in Resources */,
+				54A3C4F115FE6A87001F7E48 /* GRKPicasaQueriesQueue.h in Resources */,
+				54A3C4F215FE6A87001F7E48 /* GRKPicasaQueriesQueue.m in Resources */,
+				54A3C4F315FE6A87001F7E48 /* GRKPicasaSingleton.h in Resources */,
+				54A3C4F415FE6A87001F7E48 /* GRKPicasaSingleton.m in Resources */,
+				54A3C4F515FE6A87001F7E48 /* GRKServiceConnectorProtocol.h in Resources */,
+				54A3C4F615FE6A87001F7E48 /* GRKServiceGrabberConnectionProtocol.h in Resources */,
+				54A3C4F715FE6A87001F7E48 /* GRKServiceGrabberProtocol.h in Resources */,
+				54A3C4F815FE6A87001F7E48 /* GRKServiceQueryProtocol.h in Resources */,
+				54A3C4F915FE6A87001F7E48 /* GRKTokenStore.h in Resources */,
+				54A3C4FA15FE6A87001F7E48 /* GRKTokenStore.m in Resources */,
+				54A3C4FB15FE6A87001F7E48 /* GRKTokenStoreUserDefaults.h in Resources */,
+				54A3C4FC15FE6A87001F7E48 /* GRKTokenStoreUserDefaults.m in Resources */,
+				54A3C5EE15FE6AD1001F7E48 /* ISO8601DateFormatter.h in Resources */,
+				54A3C5EF15FE6AD1001F7E48 /* ISO8601DateFormatter.m in Resources */,
+				54A3C5F015FE6AD1001F7E48 /* LFHTTPRequest.h in Resources */,
+				54A3C5F115FE6AD1001F7E48 /* LFHTTPRequest.m in Resources */,
+				54A3C5F215FE6AD1001F7E48 /* LFSiteReachability.h in Resources */,
+				54A3C5F315FE6AD1001F7E48 /* LFSiteReachability.m in Resources */,
+				54A3C5F415FE6AD1001F7E48 /* LFWebAPIKit.h in Resources */,
+				54A3C5F515FE6AD1001F7E48 /* NSData+LFHTTPFormExtensions.h in Resources */,
+				54A3C5F615FE6AD1001F7E48 /* NSData+LFHTTPFormExtensions.m in Resources */,
+				54A3C5F715FE6AD1001F7E48 /* ObjectiveFlickr.h in Resources */,
+				54A3C5F815FE6AD1001F7E48 /* ObjectiveFlickr.m in Resources */,
+				54A3C5F915FE6AD1001F7E48 /* OFUtilities.h in Resources */,
+				54A3C5FA15FE6AD1001F7E48 /* OFUtilities.m in Resources */,
+				54A3C5FB15FE6AD1001F7E48 /* OFXMLMapper.h in Resources */,
+				54A3C5FC15FE6AD1001F7E48 /* OFXMLMapper.m in Resources */,
+				54A3C5FD15FE6AD1001F7E48 /* GDataEntryBase.h in Resources */,
+				54A3C5FE15FE6AD1001F7E48 /* GDataEntryBase.m in Resources */,
+				54A3C5FF15FE6AD1001F7E48 /* GDataFeedBase.h in Resources */,
+				54A3C60015FE6AD1001F7E48 /* GDataFeedBase.m in Resources */,
+				54A3C60115FE6AD1001F7E48 /* GDataObject.h in Resources */,
+				54A3C60215FE6AD1001F7E48 /* GDataObject.m in Resources */,
+				54A3C60315FE6AD1001F7E48 /* GDataQuery.h in Resources */,
+				54A3C60415FE6AD1001F7E48 /* GDataQuery.m in Resources */,
+				54A3C60515FE6AD1001F7E48 /* GDataServiceBase.h in Resources */,
+				54A3C60615FE6AD1001F7E48 /* GDataServiceBase.m in Resources */,
+				54A3C60715FE6AD1001F7E48 /* GDataServiceGoogle.h in Resources */,
+				54A3C60815FE6AD1001F7E48 /* GDataServiceGoogle.m in Resources */,
+				54A3C60915FE6AD1001F7E48 /* GDataAtomPubControl.h in Resources */,
+				54A3C60A15FE6AD1001F7E48 /* GDataAtomPubControl.m in Resources */,
+				54A3C60B15FE6AD1001F7E48 /* GDataBaseElements.h in Resources */,
+				54A3C60C15FE6AD1001F7E48 /* GDataBaseElements.m in Resources */,
+				54A3C60D15FE6AD1001F7E48 /* GDataBatchID.h in Resources */,
+				54A3C60E15FE6AD1001F7E48 /* GDataBatchID.m in Resources */,
+				54A3C60F15FE6AD1001F7E48 /* GDataBatchInterrupted.h in Resources */,
+				54A3C61015FE6AD1001F7E48 /* GDataBatchInterrupted.m in Resources */,
+				54A3C61115FE6AD1001F7E48 /* GDataBatchOperation.h in Resources */,
+				54A3C61215FE6AD1001F7E48 /* GDataBatchOperation.m in Resources */,
+				54A3C61315FE6AD1001F7E48 /* GDataBatchStatus.h in Resources */,
+				54A3C61415FE6AD1001F7E48 /* GDataBatchStatus.m in Resources */,
+				54A3C61515FE6AD1001F7E48 /* GDataCategory.h in Resources */,
+				54A3C61615FE6AD1001F7E48 /* GDataCategory.m in Resources */,
+				54A3C61715FE6AD1001F7E48 /* GDataComment.h in Resources */,
+				54A3C61815FE6AD1001F7E48 /* GDataComment.m in Resources */,
+				54A3C61915FE6AD1001F7E48 /* GDataCustomProperty.h in Resources */,
+				54A3C61A15FE6AD1001F7E48 /* GDataCustomProperty.m in Resources */,
+				54A3C61B15FE6AD1001F7E48 /* GDataDateTime.h in Resources */,
+				54A3C61C15FE6AD1001F7E48 /* GDataDateTime.m in Resources */,
+				54A3C61D15FE6AD1001F7E48 /* GDataDeleted.h in Resources */,
+				54A3C61E15FE6AD1001F7E48 /* GDataDeleted.m in Resources */,
+				54A3C61F15FE6AD1001F7E48 /* GDataElements.h in Resources */,
+				54A3C62015FE6AD1001F7E48 /* GDataEmail.h in Resources */,
+				54A3C62115FE6AD1001F7E48 /* GDataEmail.m in Resources */,
+				54A3C62215FE6AD1001F7E48 /* GDataEntryContent.h in Resources */,
+				54A3C62315FE6AD1001F7E48 /* GDataEntryContent.m in Resources */,
+				54A3C62415FE6AD1001F7E48 /* GDataEntryLink.h in Resources */,
+				54A3C62515FE6AD1001F7E48 /* GDataEntryLink.m in Resources */,
+				54A3C62615FE6AD1001F7E48 /* GDataExtendedProperty.h in Resources */,
+				54A3C62715FE6AD1001F7E48 /* GDataExtendedProperty.m in Resources */,
+				54A3C62815FE6AD1001F7E48 /* GDataFeedLink.h in Resources */,
+				54A3C62915FE6AD1001F7E48 /* GDataFeedLink.m in Resources */,
+				54A3C62A15FE6AD1001F7E48 /* GDataGenerator.h in Resources */,
+				54A3C62B15FE6AD1001F7E48 /* GDataGenerator.m in Resources */,
+				54A3C62C15FE6AD1001F7E48 /* GDataGeoPt.h in Resources */,
+				54A3C62D15FE6AD1001F7E48 /* GDataGeoPt.m in Resources */,
+				54A3C62E15FE6AD1001F7E48 /* GDataIM.h in Resources */,
+				54A3C62F15FE6AD1001F7E48 /* GDataIM.m in Resources */,
+				54A3C63015FE6AD1001F7E48 /* GDataLink.h in Resources */,
+				54A3C63115FE6AD1001F7E48 /* GDataLink.m in Resources */,
+				54A3C63215FE6AD1001F7E48 /* GDataMoney.h in Resources */,
+				54A3C63315FE6AD1001F7E48 /* GDataMoney.m in Resources */,
+				54A3C63415FE6AD1001F7E48 /* GDataName.h in Resources */,
+				54A3C63515FE6AD1001F7E48 /* GDataName.m in Resources */,
+				54A3C63615FE6AD1001F7E48 /* GDataOrganization.h in Resources */,
+				54A3C63715FE6AD1001F7E48 /* GDataOrganization.m in Resources */,
+				54A3C63815FE6AD1001F7E48 /* GDataOrganizationName.h in Resources */,
+				54A3C63915FE6AD1001F7E48 /* GDataOrganizationName.m in Resources */,
+				54A3C63A15FE6AD1001F7E48 /* GDataPerson.h in Resources */,
+				54A3C63B15FE6AD1001F7E48 /* GDataPerson.m in Resources */,
+				54A3C63C15FE6AD1001F7E48 /* GDataPhoneNumber.h in Resources */,
+				54A3C63D15FE6AD1001F7E48 /* GDataPhoneNumber.m in Resources */,
+				54A3C63E15FE6AD1001F7E48 /* GDataPostalAddress.h in Resources */,
+				54A3C63F15FE6AD1001F7E48 /* GDataPostalAddress.m in Resources */,
+				54A3C64015FE6AD1001F7E48 /* GDataRating.h in Resources */,
+				54A3C64115FE6AD1001F7E48 /* GDataRating.m in Resources */,
+				54A3C64215FE6AD1001F7E48 /* GDataStructuredPostalAddress.h in Resources */,
+				54A3C64315FE6AD1001F7E48 /* GDataStructuredPostalAddress.m in Resources */,
+				54A3C64415FE6AD1001F7E48 /* GDataTextConstruct.h in Resources */,
+				54A3C64515FE6AD1001F7E48 /* GDataTextConstruct.m in Resources */,
+				54A3C64615FE6AD1001F7E48 /* GDataValueConstruct.h in Resources */,
+				54A3C64715FE6AD1001F7E48 /* GDataValueConstruct.m in Resources */,
+				54A3C64815FE6AD1001F7E48 /* GDataWhen.h in Resources */,
+				54A3C64915FE6AD1001F7E48 /* GDataWhen.m in Resources */,
+				54A3C64A15FE6AD1001F7E48 /* GDataWhere.h in Resources */,
+				54A3C64B15FE6AD1001F7E48 /* GDataWhere.m in Resources */,
+				54A3C64C15FE6AD1001F7E48 /* GDataWho.h in Resources */,
+				54A3C64D15FE6AD1001F7E48 /* GDataWho.m in Resources */,
+				54A3C64E15FE6AD1001F7E48 /* GData.h in Resources */,
+				54A3C64F15FE6AD1001F7E48 /* GDataDefines.h in Resources */,
+				54A3C65015FE6AD1001F7E48 /* GDataFramework.h in Resources */,
+				54A3C65115FE6AD1001F7E48 /* GDataFramework.m in Resources */,
+				54A3C65215FE6AD1001F7E48 /* GDataTargetNamespace.h in Resources */,
+				54A3C65315FE6AD1001F7E48 /* GDataUtilities.h in Resources */,
+				54A3C65415FE6AD1001F7E48 /* GDataUtilities.m in Resources */,
+				54A3C65515FE6AD1001F7E48 /* GDataGeo.h in Resources */,
+				54A3C65615FE6AD1001F7E48 /* GDataGeo.m in Resources */,
+				54A3C65715FE6AD1001F7E48 /* GTMGatherInputStream.h in Resources */,
+				54A3C65815FE6AD1001F7E48 /* GTMGatherInputStream.m in Resources */,
+				54A3C65915FE6AD1001F7E48 /* GTMHTTPFetcher.h in Resources */,
+				54A3C65A15FE6AD1001F7E48 /* GTMHTTPFetcher.m in Resources */,
+				54A3C65B15FE6AD1001F7E48 /* GTMHTTPFetcherLogging.h in Resources */,
+				54A3C65C15FE6AD1001F7E48 /* GTMHTTPFetcherLogging.m in Resources */,
+				54A3C65D15FE6AD1001F7E48 /* GTMHTTPFetcherService.h in Resources */,
+				54A3C65E15FE6AD1001F7E48 /* GTMHTTPFetcherService.m in Resources */,
+				54A3C65F15FE6AD1001F7E48 /* GTMHTTPFetchHistory.h in Resources */,
+				54A3C66015FE6AD1001F7E48 /* GTMHTTPFetchHistory.m in Resources */,
+				54A3C66115FE6AD1001F7E48 /* GTMHTTPUploadFetcher.h in Resources */,
+				54A3C66215FE6AD1001F7E48 /* GTMHTTPUploadFetcher.m in Resources */,
+				54A3C66315FE6AD1001F7E48 /* GTMMIMEDocument.h in Resources */,
+				54A3C66415FE6AD1001F7E48 /* GTMMIMEDocument.m in Resources */,
+				54A3C66515FE6AD1001F7E48 /* GTMReadMonitorInputStream.h in Resources */,
+				54A3C66615FE6AD1001F7E48 /* GTMReadMonitorInputStream.m in Resources */,
+				54A3C66715FE6AD1001F7E48 /* GDataMedia.h in Resources */,
+				54A3C66815FE6AD1001F7E48 /* GDataMediaCategory.h in Resources */,
+				54A3C66915FE6AD1001F7E48 /* GDataMediaCategory.m in Resources */,
+				54A3C66A15FE6AD1001F7E48 /* GDataMediaContent.h in Resources */,
+				54A3C66B15FE6AD1001F7E48 /* GDataMediaContent.m in Resources */,
+				54A3C66C15FE6AD1001F7E48 /* GDataMediaCredit.h in Resources */,
+				54A3C66D15FE6AD1001F7E48 /* GDataMediaCredit.m in Resources */,
+				54A3C66E15FE6AD1001F7E48 /* GDataMediaGroup.h in Resources */,
+				54A3C66F15FE6AD1001F7E48 /* GDataMediaGroup.m in Resources */,
+				54A3C67015FE6AD1001F7E48 /* GDataMediaKeywords.h in Resources */,
+				54A3C67115FE6AD1001F7E48 /* GDataMediaKeywords.m in Resources */,
+				54A3C67215FE6AD1001F7E48 /* GDataMediaPlayer.h in Resources */,
+				54A3C67315FE6AD1001F7E48 /* GDataMediaPlayer.m in Resources */,
+				54A3C67415FE6AD1001F7E48 /* GDataMediaRating.h in Resources */,
+				54A3C67515FE6AD1001F7E48 /* GDataMediaRating.m in Resources */,
+				54A3C67615FE6AD1001F7E48 /* GDataMediaRestriction.h in Resources */,
+				54A3C67715FE6AD1001F7E48 /* GDataMediaRestriction.m in Resources */,
+				54A3C67815FE6AD1001F7E48 /* GDataMediaThumbnail.h in Resources */,
+				54A3C67915FE6AD1001F7E48 /* GDataMediaThumbnail.m in Resources */,
+				54A3C67A15FE6AD1001F7E48 /* GDataNormalPlayTime.h in Resources */,
+				54A3C67B15FE6AD1001F7E48 /* GDataNormalPlayTime.m in Resources */,
+				54A3C67C15FE6AD1001F7E48 /* GDataAuthenticationFetcher.h in Resources */,
+				54A3C67D15FE6AD1001F7E48 /* GDataAuthenticationFetcher.m in Resources */,
+				54A3C67E15FE6AD1001F7E48 /* GDataServerError.h in Resources */,
+				54A3C67F15FE6AD1001F7E48 /* GDataServerError.m in Resources */,
+				54A3C68015FE6AD1001F7E48 /* GDataACL.h in Resources */,
+				54A3C68115FE6AD1001F7E48 /* GDataACLKeyedRole.h in Resources */,
+				54A3C68215FE6AD1001F7E48 /* GDataACLKeyedRole.m in Resources */,
+				54A3C68315FE6AD1001F7E48 /* GDataACLRole.h in Resources */,
+				54A3C68415FE6AD1001F7E48 /* GDataACLRole.m in Resources */,
+				54A3C68515FE6AD1001F7E48 /* GDataACLScope.h in Resources */,
+				54A3C68615FE6AD1001F7E48 /* GDataACLScope.m in Resources */,
+				54A3C68715FE6AD1001F7E48 /* GDataEntryACL.h in Resources */,
+				54A3C68815FE6AD1001F7E48 /* GDataEntryACL.m in Resources */,
+				54A3C68915FE6AD1001F7E48 /* GDataFeedACL.h in Resources */,
+				54A3C68A15FE6AD1001F7E48 /* GDataFeedACL.m in Resources */,
+				54A3C68B15FE6AD1001F7E48 /* GDataServiceACL.h in Resources */,
+				54A3C68C15FE6AD1001F7E48 /* GDataServiceACL.m in Resources */,
+				54A3C68D15FE6AD1001F7E48 /* GDataAtomCategoryGroup.h in Resources */,
+				54A3C68E15FE6AD1001F7E48 /* GDataAtomCategoryGroup.m in Resources */,
+				54A3C68F15FE6AD1001F7E48 /* GDataAtomCollection.h in Resources */,
+				54A3C69015FE6AD1001F7E48 /* GDataAtomCollection.m in Resources */,
+				54A3C69115FE6AD1001F7E48 /* GDataAtomServiceDocument.h in Resources */,
+				54A3C69215FE6AD1001F7E48 /* GDataAtomServiceDocument.m in Resources */,
+				54A3C69315FE6AD1001F7E48 /* GDataAtomWorkspace.h in Resources */,
+				54A3C69415FE6AD1001F7E48 /* GDataAtomWorkspace.m in Resources */,
+				54A3C69515FE6AD1001F7E48 /* GDataServiceIntrospection.h in Resources */,
+				54A3C69615FE6AD1001F7E48 /* GTMOAuth2Authentication.h in Resources */,
+				54A3C69715FE6AD1001F7E48 /* GTMOAuth2Authentication.m in Resources */,
+				54A3C69815FE6AD1001F7E48 /* GTMOAuth2SignIn.h in Resources */,
+				54A3C69915FE6AD1001F7E48 /* GTMOAuth2SignIn.m in Resources */,
+				54A3C69A15FE6AD1001F7E48 /* SBJsonBase.h in Resources */,
+				54A3C69B15FE6AD1001F7E48 /* SBJsonBase.m in Resources */,
+				54A3C69C15FE6AD1001F7E48 /* SBJsonParser.h in Resources */,
+				54A3C69D15FE6AD1001F7E48 /* SBJsonParser.m in Resources */,
+				54A3C69E15FE6AD1001F7E48 /* SBJsonWriter.h in Resources */,
+				54A3C69F15FE6AD1001F7E48 /* SBJsonWriter.m in Resources */,
+				54A3C6A015FE6AD1001F7E48 /* GTMOAuth2Framework-Info.plist in Resources */,
+				54A3C6A115FE6AD1001F7E48 /* GTMOAuth2Window.xib in Resources */,
+				54A3C6A215FE6AD1001F7E48 /* GTMOAuth2WindowController.h in Resources */,
+				54A3C6A315FE6AD1001F7E48 /* GTMOAuth2WindowController.m in Resources */,
+				54A3C6A415FE6AD1001F7E48 /* GTMOAuth2ViewControllerTouch.h in Resources */,
+				54A3C6A515FE6AD1001F7E48 /* GTMOAuth2ViewControllerTouch.m in Resources */,
+				54A3C6A615FE6AD1001F7E48 /* GTMOAuth2ViewTouch.xib in Resources */,
+				54A3C6A715FE6AD1001F7E48 /* GDataXMLNode.h in Resources */,
+				54A3C6A815FE6AD1001F7E48 /* GDataXMLNode.m in Resources */,
+				54A3C6A915FE6AD1001F7E48 /* GDataEntryPhoto.h in Resources */,
+				54A3C6AA15FE6AD1001F7E48 /* GDataEntryPhoto.m in Resources */,
+				54A3C6AB15FE6AD1001F7E48 /* GDataEntryPhotoAlbum.h in Resources */,
+				54A3C6AC15FE6AD1001F7E48 /* GDataEntryPhotoAlbum.m in Resources */,
+				54A3C6AD15FE6AD1001F7E48 /* GDataEntryPhotoBase.h in Resources */,
+				54A3C6AE15FE6AD1001F7E48 /* GDataEntryPhotoBase.m in Resources */,
+				54A3C6AF15FE6AD1001F7E48 /* GDataEntryPhotoComment.h in Resources */,
+				54A3C6B015FE6AD1001F7E48 /* GDataEntryPhotoComment.m in Resources */,
+				54A3C6B115FE6AD1001F7E48 /* GDataEntryPhotoTag.h in Resources */,
+				54A3C6B215FE6AD1001F7E48 /* GDataEntryPhotoTag.m in Resources */,
+				54A3C6B315FE6AD1001F7E48 /* GDataEntryPhotoUser.h in Resources */,
+				54A3C6B415FE6AD1001F7E48 /* GDataEntryPhotoUser.m in Resources */,
+				54A3C6B515FE6AD1001F7E48 /* GDataEXIFTags.h in Resources */,
+				54A3C6B615FE6AD1001F7E48 /* GDataEXIFTags.m in Resources */,
+				54A3C6B715FE6AD1001F7E48 /* GDataFeedPhoto.h in Resources */,
+				54A3C6B815FE6AD1001F7E48 /* GDataFeedPhoto.m in Resources */,
+				54A3C6B915FE6AD1001F7E48 /* GDataFeedPhotoAlbum.h in Resources */,
+				54A3C6BA15FE6AD1001F7E48 /* GDataFeedPhotoAlbum.m in Resources */,
+				54A3C6BB15FE6AD1001F7E48 /* GDataFeedPhotoBase.h in Resources */,
+				54A3C6BC15FE6AD1001F7E48 /* GDataFeedPhotoBase.m in Resources */,
+				54A3C6BD15FE6AD1001F7E48 /* GDataFeedPhotoUser.h in Resources */,
+				54A3C6BE15FE6AD1001F7E48 /* GDataFeedPhotoUser.m in Resources */,
+				54A3C6BF15FE6AD1001F7E48 /* GDataPhotoConstants.h in Resources */,
+				54A3C6C015FE6AD1001F7E48 /* GDataPhotoConstants.m in Resources */,
+				54A3C6C115FE6AD1001F7E48 /* GDataPhotoElements.h in Resources */,
+				54A3C6C215FE6AD1001F7E48 /* GDataPhotoElements.m in Resources */,
+				54A3C6C315FE6AD1001F7E48 /* GDataPhotos.h in Resources */,
+				54A3C6C415FE6AD1001F7E48 /* GDataQueryGooglePhotos.h in Resources */,
+				54A3C6C515FE6AD1001F7E48 /* GDataQueryGooglePhotos.m in Resources */,
+				54A3C6C615FE6AD1001F7E48 /* GDataServiceGooglePhotos.h in Resources */,
+				54A3C6C715FE6AD1001F7E48 /* GDataServiceGooglePhotos.m in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +2093,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5424F42815CC122700394084 /* InfoPlist.strings in Resources */,
+				54EE2BE015FE363B0053C97E /* LICENSE in Resources */,
+				54EE2BE215FE363B0053C97E /* Readme.markdown in Resources */,
+				54EE2BF015FE43AC0053C97E /* UCPhotoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +2127,16 @@
 				5424F40D15CC122700394084 /* MasterViewController.m in Sources */,
 				5424F41015CC122700394084 /* DetailViewController.m in Sources */,
 				5424F44015CC133600394084 /* UploadcareWidget.m in Sources */,
+				54B1EA5A15D1876A0000B20B /* UploadcareServicesConfigurator.m in Sources */,
+				548077E415F9105C00090D64 /* UCAlbumsList.m in Sources */,
+				548077E615F9105C00090D64 /* UCAlbumsListCell.m in Sources */,
+				548077EA15F9105C00090D64 /* UCPhotosList.m in Sources */,
+				548077EC15F9105C00090D64 /* UCPhotosListCell.m in Sources */,
+				54EE2B7315FE1FD40053C97E /* UploadedViewController.m in Sources */,
+				54EE2B7815FE1FE00053C97E /* DisclosureViewController.m in Sources */,
+				54EE2B9A15FE30420053C97E /* UploadCareProgressView.m in Sources */,
+				54EE2BCB15FE363B0053C97E /* AJNotificationView.m in Sources */,
+				54EE2BED15FE43AC0053C97E /* UCPhotoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,16 +2145,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				5424F42B15CC122700394084 /* WidgetExampleTests.m in Sources */,
+				54B1EA5B15D1876A0000B20B /* UploadcareServicesConfigurator.m in Sources */,
+				54EE2B9B15FE30420053C97E /* UploadCareProgressView.m in Sources */,
+				54EE2BCC15FE363B0053C97E /* AJNotificationView.m in Sources */,
+				54EE2BEE15FE43AC0053C97E /* UCPhotoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		541352A315FE5CAB00E17A20 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GrabKitLib;
+			targetProxy = 541352A215FE5CAB00E17A20 /* PBXContainerItemProxy */;
+		};
+		541352A515FE5CAB00E17A20 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GrabKitBundle;
+			targetProxy = 541352A415FE5CAB00E17A20 /* PBXContainerItemProxy */;
+		};
 		5424F42215CC122700394084 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5424F3F415CC122600394084 /* WidgetExample */;
 			targetProxy = 5424F42115CC122700394084 /* PBXContainerItemProxy */;
+		};
+		544E322815F9298F00011290 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UploadcareKit;
+			targetProxy = 544E322715F9298F00011290 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -402,11 +2265,33 @@
 		5424F42F15CC122700394084 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Artyom Loenko (NTBD5ZY3XH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Artyom Loenko (NTBD5ZY3XH)";
+				DEAD_CODE_STRIPPING = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WidgetExample/WidgetExample-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"$(TARGET_BUILD_DIR)/include/GrabKitLib",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
 				INFOPLIST_FILE = "WidgetExample/WidgetExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+					"-lsqlite3.0",
+					"-lxml2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3E4182DB-1343-44D9-9278-BC51E76D6B34";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3E4182DB-1343-44D9-9278-BC51E76D6B34";
 				USER_HEADER_SEARCH_PATHS = ./../../UploadcareKit/UploadcareKit;
+				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -414,10 +2299,33 @@
 		5424F43015CC122700394084 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Artyom Loenko (NTBD5ZY3XH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Artyom Loenko (NTBD5ZY3XH)";
+				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WidgetExample/WidgetExample-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"$(TARGET_BUILD_DIR)/include/GrabKitLib",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
 				INFOPLIST_FILE = "WidgetExample/WidgetExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+					"-lsqlite3.0",
+					"-lxml2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3E4182DB-1343-44D9-9278-BC51E76D6B34";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3E4182DB-1343-44D9-9278-BC51E76D6B34";
 				USER_HEADER_SEARCH_PATHS = ./../../UploadcareKit/UploadcareKit;
 				WRAPPER_EXTENSION = app;
 			};
@@ -430,6 +2338,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WidgetExample/WidgetExample-Prefix.pch";
@@ -447,6 +2356,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WidgetExample/WidgetExample-Prefix.pch";
@@ -476,6 +2386,7 @@
 				5424F43015CC122700394084 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5424F43115CC122700394084 /* Build configuration list for PBXNativeTarget "WidgetExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -484,6 +2395,7 @@
 				5424F43315CC122700394084 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

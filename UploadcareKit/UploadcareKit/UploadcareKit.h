@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #import "UploadCareFile.h"
 
@@ -25,6 +26,8 @@
 
 #define DATE_RFC2822_FORMAT @"EEE, dd MMM yyyy HH:mm:ss Z"
 
+#define UPLOADCARE_NEW_IMAGE_NOTIFICATION @"Uploadcare should upload new image"
+
 @interface UploadcareKit : NSObject {
 /**
  Set your public key and secret for requests and validation
@@ -38,6 +41,14 @@
 
 /* Thread-safe singleton accessor to UploadcareKit */
 + (id)shared;
+
+/**
+ Download image for any service at background with placeholder value
+ 
+ @param url NSURL for image
+ @param placeholder UIImage instance for placeholder
+ */
++ (void)downloadImageAtURL:(NSURL *)url withPlaceholder:(UIImage *)placeholder forImageView:(UIImageView *) imageView;
 
 /**
  The MD5 Message-Digest Algorithm cryptographic hash function that produces a 128-bit (16-byte) hash value. Specified in RFC 1321. Used for client-server auth procedure.

@@ -13,6 +13,7 @@
 
 #import "AFJSONRequestOperation.h"
 #import "AFHTTPRequestOperation.h"
+#import "UIImageView+AFNetworking.h"
 
 #import "JSONKit.h"
 
@@ -361,6 +362,12 @@
         return NO;
     }
     return YES;
+}
+
+#pragma mark - Services helpers
+
++ (void)downloadImageAtURL:(NSURL *)url withPlaceholder:(UIImage *)placeholder forImageView:(UIImageView *) imageView {
+    [imageView setImageWithURL:url placeholderImage:placeholder];
 }
 
 @end

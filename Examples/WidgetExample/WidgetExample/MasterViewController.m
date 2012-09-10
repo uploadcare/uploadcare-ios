@@ -9,7 +9,6 @@
 #import "MasterViewController.h"
 
 #import "DetailViewController.h"
-
 #import "UploadcareWidget.h"
 
 @interface MasterViewController () {

@@ -4,3 +4,9 @@
 [submodule "UploadcareKit/Vendors/JSONKit"]
 	path = UploadcareKit/Vendors/JSONKit
 	url = https://github.com/johnezang/JSONKit.git
+[submodule "UploadcareWidget/vendors/GrabKit"]
+	path = UploadcareWidget/vendors/GrabKit
+	url = https://github.com/pierrotsmnrd/grabKit.git
+[submodule "UploadcareWidget/vendors/AJNotificationView"]
+	path = UploadcareWidget/vendors/AJNotificationView
+	url = https://github.com/ajerez/AJNotificationView.git

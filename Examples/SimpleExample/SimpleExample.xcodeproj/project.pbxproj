@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5432887115D2EF7100C881E4 /* libUploadcareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D3964D15C9AB1E007FCBE4 /* libUploadcareKit.a */; };
 		5479AE8C15CAC9350038001C /* UploadedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5479AE8A15CAC9350038001C /* UploadedViewController.m */; };
 		5479AE8D15CAC9350038001C /* UploadedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5479AE8A15CAC9350038001C /* UploadedViewController.m */; };
 		5479AE8E15CAC9350038001C /* UploadedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5479AE8B15CAC9350038001C /* UploadedViewController.xib */; };
@@ -15,6 +16,7 @@
 		5479AE9515CACF000038001C /* DisclosureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5479AE9215CACF000038001C /* DisclosureViewController.m */; };
 		5479AE9615CACF000038001C /* DisclosureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5479AE9315CACF000038001C /* DisclosureViewController.xib */; };
 		5479AE9715CACF000038001C /* DisclosureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5479AE9315CACF000038001C /* DisclosureViewController.xib */; };
+		548077AF15F90C3700090D64 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 548077AE15F90C3700090D64 /* FacebookSDK.framework */; };
 		54D4F8B815C98CD60021A868 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D4F8B715C98CD60021A868 /* UIKit.framework */; };
 		54D4F8BA15C98CD60021A868 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D4F8B915C98CD60021A868 /* Foundation.framework */; };
 		54D4F8BC15C98CD60021A868 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D4F8BB15C98CD60021A868 /* CoreGraphics.framework */; };
@@ -30,10 +32,16 @@
 		54D4F8E315C98CD70021A868 /* SimpleExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54D4F8E215C98CD70021A868 /* SimpleExampleTests.m */; };
 		54D4F8EF15C994600021A868 /* UploadcareKit.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = 54D4F8EE15C994600021A868 /* UploadcareKit.xcodeproj */; };
 		54D4F8F015C994600021A868 /* UploadcareKit.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = 54D4F8EE15C994600021A868 /* UploadcareKit.xcodeproj */; };
-		54D4F8F215C994700021A868 /* libUploadcareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D4F8F115C994700021A868 /* libUploadcareKit.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5432886F15D2EBAF00C881E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54D4F8EE15C994600021A868 /* UploadcareKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 54D4F7F815C96E8E0021A868;
+			remoteInfo = UploadcareKit;
+		};
 		54D3964C15C9AB1E007FCBE4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 54D4F8EE15C994600021A868 /* UploadcareKit.xcodeproj */;
@@ -64,6 +72,7 @@
 		5479AE9115CACF000038001C /* DisclosureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisclosureViewController.h; sourceTree = "<group>"; };
 		5479AE9215CACF000038001C /* DisclosureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisclosureViewController.m; sourceTree = "<group>"; };
 		5479AE9315CACF000038001C /* DisclosureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisclosureViewController.xib; sourceTree = "<group>"; };
+		548077AE15F90C3700090D64 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../UploadcareWidget/vendors/GrabKit/grabKit/grabKit/externalLibraries/Facebook/FacebookSDK.framework; sourceTree = "<group>"; };
 		54D4F8B315C98CD60021A868 /* SimpleExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D4F8B715C98CD60021A868 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		54D4F8B915C98CD60021A868 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -92,8 +101,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54D4F8F215C994700021A868 /* libUploadcareKit.a in Frameworks */,
+				5432887115D2EF7100C881E4 /* libUploadcareKit.a in Frameworks */,
 				54D4F8B815C98CD60021A868 /* UIKit.framework in Frameworks */,
+				548077AF15F90C3700090D64 /* FacebookSDK.framework in Frameworks */,
 				54D4F8BA15C98CD60021A868 /* Foundation.framework in Frameworks */,
 				54D4F8BC15C98CD60021A868 /* CoreGraphics.framework in Frameworks */,
 			);
@@ -145,6 +155,7 @@
 		54D4F8A815C98CD60021A868 = {
 			isa = PBXGroup;
 			children = (
+				548077AE15F90C3700090D64 /* FacebookSDK.framework */,
 				54D4F8EE15C994600021A868 /* UploadcareKit.xcodeproj */,
 				54D4F8BD15C98CD60021A868 /* SimpleExample */,
 				54D4F8DB15C98CD70021A868 /* SimpleExampleTests */,
@@ -232,6 +243,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5432887015D2EBAF00C881E4 /* PBXTargetDependency */,
 			);
 			name = SimpleExample;
 			productName = SimpleExample;
@@ -375,6 +387,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5432887015D2EBAF00C881E4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UploadcareKit;
+			targetProxy = 5432886F15D2EBAF00C881E4 /* PBXContainerItemProxy */;
+		};
 		54D4F8DA15C98CD70021A868 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 54D4F8B215C98CD60021A868 /* SimpleExample */;
@@ -462,6 +479,12 @@
 		54D4F8E715C98CD70021A868 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Artyom Loenko (NTBD5ZY3XH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Artyom Loenko (NTBD5ZY3XH)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../UploadcareWidget/vendors/GrabKit/grabKit/grabKit/externalLibraries/Facebook\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleExample/SimpleExample-Prefix.pch";
 				INFOPLIST_FILE = "SimpleExample/SimpleExample-Info.plist";
@@ -470,6 +493,8 @@
 					"\"$(SRCROOT)/../../../../../Library/Developer/Xcode/DerivedData/UploadcareKit-alxxeypsnpbppwffhgvernmyzdmx/Build/Products/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "00A3D72B-5CA0-4EAF-BE5F-26C83E986059";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "00A3D72B-5CA0-4EAF-BE5F-26C83E986059";
 				USER_HEADER_SEARCH_PATHS = ./../../UploadcareKit/UploadcareKit;
 				WRAPPER_EXTENSION = app;
 			};
@@ -478,6 +503,12 @@
 		54D4F8E815C98CD70021A868 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Artyom Loenko (NTBD5ZY3XH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Artyom Loenko (NTBD5ZY3XH)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../UploadcareWidget/vendors/GrabKit/grabKit/grabKit/externalLibraries/Facebook\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleExample/SimpleExample-Prefix.pch";
 				INFOPLIST_FILE = "SimpleExample/SimpleExample-Info.plist";
@@ -486,6 +517,8 @@
 					"\"$(SRCROOT)/../../../../../Library/Developer/Xcode/DerivedData/UploadcareKit-alxxeypsnpbppwffhgvernmyzdmx/Build/Products/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "00A3D72B-5CA0-4EAF-BE5F-26C83E986059";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "00A3D72B-5CA0-4EAF-BE5F-26C83E986059";
 				USER_HEADER_SEARCH_PATHS = ./../../UploadcareKit/UploadcareKit;
 				WRAPPER_EXTENSION = app;
 			};

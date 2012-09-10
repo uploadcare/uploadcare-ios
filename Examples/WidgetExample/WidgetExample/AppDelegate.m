@@ -10,6 +10,9 @@
 
 #import "MasterViewController.h"
 
+#import "GRKConnectorsDispatcher.h"
+#import "GRKConfiguration.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -50,5 +53,19 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+	
+    BOOL urlHasBeenHandledByDispatcher = [[GRKConnectorsDispatcher sharedInstance] dispatchURLToConnectingServiceConnector:url];
+    
+    if ( urlHasBeenHandledByDispatcher  ) return YES;
+    
+    // If you have specific URL schemes to handle for you application,
+    //  the GRKConnectorDispatcher won't handle the URL.
+    // Then, you can handle here your own URL schemes.
+    
+    return NO;
+}
+
 
 @end
