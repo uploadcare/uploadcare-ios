@@ -797,8 +797,8 @@
 		5424F42F15CC122700394084 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Artyom Loenko (NTBD5ZY3XH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Artyom Loenko (NTBD5ZY3XH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -820,8 +820,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3E4182DB-1343-44D9-9278-BC51E76D6B34";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3E4182DB-1343-44D9-9278-BC51E76D6B34";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				USER_HEADER_SEARCH_PATHS = ./../../UploadcareKit/UploadcareKit;
 				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
@@ -831,8 +831,8 @@
 		5424F43015CC122700394084 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Artyom Loenko (NTBD5ZY3XH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Artyom Loenko (NTBD5ZY3XH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -856,8 +856,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3E4182DB-1343-44D9-9278-BC51E76D6B34";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3E4182DB-1343-44D9-9278-BC51E76D6B34";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				USER_HEADER_SEARCH_PATHS = ./../../UploadcareKit/UploadcareKit;
 				WRAPPER_EXTENSION = app;
 			};
