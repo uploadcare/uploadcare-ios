@@ -24,7 +24,7 @@
 #import "UploadedViewController.h"
 #import "UploadCareProgressView.h"
 
-#import "AJNotificationView.h"
+#import "JSNotifier.h"
 
 #define SECTION_URL         0
 #define SECTION_LOCAL       1
@@ -52,7 +52,6 @@
     IBOutlet UITableView *tableview;
     
     UploadCareProgressView *progressView;
-    AJNotificationView *notificationPanel;
 }
 
 @end
@@ -396,7 +395,11 @@
 
 #pragma mark - Uploadcare
 
-- (void)uploadFromFile:(NSData *)data withName:(NSString *)name {        
+- (void)uploadFromFile:(NSData *)data withName:(NSString *)name {
+    JSNotifier *notify = [[JSNotifier alloc] initWithTitle:@"Uploading..."];
+    notify.accessoryView = progressView;
+    [notify show];
+    
     [[UploadcareKit shared] uploadFileWithName:name andData:data uploadProgressBlock:^(NSInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
         NSLog(@"+%@: line %d - progress %llu/%llu %f%%",
               NSStringFromSelector(_cmd),
@@ -406,27 +409,24 @@
               (totalBytesWritten / (totalBytesExpectedToWrite / 100.f)) / 100.f);        
         
         [progressView setProgress:((totalBytesWritten / (totalBytesExpectedToWrite / 100.f)) / 100.f) - 0.0001f];
+        [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"Uploaded %.2f%%", nil), (totalBytesWritten / (totalBytesExpectedToWrite / 100.f))]];
         
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file) {
         NSLog(@"+%@: line %d success", NSStringFromSelector(_cmd), __LINE__);
         [self addToStorage:[file file_id]];
         
-        notificationPanel = [AJNotificationView showNoticeInView:tableview
-                                                            type:AJNotificationTypeOrange
-                                                           title:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [file original_filename]]
-                                                 linedBackground:AJLinedBackgroundTypeStatic
-                                                       hideAfter:2.5f];
+        [notify setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyCheck.png"]] animated:YES];
+        [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [file original_filename]] animated:YES];
+        [notify hideIn:4.0];
         
         [progressView setProgress:.0f];
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         NSLog(@"+%@: line %d - ERROR %@", NSStringFromSelector(_cmd), __LINE__, error);
         
-        notificationPanel = [AJNotificationView showNoticeInView:tableview
-                                                            type:AJNotificationTypeRed
-                                                           title:NSLocalizedString(@"Uploading failed!", nil)
-                                                 linedBackground:AJLinedBackgroundTypeStatic
-                                                       hideAfter:2.5f];
+        [notify setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyX.png"]] animated:YES];
+        [notify setTitle:(NSLocalizedString(@"Uploading failed!", nil)) animated:YES];
+        [notify hideIn:4.0];
         
         [progressView setProgress:.0f];
     }];
@@ -436,21 +436,17 @@
     [[UploadcareKit shared] uploadFileWithURL:url success:^(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file) {
         NSLog(@"+%@: line %d success", NSStringFromSelector(_cmd), __LINE__);
         
-        notificationPanel = [AJNotificationView showNoticeInView:tableview
-                                                            type:AJNotificationTypeOrange
-                                                           title:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), url]
-                                                 linedBackground:AJLinedBackgroundTypeStatic
-                                                       hideAfter:2.5f];
+        JSNotifier *notify = [[JSNotifier alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [file original_filename]]];
+        notify.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyCheck.png"]];
+        [notify showFor:2.0];
         
         [progressView setProgress:.0f];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         NSLog(@"+%@: line %d - ERROR %@", NSStringFromSelector(_cmd), __LINE__, error);
         
-        notificationPanel = [AJNotificationView showNoticeInView:tableview
-                                                            type:AJNotificationTypeRed
-                                                           title:NSLocalizedString(@"Uploading failed!", nil)
-                                                 linedBackground:AJLinedBackgroundTypeStatic
-                                                       hideAfter:2.5f];
+        JSNotifier *notify = [[JSNotifier alloc] initWithTitle:(NSLocalizedString(@"Uploading failed!", nil))];
+        notify.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyX.png"]];
+        [notify showFor:2.0];
         
         [progressView setProgress:.0f];
     }];

@@ -28,6 +28,11 @@
 		5424F44115CC133600394084 /* UploadcareWidget.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5424F43F15CC133600394084 /* UploadcareWidget.xib */; };
 		5424F44415CC2A2F00394084 /* UploadcareKit.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = 5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */; };
 		544E322915F9299400011290 /* libUploadcareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B1D76615D14FD90000B20B /* libUploadcareKit.a */; };
+		5463E78D161B06CF005C54A5 /* JSNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 5463E78C161B06CF005C54A5 /* JSNotifier.m */; };
+		5463E792161B0716005C54A5 /* NotifyCheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 5463E78E161B0716005C54A5 /* NotifyCheck.png */; };
+		5463E793161B0716005C54A5 /* NotifyCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5463E78F161B0716005C54A5 /* NotifyCheck@2x.png */; };
+		5463E794161B0716005C54A5 /* NotifyX.png in Resources */ = {isa = PBXBuildFile; fileRef = 5463E790161B0716005C54A5 /* NotifyX.png */; };
+		5463E795161B0716005C54A5 /* NotifyX@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5463E791161B0716005C54A5 /* NotifyX@2x.png */; };
 		548077B415F90CFC00090D64 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 548077B315F90CFC00090D64 /* FacebookSDK.framework */; };
 		548077E415F9105C00090D64 /* UCAlbumsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 548077CD15F9105B00090D64 /* UCAlbumsList.m */; };
 		548077E515F9105C00090D64 /* UCAlbumsList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 548077CE15F9105B00090D64 /* UCAlbumsList.xib */; };
@@ -57,12 +62,6 @@
 		54EE2B7915FE1FE00053C97E /* DisclosureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2B7715FE1FE00053C97E /* DisclosureViewController.xib */; };
 		54EE2B9A15FE30420053C97E /* UploadCareProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2B9915FE30420053C97E /* UploadCareProgressView.m */; };
 		54EE2B9B15FE30420053C97E /* UploadCareProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2B9915FE30420053C97E /* UploadCareProgressView.m */; };
-		54EE2BCB15FE363B0053C97E /* AJNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2BAC15FE363B0053C97E /* AJNotificationView.m */; };
-		54EE2BCC15FE363B0053C97E /* AJNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2BAC15FE363B0053C97E /* AJNotificationView.m */; };
-		54EE2BDF15FE363B0053C97E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2BC115FE363B0053C97E /* LICENSE */; };
-		54EE2BE015FE363B0053C97E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2BC115FE363B0053C97E /* LICENSE */; };
-		54EE2BE115FE363B0053C97E /* Readme.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2BC215FE363B0053C97E /* Readme.markdown */; };
-		54EE2BE215FE363B0053C97E /* Readme.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2BC215FE363B0053C97E /* Readme.markdown */; };
 		54EE2BED15FE43AC0053C97E /* UCPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2BEB15FE43AC0053C97E /* UCPhotoViewController.m */; };
 		54EE2BEE15FE43AC0053C97E /* UCPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2BEB15FE43AC0053C97E /* UCPhotoViewController.m */; };
 		54EE2BEF15FE43AC0053C97E /* UCPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2BEC15FE43AC0053C97E /* UCPhotoViewController.xib */; };
@@ -172,6 +171,12 @@
 		5424F43E15CC133600394084 /* UploadcareWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadcareWidget.m; path = ../../../UploadcareWidget/UploadcareWidget.m; sourceTree = "<group>"; };
 		5424F43F15CC133600394084 /* UploadcareWidget.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UploadcareWidget.xib; path = ../../../UploadcareWidget/UploadcareWidget.xib; sourceTree = "<group>"; };
 		5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UploadcareKit.xcodeproj; path = ../../UploadcareKit/UploadcareKit.xcodeproj; sourceTree = "<group>"; };
+		5463E78B161B06CF005C54A5 /* JSNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSNotifier.h; path = "JSNotifier/JSNotifier Sample/JSNotifier.h"; sourceTree = "<group>"; };
+		5463E78C161B06CF005C54A5 /* JSNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSNotifier.m; path = "JSNotifier/JSNotifier Sample/JSNotifier.m"; sourceTree = "<group>"; };
+		5463E78E161B0716005C54A5 /* NotifyCheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NotifyCheck.png; path = JSNotifier/NotifyCheck.png; sourceTree = "<group>"; };
+		5463E78F161B0716005C54A5 /* NotifyCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NotifyCheck@2x.png"; path = "JSNotifier/NotifyCheck@2x.png"; sourceTree = "<group>"; };
+		5463E790161B0716005C54A5 /* NotifyX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NotifyX.png; path = JSNotifier/NotifyX.png; sourceTree = "<group>"; };
+		5463E791161B0716005C54A5 /* NotifyX@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NotifyX@2x.png"; path = "JSNotifier/NotifyX@2x.png"; sourceTree = "<group>"; };
 		548077B315F90CFC00090D64 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		548077CC15F9105B00090D64 /* UCAlbumsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCAlbumsList.h; sourceTree = "<group>"; };
 		548077CD15F9105B00090D64 /* UCAlbumsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCAlbumsList.m; sourceTree = "<group>"; };
@@ -208,10 +213,6 @@
 		54EE2B7715FE1FE00053C97E /* DisclosureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DisclosureViewController.xib; path = ../../../Examples/SimpleExample/SimpleExample/DisclosureViewController.xib; sourceTree = "<group>"; };
 		54EE2B9815FE30420053C97E /* UploadCareProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadCareProgressView.h; sourceTree = "<group>"; };
 		54EE2B9915FE30420053C97E /* UploadCareProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadCareProgressView.m; sourceTree = "<group>"; };
-		54EE2BAB15FE363B0053C97E /* AJNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJNotificationView.h; sourceTree = "<group>"; };
-		54EE2BAC15FE363B0053C97E /* AJNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJNotificationView.m; sourceTree = "<group>"; };
-		54EE2BC115FE363B0053C97E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		54EE2BC215FE363B0053C97E /* Readme.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.markdown; sourceTree = "<group>"; };
 		54EE2BEA15FE43AB0053C97E /* UCPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotoViewController.h; sourceTree = "<group>"; };
 		54EE2BEB15FE43AC0053C97E /* UCPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotoViewController.m; sourceTree = "<group>"; };
 		54EE2BEC15FE43AC0053C97E /* UCPhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCPhotoViewController.xib; sourceTree = "<group>"; };
@@ -259,7 +260,6 @@
 				54B1DDB915D155900000B20B /* AssetsLibrary.framework */,
 				54B1DDB715D155860000B20B /* CFNetwork.framework */,
 				548077B315F90CFC00090D64 /* FacebookSDK.framework */,
-				5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */,
 				5424F3FF15CC122600394084 /* WidgetExample */,
 				5424F42315CC122700394084 /* WidgetExampleTests */,
 				5424F3F815CC122600394084 /* Frameworks */,
@@ -347,6 +347,19 @@
 			name = UploadcareWidget;
 			sourceTree = "<group>";
 		};
+		5463E78A161B06C3005C54A5 /* JSNotifier */ = {
+			isa = PBXGroup;
+			children = (
+				5463E78E161B0716005C54A5 /* NotifyCheck.png */,
+				5463E78F161B0716005C54A5 /* NotifyCheck@2x.png */,
+				5463E790161B0716005C54A5 /* NotifyX.png */,
+				5463E791161B0716005C54A5 /* NotifyX@2x.png */,
+				5463E78B161B06CF005C54A5 /* JSNotifier.h */,
+				5463E78C161B06CF005C54A5 /* JSNotifier.m */,
+			);
+			name = JSNotifier;
+			sourceTree = "<group>";
+		};
 		548077C915F9105B00090D64 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,7 +408,8 @@
 		54B1E3FD15D15C320000B20B /* vendors */ = {
 			isa = PBXGroup;
 			children = (
-				54EE2BA815FE363B0053C97E /* AJNotificationView */,
+				5463E78A161B06C3005C54A5 /* JSNotifier */,
+				5424F44315CC2A2F00394084 /* UploadcareKit.xcodeproj */,
 				54B1EA3215D17EA90000B20B /* grabKit.xcodeproj */,
 			);
 			name = vendors;
@@ -448,25 +462,6 @@
 				54EE2B7715FE1FE00053C97E /* DisclosureViewController.xib */,
 			);
 			name = "disclosure history";
-			sourceTree = "<group>";
-		};
-		54EE2BA815FE363B0053C97E /* AJNotificationView */ = {
-			isa = PBXGroup;
-			children = (
-				54EE2BAA15FE363B0053C97E /* AJNotificationView */,
-				54EE2BC115FE363B0053C97E /* LICENSE */,
-				54EE2BC215FE363B0053C97E /* Readme.markdown */,
-			);
-			path = AJNotificationView;
-			sourceTree = "<group>";
-		};
-		54EE2BAA15FE363B0053C97E /* AJNotificationView */ = {
-			isa = PBXGroup;
-			children = (
-				54EE2BAB15FE363B0053C97E /* AJNotificationView.h */,
-				54EE2BAC15FE363B0053C97E /* AJNotificationView.m */,
-			);
-			path = AJNotificationView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -620,9 +615,11 @@
 				54EE2B6D15FE0B580053C97E /* icon_url.png in Resources */,
 				54EE2B7415FE1FD40053C97E /* UploadedViewController.xib in Resources */,
 				54EE2B7915FE1FE00053C97E /* DisclosureViewController.xib in Resources */,
-				54EE2BDF15FE363B0053C97E /* LICENSE in Resources */,
-				54EE2BE115FE363B0053C97E /* Readme.markdown in Resources */,
 				54EE2BEF15FE43AC0053C97E /* UCPhotoViewController.xib in Resources */,
+				5463E792161B0716005C54A5 /* NotifyCheck.png in Resources */,
+				5463E793161B0716005C54A5 /* NotifyCheck@2x.png in Resources */,
+				5463E794161B0716005C54A5 /* NotifyX.png in Resources */,
+				5463E795161B0716005C54A5 /* NotifyX@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,8 +628,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5424F42815CC122700394084 /* InfoPlist.strings in Resources */,
-				54EE2BE015FE363B0053C97E /* LICENSE in Resources */,
-				54EE2BE215FE363B0053C97E /* Readme.markdown in Resources */,
 				54EE2BF015FE43AC0053C97E /* UCPhotoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -673,8 +668,8 @@
 				54EE2B7315FE1FD40053C97E /* UploadedViewController.m in Sources */,
 				54EE2B7815FE1FE00053C97E /* DisclosureViewController.m in Sources */,
 				54EE2B9A15FE30420053C97E /* UploadCareProgressView.m in Sources */,
-				54EE2BCB15FE363B0053C97E /* AJNotificationView.m in Sources */,
 				54EE2BED15FE43AC0053C97E /* UCPhotoViewController.m in Sources */,
+				5463E78D161B06CF005C54A5 /* JSNotifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,7 +680,6 @@
 				5424F42B15CC122700394084 /* WidgetExampleTests.m in Sources */,
 				54B1EA5B15D1876A0000B20B /* UploadcareServicesConfigurator.m in Sources */,
 				54EE2B9B15FE30420053C97E /* UploadCareProgressView.m in Sources */,
-				54EE2BCC15FE363B0053C97E /* AJNotificationView.m in Sources */,
 				54EE2BEE15FE43AC0053C97E /* UCPhotoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

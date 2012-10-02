@@ -7,6 +7,6 @@
 [submodule "UploadcareWidget/vendors/GrabKit"]
 	path = UploadcareWidget/vendors/GrabKit
 	url = https://github.com/pierrotsmnrd/grabKit.git
-[submodule "UploadcareWidget/vendors/AJNotificationView"]
-	path = UploadcareWidget/vendors/AJNotificationView
-	url = https://github.com/ajerez/AJNotificationView.git
+[submodule "UploadcareWidget/vendors/JSNotifier"]
+	path = UploadcareWidget/vendors/JSNotifier
+	url = https://github.com/jonahsiegle/JSNotifier.git
