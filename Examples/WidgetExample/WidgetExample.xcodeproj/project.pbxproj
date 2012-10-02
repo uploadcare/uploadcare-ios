@@ -33,7 +33,6 @@
 		5463E793161B0716005C54A5 /* NotifyCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5463E78F161B0716005C54A5 /* NotifyCheck@2x.png */; };
 		5463E794161B0716005C54A5 /* NotifyX.png in Resources */ = {isa = PBXBuildFile; fileRef = 5463E790161B0716005C54A5 /* NotifyX.png */; };
 		5463E795161B0716005C54A5 /* NotifyX@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5463E791161B0716005C54A5 /* NotifyX@2x.png */; };
-		548077B415F90CFC00090D64 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 548077B315F90CFC00090D64 /* FacebookSDK.framework */; };
 		548077E415F9105C00090D64 /* UCAlbumsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 548077CD15F9105B00090D64 /* UCAlbumsList.m */; };
 		548077E515F9105C00090D64 /* UCAlbumsList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 548077CE15F9105B00090D64 /* UCAlbumsList.xib */; };
 		548077E615F9105C00090D64 /* UCAlbumsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 548077D015F9105B00090D64 /* UCAlbumsListCell.m */; };
@@ -177,7 +176,6 @@
 		5463E78F161B0716005C54A5 /* NotifyCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NotifyCheck@2x.png"; path = "JSNotifier/NotifyCheck@2x.png"; sourceTree = "<group>"; };
 		5463E790161B0716005C54A5 /* NotifyX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NotifyX.png; path = JSNotifier/NotifyX.png; sourceTree = "<group>"; };
 		5463E791161B0716005C54A5 /* NotifyX@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NotifyX@2x.png"; path = "JSNotifier/NotifyX@2x.png"; sourceTree = "<group>"; };
-		548077B315F90CFC00090D64 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		548077CC15F9105B00090D64 /* UCAlbumsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCAlbumsList.h; sourceTree = "<group>"; };
 		548077CD15F9105B00090D64 /* UCAlbumsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCAlbumsList.m; sourceTree = "<group>"; };
 		548077CE15F9105B00090D64 /* UCAlbumsList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCAlbumsList.xib; sourceTree = "<group>"; };
@@ -232,7 +230,6 @@
 				5424F3FA15CC122600394084 /* UIKit.framework in Frameworks */,
 				5424F3FC15CC122600394084 /* Foundation.framework in Frameworks */,
 				5424F3FE15CC122600394084 /* CoreGraphics.framework in Frameworks */,
-				548077B415F90CFC00090D64 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +256,6 @@
 				54B1DDBB15D155970000B20B /* Security.framework */,
 				54B1DDB915D155900000B20B /* AssetsLibrary.framework */,
 				54B1DDB715D155860000B20B /* CFNetwork.framework */,
-				548077B315F90CFC00090D64 /* FacebookSDK.framework */,
 				5424F3FF15CC122600394084 /* WidgetExample */,
 				5424F42315CC122700394084 /* WidgetExampleTests */,
 				5424F3F815CC122600394084 /* Frameworks */,
@@ -808,8 +804,8 @@
 				GCC_PREFIX_HEADER = "WidgetExample/WidgetExample-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					/usr/include/libxml2,
-					"$(TARGET_BUILD_DIR)/include/GrabKitLib",
 					"$(BUILT_PRODUCTS_DIR)",
+					"$(TARGET_BUILD_DIR)/include/GrabKitLib/",
 				);
 				INFOPLIST_FILE = "WidgetExample/WidgetExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -822,8 +818,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				USER_HEADER_SEARCH_PATHS = ./../../UploadcareKit/UploadcareKit;
+				USER_HEADER_SEARCH_PATHS = "./../../UploadcareKit/UploadcareKit ./../../UploadcareWidget/vendors/GrabKit/**";
 				VALIDATE_PRODUCT = NO;
+				VALID_ARCHS = "armv7 armv6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -844,8 +841,8 @@
 				GCC_PREFIX_HEADER = "WidgetExample/WidgetExample-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					/usr/include/libxml2,
-					"$(TARGET_BUILD_DIR)/include/GrabKitLib",
 					"$(BUILT_PRODUCTS_DIR)",
+					"$(TARGET_BUILD_DIR)/include/GrabKitLib/",
 				);
 				INFOPLIST_FILE = "WidgetExample/WidgetExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -858,7 +855,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				USER_HEADER_SEARCH_PATHS = ./../../UploadcareKit/UploadcareKit;
+				USER_HEADER_SEARCH_PATHS = "./../../UploadcareKit/UploadcareKit ./../../UploadcareWidget/vendors/GrabKit/**";
+				VALID_ARCHS = "armv7 armv6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
