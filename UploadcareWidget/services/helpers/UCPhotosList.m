@@ -204,6 +204,7 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
         if (cell == nil) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"UCPhotosListCell" owner:self options:nil] objectAtIndex:0];
             [(UCPhotosListCell *)cell setPhotoList:self];
+            [(UCPhotosListCell *)cell setServiceName:_grabber.serviceName];
         }
     }
     

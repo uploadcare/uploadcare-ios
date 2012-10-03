@@ -21,6 +21,7 @@
 
 @property (nonatomic, retain) NSArray *photos;
 @property (nonatomic, retain) UCPhotosList *photoList;
+@property (nonatomic, strong) NSString *serviceName;
 
 - (void)updateThumbnails;
 

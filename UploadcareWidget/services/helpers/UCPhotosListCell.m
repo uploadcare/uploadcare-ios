@@ -91,7 +91,8 @@
     NSDictionary *object = @{
         @"image" : [tappedImageView image],
         @"photoId" : photo.photoId ? photo.photoId : [NSNull null],
-        @"photoName" : photo.name ? photo.name : [NSNull null]
+        @"photoName" : photo.name ? photo.name : [NSNull null],
+        @"serviceName" : self.serviceName ? self.serviceName : [NSNull null],
     };
     
     [self.photoList.navigationController popToRootViewControllerAnimated:YES];

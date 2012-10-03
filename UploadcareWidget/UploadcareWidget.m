@@ -45,6 +45,8 @@
 #define INSTAGRAM_GRABBER @"GRKInstagramGrabber"
 #define PICASA_GRABBER @"GRKPicasaGrabber"
 
+#define UNKNOWN_PHOTO_SOURCE @"Unknown"
+
 #define UPLOAD_FROM_URL_DIALOG_TAG 99
 
 @interface UploadcareWidget () {
@@ -172,7 +174,9 @@
     if (object[@"image"] == [NSNull null]) return; //TODO: Handle?
     
     /* upload */
-    [self uploadFromFile:UIImagePNGRepresentation(object[@"image"]) withName:photoName];
+    [self uploadFromFile:UIImagePNGRepresentation(object[@"image"])
+                withName:photoName
+             serviceName:object[@"serviceName"] != [NSNull null] ? object[@"serviceName"] : UNKNOWN_PHOTO_SOURCE];
 }
 
 - (IBAction)dismiss:(id)sender {
@@ -417,6 +421,10 @@
 #pragma mark - Uploadcare
 
 - (void)uploadFromFile:(NSData *)data withName:(NSString *)name {
+    [self uploadFromFile:data withName:name serviceName:UNKNOWN_PHOTO_SOURCE];
+}
+
+- (void)uploadFromFile:(NSData *)data withName:(NSString *)name serviceName:(NSString*)serviceName {
     JSNotifier *notify = [[JSNotifier alloc] initWithTitle:@"Uploading..."];
     notify.accessoryView = progressView;
     [notify show];
@@ -434,7 +442,7 @@
         
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file) {
         NSLog(@"+%@: line %d success", NSStringFromSelector(_cmd), __LINE__);
-        [self addToStorage:[file file_id]];
+        [self addToStorageFileWithId:[file file_id] fromService:serviceName];
         
         [notify setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyCheck.png"]] animated:YES];
         [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [file original_filename]] animated:YES];
@@ -491,12 +499,18 @@
 //    NSArray *storage = [[NSUserDefaults standardUserDefaults] arrayForKey:@"uploadcare_storage"];
 }
 
-- (void)addToStorage:(NSString *)file_id {
+- (void)addToStorageFileWithId:(NSString *)file_id fromService:(NSString *)serviceName {
     NSArray *storage = [[NSUserDefaults standardUserDefaults] arrayForKey:@"uploadcare_storage"];
     NSMutableArray *_storage = [[NSMutableArray alloc] initWithArray:storage];
     [_storage addObject:file_id];
-    
     [[NSUserDefaults standardUserDefaults] setObject:_storage forKey:@"uploadcare_storage"];
+    
+    /* store source service name for the file */
+    NSDictionary *storedFileSources = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"uploadcare_storage_sources"];
+    NSMutableDictionary *mutableSources = [[NSMutableDictionary alloc]initWithDictionary:storedFileSources];
+    mutableSources[file_id] = serviceName;
+    [[NSUserDefaults standardUserDefaults] setObject:mutableSources forKey:@"uploadcare_storage_sources"];
+    
     [self checkStorageAndUpdateStatus];
 }
 
