@@ -38,6 +38,7 @@
     __strong static id _sharedObject = nil;
     dispatch_once(&pred, ^{
         _sharedObject = [[self alloc] init];
+        [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObjects:@"application/vnd.uploadcare-v0.2+json", nil]];
     });
     return _sharedObject;
 }
@@ -274,7 +275,7 @@
 }
 
 - (NSURLRequest *)buildRequestForUploadWithFilename:(NSString *)filename andData:(NSData *)data {
-    NSURL *postURL = [NSURL URLWithString:@"http://upload.uploadcare.com/base/"];
+    NSURL *postURL = [NSURL URLWithString:@"https://upload.staging0.uploadcare.com/base/"]; // FIXME
     NSMutableURLRequest *postRequest = [NSMutableURLRequest requestWithURL:postURL
                                                                cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                            timeoutInterval:REQUEST_TIMEOUT];

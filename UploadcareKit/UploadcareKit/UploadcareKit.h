@@ -19,9 +19,9 @@
 
 #define ALog(fmt, ...) NSLog((@"%s:%d " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 
-#define API_BASE @"http://api.uploadcare.com"
-#define API_UPLOAD @"http://upload.uploadcare.com"
-#define API_RESIZER @"http://services.uploadcare.com/resizer/"
+#define API_BASE @"https://api.staging0.uploadcare.com"
+#define API_UPLOAD @"https://upload.staging0.uploadcare.com"
+#define API_RESIZER @"https://services.staging0.uploadcare.com/resizer/"
 #define REQUEST_TIMEOUT 20.0
 
 #define DATE_RFC2822_FORMAT @"EEE, dd MMM yyyy HH:mm:ss Z"
