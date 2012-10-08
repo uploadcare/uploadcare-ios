@@ -121,6 +121,9 @@
              file.info = channelEvent.data;
              success(request, response, file);
          }];
+         [taskStatusChannel bindToEventNamed:@"fail" handleWithBlock:^(PTPusherEvent *channelEvent) {
+             failure(request, response, [NSError errorWithDomain:@"UploadCare" code:0x100 userInfo:nil]);
+         }];
      }
      failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
          DLog(@"!failure %@ : %@ : %@", response, [request URL], JSON);
