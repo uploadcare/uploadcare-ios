@@ -45,6 +45,8 @@
 #define INSTAGRAM_GRABBER @"GRKInstagramGrabber"
 #define PICASA_GRABBER @"GRKPicasaGrabber"
 
+#define UNKNOWN_PHOTO_SOURCE @"Unknown"
+
 #define UPLOAD_FROM_URL_DIALOG_TAG 99
 
 @interface UploadcareWidget () {
@@ -115,8 +117,8 @@
     [super viewDidLoad];
     
     // init UploadcareKit with public and secret
-    [[UploadcareKit shared] setPublicKey:@"fd939b2f0698f7e2ca4edd5064827c21a150c8534a2407d88f42bcff7d4f2c68"
-                               andSecret:@"4b9f679057703b699cef2955a7a64a4fe21e03c1b9f221ff76ad262bc180ee1a"];
+    [[UploadcareKit shared] setPublicKey:@"cfd09d941305970e0f7d"
+                               andSecret:@"8fcfea19f6044dfdc476"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(uploadFromImage:)
@@ -148,10 +150,33 @@
 
 - (void)uploadFromImage:(NSNotification *)image {
     NSLog(@"+%@: line %d : %@", NSStringFromSelector(_cmd), __LINE__, [image.object class]);
-    NSArray *object = image.object;
-    if ([object count] >= 2) {
-        [self uploadFromFile:UIImagePNGRepresentation([object objectAtIndex:0]) withName:[NSString stringWithFormat:@"%@.png", [object objectAtIndex:1]]];
+    NSDictionary *object = image.object;
+    
+    /* use grabber-provided photo name if available, fallback to id, then to random UUID */
+    
+    NSString *photoNameBase = nil; // extentionless
+    if (object[@"photoName"] != [NSNull null]) {
+        photoNameBase = object[@"photoName"];
+    } else {
+        // fall back to photoId
+        if (object[@"photoId"] != [NSNull null]) {
+            photoNameBase = object[@"photoId"];
+        } else {
+            // no name, no id, generate a random name
+            CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+            photoNameBase = (__bridge NSString*)CFUUIDCreateString(kCFAllocatorDefault, uuid);
+            CFRelease(uuid);
+        }
     }
+    NSString *photoName = [NSString stringWithFormat:@"%@.png", photoNameBase];
+
+    /* charlie foxtrot prevention initiative */
+    if (object[@"image"] == [NSNull null]) return; //TODO: Handle?
+    
+    /* upload */
+    [self uploadFromFile:UIImagePNGRepresentation(object[@"image"])
+                withName:photoName
+             serviceName:object[@"serviceName"] != [NSNull null] ? object[@"serviceName"] : UNKNOWN_PHOTO_SOURCE];
 }
 
 - (IBAction)dismiss:(id)sender {
@@ -396,6 +421,10 @@
 #pragma mark - Uploadcare
 
 - (void)uploadFromFile:(NSData *)data withName:(NSString *)name {
+    [self uploadFromFile:data withName:name serviceName:UNKNOWN_PHOTO_SOURCE];
+}
+
+- (void)uploadFromFile:(NSData *)data withName:(NSString *)name serviceName:(NSString*)serviceName {
     JSNotifier *notify = [[JSNotifier alloc] initWithTitle:@"Uploading..."];
     notify.accessoryView = progressView;
     [notify show];
@@ -413,7 +442,7 @@
         
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file) {
         NSLog(@"+%@: line %d success", NSStringFromSelector(_cmd), __LINE__);
-        [self addToStorage:[file file_id]];
+        [self addToStorageFileWithId:[file file_id] fromService:serviceName];
         
         [notify setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyCheck.png"]] animated:YES];
         [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [file original_filename]] animated:YES];
@@ -433,23 +462,27 @@
 }
 
 - (void)uploadFromURL:(NSString *)url {
-    [[UploadcareKit shared] uploadFileWithURL:url success:^(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file) {
-        NSLog(@"+%@: line %d success", NSStringFromSelector(_cmd), __LINE__);
-        
-        JSNotifier *notify = [[JSNotifier alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [file original_filename]]];
-        notify.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyCheck.png"]];
-        [notify showFor:2.0];
-        
-        [progressView setProgress:.0f];
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        NSLog(@"+%@: line %d - ERROR %@", NSStringFromSelector(_cmd), __LINE__, error);
-        
-        JSNotifier *notify = [[JSNotifier alloc] initWithTitle:(NSLocalizedString(@"Uploading failed!", nil))];
-        notify.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyX.png"]];
-        [notify showFor:2.0];
-        
-        [progressView setProgress:.0f];
-    }];
+    [[UploadcareKit shared] uploadFileWithURL:url
+                          uploadProgressBlock:^(long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+                              [progressView setProgress:(float)totalBytesWritten / totalBytesExpectedToWrite];
+                          }
+     
+                                      success:^(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file) {
+                                          NSLog(@"+%@: line %d success", NSStringFromSelector(_cmd), __LINE__);
+                                          JSNotifier *notify = [[JSNotifier alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [file original_filename]]];
+                                          notify.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyCheck.png"]];
+                                          [notify showFor:2.0];
+                                          [progressView setProgress:1.f];
+                                      }
+                                      failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                          NSLog(@"+%@: line %d - ERROR %@", NSStringFromSelector(_cmd), __LINE__, error);
+                                          
+                                          JSNotifier *notify = [[JSNotifier alloc] initWithTitle:(NSLocalizedString(@"Uploading failed!", nil))];
+                                          notify.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyX.png"]];
+                                          [notify showFor:2.0];
+                                          
+                                          [progressView setProgress:.0f];
+                                      }];
 }
 
 #pragma mark - Uploaded Tools
@@ -470,12 +503,18 @@
 //    NSArray *storage = [[NSUserDefaults standardUserDefaults] arrayForKey:@"uploadcare_storage"];
 }
 
-- (void)addToStorage:(NSString *)file_id {
+- (void)addToStorageFileWithId:(NSString *)file_id fromService:(NSString *)serviceName {
     NSArray *storage = [[NSUserDefaults standardUserDefaults] arrayForKey:@"uploadcare_storage"];
     NSMutableArray *_storage = [[NSMutableArray alloc] initWithArray:storage];
     [_storage addObject:file_id];
-    
     [[NSUserDefaults standardUserDefaults] setObject:_storage forKey:@"uploadcare_storage"];
+    
+    /* store source service name for the file */
+    NSDictionary *storedFileSources = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"uploadcare_storage_sources"];
+    NSMutableDictionary *mutableSources = [[NSMutableDictionary alloc]initWithDictionary:storedFileSources];
+    mutableSources[file_id] = serviceName;
+    [[NSUserDefaults standardUserDefaults] setObject:mutableSources forKey:@"uploadcare_storage_sources"];
+    
     [self checkStorageAndUpdateStatus];
 }
 

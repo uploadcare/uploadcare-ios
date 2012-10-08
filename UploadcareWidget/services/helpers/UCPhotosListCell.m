@@ -88,11 +88,13 @@
     GRKPhoto *photo = (GRKPhoto *)[_photos objectAtIndex:[tappedImageView tag]];
     NSLog(@"+%@: line %d : tag = '%d', name '%@', id '%@'", NSStringFromSelector(_cmd), __LINE__, [tappedImageView tag], photo.name, photo.photoId);
     
-    NSArray *object = [[NSArray alloc] initWithObjects:
-                       [tappedImageView image],
-                       photo.photoId,
-                       photo.name,
-                       nil];
+    NSDictionary *object = @{
+        @"image" : [tappedImageView image],
+        @"photoId" : photo.photoId ? photo.photoId : [NSNull null],
+        @"photoName" : photo.name ? photo.name : [NSNull null],
+        @"serviceName" : self.serviceName ? self.serviceName : [NSNull null],
+    };
+    
     [self.photoList.navigationController popToRootViewControllerAnimated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UPLOADCARE_NEW_IMAGE_NOTIFICATION object:object];

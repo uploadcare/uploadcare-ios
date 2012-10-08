@@ -16,11 +16,16 @@
 #import "UIImageView+AFNetworking.h"
 
 #import "JSONKit.h"
+#import "PTPusher.h"
+#import "PTPusherChannel.h"
+#import "PTPusherEvent.h"
 
 @interface UploadcareKit ()
 
 @property(nonatomic, copy) NSString* publicKey;
 @property(nonatomic, copy) NSString* secretKey;
+
+@property (nonatomic, strong) PTPusher *pusherClient;
 
 - (NSURLRequest *)buildRequestWithMethod:(NSString *)method baseURL:(NSString *)base_url URI:(NSString *)url;
 - (NSURLRequest *)buildRequestWithMethod:(NSString *)method baseURL:(NSString *)base_url URI:(NSString *)url andData:(NSString *)data;
@@ -38,6 +43,12 @@
     __strong static id _sharedObject = nil;
     dispatch_once(&pred, ^{
         _sharedObject = [[self alloc] init];
+        //TODO: Move this to init
+        PTPusher *pusherClient = [PTPusher pusherWithKey:@"79ae88bd931ea68464d9" connectAutomatically:YES encrypted:YES];
+        [pusherClient setReconnectAutomatically:YES];
+        [(UploadcareKit*)_sharedObject setPusherClient:pusherClient];
+        
+        [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObjects:@"application/vnd.uploadcare-v0.2+json", nil]];
     });
     return _sharedObject;
 }
@@ -46,7 +57,7 @@
     self.publicKey = public;
     self.secretKey = secret;
 }
-
+         
 #pragma mark - Kit Actions
 
 - (void)uploadFileWithName:(NSString *)filename
@@ -82,9 +93,11 @@
 }
 
 - (void)uploadFileWithURL:(NSString *)url
+      uploadProgressBlock:(void (^)(long long totalBytesWritten, long long totalBytesExpectedToWrite))progress
                   success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file))success
                   failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
     
+    // TODO: Don't really need the secret key
     if (![self isPublicAndSecretValid]) {
         return;
     }
@@ -96,7 +109,18 @@
                                                               URI:[NSString stringWithFormat:@"/from_url/?pub_key=%@&source_url=%@", self.publicKey, url]]
      success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
          DLog(@"+success %@ : %@ : %@", response, [request URL], JSON);
-         success(request, response, JSON);
+         
+         // Notifications via pusher
+         NSString *token = JSON[@"token"];
+         PTPusherChannel *taskStatusChannel = [self.pusherClient subscribeToChannelNamed:[NSString stringWithFormat:@"task-status-%@", token]];
+         [taskStatusChannel bindToEventNamed:@"progress" handleWithBlock:^(PTPusherEvent *channelEvent) {
+             progress([[channelEvent.data objectForKey:@"done"] longLongValue], [[channelEvent.data objectForKey:@"total"]longLongValue]);
+         }];
+         [taskStatusChannel bindToEventNamed:@"success" handleWithBlock:^(PTPusherEvent *channelEvent) {
+             UploadcareFile *file = [UploadcareFile new];
+             file.info = channelEvent.data;
+             success(request, response, file);
+         }];
      }
      failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
          DLog(@"!failure %@ : %@ : %@", response, [request URL], JSON);
@@ -274,7 +298,7 @@
 }
 
 - (NSURLRequest *)buildRequestForUploadWithFilename:(NSString *)filename andData:(NSData *)data {
-    NSURL *postURL = [NSURL URLWithString:@"http://upload.uploadcare.com/base/"];
+    NSURL *postURL = [NSURL URLWithString:@"https://upload.staging0.uploadcare.com/base/"]; // FIXME
     NSMutableURLRequest *postRequest = [NSMutableURLRequest requestWithURL:postURL
                                                                cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                            timeoutInterval:REQUEST_TIMEOUT];

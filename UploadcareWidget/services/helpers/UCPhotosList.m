@@ -157,11 +157,12 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSUInteger pageNo = section+1;
     if (state > UCPhotosListStatePhotosGrabbed) {
         NSUInteger numberOfPhotos = [[_album photosAtPageIndex:section withNumberOfPhotosPerPage:kNumberOfPhotosPerPage] count];
-        return [NSString stringWithFormat:NSLocalizedString(@"Page %d ( %d photos )", nil), section, numberOfPhotos];
+        return [NSString stringWithFormat:NSLocalizedString(@"Page %d ( %d photos )", nil), pageNo, numberOfPhotos];
     }
-    return [NSString stringWithFormat:@"Page %d", section];
+    return [NSString stringWithFormat:@"Page %d", pageNo];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -203,6 +204,7 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
         if (cell == nil) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"UCPhotosListCell" owner:self options:nil] objectAtIndex:0];
             [(UCPhotosListCell *)cell setPhotoList:self];
+            [(UCPhotosListCell *)cell setServiceName:_grabber.serviceName];
         }
     }
     
@@ -217,7 +219,7 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
         if (state == UCPhotosListStateAllPhotosGrabbed) {
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@" %d photos", nil), [[_album photos] count] ];
         } else {
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Loading page %d", nil), _lastLoadedPageIndex+1];
+            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Loading page %d", nil), _lastLoadedPageIndex+1+1];
             [self fillAlbumWithMorePhotos];
         }
     } else {
