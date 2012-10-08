@@ -26,7 +26,6 @@
 @property(nonatomic, copy) NSString* secretKey;
 
 @property (nonatomic, strong) PTPusher *pusherClient;
-@property (nonatomic, strong) PTPusherChannel *taskStatusChannel;
 
 - (NSURLRequest *)buildRequestWithMethod:(NSString *)method baseURL:(NSString *)base_url URI:(NSString *)url;
 - (NSURLRequest *)buildRequestWithMethod:(NSString *)method baseURL:(NSString *)base_url URI:(NSString *)url andData:(NSString *)data;
@@ -113,11 +112,11 @@
          
          // Notifications via pusher
          NSString *token = JSON[@"token"];
-         self.taskStatusChannel = [self.pusherClient subscribeToChannelNamed:[NSString stringWithFormat:@"task-status-%@", token]];
-         [self.taskStatusChannel bindToEventNamed:@"progress" handleWithBlock:^(PTPusherEvent *channelEvent) {
+         PTPusherChannel *taskStatusChannel = [self.pusherClient subscribeToChannelNamed:[NSString stringWithFormat:@"task-status-%@", token]];
+         [taskStatusChannel bindToEventNamed:@"progress" handleWithBlock:^(PTPusherEvent *channelEvent) {
              progress([[channelEvent.data objectForKey:@"done"] longLongValue], [[channelEvent.data objectForKey:@"total"]longLongValue]);
          }];
-         [self.taskStatusChannel bindToEventNamed:@"success" handleWithBlock:^(PTPusherEvent *channelEvent) {
+         [taskStatusChannel bindToEventNamed:@"success" handleWithBlock:^(PTPusherEvent *channelEvent) {
              UploadcareFile *file = [UploadcareFile new];
              file.info = channelEvent.data;
              success(request, response, file);
