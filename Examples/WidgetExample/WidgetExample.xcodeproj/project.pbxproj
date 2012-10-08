@@ -48,6 +48,7 @@
 		54B170FE1622F14C007A2175 /* icon_instagram@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B170F81622F14C007A2175 /* icon_instagram@2x.png */; };
 		54B170FF1622F14C007A2175 /* icon_picasa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B170F91622F14C007A2175 /* icon_picasa@2x.png */; };
 		54B171001622F14C007A2175 /* icon_url@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B170FA1622F14C007A2175 /* icon_url@2x.png */; };
+		54B171021622F421007A2175 /* icon_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B171011622F421007A2175 /* icon_facebook@2x.png */; };
 		54B1DDB815D155860000B20B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B1DDB715D155860000B20B /* CFNetwork.framework */; };
 		54B1DDBA15D155900000B20B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B1DDB915D155900000B20B /* AssetsLibrary.framework */; };
 		54B1DDBC15D155970000B20B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B1DDBB15D155970000B20B /* Security.framework */; };
@@ -204,6 +205,7 @@
 		54B170F81622F14C007A2175 /* icon_instagram@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_instagram@2x.png"; sourceTree = "<group>"; };
 		54B170F91622F14C007A2175 /* icon_picasa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_picasa@2x.png"; sourceTree = "<group>"; };
 		54B170FA1622F14C007A2175 /* icon_url@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_url@2x.png"; sourceTree = "<group>"; };
+		54B171011622F421007A2175 /* icon_facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_facebook@2x.png"; sourceTree = "<group>"; };
 		54B1DDB715D155860000B20B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		54B1DDB915D155900000B20B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		54B1DDBB15D155970000B20B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -449,6 +451,7 @@
 		54EE2B5D15FE0B580053C97E /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				54B171011622F421007A2175 /* icon_facebook@2x.png */,
 				54B170F51622F14C007A2175 /* icon_dropbox@2x.png */,
 				54B170F61622F14C007A2175 /* icon_flickr@2x.png */,
 				54B170F71622F14C007A2175 /* icon_google_drive@2x.png */,
@@ -652,6 +655,7 @@
 				54B170FE1622F14C007A2175 /* icon_instagram@2x.png in Resources */,
 				54B170FF1622F14C007A2175 /* icon_picasa@2x.png in Resources */,
 				54B171001622F14C007A2175 /* icon_url@2x.png in Resources */,
+				54B171021622F421007A2175 /* icon_facebook@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
