@@ -97,6 +97,7 @@
  @param failure A block object to be executed when the operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the resonse data as JSON. This block has no return value and takes three arguments: the request sent from the client, the response received from the server, and the error describing the network or parsing error that occurred.
  */
 - (void)uploadFileWithURL:(NSString *)url
+      uploadProgressBlock:(void (^)(long long totalBytesWritten, long long totalBytesExpectedToWrite))upload
                   success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file))success
                   failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
 
