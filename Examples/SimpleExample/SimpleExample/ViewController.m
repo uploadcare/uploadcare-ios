@@ -98,12 +98,12 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [self dismissModalViewControllerAnimated:YES];
-    
     DLog(@"File Info = %@", info);
     
     [self uploadFromFile:UIImagePNGRepresentation([info valueForKey:UIImagePickerControllerOriginalImage])
                 withName:[info valueForKey:@"UIImagePickerControllerOriginalImage"]];
+    
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

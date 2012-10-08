@@ -406,12 +406,11 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    DLog(@"File Info = %@", info);    
+    [NSThread detachNewThreadSelector:@selector(uploadFromImagePicker:)
+                             toTarget:self
+                           withObject:info];
     [self dismissModalViewControllerAnimated:YES];
-    
-    DLog(@"File Info = %@", info);
-    
-    [self uploadFromFile:UIImagePNGRepresentation([info valueForKey:UIImagePickerControllerOriginalImage])
-                withName:[info valueForKey:@"UIImagePickerControllerOriginalImage"]];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -419,6 +418,11 @@
 }
 
 #pragma mark - Uploadcare
+
+- (void)uploadFromImagePicker:(NSDictionary *)info {
+    [self uploadFromFile:UIImagePNGRepresentation([info valueForKey:UIImagePickerControllerOriginalImage])
+                withName:[info valueForKey:@"UIImagePickerControllerOriginalImage"]];
+}
 
 - (void)uploadFromFile:(NSData *)data withName:(NSString *)name {
     [self uploadFromFile:data withName:name serviceName:UNKNOWN_PHOTO_SOURCE];
