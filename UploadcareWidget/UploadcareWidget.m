@@ -454,7 +454,7 @@
         NSLog(@"+%@: line %d - ERROR %@", NSStringFromSelector(_cmd), __LINE__, error);
         
         [notify setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyX.png"]] animated:YES];
-        [notify setTitle:(NSLocalizedString(@"Uploading failed!", nil)) animated:YES];
+        [notify setTitle:(NSLocalizedString(@"Failed to upload!", nil)) animated:YES];
         [notify hideIn:4.0];
         
         [progressView setProgress:.0f];
@@ -462,25 +462,31 @@
 }
 
 - (void)uploadFromURL:(NSString *)url {
+    JSNotifier *notify = [[JSNotifier alloc] initWithTitle:@"Uploading..."];
+    notify.accessoryView = progressView;
+    [notify show];
+    
+
     [[UploadcareKit shared] uploadFileWithURL:url
                           uploadProgressBlock:^(long long totalBytesWritten, long long totalBytesExpectedToWrite) {
                               [progressView setProgress:(float)totalBytesWritten / totalBytesExpectedToWrite];
+                              [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"Uploaded %.2f%%", nil), (totalBytesWritten / (totalBytesExpectedToWrite / 100.f))]];
+
                           }
      
                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file) {
                                           NSLog(@"+%@: line %d success", NSStringFromSelector(_cmd), __LINE__);
-                                          JSNotifier *notify = [[JSNotifier alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [file original_filename]]];
+                                          [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [file original_filename]] animated:YES];
                                           notify.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyCheck.png"]];
-                                          [notify showFor:2.0];
+                                          [notify hideIn:4.f];
                                           [progressView setProgress:1.f];
                                       }
                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                           NSLog(@"+%@: line %d - ERROR %@", NSStringFromSelector(_cmd), __LINE__, error);
                                           
-                                          JSNotifier *notify = [[JSNotifier alloc] initWithTitle:(NSLocalizedString(@"Uploading failed!", nil))];
+                                          [notify setTitle:NSLocalizedString(@"Failed to upload!", nil) animated:YES];
                                           notify.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyX.png"]];
-                                          [notify showFor:2.0];
-                                          
+                                          [notify hideIn:4.f];
                                           [progressView setProgress:.0f];
                                       }];
 }
