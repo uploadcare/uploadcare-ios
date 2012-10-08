@@ -89,12 +89,7 @@
             progressBlock:(void (^)(long long uploadedBytes, long long totalBytes))progressBlock
              successBlock:(void (^)(UploadcareFile *file))successBlock
              failureBlock:(void (^)(NSError *error))failureBlock {
-    
-    // TODO: Don't really need the secret key
-    if (![self isPublicAndSecretValid]) {
-        return;
-    }
-    
+        
     AFJSONRequestOperation *operation =
     [AFJSONRequestOperation
      JSONRequestOperationWithRequest:[self buildRequestWithMethod:@"GET"
