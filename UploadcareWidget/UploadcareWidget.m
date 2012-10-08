@@ -470,29 +470,28 @@
     notify.accessoryView = progressView;
     [notify show];
     
-
-    [[UploadcareKit shared] uploadFileWithURL:url
-                          uploadProgressBlock:^(long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-                              [progressView setProgress:(float)totalBytesWritten / totalBytesExpectedToWrite];
-                              [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"Uploaded %.2f%%", nil), (totalBytesWritten / (totalBytesExpectedToWrite / 100.f))]];
-
-                          }
-     
-                                      success:^(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file) {
-                                          NSLog(@"+%@: line %d success", NSStringFromSelector(_cmd), __LINE__);
-                                          [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [file original_filename]] animated:YES];
-                                          notify.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyCheck.png"]];
-                                          [notify hideIn:4.f];
-                                          [progressView setProgress:1.f];
-                                      }
-                                      failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                          NSLog(@"+%@: line %d - ERROR %@", NSStringFromSelector(_cmd), __LINE__, error);
-                                          
-                                          [notify setTitle:NSLocalizedString(@"Failed to upload!", nil) animated:YES];
-                                          notify.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyX.png"]];
-                                          [notify hideIn:4.f];
-                                          [progressView setProgress:.0f];
-                                      }];
+    [[UploadcareKit shared]
+     uploadFileWithURL:url
+     progressBlock:^(long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+         [progressView setProgress:(float)totalBytesWritten / totalBytesExpectedToWrite];
+         [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"Uploaded %.2f%%", nil), (totalBytesWritten / (totalBytesExpectedToWrite / 100.f))]];
+         
+     }
+     successBlock:^(UploadcareFile *file) {
+         NSLog(@"+%@: line %d success", NSStringFromSelector(_cmd), __LINE__);
+         [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [file original_filename]] animated:YES];
+         notify.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyCheck.png"]];
+         [notify hideIn:4.f];
+         [progressView setProgress:.0f];
+     }
+     failureBlock:^(NSError *error) {
+         NSLog(@"+%@: line %d - ERROR %@", NSStringFromSelector(_cmd), __LINE__, error);
+         
+         [notify setTitle:NSLocalizedString(@"Failed to upload!", nil) animated:YES];
+         notify.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyX.png"]];
+         [notify hideIn:4.f];
+         [progressView setProgress:.0f];
+     }];
 }
 
 #pragma mark - Uploaded Tools

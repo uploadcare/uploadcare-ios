@@ -93,13 +93,14 @@
  Sets the properties with a blocks that executes either the specified success or failure progress block, depending on the state of the request on completion. If error returns a value, which can be caused by an unacceptable status code or content type, then failure is executed. Otherwise, success is executed.
  
  @param url The object to be loaded asynchronously during execution of the operation
- @param success A block object to be executed when the operation finishes successfully. This block has no return value and takes three arguments: the request sent from the client, the response received from the server, and the UploadcareFile object created from the response data of request.
- @param failure A block object to be executed when the operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the resonse data as JSON. This block has no return value and takes three arguments: the request sent from the client, the response received from the server, and the error describing the network or parsing error that occurred.
+ @param progressBlock The block to be executed repeatedly during the upload. Takes two arguments: the amount of data already uploaded, and the total amount to be uploaded during the operation.
+ @param success A block object to be executed when the operation finishes successfully. The block takes one argument: resulting UploadcareFile object.
+ @param failure A block object to be executed when the operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the resonse data as JSON. This block has no return value and takes one argument: the error describing the network or parsing error that occurred.
  */
 - (void)uploadFileWithURL:(NSString *)url
-      uploadProgressBlock:(void (^)(long long totalBytesWritten, long long totalBytesExpectedToWrite))upload
-                  success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file))success
-                  failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
+            progressBlock:(void (^)(long long uploadedBytes, long long totalBytes))progressBlock
+             successBlock:(void (^)(UploadcareFile *file))successBlock
+             failureBlock:(void (^)(NSError *error))failureBlock;
 
 /**
  Get file info of early uploaded file. example: 

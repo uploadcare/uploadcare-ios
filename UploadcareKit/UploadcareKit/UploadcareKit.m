@@ -7,6 +7,7 @@
 //
 
 #import "UploadcareKit.h"
+#import "UploadcareStatusWatcher.h"
 
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
@@ -16,16 +17,11 @@
 #import "UIImageView+AFNetworking.h"
 
 #import "JSONKit.h"
-#import "PTPusher.h"
-#import "PTPusherChannel.h"
-#import "PTPusherEvent.h"
 
 @interface UploadcareKit ()
 
 @property(nonatomic, copy) NSString* publicKey;
 @property(nonatomic, copy) NSString* secretKey;
-
-@property (nonatomic, strong) PTPusher *pusherClient;
 
 - (NSURLRequest *)buildRequestWithMethod:(NSString *)method baseURL:(NSString *)base_url URI:(NSString *)url;
 - (NSURLRequest *)buildRequestWithMethod:(NSString *)method baseURL:(NSString *)base_url URI:(NSString *)url andData:(NSString *)data;
@@ -43,11 +39,8 @@
     __strong static id _sharedObject = nil;
     dispatch_once(&pred, ^{
         _sharedObject = [[self alloc] init];
-        //TODO: Move this to init
-        PTPusher *pusherClient = [PTPusher pusherWithKey:@"79ae88bd931ea68464d9" connectAutomatically:YES encrypted:YES];
-        [pusherClient setReconnectAutomatically:YES];
-        [(UploadcareKit*)_sharedObject setPusherClient:pusherClient];
-        
+        //TODO: Move this -> init
+        [UploadcareStatusWatcher preheatPusher];
         [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObjects:@"application/vnd.uploadcare-v0.2+json", nil]];
     });
     return _sharedObject;
@@ -93,9 +86,9 @@
 }
 
 - (void)uploadFileWithURL:(NSString *)url
-      uploadProgressBlock:(void (^)(long long totalBytesWritten, long long totalBytesExpectedToWrite))progress
-                  success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file))success
-                  failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
+            progressBlock:(void (^)(long long uploadedBytes, long long totalBytes))progressBlock
+             successBlock:(void (^)(UploadcareFile *file))successBlock
+             failureBlock:(void (^)(NSError *error))failureBlock {
     
     // TODO: Don't really need the secret key
     if (![self isPublicAndSecretValid]) {
@@ -109,25 +102,12 @@
                                                               URI:[NSString stringWithFormat:@"/from_url/?pub_key=%@&source_url=%@", self.publicKey, url]]
      success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
          DLog(@"+success %@ : %@ : %@", response, [request URL], JSON);
-         
-         // Notifications via pusher
          NSString *token = JSON[@"token"];
-         PTPusherChannel *taskStatusChannel = [self.pusherClient subscribeToChannelNamed:[NSString stringWithFormat:@"task-status-%@", token]];
-         [taskStatusChannel bindToEventNamed:@"progress" handleWithBlock:^(PTPusherEvent *channelEvent) {
-             progress([[channelEvent.data objectForKey:@"done"] longLongValue], [[channelEvent.data objectForKey:@"total"]longLongValue]);
-         }];
-         [taskStatusChannel bindToEventNamed:@"success" handleWithBlock:^(PTPusherEvent *channelEvent) {
-             UploadcareFile *file = [UploadcareFile new];
-             file.info = channelEvent.data;
-             success(request, response, file);
-         }];
-         [taskStatusChannel bindToEventNamed:@"fail" handleWithBlock:^(PTPusherEvent *channelEvent) {
-             failure(request, response, [NSError errorWithDomain:@"UploadCare" code:0x100 userInfo:nil]);
-         }];
+         [UploadcareStatusWatcher watchUploadWithToken:token progressBlock:progressBlock successBlock:successBlock failureBlock:failureBlock];
      }
      failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
          DLog(@"!failure %@ : %@ : %@", response, [request URL], JSON);
-         failure(request, response, error);
+         failureBlock(error);
      }];
     [operation start];
 }
