@@ -7,6 +7,7 @@
 //
 
 #import "UploadcareKit.h"
+#import "UploadcareFile.h"
 #import "UploadcareStatusWatcher.h"
 #import "PTPusher.h"
 #import "PTPusherChannel.h"
@@ -15,7 +16,10 @@
 
 static NSString *const UPLOADCARE_PUSHER_KEY = @"79ae88bd931ea68464d9";
 
-/* TODO: move out */
+static const NSTimeInterval UCSWPusherTimeout = 2.;     // if the Pusher is still not working after this amount of time, poll will start
+static const NSTimeInterval UCSWPollRate = 1. / 4;
+
+/* TODO: move somewhere else */
 NSString *const UPLOADCARE_ERROR_DOMAIN = @"UploadCare";
 const int UPLOADCARE_ERROR_UPLOAD_FROM_URL_FAILED = 0x1001;
 
@@ -44,14 +48,13 @@ const int UPLOADCARE_ERROR_UPLOAD_FROM_URL_FAILED = 0x1001;
         _failureBlock = failureBlock;
         
         /* pusher */
-        _pusher = [PTPusher pusherWithKey:UPLOADCARE_PUSHER_KEY delegate:self encrypted:YES];
+        _pusher = [self.class sharedPusher];
         _pusher.reconnectAutomatically = YES;
         _pusher.reconnectDelay = .5; // default = 5
         PTPusherChannel *channel = [_pusher subscribeToChannelNamed:[NSString stringWithFormat:@"task-status-%@", _token]];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceivePusherEvent:) name:PTPusherEventReceivedNotification object:channel];
         
-        /* time-out */
-        _pusherTimeout = 1.0;
+        _pusherTimeout = UCSWPusherTimeout;
         
         /* poller */
         [self scheduleFallBackPoll];
@@ -64,12 +67,10 @@ const int UPLOADCARE_ERROR_UPLOAD_FROM_URL_FAILED = 0x1001;
 - (void)didReceivePusherEvent:(NSNotification *)notification {
     /* cancel the scheduled fall-back poll */
     [NSObject cancelPreviousPerformRequestsWithTarget:self]; /* warning: this removes stuff from the current run loop only */
-    
     PTPusherEvent *pusherEvent = notification.userInfo[PTPusherEventUserInfoKey];
+
+    [self setPusherTimeout:UCSWPusherTimeout];
     [self processUploadStatus:pusherEvent.name withDetails:pusherEvent.data];
-    
-    /* re-schedule the fall-back poll */
-    [self scheduleFallBackPoll];
 }
 
 
@@ -80,12 +81,12 @@ const int UPLOADCARE_ERROR_UPLOAD_FROM_URL_FAILED = 0x1001;
 }
 
 - (void)poll {
-    NSURLRequest *statusRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: API_UPLOAD @"/status/"]];
+    NSURLRequest *statusRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@/status/?token=%@", API_UPLOAD, self.token]]];
     AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:statusRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         /* get /status/ success */
         NSString *status = JSON[@"status"];
+        [self setPusherTimeout:UCSWPollRate];
         [self processUploadStatus:status withDetails:JSON];
-        [self scheduleFallBackPoll]; // re-schedule self
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         /* get /status/ failed */
         [self didReceiveUploadError:error];
@@ -102,27 +103,25 @@ const int UPLOADCARE_ERROR_UPLOAD_FROM_URL_FAILED = 0x1001;
         long long bytesDone = [data[@"done"] longLongValue];
         long long bytesTotal = [data[@"total"] longLongValue];
         [self didReceiveProgressInBytes:bytesDone ofTotal:bytesTotal];
+        /* re-schedule the fall-back poll */
+        [self scheduleFallBackPoll];
     } else if ([statusName isEqualToString:@"success"]) {
         /* success */
         [self didReceiveUploadSuccessWithDetails:data];
     } else if ([statusName isEqualToString:@"error"] || [statusName isEqualToString:@"fail"]) {
         /* error */
         [self didReceiveUploadError:[NSError errorWithDomain:UPLOADCARE_ERROR_DOMAIN code:UPLOADCARE_ERROR_UPLOAD_FROM_URL_FAILED userInfo:data]];
-    } else {
-        NSLog(@"Unknown upload status: %@", statusName);
     }
 }
 
 - (void)didReceiveProgressInBytes:(long long)uploadedBytes ofTotal:(long long)totalBytes {
-    if (uploadedBytes == totalBytes == 0)
-        return;
     self.progressBlock(uploadedBytes, totalBytes);
 }
 
 - (void)didReceiveUploadSuccessWithDetails:(id)data {
     UploadcareFile *file = [UploadcareFile new];
     file.info = data;
-    self.successBlock(data);
+    self.successBlock(file);
     [self removeFromTheWatch];
 }
 
@@ -134,6 +133,7 @@ const int UPLOADCARE_ERROR_UPLOAD_FROM_URL_FAILED = 0x1001;
 #pragma mark - Lifecycle and ownership
 
 - (void)removeFromTheWatch {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self.pusher disconnect];
     [[self.class watchers] removeObjectForKey:self.token];
@@ -152,6 +152,20 @@ const int UPLOADCARE_ERROR_UPLOAD_FROM_URL_FAILED = 0x1001;
     UploadcareStatusWatcher *watcher = [[UploadcareStatusWatcher alloc]initWithToken:token progressBlock:progressBlock successBlock:successBlock failureBlock:failureBlock];
     [[self watchers] setObject:watcher forKey:token];
     return watcher;
+}
+
++ (PTPusher *)sharedPusher {
+    static PTPusher *_pusher = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _pusher = [PTPusher pusherWithKey:UPLOADCARE_PUSHER_KEY connectAutomatically:YES encrypted:YES];
+        // TODO: delegate
+    });
+    return _pusher;
+}
+
++ (void)preheatPusher {
+    [self sharedPusher];
 }
 
 @end

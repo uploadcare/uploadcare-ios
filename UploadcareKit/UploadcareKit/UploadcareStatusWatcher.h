@@ -19,4 +19,6 @@ typedef void (^UCSWUploadFailureBlock)(NSError *error);
 
 + (id)watchUploadWithToken:(NSString *)token progressBlock:(UCSWUploadProgressBlock)progressBlock successBlock:(UCSWUploadSuccessBlock)successBlock failureBlock:(UCSWUploadFailureBlock)failureBlock;
 
++ (void)preheatPusher;
+
 @end
