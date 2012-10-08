@@ -63,6 +63,7 @@
 		6F2C1268161F785B00F9D54C /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2C1267161F785A00F9D54C /* libicucore.dylib */; };
 		6F2C126A161F786400F9D54C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2C1269161F786400F9D54C /* CFNetwork.framework */; };
 		6F2C126C161F786C00F9D54C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2C126B161F786C00F9D54C /* Security.framework */; };
+		6FAB7F8C16232D5E0089BB10 /* UploadcareStatusWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB7F8B16232D5E0089BB10 /* UploadcareStatusWatcher.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +177,8 @@
 		6F2C1267161F785A00F9D54C /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		6F2C1269161F786400F9D54C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		6F2C126B161F786C00F9D54C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		6FAB7F8A16232D5E0089BB10 /* UploadcareStatusWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadcareStatusWatcher.h; sourceTree = "<group>"; };
+		6FAB7F8B16232D5E0089BB10 /* UploadcareStatusWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadcareStatusWatcher.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +247,8 @@
 				54D4F85015C96EE20021A868 /* UploadcareFile.m */,
 				54D4F80115C96E8E0021A868 /* UploadcareKit.h */,
 				54D4F80315C96E8E0021A868 /* UploadcareKit.m */,
+				6FAB7F8A16232D5E0089BB10 /* UploadcareStatusWatcher.h */,
+				6FAB7F8B16232D5E0089BB10 /* UploadcareStatusWatcher.m */,
 				54D4F7FF15C96E8E0021A868 /* Supporting Files */,
 			);
 			path = UploadcareKit;
@@ -519,6 +524,7 @@
 				6F2C1264161F775800F9D54C /* base64.c in Sources */,
 				6F2C1265161F775800F9D54C /* NSData+SRB64Additions.m in Sources */,
 				6F2C1266161F775800F9D54C /* SRWebSocket.m in Sources */,
+				6FAB7F8C16232D5E0089BB10 /* UploadcareStatusWatcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
