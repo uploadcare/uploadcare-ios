@@ -85,6 +85,9 @@ const int UPLOADCARE_ERROR_UPLOAD_FROM_URL_FAILED = 0x1001;
     AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:statusRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         /* get /status/ success */
         NSString *status = JSON[@"status"];
+        if (!status && JSON[@"error"]) { /* handle {'error': 'All wrong'} cases */
+            status = @"error";
+        }
         [self setPusherTimeout:UCSWPollRate];
         [self processUploadStatus:status withDetails:JSON];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
@@ -111,6 +114,9 @@ const int UPLOADCARE_ERROR_UPLOAD_FROM_URL_FAILED = 0x1001;
     } else if ([statusName isEqualToString:@"error"] || [statusName isEqualToString:@"fail"]) {
         /* error */
         [self didReceiveUploadError:[NSError errorWithDomain:UPLOADCARE_ERROR_DOMAIN code:UPLOADCARE_ERROR_UPLOAD_FROM_URL_FAILED userInfo:data]];
+    } else {
+        /* unknown status */
+        [self scheduleFallBackPoll];
     }
 }
 
