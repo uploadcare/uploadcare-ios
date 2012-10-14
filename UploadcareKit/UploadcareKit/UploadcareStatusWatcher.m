@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Uploadcare. All rights reserved.
 //
 
+#import "UploadcareError.h"
 #import "UploadcareKit.h"
 #import "UploadcareFile.h"
 #import "UploadcareStatusWatcher.h"
@@ -18,10 +19,6 @@ static NSString *const UPLOADCARE_PUSHER_KEY = @"79ae88bd931ea68464d9";
 
 static const NSTimeInterval UCSWPusherTimeout = 2.;     // if the Pusher is still not working after this amount of time, poll will start
 static const NSTimeInterval UCSWPollRate = 1. / 4;
-
-/* TODO: move somewhere else */
-NSString *const UPLOADCARE_ERROR_DOMAIN = @"UploadCare";
-const int UPLOADCARE_ERROR_UPLOAD_FROM_URL_FAILED = 0x1001;
 
 @interface UploadcareStatusWatcher ()
 
@@ -113,7 +110,7 @@ const int UPLOADCARE_ERROR_UPLOAD_FROM_URL_FAILED = 0x1001;
         [self didReceiveUploadSuccessWithDetails:data];
     } else if ([statusName isEqualToString:@"error"] || [statusName isEqualToString:@"fail"]) {
         /* error */
-        [self didReceiveUploadError:[NSError errorWithDomain:UPLOADCARE_ERROR_DOMAIN code:UPLOADCARE_ERROR_UPLOAD_FROM_URL_FAILED userInfo:data]];
+        [self didReceiveUploadError:[NSError errorWithDomain:UploadcareErrorDomain code:UploadcareErrorUploadingFromURL userInfo:data]];
     } else {
         /* unknown status */
         [self scheduleFallBackPoll];

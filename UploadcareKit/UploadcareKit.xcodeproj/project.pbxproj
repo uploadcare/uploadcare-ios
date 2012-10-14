@@ -42,6 +42,7 @@
 		54D4F8FF15C9A9C00021A868 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 54D4F8FC15C9A9C00021A868 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		54D4F90015C9A9C00021A868 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 54D4F8FC15C9A9C00021A868 /* JSONKit.m */; };
 		54D4F90115C9A9C00021A868 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 54D4F8FD15C9A9C00021A868 /* README.md */; };
+		6F2BFCA3162B127B0024330C /* UploadcareError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2BFCA2162B127B0024330C /* UploadcareError.m */; };
 		6F2C124D161F750200F9D54C /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2C1229161F750200F9D54C /* NSDictionary+QueryString.m */; };
 		6F2C124E161F750200F9D54C /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2C122B161F750200F9D54C /* NSString+Hashing.m */; };
 		6F2C124F161F750200F9D54C /* PTBlockEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2C122D161F750200F9D54C /* PTBlockEventListener.m */; };
@@ -129,6 +130,8 @@
 		54D4F8FB15C9A9C00021A868 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		54D4F8FC15C9A9C00021A868 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		54D4F8FD15C9A9C00021A868 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6F2BFCA1162B127B0024330C /* UploadcareError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadcareError.h; sourceTree = "<group>"; };
+		6F2BFCA2162B127B0024330C /* UploadcareError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadcareError.m; sourceTree = "<group>"; };
 		6F2C1227161F750200F9D54C /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Vendors/libPusher/JSONKit.h; sourceTree = "<group>"; };
 		6F2C1228161F750200F9D54C /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+QueryString.h"; path = "Vendors/libPusher/NSDictionary+QueryString.h"; sourceTree = "<group>"; };
 		6F2C1229161F750200F9D54C /* NSDictionary+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+QueryString.m"; path = "Vendors/libPusher/NSDictionary+QueryString.m"; sourceTree = "<group>"; };
@@ -250,6 +253,8 @@
 				6FAB7F8A16232D5E0089BB10 /* UploadcareStatusWatcher.h */,
 				6FAB7F8B16232D5E0089BB10 /* UploadcareStatusWatcher.m */,
 				54D4F7FF15C96E8E0021A868 /* Supporting Files */,
+				6F2BFCA1162B127B0024330C /* UploadcareError.h */,
+				6F2BFCA2162B127B0024330C /* UploadcareError.m */,
 			);
 			path = UploadcareKit;
 			sourceTree = "<group>";
@@ -525,6 +530,7 @@
 				6F2C1265161F775800F9D54C /* NSData+SRB64Additions.m in Sources */,
 				6F2C1266161F775800F9D54C /* SRWebSocket.m in Sources */,
 				6FAB7F8C16232D5E0089BB10 /* UploadcareStatusWatcher.m in Sources */,
+				6F2BFCA3162B127B0024330C /* UploadcareError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
