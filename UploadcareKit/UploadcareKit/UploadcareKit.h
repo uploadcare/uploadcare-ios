@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 #import "UploadCareFile.h"
+#import "UploadcareError.h"
 
 #ifdef DEBUG
 #   define DLog(fmt, ...) NSLog((@"%s:%d " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);

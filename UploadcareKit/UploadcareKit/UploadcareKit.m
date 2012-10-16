@@ -366,7 +366,17 @@
     return YES;
 }
 
+- (NSString *)publicKey {
+    if (!_publicKey) {
+        /* TODO: Provide some details re. where to get one */
+        [NSException raise:UploadcareMissingPublicKeyException format:@"You must provide a valid Uploadcare public key"];
+    }
+    
+    return _publicKey;
+}
+
 #pragma mark - Services helpers
+/* TODO: This doesn't belong here  */
 
 + (void)downloadImageAtURL:(NSURL *)url withPlaceholder:(UIImage *)placeholder forImageView:(UIImageView *) imageView {
     [imageView setImageWithURL:url placeholderImage:placeholder];

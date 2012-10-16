@@ -8,4 +8,6 @@
 
 #import "UploadcareError.h"
 
+NSString *const UploadcareMissingPublicKeyException = @"UploadcareMissingPublicKeyException";
+
 NSString *const UploadcareErrorDomain = @"com.uploadcare.sdk.ErrorDomain";
