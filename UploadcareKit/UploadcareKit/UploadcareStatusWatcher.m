@@ -54,7 +54,7 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
         _pusherTimeout = UCSWPusherTimeout;
         
         /* poller */
-        [self scheduleFallBackPoll];
+        [self schedulePollIfPusherFails];
     }
     return self;
 }
@@ -73,7 +73,7 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
 
 #pragma mark - Poll
 
-- (void)scheduleFallBackPoll {
+- (void)schedulePollIfPusherFails {
     [self performSelector:@selector(poll) withObject:nil afterDelay:_pusherTimeout]; /* TODO: sort out run loops */
 }
 
@@ -104,7 +104,7 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
         long long bytesTotal = [data[@"total"] longLongValue];
         [self didReceiveProgressInBytes:bytesDone ofTotal:bytesTotal];
         /* re-schedule the fall-back poll */
-        [self scheduleFallBackPoll];
+        [self schedulePollIfPusherFails];
     } else if ([statusName isEqualToString:@"success"]) {
         /* success */
         [self didReceiveUploadSuccessWithDetails:data];
@@ -115,7 +115,7 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
                            NSLocalizedFailureReasonErrorKey: NSLocalizedString(data[@"error"], nil)}]];
     } else {
         /* unknown status */
-        [self scheduleFallBackPoll];
+        [self schedulePollIfPusherFails];
     }
 }
 
