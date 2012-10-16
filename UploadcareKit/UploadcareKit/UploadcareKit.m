@@ -31,8 +31,6 @@
 
 @implementation UploadcareKit
 
-@synthesize publicKey = _publicKey, secretKey = _secretKey;
-
 + (id)shared
 {
     static dispatch_once_t pred = 0;
@@ -58,10 +56,6 @@
        uploadProgressBlock:(void (^)(NSInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))upload
                    success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file))success
                    failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
-    
-    if (![self isPublicAndSecretValid]) {
-        return;
-    }
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]
                                          initWithRequest:[self buildRequestForUploadWithFilename:filename andData:data]];
