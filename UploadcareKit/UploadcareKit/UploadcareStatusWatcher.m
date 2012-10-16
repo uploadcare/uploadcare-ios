@@ -110,7 +110,9 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
         [self didReceiveUploadSuccessWithDetails:data];
     } else if ([statusName isEqualToString:@"error"] || [statusName isEqualToString:@"fail"]) {
         /* error */
-        [self didReceiveUploadError:[NSError errorWithDomain:UploadcareErrorDomain code:UploadcareErrorUploadingFromURL userInfo:data]];
+        [self didReceiveUploadError:[NSError errorWithDomain:UploadcareErrorDomain code:UploadcareErrorUploadingFromURL userInfo:@{
+                                  NSLocalizedDescriptionKey: NSLocalizedString(@"Uploadcare failed to upload file from the Internet", nil),
+                           NSLocalizedFailureReasonErrorKey: NSLocalizedString(data[@"error"], nil)}]];
     } else {
         /* unknown status */
         [self scheduleFallBackPoll];
