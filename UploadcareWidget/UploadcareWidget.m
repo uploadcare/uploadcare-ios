@@ -49,6 +49,16 @@
 
 #define UPLOAD_FROM_URL_DIALOG_TAG 99
 
+#define UPLOADCARE_NEW_IMAGE_NOTIFICATION @"Uploadcare should upload new image"
+
+#ifdef DEBUG
+#   define DLog(fmt, ...) NSLog((@"%s:%d " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define DLog(...)
+#endif
+
+
+
 @interface UploadcareWidget () {
     NSMutableDictionary *dataSource;
     IBOutlet UITableView *tableview;

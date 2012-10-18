@@ -14,6 +14,9 @@
 #import "GRKPhoto.h"
 #import "GRKImage.h"
 
+#define UPLOADCARE_NEW_IMAGE_NOTIFICATION @"Uploadcare should upload new image"
+
+
 @interface UCPhotosListCell()
 - (void)updateThumbnails;
 @end

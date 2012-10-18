@@ -10,24 +10,8 @@
 #import <UIKit/UIKit.h>
 
 #import "UploadcareFile.h"
-#import "UploadcareError.h"
+#import "UploadcareError.h" 
 
-#ifdef DEBUG
-#   define DLog(fmt, ...) NSLog((@"%s:%d " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
-#else
-#   define DLog(...)
-#endif
-
-#define ALog(fmt, ...) NSLog((@"%s:%d " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
-
-#define API_BASE @"https://api.staging0.uploadcare.com"
-#define API_UPLOAD @"https://upload.staging0.uploadcare.com"
-#define API_RESIZER @"https://services.staging0.uploadcare.com/resizer/"
-#define REQUEST_TIMEOUT 20.0
-
-#define DATE_RFC2822_FORMAT @"EEE, dd MMM yyyy HH:mm:ss Z"
-
-#define UPLOADCARE_NEW_IMAGE_NOTIFICATION @"Uploadcare should upload new image"
 
 /**
  @typedef Block type used to define blocks called repeatedly during an operation to indicate the operation progress
@@ -53,10 +37,7 @@ typedef void(^UploadcareFailureBlock)(NSError *error);
 /**
  TODO: Write something meaningful here 
  */
-@interface UploadcareKit : NSObject {
-    NSString *_publicKey;
-    NSString *_secretKey;
-}
+@interface UploadcareKit : NSObject 
 
 /* Thread-safe singleton accessor to UploadcareKit */
 + (id)shared;
@@ -71,23 +52,6 @@ typedef void(^UploadcareFailureBlock)(NSError *error);
  */
 + (void)downloadImageAtURL:(NSURL *)url withPlaceholder:(UIImage *)placeholder forImageView:(UIImageView *) imageView;
 
-/**
- The MD5 Message-Digest Algorithm cryptographic hash function that produces a 128-bit (16-byte) hash value. Specified in RFC 1321. Used for client-server auth procedure.
- 
- @param input NSString instance for which you want to get md5
- @return MD5 as NSString instance
- */
-+ (NSString *)md5ForString:(NSString *)input;
-
-/**
- SHA-1 is a cryptographic hash function stands for "secure hash algorithm". Used for client-server auth procedure.
- 
- @param input NSString instance for which you want to get SHA1 hash
- @param key Your secret key for hash generation
- @return SHA1 as NSString instance
- */
-+ (NSString *)hashedValueForString:(NSString *)input WithKey:(NSString *) key;
-+ (NSString *)validateUUID:(NSString *)uuid;
 
 #pragma mark - This belongs here:
 

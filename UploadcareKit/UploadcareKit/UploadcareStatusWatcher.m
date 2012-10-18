@@ -15,9 +15,13 @@
 #import "PTPusherEvent.h"
 #import "AFJSONRequestOperation.h"
 
-static NSString *const UPLOADCARE_PUSHER_KEY = @"79ae88bd931ea68464d9";
 
-static const NSTimeInterval UCSWPusherTimeout = 2.;     // if the Pusher is still not working after this amount of time, poll will start
+/* Move this out */
+extern NSString *const UploadcareURLUpload;
+static NSString *const UploadcarePusherKey = @"79ae88bd931ea68464d9";
+/* ^^ */
+
+static const NSTimeInterval UCSWPusherTimeout = 2.;     // if the Pusher is still not working after this amount of time (in seconds), poll will start
 static const NSTimeInterval UCSWPollRate = 1. / 4;
 
 @interface UploadcareStatusWatcher ()
@@ -78,7 +82,7 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
 }
 
 - (void)poll {
-    NSURLRequest *statusRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@/status/?token=%@", API_UPLOAD, self.token]]];
+    NSURLRequest *statusRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@/status/?token=%@", UploadcareURLUpload, self.token]]];
     AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:statusRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         /* get /status/ success */
         NSString *status = JSON[@"status"];
@@ -163,7 +167,7 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
     static PTPusher *_pusher = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _pusher = [PTPusher pusherWithKey:UPLOADCARE_PUSHER_KEY connectAutomatically:YES encrypted:YES];
+        _pusher = [PTPusher pusherWithKey:UploadcarePusherKey connectAutomatically:YES encrypted:YES];
         // TODO: delegate
     });
     return _pusher;

@@ -18,15 +18,39 @@
 
 #import "JSONKit.h"
 
+/* GHETTO */
+
+#ifdef DEBUG
+#   define DLog(fmt, ...) NSLog((@"%s:%d " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define DLog(...)
+#endif
+
+#define ALog(fmt, ...) NSLog((@"%s:%d " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
+#define API_BASE @"https://api.staging0.uploadcare.com"
+#define API_UPLOAD @"https://upload.staging0.uploadcare.com"
+#define API_RESIZER @"https://services.staging0.uploadcare.com/resizer/"
+#define REQUEST_TIMEOUT 20.0
+
+#define DATE_RFC2822_FORMAT @"EEE, dd MMM yyyy HH:mm:ss Z"
+
+/* -GHETTO */
+
+NSString * const UploadcareURLUpload = API_UPLOAD;
+
 @interface UploadcareKit ()
 
-@property(nonatomic, copy) NSString* publicKey;
-@property(nonatomic, copy) NSString* secretKey;
+@property (nonatomic) NSString* publicKey;
+@property (nonatomic) NSString* secretKey;
 
 - (NSURLRequest *)buildRequestWithMethod:(NSString *)method baseURL:(NSString *)base_url URI:(NSString *)url;
 - (NSURLRequest *)buildRequestWithMethod:(NSString *)method baseURL:(NSString *)base_url URI:(NSString *)url andData:(NSString *)data;
 - (NSURLRequest *)buildRequestForUploadWithFilename:(NSString *)filename andData:(NSData *)data;
 
++ (NSString *)md5ForString:(NSString *)input;
++ (NSString *)hashedValueForString:(NSString *)input WithKey:(NSString *) key;
++ (NSString *)validateUUID:(NSString *)uuid;
 @end
 
 @implementation UploadcareKit
