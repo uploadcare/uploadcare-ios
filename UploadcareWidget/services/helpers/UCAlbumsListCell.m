@@ -9,6 +9,7 @@
 #import "UCAlbumsListCell.h"
 
 #import "UploadcareKit.h"
+#import "UploadcareKit+Deprecated.h"
 
 @implementation UCAlbumsListCell
 

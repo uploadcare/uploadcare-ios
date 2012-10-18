@@ -9,6 +9,7 @@
 #import "UCPhotosListCell.h"
 
 #import "UploadcareKit.h"
+#import "UploadcareKit+Deprecated.h"
 #import "UCPhotoViewController.h"
 
 #import "GRKPhoto.h"

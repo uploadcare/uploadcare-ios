@@ -126,9 +126,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // init UploadcareKit with public and secret
-    [[UploadcareKit shared] setPublicKey:@"cfd09d941305970e0f7d"
-                               secretKey:@"8fcfea19f6044dfdc476"];
+    [[UploadcareKit shared] setPublicKey:@"cfd09d941305970e0f7d"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(uploadFromImage:)

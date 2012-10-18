@@ -9,6 +9,7 @@
 #import "DisclosureViewController.h"
 
 #import "UploadcareKit.h"
+#import "UploadcareKit+Deprecated.h"
 
 @interface DisclosureViewController () {
     IBOutlet UITextView *fileDescriptionView;

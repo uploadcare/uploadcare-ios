@@ -65,6 +65,7 @@
 		6F2C126A161F786400F9D54C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2C1269161F786400F9D54C /* CFNetwork.framework */; };
 		6F2C126C161F786C00F9D54C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2C126B161F786C00F9D54C /* Security.framework */; };
 		6FAB7F8C16232D5E0089BB10 /* UploadcareStatusWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB7F8B16232D5E0089BB10 /* UploadcareStatusWatcher.m */; };
+		6FB42E811630399A004AF91E /* UploadcareKit+Deprecated.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB42E801630399A004AF91E /* UploadcareKit+Deprecated.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +183,8 @@
 		6F2C126B161F786C00F9D54C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6FAB7F8A16232D5E0089BB10 /* UploadcareStatusWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadcareStatusWatcher.h; sourceTree = "<group>"; };
 		6FAB7F8B16232D5E0089BB10 /* UploadcareStatusWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadcareStatusWatcher.m; sourceTree = "<group>"; };
+		6FB42E7F1630399A004AF91E /* UploadcareKit+Deprecated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadcareKit+Deprecated.h"; sourceTree = "<group>"; };
+		6FB42E801630399A004AF91E /* UploadcareKit+Deprecated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadcareKit+Deprecated.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,15 +249,17 @@
 		54D4F7FE15C96E8E0021A868 /* UploadcareKit */ = {
 			isa = PBXGroup;
 			children = (
+				54D4F7FF15C96E8E0021A868 /* Supporting Files */,
+				6F2BFCA1162B127B0024330C /* UploadcareError.h */,
+				6F2BFCA2162B127B0024330C /* UploadcareError.m */,
 				54D4F84F15C96EE20021A868 /* UploadcareFile.h */,
 				54D4F85015C96EE20021A868 /* UploadcareFile.m */,
+				6FB42E7F1630399A004AF91E /* UploadcareKit+Deprecated.h */,
+				6FB42E801630399A004AF91E /* UploadcareKit+Deprecated.m */,
 				54D4F80115C96E8E0021A868 /* UploadcareKit.h */,
 				54D4F80315C96E8E0021A868 /* UploadcareKit.m */,
 				6FAB7F8A16232D5E0089BB10 /* UploadcareStatusWatcher.h */,
 				6FAB7F8B16232D5E0089BB10 /* UploadcareStatusWatcher.m */,
-				54D4F7FF15C96E8E0021A868 /* Supporting Files */,
-				6F2BFCA1162B127B0024330C /* UploadcareError.h */,
-				6F2BFCA2162B127B0024330C /* UploadcareError.m */,
 			);
 			path = UploadcareKit;
 			sourceTree = "<group>";
@@ -531,6 +536,7 @@
 				6F2C1266161F775800F9D54C /* SRWebSocket.m in Sources */,
 				6FAB7F8C16232D5E0089BB10 /* UploadcareStatusWatcher.m in Sources */,
 				6F2BFCA3162B127B0024330C /* UploadcareError.m in Sources */,
+				6FB42E811630399A004AF91E /* UploadcareKit+Deprecated.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

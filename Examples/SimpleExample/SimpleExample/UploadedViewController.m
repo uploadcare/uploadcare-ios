@@ -9,6 +9,7 @@
 #import "UploadedViewController.h"
 
 #import "UploadcareKit.h"
+#import "UploadcareKit+Deprecated.h"
 #import "DisclosureViewController.h"
 
 @interface UploadedViewController () {
