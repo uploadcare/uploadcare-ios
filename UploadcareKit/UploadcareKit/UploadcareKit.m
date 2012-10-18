@@ -44,7 +44,7 @@
     return _sharedObject;
 }
 
-- (void)setPublicKey:(NSString *)public andSecret:(NSString *)secret {
+- (void)setPublicKey:(NSString *)public secretKey:(NSString *)secret {
     self.publicKey = public;
     self.secretKey = secret;
 }

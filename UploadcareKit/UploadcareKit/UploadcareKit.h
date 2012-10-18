@@ -69,7 +69,7 @@
 + (NSString *)hashedValueForString:(NSString *)input WithKey:(NSString *) key;
 + (NSString *)validateUUID:(NSString *)uuid;
 
-- (void)setPublicKey:(NSString *)public andSecret:(NSString *)secret;
+- (void)setPublicKey:(NSString *)public secretKey:(NSString *)secret;
 
 /**
  Upload your data from specified NSData [images, video, etc.].
