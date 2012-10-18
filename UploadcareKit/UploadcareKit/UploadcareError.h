@@ -21,4 +21,6 @@ extern NSString *const UploadcareErrorDomain;
 typedef enum {
     /* Uploadcare back-end failed to process an `upload from URL` request */
     UploadcareErrorUploadingFromURL = 0x1001,
+    /* Client application failed to connect to the server */
+    UploadcareErrorConnectingHome,
 } UploadcareErrorCode;

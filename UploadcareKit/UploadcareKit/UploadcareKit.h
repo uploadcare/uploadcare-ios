@@ -49,16 +49,18 @@ typedef void(^UploadcareFailureBlock)(NSError *error);
 @property (nonatomic) NSString* secretKey __attribute__((deprecated("This is not going last long, beware")));
 
 /**
- Uploads a file of any kind (e.g. an image, a movie clip, a spreadsheet document, etc.) which content is provided by an NSData object.
+ Uploads an arbitrary file (e.g. an image, a movie clip, a spreadsheet document, etc.) with the content provided by the NSData argument.
  
  @param filename        The name to give the file when the file is uploaded.
  @param data            The data to upload.
+ @param mimeType        The media type of the file, see http://www.iana.org/assignments/media-types/index.html
  @param progressBlock   The block to call repeatedly during the upload. Receives two arguments: **long long** `bytesDone` and **long long** `bytesTotal`.
  @param successBlock    The handler block to call when the upload is completed succesfully. Receives a single argument UploadcareFile `*uploadedFile`.
  @param failureBlock    The handler block to call when the upload fails due to an error. Receives a single argument NSError `*error`
 */
 - (void)uploadFileWithName:(NSString *)filename
                       data:(NSData *)data
+                  mimeType:(NSString *)mimeType
              progressBlock:(UploadcareProgressBlock)progressBlock
               successBlock:(UploadcareSuccessBlock)successBlock
               failureBlock:(UploadcareFailureBlock)failureBlock;

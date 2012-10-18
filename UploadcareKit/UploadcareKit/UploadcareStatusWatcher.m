@@ -17,7 +17,7 @@
 
 
 /* Move this out */
-extern NSString *const UploadcareURLUpload;
+extern NSString *const UploadcareBaseUploadURL;
 static NSString *const UploadcarePusherKey = @"79ae88bd931ea68464d9";
 /* ^^ */
 
@@ -56,7 +56,7 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceivePusherEvent:) name:PTPusherEventReceivedNotification object:channel];
         
         _pusherTimeout = UCSWPusherTimeout;
-        
+    
         /* poller */
         [self schedulePollIfPusherFails];
     }
@@ -82,7 +82,7 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
 }
 
 - (void)poll {
-    NSURLRequest *statusRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@/status/?token=%@", UploadcareURLUpload, self.token]]];
+    NSURLRequest *statusRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@/status/?token=%@", UploadcareBaseUploadURL, self.token]]];
     AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:statusRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         /* get /status/ success */
         NSString *status = JSON[@"status"];
