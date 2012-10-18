@@ -8,12 +8,13 @@
 
 /* Exceptions thrown by the Uploadcare Kit */
 
-/* Uploadcare Kit throws this exception when requested to operate with no public key provided
+/** Uploadcare Kit throws this exception when requested to operate with no public key provided
+ *
  * TODO: Write an explanation regarding where the developers should get one
  */
 extern NSString *const UploadcareMissingPublicKeyException;
 
-/* The error domain of errors used by the Uploadcare Kit */
+/** The error domain of errors used by the Uploadcare Kit */
 extern NSString *const UploadcareErrorDomain;
 
 /* Error codes used by the SDK */

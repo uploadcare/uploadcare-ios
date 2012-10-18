@@ -52,38 +52,37 @@
 #pragma mark - Kit Actions
 
 - (void)uploadFileWithName:(NSString *)filename
-                   andData:(NSData *)data
-       uploadProgressBlock:(void (^)(NSInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))upload
-                   success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file))success
-                   failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
-    
+                      data:(NSData *)data
+             progressBlock:(UploadcareProgressBlock)progressBlock
+              successBlock:(UploadcareSuccessBlock)successBlock
+              failureBlock:(UploadcareFailureBlock)failureBlock {
+
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]
                                          initWithRequest:[self buildRequestForUploadWithFilename:filename andData:data]];
     [operation setUploadProgressBlock:^(NSInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-        upload(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
+        progressBlock(totalBytesWritten, totalBytesExpectedToWrite);
     }];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         JSONDecoder* decoder = [[JSONDecoder alloc] initWithParseOptions:JKParseOptionNone];
         NSDictionary *uuid = [decoder objectWithData:responseObject];
         [self requestFile:[uuid valueForKey:@"myfile"] withSuccess:^(NSHTTPURLResponse *response, id JSON, UploadcareFile *file) {
             DLog(@"+success %@ : %@", [operation response], JSON);
-            success([operation request], [operation response], file);
+            successBlock(file);
         } andFailure:^(id responseObject, NSError *error) {
             DLog(@"!failed %@ : %@", responseObject, error);
-            failure([operation request], [operation response], error);
+            failureBlock(error);
         }];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"!failure %@ : %@", [operation response], error);
-        failure([operation request], [operation response], error);
+        failureBlock(error);
     }];
     [operation start];
 }
 
-- (void)uploadFileWithURL:(NSString *)url
-            progressBlock:(void (^)(long long uploadedBytes, long long totalBytes))progressBlock
-             successBlock:(void (^)(UploadcareFile *file))successBlock
-             failureBlock:(void (^)(NSError *error))failureBlock {
-        
+- (void)uploadFileFromURL:(NSString *)url
+            progressBlock:(UploadcareProgressBlock)progressBlock
+             successBlock:(UploadcareSuccessBlock)successBlock
+             failureBlock:(UploadcareFailureBlock)failureBlock {
     AFJSONRequestOperation *operation =
     [AFJSONRequestOperation
      JSONRequestOperationWithRequest:[self buildRequestWithMethod:@"GET"
@@ -363,7 +362,7 @@
 - (NSString *)publicKey {
     if (!_publicKey) {
         /* TODO: Provide some details re. where to get one */
-        [NSException raise:UploadcareMissingPublicKeyException format:@"You must provide a valid Uploadcare public key"];
+        [NSException raise:UploadcareMissingPublicKeyException format:@"You must provide the public key"];
     }
     
     return _publicKey;

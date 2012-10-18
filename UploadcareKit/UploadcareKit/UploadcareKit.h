@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import "UploadCareFile.h"
+#import "UploadcareFile.h"
 #import "UploadcareError.h"
 
 #ifdef DEBUG
@@ -29,19 +29,39 @@
 
 #define UPLOADCARE_NEW_IMAGE_NOTIFICATION @"Uploadcare should upload new image"
 
-@interface UploadcareKit : NSObject {
 /**
- Set your public key and secret for requests and validation
+ @typedef Block type used to define blocks called repeatedly during an operation to indicate the operation progress
  
- @param public Your public key
- @param secret Your secret key
+ @param bytesDone   Number of bytes already processed
+ @param bytesTotal  Number of total bytes expexted to process during the operation
  */
+typedef void(^UploadcareProgressBlock)(long long bytesDone, long long bytesTotal);
+/**
+ @typedef Blocks of this type are called once per succesfully completed operation
+ 
+ @param uploadedFile    Object that describes the uploaded file
+ */
+typedef void(^UploadcareSuccessBlock)(UploadcareFile *uploadedFile);
+/**
+ @typedef Blocks of this type are called when an operation fails due to an error
+ 
+ @param error   NSError object that contains the error code and description
+ */
+typedef void(^UploadcareFailureBlock)(NSError *error);
+
+
+/**
+ TODO: Write something meaningful here 
+ */
+@interface UploadcareKit : NSObject {
     NSString *_publicKey;
     NSString *_secretKey;
 }
 
 /* Thread-safe singleton accessor to UploadcareKit */
 + (id)shared;
+
+#pragma mark - Move this elsewhere:
 
 /**
  Download image for any service at background with placeholder value
@@ -69,39 +89,45 @@
 + (NSString *)hashedValueForString:(NSString *)input WithKey:(NSString *) key;
 + (NSString *)validateUUID:(NSString *)uuid;
 
+#pragma mark - This belongs here:
+
+/**
+ Set your public key and secret for requests and validation
+ 
+ @param public Your public key
+ @param secret Your secret key
+ */
 - (void)setPublicKey:(NSString *)public secretKey:(NSString *)secret;
 
 /**
- Upload your data from specified NSData [images, video, etc.].
+ Uploads a file of any kind (e.g. an image, a movie clip, a spreadsheet document, etc.) which content is provided by an NSData object.
  
- Sets the properties with a blocks that executes either the specified success, failure or upload progress block, depending on the state of the request on completion. If error returns a value, which can be caused by an unacceptable status code or content type, then failure is executed. Otherwise, success is executed.
- 
- @param filename Sets the filename for uploaded data that can be used on object description
- @param data NSData object with content of your data that you trying to upload
- @param uploadProgressBlock Sets a callback to be called when an undetermined number of bytes have been uploaded to the server. A block object to be called when an undetermined number of bytes have been uploaded to the server. This block has no return value and takes three arguments: the number of bytes written since the last time the upload progress block was called, the total bytes written, and the total bytes expected to be written during the request, as initially determined by the length of the HTTP body. This block may be called multiple times.
- @param success The block to be executed on the completion of a successful request. This block has no return value and takes three arguments: the request sent from the client, the response received from the server, and the UploadcareFile object created from the response data of request.
- @param failure A block object to be executed when the operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the resonse data as JSON. This block has no return value and takes three arguments: the request sent from the client, the response received from the server, and the error describing the network or parsing error that occurred.
- */
+ @param filename        The name to give the file when the file is uploaded.
+ @param data            The data to upload.
+ @param progressBlock   The block to call repeatedly during the upload. Receives two arguments: **long long** `bytesDone` and **long long** `bytesTotal`.
+ @param successBlock    The handler block to call when the upload is completed succesfully. Receives a single argument UploadcareFile `*uploadedFile`.
+ @param failureBlock    The handler block to call when the upload fails due to an error. Receives a single argument NSError `*error`
+*/
 - (void)uploadFileWithName:(NSString *)filename
-                   andData:(NSData *)data
-       uploadProgressBlock:(void (^)(NSInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))upload
-                   success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file))success
-                   failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
+                      data:(NSData *)data
+             progressBlock:(UploadcareProgressBlock)progressBlock
+              successBlock:(UploadcareSuccessBlock)successBlock
+              failureBlock:(UploadcareFailureBlock)failureBlock;
 
 /**
- Upload your data from specified URL.
+ Uploads a file from URL
  
- Sets the properties with a blocks that executes either the specified success or failure progress block, depending on the state of the request on completion. If error returns a value, which can be caused by an unacceptable status code or content type, then failure is executed. Otherwise, success is executed.
+ @param url             The URL used to retrieve the file.
+ @param progressBlock   The block to call repeatedly during the upload. Receives two arguments: **long long** `bytesDone` and **long long** `bytesTotal`.
+ @param successBlock    The handler block to call when the upload is completed succesfully. Receives a single argument UploadcareFile `*uploadedFile`.
+ @param failureBlock    The handler block to call when the upload fails due to an error. Receives a single argument NSError `*error`
  
- @param url The object to be loaded asynchronously during execution of the operation
- @param progressBlock The block to be executed repeatedly during the upload. Takes two arguments: the amount of data already uploaded, and the total amount to be uploaded during the operation.
- @param success A block object to be executed when the operation finishes successfully. The block takes one argument: resulting UploadcareFile object.
- @param failure A block object to be executed when the operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the resonse data as JSON. This block has no return value and takes one argument: the error describing the network or parsing error that occurred.
- */
-- (void)uploadFileWithURL:(NSString *)url
-            progressBlock:(void (^)(long long uploadedBytes, long long totalBytes))progressBlock
-             successBlock:(void (^)(UploadcareFile *file))successBlock
-             failureBlock:(void (^)(NSError *error))failureBlock;
+ @see UploadcareFile
+  */
+- (void)uploadFileFromURL:(NSString *)url
+            progressBlock:(UploadcareProgressBlock)progressBlock
+             successBlock:(UploadcareSuccessBlock)successBlock
+             failureBlock:(UploadcareFailureBlock)failureBlock;
 
 /**
  Get file info of early uploaded file. example: 

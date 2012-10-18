@@ -433,28 +433,28 @@
     notify.accessoryView = progressView;
     [notify show];
     
-    [[UploadcareKit shared] uploadFileWithName:name andData:data uploadProgressBlock:^(NSInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+    [[UploadcareKit shared] uploadFileWithName:name data:data progressBlock:^(long long bytesDone, long long bytesTotal) {
+        float progressFraction = (float)bytesDone / bytesTotal;
+        float progressPercents = progressFraction * 100.f;
         NSLog(@"+%@: line %d - progress %llu/%llu %f%%",
               NSStringFromSelector(_cmd),
               __LINE__,
-              totalBytesWritten,
-              totalBytesExpectedToWrite,
-              (totalBytesWritten / (totalBytesExpectedToWrite / 100.f)) / 100.f);        
+              bytesDone,
+              bytesTotal,
+              progressPercents);
         
-        [progressView setProgress:((totalBytesWritten / (totalBytesExpectedToWrite / 100.f)) / 100.f) - 0.0001f];
-        [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"Uploaded %.2f%%", nil), (totalBytesWritten / (totalBytesExpectedToWrite / 100.f))]];
-        
-    } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UploadcareFile *file) {
+        [progressView setProgress: progressFraction - 0.0001f]; // TODO: Why the - 0.0001f?
+        [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"Uploaded %.2f%%", nil), progressPercents]];
+    } successBlock:^(UploadcareFile *uploadedFile) {
         NSLog(@"+%@: line %d success", NSStringFromSelector(_cmd), __LINE__);
-        [self addToStorageFileWithId:[file file_id] fromService:serviceName];
+        [self addToStorageFileWithId:[uploadedFile file_id] fromService:serviceName];
         
         [notify setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyCheck.png"]] animated:YES];
-        [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [file original_filename]] animated:YES];
+        [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [uploadedFile original_filename]] animated:YES];
         [notify hideIn:4.0];
         
         [progressView setProgress:.0f];
-        
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+    } failureBlock:^(NSError *error) {
         NSLog(@"+%@: line %d - ERROR %@", NSStringFromSelector(_cmd), __LINE__, error);
         
         [notify setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyX.png"]] animated:YES];
@@ -471,7 +471,7 @@
     [notify show];
     
     [[UploadcareKit shared]
-     uploadFileWithURL:url
+     uploadFileFromURL:url
      progressBlock:^(long long totalBytesWritten, long long totalBytesExpectedToWrite) {
          [progressView setProgress:(float)totalBytesWritten / totalBytesExpectedToWrite];
          [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"Uploaded %.2f%%", nil), (totalBytesWritten / (totalBytesExpectedToWrite / 100.f))]];
