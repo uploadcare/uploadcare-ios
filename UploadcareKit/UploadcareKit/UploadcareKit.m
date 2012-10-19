@@ -34,8 +34,7 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
 
 - (NSString *)publicKey {
     if (!_publicKey) {
-        /* TODO: Provide some details re. where to get one */
-        [NSException raise:UploadcareMissingPublicKeyException format:@"You must provide the public key"];
+        [NSException raise:UploadcareMissingPublicKeyException format:@"The publicKey property must be set. You can get your public key from https://uploadcare.com/accounts/settings/"];
     }
     
     return _publicKey;
