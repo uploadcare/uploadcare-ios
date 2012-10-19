@@ -23,4 +23,6 @@ typedef enum {
     UploadcareErrorUploadingFromURL = 0x1001,
     /* Client application failed to connect to the server */
     UploadcareErrorConnectingHome,
+    /* /status/ request on an upload has failed either due to connectivity issues or because of a server-side error */
+    UploadcareErrorPollingStatus,
 } UploadcareErrorCode;

@@ -78,7 +78,11 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
         UploadcareFile *file = [UploadcareFile new];
         file.info = @{@"file_id" : JSON[kDataName], @"original_filename" : filename};
         successBlock(file);
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *requestError, id JSON) {
+        NSError *error = [NSError errorWithDomain:UploadcareErrorDomain code:UploadcareErrorConnectingHome userInfo:@{
+                       NSLocalizedDescriptionKey : @"Upload request failed",
+                            NSUnderlyingErrorKey : requestError
+                          }];
         failureBlock(error);
     }];
     

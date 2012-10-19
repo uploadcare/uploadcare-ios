@@ -93,7 +93,13 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
         [self processUploadStatus:status withDetails:JSON];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         /* get /status/ failed */
-        [self didReceiveUploadError:error];
+        NSError *wrappedError = [NSError errorWithDomain: UploadcareErrorDomain
+                                                    code: UploadcareErrorPollingStatus
+                                                userInfo:  @{
+                               NSLocalizedDescriptionKey: NSLocalizedString(@"Failed to retrieve the status of the upload", nil),
+                                    NSUnderlyingErrorKey: error
+                                 }];
+        [self didReceiveUploadError: wrappedError];
     }];
     [op start];
 }
@@ -114,9 +120,13 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
         [self didReceiveUploadSuccessWithDetails:data];
     } else if ([statusName isEqualToString:@"error"] || [statusName isEqualToString:@"fail"]) {
         /* error */
-        [self didReceiveUploadError:[NSError errorWithDomain:UploadcareErrorDomain code:UploadcareErrorUploadingFromURL userInfo:@{
-                                  NSLocalizedDescriptionKey: NSLocalizedString(@"Uploadcare failed to upload file from the Internet", nil),
-                           NSLocalizedFailureReasonErrorKey: NSLocalizedString(data[@"error"], nil)}]];
+        NSError *wrappedError = [NSError errorWithDomain: UploadcareErrorDomain
+                                                    code: UploadcareErrorUploadingFromURL
+                                                userInfo: @{
+                               NSLocalizedDescriptionKey: NSLocalizedString(@"Uploadcare failed to upload file from the Internet", nil),
+                        NSLocalizedFailureReasonErrorKey: NSLocalizedString(data[@"error"], nil)
+                                 }];
+        [self didReceiveUploadError: wrappedError];
     } else {
         /* unknown status */
         [self schedulePollIfPusherFails];
