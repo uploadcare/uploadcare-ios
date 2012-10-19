@@ -441,7 +441,7 @@
     notify.accessoryView = progressView;
     [notify show];
     
-    [[UploadcareKit shared] uploadFileWithName:name data:data mimeType:@"image/png" progressBlock:^(long long bytesDone, long long bytesTotal) {
+    [[UploadcareKit shared] uploadFileWithName:name data:data contentType:@"image/png" progressBlock:^(long long bytesDone, long long bytesTotal) {
         float progressFraction = (float)bytesDone / bytesTotal;
         float progressPercents = progressFraction * 100.f;
         NSLog(@"+%@: line %d - progress %llu/%llu %f%%",

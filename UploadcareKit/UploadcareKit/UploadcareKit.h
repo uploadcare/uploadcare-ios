@@ -53,14 +53,14 @@ typedef void(^UploadcareFailureBlock)(NSError *error);
  
  @param filename        The name to give the file when the file is uploaded.
  @param data            The data to upload.
- @param mimeType        The media type of the file, see http://www.iana.org/assignments/media-types/index.html
+ @param contentType     The media type of the file, see http://en.wikipedia.org/wiki/Internet_media_type
  @param progressBlock   The block to call repeatedly during the upload. Receives two arguments: **long long** `bytesDone` and **long long** `bytesTotal`.
  @param successBlock    The handler block to call when the upload is completed succesfully. Receives a single argument UploadcareFile `*uploadedFile`.
  @param failureBlock    The handler block to call when the upload fails due to an error. Receives a single argument NSError `*error`
 */
 - (void)uploadFileWithName:(NSString *)filename
                       data:(NSData *)data
-                  mimeType:(NSString *)mimeType
+               contentType:(NSString *)contentType
              progressBlock:(UploadcareProgressBlock)progressBlock
               successBlock:(UploadcareSuccessBlock)successBlock
               failureBlock:(UploadcareFailureBlock)failureBlock;

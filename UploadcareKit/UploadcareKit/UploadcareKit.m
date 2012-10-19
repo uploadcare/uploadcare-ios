@@ -63,17 +63,17 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
 
 - (void)uploadFileWithName:(NSString *)filename
                       data:(NSData *)data
-                  mimeType:(NSString *)mimeType
+               contentType:(NSString *)contentType
              progressBlock:(UploadcareProgressBlock)progressBlock
               successBlock:(UploadcareSuccessBlock)successBlock
               failureBlock:(UploadcareFailureBlock)failureBlock {
-    
+        
     NSString *const kDataName = @"file";
     NSString *uploadFilePath = @"/base/";
-    if (!mimeType) mimeType = @"";
+    if (!contentType) contentType = @"";
     NSURLRequest *uploadFileRequest = [self.class.sharedUploadClient multipartFormRequestWithMethod:@"POST" path:uploadFilePath parameters:@{
                                           @"UPLOADCARE_PUB_KEY" : self.publicKey } constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                                              [formData appendPartWithFileData:data name:kDataName fileName:filename mimeType:mimeType];
+                                              [formData appendPartWithFileData:data name:kDataName fileName:filename mimeType:contentType];
                                           }];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:uploadFileRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         UploadcareFile *file = [UploadcareFile new];
