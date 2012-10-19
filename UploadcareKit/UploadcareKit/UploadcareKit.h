@@ -51,9 +51,9 @@ typedef void(^UploadcareFailureBlock)(NSError *error);
 /**
  Uploads an arbitrary file (e.g. an image, a movie clip, a spreadsheet document, etc.) with the content provided by the NSData argument.
  
- @param filename        The name to give the file when the file is uploaded.
+ @param filename        The file name to assign to the file uploaded.
  @param data            The data to upload.
- @param contentType     The media type of the file, see http://en.wikipedia.org/wiki/Internet_media_type
+ @param contentType     The Internet media type of the file. If `nil`, the type is auto-detected from the file name.
  @param progressBlock   The block to call repeatedly during the upload. Receives two arguments: **long long** `bytesDone` and **long long** `bytesTotal`.
  @param successBlock    The handler block to call when the upload is completed succesfully. Receives a single argument UploadcareFile `*uploadedFile`.
  @param failureBlock    The handler block to call when the upload fails due to an error. Receives a single argument NSError `*error`

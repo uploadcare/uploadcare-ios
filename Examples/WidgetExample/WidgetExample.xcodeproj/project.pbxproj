@@ -75,6 +75,7 @@
 		54EE2BF015FE43AC0053C97E /* UCPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2BEC15FE43AC0053C97E /* UCPhotoViewController.xib */; };
 		6F2C126E161F789200F9D54C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2C126D161F789200F9D54C /* Default-568h@2x.png */; };
 		6F2C1270161F78AB00F9D54C /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2C126F161F78AB00F9D54C /* libicucore.dylib */; };
+		6FB5DA54163174EF005A73CD /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FB5DA53163174EF005A73CD /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -234,6 +235,7 @@
 		54EE2BEC15FE43AC0053C97E /* UCPhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCPhotoViewController.xib; sourceTree = "<group>"; };
 		6F2C126D161F789200F9D54C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6F2C126F161F78AB00F9D54C /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		6FB5DA53163174EF005A73CD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FB5DA54163174EF005A73CD /* MobileCoreServices.framework in Frameworks */,
 				6F2C1270161F78AB00F9D54C /* libicucore.dylib in Frameworks */,
 				541352A615FE5CC500E17A20 /* GrabKitLib.a in Frameworks */,
 				544E322915F9299400011290 /* libUploadcareKit.a in Frameworks */,
@@ -271,6 +274,7 @@
 		5424F3EA15CC122600394084 = {
 			isa = PBXGroup;
 			children = (
+				6FB5DA53163174EF005A73CD /* MobileCoreServices.framework */,
 				6F2C126F161F78AB00F9D54C /* libicucore.dylib */,
 				6F2C126D161F789200F9D54C /* Default-568h@2x.png */,
 				5413529D15FE5C2A00E17A20 /* GTMOAuth2ViewTouch.xib */,

@@ -66,6 +66,7 @@
 		6F2C126C161F786C00F9D54C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2C126B161F786C00F9D54C /* Security.framework */; };
 		6FAB7F8C16232D5E0089BB10 /* UploadcareStatusWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB7F8B16232D5E0089BB10 /* UploadcareStatusWatcher.m */; };
 		6FB42E811630399A004AF91E /* UploadcareKit+Deprecated.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB42E801630399A004AF91E /* UploadcareKit+Deprecated.m */; };
+		6FB5DA521631654F005A73CD /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FB5DA511631654F005A73CD /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,6 +186,7 @@
 		6FAB7F8B16232D5E0089BB10 /* UploadcareStatusWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadcareStatusWatcher.m; sourceTree = "<group>"; };
 		6FB42E7F1630399A004AF91E /* UploadcareKit+Deprecated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadcareKit+Deprecated.h"; sourceTree = "<group>"; };
 		6FB42E801630399A004AF91E /* UploadcareKit+Deprecated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadcareKit+Deprecated.m"; sourceTree = "<group>"; };
+		6FB5DA511631654F005A73CD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FB5DA521631654F005A73CD /* MobileCoreServices.framework in Frameworks */,
 				6F2C126C161F786C00F9D54C /* Security.framework in Frameworks */,
 				6F2C126A161F786400F9D54C /* CFNetwork.framework in Frameworks */,
 				6F2C1268161F785B00F9D54C /* libicucore.dylib in Frameworks */,
@@ -216,9 +219,6 @@
 		54D4F7EE15C96E8E0021A868 = {
 			isa = PBXGroup;
 			children = (
-				6F2C126B161F786C00F9D54C /* Security.framework */,
-				6F2C1269161F786400F9D54C /* CFNetwork.framework */,
-				6F2C1267161F785A00F9D54C /* libicucore.dylib */,
 				54D4F82415C96EA70021A868 /* Vendors */,
 				54D4F7FE15C96E8E0021A868 /* UploadcareKit */,
 				54D4F81315C96E8E0021A868 /* UploadcareKitTests */,
@@ -239,6 +239,10 @@
 		54D4F7FB15C96E8E0021A868 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FB5DA511631654F005A73CD /* MobileCoreServices.framework */,
+				6F2C1267161F785A00F9D54C /* libicucore.dylib */,
+				6F2C126B161F786C00F9D54C /* Security.framework */,
+				6F2C1269161F786400F9D54C /* CFNetwork.framework */,
 				544E322415F9263D00011290 /* UIKit.framework */,
 				54D4F7FC15C96E8E0021A868 /* Foundation.framework */,
 				54D4F80B15C96E8E0021A868 /* SenTestingKit.framework */,
