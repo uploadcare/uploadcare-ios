@@ -83,17 +83,20 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
             contentType = @"";
     }
     
+    /* upload! */
     NSURLRequest *uploadFileRequest = [self.class.sharedUploadClient multipartFormRequestWithMethod:@"POST" path:uploadFilePath parameters:@{
                                           @"UPLOADCARE_PUB_KEY" : self.publicKey } constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                                               [formData appendPartWithFileData:data name:kDataFileId fileName:filename mimeType:contentType];
                                           }];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:uploadFileRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        /* request succeeded */
         NSString *fileId = JSON[kDataFileId];
         successBlock(fileId);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *requestError, id JSON) {
+        /* request failed */
         NSError *error = [NSError errorWithDomain:UploadcareErrorDomain code:UploadcareErrorConnectingHome userInfo:@{
-                       NSLocalizedDescriptionKey : @"Upload request failed",
-                            NSUnderlyingErrorKey : requestError
+                        NSLocalizedDescriptionKey:@"Upload request failed",
+                             NSUnderlyingErrorKey:requestError
                           }];
         failureBlock(error);
     }];
@@ -105,26 +108,29 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
     [operation start];
 }
 
-- (void)uploadFileFromURL:(NSString *)url progressBlock:(UploadcareProgressBlock)progressBlock successBlock:(UploadcareSuccessBlock)successBlock failureBlock:(UploadcareFailureBlock)failureBlock {
-    NSString *uploadFromURLPath = [NSString stringWithFormat:@"/from_url/?source_url=%@", url];
+- (void)uploadFileFromURL:(NSString *)url
+            progressBlock:(UploadcareProgressBlock)progressBlock
+             successBlock:(UploadcareSuccessBlock)successBlock
+             failureBlock:(UploadcareFailureBlock)failureBlock {
+    
+    NSString *uploadFromURLPath = @"/from_url/";
     NSURLRequest *uploadFromURLRequest = [self.class.sharedUploadClient requestWithMethod:@"POST" path:uploadFromURLPath parameters:@{
-                                          @"pub_key" : self.publicKey }];
+                                          @"pub_key" : self.publicKey,
+                                          @"source_url" : url }];
     
-    AFJSONRequestOperation *operation =
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:uploadFromURLRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        /* request succeeded */
+        NSString *token = JSON[@"token"];
+        [UploadcareStatusWatcher watchUploadWithToken:token progressBlock:progressBlock successBlock:successBlock failureBlock:failureBlock];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *requestError, id JSON) {
+        /* request failed */
+        NSError *error = [NSError errorWithDomain:UploadcareErrorDomain code:UploadcareErrorConnectingHome userInfo:@{
+                        NSLocalizedDescriptionKey:@"Upload request failed",
+                             NSUnderlyingErrorKey:requestError
+                          }];
+        failureBlock(error);
+    }];
     
-    [AFJSONRequestOperation
-     JSONRequestOperationWithRequest: uploadFromURLRequest
-     success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-         NSString *token = JSON[@"token"];
-         [UploadcareStatusWatcher watchUploadWithToken:token progressBlock:progressBlock successBlock:successBlock failureBlock:failureBlock];
-     }
-     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *requestError, id JSON) {
-         NSError *error = [NSError errorWithDomain:UploadcareErrorDomain code:UploadcareErrorConnectingHome userInfo:@{
-                        NSLocalizedDescriptionKey : @"Upload request failed",
-                             NSUnderlyingErrorKey : requestError
-                           }];
-         failureBlock(error);
-     }];
     [operation start];
 }
 
