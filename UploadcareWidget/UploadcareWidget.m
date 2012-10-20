@@ -453,17 +453,17 @@
         
         [progressView setProgress: progressFraction - 0.0001f]; // TODO: Why the - 0.0001f?
         [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"Uploaded %.2f%%", nil), progressPercents]];
-    } successBlock:^(UploadcareFile *uploadedFile) {
+    } successBlock:^(NSString *file_id) {
         NSLog(@"+%@: line %d success", NSStringFromSelector(_cmd), __LINE__);
-        [self addToStorageFileWithId:[uploadedFile file_id] fromService:serviceName];
+        [self addToStorageFileWithId:file_id fromService:serviceName];
         
         [notify setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyCheck.png"]] animated:YES];
-        [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [uploadedFile original_filename]] animated:YES];
+        [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), name] animated:YES];
         [notify hideIn:4.0];
         
         [progressView setProgress:.0f];
     } failureBlock:^(NSError *error) {
-        NSLog(@"+%@: line %d - ERROR %@", NSStringFromSelector(_cmd), __LINE__, error);
+        NSLog(@"+%@: line %d - ERROR %@, %@", NSStringFromSelector(_cmd), __LINE__, error, error.userInfo[NSUnderlyingErrorKey]);
         
         [notify setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyX.png"]] animated:YES];
         [notify setTitle:(NSLocalizedString(@"Failed to upload!", nil)) animated:YES];
@@ -485,9 +485,9 @@
          [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"Uploaded %.2f%%", nil), (totalBytesWritten / (totalBytesExpectedToWrite / 100.f))]];
          
      }
-     successBlock:^(UploadcareFile *file) {
+     successBlock:^(NSString *file_id) {
          NSLog(@"+%@: line %d success", NSStringFromSelector(_cmd), __LINE__);
-         [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [file original_filename]] animated:YES];
+         [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"File uploaded %@", nil), [url lastPathComponent]] animated:YES];
          notify.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyCheck.png"]];
          [notify hideIn:4.f];
          [progressView setProgress:.0f];

@@ -8,7 +8,6 @@
 
 #import "UploadcareError.h"
 #import "UploadcareKit.h"
-#import "UploadcareFile.h"
 #import "UploadcareStatusWatcher.h"
 #import "PTPusher.h"
 #import "PTPusherChannel.h"
@@ -30,9 +29,9 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
 @property PTPusher *pusher;
 @property NSTimeInterval pusherTimeout;
 
-@property (strong) UCSWUploadProgressBlock progressBlock;
-@property (strong) UCSWUploadSuccessBlock successBlock;
-@property (strong) UCSWUploadFailureBlock failureBlock;
+@property (strong) UploadcareProgressBlock progressBlock;
+@property (strong) UploadcareSuccessBlock successBlock;
+@property (strong) UploadcareFailureBlock failureBlock;
 
 @end
 
@@ -40,7 +39,7 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
 
 @implementation UploadcareStatusWatcher
 
-- (id)initWithToken: (NSString *)token progressBlock:(UCSWUploadProgressBlock)progressBlock successBlock:(UCSWUploadSuccessBlock)successBlock failureBlock:(UCSWUploadFailureBlock)failureBlock {
+- (id)initWithToken: (NSString *)token progressBlock:(UploadcareProgressBlock)progressBlock successBlock:(UploadcareSuccessBlock)successBlock failureBlock:(UploadcareFailureBlock)failureBlock {
     self = [super init];
     if (self) {
         _token = token;
@@ -138,9 +137,8 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
 }
 
 - (void)didReceiveUploadSuccessWithDetails:(id)data {
-    UploadcareFile *file = [UploadcareFile new];
-    file.info = data;
-    self.successBlock(file);
+    NSString *file_id = data[@"file_id"];
+    self.successBlock(file_id);
     [self removeFromTheWatch];
 }
 
@@ -167,7 +165,7 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
     return _watchers;
 }
 
-+ (id)watchUploadWithToken:(NSString *)token progressBlock:(UCSWUploadProgressBlock)progressBlock successBlock:(UCSWUploadSuccessBlock)successBlock failureBlock:(UCSWUploadFailureBlock)failureBlock{
++ (id)watchUploadWithToken:(NSString *)token progressBlock:(UploadcareProgressBlock)progressBlock successBlock:(UploadcareSuccessBlock)successBlock failureBlock:(UploadcareFailureBlock)failureBlock{
     UploadcareStatusWatcher *watcher = [[UploadcareStatusWatcher alloc]initWithToken:token progressBlock:progressBlock successBlock:successBlock failureBlock:failureBlock];
     [[self watchers] setObject:watcher forKey:token];
     return watcher;

@@ -7,6 +7,7 @@
 //
 
 #import "UploadcareKit.h"
+#import "UploadcareFile.h"
 
 @interface UploadcareKit (Deprecated)
 

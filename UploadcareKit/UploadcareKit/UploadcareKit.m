@@ -69,7 +69,7 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
               successBlock:(UploadcareSuccessBlock)successBlock
               failureBlock:(UploadcareFailureBlock)failureBlock {
         
-    NSString *const kDataName = @"file"; // whatever goes into multipart form data's name becomes the key for file_id in JSON response
+    NSString *const kDataFileId = @"file"; // whatever goes into multipart form data's name becomes the key for file_id in JSON response
     NSString *uploadFilePath = @"/base/";
     
     /* autodetect content-type if not specified */
@@ -85,13 +85,11 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
     
     NSURLRequest *uploadFileRequest = [self.class.sharedUploadClient multipartFormRequestWithMethod:@"POST" path:uploadFilePath parameters:@{
                                           @"UPLOADCARE_PUB_KEY" : self.publicKey } constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                                              [formData appendPartWithFileData:data name:kDataName fileName:filename mimeType:contentType];
+                                              [formData appendPartWithFileData:data name:kDataFileId fileName:filename mimeType:contentType];
                                           }];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:uploadFileRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        UploadcareFile *file = [UploadcareFile new];
-        file.info = @{@"file_id" : JSON[kDataName], @"original_filename" : filename};
-        NSLog(@"%@", file.info);
-        successBlock(file);
+        NSString *fileId = JSON[kDataFileId];
+        successBlock(fileId);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *requestError, id JSON) {
         NSError *error = [NSError errorWithDomain:UploadcareErrorDomain code:UploadcareErrorConnectingHome userInfo:@{
                        NSLocalizedDescriptionKey : @"Upload request failed",

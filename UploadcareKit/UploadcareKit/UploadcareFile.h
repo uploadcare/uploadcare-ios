@@ -27,6 +27,7 @@
  }
  */
 
+__attribute__ ((deprecated))
 @interface UploadcareFile : NSObject
 
 @property(nonatomic, copy) NSDictionary* info;

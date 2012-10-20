@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import "UploadcareFile.h"
 #import "UploadcareError.h" 
 
 
@@ -25,7 +24,7 @@ typedef void(^UploadcareProgressBlock)(long long bytesDone, long long bytesTotal
  
  @param uploadedFile    Object that describes the uploaded file
  */
-typedef void(^UploadcareSuccessBlock)(UploadcareFile *uploadedFile);
+typedef void(^UploadcareSuccessBlock)(NSString *file_id);
 /**
  @typedef Blocks of this type are called when an operation fails due to an error
  
