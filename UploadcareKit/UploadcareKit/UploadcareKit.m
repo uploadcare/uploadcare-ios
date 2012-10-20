@@ -69,7 +69,7 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
               successBlock:(UploadcareSuccessBlock)successBlock
               failureBlock:(UploadcareFailureBlock)failureBlock {
         
-    NSString *const kDataFileId = @"file"; // whatever goes into multipart form data's name becomes the key for file_id in JSON response
+    NSString *const kDataFileId = @"file"; // whatever goes into multipart form data's name becomes the key for the file id in JSON response dict.
     NSString *uploadFilePath = @"/base/";
     
     /* autodetect content-type if not specified */

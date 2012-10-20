@@ -137,8 +137,8 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
 }
 
 - (void)didReceiveUploadSuccessWithDetails:(id)data {
-    NSString *file_id = data[@"file_id"];
-    self.successBlock(file_id);
+    NSString *fileId = data[@"file_id"];
+    self.successBlock(fileId);
     [self removeFromTheWatch];
 }
 

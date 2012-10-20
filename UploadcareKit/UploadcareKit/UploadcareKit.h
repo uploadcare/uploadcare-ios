@@ -24,7 +24,7 @@ typedef void(^UploadcareProgressBlock)(long long bytesDone, long long bytesTotal
  
  @param uploadedFile    Object that describes the uploaded file
  */
-typedef void(^UploadcareSuccessBlock)(NSString *file_id);
+typedef void(^UploadcareSuccessBlock)(NSString *fileId);
 /**
  @typedef Blocks of this type are called when an operation fails due to an error
  
@@ -54,7 +54,7 @@ typedef void(^UploadcareFailureBlock)(NSError *error);
  @param data            The data to upload.
  @param contentType     The Internet media type of the file. If `nil`, the type is auto-detected from the file name.
  @param progressBlock   The block to call repeatedly during the upload. Receives two arguments: **long long** `bytesDone` and **long long** `bytesTotal`.
- @param successBlock    The handler block to call when the upload is completed succesfully. Receives a single argument UploadcareFile `*uploadedFile`.
+ @param successBlock    The handler block to call when the upload is completed succesfully. Receives a single string argument `fileId`.
  @param failureBlock    The handler block to call when the upload fails due to an error. Receives a single argument NSError `*error`
 */
 - (void)uploadFileWithName:(NSString *)filename
@@ -69,7 +69,7 @@ typedef void(^UploadcareFailureBlock)(NSError *error);
  
  @param url             The URL used to retrieve the file.
  @param progressBlock   The block to call repeatedly during the upload. Receives two arguments: **long long** `bytesDone` and **long long** `bytesTotal`.
- @param successBlock    The handler block to call when the upload is completed succesfully. Receives a single argument UploadcareFile `*uploadedFile`.
+ @param successBlock    The handler block to call when the upload is completed succesfully. Receives a single string argument `fileId`.
  @param failureBlock    The handler block to call when the upload fails due to an error. Receives a single argument NSError `*error`
  
  @see UploadcareFile
