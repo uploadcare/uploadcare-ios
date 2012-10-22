@@ -95,7 +95,8 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
         NSError *wrappedError = [NSError errorWithDomain: UploadcareErrorDomain
                                                     code: UploadcareErrorPollingStatus
                                                 userInfo:  @{
-                               NSLocalizedDescriptionKey: NSLocalizedString(@"Failed to retrieve the status of the upload", nil),
+                               NSLocalizedDescriptionKey: NSLocalizedString(@"Failed to retrieve the status of the upload.", nil),
+                        NSLocalizedFailureReasonErrorKey:[NSHTTPURLResponse localizedStringForStatusCode:response.statusCode],
                                     NSUnderlyingErrorKey: error
                                  }];
         [self didReceiveUploadError: wrappedError];
@@ -122,7 +123,7 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
         NSError *wrappedError = [NSError errorWithDomain: UploadcareErrorDomain
                                                     code: UploadcareErrorUploadingFromURL
                                                 userInfo: @{
-                               NSLocalizedDescriptionKey: NSLocalizedString(@"Uploadcare failed to upload file from the Internet", nil),
+                               NSLocalizedDescriptionKey: NSLocalizedString(@"Uploadcare failed to upload file from the Internet.", nil),
                         NSLocalizedFailureReasonErrorKey: NSLocalizedString(data[@"error"], nil)
                                  }];
         [self didReceiveUploadError: wrappedError];

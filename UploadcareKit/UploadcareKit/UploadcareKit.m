@@ -52,8 +52,6 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
     return _sharedObject;
 }
          
-#pragma mark - Kit Actions
-
 - (id)init {
     if (self = [super init]) {
         [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObjects:@"application/vnd.uploadcare-v0.2+json", nil]];
@@ -61,6 +59,8 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
     }
     return self;
 }
+
+#pragma mark - Upload
 
 - (void)uploadFileWithName:(NSString *)filename
                       data:(NSData *)data
@@ -94,10 +94,13 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
         successBlock(fileId);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *requestError, id JSON) {
         /* request failed */
-        NSError *error = [NSError errorWithDomain:UploadcareErrorDomain code:UploadcareErrorConnectingHome userInfo:@{
-                        NSLocalizedDescriptionKey:@"Upload request failed",
-                             NSUnderlyingErrorKey:requestError
-                          }];
+        NSError *error;
+        
+        if (response.statusCode == 403)
+            error = UploadcareMakePubAuthError(requestError);
+        else
+            error = [NSError errorWithDomain:UploadcareErrorDomain code:UploadcareErrorConnectingHome userInfo:@{NSLocalizedDescriptionKey:@"Upload request failed.", NSLocalizedFailureReasonErrorKey:[NSHTTPURLResponse localizedStringForStatusCode:response.statusCode], NSUnderlyingErrorKey:requestError}];
+        
         failureBlock(error);
     }];
     
@@ -124,10 +127,13 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
         [UploadcareStatusWatcher watchUploadWithToken:token progressBlock:progressBlock successBlock:successBlock failureBlock:failureBlock];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *requestError, id JSON) {
         /* request failed */
-        NSError *error = [NSError errorWithDomain:UploadcareErrorDomain code:UploadcareErrorConnectingHome userInfo:@{
-                        NSLocalizedDescriptionKey:@"Upload request failed",
-                             NSUnderlyingErrorKey:requestError
-                          }];
+        
+        NSError *error;
+        if (response.statusCode == 403)
+            error = UploadcareMakePubAuthError(requestError);
+        else
+            error = [NSError errorWithDomain:UploadcareErrorDomain code:UploadcareErrorConnectingHome userInfo:@{NSLocalizedDescriptionKey:@"Upload request failed.", NSLocalizedFailureReasonErrorKey:[NSHTTPURLResponse localizedStringForStatusCode:response.statusCode], NSUnderlyingErrorKey:requestError}];
+        
         failureBlock(error);
     }];
     

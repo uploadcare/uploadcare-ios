@@ -8,10 +8,9 @@
 
 /* Exceptions thrown by the Uploadcare Kit */
 
-/** Uploadcare Kit throws this exception when requested to operate with no public key provided
- *
- * TODO: Write an explanation regarding where the developers should get one
- */
+/** 
+ Uploadcare Kit throws this exception when requested to operate with no public key provided.
+ Please consult the documentation: http://github.com/uploadcare/uploadcare-ios */
 extern NSString *const UploadcareMissingPublicKeyException;
 
 /** The error domain of errors used by the Uploadcare Kit */
@@ -25,4 +24,8 @@ typedef enum {
     UploadcareErrorConnectingHome,
     /* /status/ request on an upload has failed either due to connectivity issues or because of a server-side error */
     UploadcareErrorPollingStatus,
+    /* Public key is invalid */
+    UploadcareErrorAuthenticatingWithPublicKey,
 } UploadcareErrorCode;
+
+NSError *UploadcareMakePubAuthError(NSError *underlyingError);
