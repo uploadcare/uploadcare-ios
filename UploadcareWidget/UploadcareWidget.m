@@ -428,8 +428,10 @@
 #pragma mark - Uploadcare
 
 - (void)uploadFromImagePicker:(NSDictionary *)info {
+    NSURL *refURL = info[UIImagePickerControllerReferenceURL];
+    //TODO: Parse asset library URL? (?id=.... -> name)
     [self uploadFromFile:UIImagePNGRepresentation([info valueForKey:UIImagePickerControllerOriginalImage])
-                withName:[info valueForKey:@"UIImagePickerControllerOriginalImage"]];
+                withName:[refURL lastPathComponent]];
 }
 
 - (void)uploadFromFile:(NSData *)data withName:(NSString *)name {
