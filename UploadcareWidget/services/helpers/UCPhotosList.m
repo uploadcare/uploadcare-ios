@@ -91,26 +91,22 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
             [_album addObserver:self forKeyPath:@"count" options:NSKeyValueObservingOptionNew context:nil];
             break;
         }
-            
         case UCPhotosListStatePhotosGrabbed:{
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
             });
             break;
         }
-            
         case UCPhotosListStateAllPhotosGrabbed:{
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
             });
             break;
         }
-            
         default:
             break;
     }
 }
-
 
 #pragma mark - Helpers
 

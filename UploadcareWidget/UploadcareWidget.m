@@ -158,33 +158,7 @@
 
 - (void)uploadFromImage:(NSNotification *)image {
     NSLog(@"+%@: line %d : %@", NSStringFromSelector(_cmd), __LINE__, [image.object class]);
-    NSDictionary *object = image.object;
-    
-    /* use grabber-provided photo name if available, fallback to id, then to random UUID */
-    
-    NSString *photoNameBase = nil; // extentionless
-    if (object[@"photoName"] != [NSNull null]) {
-        photoNameBase = object[@"photoName"];
-    } else {
-        // fall back to photoId
-        if (object[@"photoId"] != [NSNull null]) {
-            photoNameBase = object[@"photoId"];
-        } else {
-            // no name, no id, generate a random name
-            CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
-            photoNameBase = (__bridge NSString*)CFUUIDCreateString(kCFAllocatorDefault, uuid);
-            CFRelease(uuid);
-        }
-    }
-    NSString *photoName = [NSString stringWithFormat:@"%@.png", photoNameBase];
-
-    /* charlie foxtrot prevention initiative */
-    if (object[@"image"] == [NSNull null]) return; //TODO: Handle?
-    
-    /* upload */
-    [self uploadFromFile:UIImagePNGRepresentation(object[@"image"])
-                withName:photoName
-             serviceName:object[@"serviceName"] != [NSNull null] ? object[@"serviceName"] : UNKNOWN_PHOTO_SOURCE];
+    [self uploadFromURL:image.object[@"imageURL"]];
 }
 
 - (IBAction)dismiss:(id)sender {
@@ -474,7 +448,7 @@
         [progressView setProgress: progressFraction - 0.0001f]; // TODO: Why the - 0.0001f?
         [notify setTitle:[NSString stringWithFormat:NSLocalizedString(@"Uploaded %.2f%%", nil), progressPercents]];
     } successBlock:^(NSString *file_id) {
-        NSLog(@"+%@: line %d success", NSStringFromSelector(_cmd), __LINE__);
+        NSLog(@"uploaded file_id: %@", file_id);
         [self addToStorageFileWithId:file_id fromService:serviceName];
         
         [notify setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NotifyCheck.png"]] animated:YES];

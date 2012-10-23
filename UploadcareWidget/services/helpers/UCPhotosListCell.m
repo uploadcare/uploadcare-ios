@@ -59,7 +59,7 @@
 }
 
 - (void)updateThumbnail:(UIImageView *)thumbnail withPhoto:(GRKPhoto *)photo {
-    NSURL * thumbnailURL = [photo originalImage].URL;
+    NSURL * thumbnailURL = [[photo imagesSortedByHeight][0] URL];
     [UploadcareKit downloadImageAtURL:thumbnailURL withPlaceholder:[UIImage imageNamed:@"icon_url"] forImageView:thumbnail];
 }
 
@@ -93,7 +93,7 @@
     NSLog(@"+%@: line %d : tag = '%d', name '%@', id '%@'", NSStringFromSelector(_cmd), __LINE__, [tappedImageView tag], photo.name, photo.photoId);
     
     NSDictionary *object = @{
-        @"image" : [tappedImageView image],
+        @"imageURL" : photo.originalImage.URL,
         @"photoId" : photo.photoId ? photo.photoId : [NSNull null],
         @"photoName" : photo.name ? photo.name : [NSNull null],
         @"serviceName" : self.serviceName ? self.serviceName : [NSNull null],
