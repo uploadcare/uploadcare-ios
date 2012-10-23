@@ -81,7 +81,7 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
 }
 
 - (void)poll {
-    NSURLRequest *statusRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@/status/?token=%@", UploadcareBaseUploadURL, self.token]]];
+    NSURLRequest *statusRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@/from_url/status/?token=%@", UploadcareBaseUploadURL, self.token]]];
     AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:statusRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         /* get /status/ success */
         NSString *status = JSON[@"status"];
