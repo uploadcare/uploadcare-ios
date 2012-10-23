@@ -245,6 +245,20 @@
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.textLabel.textAlignment = UITextAlignmentCenter;
+                if ([indexPath row] == SECTION_SERVICES_LIBRARY) {
+                    BOOL libAvailable = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
+                    cell.textLabel.enabled = libAvailable;
+                    if (!libAvailable) {
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    }
+                }
+                else if ([indexPath row] == SECTION_SERVICES_CAMERA) {
+                    BOOL camAvailable = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+                    cell.textLabel.enabled = camAvailable;
+                    if (!camAvailable) {
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    }
+                }
                 break;
             }
             case SECTION_SERVICES: {
@@ -333,10 +347,14 @@
         case SECTION_LOCAL: {
             switch ([indexPath row]) {
                 case SECTION_SERVICES_CAMERA:
-                    [self startMediaBrowserFromViewController:self withSourceType:UIImagePickerControllerCameraCaptureModeVideo usingDelegate:self];
+                    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                        [self startMediaBrowserFromViewController:self withSourceType:UIImagePickerControllerCameraCaptureModeVideo usingDelegate:self];
+                    }
                     break;
                 case SECTION_SERVICES_LIBRARY:
-                    [self uploadFileFromPhotoLibrary:self];
+                    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+                        [self uploadFileFromPhotoLibrary:self];
+                    }
                     break;
             }
             break;
