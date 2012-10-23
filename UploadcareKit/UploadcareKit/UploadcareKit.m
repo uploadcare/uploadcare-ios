@@ -107,6 +107,11 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
     [operation setUploadProgressBlock:^(NSInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
         progressBlock(totalBytesWritten, totalBytesExpectedToWrite);
     }];
+
+    /* Allow the upload to continue in the background */
+    [operation setShouldExecuteAsBackgroundTaskWithExpirationHandler:^{
+        /* do nothing */
+    }];
     
     [operation start];
 }
@@ -136,6 +141,14 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
         
         failureBlock(error);
     }];
+    
+    /* This doesn't make much sense, since the request is expected to yield
+     * immediately, as the actual uploading runs on the server only. Still,
+     * won't hurt to be on the safer side. */
+    [operation setShouldExecuteAsBackgroundTaskWithExpirationHandler:^{
+        /* do nothing */
+    }];
+
     
     [operation start];
 }
