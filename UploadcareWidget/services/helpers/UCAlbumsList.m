@@ -30,15 +30,13 @@ typedef NSUInteger UCAlbumsListState;
 @property NSString *serviceName;
 @property NSMutableArray *albums;
 @property NSUInteger lastLoadedPageIndex;
-@property BOOL allAlbumsGrabbed;
 @property (nonatomic)  UCAlbumsListState state;
 
 - (void)grabMoreAlbums;
-- (void)setState:(UCAlbumsListState)newState;
 - (void)addLogoutButton;
 @end
 
-NSUInteger kNumberOfAlbumsPerPage = 8;
+NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
 
 @implementation UCAlbumsList
 
@@ -49,24 +47,9 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
         _serviceName = serviceName;
         _albums = [[NSMutableArray alloc] init];
         _lastLoadedPageIndex = 0;
-        _allAlbumsGrabbed = NO;
         [self setState:UCAlbumsListStateInitial];
     }
     return self;
-}
-
-- (void)setState:(UCAlbumsListState)newState {
-    _state = newState;
-    switch (newState) {
-        case UCAlbumsListStateAlbumsGrabbed:
-            [self.tableView reloadData];
-            break;
-        case UCAlbumsListStateAllAlbumsGrabbed:
-            [self.tableView reloadData];
-            break;
-        default:
-            break;
-    }
 }
 
 #pragma mark - View lifecycle
@@ -87,11 +70,7 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
                 NSLog(@"+%@: line %d", NSStringFromSelector(_cmd), __LINE__);
                 if (connected) {
                     [self setState:UCAlbumsListStateConnected];
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self addLogoutButton];
-                        [self grabMoreAlbums];
-                    });
+                    [self setupServiceConnection];
                 }
             } andErrorBlock:^(NSError *error) {
                 [self setState:UCAlbumsListStateError];
@@ -111,11 +90,21 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
     [super viewDidAppear:animated];
     
     self.title = self.serviceName;
-    if (self.state != UCAlbumsListStateInitial) {
-        return;
-    }
     
-    [self setupServiceConnection];
+    switch (self.state) {
+        case UCAlbumsListStateInitial:
+            [self setupServiceConnection];
+            break;
+            
+        case UCAlbumsListStateAlbumsGrabbed:
+        case UCAlbumsListStateGrabbing:
+             /* resume retrieving albums (has been interrupted the last time) */
+            [self grabMoreAlbums];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -134,52 +123,25 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSUInteger res = [self.albums count];
-    if (self.state == UCAlbumsListStateAlbumsGrabbed || self.state == UCAlbumsListStateAllAlbumsGrabbed) {
-        res++;
-    }
-    
-    return res;
+    return self.albums.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = nil;
-    
-    if (indexPath.row >= [self.albums count]) {
-        static NSString *CellIdentifier = @"ExtraCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        
-        if (!self.allAlbumsGrabbed) {
-            cell.textLabel.text = [NSString stringWithFormat:
-                                   NSLocalizedString(@"%d Albums - Load More", nil),
-                                   [self.albums count]];
-            cell.textLabel.font = [UIFont fontWithName:@"System" size:8];
-        } else {
-            cell.textLabel.text = [NSString stringWithFormat:
-                                   NSLocalizedString(@"%d Albums", nil),
-                                   [self.albums count]];
-            cell.textLabel.font = [UIFont fontWithName:@"System" size:8];
-        }
-    } else {
-        static NSString *CellIdentifier = @"AlbumCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-            cell.imageView.layer.cornerRadius = 4.0f;
-            cell.imageView.clipsToBounds = YES;
-        }
-        
-        GRKAlbum * album = (GRKAlbum*)[self.albums objectAtIndex:indexPath.row];
-        NSURL *thumbnailURL = [album.coverPhoto.imagesSortedByHeight[0] URL];
-        cell.textLabel.text = album.name;
-        cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Items: %d", nil), album.count];
-        [cell.imageView setImage:[[UIImage imageNamed:@"icon_url@2x.png"] imageByScalingToSize:CGSizeMake(64, 64)]];
-        if (thumbnailURL != nil) [cell.imageView setImageFromURL:thumbnailURL scaledToSize:CGSizeMake(64, 64)];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    static NSString *const kCellIdentifier = @"AlbumCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellIdentifier];
+        cell.imageView.layer.cornerRadius = 4.0f;
+        cell.imageView.clipsToBounds = YES;
     }
+    
+    GRKAlbum * album = (GRKAlbum*)[self.albums objectAtIndex:indexPath.row];
+    NSURL *thumbnailURL = [album.coverPhoto.imagesSortedByHeight[0] URL];
+    cell.textLabel.text = [album.albumId isEqualToString:@"me"] && !album.name ? @"Photos of You" : album.name;
+    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Items: %d", nil), album.count];
+    [cell.imageView setImage:[[UIImage imageNamed:@"icon_url@2x.png"] imageByScalingToSize:CGSizeMake(64, 64)]];
+    if (thumbnailURL != nil) [cell.imageView setImageFromURL:thumbnailURL scaledToSize:CGSizeMake(64, 64)];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -190,27 +152,16 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
-    if (indexPath.row == [self.albums count]  && !self.allAlbumsGrabbed) {
-        [self grabMoreAlbums];
-    } else if (indexPath.row <= [self.albums count] - 1) {
+    if (indexPath.row <= [self.albums count] - 1) {
         GRKAlbum * albumAtIndexPath = [self.albums objectAtIndex:indexPath.row];
         UCPhotosList * photosList = [[UCPhotosList alloc] initWithNibName:@"UCPhotosList" bundle:nil andGrabber:self.grabber andAlbum:albumAtIndexPath];
         [self.navigationController pushViewController:photosList animated:YES];
     }
 }
 
-#pragma mark - UIAlertView delegate
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == alertView.cancelButtonIndex) {
-        [self.navigationController popViewControllerAnimated:YES];
-    } else {
-    }
-}
-
 #pragma mark -
 
-- (void)loadCoverPhotoForAlbums:(NSArray*)albums {
+- (void)loadCoverPhotosForAlbums:(NSArray*)albums {
     NSMutableArray *albumsWithoutCover = [NSMutableArray array];
     for (GRKAlbum *album in albums) {
         if (album.coverPhoto == nil) {
@@ -219,34 +170,41 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
     }
     
     [self.grabber fillCoverPhotoOfAlbums:albumsWithoutCover withCompleteBlock:^(id result) {
-        [self.tableView reloadData];
+        NSArray *albumsUpdated = (NSArray*)result;
+        NSMutableArray *indicesToReload = [NSMutableArray arrayWithCapacity:albumsUpdated.count];
+        for (GRKAlbum *album in albumsUpdated) {
+            NSUInteger idx = [self.albums indexOfObject:album];
+            assert(idx != NSNotFound);
+            if (album.coverPhoto != nil) [indicesToReload addObject:[NSIndexPath indexPathForRow:idx inSection:0]];
+        }
+        [self.tableView reloadRowsAtIndexPaths:indicesToReload withRowAnimation:UITableViewRowAnimationFade];
     } andErrorBlock:^(NSError *error) {
+        NSLog(@"Failed to retrive cover photos: %@", error);
     }];
 }
 
 - (void)grabMoreAlbums {
     [self setState:UCAlbumsListStateGrabbing];
     
-    NSLog(@" load albums for page %d", self.lastLoadedPageIndex);
     [self.grabber albumsOfCurrentUserAtPageIndex:self.lastLoadedPageIndex
-                   withNumberOfAlbumsPerPage:kNumberOfAlbumsPerPage
+                   withNumberOfAlbumsPerPage:kUCNumberOfAlbumsPerPage
                             andCompleteBlock:^(NSArray *results) {
                                 self.lastLoadedPageIndex+=1;
                                 
-                                [results enumerateObjectsUsingBlock:^(id album, NSUInteger idx, BOOL *stop) {
-                                    NSLog(@"albums %@", album);
+                                [results enumerateObjectsUsingBlock:^(GRKAlbum *album, NSUInteger idx, BOOL *stop) {
                                     if ([album count] != 0) {
                                         [self.albums addObject:album];
+                                        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.albums.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
                                     }
                                 }];
                                 
-                                [self loadCoverPhotoForAlbums:results];
+                                [self loadCoverPhotosForAlbums:results];
                                 
-                                if ( [results count] < kNumberOfAlbumsPerPage ){
-                                    self.allAlbumsGrabbed = YES;
+                                if ( [results count] < kUCNumberOfAlbumsPerPage ){
                                     [self setState:UCAlbumsListStateAllAlbumsGrabbed];
                                 } else {
                                     [self setState:UCAlbumsListStateAlbumsGrabbed];
+                                    [self grabMoreAlbums];
                                 }
                             } andErrorBlock:^(NSError *error) {
                                 NSLog(@" error ! %@", error);
