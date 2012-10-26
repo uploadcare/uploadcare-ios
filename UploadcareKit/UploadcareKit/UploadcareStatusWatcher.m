@@ -17,7 +17,7 @@
 
 /* Move this out */
 extern NSString *const UploadcareBaseUploadURL;
-static NSString *const UploadcarePusherKey = @"79ae88bd931ea68464d9";
+static NSString *const UploadcarePusherKey = @"a2dfe15c549a403f58ee";
 /* ^^ */
 
 static const NSTimeInterval UCSWPusherTimeout = 2.;     // if the Pusher is still not working after this amount of time (in seconds), poll will start
