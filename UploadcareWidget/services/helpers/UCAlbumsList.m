@@ -23,12 +23,6 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
 
 @implementation UCAlbumsList
 
-- (void) dealloc {
-    for(GRKAlbum *album in _albums) {
-        [album removeObserver:self forKeyPath:@"count"];
-    }
-}
-
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
@@ -233,16 +227,6 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
 
 #pragma mark -
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"count"]) {
-        NSInteger indexOfAlbum = [_albums indexOfObject:object];
-        if (indexOfAlbum != NSNotFound){
-            NSArray * indexPathsToReload = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexOfAlbum inSection:0]];
-            [self.tableView reloadRowsAtIndexPaths:indexPathsToReload withRowAnimation:UITableViewRowAnimationNone];
-        }
-    }
-}
-
 - (void)loadCoverPhotoForAlbums:(NSArray*)albums {
     NSMutableArray *albumsWithoutCover = [NSMutableArray array];
     for (GRKAlbum *album in albums) {
@@ -265,11 +249,7 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
                    withNumberOfAlbumsPerPage:kNumberOfAlbumsPerPage
                             andCompleteBlock:^(NSArray *results) {
                                 _lastLoadedPageIndex+=1;
-                                [_albums addObjectsFromArray:results];
                                 
-                                for( GRKAlbum * newAlbum in results ){
-                                    [newAlbum addObserver:self forKeyPath:@"count" options:NSKeyValueObservingOptionNew context:nil];
-                                }
                                 [self loadCoverPhotoForAlbums:results];
                                 
                                 if ( [results count] < kNumberOfAlbumsPerPage ){
