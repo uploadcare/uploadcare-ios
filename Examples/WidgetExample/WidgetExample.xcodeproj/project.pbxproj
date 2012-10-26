@@ -36,8 +36,6 @@
 		5463E7C8161B2D7C005C54A5 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5463E7C7161B2D7C005C54A5 /* FacebookSDK.framework */; };
 		548077E415F9105C00090D64 /* UCAlbumsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 548077CD15F9105B00090D64 /* UCAlbumsList.m */; };
 		548077E515F9105C00090D64 /* UCAlbumsList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 548077CE15F9105B00090D64 /* UCAlbumsList.xib */; };
-		548077E615F9105C00090D64 /* UCAlbumsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 548077D015F9105B00090D64 /* UCAlbumsListCell.m */; };
-		548077E715F9105C00090D64 /* UCAlbumsListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 548077D115F9105B00090D64 /* UCAlbumsListCell.xib */; };
 		548077EA15F9105C00090D64 /* UCPhotosList.m in Sources */ = {isa = PBXBuildFile; fileRef = 548077D715F9105B00090D64 /* UCPhotosList.m */; };
 		548077EB15F9105C00090D64 /* UCPhotosList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 548077D815F9105B00090D64 /* UCPhotosList.xib */; };
 		548077EC15F9105C00090D64 /* UCPhotosListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 548077DA15F9105B00090D64 /* UCPhotosListCell.m */; };
@@ -194,9 +192,6 @@
 		548077CC15F9105B00090D64 /* UCAlbumsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCAlbumsList.h; sourceTree = "<group>"; };
 		548077CD15F9105B00090D64 /* UCAlbumsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCAlbumsList.m; sourceTree = "<group>"; };
 		548077CE15F9105B00090D64 /* UCAlbumsList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCAlbumsList.xib; sourceTree = "<group>"; };
-		548077CF15F9105B00090D64 /* UCAlbumsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCAlbumsListCell.h; sourceTree = "<group>"; };
-		548077D015F9105B00090D64 /* UCAlbumsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCAlbumsListCell.m; sourceTree = "<group>"; };
-		548077D115F9105B00090D64 /* UCAlbumsListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCAlbumsListCell.xib; sourceTree = "<group>"; };
 		548077D615F9105B00090D64 /* UCPhotosList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotosList.h; sourceTree = "<group>"; };
 		548077D715F9105B00090D64 /* UCPhotosList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotosList.m; sourceTree = "<group>"; };
 		548077D815F9105B00090D64 /* UCPhotosList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UCPhotosList.xib; sourceTree = "<group>"; };
@@ -426,9 +421,6 @@
 				548077CC15F9105B00090D64 /* UCAlbumsList.h */,
 				548077CD15F9105B00090D64 /* UCAlbumsList.m */,
 				548077CE15F9105B00090D64 /* UCAlbumsList.xib */,
-				548077CF15F9105B00090D64 /* UCAlbumsListCell.h */,
-				548077D015F9105B00090D64 /* UCAlbumsListCell.m */,
-				548077D115F9105B00090D64 /* UCAlbumsListCell.xib */,
 				548077D615F9105B00090D64 /* UCPhotosList.h */,
 				548077D715F9105B00090D64 /* UCPhotosList.m */,
 				548077D815F9105B00090D64 /* UCPhotosList.xib */,
@@ -699,7 +691,6 @@
 				5424F44115CC133600394084 /* UploadcareWidget.xib in Resources */,
 				5424F44415CC2A2F00394084 /* UploadcareKit.xcodeproj in Resources */,
 				548077E515F9105C00090D64 /* UCAlbumsList.xib in Resources */,
-				548077E715F9105C00090D64 /* UCAlbumsListCell.xib in Resources */,
 				548077EB15F9105C00090D64 /* UCPhotosList.xib in Resources */,
 				548077ED15F9105C00090D64 /* UCPhotosListCell.xib in Resources */,
 				54EE2B6615FE0B580053C97E /* button_background.png in Resources */,
@@ -767,7 +758,6 @@
 				5424F44015CC133600394084 /* UploadcareWidget.m in Sources */,
 				54B1EA5A15D1876A0000B20B /* UploadcareServicesConfigurator.m in Sources */,
 				548077E415F9105C00090D64 /* UCAlbumsList.m in Sources */,
-				548077E615F9105C00090D64 /* UCAlbumsListCell.m in Sources */,
 				548077EA15F9105C00090D64 /* UCPhotosList.m in Sources */,
 				548077EC15F9105C00090D64 /* UCPhotosListCell.m in Sources */,
 				54EE2B7315FE1FD40053C97E /* UploadedViewController.m in Sources */,

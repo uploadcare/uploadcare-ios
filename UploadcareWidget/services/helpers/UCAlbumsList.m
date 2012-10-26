@@ -9,7 +9,9 @@
 #import "UCAlbumsList.h"
 #import "GRKServiceGrabberConnectionProtocol.h"
 #import "UCPhotosList.h"
-#import "UCAlbumsListCell.h"
+#import "UIImageView+UCHelpers.h"
+#import "UIImage+UCHelpers.h"
+#import "QuartzCore/QuartzCore.h"
 
 @interface UCAlbumsList()
 - (void)grabMoreAlbums;
@@ -173,15 +175,23 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
         static NSString *CellIdentifier = @"AlbumCell";
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"UCAlbumsListCell" owner:nil options:nil] objectAtIndex:0];
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+            cell.imageView.layer.cornerRadius = 4.0f;
+            cell.imageView.clipsToBounds = YES;
         }
         
-        GRKAlbum * albumAtIndexPath = (GRKAlbum*)[_albums objectAtIndex:indexPath.row];
-        [(UCAlbumsListCell*)cell setAlbum:albumAtIndexPath];
+        GRKAlbum * album = (GRKAlbum*)[_albums objectAtIndex:indexPath.row];
+        NSURL *thumbnailURL = [album.coverPhoto.imagesSortedByHeight[0] URL];
+        cell.textLabel.text = album.name;
+        cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Items: %d", nil), album.count];
+        [cell.imageView setImage:[[UIImage imageNamed:@"icon_url@2x.png"] imageByScalingToSize:CGSizeMake(64, 64)]];
+        if (thumbnailURL != nil) [cell.imageView setImageFromURL:thumbnailURL scaledToSize:CGSizeMake(64, 64)];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return cell;
 }
+
+
 
 #pragma mark - Table view delegate
 
