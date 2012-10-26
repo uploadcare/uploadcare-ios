@@ -7,29 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GRKServiceGrabber.h"
 
-enum {
-    UCAlbumsListStateInitial = 0,
-    UCAlbumsListStateConnecting,
-    UCAlbumsListStateConnected,
-    UCAlbumsListStateGrabbing,
-    UCAlbumsListStateAlbumsGrabbed,
-    UCAlbumsListStateAllAlbumsGrabbed,
-    UCAlbumsListStateError = 99
-};
-typedef NSUInteger UCAlbumsListState;
+@interface UCAlbumsList : UITableViewController
 
-
-@interface UCAlbumsList : UITableViewController {
-    GRKServiceGrabber * _grabber;
-    NSString * _serviceName;
-    NSMutableArray * _albums;
-    NSUInteger _lastLoadedPageIndex;
-    BOOL allAlbumsGrabbed;
-    UCAlbumsListState state;
-}
-
--(id) initWithGrabber:(id)grabber andServiceName:(NSString *)serviceName;
+- (id)initWithGrabber:(id)grabber serviceName:(NSString *)serviceName;
 
 @end

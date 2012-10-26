@@ -13,7 +13,26 @@
 #import "UIImage+UCHelpers.h"
 #import "QuartzCore/QuartzCore.h"
 
+enum {
+    UCAlbumsListStateInitial = 0,
+    UCAlbumsListStateConnecting,
+    UCAlbumsListStateConnected,
+    UCAlbumsListStateGrabbing,
+    UCAlbumsListStateAlbumsGrabbed,
+    UCAlbumsListStateAllAlbumsGrabbed,
+    UCAlbumsListStateError = 99
+};
+typedef NSUInteger UCAlbumsListState;
+
 @interface UCAlbumsList()
+
+@property GRKServiceGrabber *grabber;
+@property NSString *serviceName;
+@property NSMutableArray *albums;
+@property NSUInteger lastLoadedPageIndex;
+@property BOOL allAlbumsGrabbed;
+@property (nonatomic)  UCAlbumsListState state;
+
 - (void)grabMoreAlbums;
 - (void)setState:(UCAlbumsListState)newState;
 - (void)addLogoutButton;
@@ -23,28 +42,21 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
 
 @implementation UCAlbumsList
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
-
-- (id)initWithGrabber:(id)grabber andServiceName:(NSString *)serviceName {
+- (id)initWithGrabber:(id)grabber serviceName:(NSString *)serviceName {
     self = [super initWithNibName:@"UCAlbumsList" bundle:nil];
     if (self) {
         _grabber = grabber;
         _serviceName = serviceName;
         _albums = [[NSMutableArray alloc] init];
         _lastLoadedPageIndex = 0;
-        allAlbumsGrabbed = NO;
+        _allAlbumsGrabbed = NO;
         [self setState:UCAlbumsListStateInitial];
     }
     return self;
 }
 
 - (void)setState:(UCAlbumsListState)newState {
-    state = newState;
+    _state = newState;
     switch (newState) {
         case UCAlbumsListStateAlbumsGrabbed:
             [self.tableView reloadData];
@@ -59,66 +71,56 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
 - (void)addLogoutButton {
     if (self.navigationItem.rightBarButtonItem == nil) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Log out", nil)
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Sign out", nil)
                                                                                   style:UIBarButtonItemStyleDone
                                                                                  target:self action:@selector(logoutGrabberAndPopToRoot)];
     }
 }
 
+- (void)setupServiceConnection {
+    [(id<GRKServiceGrabberConnectionProtocol>)self.grabber isConnected:^(BOOL connected) {
+        if (!connected) {
+            [self setState:UCAlbumsListStateConnecting];
+            [(id<GRKServiceGrabberConnectionProtocol>)self.grabber connectWithConnectionIsCompleteBlock:^(BOOL connected) {
+                NSLog(@"+%@: line %d", NSStringFromSelector(_cmd), __LINE__);
+                if (connected) {
+                    [self setState:UCAlbumsListStateConnected];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self addLogoutButton];
+                        [self grabMoreAlbums];
+                    });
+                }
+            } andErrorBlock:^(NSError *error) {
+                [self setState:UCAlbumsListStateError];
+                NSLog(@" an error occured trying to connect the grabber : %@", error);
+            }];
+        } else {
+            /* already connected */
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self addLogoutButton];
+                [self grabMoreAlbums];
+            });
+        }
+    }];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    self.title = _serviceName;
-    if (state != UCAlbumsListStateInitial) {
+    self.title = self.serviceName;
+    if (self.state != UCAlbumsListStateInitial) {
         return;
     }
     
-    if ([_grabber conformsToProtocol:@protocol(GRKServiceGrabberConnectionProtocol)]) {
-        [(id<GRKServiceGrabberConnectionProtocol>)_grabber isConnected:^(BOOL connected) {
-            NSLog(@" grabber connected ? %d", connected);
-            
-            if (!connected) {
-                NSString * connectMessage = [NSString stringWithFormat:
-                                             NSLocalizedString(@"Uploadcare needs to open Safari to authentificate you on %@. ", nil),
-                                             _serviceName];
-                
-                UIAlertView * grabberNeedToConnect = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection", nil)
-                                                                                message:connectMessage
-                                                                               delegate:self
-                                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                                                      otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
-                [grabberNeedToConnect show];
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^(void){
-                    [self addLogoutButton];
-                    [self grabMoreAlbums];
-                });
-            }
-        }];
-    } else {
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            [self grabMoreAlbums];
-        });
-    }
+    [self setupServiceConnection];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [_grabber cancelAll];
+    [self.grabber cancelAll];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -136,8 +138,8 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSUInteger res = [_albums count];
-    if (state == UCAlbumsListStateAlbumsGrabbed || state == UCAlbumsListStateAllAlbumsGrabbed) {
+    NSUInteger res = [self.albums count];
+    if (self.state == UCAlbumsListStateAlbumsGrabbed || self.state == UCAlbumsListStateAllAlbumsGrabbed) {
         res++;
     }
     
@@ -147,22 +149,22 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = nil;
     
-    if (indexPath.row >= [_albums count]) {
+    if (indexPath.row >= [self.albums count]) {
         static NSString *CellIdentifier = @"ExtraCell";
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
-        if (!allAlbumsGrabbed) {
+        if (!self.allAlbumsGrabbed) {
             cell.textLabel.text = [NSString stringWithFormat:
                                    NSLocalizedString(@"%d Albums - Load More", nil),
-                                   [_albums count]];
+                                   [self.albums count]];
             cell.textLabel.font = [UIFont fontWithName:@"System" size:8];
         } else {
             cell.textLabel.text = [NSString stringWithFormat:
                                    NSLocalizedString(@"%d Albums", nil),
-                                   [_albums count]];
+                                   [self.albums count]];
             cell.textLabel.font = [UIFont fontWithName:@"System" size:8];
         }
     } else {
@@ -174,7 +176,7 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
             cell.imageView.clipsToBounds = YES;
         }
         
-        GRKAlbum * album = (GRKAlbum*)[_albums objectAtIndex:indexPath.row];
+        GRKAlbum * album = (GRKAlbum*)[self.albums objectAtIndex:indexPath.row];
         NSURL *thumbnailURL = [album.coverPhoto.imagesSortedByHeight[0] URL];
         cell.textLabel.text = album.name;
         cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Items: %d", nil), album.count];
@@ -192,11 +194,11 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
-    if (indexPath.row == [_albums count]  && !allAlbumsGrabbed) {
+    if (indexPath.row == [self.albums count]  && !self.allAlbumsGrabbed) {
         [self grabMoreAlbums];
-    } else if (indexPath.row <= [_albums count] - 1) {
-        GRKAlbum * albumAtIndexPath = [_albums objectAtIndex:indexPath.row];
-        UCPhotosList * photosList = [[UCPhotosList alloc] initWithNibName:@"UCPhotosList" bundle:nil andGrabber:_grabber andAlbum:albumAtIndexPath];
+    } else if (indexPath.row <= [self.albums count] - 1) {
+        GRKAlbum * albumAtIndexPath = [self.albums objectAtIndex:indexPath.row];
+        UCPhotosList * photosList = [[UCPhotosList alloc] initWithNibName:@"UCPhotosList" bundle:nil andGrabber:self.grabber andAlbum:albumAtIndexPath];
         [self.navigationController pushViewController:photosList animated:YES];
     }
 }
@@ -207,21 +209,6 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
     if (buttonIndex == alertView.cancelButtonIndex) {
         [self.navigationController popViewControllerAnimated:YES];
     } else {
-        [self setState:UCAlbumsListStateConnecting];
-        [(id<GRKServiceGrabberConnectionProtocol>)_grabber connectWithConnectionIsCompleteBlock:^(BOOL connected) {
-            NSLog(@"+%@: line %d", NSStringFromSelector(_cmd), __LINE__);
-            if (connected) {
-                [self setState:UCAlbumsListStateConnected];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self addLogoutButton];
-                    [self grabMoreAlbums];
-                });
-            }
-        } andErrorBlock:^(NSError *error) {
-            [self setState:UCAlbumsListStateError];
-            NSLog(@" an error occured trying to connect the grabber : %@", error);
-        }];
     }
 }
 
@@ -235,7 +222,7 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
         }
     }
     
-    [_grabber fillCoverPhotoOfAlbums:albumsWithoutCover withCompleteBlock:^(id result) {
+    [self.grabber fillCoverPhotoOfAlbums:albumsWithoutCover withCompleteBlock:^(id result) {
         [self.tableView reloadData];
     } andErrorBlock:^(NSError *error) {
     }];
@@ -244,16 +231,23 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
 - (void)grabMoreAlbums {
     [self setState:UCAlbumsListStateGrabbing];
     
-    NSLog(@" load albums for page %d", _lastLoadedPageIndex);
-    [_grabber albumsOfCurrentUserAtPageIndex:_lastLoadedPageIndex
+    NSLog(@" load albums for page %d", self.lastLoadedPageIndex);
+    [self.grabber albumsOfCurrentUserAtPageIndex:self.lastLoadedPageIndex
                    withNumberOfAlbumsPerPage:kNumberOfAlbumsPerPage
                             andCompleteBlock:^(NSArray *results) {
-                                _lastLoadedPageIndex+=1;
+                                self.lastLoadedPageIndex+=1;
+                                
+                                [results enumerateObjectsUsingBlock:^(id album, NSUInteger idx, BOOL *stop) {
+                                    NSLog(@"albums %@", album);
+                                    if ([album count] != 0) {
+                                        [self.albums addObject:album];
+                                    }
+                                }];
                                 
                                 [self loadCoverPhotoForAlbums:results];
                                 
                                 if ( [results count] < kNumberOfAlbumsPerPage ){
-                                    allAlbumsGrabbed = YES;
+                                    self.allAlbumsGrabbed = YES;
                                     [self setState:UCAlbumsListStateAllAlbumsGrabbed];
                                 } else {
                                     [self setState:UCAlbumsListStateAlbumsGrabbed];
@@ -266,9 +260,9 @@ NSUInteger kNumberOfAlbumsPerPage = 8;
 #pragma mark - Logout
 
 - (void)logoutGrabberAndPopToRoot {
-    [_grabber cancelAllWithCompleteBlock:^(NSArray *results) {
-        if ([_grabber conformsToProtocol:@protocol(GRKServiceGrabberConnectionProtocol)]) {
-            [(id<GRKServiceGrabberConnectionProtocol>)_grabber disconnectWithDisconnectionIsCompleteBlock:^(BOOL disconnected) {
+    [self.grabber cancelAllWithCompleteBlock:^(NSArray *results) {
+        if ([self.grabber conformsToProtocol:@protocol(GRKServiceGrabberConnectionProtocol)]) {
+            [(id<GRKServiceGrabberConnectionProtocol>)self.grabber disconnectWithDisconnectionIsCompleteBlock:^(BOOL disconnected) {
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }];
         } else {

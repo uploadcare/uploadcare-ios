@@ -337,25 +337,25 @@
             if ([indexPath row] == SECTION_SERVICES_FACEBOOK) {
                 GRKFacebookGrabber *grabber = [[GRKFacebookGrabber alloc] init];
                 UCAlbumsList *albumsList = [[UCAlbumsList alloc] initWithGrabber:grabber
-                                                                             andServiceName:[[dataSource objectForKey:[NSNumber numberWithInt:[indexPath section]]] objectAtIndex:[indexPath row]]];
+                                                                     serviceName:[[dataSource objectForKey:[NSNumber numberWithInt:[indexPath section]]] objectAtIndex:[indexPath row]]];
                 [self.navigationController pushViewController:albumsList animated:YES];
                 
             } else if ([indexPath row] == SECTION_SERVICES_FLICKR) {
                 GRKFlickrGrabber *grabber = [[GRKFlickrGrabber alloc] init];
                 UCAlbumsList *albumsList = [[UCAlbumsList alloc] initWithGrabber:grabber
-                                                                  andServiceName:[[dataSource objectForKey:[NSNumber numberWithInt:[indexPath section]]] objectAtIndex:[indexPath row]]];
+                                                                     serviceName:[[dataSource objectForKey:[NSNumber numberWithInt:[indexPath section]]] objectAtIndex:[indexPath row]]];
                 [self.navigationController pushViewController:albumsList animated:YES];
                 
             } else if ([indexPath row] == SECTION_SERVICES_INSTAGRAM) {
                 GRKInstagramGrabber *grabber = [[GRKInstagramGrabber alloc] init];
                 UCAlbumsList *albumsList = [[UCAlbumsList alloc] initWithGrabber:grabber
-                                                                  andServiceName:[[dataSource objectForKey:[NSNumber numberWithInt:[indexPath section]]] objectAtIndex:[indexPath row]]];
+                                                                     serviceName:[[dataSource objectForKey:[NSNumber numberWithInt:[indexPath section]]] objectAtIndex:[indexPath row]]];
                 [self.navigationController pushViewController:albumsList animated:YES];
                 
             } else if ([indexPath row] == SECTION_SERVICES_PICASA) {
                 GRKPicasaGrabber *grabber = [[GRKPicasaGrabber alloc] init];
                 UCAlbumsList *albumsList = [[UCAlbumsList alloc] initWithGrabber:grabber
-                                                                  andServiceName:[[dataSource objectForKey:[NSNumber numberWithInt:[indexPath section]]] objectAtIndex:[indexPath row]]];
+                                                                     serviceName:[[dataSource objectForKey:[NSNumber numberWithInt:[indexPath section]]] objectAtIndex:[indexPath row]]];
                 [self.navigationController pushViewController:albumsList animated:YES];
                 
             } else if ([indexPath row] == SECTION_SERVICES_URL) {
