@@ -199,6 +199,7 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
         cell = [tableView dequeueReusableCellWithIdentifier:photoCellIdentifier];
         if (cell == nil) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"UCPhotosListCell" owner:self options:nil] objectAtIndex:0];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [(UCPhotosListCell *)cell setPhotoList:self];
             [(UCPhotosListCell *)cell setServiceName:_grabber.serviceName];
         }
