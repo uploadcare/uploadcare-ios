@@ -6,7 +6,7 @@
 	url = https://github.com/johnezang/JSONKit.git
 [submodule "UploadcareWidget/vendors/GrabKit"]
 	path = UploadcareWidget/vendors/GrabKit
-	url = https://github.com/pierrotsmnrd/grabKit.git
+url=git@github.com:zrxq/grabKit.git
 [submodule "UploadcareWidget/vendors/JSNotifier"]
 	path = UploadcareWidget/vendors/JSNotifier
 	url = https://github.com/jonahsiegle/JSNotifier.git
