@@ -9,7 +9,7 @@
 #import "UCPhotosListCell.h"
 
 #import "UploadcareKit.h"
-#import "UploadcareKit+Deprecated.h"
+#import "UIImageView+UCHelpers.h"
 #import "UCPhotoViewController.h"
 
 #import "GRKPhoto.h"
@@ -60,7 +60,8 @@
 
 - (void)updateThumbnail:(UIImageView *)thumbnail withPhoto:(GRKPhoto *)photo {
     NSURL * thumbnailURL = [[photo imagesSortedByHeight][0] URL];
-    [UploadcareKit downloadImageAtURL:thumbnailURL withPlaceholder:[UIImage imageNamed:@"icon_url"] forImageView:thumbnail];
+    [thumbnail setImage:[UIImage imageNamed:@"icon_url"]];
+    [thumbnail setImageFromURL:thumbnailURL scaledToSize:CGSizeMake(75, 75)];
 }
 
 - (void)updateThumbnails {
