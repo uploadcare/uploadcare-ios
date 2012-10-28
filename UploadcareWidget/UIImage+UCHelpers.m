@@ -31,4 +31,11 @@
     return scaled;
 }
 
++ (UIImage *)blankImageWithSize:(CGSize)size {
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    UIImage *blank = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return blank;
+}
+
 @end

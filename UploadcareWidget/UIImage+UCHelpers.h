@@ -14,4 +14,9 @@
  Creates and returns an image object by scaling the receiver's content while preserving the original aspect ratio and cropping the remainder.
  */
 - (UIImage *)imageByScalingToSize:(CGSize)size;
+
+/**
+ Creates and returns an empty transparent image object of given dimensions.
+ */
++ (UIImage *)blankImageWithSize:(CGSize)size;
 @end
