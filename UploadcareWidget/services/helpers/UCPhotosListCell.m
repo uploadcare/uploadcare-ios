@@ -60,12 +60,7 @@
 
 - (void)updateThumbnail:(UIImageView *)thumbnail withPhoto:(GRKPhoto *)photo {
     NSURL * thumbnailURL = [[photo imagesSortedByHeight][0] URL];
-    [thumbnail setImage:[UIImage imageNamed:@"icon_url"]];
-    [thumbnail setImageFromURL:thumbnailURL scaledToSize:CGSizeMake(75, 75) successBlock:^(UIImage *image) {
-        // success
-    } failureBlock:^(NSError *error) {
-        // failure
-    }];
+    [thumbnail setImageFromURL:thumbnailURL scaledToSize:CGSizeMake(75, 75) placeholderImage:nil showActivityIndicator:YES withStyle:UIActivityIndicatorViewStyleGray];
 }
 
 - (void)updateThumbnails {

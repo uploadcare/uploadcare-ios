@@ -37,20 +37,51 @@ static const NSInteger kUCImageViewActivityIndicatorViewTag = 10812; // Random
     } successBlock:successBlock failureBlock:failureBlock];
 }
 
-- (void)showActivityIndicatorWithStyle:(UIActivityIndicatorViewStyle)style placeholderSize:(CGSize)size {
-    [self setImage:[UIImage blankImageWithSize:size]];
-    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:style];
+- (void)setImageFromURL:(NSURL *)url scaledToSize:(CGSize)size placeholderImage:(UIImage *)placeholderImage showActivityIndicator:(BOOL)showIndicator withStyle:(UIActivityIndicatorViewStyle)style {
+    if (!placeholderImage) {
+        placeholderImage = [UIImage blankImageWithSize:size];
+    }
+    [self setImage:placeholderImage];
+    UIActivityIndicatorView *indicator;
+    if (showIndicator) {
+        indicator = [self showActivityIndicatorWithStyle:style center:CGPointMake(placeholderImage.size.width / 2, placeholderImage.size.height / 2)];
+    }
+    [self setImageFromURL:url scaledToSize:size successBlock:^(UIImage *image) {
+        /* success */
+        [indicator removeFromSuperview];
+    } failureBlock:^(NSError *error) {
+        /* failure */
+        [indicator removeFromSuperview];
+        /* TODO: show failure image placeholder? */
+    }];
+}
+
+- (UIActivityIndicatorView*)activityIndicator {
+    UIView *allegedIndicator = [self viewWithTag:kUCImageViewActivityIndicatorViewTag];
+    if ([allegedIndicator isKindOfClass:[UIActivityIndicatorView class]]) {
+        return (UIActivityIndicatorView*)allegedIndicator;
+    }
+    return nil;
+}
+
+- (UIActivityIndicatorView *)showActivityIndicatorWithStyle:(UIActivityIndicatorViewStyle)style center:(CGPoint)center {
+    UIActivityIndicatorView *indicator;
+    if ((indicator = self.activityIndicator)) return indicator; // already exists, one is enough
+    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:style];
     indicator.tag = kUCImageViewActivityIndicatorViewTag;
-    indicator.center = CGPointMake(size.width / 2, size.height / 2);
+    indicator.center = center;
     [self addSubview:indicator];
     [indicator startAnimating];
+    return indicator;
+}
+
+- (UIActivityIndicatorView *)showActivityIndicatorWithStyle:(UIActivityIndicatorViewStyle)style placeholderSize:(CGSize)size {
+    [self setImage:[UIImage blankImageWithSize:size]];
+    return [self showActivityIndicatorWithStyle:style center:CGPointMake(size.width / 2, size.height / 2)];
 }
 
 - (void)removeActivityIndicator {
-    UIView *allegedIndicator = [self viewWithTag:kUCImageViewActivityIndicatorViewTag];
-    if ([allegedIndicator isKindOfClass:[UIActivityIndicatorView class]]) { /* just to be on the safe side */
-        [allegedIndicator removeFromSuperview];
-    }
+    [self.activityIndicator removeFromSuperview];
 }
 
 @end
