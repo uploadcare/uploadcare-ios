@@ -30,7 +30,7 @@ typedef NSUInteger UCAlbumsListState;
 @property NSString *serviceName;
 @property NSMutableArray *albums;
 @property NSUInteger lastLoadedPageIndex;
-@property (nonatomic)  UCAlbumsListState state;
+@property UCAlbumsListState state;
 
 - (void)grabMoreAlbums;
 - (void)addLogoutButton;
@@ -47,7 +47,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
         _serviceName = serviceName;
         _albums = [[NSMutableArray alloc] init];
         _lastLoadedPageIndex = 0;
-        [self setState:UCAlbumsListStateInitial];
+        _state = UCAlbumsListStateInitial;
     }
     return self;
 }
@@ -88,7 +88,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+        
     self.title = self.serviceName;
     
     switch (self.state) {
@@ -100,7 +100,8 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
         case UCAlbumsListStateGrabbing:
              /* resume retrieving albums (has been interrupted the last time) */
             [self grabMoreAlbums];
-            break;
+        case UCAlbumsListStateAllAlbumsGrabbed:
+            [self.tableView reloadData]; /* TODO: Instead of reloading the stuff, find empty cover photos and re-request */
             
         default:
             break;
@@ -129,6 +130,8 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *const kCellIdentifier = @"AlbumCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+    [cell.imageView removeActivityIndicator];
+    
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellIdentifier];
         cell.imageView.layer.cornerRadius = 4.0f;
@@ -139,8 +142,17 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
     NSURL *thumbnailURL = [album.coverPhoto.imagesSortedByHeight[0] URL];
     cell.textLabel.text = [album.albumId isEqualToString:@"me"] && !album.name ? @"Photos of You" : album.name;
     cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Items: %d", nil), album.count];
-    [cell.imageView setImage:[[UIImage imageNamed:@"icon_url@2x.png"] imageByScalingToSize:CGSizeMake(64, 64)]];
-    if (thumbnailURL != nil) [cell.imageView setImageFromURL:thumbnailURL scaledToSize:CGSizeMake(64, 64)];
+    CGSize kAlbumCoverThumbnailSize = CGSizeMake(64, 64);
+    /* show the activity indicator */
+    [cell.imageView showActivityIndicatorWithStyle:UIActivityIndicatorViewStyleGray placeholderSize:kAlbumCoverThumbnailSize];
+    if (thumbnailURL != nil) [cell.imageView setImageFromURL:thumbnailURL scaledToSize:kAlbumCoverThumbnailSize successBlock:^(UIImage *image) {
+        /* remove the activity indicator on success */
+        [cell.imageView removeActivityIndicator];
+    } failureBlock:^(NSError *error) {
+        /* ...and on error */
+        [cell.imageView removeActivityIndicator];
+        /* TODO: handle */
+    }];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
