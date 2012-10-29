@@ -100,8 +100,16 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
         case UCAlbumsListStateGrabbing:
              /* resume retrieving albums (has been interrupted the last time) */
             [self grabMoreAlbums];
-        case UCAlbumsListStateAllAlbumsGrabbed:
-            [self.tableView reloadData]; /* TODO: Instead of reloading the stuff, find empty cover photos and re-request */
+        case UCAlbumsListStateAllAlbumsGrabbed: {
+            /* load cover for albums without one */
+            NSMutableArray *albumsWithoutCover = [NSMutableArray arrayWithCapacity:self.albums.count];
+            [self.albums enumerateObjectsUsingBlock:^(GRKAlbum *album, NSUInteger idx, BOOL *stop) {
+                if (!album.coverPhoto) {
+                    [albumsWithoutCover addObject:album];
+                }
+            }];
+            [self loadCoverPhotosForAlbums:albumsWithoutCover];
+        }
             
         default:
             break;
