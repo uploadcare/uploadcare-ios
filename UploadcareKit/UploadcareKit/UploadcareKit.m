@@ -104,7 +104,7 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.
         failureBlock(error);
     }];
     
-    [operation setUploadProgressBlock:^(NSInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
         progressBlock(totalBytesWritten, totalBytesExpectedToWrite);
     }];
 

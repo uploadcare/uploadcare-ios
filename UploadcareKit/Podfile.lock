@@ -1,0 +1,17 @@
+
+DEPENDENCIES: 
+- AFNetworking (~> 1.0)
+- libPusher (~> 1.4)
+
+COCOAPODS: 0.15.2
+
+SPEC CHECKSUMS: 
+  AFNetworking: 4c11f857c9a18d65f4257c90a1e74ac49f0ac422
+  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
+  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
+
+PODS: 
+- AFNetworking (1.0.1)
+- SocketRocket (0.2.0)
+- libPusher (1.4): 
+  - SocketRocket

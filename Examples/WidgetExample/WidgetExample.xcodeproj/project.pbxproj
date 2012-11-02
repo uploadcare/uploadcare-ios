@@ -47,10 +47,6 @@
 		54B170FF1622F14C007A2175 /* icon_picasa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B170F91622F14C007A2175 /* icon_picasa@2x.png */; };
 		54B171001622F14C007A2175 /* icon_url@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B170FA1622F14C007A2175 /* icon_url@2x.png */; };
 		54B171021622F421007A2175 /* icon_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B171011622F421007A2175 /* icon_facebook@2x.png */; };
-		54B1DDB815D155860000B20B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B1DDB715D155860000B20B /* CFNetwork.framework */; };
-		54B1DDBA15D155900000B20B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B1DDB915D155900000B20B /* AssetsLibrary.framework */; };
-		54B1DDBC15D155970000B20B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B1DDBB15D155970000B20B /* Security.framework */; };
-		54B1DDBE15D1559F0000B20B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B1DDBD15D1559F0000B20B /* SystemConfiguration.framework */; };
 		54B1EA5A15D1876A0000B20B /* UploadcareServicesConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B1EA5915D1876A0000B20B /* UploadcareServicesConfigurator.m */; };
 		54B1EA5B15D1876A0000B20B /* UploadcareServicesConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B1EA5915D1876A0000B20B /* UploadcareServicesConfigurator.m */; };
 		54EE2B6615FE0B580053C97E /* button_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2B5E15FE0B580053C97E /* button_background.png */; };
@@ -71,12 +67,10 @@
 		54EE2BEE15FE43AC0053C97E /* UCPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EE2BEB15FE43AC0053C97E /* UCPhotoViewController.m */; };
 		54EE2BEF15FE43AC0053C97E /* UCPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2BEC15FE43AC0053C97E /* UCPhotoViewController.xib */; };
 		54EE2BF015FE43AC0053C97E /* UCPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54EE2BEC15FE43AC0053C97E /* UCPhotoViewController.xib */; };
-		6F284B9316382C43008BA2B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F284B9216382C42008BA2B7 /* QuartzCore.framework */; };
 		6F2C126E161F789200F9D54C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2C126D161F789200F9D54C /* Default-568h@2x.png */; };
 		6F2C1270161F78AB00F9D54C /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2C126F161F78AB00F9D54C /* libicucore.dylib */; };
 		6F5AB447163A93D700BF6192 /* UIImage+UCHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5AB444163A93D700BF6192 /* UIImage+UCHelpers.m */; };
 		6F5AB448163A93D700BF6192 /* UIImageView+UCHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5AB446163A93D700BF6192 /* UIImageView+UCHelpers.m */; };
-		6FB5DA54163174EF005A73CD /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FB5DA53163174EF005A73CD /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,10 +199,6 @@
 		54B170F91622F14C007A2175 /* icon_picasa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_picasa@2x.png"; sourceTree = "<group>"; };
 		54B170FA1622F14C007A2175 /* icon_url@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_url@2x.png"; sourceTree = "<group>"; };
 		54B171011622F421007A2175 /* icon_facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_facebook@2x.png"; sourceTree = "<group>"; };
-		54B1DDB715D155860000B20B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		54B1DDB915D155900000B20B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
-		54B1DDBB15D155970000B20B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		54B1DDBD15D1559F0000B20B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		54B1EA3215D17EA90000B20B /* grabKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = grabKit.xcodeproj; path = GrabKit/grabKit/grabKit.xcodeproj; sourceTree = "<group>"; };
 		54B1EA5815D1876A0000B20B /* UploadcareServicesConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadcareServicesConfigurator.h; sourceTree = "<group>"; };
 		54B1EA5915D1876A0000B20B /* UploadcareServicesConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadcareServicesConfigurator.m; sourceTree = "<group>"; };
@@ -252,14 +242,12 @@
 		6F284B791637F311008BA2B7 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		6F284B7A1637F311008BA2B7 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		6F284B7B1637F311008BA2B7 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		6F284B9216382C42008BA2B7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6F2C126D161F789200F9D54C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6F2C126F161F78AB00F9D54C /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		6F5AB443163A93D700BF6192 /* UIImage+UCHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+UCHelpers.h"; path = "../../../UploadcareWidget/UIImage+UCHelpers.h"; sourceTree = "<group>"; };
 		6F5AB444163A93D700BF6192 /* UIImage+UCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+UCHelpers.m"; path = "../../../UploadcareWidget/UIImage+UCHelpers.m"; sourceTree = "<group>"; };
 		6F5AB445163A93D700BF6192 /* UIImageView+UCHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+UCHelpers.h"; path = "../../../UploadcareWidget/UIImageView+UCHelpers.h"; sourceTree = "<group>"; };
 		6F5AB446163A93D700BF6192 /* UIImageView+UCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+UCHelpers.m"; path = "../../../UploadcareWidget/UIImageView+UCHelpers.m"; sourceTree = "<group>"; };
-		6FB5DA53163174EF005A73CD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,15 +255,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F284B9316382C43008BA2B7 /* QuartzCore.framework in Frameworks */,
-				6FB5DA54163174EF005A73CD /* MobileCoreServices.framework in Frameworks */,
 				6F2C1270161F78AB00F9D54C /* libicucore.dylib in Frameworks */,
 				541352A615FE5CC500E17A20 /* GrabKitLib.a in Frameworks */,
 				544E322915F9299400011290 /* libUploadcareKit.a in Frameworks */,
-				54B1DDBE15D1559F0000B20B /* SystemConfiguration.framework in Frameworks */,
-				54B1DDBC15D155970000B20B /* Security.framework in Frameworks */,
-				54B1DDBA15D155900000B20B /* AssetsLibrary.framework in Frameworks */,
-				54B1DDB815D155860000B20B /* CFNetwork.framework in Frameworks */,
 				5424F3FA15CC122600394084 /* UIKit.framework in Frameworks */,
 				5424F3FC15CC122600394084 /* Foundation.framework in Frameworks */,
 				5424F3FE15CC122600394084 /* CoreGraphics.framework in Frameworks */,
@@ -299,17 +281,11 @@
 		5424F3EA15CC122600394084 = {
 			isa = PBXGroup;
 			children = (
-				6F284B9216382C42008BA2B7 /* QuartzCore.framework */,
-				6FB5DA53163174EF005A73CD /* MobileCoreServices.framework */,
 				6F2C126F161F78AB00F9D54C /* libicucore.dylib */,
 				6F2C126D161F789200F9D54C /* Default-568h@2x.png */,
 				5413529D15FE5C2A00E17A20 /* GTMOAuth2ViewTouch.xib */,
 				5413529B15FE5C2000E17A20 /* GTMOAuth2Window.xib */,
 				5413529915FE5C1100E17A20 /* GTMOAuth2Framework-Info.plist */,
-				54B1DDBD15D1559F0000B20B /* SystemConfiguration.framework */,
-				54B1DDBB15D155970000B20B /* Security.framework */,
-				54B1DDB915D155900000B20B /* AssetsLibrary.framework */,
-				54B1DDB715D155860000B20B /* CFNetwork.framework */,
 				5424F3FF15CC122600394084 /* WidgetExample */,
 				5424F42315CC122700394084 /* WidgetExampleTests */,
 				5424F3F815CC122600394084 /* Frameworks */,
