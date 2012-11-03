@@ -488,12 +488,6 @@
 
 #pragma mark - Uploaded Tools
 
-- (IBAction)showOnlineFileList:(id)sender {
-    UploadedViewController *uploadedViewController = [[UploadedViewController alloc] init];
-    [uploadedViewController setShowLocal:NO];
-    [self presentModalViewController:uploadedViewController animated:YES];
-}
-
 - (IBAction)showUploaded:(id)sender {
     UploadedViewController *uploadedViewController = [[UploadedViewController alloc] init];
     [uploadedViewController setShowLocal:YES];
