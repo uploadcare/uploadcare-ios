@@ -13,7 +13,6 @@
 
 #import "GRKConfiguration.h"
 
-#import "GRKPicasaGrabber.h"
 #import "GRKFacebookGrabber.h"
 #import "GRKFlickrGrabber.h"
 #import "GRKInstagramGrabber.h"
@@ -21,7 +20,6 @@
 #import "GRKPhoto.h"
 #import "GRKImage.h"
 
-#import "UploadedViewController.h"
 #import "UploadCareProgressView.h"
 
 #import "JSNotifier.h"
@@ -107,8 +105,6 @@
                                NSLocalizedString(@"Facebook", nil),
                                NSLocalizedString(@"Flickr", nil),
                                NSLocalizedString(@"Instagram", nil),
-                               NSLocalizedString(@"Picasa", nil),
-//                               NSLocalizedString(@"From URL", nil),
                                nil]
                        forKey:[NSNumber numberWithInt:SECTION_SERVICES]];
         
@@ -348,12 +344,6 @@
                 
             } else if ([indexPath row] == SECTION_SERVICES_INSTAGRAM) {
                 GRKInstagramGrabber *grabber = [[GRKInstagramGrabber alloc] init];
-                UCAlbumsList *albumsList = [[UCAlbumsList alloc] initWithGrabber:grabber
-                                                                     serviceName:[[dataSource objectForKey:[NSNumber numberWithInt:[indexPath section]]] objectAtIndex:[indexPath row]]];
-                [self.navigationController pushViewController:albumsList animated:YES];
-                
-            } else if ([indexPath row] == SECTION_SERVICES_PICASA) {
-                GRKPicasaGrabber *grabber = [[GRKPicasaGrabber alloc] init];
                 UCAlbumsList *albumsList = [[UCAlbumsList alloc] initWithGrabber:grabber
                                                                      serviceName:[[dataSource objectForKey:[NSNumber numberWithInt:[indexPath section]]] objectAtIndex:[indexPath row]]];
                 [self.navigationController pushViewController:albumsList animated:YES];
