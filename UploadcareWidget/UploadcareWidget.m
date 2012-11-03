@@ -489,9 +489,7 @@
 #pragma mark - Uploaded Tools
 
 - (IBAction)showUploaded:(id)sender {
-    UploadedViewController *uploadedViewController = [[UploadedViewController alloc] init];
-    [uploadedViewController setShowLocal:YES];
-    [self presentModalViewController:uploadedViewController animated:YES];
+    /* TODO: ^ */
 }
 
 - (void)checkStorageAndUpdateStatus {
