@@ -1,0 +1,1 @@
+../../../../../UploadcareKit/UploadcareKit+Deprecated.h
