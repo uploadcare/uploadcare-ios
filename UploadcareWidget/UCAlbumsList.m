@@ -41,7 +41,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
 @implementation UCAlbumsList
 
 - (id)initWithGrabber:(id)grabber serviceName:(NSString *)serviceName {
-    self = [super initWithNibName:@"UCAlbumsList" bundle:nil];
+    self = [super initWithNibName:nil bundle:nil];
     if (self) {
         _grabber = grabber;
         _serviceName = serviceName;
@@ -63,7 +63,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
 }
 
 - (void)setupServiceConnection {
-    [(id<GRKServiceGrabberConnectionProtocol>)self.grabber isConnected:^(BOOL connected) {
+    if ([self.grabber conformsToProtocol:@protocol(GRKServiceGrabberConnectionProtocol)]) [(id<GRKServiceGrabberConnectionProtocol>)self.grabber isConnected:^(BOOL connected) {
         if (!connected) {
             [self setState:UCAlbumsListStateConnecting];
             [(id<GRKServiceGrabberConnectionProtocol>)self.grabber connectWithConnectionIsCompleteBlock:^(BOOL connected) {
@@ -83,7 +83,9 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
                 [self grabMoreAlbums];
             });
         }
-    }];
+    }]; else {
+        [self grabMoreAlbums];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -168,6 +170,10 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
 
 
 #pragma mark - Table view delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80.f;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];

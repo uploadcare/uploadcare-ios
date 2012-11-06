@@ -39,29 +39,7 @@
 		5424F41215CC122700394084 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController.xib; sourceTree = "<group>"; };
 		5424F41515CC122700394084 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController.xib; sourceTree = "<group>"; };
 		5424F41D15CC122700394084 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		5424F43D15CC133600394084 /* UploadcareWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UploadcareWidget.h; path = ../../../UploadcareWidget/UploadcareWidget.h; sourceTree = "<group>"; };
-		5424F43E15CC133600394084 /* UploadcareWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadcareWidget.m; path = ../../../UploadcareWidget/UploadcareWidget.m; sourceTree = "<group>"; };
-		5424F43F15CC133600394084 /* UploadcareWidget.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UploadcareWidget.xib; path = ../../../UploadcareWidget/UploadcareWidget.xib; sourceTree = "<group>"; };
-		54B170F51622F14C007A2175 /* icon_dropbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_dropbox@2x.png"; sourceTree = "<group>"; };
-		54B170F61622F14C007A2175 /* icon_flickr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_flickr@2x.png"; sourceTree = "<group>"; };
-		54B170F71622F14C007A2175 /* icon_google_drive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_google_drive@2x.png"; sourceTree = "<group>"; };
-		54B170F81622F14C007A2175 /* icon_instagram@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_instagram@2x.png"; sourceTree = "<group>"; };
-		54B170F91622F14C007A2175 /* icon_picasa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_picasa@2x.png"; sourceTree = "<group>"; };
-		54B170FA1622F14C007A2175 /* icon_url@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_url@2x.png"; sourceTree = "<group>"; };
-		54B171011622F421007A2175 /* icon_facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_facebook@2x.png"; sourceTree = "<group>"; };
-		54EE2B5E15FE0B580053C97E /* button_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_background.png; sourceTree = "<group>"; };
-		54EE2B5F15FE0B580053C97E /* icon_dropbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_dropbox.png; sourceTree = "<group>"; };
-		54EE2B6015FE0B580053C97E /* icon_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_facebook.png; sourceTree = "<group>"; };
-		54EE2B6115FE0B580053C97E /* icon_flickr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_flickr.png; sourceTree = "<group>"; };
-		54EE2B6215FE0B580053C97E /* icon_google_drive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_google_drive.png; sourceTree = "<group>"; };
-		54EE2B6315FE0B580053C97E /* icon_instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_instagram.png; sourceTree = "<group>"; };
-		54EE2B6415FE0B580053C97E /* icon_picasa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_picasa.png; sourceTree = "<group>"; };
-		54EE2B6515FE0B580053C97E /* icon_url.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_url.png; sourceTree = "<group>"; };
 		6F2C126D161F789200F9D54C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		6F5AB443163A93D700BF6192 /* UIImage+UCHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+UCHelpers.h"; path = "../../../UploadcareWidget/UIImage+UCHelpers.h"; sourceTree = "<group>"; };
-		6F5AB444163A93D700BF6192 /* UIImage+UCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+UCHelpers.m"; path = "../../../UploadcareWidget/UIImage+UCHelpers.m"; sourceTree = "<group>"; };
-		6F5AB445163A93D700BF6192 /* UIImageView+UCHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+UCHelpers.h"; path = "../../../UploadcareWidget/UIImageView+UCHelpers.h"; sourceTree = "<group>"; };
-		6F5AB446163A93D700BF6192 /* UIImageView+UCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+UCHelpers.m"; path = "../../../UploadcareWidget/UIImageView+UCHelpers.m"; sourceTree = "<group>"; };
 		7FDB555E90164E2FB78195FD /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		AF2A727567844E62AA06E09B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -115,7 +93,6 @@
 		5424F3FF15CC122600394084 /* WidgetExample */ = {
 			isa = PBXGroup;
 			children = (
-				5424F44215CC134400394084 /* UploadcareWidget */,
 				5424F40815CC122700394084 /* AppDelegate.h */,
 				5424F40915CC122700394084 /* AppDelegate.m */,
 				5424F40B15CC122700394084 /* MasterViewController.h */,
@@ -138,44 +115,6 @@
 				5424F40715CC122700394084 /* WidgetExample-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		5424F44215CC134400394084 /* UploadcareWidget */ = {
-			isa = PBXGroup;
-			children = (
-				54EE2B5D15FE0B580053C97E /* resources */,
-				5424F43D15CC133600394084 /* UploadcareWidget.h */,
-				5424F43E15CC133600394084 /* UploadcareWidget.m */,
-				5424F43F15CC133600394084 /* UploadcareWidget.xib */,
-				6F5AB443163A93D700BF6192 /* UIImage+UCHelpers.h */,
-				6F5AB444163A93D700BF6192 /* UIImage+UCHelpers.m */,
-				6F5AB445163A93D700BF6192 /* UIImageView+UCHelpers.h */,
-				6F5AB446163A93D700BF6192 /* UIImageView+UCHelpers.m */,
-			);
-			name = UploadcareWidget;
-			sourceTree = "<group>";
-		};
-		54EE2B5D15FE0B580053C97E /* resources */ = {
-			isa = PBXGroup;
-			children = (
-				54B171011622F421007A2175 /* icon_facebook@2x.png */,
-				54B170F51622F14C007A2175 /* icon_dropbox@2x.png */,
-				54B170F61622F14C007A2175 /* icon_flickr@2x.png */,
-				54B170F71622F14C007A2175 /* icon_google_drive@2x.png */,
-				54B170F81622F14C007A2175 /* icon_instagram@2x.png */,
-				54B170F91622F14C007A2175 /* icon_picasa@2x.png */,
-				54B170FA1622F14C007A2175 /* icon_url@2x.png */,
-				54EE2B5E15FE0B580053C97E /* button_background.png */,
-				54EE2B5F15FE0B580053C97E /* icon_dropbox.png */,
-				54EE2B6015FE0B580053C97E /* icon_facebook.png */,
-				54EE2B6115FE0B580053C97E /* icon_flickr.png */,
-				54EE2B6215FE0B580053C97E /* icon_google_drive.png */,
-				54EE2B6315FE0B580053C97E /* icon_instagram.png */,
-				54EE2B6415FE0B580053C97E /* icon_picasa.png */,
-				54EE2B6515FE0B580053C97E /* icon_url.png */,
-			);
-			name = resources;
-			path = ../../../UploadcareWidget/resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

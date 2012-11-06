@@ -9,7 +9,9 @@
 #import "MasterViewController.h"
 
 #import "DetailViewController.h"
-#import "UploadcareWidget.h"
+//#import "UploadcareWidget.h"
+#import "UCUploadNavigationController.h"
+#import "UCUploadViewController.h"
 
 @interface MasterViewController () {
     NSMutableArray *_objects;
@@ -61,10 +63,17 @@
 #pragma mark - Actions
 
 - (void)showUploadCare:(id)sender {
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[UploadcareWidget alloc] init]];
-    
-    [[self presentedViewController] setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    [self presentModalViewController:navigationController animated:YES];
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[UploadcareWidget alloc] init]];
+//    
+//    [[self presentedViewController] setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+//    [self presentModalViewController:navigationController animated:YES];
+//
+//    return;
+
+    UCUploadViewController *uploadcareViewController = [[UCUploadViewController alloc]init];
+    UINavigationController *uploadcare = [[UINavigationController alloc]initWithRootViewController:uploadcareViewController];
+//    [self presentViewController:uploadcare animated:YES completion:nil];
+    [self presentModalViewController:uploadcare animated:YES];
 }
 
 #pragma mark - Table View
