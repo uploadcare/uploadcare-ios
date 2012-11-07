@@ -9,7 +9,6 @@
 #import "MasterViewController.h"
 
 #import "DetailViewController.h"
-//#import "UploadcareWidget.h"
 #import "UCUploadNavigationController.h"
 #import "UCUploadViewController.h"
 
@@ -35,7 +34,7 @@
 
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showUploadCare:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showUploadcare:)];
     self.navigationItem.rightBarButtonItem = addButton;
 }
 
@@ -50,30 +49,28 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-- (void)insertNewObject:(id)sender
+- (void)insertFileId:(NSString *)fileId
 {
     if (!_objects) {
         _objects = [[NSMutableArray alloc] init];
     }
-    [_objects insertObject:[NSDate date] atIndex:0];
+    [_objects insertObject:fileId atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - Actions
 
-- (void)showUploadCare:(id)sender {
-//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[UploadcareWidget alloc] init]];
-//    
-//    [[self presentedViewController] setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-//    [self presentModalViewController:navigationController animated:YES];
-//
-//    return;
-
-    UCUploadViewController *uploadcareViewController = [[UCUploadViewController alloc]init];
-    UINavigationController *uploadcare = [[UINavigationController alloc]initWithRootViewController:uploadcareViewController];
-//    [self presentViewController:uploadcare animated:YES completion:nil];
-    [self presentModalViewController:uploadcare animated:YES];
+- (void)showUploadcare:(id)sender {
+    UCUploadNavigationController *uploadcare = [[UCUploadNavigationController alloc]initWithUploadcarePublicKey:@"demopublickey"];
+    [uploadcare setUploadCompletionBlock:^(NSString *fileId) {
+        NSLog(@"Done uploading! fileId: %@", fileId);
+        [self insertFileId:fileId];
+    }];
+    [uploadcare setUploadFailureBlock:^(NSError *error) {
+        NSLog(@"Oops :(");
+    }];
+    [self presentViewController:uploadcare animated:YES completion:nil];
 }
 
 #pragma mark - Table View

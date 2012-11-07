@@ -1,48 +1,51 @@
 
-EXTERNAL SOURCES: 
-  uploadcare-ios: 
-    :local: ../../
-
-DEPENDENCIES: 
-- uploadcare-ios (from `../../')
-
 PODS: 
-- AFNetworking (1.0)
+- AFNetworking (1.0.1)
 - Facebook-iOS-SDK (3.1.1)
 - ISO8601DateFormatter (0.6)
+- MBProgressHUD (HEAD based on 0.5)
 - SocketRocket (0.2.0)
-- grabKit (0.0.1): 
-  - grabKit/device (= 0.0.1)
-  - grabKit/facebook (= 0.0.1)
-  - grabKit/flickr (= 0.0.1)
-  - grabKit/instagram (= 0.0.1)
-- grabKit/device (0.0.1)
-- grabKit/facebook (0.0.1): 
+- grabKit (1.2): 
+  - grabKit/device (= 1.2)
+  - grabKit/facebook (= 1.2)
+  - grabKit/flickr (= 1.2)
+  - grabKit/instagram (= 1.2)
+- grabKit/device (1.2)
+- grabKit/facebook (1.2): 
   - Facebook-iOS-SDK (= 3.1.1)
   - ISO8601DateFormatter (= 0.6)
-- grabKit/flickr (0.0.1): 
+- grabKit/flickr (1.2): 
   - objectiveflickr (= 2.0.2)
-- grabKit/instagram (0.0.1)
+- grabKit/instagram (1.2)
 - libPusher (1.4): 
   - SocketRocket
 - objectiveflickr (2.0.2)
 - uploadcare-ios (0.0.1): 
-  - AFNetworking (= 1.0)
-  - grabKit (= 0.0.1)
-  - libPusher (= 1.4)
+  - AFNetworking (~> 1.0)
+  - MBProgressHUD (HEAD)
+  - grabKit (= 1.2)
+  - libPusher (~> 1.4)
+
+SPEC CHECKSUMS: 
+  grabKit/flickr: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
+  MBProgressHUD: b23ee11c42253d6d804e8e0bfabdc334e8b2571f
+  uploadcare-ios: fbb37c253fba9d3e4342b2f3e6ee2ae130db206c
+  grabKit/instagram: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
+  grabKit/device: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
+  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
+  grabKit/facebook: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
+  AFNetworking: 4c11f857c9a18d65f4257c90a1e74ac49f0ac422
+  ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780
+  objectiveflickr: 8698a6f399feb7c05216aa24cb2810881b2078f2
+  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
+  Facebook-iOS-SDK: 5fc068ebfd8c8c9b0fad476bc36dbbf1fffeebc8
+  grabKit: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
+
+DEPENDENCIES: 
+- uploadcare-ios (from `../../')
 
 COCOAPODS: 0.15.2
 
-SPEC CHECKSUMS: 
-  uploadcare-ios: d59aa285ca1cbf7da47e7654f7915affa87b890a
-  grabKit: 0e08ed6ee0323c1208463883d82efa4ef29e2a47
-  objectiveflickr: 8698a6f399feb7c05216aa24cb2810881b2078f2
-  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
-  grabKit/facebook: 0e08ed6ee0323c1208463883d82efa4ef29e2a47
-  grabKit/device: 0e08ed6ee0323c1208463883d82efa4ef29e2a47
-  Facebook-iOS-SDK: 5fc068ebfd8c8c9b0fad476bc36dbbf1fffeebc8
-  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
-  AFNetworking: 758a1cb1ab5a0d22795ba1c44abb9cad395bc126
-  grabKit/instagram: 0e08ed6ee0323c1208463883d82efa4ef29e2a47
-  ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780
-  grabKit/flickr: 0e08ed6ee0323c1208463883d82efa4ef29e2a47
+EXTERNAL SOURCES: 
+  uploadcare-ios: 
+    :local: ../../

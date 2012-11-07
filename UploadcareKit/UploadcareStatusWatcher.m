@@ -25,8 +25,8 @@ static const NSTimeInterval UCSWPollRate = 1. / 4;
 
 @interface UploadcareStatusWatcher ()
 
-@property NSString *token;
-@property PTPusher *pusher;
+@property (strong) NSString *token;
+@property (strong) PTPusher *pusher;
 @property NSTimeInterval pusherTimeout;
 
 @property (strong) UploadcareProgressBlock progressBlock;

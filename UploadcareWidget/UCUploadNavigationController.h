@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UploadcareKit.h>
 
 @interface UCUploadNavigationController : UINavigationController
 
-@property NSString *title;
+@property (strong) NSString *navigationTitle;
+- (id)initWithUploadcarePublicKey:(NSString *)publicKey;
 
+- (void)setUploadFailureBlock:(UploadcareFailureBlock)failureBlock;
+- (void)setUploadCompletionBlock:(UploadcareSuccessBlock)completionBlock;
 @end
+

@@ -9,14 +9,13 @@
 #import "UCPhotosListCell.h"
 
 #import "UploadcareKit.h"
+#import "UCUploader.h"
 #import "UIImageView+UCHelpers.h"
-#import "UCPhotoViewController.h"
 
 #import "GRKPhoto.h"
 #import "GRKImage.h"
 
-#define UPLOADCARE_NEW_IMAGE_NOTIFICATION @"Uploadcare should upload new image"
-
+#define UCImageWillUploadNotification @"UCImageWillUploadNotification" // FIXME extern const NSString
 
 @interface UCPhotosListCell()
 - (void)updateThumbnails;
@@ -90,18 +89,9 @@
     UITapGestureRecognizer *tapGesture = (UITapGestureRecognizer *)sender;
     UIImageView *tappedImageView = (UIImageView *)[tapGesture view];
     GRKPhoto *photo = (GRKPhoto *)[_photos objectAtIndex:[tappedImageView tag]];
-    NSLog(@"+%@: line %d : tag = '%d', name '%@', id '%@'", NSStringFromSelector(_cmd), __LINE__, [tappedImageView tag], photo.name, photo.photoId);
-    
-    NSDictionary *object = @{
-        @"imageURL" : photo.originalImage.URL,
-        @"photoId" : photo.photoId ? photo.photoId : [NSNull null],
-        @"photoName" : photo.name ? photo.name : [NSNull null],
-        @"serviceName" : self.serviceName ? self.serviceName : [NSNull null],
-    };
-    
-    [self.photoList.navigationController popToRootViewControllerAnimated:YES];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:UPLOADCARE_NEW_IMAGE_NOTIFICATION object:object];
+    [self.photoList.navigationController dismissViewControllerAnimated:YES completion:^{
+        UCUploadFile([photo.imagesSortedByHeight.lastObject URL].absoluteString, self.photoList.albumList.uploadCompletionBlock, self.photoList.albumList.uploadFailureBlock);
+    }];
 }
 
 @end

@@ -10,22 +10,29 @@
 #import "UCUploadViewController.h"
 
 @interface UCUploadNavigationController ()
-@property UCUploadViewController *uploadViewController;
+@property (strong) UCUploadViewController *uploadViewController;
 @end
 
 @implementation UCUploadNavigationController
 
-- (id)init {
-    self.uploadViewController = nil;//[[UCUploadViewController alloc]init];
-    return [super initWithRootViewController:_uploadViewController];
+- (id)initWithUploadcarePublicKey:(NSString *)publicKey {
+    self = [super init];
+    if (self) {
+        _uploadViewController = [[UCUploadViewController alloc]init];
+        [[UploadcareKit shared]setPublicKey:publicKey];
+        self.viewControllers = @[_uploadViewController];
+    }
+    return self;
 }
 
-- (void)setTitle:(NSString *)title {
-    self.uploadViewController.title = title;
+#pragma mark - forwarding bussiness
+
+- (void)setUploadCompletionBlock:(UploadcareSuccessBlock)completionBlock {
+    [self.uploadViewController setUploadCompletionBlock:completionBlock];
 }
 
-- (NSString*)title {
-    return self.uploadViewController.title;
+- (void)setUploadFailureBlock:(UploadcareFailureBlock)failureBlock {
+    [self.uploadViewController setUploadFailureBlock:failureBlock];
 }
 
 @end

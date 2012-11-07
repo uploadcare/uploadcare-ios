@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "GRKServiceGrabber.h"
 #import "GRKAlbum.h"
+
+#import "UCAlbumsList.h"
 
 enum {
     UCPhotosListStateInitial = 0,
@@ -29,6 +32,8 @@ typedef NSUInteger UCPhotosListState;
     NSUInteger _lastLoadedPageIndex;
     NSUInteger _nextPageIndexToLoad;
 }
+
+@property (weak) UCAlbumsList *albumList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andGrabber:(GRKServiceGrabber*)grabber andAlbum:(GRKAlbum*)album;
 

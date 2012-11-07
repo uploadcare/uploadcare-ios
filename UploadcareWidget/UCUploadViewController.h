@@ -6,12 +6,17 @@
 //  Copyright (c) 2012 Uploadcare. All rights reserved.
 //
 
+#import <UploadcareKit.h>
+
 #import "UCMenuViewController.h"
 
-@interface UCUploadViewController : UCMenuViewController
+@interface UCUploadViewController : UCMenuViewController<UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
+@property (nonatomic) NSString *navigationTitle;
 
 - (id)init;
 
-@property (nonatomic) NSString *navigationTitle;
+@property (strong) UploadcareSuccessBlock uploadCompletionBlock;
+@property (strong) UploadcareFailureBlock uploadFailureBlock;
 
 @end

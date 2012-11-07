@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UploadcareKit.h>
 
 @interface UCAlbumsList : UITableViewController
+
+@property (weak) UploadcareSuccessBlock uploadCompletionBlock;
+@property (weak) UploadcareFailureBlock uploadFailureBlock;
 
 - (id)initWithGrabber:(id)grabber serviceName:(NSString *)serviceName;
 

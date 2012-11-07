@@ -16,22 +16,24 @@
 #import "GRKFlickrGrabber.h"
 #import "GRKInstagramGrabber.h"
 
+#import "UCUploader.h"
+#import "UCHUD.h"
+
 @interface UCUploadViewController ()
-@property GRKServiceGrabber *grabber;
-@property UCAlbumsList *albumList;
+@property (strong) GRKServiceGrabber *grabber;
+@property (strong) UCAlbumsList *albumList;
 @end
 
 @implementation UCUploadViewController
 
 + (void)initialize {
-//    [GRKConfiguration initializeWithConfigurator:[[UploadcareServicesConfigurator alloc]init]];
+    [GRKConfiguration initializeWithConfigurator:[[UploadcareServicesConfigurator alloc]init]];
 }
 
 - (id)init {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         /* ... */
-        [GRKConfiguration initializeWithConfiguratorClassName:@"UploadcareServicesConfigurator"];
     }
     
     return self;
@@ -64,13 +66,16 @@
         _menuItems = @[
                 @{@"items": @[
                     @{ @"textLabel.text"          : @"Snap a Photo",
+                       @"textLabel.enabled"       : @([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]),
                        @"textLabel.textAlignment" : @(NSTextAlignmentCenter),
-                       @"action"                  : @"uploadFromCamera"
+                       @"action"                  : @"uploadFromCamera",
+                       @"accessoryType"           : @(UITableViewCellAccessoryNone),
                      },
 
                     @{ @"textLabel.text"          : @"Select from Library",
+                       @"textLabel.enabled"       : @([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]),
                        @"textLabel.textAlignment" : @(NSTextAlignmentCenter),
-                       @"action"                  : @"uploadFromLibrary"
+                       @"action"                  : @"uploadFromLibrary",
                      },
                  ],
                 },
@@ -94,10 +99,10 @@
                        @"accessoryType"   : @(UITableViewCellAccessoryDisclosureIndicator),
                      },
 
-                    @{ @"textLabel.text"  : @"Internet Link",
+                    @{ @"textLabel.text"  : @"Internet Address",
                        @"imageView.image" : [UIImage imageNamed:@"icon_url"],
                        @"action"          : @"uploadFromURL",
-                       @"accessoryType"   : @(UITableViewCellAccessoryDisclosureIndicator),
+                       @"accessoryType"   : @(UITableViewCellAccessoryNone),
                      },
 
                  ],
@@ -114,41 +119,80 @@
 
 #pragma mark - Menu handlers
 
+- (void)presentImagePickerWithSourceType:(UIImagePickerControllerSourceType)sourceType {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    imagePicker.sourceType = sourceType;
+    imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
+    imagePicker.delegate = self;
+    [self presentModalViewController:imagePicker animated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:NO completion:^{
+        [self dismissViewControllerAnimated:YES completion:^{
+            [UCHUD setProgress:0];
+            [UCHUD setText:NSLocalizedString(@"Uploading", @"Upload HUD text")];
+            [UCHUD show];
+            [[UploadcareKit shared]uploadFileWithName:info[UIImagePickerControllerReferenceURL] data:UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage], 1) contentType:@"image/jpeg" progressBlock:^(long long bytesDone, long long bytesTotal) {
+                [UCHUD setProgress:(float)bytesDone / bytesTotal];
+            } successBlock:^(NSString *fileId) {
+                [UCHUD dismiss];
+                self.uploadCompletionBlock(fileId);
+            } failureBlock:^(NSError *error) {
+                [UCHUD dismiss];
+                self.uploadFailureBlock(error);
+            }];
+        }];
+     }];
+}
+
 - (void)uploadFromCamera {
-    
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) return;
+    [self presentImagePickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
 }
 
 - (void)uploadFromLibrary {
-    /* TODO: reuse grabbers? */
-    self.grabber = [[GRKDeviceGrabber alloc] init];
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) return;
+    [self presentImagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+- (void)uploadFromServiceNamed:(NSString*)serviceName withGrabberClass:(Class)grabberClass  {
+    /* TODO: reuse grabbers? like, NSDictonary of class:singletonInstance */
+    self.grabber = [[grabberClass alloc]init];
     self.albumList = [[UCAlbumsList alloc] initWithGrabber:self.grabber
-                                                         serviceName:@"Library"];
+                                               serviceName:serviceName];
+    self.albumList.uploadCompletionBlock = self.uploadCompletionBlock;
+    self.albumList.uploadFailureBlock = self.uploadFailureBlock;
     [self.navigationController pushViewController:self.albumList animated:YES];
 }
 
 - (void)uploadFromFacebook {
-    self.grabber = [[GRKFacebookGrabber alloc] init];
-    self.albumList = [[UCAlbumsList alloc] initWithGrabber:self.grabber
-                                                         serviceName:@"Facebook"];
-    [self.navigationController pushViewController:self.albumList animated:YES];
+    [self uploadFromServiceNamed:@"Facebook" withGrabberClass:[GRKFacebookGrabber class]];
 }
 
 - (void)uploadFromFlickr {
-    self.grabber = [[GRKFlickrGrabber alloc] init];
-    self.albumList = [[UCAlbumsList alloc] initWithGrabber:self.grabber
-                                                         serviceName:@"Flickr"];
-    [self.navigationController pushViewController:self.albumList animated:YES];
+    [self uploadFromServiceNamed:@"Flickr" withGrabberClass:[GRKFlickrGrabber class]];
 }
 
 - (void)uploadFromInstagram {
-    self.grabber = [[GRKInstagramGrabber alloc] init];
-    self.albumList = [[UCAlbumsList alloc] initWithGrabber:self.grabber
-                                                         serviceName:@"Instagram"];
-    [self.navigationController pushViewController:self.albumList animated:YES];
+    [self uploadFromServiceNamed:@"Instagram" withGrabberClass:[GRKInstagramGrabber class]];
 }
 
 - (void)uploadFromURL {
-    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Upload from the Internet", @"Upload from URL dialog title") message:NSLocalizedString(@"Where do you want it uploaded from?", @"Upload from URL subtitle/message text") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Upload from URL dialog CANCEL button") otherButtonTitles: NSLocalizedString(@"Upload", @"Upload from URL dialog ACTION button"), nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField * URLTextField = [alert textFieldAtIndex:0];
+    URLTextField.keyboardType = UIKeyboardTypeURL;
+    URLTextField.placeholder = NSLocalizedString(@"http://", @"Placeholder for the Upload from URL dialog");
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (!buttonIndex) return; // cancelled
+    [self dismissViewControllerAnimated:YES completion:^{
+        NSString *fileURL = [[alertView textFieldAtIndex:0] text];
+        UCUploadFile(fileURL, self.uploadCompletionBlock, self.uploadFailureBlock);
+    }];
 }
 
 @end
