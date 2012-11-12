@@ -1,4 +1,26 @@
 
+SPEC CHECKSUMS: 
+  Facebook-iOS-SDK: 5fc068ebfd8c8c9b0fad476bc36dbbf1fffeebc8
+  MBProgressHUD: b23ee11c42253d6d804e8e0bfabdc334e8b2571f
+  objectiveflickr: 8698a6f399feb7c05216aa24cb2810881b2078f2
+  grabKit/device: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
+  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
+  ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780
+  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
+  uploadcare-ios: fbb37c253fba9d3e4342b2f3e6ee2ae130db206c
+  grabKit/flickr: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
+  grabKit/facebook: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
+  AFNetworking: 4c11f857c9a18d65f4257c90a1e74ac49f0ac422
+  grabKit/instagram: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
+  grabKit: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
+
+EXTERNAL SOURCES: 
+  uploadcare-ios: 
+    :local: ../../
+
+DEPENDENCIES: 
+- uploadcare-ios (from `../../')
+
 PODS: 
 - AFNetworking (1.0.1)
 - Facebook-iOS-SDK (3.1.1)
@@ -26,26 +48,4 @@ PODS:
   - grabKit (= 1.2)
   - libPusher (~> 1.4)
 
-SPEC CHECKSUMS: 
-  grabKit/flickr: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
-  MBProgressHUD: b23ee11c42253d6d804e8e0bfabdc334e8b2571f
-  uploadcare-ios: fbb37c253fba9d3e4342b2f3e6ee2ae130db206c
-  grabKit/instagram: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
-  grabKit/device: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
-  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
-  grabKit/facebook: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
-  AFNetworking: 4c11f857c9a18d65f4257c90a1e74ac49f0ac422
-  ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780
-  objectiveflickr: 8698a6f399feb7c05216aa24cb2810881b2078f2
-  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
-  Facebook-iOS-SDK: 5fc068ebfd8c8c9b0fad476bc36dbbf1fffeebc8
-  grabKit: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
-
-DEPENDENCIES: 
-- uploadcare-ios (from `../../')
-
 COCOAPODS: 0.15.2
-
-EXTERNAL SOURCES: 
-  uploadcare-ios: 
-    :local: ../../

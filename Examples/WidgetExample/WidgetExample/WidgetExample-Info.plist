@@ -59,8 +59,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb442253875803433</string>
-				<string>uploadcareinstagramdemo</string>
-				<string>uploadcareflickrtestapp</string>
+				<string>com.uploadcare.WidgetExample</string>
 			</array>
 		</dict>
 	</array>

@@ -12,9 +12,14 @@
 @interface UCUploadNavigationController : UINavigationController
 
 @property (strong) NSString *navigationTitle;
+
 - (id)initWithUploadcarePublicKey:(NSString *)publicKey;
 
 - (void)setUploadFailureBlock:(UploadcareFailureBlock)failureBlock;
 - (void)setUploadCompletionBlock:(UploadcareSuccessBlock)completionBlock;
+
+- (void)enableFlickrWithAPIKey:(NSString *)flickrAPIKey flickrAPISecret:(NSString *)flickrAPISecret;
+
+
 @end
 

@@ -8,7 +8,7 @@
 
 #import "UCUploadViewController.h"
 #import "UCAlbumsList.h"
-#import "UploadcareServicesConfigurator.h"
+#import "UCGrabkitConfigurator.h"
 
 #import "GRKConfiguration.h"
 #import "GRKDeviceGrabber.h"
@@ -27,7 +27,7 @@
 @implementation UCUploadViewController
 
 + (void)initialize {
-    [GRKConfiguration initializeWithConfigurator:[[UploadcareServicesConfigurator alloc]init]];
+    [GRKConfiguration initializeWithConfigurator:[UCGrabkitConfigurator shared]];
 }
 
 - (id)init {
@@ -60,10 +60,10 @@
 #pragma mark - Menu declaration
 
 + (NSArray *)menuItems {
-    static NSArray* _menuItems;
+    static NSMutableArray* _menuItems;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _menuItems = @[
+        _menuItems = [NSMutableArray arrayWithArray:@[
                 @{@"items": @[
                     @{ @"textLabel.text"          : @"Snap a Photo",
                        @"textLabel.enabled"       : @([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]),
@@ -79,36 +79,51 @@
                      },
                  ],
                 },
-
-                @{@"items": @[
+          ]];
+        
+        NSMutableArray *serviceSectionItems = [NSMutableArray array];
+        
+        if ([[UCGrabkitConfigurator shared] facebookIsEnabled]) {
+            [serviceSectionItems addObject:
                     @{ @"textLabel.text"  : @"Facebook",
                        @"imageView.image" : [UIImage imageNamed:@"icon_facebook"],
                        @"action"          : @"uploadFromFacebook",
                        @"accessoryType"   : @(UITableViewCellAccessoryDisclosureIndicator),
-                     },
-
+                     }
+             ];
+        }
+            
+        if ([[UCGrabkitConfigurator shared] flickrIsEnabled]) {
+            [serviceSectionItems addObject:
                     @{ @"textLabel.text"  : @"Flickr",
                        @"imageView.image" : [UIImage imageNamed:@"icon_flickr"],
                        @"action"          : @"uploadFromFlickr",
                        @"accessoryType"   : @(UITableViewCellAccessoryDisclosureIndicator),
-                     },
-
+                     }
+             ];
+         }
+        
+        if ([[UCGrabkitConfigurator shared] instagramIsEnabled]) {
+            [serviceSectionItems addObject:
                     @{ @"textLabel.text"  : @"Instagram",
                        @"imageView.image" : [UIImage imageNamed:@"icon_instagram"],
                        @"action"          : @"uploadFromInstagram",
                        @"accessoryType"   : @(UITableViewCellAccessoryDisclosureIndicator),
-                     },
-
+                     }
+             ];
+        }
+        
+        [serviceSectionItems addObject:
                     @{ @"textLabel.text"  : @"Internet Address",
                        @"imageView.image" : [UIImage imageNamed:@"icon_url"],
                        @"action"          : @"uploadFromURL",
                        @"accessoryType"   : @(UITableViewCellAccessoryNone),
-                     },
-
-                 ],
-                 @"footer" : @"Powered by Uploadcare",
-                },
-        ];
+                     }
+         ];
+        
+        [_menuItems addObject:@{@"items":serviceSectionItems, @"footer":@"Powered by Uploadcare"}];
+        
+        
     });
     return _menuItems;
 }

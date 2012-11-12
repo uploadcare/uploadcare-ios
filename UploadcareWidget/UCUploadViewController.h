@@ -19,4 +19,8 @@
 @property (strong) UploadcareSuccessBlock uploadCompletionBlock;
 @property (strong) UploadcareFailureBlock uploadFailureBlock;
 
+@property BOOL flickrIsEnabled;
+@property BOOL facebookIsEnabled;
+@property BOOL instagramIsEnabled;
+
 @end
