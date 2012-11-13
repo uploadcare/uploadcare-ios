@@ -200,13 +200,18 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
         NSArray *albumsUpdated = (NSArray*)result;
         NSMutableArray *indicesToReload = [NSMutableArray arrayWithCapacity:albumsUpdated.count];
         for (GRKAlbum *album in albumsUpdated) {
-            if (!album.coverPhoto) continue;
             NSUInteger idx = [self.albums indexOfObject:album];
             if (idx == NSNotFound) {
-                NSLog(@"Warning: Received a cover photo for an unknown album '%@'", album.name);
+                if (album.coverPhoto != nil)
+                    NSLog(@"Warning: Received a cover photo for an unknown album '%@'", album.name);
                 continue;
             }
-            if (album.coverPhoto != nil) [indicesToReload addObject:[NSIndexPath indexPathForRow:idx inSection:0]];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
+            /* there's a cover photo, update the row */
+            if (album.coverPhoto != nil) [indicesToReload addObject:indexPath];
+            /* coverPhoto == nil, just remove the activity indicator */
+            else [[[self.tableView cellForRowAtIndexPath:indexPath]imageView]removeActivityIndicator];
+            
         }
         [self.tableView reloadRowsAtIndexPaths:indicesToReload withRowAnimation:UITableViewRowAnimationFade];
     } andErrorBlock:^(NSError *error) {
