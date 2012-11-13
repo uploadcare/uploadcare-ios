@@ -18,6 +18,7 @@
 - (void)setUploadFailureBlock:(UploadcareFailureBlock)failureBlock;
 - (void)setUploadCompletionBlock:(UploadcareSuccessBlock)completionBlock;
 
+- (void)enableFacebook;
 - (void)enableFlickrWithAPIKey:(NSString *)flickrAPIKey flickrAPISecret:(NSString *)flickrAPISecret;
 - (void)enableInstagramWithAppId:(NSString *)instagramAppId;
 

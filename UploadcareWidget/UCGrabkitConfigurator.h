@@ -14,6 +14,8 @@
 + (id)shared;
 
 @property BOOL facebookIsEnabled;
+@property (strong) NSString *facebookAppId;
+@property (readonly) NSString *facebookTaggedPhotosAlbumName;
 
 @property BOOL flickrIsEnabled;
 @property (strong) NSString *flickrApiKey;

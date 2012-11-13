@@ -14,6 +14,9 @@
 @property (strong) UCUploadViewController *uploadViewController;
 @end
 
+NSString *const UCFacebookMisconfigurationException = @"UCFacebookConfiguratioException";
+NSString *const UCGenericURLSchemaNotConfiguredException = @"UCGenericURLSchemaNotConfiguredException";
+
 @implementation UCUploadNavigationController
 
 - (id)initWithUploadcarePublicKey:(NSString *)publicKey {
@@ -39,12 +42,12 @@
 #pragma mark - URL scheme handling related utilities
 /* TODO: Move this elsewhere */
 
-- (BOOL)schemeIsHandled:(NSString*)scheme {
-    BOOL schemeHandlerExists;
-    NSArray *bundleURLTypes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
+- (BOOL)schemeIsHandled:(NSString*)targetScheme {
+    BOOL schemeHandlerExists = NO;
+    NSArray *bundleURLTypes = [[NSBundle mainBundle]objectForInfoDictionaryKey:@"CFBundleURLTypes"];
     for(NSDictionary *URLType in bundleURLTypes) {
         for(NSString *scheme in URLType[@"CFBundleURLSchemes"]) {
-            if ([scheme isEqualToString:scheme]) {
+            if ([scheme isEqualToString:targetScheme]) {
                 schemeHandlerExists = YES;
                 break;
             }
@@ -60,11 +63,26 @@
 - (void)assertGenericSchemeHandled {
     if (![self schemeIsHandled:self.genericScheme]) {
         /* FIXME: Better name and description */
-        [NSException raise:@"URL Scheme not Registered" format:@"Please add '%@' to CFBundleURLSchemes", self.genericScheme];
+        [NSException raise:UCGenericURLSchemaNotConfiguredException format:@"Please add '%@' to CFBundleURLSchemes in app's Info.plist", self.genericScheme];
     }
 }
 
 #pragma mark - Services
+
+- (void)enableFacebook {
+    NSString *facebookId = [[NSBundle mainBundle]objectForInfoDictionaryKey:@"FacebookAppID"];
+    if (!facebookId) {
+        [NSException raise:UCFacebookMisconfigurationException format:@"Please add FacebookAppID property to the Info.plist (see 'Adding your Facebook App ID' section of https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/3.1/ )"];
+    }
+    NSString *facebookScheme = [NSString stringWithFormat:@"fb%@", facebookId];
+    if (![self schemeIsHandled:facebookScheme]) {
+        [NSException raise:UCFacebookMisconfigurationException format:@"Please add '%@' to CFBundleURLSchemes in app's Info.plist (see 'Adding your Facebook App ID' section of https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/3.1/ )", facebookScheme];
+    }
+    
+    UCGrabkitConfigurator *config = [UCGrabkitConfigurator shared];
+    [config setFacebookAppId:facebookId];
+    [config setFacebookIsEnabled:YES];
+}
 
 - (void)enableFlickrWithAPIKey:(NSString *)flickrAPIKey flickrAPISecret:(NSString *)flickrAPISecret {
     [self assertGenericSchemeHandled];

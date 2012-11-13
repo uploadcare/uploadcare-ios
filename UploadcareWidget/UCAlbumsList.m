@@ -150,7 +150,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
     
     GRKAlbum * album = (GRKAlbum*)[self.albums objectAtIndex:indexPath.row];
     NSURL *thumbnailURL = [album.coverPhoto.imagesSortedByHeight[0] URL];
-    cell.textLabel.text = [album.albumId isEqualToString:@"me"] && !album.name ? @"Photos of You" : album.name;
+    cell.textLabel.text = album.name;
     cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Items: %d", nil), album.count];
     CGSize kAlbumCoverThumbnailSize = CGSizeMake(64, 64);
     /* show the activity indicator */
@@ -201,7 +201,10 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
         NSMutableArray *indicesToReload = [NSMutableArray arrayWithCapacity:albumsUpdated.count];
         for (GRKAlbum *album in albumsUpdated) {
             NSUInteger idx = [self.albums indexOfObject:album];
-            assert(idx != NSNotFound);
+            if (idx == NSNotFound) {
+                NSLog(@"%@ not found", album.name);
+                continue;
+            }
             if (album.coverPhoto != nil) [indicesToReload addObject:[NSIndexPath indexPathForRow:idx inSection:0]];
         }
         [self.tableView reloadRowsAtIndexPaths:indicesToReload withRowAnimation:UITableViewRowAnimationFade];
