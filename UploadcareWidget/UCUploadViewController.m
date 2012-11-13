@@ -82,8 +82,9 @@
           ]];
         
         NSMutableArray *serviceSectionItems = [NSMutableArray array];
+        UCGrabkitConfigurator *config = [UCGrabkitConfigurator shared];
         
-        if ([[UCGrabkitConfigurator shared] facebookIsEnabled]) {
+        if ([config facebookIsEnabled]) {
             [serviceSectionItems addObject:
                     @{ @"textLabel.text"  : @"Facebook",
                        @"imageView.image" : [UIImage imageNamed:@"icon_facebook"],
@@ -93,7 +94,7 @@
              ];
         }
             
-        if ([[UCGrabkitConfigurator shared] flickrIsEnabled]) {
+        if ([config flickrIsEnabled]) {
             [serviceSectionItems addObject:
                     @{ @"textLabel.text"  : @"Flickr",
                        @"imageView.image" : [UIImage imageNamed:@"icon_flickr"],
@@ -103,7 +104,7 @@
              ];
          }
         
-        if ([[UCGrabkitConfigurator shared] instagramIsEnabled]) {
+        if ([config instagramIsEnabled]) {
             [serviceSectionItems addObject:
                     @{ @"textLabel.text"  : @"Instagram",
                        @"imageView.image" : [UIImage imageNamed:@"icon_instagram"],

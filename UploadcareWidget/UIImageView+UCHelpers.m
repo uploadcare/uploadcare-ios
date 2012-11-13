@@ -32,7 +32,6 @@ static const NSInteger kUCImageViewActivityIndicatorViewTag = 10812; // Random
 
 - (void)setImageFromURL:(NSURL *)url scaledToSize:(CGSize)size successBlock:(void (^)(UIImage *))successBlock failureBlock:(void (^)(NSError *))failureBlock {
     [self setImageFromURL:url imageProcessingBlock:^UIImage *(UIImage *sourceImage) {
-        NSLog(@"resizing from %.1f %.1f", sourceImage.size.width, sourceImage.size.height);
         return [sourceImage imageByScalingToSize:size];
     } successBlock:successBlock failureBlock:failureBlock];
 }

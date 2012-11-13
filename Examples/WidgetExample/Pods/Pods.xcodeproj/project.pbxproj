@@ -65,7 +65,6 @@
 		39D832D4C2ED4B288EFB2C4B /* FBGraphObjectTableCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4AE334A45F9E4EBE9E568BC2 /* FBGraphObjectTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3FB4E3AE0DC5423BB47153D2 /* PTJSON.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 56E1BA2E412B4E16B3E81AC4 /* PTJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41B6A272ACCE4694AC62FC76 /* FBSBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBACB9957E041EC9CBF8F65 /* FBSBJSON.m */; };
-		425BEA729BED4386A82EA038 /* JSNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A570866B08644A1CAE569725 /* JSNotifier.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		42AF282080F64649B434C480 /* UCUploadNavigationController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9CFCBAE9B7EA4F8A8B6FC9F9 /* UCUploadNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42C3AA9FF776490FB3AA5EF2 /* GRKTokenStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E29E64C628444B49B00E572A /* GRKTokenStore.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		430DA131BCAB4BBE9C555A61 /* PTPusherMockConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D70BF6AB13943CB8D3AF08F /* PTPusherMockConnection.m */; settings = {COMPILER_FLAGS = "-Wno-arc-performSelector-leaks -Wno-format -fobjc-arc"; }; };
@@ -94,7 +93,6 @@
 		579F585A7BD44195B394F73F /* GRKFlickrQueriesQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D02B3F20DE9C45999A8A68B7 /* GRKFlickrQueriesQueue.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		5852193D77124EC1B5C777F1 /* UCUploadNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6018A96675CD4E2088096710 /* UCUploadNavigationController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		5A95DD14FFCF43C98DD0F4FD /* GRKFlickrGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C963F3D6204E1B869C9891 /* GRKFlickrGrabber.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		5BA3A2F96A0E4B90BFB67D9A /* UploadcareWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = D4DFAD1589764024AD182E4E /* UploadcareWidget.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		5CC79CB8C77D488998CF17F0 /* FBFriendPickerCacheDescriptor.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9917DE19FEB8415E8EB0433E /* FBFriendPickerCacheDescriptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5D283921E0BC4B5FBDC704F6 /* OFUtilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 29FD40A5F46D4955A7D68F78 /* OFUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5DC145896C664F53BAF3B9D6 /* FBRequestBody.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 18FC9676FAF247B492FB112F /* FBRequestBody.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -119,7 +117,6 @@
 		6D51645A2E664522BC8199C3 /* NSData+SRB64Additions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 25052970541E4616906279D3 /* NSData+SRB64Additions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E19D33D75134D788B96CA30 /* PTBlockEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE440E4C87841DEA9EE0566 /* PTBlockEventListener.m */; settings = {COMPILER_FLAGS = "-Wno-arc-performSelector-leaks -Wno-format -fobjc-arc"; }; };
 		6E559BA979D246B9B9399558 /* FBSBJsonWriter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D14E30EFF1154AC89A7F7D4F /* FBSBJsonWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6F9A80D7B26846A3A60AA761 /* UploadcareFile.m in Sources */ = {isa = PBXBuildFile; fileRef = F53B2EC8C63742AAB2750359 /* UploadcareFile.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		71F722100223428D87744507 /* ObjectiveFlickr.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5B346BC95C04218B4C661CB /* ObjectiveFlickr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		723EA6E5A3B440E785C039C9 /* UIImageView+UCHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0038301160C94121A6E899F9 /* UIImageView+UCHelpers.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		72604FF481D34DA8A6F03715 /* LFHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E0944839706C4C669B6E72A7 /* LFHTTPRequest.m */; };
@@ -135,7 +132,6 @@
 		7D669535C97643BE9737DE85 /* GRKImage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D326C9E83FC84B60A42FF2B9 /* GRKImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7DB01A860A8845D4BE519E1B /* GRKServiceQueryProtocol.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5F385AD4E62F47E8958F5287 /* GRKServiceQueryProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7DBE805C93D9465C8D4593CB /* PTPusherConnection.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EC0CD47AE78424787FE4949 /* PTPusherConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E650A9CE19D4499A2F38B63 /* UploadcareKit+Deprecated.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EFA32F1B464350BF28FA13 /* UploadcareKit+Deprecated.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		7EAF91A666F14510AB1B8D57 /* FBRequestConnection.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7DD1044197AD46C1AF4CC594 /* FBRequestConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F289148AD47474DB5D551D9 /* GRKFlickrConnector.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8BA9FDF3394DB2983CC8A8 /* GRKFlickrConnector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81E1C810C68A4D7584925856 /* AFXMLRequestOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D5A38E1320643919C4E6F30 /* AFXMLRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -149,7 +145,6 @@
 		8A514FF7D3FF4CD1B0BDBB79 /* FBFriendPickerCacheDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = A45398A8E0E3453A8A810DE7 /* FBFriendPickerCacheDescriptor.m */; };
 		8AA737DECAAB4848B2A0FD20 /* GRKFlickrSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E801063138F43C49362FEA9 /* GRKFlickrSingleton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		8BA221BD4D40498085DC9D7E /* UIImageView+UCHelpers.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BDB8C214552D4A3BBC09E946 /* UIImageView+UCHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8BADC3C6902E42C89DADE6FF /* UploadcareFile.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AE16888A9EEF498FA7224EEE /* UploadcareFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D6E1109E2C645FFB6981B24 /* LFWebAPIKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ED56EDB894A4599B3EFAAEB /* LFWebAPIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DB4661BB4D043969FAF7C78 /* GRKFacebookBatchQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 699E117AA8A5425B98851E44 /* GRKFacebookBatchQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		8DF7176448174352B9200481 /* GRKServiceConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E65D8B499CD4C1C9E7F33D3 /* GRKServiceConnector.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -249,11 +244,9 @@
 		D9288FDCD94A482DA61BE97A /* FBGraphObjectTableDataSource.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F2E4BF5029B14C06AF180E3C /* FBGraphObjectTableDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA5AA1E4F1C44E2E80E59631 /* FBProfilePictureView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0688420F52D941F9AEBA47C5 /* FBProfilePictureView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC4C948840D2417BB0E4E574 /* UploadcareStatusWatcher.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF54D85734B140F7BC1F7BDC /* UploadcareStatusWatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DC73173D10C64A02BE7507DC /* UploadcareKit+Deprecated.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FCA63BC4679846D6A1A2B4A3 /* UploadcareKit+Deprecated.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC95F62F09B745F487F5A6FB /* FBProfilePictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 56EE3756C7E1461C9DBF5079 /* FBProfilePictureView.m */; };
 		DD180DF420C943AAB89ACD46 /* AFPropertyListRequestOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 18DD21E560004BC08E70767A /* AFPropertyListRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE2DAD461D7144F7B43C9310 /* PTPusher+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = 481954C4AA1E426E87B67A89 /* PTPusher+Testing.m */; settings = {COMPILER_FLAGS = "-Wno-arc-performSelector-leaks -Wno-format -fobjc-arc"; }; };
-		DF84CD83A7D945B786599477 /* JSNotifier.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 512DE49B224049EFA7BE7820 /* JSNotifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E015DA33D7AD4D1DB7E20309 /* NSDictionary+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 514E3BD85E3143E081371506 /* NSDictionary+URLEncoding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		E0C22FEBE71844D0B87728C6 /* FBSessionTokenCachingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 67BC5DDFA1994F6B91E7E305 /* FBSessionTokenCachingStrategy.m */; };
 		E21F22043D0D483F817F5B44 /* GRKDeviceGrabber.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 946C3BB9F96746CDA61B2E5D /* GRKDeviceGrabber.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -282,7 +275,6 @@
 		F4C7D0579F844C428CC8DF49 /* FBFriendPickerViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5549960151014F3FA7DCD1E8 /* FBFriendPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F4D2B342D9E54AAA9A1103A9 /* GRKServiceConnector.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F22763FA13FA4EBF90D5A7EE /* GRKServiceConnector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F700EB2755234A058453DF07 /* NSString+date.m in Sources */ = {isa = PBXBuildFile; fileRef = A784A170AE104FF59741F62D /* NSString+date.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		FBA8FE94E527467782AC0815 /* UploadcareWidget.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1BC8FEC4642E466CB7374654 /* UploadcareWidget.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FDA82577233347B99B8966A6 /* GRKInstagramConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4A522CB6C4DFC9F56902E /* GRKInstagramConnector.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		FFCCB8008605415EB029AE87 /* UCAlbumsList.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A27BAB566E8448297CD0DD5 /* UCAlbumsList.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -429,11 +421,8 @@
 				8D6E1109E2C645FFB6981B24 /* LFWebAPIKit.h in CopyFiles */,
 				94D5C06386D44A07BCA95737 /* NSData+LFHTTPFormExtensions.h in CopyFiles */,
 				112DCB11C1F34E6CA880EB59 /* UploadcareError.h in CopyFiles */,
-				8BADC3C6902E42C89DADE6FF /* UploadcareFile.h in CopyFiles */,
-				DC73173D10C64A02BE7507DC /* UploadcareKit+Deprecated.h in CopyFiles */,
 				C1AF5D2AD55B4DA7BE6119F3 /* UploadcareKit.h in CopyFiles */,
 				DC4C948840D2417BB0E4E574 /* UploadcareStatusWatcher.h in CopyFiles */,
-				DF84CD83A7D945B786599477 /* JSNotifier.h in CopyFiles */,
 				FFCCB8008605415EB029AE87 /* UCAlbumsList.h in CopyFiles */,
 				44EDACDDCB984256BDC42082 /* UCGrabkitConfigurator.h in CopyFiles */,
 				1299AA4DEBBC4A2BABDF8C93 /* UCHUD.h in CopyFiles */,
@@ -447,7 +436,6 @@
 				8BA221BD4D40498085DC9D7E /* UIImageView+UCHelpers.h in CopyFiles */,
 				4E8F2B0A4F2B4DEFAFE704D6 /* UploadCareProgressView.h in CopyFiles */,
 				1F8A5260671A4D4B89D142B3 /* UploadcareServicesConfigurator.h in CopyFiles */,
-				FBA8FE94E527467782AC0815 /* UploadcareWidget.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,7 +468,6 @@
 		18FC9676FAF247B492FB112F /* FBRequestBody.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBRequestBody.h; path = "Facebook-iOS-SDK/src/FBRequestBody.h"; sourceTree = SOURCE_ROOT; };
 		1A5067359D294374BED12800 /* OFXMLMapper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OFXMLMapper.m; path = objectiveflickr/Source/OFXMLMapper.m; sourceTree = SOURCE_ROOT; };
 		1B8CC2796C9E466184F48D73 /* PTPusherMockConnection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherMockConnection.h; path = libPusher/Library/PTPusherMockConnection.h; sourceTree = SOURCE_ROOT; };
-		1BC8FEC4642E466CB7374654 /* UploadcareWidget.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UploadcareWidget.h; path = ../../../UploadcareWidget/UploadcareWidget.h; sourceTree = SOURCE_ROOT; };
 		1CC16FC27B8047ACBB3406F2 /* FBSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSession.h; path = "Facebook-iOS-SDK/src/FBSession.h"; sourceTree = SOURCE_ROOT; };
 		1E3F3D6A9FA74C24BE7AC385 /* ISO8601DateFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ISO8601DateFormatter.m; path = ISO8601DateFormatter/ISO8601DateFormatter.m; sourceTree = SOURCE_ROOT; };
 		1ED48A78AE414B598323A8DE /* FBError.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBError.m; path = "Facebook-iOS-SDK/src/FBError.m"; sourceTree = SOURCE_ROOT; };
@@ -530,7 +517,6 @@
 		4FB2B18E251D4C9DAEB2E26C /* GRKInstagramQuery.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GRKInstagramQuery.h; path = grabKit/grabKit/grabKit/grabKitSources/serviceGrabbers/instagramGrabber/GRKInstagramQuery.h; sourceTree = SOURCE_ROOT; };
 		4FBC4D432DE74CDCA5C54B6D /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+QueryString.h"; path = "libPusher/Library/NSDictionary+QueryString.h"; sourceTree = SOURCE_ROOT; };
 		50A4C3482D9642E1873C26EB /* GRKTokenStoreUserDefaults.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GRKTokenStoreUserDefaults.h; path = grabKit/grabKit/grabKit/grabKitSources/serviceGrabbers/tokenStores/GRKTokenStoreUserDefaults.h; sourceTree = SOURCE_ROOT; };
-		512DE49B224049EFA7BE7820 /* JSNotifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JSNotifier.h; path = ../../../UploadcareWidget/JSNotifier.h; sourceTree = SOURCE_ROOT; };
 		514E3BD85E3143E081371506 /* NSDictionary+URLEncoding.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+URLEncoding.m"; path = "grabKit/grabKit/grabKit/grabKitSources/helpers/NSDictionary+URLEncoding.m"; sourceTree = SOURCE_ROOT; };
 		5308338ED588447F9091D8C7 /* UCUploader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = UCUploader.m; path = ../../../UploadcareWidget/UCUploader.m; sourceTree = SOURCE_ROOT; };
 		53D898613CFB49968F105612 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLConnectionOperation.m; path = AFNetworking/AFNetworking/AFURLConnectionOperation.m; sourceTree = SOURCE_ROOT; };
@@ -629,7 +615,6 @@
 		A45398A8E0E3453A8A810DE7 /* FBFriendPickerCacheDescriptor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBFriendPickerCacheDescriptor.m; path = "Facebook-iOS-SDK/src/FBFriendPickerCacheDescriptor.m"; sourceTree = SOURCE_ROOT; };
 		A45EC74DF8D34706BEE2B4B0 /* ObjectiveFlickr.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ObjectiveFlickr.m; path = objectiveflickr/Source/ObjectiveFlickr.m; sourceTree = SOURCE_ROOT; };
 		A4C3B89284964D849BC6BF8F /* MBProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
-		A570866B08644A1CAE569725 /* JSNotifier.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSNotifier.m; path = ../../../UploadcareWidget/JSNotifier.m; sourceTree = SOURCE_ROOT; };
 		A5977A8442F247EC89E26D10 /* FBDialog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBDialog.h; path = "Facebook-iOS-SDK/src/FBDialog.h"; sourceTree = SOURCE_ROOT; };
 		A5B346BC95C04218B4C661CB /* ObjectiveFlickr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ObjectiveFlickr.h; path = objectiveflickr/Source/ObjectiveFlickr.h; sourceTree = SOURCE_ROOT; };
 		A77B2366CBA94C84B5951E88 /* PTURLRequestOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTURLRequestOperation.h; path = libPusher/Library/PTURLRequestOperation.h; sourceTree = SOURCE_ROOT; };
@@ -639,7 +624,6 @@
 		A9662A5F3E0A4BDC9ED2533C /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "AFNetworking/AFNetworking/UIImageView+AFNetworking.h"; sourceTree = SOURCE_ROOT; };
 		AC5967FADF4C442BA0160354 /* FBOpenGraphAction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBOpenGraphAction.h; path = "Facebook-iOS-SDK/src/FBOpenGraphAction.h"; sourceTree = SOURCE_ROOT; };
 		AD87584400444147A7286212 /* PTPusherEventDispatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherEventDispatcher.h; path = libPusher/Library/PTPusherEventDispatcher.h; sourceTree = SOURCE_ROOT; };
-		AE16888A9EEF498FA7224EEE /* UploadcareFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UploadcareFile.h; path = ../../../UploadcareKit/UploadcareFile.h; sourceTree = SOURCE_ROOT; };
 		AED943D0E316427DBBA587B8 /* PTPusherChannelAuthorizationOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTPusherChannelAuthorizationOperation.m; path = libPusher/Library/PTPusherChannelAuthorizationOperation.m; sourceTree = SOURCE_ROOT; };
 		AF03C222086146669C8FE80F /* GRKConnectorsDispatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GRKConnectorsDispatcher.h; path = grabKit/grabKit/grabKit/grabKitSources/serviceGrabbers/GRKConnectorsDispatcher.h; sourceTree = SOURCE_ROOT; };
 		AF54D85734B140F7BC1F7BDC /* UploadcareStatusWatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UploadcareStatusWatcher.h; path = ../../../UploadcareKit/UploadcareStatusWatcher.h; sourceTree = SOURCE_ROOT; };
@@ -682,7 +666,6 @@
 		D24226891EA34C43BEF2F5DE /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFPropertyListRequestOperation.m; path = AFNetworking/AFNetworking/AFPropertyListRequestOperation.m; sourceTree = SOURCE_ROOT; };
 		D326C9E83FC84B60A42FF2B9 /* GRKImage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GRKImage.h; path = grabKit/grabKit/grabKit/grabKitSources/model/GRKImage.h; sourceTree = SOURCE_ROOT; };
 		D46C5D9411DA4939B593E535 /* PTPusherEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PTPusherEvent.m; path = libPusher/Library/PTPusherEvent.m; sourceTree = SOURCE_ROOT; };
-		D4DFAD1589764024AD182E4E /* UploadcareWidget.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = UploadcareWidget.m; path = ../../../UploadcareWidget/UploadcareWidget.m; sourceTree = SOURCE_ROOT; };
 		D82CA13B24214F2A9D2BEA8D /* GRKPhoto.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GRKPhoto.h; path = grabKit/grabKit/grabKit/grabKitSources/model/GRKPhoto.h; sourceTree = SOURCE_ROOT; };
 		D9BAFF6AAF17498AA9C0FC2C /* GRKServiceGrabber.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GRKServiceGrabber.m; path = grabKit/grabKit/grabKit/grabKitSources/serviceGrabbers/GRKServiceGrabber.m; sourceTree = SOURCE_ROOT; };
 		DA25370CA29A4646BD5A477D /* base64.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = base64.c; path = SocketRocket/SocketRocket/base64.c; sourceTree = SOURCE_ROOT; };
@@ -715,14 +698,12 @@
 		F2E4BF5029B14C06AF180E3C /* FBGraphObjectTableDataSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBGraphObjectTableDataSource.h; path = "Facebook-iOS-SDK/src/FBGraphObjectTableDataSource.h"; sourceTree = SOURCE_ROOT; };
 		F318F0B35BA44431940F25A7 /* PTPusherAPI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherAPI.h; path = libPusher/Library/PTPusherAPI.h; sourceTree = SOURCE_ROOT; };
 		F34F37860A7F4F58BC4B641E /* LFHTTPRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LFHTTPRequest.h; path = objectiveflickr/LFWebAPIKit/LFHTTPRequest.h; sourceTree = SOURCE_ROOT; };
-		F53B2EC8C63742AAB2750359 /* UploadcareFile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = UploadcareFile.m; path = ../../../UploadcareKit/UploadcareFile.m; sourceTree = SOURCE_ROOT; };
 		F64BC24AD8D44102BA089265 /* GRKFlickrGrabber.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GRKFlickrGrabber.h; path = grabKit/grabKit/grabKit/grabKitSources/serviceGrabbers/flickrGrabber/GRKFlickrGrabber.h; sourceTree = SOURCE_ROOT; };
 		F77D797EC77649C4B2BE2262 /* UCGrabkitConfigurator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UCGrabkitConfigurator.h; path = ../../../UploadcareWidget/UCGrabkitConfigurator.h; sourceTree = SOURCE_ROOT; };
 		F7A8FD3F6F9A42E3A3A15631 /* SRWebSocket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = SocketRocket/SocketRocket/SRWebSocket.m; sourceTree = SOURCE_ROOT; };
 		F7EBCC2987D544159525E266 /* OFUtilities.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OFUtilities.m; path = objectiveflickr/Source/OFUtilities.m; sourceTree = SOURCE_ROOT; };
 		F890640F06984401969FC6C9 /* NSIndexSet+pagination.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSIndexSet+pagination.m"; path = "grabKit/grabKit/grabKit/grabKitSources/helpers/NSIndexSet+pagination.m"; sourceTree = SOURCE_ROOT; };
 		F8C7CDB7B5C84E3A8AE35DDA /* FBGraphPlace.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBGraphPlace.h; path = "Facebook-iOS-SDK/src/FBGraphPlace.h"; sourceTree = SOURCE_ROOT; };
-		F8EFA32F1B464350BF28FA13 /* UploadcareKit+Deprecated.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UploadcareKit+Deprecated.m"; path = "../../../UploadcareKit/UploadcareKit+Deprecated.m"; sourceTree = SOURCE_ROOT; };
 		FA5A46EC2AB346B6B1B9E28E /* FBFriendPickerViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBFriendPickerViewController.m; path = "Facebook-iOS-SDK/src/FBFriendPickerViewController.m"; sourceTree = SOURCE_ROOT; };
 		FB1747020CB4425F94DD6075 /* NSMutableArray+setObjectAtPosition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+setObjectAtPosition.m"; path = "grabKit/grabKit/grabKit/grabKitSources/helpers/NSMutableArray+setObjectAtPosition.m"; sourceTree = SOURCE_ROOT; };
 		FB4A9F98AA31403FB9EBC8F2 /* NSData+SRB64Additions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSData+SRB64Additions.m"; path = "SocketRocket/SocketRocket/NSData+SRB64Additions.m"; sourceTree = SOURCE_ROOT; };
@@ -730,7 +711,6 @@
 		FB899B93860C4D6BAE0C469E /* NSString+date.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+date.h"; path = "grabKit/grabKit/grabKit/grabKitSources/helpers/NSString+date.h"; sourceTree = SOURCE_ROOT; };
 		FBCCC655849043199D27AEE9 /* FBUserSettingsViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBUserSettingsViewController.h; path = "Facebook-iOS-SDK/src/FBUserSettingsViewController.h"; sourceTree = SOURCE_ROOT; };
 		FBECCE0D032A41D7A115552F /* PTPusherEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherEvent.h; path = libPusher/Library/PTPusherEvent.h; sourceTree = SOURCE_ROOT; };
-		FCA63BC4679846D6A1A2B4A3 /* UploadcareKit+Deprecated.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UploadcareKit+Deprecated.h"; path = "../../../UploadcareKit/UploadcareKit+Deprecated.h"; sourceTree = SOURCE_ROOT; };
 		FD34620FC8564744A7882CD8 /* PTPusherChannel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PTPusherChannel.h; path = libPusher/Library/PTPusherChannel.h; sourceTree = SOURCE_ROOT; };
 		FDFA846A96FE455A95649607 /* UCUploader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UCUploader.h; path = ../../../UploadcareWidget/UCUploader.h; sourceTree = SOURCE_ROOT; };
 		FE1E3192A66B48EEA45B6F76 /* FBGraphObjectPagingLoader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBGraphObjectPagingLoader.m; path = "Facebook-iOS-SDK/src/FBGraphObjectPagingLoader.m"; sourceTree = SOURCE_ROOT; };
@@ -990,8 +970,6 @@
 		7FBC3FC04DFB428F8FB859E7 /* uploadcare-ios */ = {
 			isa = PBXGroup;
 			children = (
-				512DE49B224049EFA7BE7820 /* JSNotifier.h */,
-				A570866B08644A1CAE569725 /* JSNotifier.m */,
 				9A27BAB566E8448297CD0DD5 /* UCAlbumsList.h */,
 				6474E15BCF1E4225BEE059EF /* UCAlbumsList.m */,
 				F77D797EC77649C4B2BE2262 /* UCGrabkitConfigurator.h */,
@@ -1016,10 +994,6 @@
 				0038301160C94121A6E899F9 /* UIImageView+UCHelpers.m */,
 				57C8BCEFAFBB476D9BA5B117 /* UploadcareError.h */,
 				2BAA45D3407E4DCFB012A57E /* UploadcareError.m */,
-				AE16888A9EEF498FA7224EEE /* UploadcareFile.h */,
-				F53B2EC8C63742AAB2750359 /* UploadcareFile.m */,
-				FCA63BC4679846D6A1A2B4A3 /* UploadcareKit+Deprecated.h */,
-				F8EFA32F1B464350BF28FA13 /* UploadcareKit+Deprecated.m */,
 				DA62A9FC3FFC4FF280A255C6 /* UploadcareKit.h */,
 				93AD8F4154CA4B3CA2B8E9A3 /* UploadcareKit.m */,
 				3B082F01DFB7447EB9EC4CAB /* UploadCareProgressView.h */,
@@ -1028,8 +1002,6 @@
 				B1BD4781ACFD4F58889033EE /* UploadcareServicesConfigurator.m */,
 				AF54D85734B140F7BC1F7BDC /* UploadcareStatusWatcher.h */,
 				0D8CF83319644191A81B4164 /* UploadcareStatusWatcher.m */,
-				1BC8FEC4642E466CB7374654 /* UploadcareWidget.h */,
-				D4DFAD1589764024AD182E4E /* UploadcareWidget.m */,
 			);
 			name = "uploadcare-ios";
 			sourceTree = "<group>";
@@ -1343,11 +1315,8 @@
 				6A5B671F53D14204858B76F4 /* LFSiteReachability.m in Sources */,
 				4E50CF34893F4E1EB063F7F9 /* NSData+LFHTTPFormExtensions.m in Sources */,
 				B3F9BB1A64DC40B5BC6B3A66 /* UploadcareError.m in Sources */,
-				6F9A80D7B26846A3A60AA761 /* UploadcareFile.m in Sources */,
-				7E650A9CE19D4499A2F38B63 /* UploadcareKit+Deprecated.m in Sources */,
 				E893E4E08773404BAB57FB66 /* UploadcareKit.m in Sources */,
 				01360A38C5F4443FA833213B /* UploadcareStatusWatcher.m in Sources */,
-				425BEA729BED4386A82EA038 /* JSNotifier.m in Sources */,
 				83F71548201C4F1D98DCA9C1 /* UCAlbumsList.m in Sources */,
 				190ADFE6815A4B42A6645F12 /* UCGrabkitConfigurator.m in Sources */,
 				D7E3765E223740D68FF97292 /* UCHUD.m in Sources */,
@@ -1361,7 +1330,6 @@
 				723EA6E5A3B440E785C039C9 /* UIImageView+UCHelpers.m in Sources */,
 				631E050EA9A54933B299E82B /* UploadCareProgressView.m in Sources */,
 				EF6AC050C3384212ACFE9C62 /* UploadcareServicesConfigurator.m in Sources */,
-				5BA3A2F96A0E4B90BFB67D9A /* UploadcareWidget.m in Sources */,
 				05483960659C42E2BCE7685B /* PodsDummy_Pods.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

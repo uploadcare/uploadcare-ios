@@ -10,13 +10,18 @@
 
 @implementation UCGrabkitConfigurator
 
+#pragma mark - picasa: not implemented
+
 - (NSString *)picasaClientId {
+    [NSException raise:@"Not Implemented" format:@"Picasa doesn't work at the moment"];
     return nil; /* not implemented */
 }
 
 - (NSString *)picasaClientSecret {
-    return nil; /* not implemented */
+    return [self picasaClientId]; /* not implemented */
 }
+
+#pragma mark - shared instance
 
 + (id)shared {
     static UCGrabkitConfigurator *_shared;
@@ -26,6 +31,8 @@
     });
     return _shared;
 }
+
+#pragma mark
 
 - (NSString *)facebookTaggedPhotosAlbumName {
     return NSLocalizedString(@"Photos of You", @"The name of the album 'Tagged photos' on Facebook");
