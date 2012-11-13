@@ -200,9 +200,10 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
         NSArray *albumsUpdated = (NSArray*)result;
         NSMutableArray *indicesToReload = [NSMutableArray arrayWithCapacity:albumsUpdated.count];
         for (GRKAlbum *album in albumsUpdated) {
+            if (!album.coverPhoto) continue;
             NSUInteger idx = [self.albums indexOfObject:album];
             if (idx == NSNotFound) {
-                NSLog(@"%@ not found", album.name);
+                NSLog(@"Warning: Received a cover photo for an unknown album '%@'", album.name);
                 continue;
             }
             if (album.coverPhoto != nil) [indicesToReload addObject:[NSIndexPath indexPathForRow:idx inSection:0]];
