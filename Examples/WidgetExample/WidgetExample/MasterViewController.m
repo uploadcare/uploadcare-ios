@@ -64,6 +64,7 @@
 - (void)showUploadcare:(id)sender {
     UCUploadNavigationController *uploadcare = [[UCUploadNavigationController alloc]initWithUploadcarePublicKey:@"demopublickey"];
     [uploadcare enableFlickrWithAPIKey:@"640dd6a955dd11005c7ebe3b04f8aa72" flickrAPISecret:@"562666552347ceaa"];
+    [uploadcare enableInstagramWithAppId:@"240acb84ad6d45fda3db9cf16ec48603"];
     [uploadcare setUploadCompletionBlock:^(NSString *fileId) {
         NSLog(@"Done uploading! fileId: %@", fileId);
         [self insertFileId:fileId];

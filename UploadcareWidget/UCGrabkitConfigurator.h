@@ -14,11 +14,14 @@
 + (id)shared;
 
 @property BOOL facebookIsEnabled;
-@property BOOL instagramIsEnabled;
 
 @property BOOL flickrIsEnabled;
 @property (strong) NSString *flickrApiKey;
 @property (strong) NSString *flickrApiSecret;
 @property (strong) NSString *flickrRedirectUri;
+
+@property BOOL instagramIsEnabled;
+@property (strong) NSString *instagramAppId;
+@property (strong) NSString *instagramRedirectUri;
 
 @end

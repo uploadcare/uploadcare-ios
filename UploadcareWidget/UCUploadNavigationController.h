@@ -19,6 +19,7 @@
 - (void)setUploadCompletionBlock:(UploadcareSuccessBlock)completionBlock;
 
 - (void)enableFlickrWithAPIKey:(NSString *)flickrAPIKey flickrAPISecret:(NSString *)flickrAPISecret;
+- (void)enableInstagramWithAppId:(NSString *)instagramAppId;
 
 
 @end

@@ -57,21 +57,30 @@
     return [[NSBundle mainBundle]bundleIdentifier];
 }
 
-- (BOOL)genericSchemeIsHandled {
-    return [self schemeIsHandled:self.genericScheme];
+- (void)assertGenericSchemeHandled {
+    if (![self schemeIsHandled:self.genericScheme]) {
+        /* FIXME: Better name and description */
+        [NSException raise:@"URL Scheme not Registered" format:@"Please add '%@' to CFBundleURLSchemes", self.genericScheme];
+    }
 }
 
 #pragma mark - Services
 
 - (void)enableFlickrWithAPIKey:(NSString *)flickrAPIKey flickrAPISecret:(NSString *)flickrAPISecret {
-    if (!self.genericSchemeIsHandled) {
-        /* FIXME: Better name and description */
-        [NSException raise:@"URL Scheme not Registered" format:@"Please add '%@' to CFBundleURLSchemes", self.genericScheme];
-    }
-    [[UCGrabkitConfigurator shared] setFlickrRedirectUri:[[NSString stringWithFormat:@"%@://", self.genericScheme] lowercaseString]];
-    [[UCGrabkitConfigurator shared] setFlickrApiKey:flickrAPIKey];
-    [[UCGrabkitConfigurator shared] setFlickrApiSecret:flickrAPISecret];
-    [[UCGrabkitConfigurator shared] setFlickrIsEnabled:YES];
+    [self assertGenericSchemeHandled];
+    UCGrabkitConfigurator *config = [UCGrabkitConfigurator shared];
+    [config setFlickrRedirectUri:[[NSString stringWithFormat:@"%@://", self.genericScheme] lowercaseString]];
+    [config setFlickrApiKey:flickrAPIKey];
+    [config setFlickrApiSecret:flickrAPISecret];
+    [config setFlickrIsEnabled:YES];
+}
+
+- (void)enableInstagramWithAppId:(NSString *)instagramAppId {
+    [self assertGenericSchemeHandled];
+    UCGrabkitConfigurator *config = [UCGrabkitConfigurator shared];
+    [config setInstagramRedirectUri:[[NSString stringWithFormat:@"%@://", self.genericScheme] lowercaseString]];
+    [config setInstagramAppId:instagramAppId];
+    [config setInstagramIsEnabled:YES];
 }
 
 @end
