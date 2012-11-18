@@ -9,6 +9,7 @@
 #import "UCUploadViewController.h"
 #import "UCAlbumsList.h"
 #import "UCGrabkitConfigurator.h"
+#import "UCRecentUploadsViewController.h"
 
 #import "GRKConfiguration.h"
 #import "GRKDeviceGrabber.h"
@@ -122,7 +123,15 @@
                      }
          ];
         
-        [_menuItems addObject:@{@"items":serviceSectionItems, @"footer":@"Powered by Uploadcare"}];
+        [_menuItems addObject:@{@"items":serviceSectionItems}];
+        [_menuItems addObject:@{@"items":@[
+                    @{ @"textLabel.text"  : @"Recent Uploads",
+                       @"action"          : @"showRecentUploads",
+                       @"accessoryType"   : @(UITableViewCellAccessoryDisclosureIndicator),
+                       @"textLabel.textAlignment" : @(NSTextAlignmentCenter),
+                     }
+            
+         ], @"footer":@"Powered by Uploadcare"}];
         
         
     });
@@ -209,6 +218,11 @@
         NSString *fileURL = [[alertView textFieldAtIndex:0] text];
         UCUploadFile(fileURL, self.uploadCompletionBlock, self.uploadFailureBlock);
     }];
+}
+
+- (void)showRecentUploads {
+    UCRecentUploadsViewController *recentUploadsViewController = [[UCRecentUploadsViewController alloc]initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:recentUploadsViewController animated:YES];
 }
 
 @end
