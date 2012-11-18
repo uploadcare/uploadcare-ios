@@ -153,6 +153,7 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return nil;
     NSUInteger pageNo = section+1;
     if (state > UCPhotosListStatePhotosGrabbed) {
         NSUInteger numberOfPhotos = [[_album photosAtPageIndex:section withNumberOfPhotosPerPage:kNumberOfPhotosPerPage] count];
