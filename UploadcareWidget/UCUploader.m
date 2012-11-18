@@ -14,16 +14,18 @@ void UCUploadFile(NSString *fileURL, UploadcareSuccessBlock success, UploadcareF
     [UCHUD setText:NSLocalizedString(@"Uploading", @"Upload HUD text")];
     [UCHUD show];
     [UCHUD setProgress:0];
-    NSLog(@"upload from URL: %@", fileURL);
+    NSLog(@"Uploading from URL %@...", fileURL);
     [[UploadcareKit shared]uploadFileFromURL:fileURL progressBlock:^(long long bytesDone, long long bytesTotal) {
          [UCHUD setProgress:(float)bytesDone / bytesTotal];
      } successBlock:^(NSString *fileId) {
          /* on upload completed */
          [UCHUD dismiss];
-         success(fileId);
+         if (success) success(fileId);
+         else NSLog(@"Upload finished, file_id = '%@'", fileId);
      } failureBlock:^(NSError *error) {
          /* on upload failed */
          [UCHUD dismiss];
-         failure(error);
+         if (failure) failure(error);
+         else NSLog(@"Uploadcare failed to upload a file.\n\n%@", error);
      }];
 }
