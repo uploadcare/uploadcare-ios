@@ -93,7 +93,7 @@ NSString *const UCGenericURLSchemaNotConfiguredException = @"UCGenericURLSchemaN
     [config setFlickrIsEnabled:YES];
 }
 
-- (void)enableInstagramWithAppId:(NSString *)instagramAppId {
+- (void)enableInstagramWithClientId:(NSString *)instagramAppId {
     [self assertGenericSchemeHandled];
     UCGrabkitConfigurator *config = [UCGrabkitConfigurator shared];
     [config setInstagramRedirectUri:[[NSString stringWithFormat:@"%@://", self.genericScheme] lowercaseString]];

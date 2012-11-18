@@ -20,7 +20,7 @@
 
 - (void)enableFacebook;
 - (void)enableFlickrWithAPIKey:(NSString *)flickrAPIKey flickrAPISecret:(NSString *)flickrAPISecret;
-- (void)enableInstagramWithAppId:(NSString *)instagramAppId;
+- (void)enableInstagramWithClientId:(NSString *)instagramAppId;
 
 
 @end
