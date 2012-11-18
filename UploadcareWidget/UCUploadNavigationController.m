@@ -57,7 +57,7 @@ NSString *const UCGenericURLSchemaNotConfiguredException = @"UCGenericURLSchemaN
 }
 
 - (NSString *)genericScheme {
-    return [[NSBundle mainBundle]bundleIdentifier];
+    return  [NSString stringWithFormat:@"uc-%@", [[[NSBundle mainBundle]bundleIdentifier]stringByReplacingOccurrencesOfString:@"." withString:@"-"]];
 }
 
 - (void)assertGenericSchemeHandled {

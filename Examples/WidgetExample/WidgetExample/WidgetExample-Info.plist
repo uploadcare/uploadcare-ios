@@ -41,6 +41,16 @@
 	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>com.uploadcare.${PRODUCT_NAME:rfc1034identifier}</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb442253875803433</string>
+				<string>uc-com-uploadcare-WidgetExample</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
