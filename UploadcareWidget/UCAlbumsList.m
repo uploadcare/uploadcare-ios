@@ -110,7 +110,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
                     [albumsWithoutCover addObject:album];
                 }
             }];
-            [self loadCoverPhotosForAlbums:albumsWithoutCover];
+            if ([albumsWithoutCover count]) [self loadCoverPhotosForAlbums:albumsWithoutCover];
         }
             
         default:
