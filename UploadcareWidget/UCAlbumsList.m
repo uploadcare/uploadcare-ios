@@ -209,9 +209,18 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
             /* there's a cover photo, update the row */
             if (album.coverPhoto != nil) [indicesToReload addObject:indexPath];
-            /* coverPhoto == nil, just remove the activity indicator */
-            else [[[self.tableView cellForRowAtIndexPath:indexPath]imageView]removeActivityIndicator];
-            
+            else {
+                /* coverPhoto == nil, take the first album picture instead */
+                [self.grabber fillAlbum:album withPhotosAtPageIndex:0 withNumberOfPhotosPerPage:1 andCompleteBlock:^(NSArray *photos) {
+                    GRKPhoto *firstPhoto = photos.lastObject;
+                    if (firstPhoto) {
+                        album.coverPhoto = firstPhoto;
+                        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                    }
+                } andErrorBlock:^(NSError *error) {
+                    NSLog(@"Error grabbing photos: %@", error);
+                }];
+            }
         }
         [self.tableView reloadRowsAtIndexPaths:indicesToReload withRowAnimation:UITableViewRowAnimationFade];
     } andErrorBlock:^(NSError *error) {
