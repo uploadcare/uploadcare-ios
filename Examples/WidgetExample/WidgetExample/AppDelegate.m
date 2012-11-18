@@ -38,7 +38,7 @@
         return YES;
     }
     
-    /* TODO: Add your own URL handling code */
+    /* TODO: Add your own URL handling code (if needed) */
     
     return NO;
 }
