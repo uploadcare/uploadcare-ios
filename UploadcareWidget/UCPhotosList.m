@@ -25,15 +25,8 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
     [_album removeObserver:self forKeyPath:@"count"];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andGrabber:(GRKServiceGrabber *)grabber andAlbum:(GRKAlbum *)album {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id)initWithGrabber:(GRKServiceGrabber *)grabber album:(GRKAlbum *)album {
+    self = [super initWithNibName:@"UCPhotosList" bundle:nil];
     if (self != nil) {
         _grabber = grabber;
         _album = album;
@@ -191,9 +184,10 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:extraCellIdentifier];
         }
-        
-        cell.textLabel.text = NSLocalizedString(@"load more", nil);
-        cell.textLabel.font = [UIFont fontWithName:@"System" size:8];
+
+        /* XXX replace with activity indicator */
+//        cell.textLabel.text = NSLocalizedString(@"load more", nil);
+//        cell.textLabel.font = [UIFont fontWithName:@"System" size:8];
     } else {
         static NSString *photoCellIdentifier = @"photoCell";
         
@@ -202,22 +196,21 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
             cell = [[[NSBundle mainBundle] loadNibNamed:@"UCPhotosListCell" owner:self options:nil] objectAtIndex:0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [(UCPhotosListCell *)cell setPhotoList:self];
-            [(UCPhotosListCell *)cell setServiceName:_grabber.serviceName];
+            [(UCPhotosListCell *)cell setServiceName:self.albumList.serviceName];
         }
     }
     
     return cell;
 }
 
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([cell.reuseIdentifier isEqualToString:@"ExtraCell"]) {
         if (state == UCPhotosListStateAllPhotosGrabbed) {
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@" %d photos", nil), [[_album photos] count] ];
+//            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@" %d photos", nil), [[_album photos] count] ];
         } else {
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Loading page %d", nil), _lastLoadedPageIndex+1+1];
+//            cell.textLabel.te3xt = [NSString stringWithFormat:NSLocalizedString(@"Loading page %d", nil), _lastLoadedPageIndex+1+1];
             [self fillAlbumWithMorePhotos];
         }
     } else {

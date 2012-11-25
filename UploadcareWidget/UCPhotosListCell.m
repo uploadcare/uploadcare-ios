@@ -10,7 +10,9 @@
 
 #import "UploadcareKit.h"
 #import "UCUploader.h"
+#import "UCRecentUploads.h"
 #import "UIImageView+UCHelpers.h"
+#import "UploadcareError.h"
 
 #import "GRKPhoto.h"
 #import "GRKImage.h"
@@ -85,12 +87,28 @@
     [super setSelected:selected animated:animated];
 }
 
+
+NSString *UCReadableTitleFromGRKPhoto(GRKPhoto *photo, NSString *serviceName) {
+    if (photo.name && photo.name.length) return photo.name;
+    if (photo.caption && photo.caption.length) return photo.caption;
+    return NSLocalizedString(@"Untitled", @"Caption for nameless photos");
+}
+
 - (IBAction)didSelected:(id)sender {
     UITapGestureRecognizer *tapGesture = (UITapGestureRecognizer *)sender;
     UIImageView *tappedImageView = (UIImageView *)[tapGesture view];
     GRKPhoto *photo = (GRKPhoto *)[_photos objectAtIndex:[tappedImageView tag]];
     [self.photoList.navigationController dismissViewControllerAnimated:YES completion:^{
-        UCUploadFile([photo.imagesSortedByHeight.lastObject URL].absoluteString, self.photoList.albumList.uploadCompletionBlock, self.photoList.albumList.uploadFailureBlock);
+        UCUploadFile([photo.imagesSortedByHeight.lastObject URL].absoluteString,
+                     ^(NSString *fileId) {
+                         [UCRecentUploads recordUploadFromURL:[photo.imagesSortedByHeight.lastObject URL] thumnailURL:[photo.imagesSortedByHeight[0] URL] title:UCReadableTitleFromGRKPhoto(photo, self.serviceName) sourceType:self.serviceName errorType:UCRecentUploadsNoError];
+                         /* ^ TODO: Select the most suitable thumbnail */
+                         self.photoList.albumList.uploadCompletionBlock(fileId);
+                     }, ^(NSError *error) {
+                         [UCRecentUploads recordUploadFromURL:[photo.imagesSortedByHeight.lastObject URL] thumnailURL:[photo.imagesSortedByHeight[0] URL] title:UCReadableTitleFromGRKPhoto(photo, self.serviceName) sourceType:self.serviceName errorType:UCRecentUploadsSystemError];
+                         /* ^ TODO: thumbnail, see above */
+                         self.photoList.albumList.uploadFailureBlock(error);
+                     });
     }];
 }
 

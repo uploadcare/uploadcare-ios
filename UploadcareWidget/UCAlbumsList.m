@@ -27,7 +27,6 @@ typedef NSUInteger UCAlbumsListState;
 @interface UCAlbumsList()
 
 @property (strong) GRKServiceGrabber *grabber;
-@property (strong) NSString *serviceName;
 @property (strong) NSMutableArray *albums;
 @property NSUInteger lastLoadedPageIndex;
 @property UCAlbumsListState state;
@@ -180,7 +179,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
     
     if (indexPath.row <= [self.albums count] - 1) {
         GRKAlbum * albumAtIndexPath = [self.albums objectAtIndex:indexPath.row];
-        UCPhotosList * photosList = [[UCPhotosList alloc] initWithNibName:@"UCPhotosList" bundle:nil andGrabber:self.grabber andAlbum:albumAtIndexPath];
+        UCPhotosList * photosList = [[UCPhotosList alloc] initWithGrabber:self.grabber album:albumAtIndexPath];
         photosList.albumList = self;
         [self.navigationController pushViewController:photosList animated:YES];
     }

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UploadcareKit.h>
 
 @interface UCRecentUploadsViewController : UITableViewController
+
+@property (strong) UploadcareSuccessBlock uploadCompletionBlock;
+@property (strong) UploadcareFailureBlock uploadFailureBlock;
+
 
 @end

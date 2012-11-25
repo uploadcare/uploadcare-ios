@@ -13,6 +13,7 @@
 
 @property (weak) UploadcareSuccessBlock uploadCompletionBlock;
 @property (weak) UploadcareFailureBlock uploadFailureBlock;
+@property (strong) NSString *serviceName;
 
 - (id)initWithGrabber:(id)grabber serviceName:(NSString *)serviceName;
 

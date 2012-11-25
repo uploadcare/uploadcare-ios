@@ -35,6 +35,6 @@ typedef NSUInteger UCPhotosListState;
 
 @property (weak) UCAlbumsList *albumList;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andGrabber:(GRKServiceGrabber*)grabber andAlbum:(GRKAlbum*)album;
+- (id)initWithGrabber:(GRKServiceGrabber *)grabber album:(GRKAlbum *)album;
 
 @end

@@ -7,6 +7,11 @@
 //
 
 #import "UCRecentUploadsViewController.h"
+#import "UCRecentUploads.h"
+#import "UCUploader.h"
+#import "UIImageView+UCHelpers.h"
+#import "QuartzCore/QuartzCore.h"
+
 
 @interface UCRecentUploadsViewController ()
 
@@ -26,10 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
+    self.title = NSLocalizedString(@"Recent", @"Title for the recent uploads view controller");
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
@@ -43,76 +45,90 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [[UCRecentUploads sortedUploads] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *reusableIdentifier = @"UCRecentUploadsCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reusableIdentifier];
     
-    // Configure the cell...
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reusableIdentifier];
+        
+        /* TODO: Share the code with the album view cells */
+        cell.imageView.layer.cornerRadius = 4.0f;
+        cell.imageView.clipsToBounds = YES;
+        
+        /* ...not the following though */
+        cell.textLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    }
+
+    NSDictionary *uploadInfo = [[UCRecentUploads sortedUploads] objectAtIndex:indexPath.row];
+
+    /* title */
+    cell.textLabel.text = uploadInfo[UCRecentUploadsTitleKey];
     
+    /* subtitle */
+    NSDate *uploadDate = uploadInfo[UCRecentUploadsDateKey];
+    NSString *uploadSource = uploadInfo[UCRecentUploadsSourceTypeKey];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    dateFormatter.dateStyle = NSDateFormatterShortStyle;
+    dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    dateFormatter.doesRelativeDateFormatting = YES;
+    NSString *dateString = [dateFormatter stringFromDate:uploadDate];
+    NSString *detailFormatString = NSLocalizedString(@"%@ from %@", "Recent uploads item subtitle, e.g. `Yesterday from Facebook`, or `22.09.2012 from an URL");
+    cell.detailTextLabel.text = [NSString stringWithFormat:detailFormatString, dateString, uploadSource];
+    
+    /* thumbnail */
+    NSURL *thumbnailURL = ([uploadInfo[UCRecentUploadsThumbnailURLKey] length]) ? [NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] : [[NSBundle mainBundle]URLForResource:@"icon_url@2x" withExtension:@"png"];
+    [cell.imageView showActivityIndicatorWithStyle:UIActivityIndicatorViewStyleGray placeholderSize:CGSizeMake(64, 64)];
+    if (thumbnailURL) [cell.imageView setImageFromURL:thumbnailURL scaledToSize:CGSizeMake(64, 64) successBlock:^(UIImage *image) {
+        /* remove the activity indicator on success */
+        [cell.imageView removeActivityIndicator];
+    } failureBlock:^(NSError *error) {
+        /* ^ or error */
+        [cell.imageView removeActivityIndicator];
+    }];
+
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80.f;
 }
-*/
 
-// Override to support editing the table view.
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
+        [UCRecentUploads deleteRecordWithSortedIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
 }
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    NSDictionary *uploadInfo = [[UCRecentUploads sortedUploads] objectAtIndex:indexPath.row];
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        UCUploadFile(uploadInfo[UCRecentUploadsURLKey],
+                     ^(NSString *fileId) {
+                         [UCRecentUploads recordUploadFromURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsURLKey]] thumnailURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] title:uploadInfo[UCRecentUploadsTitleKey] sourceType:uploadInfo[UCRecentUploadsSourceTypeKey] errorType:UCRecentUploadsNoError];
+                         if (self.uploadCompletionBlock) self.uploadCompletionBlock(fileId);
+                     }, ^(NSError *error) {
+                         [UCRecentUploads recordUploadFromURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsURLKey]] thumnailURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] title:uploadInfo[UCRecentUploadsTitleKey] sourceType:uploadInfo[UCRecentUploadsSourceTypeKey] errorType:UCRecentUploadsNoError];
+                         if (self.uploadFailureBlock) self.uploadFailureBlock(error);
+                     });
+    }];
 }
 
 @end

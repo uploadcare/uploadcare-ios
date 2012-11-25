@@ -9,6 +9,7 @@
 #import "UCUploadViewController.h"
 #import "UCAlbumsList.h"
 #import "UCGrabkitConfigurator.h"
+#import "UCRecentUploads.h"
 #import "UCRecentUploadsViewController.h"
 
 #import "GRKConfiguration.h"
@@ -155,15 +156,18 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:NO completion:^{
         [self dismissViewControllerAnimated:YES completion:^{
+             /* TODO: Move everything to UCUploader */
             [UCHUD setProgress:0];
             [UCHUD setText:NSLocalizedString(@"Uploading", @"Upload HUD text")];
             [UCHUD show];
-            [[UploadcareKit shared]uploadFileWithName:info[UIImagePickerControllerReferenceURL] data:UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage], 1) contentType:@"image/jpeg" progressBlock:^(long long bytesDone, long long bytesTotal) {
+            [[UploadcareKit shared]uploadFileWithName:info[UIImagePickerControllerReferenceURL] data: /* TODO: what if the image is not from the camera? parse UIImagePickerControllerReferenceURL or whatever */UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage], 1) contentType:@"image/jpeg" progressBlock:^(long long bytesDone, long long bytesTotal) {
                 [UCHUD setProgress:(float)bytesDone / bytesTotal];
             } successBlock:^(NSString *fileId) {
                 [UCHUD dismiss];
+                /* [UCRecentUploads recordUploadFromURL:info[UIImagePickerControllerReferenceURL] thumnailURL:info[UIImagePickerControllerReferenceURL] title:@"..." sourceType:@"..." errorType:UCRecentUploadsNoError]; */
                 self.uploadCompletionBlock(fileId);
             } failureBlock:^(NSError *error) {
+                /* [UCRecentUploads recordUploadFromURL:info[UIImagePickerControllerReferenceURL] thumnailURL:info[UIImagePickerControllerReferenceURL] title:@"..." sourceType:@"..." errorType:UCRecentUploadsSystemError]; */
                 [UCHUD dismiss];
                 self.uploadFailureBlock(error);
             }];
@@ -216,12 +220,20 @@
     if (!buttonIndex) return; // cancelled
     [self dismissViewControllerAnimated:YES completion:^{
         NSString *fileURL = [[alertView textFieldAtIndex:0] text];
-        UCUploadFile(fileURL, self.uploadCompletionBlock, self.uploadFailureBlock);
+        UCUploadFile(fileURL, ^(NSString *fileId) {
+            [UCRecentUploads recordUploadFromURL:[NSURL URLWithString:fileURL] thumnailURL:nil title:fileURL sourceType:@"an URL" errorType:UCRecentUploadsNoError];
+            self.uploadCompletionBlock(fileId);
+        }, ^(NSError *error) {
+            [UCRecentUploads recordUploadFromURL:[NSURL URLWithString:fileURL] thumnailURL:nil title:fileURL sourceType:@"an URL" errorType:UCRecentUploadsSystemError];
+            self.uploadFailureBlock(error);
+        });
     }];
 }
 
 - (void)showRecentUploads {
     UCRecentUploadsViewController *recentUploadsViewController = [[UCRecentUploadsViewController alloc]initWithStyle:UITableViewStylePlain];
+    recentUploadsViewController.uploadCompletionBlock = self.uploadCompletionBlock;
+    recentUploadsViewController.uploadFailureBlock = self.uploadFailureBlock;
     [self.navigationController pushViewController:recentUploadsViewController animated:YES];
 }
 
