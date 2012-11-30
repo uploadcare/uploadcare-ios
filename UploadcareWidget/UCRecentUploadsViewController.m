@@ -88,7 +88,7 @@
     cell.detailTextLabel.text = [NSString stringWithFormat:detailFormatString, dateString, uploadSource];
     
     /* thumbnail */
-    NSURL *thumbnailURL = ([uploadInfo[UCRecentUploadsThumbnailURLKey] length]) ? [NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] : [[NSBundle mainBundle]URLForResource:@"icon_url@2x" withExtension:@"png"];
+    NSURL *thumbnailURL = ([uploadInfo[UCRecentUploadsThumbnailURLKey] length]) ? [NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] : [[NSBundle mainBundle]URLForResource:@"thumb_from_URL_128x128" withExtension:@"png"];
     [cell.imageView showActivityIndicatorWithStyle:UIActivityIndicatorViewStyleGray placeholderSize:CGSizeMake(64, 64)];
     if (thumbnailURL) [cell.imageView setImageFromURL:thumbnailURL scaledToSize:CGSizeMake(64, 64) successBlock:^(UIImage *image) {
         /* remove the activity indicator on success */
