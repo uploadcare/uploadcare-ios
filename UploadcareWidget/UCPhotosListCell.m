@@ -103,11 +103,11 @@ NSString *UCReadableTitleFromGRKPhoto(GRKPhoto *photo, NSString *serviceName) {
                      ^(NSString *fileId) {
                          [UCRecentUploads recordUploadFromURL:[photo.imagesSortedByHeight.lastObject URL] thumnailURL:[photo.imagesSortedByHeight[0] URL] title:UCReadableTitleFromGRKPhoto(photo, self.serviceName) sourceType:self.serviceName errorType:UCRecentUploadsNoError];
                          /* ^ TODO: Select the most suitable thumbnail */
-                         self.photoList.albumList.uploadCompletionBlock(fileId);
+                         if (self.photoList.albumList.uploadCompletionBlock) self.photoList.albumList.uploadCompletionBlock(fileId);
                      }, ^(NSError *error) {
                          [UCRecentUploads recordUploadFromURL:[photo.imagesSortedByHeight.lastObject URL] thumnailURL:[photo.imagesSortedByHeight[0] URL] title:UCReadableTitleFromGRKPhoto(photo, self.serviceName) sourceType:self.serviceName errorType:UCRecentUploadsSystemError];
                          /* ^ TODO: thumbnail, see above */
-                         self.photoList.albumList.uploadFailureBlock(error);
+                         if (self.photoList.albumList.uploadFailureBlock) self.photoList.albumList.uploadFailureBlock(error);
                      });
     }];
 }

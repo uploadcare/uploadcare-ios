@@ -33,7 +33,7 @@ typedef NSUInteger UCPhotosListState;
     NSUInteger _nextPageIndexToLoad;
 }
 
-@property (weak) UCAlbumsList *albumList;
+@property (strong) UCAlbumsList *albumList;
 
 - (id)initWithGrabber:(GRKServiceGrabber *)grabber album:(GRKAlbum *)album;
 

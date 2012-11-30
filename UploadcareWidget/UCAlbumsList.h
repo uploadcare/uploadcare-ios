@@ -11,8 +11,8 @@
 
 @interface UCAlbumsList : UITableViewController
 
-@property (weak) UploadcareSuccessBlock uploadCompletionBlock;
-@property (weak) UploadcareFailureBlock uploadFailureBlock;
+@property (strong) UploadcareSuccessBlock uploadCompletionBlock;
+@property (strong) UploadcareFailureBlock uploadFailureBlock;
 @property (strong) NSString *serviceName;
 
 - (id)initWithGrabber:(id)grabber serviceName:(NSString *)serviceName;
