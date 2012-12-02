@@ -132,7 +132,7 @@
                        @"textLabel.textAlignment" : @(NSTextAlignmentCenter),
                      }
             
-         ], @"footer":@"Powered by Uploadcare"}];
+         ], @"footer":@"Powered by Uploadcare.com"}];
         
         
     });
