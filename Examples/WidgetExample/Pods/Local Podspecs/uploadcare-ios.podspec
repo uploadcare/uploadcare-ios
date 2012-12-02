@@ -12,6 +12,6 @@ Pod::Spec.new do |s|
   s.platform = :ios, '5.0'
   s.dependency 'AFNetworking', '~> 1.0'
   s.dependency 'libPusher', '~> 1.4'
-  s.dependency 'grabKit', '1.2'
+  s.dependency 'grabKit', '1.2.1'
   s.dependency 'MBProgressHUD', :head
 end

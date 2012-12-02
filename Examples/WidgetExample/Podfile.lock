@@ -1,27 +1,23 @@
 
+DEPENDENCIES: 
+- uploadcare-ios (from `../../')
+
 COCOAPODS: 0.15.2
 
-EXTERNAL SOURCES: 
-  uploadcare-ios: 
-    :local: ../../
-
 SPEC CHECKSUMS: 
-  uploadcare-ios: fbb37c253fba9d3e4342b2f3e6ee2ae130db206c
-  objectiveflickr: 17f5f1fd4b9b9d6761a9545493c79221f65604c3
-  grabKit/instagram: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
-  grabKit/flickr: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
+  grabKit/instagram: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
   libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
   MBProgressHUD: b23ee11c42253d6d804e8e0bfabdc334e8b2571f
   ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780
+  grabKit: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
   Facebook-iOS-SDK: 5fc068ebfd8c8c9b0fad476bc36dbbf1fffeebc8
-  grabKit/facebook: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
-  grabKit/device: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
-  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
-  grabKit: ccae5bcd30e5a8b2592a2367f8e7e273d347ea0d
+  objectiveflickr: 17f5f1fd4b9b9d6761a9545493c79221f65604c3
+  grabKit/flickr: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  grabKit/facebook: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  uploadcare-ios: 5f84f8cec3da426099c13a3094ca0599d9d22c95
+  grabKit/device: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
   AFNetworking: 4c11f857c9a18d65f4257c90a1e74ac49f0ac422
-
-DEPENDENCIES: 
-- uploadcare-ios (from `../../')
+  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
 
 PODS: 
 - AFNetworking (1.0.1)
@@ -29,23 +25,27 @@ PODS:
 - ISO8601DateFormatter (0.6)
 - MBProgressHUD (HEAD based on 0.5)
 - SocketRocket (0.2.0)
-- grabKit (1.2): 
-  - grabKit/device (= 1.2)
-  - grabKit/facebook (= 1.2)
-  - grabKit/flickr (= 1.2)
-  - grabKit/instagram (= 1.2)
-- grabKit/device (1.2)
-- grabKit/facebook (1.2): 
+- grabKit (1.2.1): 
+  - grabKit/device (= 1.2.1)
+  - grabKit/facebook (= 1.2.1)
+  - grabKit/flickr (= 1.2.1)
+  - grabKit/instagram (= 1.2.1)
+- grabKit/device (1.2.1)
+- grabKit/facebook (1.2.1): 
   - Facebook-iOS-SDK (= 3.1.1)
   - ISO8601DateFormatter (= 0.6)
-- grabKit/flickr (1.2): 
+- grabKit/flickr (1.2.1): 
   - objectiveflickr (= 2.0.2)
-- grabKit/instagram (1.2)
+- grabKit/instagram (1.2.1)
 - libPusher (1.4): 
   - SocketRocket
 - objectiveflickr (2.0.2)
 - uploadcare-ios (0.0.1): 
   - AFNetworking (~> 1.0)
   - MBProgressHUD (HEAD)
-  - grabKit (= 1.2)
+  - grabKit (= 1.2.1)
   - libPusher (~> 1.4)
+
+EXTERNAL SOURCES: 
+  uploadcare-ios: 
+    :local: ../../

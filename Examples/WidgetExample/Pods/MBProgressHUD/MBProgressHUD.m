@@ -125,15 +125,14 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 }
 
 + (MBProgressHUD *)HUDForView:(UIView *)view {
-	MBProgressHUD *hud = nil;
-	NSArray *subviews = view.subviews;
 	Class hudClass = [MBProgressHUD class];
-	for (UIView *aView in subviews) {
-		if ([aView isKindOfClass:hudClass]) {
-			hud = (MBProgressHUD *)aView;
+	NSEnumerator *subviewsEnum = [view.subviews reverseObjectEnumerator];
+	for (UIView *subview in subviewsEnum) {
+		if ([subview isKindOfClass:hudClass]) {
+			return (MBProgressHUD *)subview;
 		}
 	}
-	return hud;
+	return nil;
 }
 
 + (NSArray *)allHUDsForView:(UIView *)view {
@@ -283,7 +282,6 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 #pragma mark - Internal show & hide operations
 
 - (void)showUsingAnimation:(BOOL)animated {
-	self.alpha = 0.0f;
 	if (animated && animationType == MBProgressHUDAnimationZoomIn) {
 		self.transform = CGAffineTransformConcat(rotationTransform, CGAffineTransformMakeScale(0.5f, 0.5f));
 	} else if (animated && animationType == MBProgressHUDAnimationZoomOut) {
@@ -426,7 +424,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 - (void)setupLabels {
 	label = [[UILabel alloc] initWithFrame:self.bounds];
 	label.adjustsFontSizeToFitWidth = NO;
-	label.textAlignment = UITextAlignmentCenter;
+	label.textAlignment = MBLabelAlignmentCenter;
 	label.opaque = NO;
 	label.backgroundColor = [UIColor clearColor];
 	label.textColor = [UIColor whiteColor];
@@ -437,7 +435,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	detailsLabel = [[UILabel alloc] initWithFrame:self.bounds];
 	detailsLabel.font = self.detailsLabelFont;
 	detailsLabel.adjustsFontSizeToFitWidth = NO;
-	detailsLabel.textAlignment = UITextAlignmentCenter;
+	detailsLabel.textAlignment = MBLabelAlignmentCenter;
 	detailsLabel.opaque = NO;
 	detailsLabel.backgroundColor = [UIColor clearColor];
 	detailsLabel.textColor = [UIColor whiteColor];
@@ -731,6 +729,11 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	BOOL _annular;
 }
 
+#pragma mark - Properties
+
+@synthesize progressTintColor = _progressTintColor;
+@synthesize backgroundTintColor = _backgroundTintColor;
+
 #pragma mark - Accessors
 
 - (float)progress {
@@ -764,8 +767,20 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		self.opaque = NO;
 		_progress = 0.f;
 		_annular = NO;
+		_progressTintColor = [[UIColor alloc] initWithWhite:1.f alpha:1.f];
+		_backgroundTintColor = [[UIColor alloc] initWithWhite:1.f alpha:.1f];
+		[self registerForKVO];
 	}
 	return self;
+}
+
+- (void)dealloc {
+	[self unregisterFromKVO];
+#if !__has_feature(objc_arc)
+	[_progressTintColor release];
+	[_backgroundTintColor release];
+	[super dealloc];
+#endif
 }
 
 #pragma mark - Drawing
@@ -787,7 +802,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		CGFloat startAngle = - ((float)M_PI / 2); // 90 degrees
 		CGFloat endAngle = (2 * (float)M_PI) + startAngle;
 		[processBackgroundPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
-		[[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.1f] set];
+		[_backgroundTintColor set];
 		[processBackgroundPath stroke];
 		// Draw progress
 		UIBezierPath *processPath = [UIBezierPath bezierPath];
@@ -795,12 +810,12 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		processPath.lineWidth = lineWidth;
 		endAngle = (self.progress * 2 * (float)M_PI) + startAngle;
 		[processPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
-		[[UIColor whiteColor] set];
+		[_progressTintColor set];
 		[processPath stroke];
 	} else {
 		// Draw background
-		CGContextSetRGBStrokeColor(context, 1.0f, 1.0f, 1.0f, 1.0f); // white
-		CGContextSetRGBFillColor(context, 1.0f, 1.0f, 1.0f, 0.1f); // translucent white
+		[_progressTintColor setStroke];
+		[_backgroundTintColor setFill];
 		CGContextSetLineWidth(context, 2.0f);
 		CGContextFillEllipseInRect(context, circleRect);
 		CGContextStrokeEllipseInRect(context, circleRect);
@@ -815,6 +830,28 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		CGContextClosePath(context);
 		CGContextFillPath(context);
 	}
+}
+
+#pragma mark - KVO
+
+- (void)registerForKVO {
+	for (NSString *keyPath in [self observableKeypaths]) {
+		[self addObserver:self forKeyPath:keyPath options:NSKeyValueObservingOptionNew context:NULL];
+	}
+}
+
+- (void)unregisterFromKVO {
+	for (NSString *keyPath in [self observableKeypaths]) {
+		[self removeObserver:self forKeyPath:keyPath];
+	}
+}
+
+- (NSArray *)observableKeypaths {
+	return [NSArray arrayWithObjects:@"progressTintColor", @"backgroundTintColor", nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+	[self setNeedsDisplay];
 }
 
 @end
