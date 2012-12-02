@@ -19,6 +19,7 @@
         _sharedHUD = [[MBProgressHUD alloc] initWithView:rootView];
         [rootView addSubview:_sharedHUD];
         
+        _sharedHUD.userInteractionEnabled = NO;
         _sharedHUD.mode = MBProgressHUDModeAnnularDeterminate;
         _sharedHUD.animationType = MBProgressHUDAnimationZoom;
     });
