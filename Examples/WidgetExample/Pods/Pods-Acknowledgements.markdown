@@ -290,6 +290,15 @@ respective headers for the terms of their individual licenses.
 
 
 
+## TestFlightSDK
+
+All text and design is copyright © 2010-2012 TestFlight App, Inc.
+
+All rights reserved.
+
+https://testflightapp.com/tos/
+
+
 ## grabKit
 
 Copyright (c) 2012 Pierre-Olivier Simonard <pierre.olivier.simonard@gmail.com>

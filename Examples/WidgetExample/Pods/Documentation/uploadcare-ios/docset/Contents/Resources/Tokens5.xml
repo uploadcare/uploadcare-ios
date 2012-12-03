@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/UCPhotosList.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/UCPhotosList</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCPhotosList.h</DeclaredIn>
+			
+			<NodeRef refid="5"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCPhotosList/setAlbumList:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCPhotosList.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) UCAlbumsList *albumList</Declaration>
+			
+			
+			<Anchor>//api/name/albumList</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCPhotosList/albumList</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCPhotosList.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) UCAlbumsList *albumList</Declaration>
+			
+			
+			<Anchor>//api/name/albumList</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCPhotosList/initWithGrabber:album:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCPhotosList.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithGrabber:(GRKServiceGrabber *)grabber album:(GRKAlbum *)album</Declaration>
+			
+			
+			<Anchor>//api/name/initWithGrabber:album:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

@@ -1,3 +1,4 @@
 platform :ios, '5.0'
 
 pod 'uploadcare-ios', :local => '../../'
+pod 'TestFlightSDK','~> 1.1'

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/UploadcareStatusWatcher.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/UploadcareStatusWatcher</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UploadcareStatusWatcher.h</DeclaredIn>
+			
+			<NodeRef refid="14"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/UploadcareStatusWatcher/watchUploadWithToken:progressBlock:successBlock:failureBlock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UploadcareStatusWatcher.h</DeclaredIn>			
+			
+			<Declaration>+ (id)watchUploadWithToken:(NSString *)token progressBlock:(UploadcareProgressBlock)progressBlock successBlock:(UploadcareSuccessBlock)successBlock failureBlock:(UploadcareFailureBlock)failureBlock</Declaration>
+			
+			
+			<Anchor>//api/name/watchUploadWithToken:progressBlock:successBlock:failureBlock:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/UploadcareStatusWatcher/preheatPusher</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UploadcareStatusWatcher.h</DeclaredIn>			
+			
+			<Declaration>+ (void)preheatPusher</Declaration>
+			
+			
+			<Anchor>//api/name/preheatPusher</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

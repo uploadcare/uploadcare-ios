@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/UCMenuViewController.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/UCMenuViewController</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCMenuViewController.h</DeclaredIn>
+			
+			<NodeRef refid="4"/>
+		</Token>
+		
+		
+	</File>
+</Tokens>

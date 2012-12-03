@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/UCUploadNavigationController.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/UCUploadNavigationController</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCUploadNavigationController.h</DeclaredIn>
+			
+			<NodeRef refid="9"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCUploadNavigationController/setNavigationTitle:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCUploadNavigationController.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *navigationTitle</Declaration>
+			
+			
+			<Anchor>//api/name/navigationTitle</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCUploadNavigationController/navigationTitle</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCUploadNavigationController.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *navigationTitle</Declaration>
+			
+			
+			<Anchor>//api/name/navigationTitle</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCUploadNavigationController/initWithUploadcarePublicKey:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCUploadNavigationController.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithUploadcarePublicKey:(NSString *)publicKey</Declaration>
+			
+			
+			<Anchor>//api/name/initWithUploadcarePublicKey:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCUploadNavigationController/setUploadFailureBlock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCUploadNavigationController.h</DeclaredIn>			
+			
+			<Declaration>- (void)setUploadFailureBlock:(UploadcareFailureBlock)failureBlock</Declaration>
+			
+			
+			<Anchor>//api/name/setUploadFailureBlock:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCUploadNavigationController/setUploadCompletionBlock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCUploadNavigationController.h</DeclaredIn>			
+			
+			<Declaration>- (void)setUploadCompletionBlock:(UploadcareSuccessBlock)completionBlock</Declaration>
+			
+			
+			<Anchor>//api/name/setUploadCompletionBlock:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCUploadNavigationController/enableFacebook</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCUploadNavigationController.h</DeclaredIn>			
+			
+			<Declaration>- (void)enableFacebook</Declaration>
+			
+			
+			<Anchor>//api/name/enableFacebook</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCUploadNavigationController/enableFlickrWithAPIKey:flickrAPISecret:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCUploadNavigationController.h</DeclaredIn>			
+			
+			<Declaration>- (void)enableFlickrWithAPIKey:(NSString *)flickrAPIKey flickrAPISecret:(NSString *)flickrAPISecret</Declaration>
+			
+			
+			<Anchor>//api/name/enableFlickrWithAPIKey:flickrAPISecret:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCUploadNavigationController/enableInstagramWithClientId:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCUploadNavigationController.h</DeclaredIn>			
+			
+			<Declaration>- (void)enableInstagramWithClientId:(NSString *)instagramAppId</Declaration>
+			
+			
+			<Anchor>//api/name/enableInstagramWithClientId:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

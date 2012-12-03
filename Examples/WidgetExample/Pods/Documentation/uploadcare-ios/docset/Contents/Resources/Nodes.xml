@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocSetNodes version="1.0">
+    <TOC>
+        <Node type="folder">
+            <Name>uploadcare-ios 0.0.1</Name>
+            <Path>index.html</Path>
+			<Subnodes>
+                
+				
+				<Node type="folder">
+					<Name>Classes</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="1"/>
+						<NodeRef refid="2"/>
+						<NodeRef refid="3"/>
+						<NodeRef refid="4"/>
+						<NodeRef refid="5"/>
+						<NodeRef refid="6"/>
+						<NodeRef refid="7"/>
+						<NodeRef refid="8"/>
+						<NodeRef refid="9"/>
+						<NodeRef refid="10"/>
+						<NodeRef refid="11"/>
+						<NodeRef refid="12"/>
+						<NodeRef refid="13"/>
+						<NodeRef refid="14"/>
+						
+					</Subnodes>
+				</Node>
+				
+				
+				<Node type="folder">
+					<Name>Categories</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="15"/>
+						<NodeRef refid="16"/>
+						
+					</Subnodes>
+				</Node>
+				
+				
+			</Subnodes>
+        </Node>
+    </TOC>
+	<Library>
+		
+		<Node id="1">
+			<Name>UCAlbumsList</Name>
+			<Path>Classes/UCAlbumsList.html</Path>
+		</Node>
+		<Node id="2">
+			<Name>UCAppDelegate</Name>
+			<Path>Classes/UCAppDelegate.html</Path>
+		</Node>
+		<Node id="3">
+			<Name>UCGrabkitConfigurator</Name>
+			<Path>Classes/UCGrabkitConfigurator.html</Path>
+		</Node>
+		<Node id="4">
+			<Name>UCMenuViewController</Name>
+			<Path>Classes/UCMenuViewController.html</Path>
+		</Node>
+		<Node id="5">
+			<Name>UCPhotosList</Name>
+			<Path>Classes/UCPhotosList.html</Path>
+		</Node>
+		<Node id="6">
+			<Name>UCPhotosListCell</Name>
+			<Path>Classes/UCPhotosListCell.html</Path>
+		</Node>
+		<Node id="7">
+			<Name>UCRecentUploads</Name>
+			<Path>Classes/UCRecentUploads.html</Path>
+		</Node>
+		<Node id="8">
+			<Name>UCRecentUploadsViewController</Name>
+			<Path>Classes/UCRecentUploadsViewController.html</Path>
+		</Node>
+		<Node id="9">
+			<Name>UCUploadNavigationController</Name>
+			<Path>Classes/UCUploadNavigationController.html</Path>
+		</Node>
+		<Node id="10">
+			<Name>UCUploadViewController</Name>
+			<Path>Classes/UCUploadViewController.html</Path>
+		</Node>
+		<Node id="11">
+			<Name>UploadCareProgressView</Name>
+			<Path>Classes/UploadCareProgressView.html</Path>
+		</Node>
+		<Node id="12">
+			<Name>UploadcareKit</Name>
+			<Path>Classes/UploadcareKit.html</Path>
+		</Node>
+		<Node id="13">
+			<Name>UploadcareServicesConfigurator</Name>
+			<Path>Classes/UploadcareServicesConfigurator.html</Path>
+		</Node>
+		<Node id="14">
+			<Name>UploadcareStatusWatcher</Name>
+			<Path>Classes/UploadcareStatusWatcher.html</Path>
+		</Node>
+		
+		<Node id="15">
+			<Name>UIImage(UCHelpers)</Name>
+			<Path>Categories/UIImage+UCHelpers.html</Path>
+		</Node>
+		<Node id="16">
+			<Name>UIImageView(UCHelpers)</Name>
+			<Path>Categories/UIImageView+UCHelpers.html</Path>
+		</Node>
+		
+		
+	</Library>
+</DocSetNodes>

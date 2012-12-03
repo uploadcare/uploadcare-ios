@@ -41,6 +41,16 @@
 	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>com.uploadcare.${PRODUCT_NAME:rfc1034identifier}</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.1</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -51,20 +61,8 @@
 			</array>
 		</dict>
 	</array>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.1</string>
-	<key>UIPrerenderedIcon</key>
-	<false/>
-	<key>CFBundleSignature</key>
-	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.1.2</string>
+	<string>1.1.3</string>
 	<key>FacebookAppID</key>
 	<string>442253875803433</string>
 	<key>LSApplicationCategoryType</key>
@@ -81,6 +79,8 @@
 	</array>
 	<key>UIInterfaceOrientation</key>
 	<string>UIInterfaceOrientationPortrait</string>
+	<key>UIPrerenderedIcon</key>
+	<false/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

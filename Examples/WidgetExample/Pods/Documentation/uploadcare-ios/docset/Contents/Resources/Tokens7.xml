@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/UCRecentUploads.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/UCRecentUploads</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCRecentUploads.h</DeclaredIn>
+			
+			<NodeRef refid="7"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/UCRecentUploads/recordUploadFromURL:thumnailURL:title:sourceType:errorType:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCRecentUploads.h</DeclaredIn>			
+			
+			<Declaration>+ (void)recordUploadFromURL:(NSURL *)fileURL thumnailURL:(NSURL *)thumbnailURL title:(NSString *)fileTitle sourceType:(NSString *)sourceType errorType:(NSString *)errorType</Declaration>
+			
+			
+			<Anchor>//api/name/recordUploadFromURL:thumnailURL:title:sourceType:errorType:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/UCRecentUploads/sortedUploads</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCRecentUploads.h</DeclaredIn>			
+			
+			<Declaration>+ (NSArray *)sortedUploads</Declaration>
+			
+			
+			<Anchor>//api/name/sortedUploads</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/UCRecentUploads/deleteRecordWithSortedIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCRecentUploads.h</DeclaredIn>			
+			
+			<Declaration>+ (void)deleteRecordWithSortedIndex:(NSInteger)idx</Declaration>
+			
+			
+			<Anchor>//api/name/deleteRecordWithSortedIndex:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

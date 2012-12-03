@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/UCAlbumsList.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/UCAlbumsList</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCAlbumsList.h</DeclaredIn>
+			
+			<NodeRef refid="1"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCAlbumsList/setUploadCompletionBlock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCAlbumsList.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) UploadcareSuccessBlock uploadCompletionBlock</Declaration>
+			
+			
+			<Anchor>//api/name/uploadCompletionBlock</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCAlbumsList/uploadCompletionBlock</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCAlbumsList.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) UploadcareSuccessBlock uploadCompletionBlock</Declaration>
+			
+			
+			<Anchor>//api/name/uploadCompletionBlock</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCAlbumsList/setUploadFailureBlock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCAlbumsList.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) UploadcareFailureBlock uploadFailureBlock</Declaration>
+			
+			
+			<Anchor>//api/name/uploadFailureBlock</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCAlbumsList/uploadFailureBlock</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCAlbumsList.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) UploadcareFailureBlock uploadFailureBlock</Declaration>
+			
+			
+			<Anchor>//api/name/uploadFailureBlock</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCAlbumsList/setServiceName:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCAlbumsList.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *serviceName</Declaration>
+			
+			
+			<Anchor>//api/name/serviceName</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCAlbumsList/serviceName</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCAlbumsList.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *serviceName</Declaration>
+			
+			
+			<Anchor>//api/name/serviceName</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCAlbumsList/initWithGrabber:serviceName:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCAlbumsList.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithGrabber:(id)grabber serviceName:(NSString *)serviceName</Declaration>
+			
+			
+			<Anchor>//api/name/initWithGrabber:serviceName:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

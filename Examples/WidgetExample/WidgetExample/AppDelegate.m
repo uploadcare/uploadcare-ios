@@ -9,12 +9,15 @@
 #import "AppDelegate.h"
 #import "MasterViewController.h"
 
+#import <TestFlight.h>
+
 #import <UploadcareWidget.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [TestFlight takeOff:@"12673745eb2ede1bb0bcd80628afd4df_MTAyNDgxMjAxMi0wNi0yMSAxMzo0MDo0Ni44MjAyODY"];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 

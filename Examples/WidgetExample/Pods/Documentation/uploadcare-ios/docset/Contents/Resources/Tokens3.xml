@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/UCGrabkitConfigurator.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/UCGrabkitConfigurator</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>
+			
+			<NodeRef refid="3"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/UCGrabkitConfigurator/shared</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>+ (id)shared</Declaration>
+			
+			
+			<Anchor>//api/name/shared</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCGrabkitConfigurator/setFacebookIsEnabled:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property BOOL facebookIsEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/facebookIsEnabled</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCGrabkitConfigurator/facebookIsEnabled</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property BOOL facebookIsEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/facebookIsEnabled</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCGrabkitConfigurator/setFacebookAppId:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *facebookAppId</Declaration>
+			
+			
+			<Anchor>//api/name/facebookAppId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCGrabkitConfigurator/facebookAppId</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *facebookAppId</Declaration>
+			
+			
+			<Anchor>//api/name/facebookAppId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCGrabkitConfigurator/setFacebookTaggedPhotosAlbumName:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property (readonly) NSString *facebookTaggedPhotosAlbumName</Declaration>
+			
+			
+			<Anchor>//api/name/facebookTaggedPhotosAlbumName</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCGrabkitConfigurator/facebookTaggedPhotosAlbumName</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property (readonly) NSString *facebookTaggedPhotosAlbumName</Declaration>
+			
+			
+			<Anchor>//api/name/facebookTaggedPhotosAlbumName</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCGrabkitConfigurator/setFlickrIsEnabled:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property BOOL flickrIsEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/flickrIsEnabled</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCGrabkitConfigurator/flickrIsEnabled</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property BOOL flickrIsEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/flickrIsEnabled</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCGrabkitConfigurator/setFlickrApiKey:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *flickrApiKey</Declaration>
+			
+			
+			<Anchor>//api/name/flickrApiKey</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCGrabkitConfigurator/flickrApiKey</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *flickrApiKey</Declaration>
+			
+			
+			<Anchor>//api/name/flickrApiKey</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCGrabkitConfigurator/setFlickrApiSecret:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *flickrApiSecret</Declaration>
+			
+			
+			<Anchor>//api/name/flickrApiSecret</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCGrabkitConfigurator/flickrApiSecret</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *flickrApiSecret</Declaration>
+			
+			
+			<Anchor>//api/name/flickrApiSecret</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCGrabkitConfigurator/setFlickrRedirectUri:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *flickrRedirectUri</Declaration>
+			
+			
+			<Anchor>//api/name/flickrRedirectUri</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCGrabkitConfigurator/flickrRedirectUri</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *flickrRedirectUri</Declaration>
+			
+			
+			<Anchor>//api/name/flickrRedirectUri</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCGrabkitConfigurator/setInstagramIsEnabled:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property BOOL instagramIsEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/instagramIsEnabled</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCGrabkitConfigurator/instagramIsEnabled</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property BOOL instagramIsEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/instagramIsEnabled</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCGrabkitConfigurator/setInstagramAppId:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *instagramAppId</Declaration>
+			
+			
+			<Anchor>//api/name/instagramAppId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCGrabkitConfigurator/instagramAppId</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *instagramAppId</Declaration>
+			
+			
+			<Anchor>//api/name/instagramAppId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/UCGrabkitConfigurator/setInstagramRedirectUri:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *instagramRedirectUri</Declaration>
+			
+			
+			<Anchor>//api/name/instagramRedirectUri</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/UCGrabkitConfigurator/instagramRedirectUri</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>UCGrabkitConfigurator.h</DeclaredIn>			
+			
+			<Declaration>@property (strong) NSString *instagramRedirectUri</Declaration>
+			
+			
+			<Anchor>//api/name/instagramRedirectUri</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>
