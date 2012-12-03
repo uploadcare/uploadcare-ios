@@ -8,6 +8,7 @@
 
 #import "UCAlbumsList.h"
 #import "GRKServiceGrabberConnectionProtocol.h"
+#import "GRKInstagramGrabber.h"
 #import "UCPhotosList.h"
 #import "UIImageView+UCHelpers.h"
 #import "UIImage+UCHelpers.h"
@@ -154,6 +155,12 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
     GRKAlbum * album = (GRKAlbum*)[self.albums objectAtIndex:indexPath.row];
     NSURL *thumbnailURL = [album.coverPhoto.imagesSortedByHeight[0] URL];
     cell.textLabel.text = album.name;
+    if ([self.grabber isKindOfClass:[GRKInstagramGrabber class]]) {
+        /* Workaround for Instagram: Replace the default album name
+           (`self`) with something better.
+           TODO: Don't show the albums list for the Instagram at all */
+        cell.textLabel.text = NSLocalizedString(@"Photos", "The Instagram's only album name");
+    }
     cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Items: %d", nil), album.count];
     CGSize kAlbumCoverThumbnailSize = CGSizeMake(64, 64);
     /* show the activity indicator */
