@@ -18,8 +18,9 @@
 #import "GRKFlickrGrabber.h"
 #import "GRKInstagramGrabber.h"
 
+#import "SVProgressHUD.h"
+
 #import "UCUploader.h"
-#import "UCHUD.h"
 
 @interface UCUploadViewController ()
 @property (strong) GRKServiceGrabber *grabber;
@@ -157,18 +158,17 @@
     [picker dismissViewControllerAnimated:NO completion:^{
         [self dismissViewControllerAnimated:YES completion:^{
              /* TODO: Move everything to UCUploader */
-            [UCHUD setProgress:0];
-            [UCHUD setText:NSLocalizedString(@"Uploading", @"Upload HUD text")];
-            [UCHUD show];
+            NSString *const kUploadingText = NSLocalizedString(@"Uploading", @"Upload HUD text");
+            [SVProgressHUD showProgress:0 status:kUploadingText maskType:SVProgressHUDMaskTypeNone];
             [[UploadcareKit shared]uploadFileWithName:info[UIImagePickerControllerReferenceURL] data: /* TODO: what if the image is not from the camera? parse UIImagePickerControllerReferenceURL or whatever */UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage], 1) contentType:@"image/jpeg" progressBlock:^(long long bytesDone, long long bytesTotal) {
-                [UCHUD setProgress:(float)bytesDone / bytesTotal];
+                [SVProgressHUD showProgress:(float)bytesDone / bytesTotal status:kUploadingText maskType:SVProgressHUDMaskTypeNone];
             } successBlock:^(NSString *fileId) {
-                [UCHUD dismiss];
+                [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Done", @"Uploading done HUD text")];
                 /* [UCRecentUploads recordUploadFromURL:info[UIImagePickerControllerReferenceURL] thumnailURL:info[UIImagePickerControllerReferenceURL] title:@"..." sourceType:@"..." errorType:UCRecentUploadsNoError]; */
                 self.uploadCompletionBlock(fileId);
             } failureBlock:^(NSError *error) {
+                [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Error", @"Uploading failed HUD text")];
                 /* [UCRecentUploads recordUploadFromURL:info[UIImagePickerControllerReferenceURL] thumnailURL:info[UIImagePickerControllerReferenceURL] title:@"..." sourceType:@"..." errorType:UCRecentUploadsSystemError]; */
-                [UCHUD dismiss];
                 self.uploadFailureBlock(error);
             }];
         }];

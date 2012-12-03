@@ -8,23 +8,23 @@
 
 #import <UploadcareKit.h>
 #import "UCUploader.h"
-#import "UCHUD.h"
+#import "SVProgressHUD.h"
 
 void UCUploadFile(NSString *fileURL, UploadcareSuccessBlock success, UploadcareFailureBlock failure) {
-    [UCHUD setText:NSLocalizedString(@"Uploading", @"Upload HUD text")];
-    [UCHUD show];
-    [UCHUD setProgress:0];
-    NSLog(@"Uploading from URL %@...", fileURL);
+    NSString *const kUploadingText = NSLocalizedString(@"Uploading", @"Upload HUD text");
+    [SVProgressHUD showProgress:0 status:kUploadingText maskType:SVProgressHUDMaskTypeNone];
     [[UploadcareKit shared]uploadFileFromURL:fileURL progressBlock:^(long long bytesDone, long long bytesTotal) {
-         [UCHUD setProgress:(float)bytesDone / bytesTotal];
+        [SVProgressHUD showProgress:(float)bytesDone / bytesTotal status:kUploadingText maskType:SVProgressHUDMaskTypeNone];
      } successBlock:^(NSString *fileId) {
          /* on upload completed */
-         [UCHUD dismiss];
+         [SVProgressHUD dismiss];
+         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Done", @"Uploading done HUD text")];
          if (success) success(fileId);
          else NSLog(@"Upload finished, file_id = '%@'", fileId);
      } failureBlock:^(NSError *error) {
          /* on upload failed */
-         [UCHUD dismiss];
+         [SVProgressHUD dismiss];
+         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Error", @"Uploading failed HUD text")];
          if (failure) failure(error);
          else NSLog(@"Uploadcare failed to upload a file.\n\n%@", error);
      }];

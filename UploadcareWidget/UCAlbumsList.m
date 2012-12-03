@@ -12,6 +12,7 @@
 #import "UIImageView+UCHelpers.h"
 #import "UIImage+UCHelpers.h"
 #import "QuartzCore/QuartzCore.h"
+#import "SVProgressHUD.h"
 
 enum {
     UCAlbumsListStateInitial = 0,
@@ -89,18 +90,21 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-        
+    
     self.title = self.serviceName;
     
     switch (self.state) {
         case UCAlbumsListStateInitial:
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
             [self setupServiceConnection];
             break;
             
         case UCAlbumsListStateAlbumsGrabbed:
         case UCAlbumsListStateGrabbing:
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
              /* resume retrieving albums (has been interrupted the last time) */
             [self grabMoreAlbums];
+            /* ..fall-through.. */
         case UCAlbumsListStateAllAlbumsGrabbed: {
             /* load cover for albums without one */
             NSMutableArray *albumsWithoutCover = [NSMutableArray arrayWithCapacity:self.albums.count];
@@ -222,6 +226,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
             }
         }
         [self.tableView reloadRowsAtIndexPaths:indicesToReload withRowAnimation:UITableViewRowAnimationFade];
+        [SVProgressHUD dismiss];
     } andErrorBlock:^(NSError *error) {
         NSLog(@"Failed to retrive cover photos: %@", error);
     }];
@@ -246,6 +251,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
                                 
                                 if ( [results count] < kUCNumberOfAlbumsPerPage ){
                                     [self setState:UCAlbumsListStateAllAlbumsGrabbed];
+                                    [SVProgressHUD dismiss];
                                 } else {
                                     [self setState:UCAlbumsListStateAlbumsGrabbed];
                                     [self grabMoreAlbums];
