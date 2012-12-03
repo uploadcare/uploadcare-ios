@@ -1,13 +1,21 @@
 
-EXTERNAL SOURCES: 
-  uploadcare-ios: 
-    :local: ../../
+SPEC CHECKSUMS: 
+  objectiveflickr: 17f5f1fd4b9b9d6761a9545493c79221f65604c3
+  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
+  grabKit/instagram: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  grabKit/facebook: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  grabKit: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  grabKit/flickr: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  grabKit/device: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780
+  Facebook-iOS-SDK: 5fc068ebfd8c8c9b0fad476bc36dbbf1fffeebc8
+  uploadcare-ios: 16dca31c0d05b36e7df4498598b094ac008ceaf1
+  TestFlightSDK: 964167fdbf681a26e4452d087b779cafcba756ae
+  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
+  SVProgressHUD: 51042a14e3a716efdbdd73cbb2181fb23ee94389
+  AFNetworking: 4c11f857c9a18d65f4257c90a1e74ac49f0ac422
 
 COCOAPODS: 0.15.2
-
-DEPENDENCIES: 
-- TestFlightSDK (~> 1.1)
-- uploadcare-ios (from `../../')
 
 PODS: 
 - AFNetworking (1.0.1)
@@ -31,24 +39,16 @@ PODS:
 - libPusher (1.4): 
   - SocketRocket
 - objectiveflickr (2.0.2)
-- uploadcare-ios (0.0.1): 
+- uploadcare-ios (0.9.0): 
   - AFNetworking (~> 1.0)
   - SVProgressHUD (HEAD)
   - grabKit (= 1.2.1)
   - libPusher (~> 1.4)
 
-SPEC CHECKSUMS: 
-  objectiveflickr: 17f5f1fd4b9b9d6761a9545493c79221f65604c3
-  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
-  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
-  SVProgressHUD: 51042a14e3a716efdbdd73cbb2181fb23ee94389
-  uploadcare-ios: 964ec48c5d30183e278a0555d337383303e66f32
-  ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780
-  Facebook-iOS-SDK: 5fc068ebfd8c8c9b0fad476bc36dbbf1fffeebc8
-  grabKit/instagram: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  AFNetworking: 4c11f857c9a18d65f4257c90a1e74ac49f0ac422
-  grabKit/facebook: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  grabKit/device: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  grabKit: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  grabKit/flickr: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  TestFlightSDK: 964167fdbf681a26e4452d087b779cafcba756ae
+EXTERNAL SOURCES: 
+  uploadcare-ios: 
+    :local: ../../
+
+DEPENDENCIES: 
+- TestFlightSDK (~> 1.1)
+- uploadcare-ios (from `../../')
