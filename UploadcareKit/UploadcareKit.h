@@ -33,9 +33,7 @@ typedef void(^UploadcareSuccessBlock)(NSString *fileId);
 typedef void(^UploadcareFailureBlock)(NSError *error);
 
 /**
- * TODO: Write something meaningful here
- * 
- * This is the main class, mon.
+ * This class provides access to Uploadcare <http://uploadcare.com>
  */
 @interface UploadcareKit : NSObject 
 
@@ -45,7 +43,6 @@ typedef void(^UploadcareFailureBlock)(NSError *error);
 /** Uploadcare public key
  */
 @property (nonatomic) NSString* publicKey;
-@property (nonatomic) NSString* secretKey __attribute__((deprecated("This is not going last long, beware")));
 
 /**
  Uploads an arbitrary file (e.g. an image, a movie clip, a spreadsheet document, etc.) with the content provided by the NSData argument.
