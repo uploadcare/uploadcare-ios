@@ -40,19 +40,25 @@ static const NSInteger kUCImageViewActivityIndicatorViewTag = 10812; // Random
     if (!placeholderImage) {
         placeholderImage = [UIImage blankImageWithSize:size];
     }
-    [self setImage:placeholderImage];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache]cachedResponseForRequest:request];
     UIActivityIndicatorView *indicator;
-    if (showIndicator) {
-        indicator = [self showActivityIndicatorWithStyle:style center:CGPointMake(placeholderImage.size.width / 2, placeholderImage.size.height / 2)];
+    if (!cachedResponse) {
+        [self setImage:placeholderImage];
+        if (showIndicator) indicator = [self showActivityIndicatorWithStyle:style center:CGPointMake(placeholderImage.size.width / 2, placeholderImage.size.height / 2)];
+        [self setImageFromURL:url scaledToSize:size successBlock:^(UIImage *image) {
+            /* success */
+            [indicator removeFromSuperview];
+        } failureBlock:^(NSError *error) {
+            /* failure */
+            [indicator removeFromSuperview];
+            /* TODO: show failure image placeholder? */
+        }];
+    }else{
+        /* show the cached image */
+        UIImage *cachedImage = [UIImage imageWithData:cachedResponse.data];
+        [self setImage:[cachedImage imageByScalingToSize:size]];
     }
-    [self setImageFromURL:url scaledToSize:size successBlock:^(UIImage *image) {
-        /* success */
-        [indicator removeFromSuperview];
-    } failureBlock:^(NSError *error) {
-        /* failure */
-        [indicator removeFromSuperview];
-        /* TODO: show failure image placeholder? */
-    }];
 }
 
 - (UIActivityIndicatorView*)activityIndicator {
