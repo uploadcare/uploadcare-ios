@@ -13,7 +13,7 @@
 #import "AFHTTPClient.h"
 #import "MobileCoreServices/UTType.h"
 
-NSString * const UploadcareBaseUploadURL = @"https://upload.staging0.uploadcare.com";
+NSString * const UploadcareBaseUploadURL = @"https://upload.uploadcare.com";
 
 @interface UploadcareKit () {
     NSString *_secretKey;
