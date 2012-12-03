@@ -163,12 +163,12 @@
             [[UploadcareKit shared]uploadFileWithName:info[UIImagePickerControllerReferenceURL] data: /* TODO: what if the image is not from the camera? parse UIImagePickerControllerReferenceURL or whatever */UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage], 1) contentType:@"image/jpeg" progressBlock:^(long long bytesDone, long long bytesTotal) {
                 [SVProgressHUD showProgress:(float)bytesDone / bytesTotal status:kUploadingText maskType:SVProgressHUDMaskTypeNone];
             } successBlock:^(NSString *fileId) {
+                [SVProgressHUD dismiss];
                 [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Done", @"Uploading done HUD text")];
-                /* [UCRecentUploads recordUploadFromURL:info[UIImagePickerControllerReferenceURL] thumnailURL:info[UIImagePickerControllerReferenceURL] title:@"..." sourceType:@"..." errorType:UCRecentUploadsNoError]; */
                 self.uploadCompletionBlock(fileId);
             } failureBlock:^(NSError *error) {
+                [SVProgressHUD dismiss];
                 [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Error", @"Uploading failed HUD text")];
-                /* [UCRecentUploads recordUploadFromURL:info[UIImagePickerControllerReferenceURL] thumnailURL:info[UIImagePickerControllerReferenceURL] title:@"..." sourceType:@"..." errorType:UCRecentUploadsSystemError]; */
                 self.uploadFailureBlock(error);
             }];
         }];
