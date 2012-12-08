@@ -1,0 +1,1 @@
+../../uploadcare-ios/UploadcareKit/UploadcareKit.h

@@ -1,0 +1,1 @@
+../../uploadcare-ios/UploadcareKit/UploadcareStatusWatcher.h
