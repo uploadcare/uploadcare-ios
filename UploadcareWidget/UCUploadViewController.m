@@ -71,14 +71,14 @@
     dispatch_once(&onceToken, ^{
         _menuItems = [NSMutableArray arrayWithArray:@[
                 @{@"items": @[
-                    @{ @"textLabel.text"          : @"Snap a Photo",
+                    @{ @"textLabel.text"          : @"Camera",
                        @"textLabel.enabled"       : @([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]),
                        @"textLabel.textAlignment" : @(NSTextAlignmentCenter),
                        @"action"                  : @"uploadFromCamera",
                        @"accessoryType"           : @(UITableViewCellAccessoryNone),
                      },
 
-                    @{ @"textLabel.text"          : @"Select from Library",
+                    @{ @"textLabel.text"          : @"Media Library",
                        @"textLabel.enabled"       : @([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]),
                        @"textLabel.textAlignment" : @(NSTextAlignmentCenter),
                        @"action"                  : @"uploadFromLibrary",
