@@ -158,8 +158,9 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeNone];
     [picker dismissViewControllerAnimated:NO completion:^{
-        [self dismissViewControllerAnimated:YES completion:^{
+        [self dismissViewControllerAnimated:NO completion:^{
              /* TODO: Move everything to UCUploader */
             NSString *const kUploadingText = NSLocalizedString(@"Uploading", @"Upload HUD text");
             NSData *data;
