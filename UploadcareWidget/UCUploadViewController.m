@@ -162,13 +162,25 @@
         [self dismissViewControllerAnimated:YES completion:^{
              /* TODO: Move everything to UCUploader */
             NSString *const kUploadingText = NSLocalizedString(@"Uploading", @"Upload HUD text");
-            UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-            if (!image) image = [info objectForKey:UIImagePickerControllerOriginalImage];
-            NSString *filename = info[UIImagePickerControllerReferenceURL];
-            if (!filename) filename = @"untitled";
-            /* TODO: Save image to the album? */
-            [SVProgressHUD showProgress:0 status:kUploadingText maskType:SVProgressHUDMaskTypeNone];
-            [[UploadcareKit shared]uploadFileWithName:filename data: UIImageJPEGRepresentation(image, 1) contentType:@"image/jpeg" progressBlock:^(long long bytesDone, long long bytesTotal) {
+            NSData *data;
+            NSString *filename;
+            if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:(NSString *)kUTTypeImage]) {
+                /* a picture */
+                /* TODO: If UIImagePickerControllerReferenceURL presents, upload [NSData fromURL] */
+                UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+                if (!image) image = [info objectForKey:UIImagePickerControllerOriginalImage];
+                filename = info[UIImagePickerControllerReferenceURL];
+                if (!filename) filename = @"untitled.jpg";
+                data = UIImageJPEGRepresentation(image, 1);
+                NSLog(@"METADATA %@", [info objectForKey:UIImagePickerControllerMediaMetadata]);
+            } else if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:(NSString *)kUTTypeMovie]) {
+                /* a movie */
+                filename = info[UIImagePickerControllerMediaURL];
+                if (!filename) filename = @"untitled.mov";
+                data = [NSData dataWithContentsOfURL:[info objectForKey:UIImagePickerControllerMediaURL]];
+            }
+            /* TODO: Save image/video to the library? */
+            [[UploadcareKit shared]uploadFileWithName:filename data: data contentType:nil progressBlock:^(long long bytesDone, long long bytesTotal) {
                 [SVProgressHUD showProgress:(float)bytesDone / bytesTotal status:kUploadingText maskType:SVProgressHUDMaskTypeNone];
             } successBlock:^(NSString *fileId) {
                 [SVProgressHUD dismiss];
