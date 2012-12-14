@@ -9,9 +9,22 @@
 #import <UIKit/UIKit.h>
 #import <UploadcareKit.h>
 
-@interface UCUploadNavigationController : UINavigationController
+@class UCWidget;
+
+@protocol UCWidgetDelegate <NSObject>
+@optional
+/** 
+ * Tells the delegate that the user dismissed the widget */
+- (void)uploadcareWidgetDidCancel:(UCWidget *)widget;
+/** 
+ * Doesn't work yet */
+- (void)uploadcareWidget:(UCWidget *)widget didStartUploadingFileNamed:(NSString *)fileName FromURL:(NSURL *)url;
+@end
+
+@interface UCWidget : UINavigationController
 
 @property (strong) NSString *navigationTitle;
+@property (nonatomic, assign) id<UINavigationControllerDelegate, UCWidgetDelegate> delegate;
 
 - (id)initWithUploadcarePublicKey:(NSString *)publicKey;
 

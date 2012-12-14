@@ -1,2 +1,2 @@
 #import <UCAppDelegate.h>
-#import <UCUploadNavigationController.h>
+#import <UCWidget.h>

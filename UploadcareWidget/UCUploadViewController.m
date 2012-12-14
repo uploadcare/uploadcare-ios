@@ -22,23 +22,25 @@
 
 #import "UCUploader.h"
 
+/* Private parts */
 @interface UCUploadViewController ()
 @property (strong) GRKServiceGrabber *grabber;
 @property (strong) UCAlbumsList *albumList;
+@property (readonly) UCWidget *widget;
 @end
 
+/* Implementation */
 @implementation UCUploadViewController
 
 + (void)initialize {
     [GRKConfiguration initializeWithConfigurator:[UCGrabkitConfigurator shared]];
 }
 
-- (id)init {
+- (id)initWithWidget:(UCWidget *)widget {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
-        /* ... */
+        _widget = widget;
     }
-    
     return self;
 }
 
@@ -57,6 +59,7 @@
 }
 
 - (void)dismiss {
+    [self.widget.delegate uploadcareWidgetDidCancel:self.widget];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

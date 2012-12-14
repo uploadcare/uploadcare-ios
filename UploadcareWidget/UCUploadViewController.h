@@ -9,12 +9,13 @@
 #import <UploadcareKit.h>
 
 #import "UCMenuViewController.h"
+#import "UCWidget.h"
 
 @interface UCUploadViewController : UCMenuViewController<UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic) NSString *navigationTitle;
 
-- (id)init;
+- (id)initWithWidget:(UCWidget *)widget;
 
 @property (strong) UploadcareSuccessBlock uploadCompletionBlock;
 @property (strong) UploadcareFailureBlock uploadFailureBlock;

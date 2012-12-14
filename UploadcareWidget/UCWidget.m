@@ -6,23 +6,26 @@
 //  Copyright (c) 2012 Uploadcare. All rights reserved.
 //
 
-#import "UCUploadNavigationController.h"
+#import "UCWidget.h"
 #import "UCUploadViewController.h"
 #import "UCGrabkitConfigurator.h"
 
-@interface UCUploadNavigationController ()
+@interface UCWidget () {
+    id<UINavigationControllerDelegate,UCWidgetDelegate> _delegate;
+}
+
 @property (strong) UCUploadViewController *uploadViewController;
 @end
 
 NSString *const UCFacebookMisconfigurationException = @"UCFacebookConfiguratioException";
 NSString *const UCGenericURLSchemaNotConfiguredException = @"UCGenericURLSchemaNotConfiguredException";
 
-@implementation UCUploadNavigationController
+@implementation UCWidget
 
 - (id)initWithUploadcarePublicKey:(NSString *)publicKey {
     self = [super init];
     if (self) {
-        _uploadViewController = [[UCUploadViewController alloc]init];
+        _uploadViewController = [[UCUploadViewController alloc]initWithWidget:self];
         [[UploadcareKit shared]setPublicKey:publicKey];
         self.viewControllers = @[_uploadViewController];
     }
@@ -99,6 +102,14 @@ NSString *const UCGenericURLSchemaNotConfiguredException = @"UCGenericURLSchemaN
     [config setInstagramRedirectUri:[[NSString stringWithFormat:@"%@://", self.genericScheme] lowercaseString]];
     [config setInstagramAppId:instagramAppId];
     [config setInstagramIsEnabled:YES];
+}
+
+- (void)setDelegate:(id<UINavigationControllerDelegate,UCWidgetDelegate>)delegate {
+    [super setDelegate:delegate];
+    _delegate = delegate;
+}
+- (id<UINavigationControllerDelegate,UCWidgetDelegate>)delegate {
+    return _delegate;
 }
 
 @end
