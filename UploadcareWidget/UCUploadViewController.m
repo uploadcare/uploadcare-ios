@@ -71,28 +71,28 @@
     dispatch_once(&onceToken, ^{
         _menuItems = [NSMutableArray arrayWithArray:@[
                 @{@"items": @[
-                    @{ @"textLabel.text"          : @"Camera",
+                    @{ @"textLabel.text"          : NSLocalizedString(@"Camera", @"Camera menu item"),
                        @"textLabel.enabled"       : @([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]),
                        @"textLabel.textAlignment" : @(NSTextAlignmentCenter),
                        @"action"                  : @"uploadFromCamera",
                        @"accessoryType"           : @(UITableViewCellAccessoryNone),
                      },
 
-                    @{ @"textLabel.text"          : @"Media Library",
+                    @{ @"textLabel.text"          : @NSLocalizedString("Media Library", @"Media Library menu item"),
                        @"textLabel.enabled"       : @([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]),
                        @"textLabel.textAlignment" : @(NSTextAlignmentCenter),
                        @"action"                  : @"uploadFromLibrary",
                      },
                  ],
                 },
-          ]];
+          ];
         
         NSMutableArray *serviceSectionItems = [NSMutableArray array];
         UCGrabkitConfigurator *config = [UCGrabkitConfigurator shared];
         
         if ([config facebookIsEnabled]) {
             [serviceSectionItems addObject:
-                    @{ @"textLabel.text"  : @"Facebook",
+                    @{ @"textLabel.text"  : NSLocalizedString(@"Facebook", @"Facebook menu item"),
                        @"imageView.image" : [UIImage imageNamed:@"icon_facebook"],
                        @"action"          : @"uploadFromFacebook",
                        @"accessoryType"   : @(UITableViewCellAccessoryDisclosureIndicator),
@@ -102,7 +102,7 @@
             
         if ([config flickrIsEnabled]) {
             [serviceSectionItems addObject:
-                    @{ @"textLabel.text"  : @"Flickr",
+                    @{ @"textLabel.text"  : NSLocalizedString(@"Flickr", @"Flickr menu item"),
                        @"imageView.image" : [UIImage imageNamed:@"icon_flickr"],
                        @"action"          : @"uploadFromFlickr",
                        @"accessoryType"   : @(UITableViewCellAccessoryDisclosureIndicator),
@@ -112,7 +112,7 @@
         
         if ([config instagramIsEnabled]) {
             [serviceSectionItems addObject:
-                    @{ @"textLabel.text"  : @"Instagram",
+                    @{ @"textLabel.text"  : NSLocalizedString(@"Instagram", @"Instagram menu item"),
                        @"imageView.image" : [UIImage imageNamed:@"icon_instagram"],
                        @"action"          : @"uploadFromInstagram",
                        @"accessoryType"   : @(UITableViewCellAccessoryDisclosureIndicator),
@@ -121,7 +121,7 @@
         }
         
         [serviceSectionItems addObject:
-                    @{ @"textLabel.text"  : @"Internet Address",
+                    @{ @"textLabel.text"  : NSLocalizedString(@"Internet Address", @"Upload from URL menu item"),
                        @"imageView.image" : [UIImage imageNamed:@"icon_url"],
                        @"action"          : @"uploadFromURL",
                        @"accessoryType"   : @(UITableViewCellAccessoryNone),
@@ -130,7 +130,7 @@
         
         [_menuItems addObject:@{@"items":serviceSectionItems}];
         [_menuItems addObject:@{@"items":@[
-                    @{ @"textLabel.text"  : @"Recent Uploads",
+                    @{ @"textLabel.text"  : NSLocalizedString(@"Recent Uploads", @"Recent Uploads menu item"),
                        @"action"          : @"showRecentUploads",
                        @"accessoryType"   : @(UITableViewCellAccessoryDisclosureIndicator),
                        @"textLabel.textAlignment" : @(NSTextAlignmentCenter),
