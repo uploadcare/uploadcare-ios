@@ -1,1 +1,1 @@
-../../uploadcare-ios/UploadcareWidget/UploadcareServicesConfigurator.h
+../../../../../UploadcareWidget/UploadcareServicesConfigurator.h

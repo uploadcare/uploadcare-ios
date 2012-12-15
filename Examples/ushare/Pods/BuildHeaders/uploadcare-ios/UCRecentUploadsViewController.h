@@ -1,1 +1,1 @@
-../../uploadcare-ios/UploadcareWidget/UCRecentUploadsViewController.h
+../../../../../UploadcareWidget/UCRecentUploadsViewController.h

@@ -1,10 +1,18 @@
 
+COCOAPODS: 0.15.2
+
+DEPENDENCIES: 
+- AFNetworking
+- TestFlightSDK (~> 1.1)
+- uploadcare-ios (from `../../')
+
 PODS: 
 - AFNetworking (1.0.1)
 - Facebook-iOS-SDK (3.1.1)
 - ISO8601DateFormatter (0.6)
 - SVProgressHUD (HEAD based on 0.8)
 - SocketRocket (0.2.0)
+- TestFlightSDK (1.2)
 - grabKit (1.2.1): 
   - grabKit/device (= 1.2.1)
   - grabKit/facebook (= 1.2.1)
@@ -26,22 +34,22 @@ PODS:
   - grabKit (= 1.2.1)
   - libPusher (~> 1.4)
 
-COCOAPODS: 0.15.2
-
-DEPENDENCIES: 
-- uploadcare-ios
+EXTERNAL SOURCES: 
+  uploadcare-ios: 
+    :local: ../../
 
 SPEC CHECKSUMS: 
-  grabKit: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
-  grabKit/device: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  AFNetworking: 4c11f857c9a18d65f4257c90a1e74ac49f0ac422
-  objectiveflickr: 17f5f1fd4b9b9d6761a9545493c79221f65604c3
-  Facebook-iOS-SDK: 5fc068ebfd8c8c9b0fad476bc36dbbf1fffeebc8
-  grabKit/facebook: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780
-  grabKit/flickr: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  grabKit/instagram: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
-  uploadcare-ios: 965b05c58ae42469fe306fd27bcf76d4798faa85
   SVProgressHUD: 51042a14e3a716efdbdd73cbb2181fb23ee94389
+  grabKit/facebook: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
+  objectiveflickr: 17f5f1fd4b9b9d6761a9545493c79221f65604c3
+  grabKit/instagram: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  grabKit/flickr: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  Facebook-iOS-SDK: 5fc068ebfd8c8c9b0fad476bc36dbbf1fffeebc8
+  AFNetworking: 4c11f857c9a18d65f4257c90a1e74ac49f0ac422
+  TestFlightSDK: 29e194fb148e4861f92e4c1195b9697e1f3ad19a
+  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
+  grabKit/device: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  grabKit: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  uploadcare-ios: 16dca31c0d05b36e7df4498598b094ac008ceaf1
+  ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780

@@ -1,1 +1,1 @@
-../../uploadcare-ios/UploadcareWidget/UIImageView+UCHelpers.h
+../../../../../UploadcareWidget/UIImageView+UCHelpers.h

@@ -1,1 +1,1 @@
-../../uploadcare-ios/UploadcareKit/UploadcareStatusWatcher.h
+../../../../../UploadcareKit/UploadcareStatusWatcher.h

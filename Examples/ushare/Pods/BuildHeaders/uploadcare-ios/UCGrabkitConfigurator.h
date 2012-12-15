@@ -1,1 +1,1 @@
-../../uploadcare-ios/UploadcareWidget/UCGrabkitConfigurator.h
+../../../../../UploadcareWidget/UCGrabkitConfigurator.h

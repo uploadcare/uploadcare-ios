@@ -1,1 +1,1 @@
-../../uploadcare-ios/UploadcareWidget/UCPhotosListCell.h
+../../../../../UploadcareWidget/UCPhotosListCell.h

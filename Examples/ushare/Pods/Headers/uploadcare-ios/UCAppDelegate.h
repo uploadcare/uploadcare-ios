@@ -1,1 +1,1 @@
-../../uploadcare-ios/UploadcareWidget/UCAppDelegate.h
+../../../../../UploadcareWidget/UCAppDelegate.h

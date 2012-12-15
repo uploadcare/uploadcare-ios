@@ -1,1 +1,1 @@
-../../uploadcare-ios/UploadcareWidget/UploadcareWidget.h
+../../../../../UploadcareWidget/UploadcareWidget.h

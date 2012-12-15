@@ -1,1 +1,1 @@
-../../uploadcare-ios/UploadcareKit/UploadcareError.h
+../../../../../UploadcareKit/UploadcareError.h

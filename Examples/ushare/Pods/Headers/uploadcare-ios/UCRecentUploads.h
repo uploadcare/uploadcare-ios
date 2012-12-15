@@ -1,1 +1,1 @@
-../../uploadcare-ios/UploadcareWidget/UCRecentUploads.h
+../../../../../UploadcareWidget/UCRecentUploads.h

@@ -1,1 +1,0 @@
-../../uploadcare-ios/UploadcareWidget/UCUploadNavigationController.h

@@ -1,1 +1,1 @@
-../../uploadcare-ios/UploadcareWidget/UCUploadViewController.h
+../../../../../UploadcareWidget/UCUploadViewController.h
