@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UCWidget.h>
 
-@interface USViewController : UIViewController
+@interface USViewController : UIViewController<UCWidgetDelegate, UINavigationControllerDelegate>
+- (IBAction)ushareTapped:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *promptLabel;
 
 @end

@@ -6,14 +6,18 @@
 //  Copyright (c) 2012 Uploadcare. All rights reserved.
 //
 
-#import "USAppDelegate.h"
+#import <UploadcareWidget.h>
 
+#import "USAppDelegate.h"
 #import "USViewController.h"
+
+#import <TestFlight.h>
 
 @implementation USAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [TestFlight takeOff:@"75b19a4f-fbae-4f31-ae8e-19211eed7973"];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
@@ -41,12 +45,21 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [UCAppDelegate handleDidBecomeActive];
+    /* TODO: Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface. */
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    if ([UCAppDelegate handleOpenURL:url]) {
+        return YES;
+    }
+    /* TODO: Add your own URL handling code here (if needed) */
+    return NO;
 }
 
 @end
