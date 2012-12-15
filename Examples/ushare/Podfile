@@ -1,3 +1,5 @@
 platform :ios, '5.0'
 
-pod 'uploadcare-ios'
+pod 'uploadcare-ios', :local => '../../'
+pod 'AFNetworking'
+pod 'TestFlightSDK','~> 1.1'
