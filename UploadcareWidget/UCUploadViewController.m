@@ -78,14 +78,14 @@
                        @"accessoryType"           : @(UITableViewCellAccessoryNone),
                      },
 
-                    @{ @"textLabel.text"          : @NSLocalizedString("Media Library", @"Media Library menu item"),
+                    @{ @"textLabel.text"          : NSLocalizedString(@"Media Library", @"Media Library menu item"),
                        @"textLabel.enabled"       : @([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]),
                        @"textLabel.textAlignment" : @(NSTextAlignmentCenter),
                        @"action"                  : @"uploadFromLibrary",
                      },
                  ],
                 },
-          ];
+          ]];
         
         NSMutableArray *serviceSectionItems = [NSMutableArray array];
         UCGrabkitConfigurator *config = [UCGrabkitConfigurator shared];
