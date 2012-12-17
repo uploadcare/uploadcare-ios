@@ -109,7 +109,7 @@
 }
 
 - (void)onUploadCompleteWithPublicAddress:(NSString *)publicAddress {
-    [UIPasteboard generalPasteboard].URL = [NSURL URLWithString:publicAddress];
+    [UIPasteboard generalPasteboard].string = publicAddress;
     self.promptLabel.text = NSLocalizedString(@"✅ Success! The public link has been copied to your pasteboard.", @"Upload success text");
 }
 
