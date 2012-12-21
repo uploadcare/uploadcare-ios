@@ -9,7 +9,7 @@
 #import "MasterViewController.h"
 
 #import "DetailViewController.h"
-#import "UCUploadNavigationController.h"
+#import "UCWidget.h"
 #import "UCUploadViewController.h"
 
 @interface MasterViewController () {
@@ -62,7 +62,7 @@
 #pragma mark - Actions
 
 - (void)showUploadcare:(id)sender {
-    UCUploadNavigationController *uploadcare = [[UCUploadNavigationController alloc]initWithUploadcarePublicKey:@"demopublickey"];
+    UCWidget *uploadcare = [[UCWidget alloc]initWithUploadcarePublicKey:@"demopublickey"];
     [uploadcare enableFacebook];
     [uploadcare enableFlickrWithAPIKey:@"640dd6a955dd11005c7ebe3b04f8aa72" flickrAPISecret:@"562666552347ceaa"];
     [uploadcare enableInstagramWithClientId:@"de2cbd10b2744c5dac031d1402768cdb"];
