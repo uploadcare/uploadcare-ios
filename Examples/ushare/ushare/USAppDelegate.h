@@ -13,7 +13,6 @@
 @interface USAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 @property (strong, nonatomic) USViewController *viewController;
 
 @end

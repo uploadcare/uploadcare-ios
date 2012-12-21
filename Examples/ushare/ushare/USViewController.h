@@ -12,5 +12,6 @@
 @interface USViewController : UIViewController<UCWidgetDelegate, UINavigationControllerDelegate>
 - (IBAction)ushareTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *promptLabel;
+@property (assign, nonatomic) BOOL busy;
 
 @end

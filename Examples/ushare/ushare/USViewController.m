@@ -43,6 +43,7 @@
 }
 
 - (IBAction)ushareTapped:(id)sender {
+    if (self.busy) return;
     [self doTheBussiness];
 }
 
@@ -71,10 +72,10 @@
 - (void)blockUserInteraction:(BOOL)block {
     if (block) {
         self.view.layer.opacity = 0.3f;
-        self.view.userInteractionEnabled = NO;
+        self.busy = YES;
     } else {
         self.view.layer.opacity = 1.0f;
-        self.view.userInteractionEnabled = YES;
+        self.busy = NO;
     }
 }
 
@@ -109,8 +110,12 @@
 }
 
 - (void)onUploadCompleteWithPublicAddress:(NSString *)publicAddress {
-    [UIPasteboard generalPasteboard].string = publicAddress;
-    self.promptLabel.text = NSLocalizedString(@"✅ Success! The public link has been copied to your pasteboard.", @"Upload success text");
+    self.promptLabel.text = NSLocalizedString(@"✅ The file has been successfully uploaded!", @"Upload success text");
+    
+    UIActivityViewController *actions = [[UIActivityViewController alloc]initWithActivityItems:@[publicAddress, [NSURL URLWithString:publicAddress]] applicationActivities:nil];
+    [self presentViewController:actions animated:YES completion:^{
+        
+    }];
 }
 
 - (void)onFailedToUploadBecauseOfError:(NSError *)error {
