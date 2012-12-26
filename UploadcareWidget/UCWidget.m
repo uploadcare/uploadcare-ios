@@ -36,10 +36,13 @@ NSString *const UCGenericURLSchemaNotConfiguredException = @"UCGenericURLSchemaN
 
 - (void)setUploadCompletionBlock:(UploadcareSuccessBlock)completionBlock {
     [self.uploadViewController setUploadCompletionBlock:completionBlock];
+- (void)viewDidAppear:(BOOL)animated {
 }
 
 - (void)setUploadFailureBlock:(UploadcareFailureBlock)failureBlock {
     [self.uploadViewController setUploadFailureBlock:failureBlock];
+- (void)viewDidDisappear:(BOOL)animated {
+    [self popToRootViewControllerAnimated:NO];
 }
 
 #pragma mark - URL scheme handling related utilities
