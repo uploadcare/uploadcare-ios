@@ -104,10 +104,9 @@
 		6F0641B91673AA2C009417A4 = {
 			isa = PBXGroup;
 			children = (
-				6F5DC7DE1678BC8D00CEF3D7 /* CoreImage.framework */,
-				6F0641CE1673AA2C009417A4 /* ushare */,
 				6F0641C71673AA2C009417A4 /* Frameworks */,
 				6F5D266B1688C7C000C7BDC5 /* ARChromeActivity */,
+				6F0641CE1673AA2C009417A4 /* uShare */,
 				6F0641C51673AA2C009417A4 /* Products */,
 				BAB5CF89AB3341248E7936B8 /* Pods.xcconfig */,
 				6F5D267B1688D59800C7BDC5 /* Settings.bundle */,
@@ -125,6 +124,7 @@
 		6F0641C71673AA2C009417A4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6F5DC7DE1678BC8D00CEF3D7 /* CoreImage.framework */,
 				6F0641C81673AA2C009417A4 /* UIKit.framework */,
 				6F0641CA1673AA2C009417A4 /* Foundation.framework */,
 				6F0641CC1673AA2C009417A4 /* CoreGraphics.framework */,
@@ -133,7 +133,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6F0641CE1673AA2C009417A4 /* ushare */ = {
+		6F0641CE1673AA2C009417A4 /* uShare */ = {
 			isa = PBXGroup;
 			children = (
 				6F0641D71673AA2C009417A4 /* USAppDelegate.h */,
@@ -142,6 +142,7 @@
 				6F0641E11673AA2C009417A4 /* USViewController.m */,
 				6F0641CF1673AA2C009417A4 /* Supporting Files */,
 			);
+			name = uShare;
 			path = ushare;
 			sourceTree = "<group>";
 		};
