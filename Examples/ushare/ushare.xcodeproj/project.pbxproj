@@ -42,6 +42,7 @@
 		6F0641E11673AA2C009417A4 /* USViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = USViewController.m; sourceTree = "<group>"; };
 		6F0705A516788F7100DD3100 /* USUploadBezel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = USUploadBezel.png; sourceTree = "<group>"; };
 		6F0705A616788F7100DD3100 /* USUploadBezel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "USUploadBezel@2x.png"; sourceTree = "<group>"; };
+		6F5D267B1688D59800C7BDC5 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		6F5DC7DE1678BC8D00CEF3D7 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		6F5DC7E11678DB8700CEF3D7 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		6F5DC7E21678DB8800CEF3D7 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -76,6 +77,7 @@
 				6F0641C71673AA2C009417A4 /* Frameworks */,
 				6F0641C51673AA2C009417A4 /* Products */,
 				BAB5CF89AB3341248E7936B8 /* Pods.xcconfig */,
+				6F5D267B1688D59800C7BDC5 /* Settings.bundle */,
 			);
 			sourceTree = "<group>";
 		};
@@ -191,6 +193,7 @@
 				6F0705A816788F7100DD3100 /* USUploadBezel@2x.png in Resources */,
 				6F5DC7E31678DB8800CEF3D7 /* Icon.png in Resources */,
 				6F5DC7E41678DB8800CEF3D7 /* Icon@2x.png in Resources */,
+				6F5D267C1688D59800C7BDC5 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
