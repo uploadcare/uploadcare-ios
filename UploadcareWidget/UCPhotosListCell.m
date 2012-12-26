@@ -13,6 +13,7 @@
 #import "UCRecentUploads.h"
 #import "UIImageView+UCHelpers.h"
 #import "UploadcareError.h"
+#import "UCWidget.h"
 
 #import "GRKPhoto.h"
 #import "GRKImage.h"
@@ -97,19 +98,27 @@ NSString *UCReadableTitleFromGRKPhoto(GRKPhoto *photo, NSString *serviceName) {
 - (IBAction)didSelected:(id)sender {
     UITapGestureRecognizer *tapGesture = (UITapGestureRecognizer *)sender;
     UIImageView *tappedImageView = (UIImageView *)[tapGesture view];
+    UCWidget *widget = self.photoList.albumList.widget;
     GRKPhoto *photo = (GRKPhoto *)[_photos objectAtIndex:[tappedImageView tag]];
-    [self.photoList.navigationController dismissViewControllerAnimated:YES completion:^{
-        UCUploadFile([photo.imagesSortedByHeight.lastObject URL].absoluteString,
-                     ^(NSString *fileId) {
-                         [UCRecentUploads recordUploadFromURL:[photo.imagesSortedByHeight.lastObject URL] thumnailURL:[photo.imagesSortedByHeight[0] URL] title:UCReadableTitleFromGRKPhoto(photo, self.serviceName) sourceType:self.serviceName errorType:UCRecentUploadsNoError];
-                         /* ^ TODO: Select the most suitable thumbnail */
-                         if (self.photoList.albumList.uploadCompletionBlock) self.photoList.albumList.uploadCompletionBlock(fileId);
-                     }, ^(NSError *error) {
-                         [UCRecentUploads recordUploadFromURL:[photo.imagesSortedByHeight.lastObject URL] thumnailURL:[photo.imagesSortedByHeight[0] URL] title:UCReadableTitleFromGRKPhoto(photo, self.serviceName) sourceType:self.serviceName errorType:UCRecentUploadsSystemError];
-                         /* ^ TODO: thumbnail, see above */
-                         if (self.photoList.albumList.uploadFailureBlock) self.photoList.albumList.uploadFailureBlock(error);
-                     });
-    }];
+    NSURL *photoURL = [photo.imagesSortedByHeight.lastObject URL];
+    if ([widget.delegate respondsToSelector:@selector(uploadcareWidget:didStartUploadingFileNamed:fromURL:withThumbnail:)]) {
+        [widget.delegate uploadcareWidget:widget didStartUploadingFileNamed:photoURL.lastPathComponent fromURL:photoURL withThumbnail:tappedImageView.image];
+    }else{
+        [self.photoList.albumList.widget.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+//    [self.photoList.albumList.widget]
+    UCUploadFile(photoURL.absoluteString,
+                 ^(NSString *fileId) {
+                     [UCRecentUploads recordUploadFromURL:photoURL thumnailURL:[photo.imagesSortedByHeight[0] URL] title:UCReadableTitleFromGRKPhoto(photo, self.serviceName) sourceType:self.serviceName errorType:UCRecentUploadsNoError];
+                     /* ^ TODO: Select the most suitable thumbnail */
+                     if (self.photoList.albumList.widget.uploadCompletionBlock) self.photoList.albumList.widget.uploadCompletionBlock(fileId);
+                 },
+                 self.photoList.albumList.widget.uploadProgressBlock,
+                 ^(NSError *error) {
+                     [UCRecentUploads recordUploadFromURL:photoURL thumnailURL:[photo.imagesSortedByHeight[0] URL] title:UCReadableTitleFromGRKPhoto(photo, self.serviceName) sourceType:self.serviceName errorType:UCRecentUploadsSystemError];
+                     /* ^ TODO: thumbnail, see above */
+                     if (self.photoList.albumList.widget.uploadFailureBlock) self.photoList.albumList.widget.uploadFailureBlock(error);
+                 });
 }
 
 @end

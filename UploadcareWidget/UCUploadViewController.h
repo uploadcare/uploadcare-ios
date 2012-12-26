@@ -17,7 +17,6 @@
 
 - (id)initWithWidget:(UCWidget *)widget;
 
-@property (strong) UploadcareSuccessBlock uploadCompletionBlock;
-@property (strong) UploadcareFailureBlock uploadFailureBlock;
+@property (nonatomic, strong) UIImagePickerController *imagePicker;
 
 @end

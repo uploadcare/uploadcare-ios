@@ -11,7 +11,7 @@
 #import "UCUploader.h"
 #import "UIImageView+UCHelpers.h"
 #import "QuartzCore/QuartzCore.h"
-
+#import "UCWidget.h"
 
 @interface UCRecentUploadsViewController ()
 
@@ -119,16 +119,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *uploadInfo = [[UCRecentUploads sortedUploads] objectAtIndex:indexPath.row];
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        UCUploadFile(uploadInfo[UCRecentUploadsURLKey],
-                     ^(NSString *fileId) {
-                         [UCRecentUploads recordUploadFromURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsURLKey]] thumnailURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] title:uploadInfo[UCRecentUploadsTitleKey] sourceType:uploadInfo[UCRecentUploadsSourceTypeKey] errorType:UCRecentUploadsNoError];
-                         if (self.uploadCompletionBlock) self.uploadCompletionBlock(fileId);
-                     }, ^(NSError *error) {
-                         [UCRecentUploads recordUploadFromURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsURLKey]] thumnailURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] title:uploadInfo[UCRecentUploadsTitleKey] sourceType:uploadInfo[UCRecentUploadsSourceTypeKey] errorType:UCRecentUploadsNoError];
-                         if (self.uploadFailureBlock) self.uploadFailureBlock(error);
-                     });
-    }];
+    UIImage *thumbnail = [self.tableView cellForRowAtIndexPath:indexPath].imageView.image;
+    if ([self.widget.delegate respondsToSelector:@selector(uploadcareWidget:didStartUploadingFileNamed:fromURL:withThumbnail:)]) {
+        NSURL *photoURL = [NSURL URLWithString:uploadInfo[UCRecentUploadsURLKey]];
+        [self.widget.delegate uploadcareWidget:self.widget didStartUploadingFileNamed:photoURL.lastPathComponent fromURL:photoURL withThumbnail:thumbnail];
+    }else{
+        [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+
+    UCUploadFile(uploadInfo[UCRecentUploadsURLKey],
+                 ^(NSString *fileId) {
+                     [UCRecentUploads recordUploadFromURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsURLKey]] thumnailURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] title:uploadInfo[UCRecentUploadsTitleKey] sourceType:uploadInfo[UCRecentUploadsSourceTypeKey] errorType:UCRecentUploadsNoError];
+                     if (self.widget.uploadCompletionBlock) self.widget.uploadCompletionBlock(fileId);
+                 },
+                 self.widget.uploadProgressBlock,
+                 ^(NSError *error) {
+                     [UCRecentUploads recordUploadFromURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsURLKey]] thumnailURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] title:uploadInfo[UCRecentUploadsTitleKey] sourceType:uploadInfo[UCRecentUploadsSourceTypeKey] errorType:UCRecentUploadsNoError];
+                     if (self.widget.uploadFailureBlock) self.widget.uploadFailureBlock(error);
+                 });
 }
 
 @end

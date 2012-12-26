@@ -7,5 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UploadcareKit.h"
 
-void UCUploadFile(NSString *fileURL, UploadcareSuccessBlock success, UploadcareFailureBlock failure);
+void UCUploadFile(NSString *fileURL, UploadcareSuccessBlock success, UploadcareProgressBlock progress, UploadcareFailureBlock failure);

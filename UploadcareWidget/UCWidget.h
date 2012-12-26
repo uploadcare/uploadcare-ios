@@ -14,26 +14,32 @@
 @protocol UCWidgetDelegate <NSObject>
 @optional
 /** 
- * Tells the delegate that the user dismissed the widget */
+ * Tells the delegate that the user dismissed the widget.
+ *
+ * The delegate is expected to dismiss the controller. */
 - (void)uploadcareWidgetDidCancel:(UCWidget *)widget;
 /** 
- * Doesn't work yet */
-- (void)uploadcareWidget:(UCWidget *)widget didStartUploadingFileNamed:(NSString *)fileName FromURL:(NSURL *)url;
+ * Tells the delegate that the user picked a file to upload.
+ *
+ * The delegate is expected to dismiss the controller. */
+- (void)uploadcareWidget:(UCWidget *)widget didStartUploadingFileNamed:(NSString *)fileName fromURL:(NSURL *)url withThumbnail:(UIImage *)thumbnail;
 @end
 
 @interface UCWidget : UINavigationController
 
 @property (strong) NSString *navigationTitle;
-@property (nonatomic, assign) id<UINavigationControllerDelegate, UCWidgetDelegate> delegate;
+@property (nonatomic, weak) id<UINavigationControllerDelegate, UCWidgetDelegate> delegate;
 
 - (id)initWithUploadcarePublicKey:(NSString *)publicKey;
 
-- (void)setUploadFailureBlock:(UploadcareFailureBlock)failureBlock;
-- (void)setUploadCompletionBlock:(UploadcareSuccessBlock)completionBlock;
+@property (strong) UploadcareProgressBlock uploadProgressBlock;
+@property (strong) UploadcareSuccessBlock uploadCompletionBlock;
+@property (strong) UploadcareFailureBlock uploadFailureBlock;
 
 - (void)enableFacebook;
 - (void)enableFlickrWithAPIKey:(NSString *)flickrAPIKey flickrAPISecret:(NSString *)flickrAPISecret;
 - (void)enableInstagramWithClientId:(NSString *)instagramAppId;
+
 
 
 @end

@@ -32,15 +32,11 @@ NSString *const UCGenericURLSchemaNotConfiguredException = @"UCGenericURLSchemaN
     return self;
 }
 
-#pragma mark - forwarding bussiness
+#pragma mark - view controller
 
-- (void)setUploadCompletionBlock:(UploadcareSuccessBlock)completionBlock {
-    [self.uploadViewController setUploadCompletionBlock:completionBlock];
 - (void)viewDidAppear:(BOOL)animated {
 }
 
-- (void)setUploadFailureBlock:(UploadcareFailureBlock)failureBlock {
-    [self.uploadViewController setUploadFailureBlock:failureBlock];
 - (void)viewDidDisappear:(BOOL)animated {
     [self popToRootViewControllerAnimated:NO];
 }
