@@ -162,7 +162,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
         cell.textLabel.text = NSLocalizedString(@"Photos", "The Instagram's only album name");
     }
     cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Items: %d", nil), album.count];
-    CGSize kAlbumCoverThumbnailSize = CGSizeMake(64, 64);
+    CGSize kAlbumCoverThumbnailSize = CGSizeMake(75, 75);
     /* show the activity indicator */
     [cell.imageView showActivityIndicatorWithStyle:UIActivityIndicatorViewStyleGray placeholderSize:kAlbumCoverThumbnailSize];
     if (thumbnailURL != nil) [cell.imageView setImageFromURL:thumbnailURL scaledToSize:kAlbumCoverThumbnailSize successBlock:^(UIImage *image) {
