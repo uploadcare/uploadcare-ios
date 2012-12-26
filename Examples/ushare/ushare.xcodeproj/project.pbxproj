@@ -44,6 +44,7 @@
 		6F7280361689D1F90080A172 /* USShareIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F7280341689D1F90080A172 /* USShareIcon@2x.png */; };
 		6F72803A1689D4B40080A172 /* USSilverButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F7280381689D4B40080A172 /* USSilverButtonDepressed.png */; };
 		6F72803B1689D4B40080A172 /* USSilverButtonDepressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F7280391689D4B40080A172 /* USSilverButtonDepressed@2x.png */; };
+		6F72803E1689EC120080A172 /* UIView+USHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F72803D1689EC120080A172 /* UIView+USHelpers.m */; };
 		6FBBA823167884700017C428 /* USViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBBA821167884700017C428 /* USViewController.xib */; };
 		A3B5C3DF94EA43CBBB637C64 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7636672D8B104549AC9FEE10 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -106,6 +107,8 @@
 		6F7280341689D1F90080A172 /* USShareIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "USShareIcon@2x.png"; sourceTree = "<group>"; };
 		6F7280381689D4B40080A172 /* USSilverButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = USSilverButtonDepressed.png; sourceTree = "<group>"; };
 		6F7280391689D4B40080A172 /* USSilverButtonDepressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "USSilverButtonDepressed@2x.png"; sourceTree = "<group>"; };
+		6F72803C1689EC120080A172 /* UIView+USHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+USHelpers.h"; sourceTree = "<group>"; };
+		6F72803D1689EC120080A172 /* UIView+USHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+USHelpers.m"; sourceTree = "<group>"; };
 		6F9301251678DE420030E8AB /* uShare-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "uShare-Prefix.pch"; sourceTree = "<group>"; };
 		6F9301261678DE420030E8AB /* uShare.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = uShare.plist; sourceTree = "<group>"; };
 		6FBBA822167884700017C428 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/USViewController.xib; sourceTree = "<group>"; };
@@ -170,6 +173,8 @@
 				6F0641E01673AA2C009417A4 /* USViewController.h */,
 				6F0641E11673AA2C009417A4 /* USViewController.m */,
 				6F0641CF1673AA2C009417A4 /* Supporting Files */,
+				6F72803C1689EC120080A172 /* UIView+USHelpers.h */,
+				6F72803D1689EC120080A172 /* UIView+USHelpers.m */,
 			);
 			name = uShare;
 			path = ushare;
@@ -360,6 +365,7 @@
 				6F0641E21673AA2C009417A4 /* USViewController.m in Sources */,
 				6F5D26721688C7C000C7BDC5 /* ARChromeActivity.m in Sources */,
 				6F5D269A1688E49300C7BDC5 /* TUSafariActivity.m in Sources */,
+				6F72803E1689EC120080A172 /* UIView+USHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
