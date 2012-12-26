@@ -21,6 +21,7 @@
 		6F0641E21673AA2C009417A4 /* USViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0641E11673AA2C009417A4 /* USViewController.m */; };
 		6F0705A716788F7100DD3100 /* USUploadBezel.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0705A516788F7100DD3100 /* USUploadBezel.png */; };
 		6F0705A816788F7100DD3100 /* USUploadBezel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0705A616788F7100DD3100 /* USUploadBezel@2x.png */; };
+		6F5D267C1688D59800C7BDC5 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F5D267B1688D59800C7BDC5 /* Settings.bundle */; };
 		6F5DC7DF1678BC8D00CEF3D7 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5DC7DE1678BC8D00CEF3D7 /* CoreImage.framework */; };
 		6F5DC7E31678DB8800CEF3D7 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5DC7E11678DB8700CEF3D7 /* Icon.png */; };
 		6F5DC7E41678DB8800CEF3D7 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5DC7E21678DB8800CEF3D7 /* Icon@2x.png */; };
