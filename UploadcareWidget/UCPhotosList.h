@@ -25,8 +25,8 @@ enum {
 typedef NSUInteger UCPhotosListState;
 
 @interface UCPhotosList : UITableViewController {
-    GRKServiceGrabber *_grabber;
-    GRKAlbum *_album;
+    __strong GRKServiceGrabber *_grabber;
+    __strong GRKAlbum *_album;
     UCPhotosListState state;
     
     NSUInteger _lastLoadedPageIndex;

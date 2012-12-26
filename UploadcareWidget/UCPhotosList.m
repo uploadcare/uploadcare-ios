@@ -86,13 +86,15 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
         }
         case UCPhotosListStatePhotosGrabbed:{
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
+                if ([self.navigationController.topViewController isEqual:self])
+                    [self.tableView reloadData];
             });
             break;
         }
         case UCPhotosListStateAllPhotosGrabbed:{
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
+                if ([self.navigationController.topViewController isEqual:self])
+                    [self.tableView reloadData];
             });
             break;
         }

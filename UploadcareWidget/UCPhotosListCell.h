@@ -13,14 +13,14 @@
 @interface UCPhotosListCell : UITableViewCell {
     NSArray * _photos;
     
-    IBOutlet UIImageView *photoThumbnail0;
-    IBOutlet UIImageView *photoThumbnail1;
-    IBOutlet UIImageView *photoThumbnail2;
-    IBOutlet UIImageView *photoThumbnail3;
+    __strong IBOutlet UIImageView *photoThumbnail0;
+    __strong IBOutlet UIImageView *photoThumbnail1;
+    __strong IBOutlet UIImageView *photoThumbnail2;
+    __strong IBOutlet UIImageView *photoThumbnail3;
 }
 
-@property (nonatomic, retain) NSArray *photos;
-@property (nonatomic, retain) UCPhotosList *photoList;
+@property (nonatomic, strong) NSArray *photos;
+@property (nonatomic, strong) UCPhotosList *photoList;
 @property (nonatomic, strong) NSString *serviceName;
 
 - (void)updateThumbnails;
