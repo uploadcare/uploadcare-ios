@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F0467CD1689C26C009C4C67 /* USSilverButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0467CB1689C26C009C4C67 /* USSilverButton.png */; };
+		6F0467CE1689C26C009C4C67 /* USSilverButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0467CC1689C26C009C4C67 /* USSilverButton@2x.png */; };
 		6F0641C91673AA2C009417A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0641C81673AA2C009417A4 /* UIKit.framework */; };
 		6F0641CB1673AA2C009417A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0641CA1673AA2C009417A4 /* Foundation.framework */; };
 		6F0641CD1673AA2C009417A4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0641CC1673AA2C009417A4 /* CoreGraphics.framework */; };
@@ -22,11 +24,15 @@
 		6F5DC7DF1678BC8D00CEF3D7 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5DC7DE1678BC8D00CEF3D7 /* CoreImage.framework */; };
 		6F5DC7E31678DB8800CEF3D7 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5DC7E11678DB8700CEF3D7 /* Icon.png */; };
 		6F5DC7E41678DB8800CEF3D7 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5DC7E21678DB8800CEF3D7 /* Icon@2x.png */; };
+		6F72803A1689D4B40080A172 /* USSilverButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F7280381689D4B40080A172 /* USSilverButtonDepressed.png */; };
+		6F72803B1689D4B40080A172 /* USSilverButtonDepressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F7280391689D4B40080A172 /* USSilverButtonDepressed@2x.png */; };
 		6FBBA823167884700017C428 /* USViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBBA821167884700017C428 /* USViewController.xib */; };
 		A3B5C3DF94EA43CBBB637C64 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7636672D8B104549AC9FEE10 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F0467CB1689C26C009C4C67 /* USSilverButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = USSilverButton.png; sourceTree = "<group>"; };
+		6F0467CC1689C26C009C4C67 /* USSilverButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "USSilverButton@2x.png"; sourceTree = "<group>"; };
 		6F0641C41673AA2C009417A4 /* uShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = uShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0641C81673AA2C009417A4 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6F0641CA1673AA2C009417A4 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -46,6 +52,8 @@
 		6F5DC7DE1678BC8D00CEF3D7 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		6F5DC7E11678DB8700CEF3D7 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		6F5DC7E21678DB8800CEF3D7 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		6F7280381689D4B40080A172 /* USSilverButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = USSilverButtonDepressed.png; sourceTree = "<group>"; };
+		6F7280391689D4B40080A172 /* USSilverButtonDepressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "USSilverButtonDepressed@2x.png"; sourceTree = "<group>"; };
 		6F9301251678DE420030E8AB /* uShare-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "uShare-Prefix.pch"; sourceTree = "<group>"; };
 		6F9301261678DE420030E8AB /* uShare.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = uShare.plist; sourceTree = "<group>"; };
 		6FBBA822167884700017C428 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/USViewController.xib; sourceTree = "<group>"; };
@@ -115,6 +123,10 @@
 		6F0641CF1673AA2C009417A4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6F7280381689D4B40080A172 /* USSilverButtonDepressed.png */,
+				6F7280391689D4B40080A172 /* USSilverButtonDepressed@2x.png */,
+				6F0467CB1689C26C009C4C67 /* USSilverButton.png */,
+				6F0467CC1689C26C009C4C67 /* USSilverButton@2x.png */,
 				6F9301251678DE420030E8AB /* uShare-Prefix.pch */,
 				6F9301261678DE420030E8AB /* uShare.plist */,
 				6F5DC7E11678DB8700CEF3D7 /* Icon.png */,
@@ -194,6 +206,10 @@
 				6F5DC7E31678DB8800CEF3D7 /* Icon.png in Resources */,
 				6F5DC7E41678DB8800CEF3D7 /* Icon@2x.png in Resources */,
 				6F5D267C1688D59800C7BDC5 /* Settings.bundle in Resources */,
+				6F0467CD1689C26C009C4C67 /* USSilverButton.png in Resources */,
+				6F0467CE1689C26C009C4C67 /* USSilverButton@2x.png in Resources */,
+				6F72803A1689D4B40080A172 /* USSilverButtonDepressed.png in Resources */,
+				6F72803B1689D4B40080A172 /* USSilverButtonDepressed@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
