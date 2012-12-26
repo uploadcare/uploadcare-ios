@@ -19,8 +19,6 @@
 		6F0641DD1673AA2C009417A4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0641DC1673AA2C009417A4 /* Default@2x.png */; };
 		6F0641DF1673AA2C009417A4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0641DE1673AA2C009417A4 /* Default-568h@2x.png */; };
 		6F0641E21673AA2C009417A4 /* USViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0641E11673AA2C009417A4 /* USViewController.m */; };
-		6F0705A716788F7100DD3100 /* USUploadBezel.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0705A516788F7100DD3100 /* USUploadBezel.png */; };
-		6F0705A816788F7100DD3100 /* USUploadBezel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0705A616788F7100DD3100 /* USUploadBezel@2x.png */; };
 		6F5D26721688C7C000C7BDC5 /* ARChromeActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5D266D1688C7C000C7BDC5 /* ARChromeActivity.m */; };
 		6F5D26731688C7C000C7BDC5 /* ARChromeActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5D266E1688C7C000C7BDC5 /* ARChromeActivity.png */; };
 		6F5D26741688C7C000C7BDC5 /* ARChromeActivity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5D266F1688C7C000C7BDC5 /* ARChromeActivity@2x.png */; };
@@ -65,8 +63,6 @@
 		6F0641DE1673AA2C009417A4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6F0641E01673AA2C009417A4 /* USViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USViewController.h; sourceTree = "<group>"; };
 		6F0641E11673AA2C009417A4 /* USViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = USViewController.m; sourceTree = "<group>"; };
-		6F0705A516788F7100DD3100 /* USUploadBezel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = USUploadBezel.png; sourceTree = "<group>"; };
-		6F0705A616788F7100DD3100 /* USUploadBezel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "USUploadBezel@2x.png"; sourceTree = "<group>"; };
 		6F5D266C1688C7C000C7BDC5 /* ARChromeActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARChromeActivity.h; sourceTree = "<group>"; };
 		6F5D266D1688C7C000C7BDC5 /* ARChromeActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARChromeActivity.m; sourceTree = "<group>"; };
 		6F5D266E1688C7C000C7BDC5 /* ARChromeActivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARChromeActivity.png; sourceTree = "<group>"; };
@@ -197,8 +193,6 @@
 				6F9301261678DE420030E8AB /* uShare.plist */,
 				6F5DC7E11678DB8700CEF3D7 /* Icon.png */,
 				6F5DC7E21678DB8800CEF3D7 /* Icon@2x.png */,
-				6F0705A516788F7100DD3100 /* USUploadBezel.png */,
-				6F0705A616788F7100DD3100 /* USUploadBezel@2x.png */,
 				6FBBA821167884700017C428 /* USViewController.xib */,
 				6F0641D11673AA2C009417A4 /* InfoPlist.strings */,
 				6F0641D41673AA2C009417A4 /* main.m */,
@@ -309,8 +303,6 @@
 				6F0641DD1673AA2C009417A4 /* Default@2x.png in Resources */,
 				6F0641DF1673AA2C009417A4 /* Default-568h@2x.png in Resources */,
 				6FBBA823167884700017C428 /* USViewController.xib in Resources */,
-				6F0705A716788F7100DD3100 /* USUploadBezel.png in Resources */,
-				6F0705A816788F7100DD3100 /* USUploadBezel@2x.png in Resources */,
 				6F5DC7E31678DB8800CEF3D7 /* Icon.png in Resources */,
 				6F5DC7E41678DB8800CEF3D7 /* Icon@2x.png in Resources */,
 				6F5D26731688C7C000C7BDC5 /* ARChromeActivity.png in Resources */,
