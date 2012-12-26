@@ -27,6 +27,8 @@
 		6F5D26751688C7C000C7BDC5 /* ARChromeActivity@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5D26701688C7C000C7BDC5 /* ARChromeActivity@2x~ipad.png */; };
 		6F5D26761688C7C000C7BDC5 /* ARChromeActivity~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5D26711688C7C000C7BDC5 /* ARChromeActivity~ipad.png */; };
 		6F5D267C1688D59800C7BDC5 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F5D267B1688D59800C7BDC5 /* Settings.bundle */; };
+		6F5D27301689908800C7BDC5 /* ToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5D272E1689908800C7BDC5 /* ToolbarIcon.png */; };
+		6F5D27311689908800C7BDC5 /* ToolbarIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5D272F1689908800C7BDC5 /* ToolbarIcon@2x.png */; };
 		6F5DC7DF1678BC8D00CEF3D7 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5DC7DE1678BC8D00CEF3D7 /* CoreImage.framework */; };
 		6F5DC7E31678DB8800CEF3D7 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5DC7E11678DB8700CEF3D7 /* Icon.png */; };
 		6F5DC7E41678DB8800CEF3D7 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5DC7E21678DB8800CEF3D7 /* Icon@2x.png */; };
@@ -61,6 +63,8 @@
 		6F5D26701688C7C000C7BDC5 /* ARChromeActivity@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ARChromeActivity@2x~ipad.png"; sourceTree = "<group>"; };
 		6F5D26711688C7C000C7BDC5 /* ARChromeActivity~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ARChromeActivity~ipad.png"; sourceTree = "<group>"; };
 		6F5D267B1688D59800C7BDC5 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		6F5D272E1689908800C7BDC5 /* ToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ToolbarIcon.png; path = ../../uShare/ushare/ToolbarIcon.png; sourceTree = "<group>"; };
+		6F5D272F1689908800C7BDC5 /* ToolbarIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ToolbarIcon@2x.png"; path = "../../uShare/ushare/ToolbarIcon@2x.png"; sourceTree = "<group>"; };
 		6F5DC7DE1678BC8D00CEF3D7 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		6F5DC7E11678DB8700CEF3D7 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		6F5DC7E21678DB8800CEF3D7 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 				6F7280391689D4B40080A172 /* USSilverButtonDepressed@2x.png */,
 				6F0467CB1689C26C009C4C67 /* USSilverButton.png */,
 				6F0467CC1689C26C009C4C67 /* USSilverButton@2x.png */,
+				6F5D272E1689908800C7BDC5 /* ToolbarIcon.png */,
+				6F5D272F1689908800C7BDC5 /* ToolbarIcon@2x.png */,
 				6F9301251678DE420030E8AB /* uShare-Prefix.pch */,
 				6F9301261678DE420030E8AB /* uShare.plist */,
 				6F5DC7E11678DB8700CEF3D7 /* Icon.png */,
@@ -236,6 +242,8 @@
 				6F5D26751688C7C000C7BDC5 /* ARChromeActivity@2x~ipad.png in Resources */,
 				6F5D26761688C7C000C7BDC5 /* ARChromeActivity~ipad.png in Resources */,
 				6F5D267C1688D59800C7BDC5 /* Settings.bundle in Resources */,
+				6F5D27301689908800C7BDC5 /* ToolbarIcon.png in Resources */,
+				6F5D27311689908800C7BDC5 /* ToolbarIcon@2x.png in Resources */,
 				6F0467CD1689C26C009C4C67 /* USSilverButton.png in Resources */,
 				6F0467CE1689C26C009C4C67 /* USSilverButton@2x.png in Resources */,
 				6F72803A1689D4B40080A172 /* USSilverButtonDepressed.png in Resources */,
