@@ -33,6 +33,7 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
         _lastLoadedPageIndex = 0;
         _nextPageIndexToLoad = 0;
         [self setState:UCPhotosListStateInitial];
+        self.contentSizeForViewInPopover = CGSizeMake(320, 480);
     }
     return self;
 }

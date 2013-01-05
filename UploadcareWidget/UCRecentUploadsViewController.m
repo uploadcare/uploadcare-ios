@@ -19,11 +19,10 @@
 
 @implementation UCRecentUploadsViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
+- (id)init {
+    self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
-        // Custom initialization
+        self.contentSizeForViewInPopover = CGSizeMake(320, 480);
     }
     return self;
 }

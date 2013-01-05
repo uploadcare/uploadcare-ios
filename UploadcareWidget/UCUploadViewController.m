@@ -42,6 +42,7 @@
         _widget = widget;
         _assets = [[ALAssetsLibrary alloc]init];
         _imagePicker = [[UIImagePickerController alloc]init];
+        self.contentSizeForViewInPopover = CGSizeMake(320, 480);
    }
     return self;
 }
@@ -57,7 +58,11 @@
 
 - (void)viewDidLoad {
     self.navigationItem.title = self.title ? self.title : NSLocalizedString(@"Upload", @"Uploadcare menu default navigation view title");
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismiss)];
+    
+    /* Don't show the `Cancel` button when presented in a popover on iPad */
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismiss)];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -218,7 +223,7 @@
 }
 
 - (void)showRecentUploads {
-    UCRecentUploadsViewController *recentUploadsViewController = [[UCRecentUploadsViewController alloc]initWithStyle:UITableViewStylePlain];
+    UCRecentUploadsViewController *recentUploadsViewController = [[UCRecentUploadsViewController alloc]init];
     recentUploadsViewController.widget = self.widget;
     [self.navigationController pushViewController:recentUploadsViewController animated:YES];
 }
@@ -229,7 +234,11 @@
     self.imagePicker.sourceType = sourceType;
     self.imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
     self.imagePicker.delegate = self;
-    [self presentModalViewController:self.imagePicker animated:YES];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone || sourceType == UIImagePickerControllerSourceTypeCamera) {
+        [self presentModalViewController:self.imagePicker animated:YES];
+    }else{
+        [self.widget.popover setContentViewController:self.imagePicker animated:YES];
+    }
 }
 
 - (void)uploadData:(NSData *)data named:(NSString*)filename {

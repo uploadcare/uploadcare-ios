@@ -35,6 +35,7 @@
 @property (strong) UploadcareProgressBlock uploadProgressBlock;
 @property (strong) UploadcareSuccessBlock uploadCompletionBlock;
 @property (strong) UploadcareFailureBlock uploadFailureBlock;
+@property (nonatomic, weak) UIPopoverController *popover;
 
 - (void)enableFacebook;
 - (void)enableFlickrWithAPIKey:(NSString *)flickrAPIKey flickrAPISecret:(NSString *)flickrAPISecret;
