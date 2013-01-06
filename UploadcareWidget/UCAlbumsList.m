@@ -50,6 +50,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
         _lastLoadedPageIndex = 0;
         _state = UCAlbumsListStateInitial;
         _widget = widget;
+        self.contentSizeForViewInPopover = CGSizeMake(320, 480);
     }
     return self;
 }

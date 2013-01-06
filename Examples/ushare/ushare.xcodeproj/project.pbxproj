@@ -44,6 +44,7 @@
 		6F72803B1689D4B40080A172 /* USSilverButtonDepressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F7280391689D4B40080A172 /* USSilverButtonDepressed@2x.png */; };
 		6F72803E1689EC120080A172 /* UIView+USHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F72803D1689EC120080A172 /* UIView+USHelpers.m */; };
 		6FBBA823167884700017C428 /* USViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBBA821167884700017C428 /* USViewController.xib */; };
+		6FD691B51698798800750895 /* USViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD691B31698798800750895 /* USViewController~ipad.xib */; };
 		A3B5C3DF94EA43CBBB637C64 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7636672D8B104549AC9FEE10 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +109,7 @@
 		6F9301251678DE420030E8AB /* uShare-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "uShare-Prefix.pch"; sourceTree = "<group>"; };
 		6F9301261678DE420030E8AB /* uShare.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = uShare.plist; sourceTree = "<group>"; };
 		6FBBA822167884700017C428 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/USViewController.xib; sourceTree = "<group>"; };
+		6FD691B41698798800750895 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/USViewController~ipad.xib"; sourceTree = "<group>"; };
 		7636672D8B104549AC9FEE10 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAB5CF89AB3341248E7936B8 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -194,6 +196,7 @@
 				6F5DC7E11678DB8700CEF3D7 /* Icon.png */,
 				6F5DC7E21678DB8800CEF3D7 /* Icon@2x.png */,
 				6FBBA821167884700017C428 /* USViewController.xib */,
+				6FD691B31698798800750895 /* USViewController~ipad.xib */,
 				6F0641D11673AA2C009417A4 /* InfoPlist.strings */,
 				6F0641D41673AA2C009417A4 /* main.m */,
 				6F0641DA1673AA2C009417A4 /* Default.png */,
@@ -325,6 +328,7 @@
 				6F7280361689D1F90080A172 /* USShareIcon@2x.png in Resources */,
 				6F72803A1689D4B40080A172 /* USSilverButtonDepressed.png in Resources */,
 				6F72803B1689D4B40080A172 /* USSilverButtonDepressed@2x.png in Resources */,
+				6FD691B51698798800750895 /* USViewController~ipad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +407,14 @@
 			name = USViewController.xib;
 			sourceTree = "<group>";
 		};
+		6FD691B31698798800750895 /* USViewController~ipad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6FD691B41698798800750895 /* en */,
+			);
+			name = "USViewController~ipad.xib";
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -465,6 +477,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ushare/uShare.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = uShare;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -478,6 +491,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ushare/uShare.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = uShare;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

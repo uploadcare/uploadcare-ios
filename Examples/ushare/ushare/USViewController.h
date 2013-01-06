@@ -16,16 +16,17 @@
 
 @property (nonatomic, strong) NSURL *publicURL;
 @property (nonatomic, strong) NSString *fileName;
-@property (strong, nonatomic) UCWidget *uploadWidget;
-@property (weak, nonatomic) IBOutlet UILabel *promptLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *thumbnailImageView;
-@property (weak, nonatomic) IBOutlet UIView *uploadingAnchor;
-@property (weak, nonatomic) IBOutlet UIView *restingAnchor;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
-@property (weak, nonatomic) IBOutlet UIButton *shareButton;
-@property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
-@property (weak, nonatomic) IBOutlet UILabel *progressLabel;
-@property (weak, nonatomic) IBOutlet UILabel *uploadButtonHint;
-@property (weak, nonatomic) IBOutlet UILabel *uploadButtonHintArrow;
+@property (nonatomic, strong) UCWidget *uploadWidget;
+@property (nonatomic, strong) UIPopoverController *popover;
+@property (nonatomic, weak) IBOutlet UILabel *promptLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
+@property (nonatomic, weak) IBOutlet UIView *uploadingAnchor;
+@property (nonatomic, weak) IBOutlet UIView *restingAnchor;
+@property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, weak) IBOutlet UIButton *shareButton;
+@property (nonatomic, weak) IBOutlet UIProgressView *progressBar;
+@property (nonatomic, weak) IBOutlet UILabel *progressLabel;
+@property (nonatomic, weak) IBOutlet UILabel *uploadButtonHint;
+@property (nonatomic, weak) IBOutlet UILabel *uploadButtonHintArrow;
 
 @end
