@@ -18,7 +18,6 @@ install_resource()
   esac
 }
 install_resource 'Facebook-iOS-SDK/src/FacebookSDKResources.bundle'
-install_resource 'SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle'
 install_resource 'objectiveflickr/BridgeSupport'
 install_resource '../../../UploadcareWidget/resources/button_background.png'
 install_resource '../../../UploadcareWidget/resources/icon_dropbox.png'

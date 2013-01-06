@@ -13,7 +13,6 @@
 #import "UIImageView+UCHelpers.h"
 #import "UIImage+UCHelpers.h"
 #import "QuartzCore/QuartzCore.h"
-#import "SVProgressHUD.h"
 
 enum {
     UCAlbumsListStateInitial = 0,
@@ -32,6 +31,8 @@ typedef NSUInteger UCAlbumsListState;
 @property (strong) NSMutableArray *albums;
 @property NSUInteger lastLoadedPageIndex;
 @property UCAlbumsListState state;
+@property (strong) UIActivityIndicatorView *activityIndicator;
+@property (strong) UILabel *loadingLabel;
 
 - (void)grabMoreAlbums;
 - (void)addLogoutButton;
@@ -51,8 +52,48 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
         _state = UCAlbumsListStateInitial;
         _widget = widget;
         self.contentSizeForViewInPopover = CGSizeMake(320, 480);
+        self.tableView.rowHeight = 80.f;
+        self.tableView.backgroundColor = [UIColor colorWithWhite:.95f alpha:1.f];
+        
+        [self setupLoadingIndicator];
     }
     return self;
+}
+
+/* loading indicator */
+- (void)setupLoadingIndicator {
+    _loadingLabel = [[UILabel alloc]init];
+    _loadingLabel.text = NSLocalizedString(@"Loading...", @"`Album is loading` label");
+    _loadingLabel.backgroundColor = [UIColor clearColor];
+    _loadingLabel.textColor = [UIColor colorWithWhite:.33f alpha:1.f];
+    _loadingLabel.shadowColor = [UIColor whiteColor];
+    _loadingLabel.shadowOffset = CGSizeMake(0, 1);
+    _loadingLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]*0.9];
+    [_loadingLabel sizeToFit];
+    [self.tableView addSubview:_loadingLabel];
+    
+    _activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.tableView addSubview:_activityIndicator];
+    
+    CGFloat loadingWidth = CGRectGetWidth(_activityIndicator.bounds)+5.f+CGRectGetWidth(_loadingLabel.bounds);
+    CGFloat loadingHeight = CGRectGetHeight(_activityIndicator.bounds);
+    CGFloat statusBarHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+    UIScreen *screen = [UIScreen mainScreen];
+    CGPoint screenCenter = CGPointMake(CGRectGetWidth(screen.bounds) * .5f - CGRectGetMinX(self.tableView.frame), CGRectGetHeight(screen.bounds) * .5f - CGRectGetMinY(self.tableView.frame) - statusBarHeight);
+    _activityIndicator.center = CGPointMake(screenCenter.x - loadingWidth / 2 + CGRectGetWidth(_activityIndicator.bounds) / 2, screenCenter.y);
+    _loadingLabel.center = CGPointMake(_activityIndicator.center.x+CGRectGetWidth(_activityIndicator.bounds) * .5f + 5.f + CGRectGetWidth(_loadingLabel.bounds) * .5f, screenCenter.y);
+
+    [self hideLoadingIndicator];
+}
+
+- (void)showLoadingIndicator {
+    self.loadingLabel.hidden = NO;
+    [self.activityIndicator startAnimating];
+}
+
+- (void)hideLoadingIndicator {
+    self.loadingLabel.hidden = YES;
+    [self.activityIndicator stopAnimating];
 }
 
 #pragma mark - View lifecycle
@@ -98,13 +139,15 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
     
     switch (self.state) {
         case UCAlbumsListStateInitial:
-            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+//            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+            [self showLoadingIndicator];
             [self setupServiceConnection];
             break;
             
         case UCAlbumsListStateAlbumsGrabbed:
         case UCAlbumsListStateGrabbing:
-            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+//            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+            [self showLoadingIndicator];
              /* resume retrieving albums (has been interrupted the last time) */
             [self grabMoreAlbums];
             /* ..fall-through.. */
@@ -183,10 +226,6 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
 
 #pragma mark - Table view delegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80.f;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
@@ -235,7 +274,8 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
             }
         }
         [self.tableView reloadRowsAtIndexPaths:indicesToReload withRowAnimation:UITableViewRowAnimationFade];
-        [SVProgressHUD dismiss];
+//        [SVProgressHUD dismiss];
+        [self hideLoadingIndicator];
     } andErrorBlock:^(NSError *error) {
         NSLog(@"Failed to retrive cover photos: %@", error);
     }];
@@ -260,7 +300,8 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
                                 
                                 if ( [results count] < kUCNumberOfAlbumsPerPage ){
                                     [self setState:UCAlbumsListStateAllAlbumsGrabbed];
-                                    [SVProgressHUD dismiss];
+//                                    [SVProgressHUD dismiss];
+                                    [self hideLoadingIndicator];
                                 } else {
                                     [self setState:UCAlbumsListStateAlbumsGrabbed];
                                     [self grabMoreAlbums];

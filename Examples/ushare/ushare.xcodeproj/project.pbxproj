@@ -45,6 +45,7 @@
 		6F72803E1689EC120080A172 /* UIView+USHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F72803D1689EC120080A172 /* UIView+USHelpers.m */; };
 		6FBBA823167884700017C428 /* USViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBBA821167884700017C428 /* USViewController.xib */; };
 		6FD691B51698798800750895 /* USViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD691B31698798800750895 /* USViewController~ipad.xib */; };
+		6FD83F97169A14DB00E799DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD83F96169A14DB00E799DE /* QuartzCore.framework */; };
 		A3B5C3DF94EA43CBBB637C64 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7636672D8B104549AC9FEE10 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,7 @@
 		6F9301261678DE420030E8AB /* uShare.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = uShare.plist; sourceTree = "<group>"; };
 		6FBBA822167884700017C428 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/USViewController.xib; sourceTree = "<group>"; };
 		6FD691B41698798800750895 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/USViewController~ipad.xib"; sourceTree = "<group>"; };
+		6FD83F96169A14DB00E799DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7636672D8B104549AC9FEE10 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAB5CF89AB3341248E7936B8 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -119,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD83F97169A14DB00E799DE /* QuartzCore.framework in Frameworks */,
 				6F5DC7DF1678BC8D00CEF3D7 /* CoreImage.framework in Frameworks */,
 				6F0641C91673AA2C009417A4 /* UIKit.framework in Frameworks */,
 				6F0641CB1673AA2C009417A4 /* Foundation.framework in Frameworks */,
@@ -133,6 +136,7 @@
 		6F0641B91673AA2C009417A4 = {
 			isa = PBXGroup;
 			children = (
+				6FD83F96169A14DB00E799DE /* QuartzCore.framework */,
 				6F0641C71673AA2C009417A4 /* Frameworks */,
 				6F5D266B1688C7C000C7BDC5 /* ARChromeActivity */,
 				6F5D267D1688E49300C7BDC5 /* TUSafariActivity */,
