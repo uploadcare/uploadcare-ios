@@ -25,7 +25,7 @@
 @interface UCUploadViewController ()
 @property (strong) GRKServiceGrabber *grabber;
 @property (strong) UCAlbumsList *albumList;
-@property (readonly) UCWidget *widget;
+@property (readonly) UPCUploadController *widget;
 @property (readonly) ALAssetsLibrary* assets;
 @end
 
@@ -36,7 +36,7 @@
     [GRKConfiguration initializeWithConfigurator:[UCGrabkitConfigurator shared]];
 }
 
-- (id)initWithWidget:(UCWidget *)widget {
+- (id)initWithWidget:(UPCUploadController *)widget {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         _widget = widget;

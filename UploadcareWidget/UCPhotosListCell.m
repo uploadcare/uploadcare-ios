@@ -13,7 +13,7 @@
 #import "UCRecentUploads.h"
 #import "UIImageView+UCHelpers.h"
 #import "UploadcareError.h"
-#import "UCWidget.h"
+#import "UPCUploadController.h"
 
 #import "GRKPhoto.h"
 #import "GRKImage.h"
@@ -98,7 +98,7 @@ NSString *UCReadableTitleFromGRKPhoto(GRKPhoto *photo, NSString *serviceName) {
 - (IBAction)didSelected:(id)sender {
     UITapGestureRecognizer *tapGesture = (UITapGestureRecognizer *)sender;
     UIImageView *tappedImageView = (UIImageView *)[tapGesture view];
-    UCWidget *widget = self.photoList.albumList.widget;
+    UPCUploadController *widget = self.photoList.albumList.widget;
     GRKPhoto *photo = (GRKPhoto *)[_photos objectAtIndex:[tappedImageView tag]];
     NSURL *photoURL = [photo.imagesSortedByHeight.lastObject URL];
     if ([widget.delegate respondsToSelector:@selector(uploadcareWidget:didStartUploadingFileNamed:fromURL:withThumbnail:)]) {

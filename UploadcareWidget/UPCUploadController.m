@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 Uploadcare. All rights reserved.
 //
 
-#import "UCWidget.h"
+#import "UPCUploadController.h"
 #import "UCUploadViewController.h"
 #import "UCGrabkitConfigurator.h"
 
-@interface UCWidget () {
+@interface UPCUploadController () {
     id<UINavigationControllerDelegate,UCWidgetDelegate> _delegate;
 }
 
@@ -20,7 +20,7 @@
 NSString *const UCFacebookMisconfigurationException = @"UCFacebookConfiguratioException";
 NSString *const UCGenericURLSchemaNotConfiguredException = @"UCGenericURLSchemaNotConfiguredException";
 
-@implementation UCWidget
+@implementation UPCUploadController
 
 - (id)initWithUploadcarePublicKey:(NSString *)publicKey {
     self = [super init];

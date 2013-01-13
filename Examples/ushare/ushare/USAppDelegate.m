@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Uploadcare. All rights reserved.
 //
 
-#import <UploadcareWidget.h>
+#import <UCAppDelegate.h>
 
 #import "USAppDelegate.h"
 #import "USViewController.h"

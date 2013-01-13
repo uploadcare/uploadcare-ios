@@ -57,7 +57,7 @@
     [self.shareButton setBackgroundImage:[[UIImage imageNamed:@"USSilverButtonDepressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(16, 16, 16, 16)] forState:UIControlStateHighlighted];
     
     /* Uploadcare widget initialization */
-    self.uploadWidget = [[UCWidget alloc]initWithUploadcarePublicKey:@"demopublickey"];
+    self.uploadWidget = [[UPCUploadController alloc]initWithUploadcarePublicKey:@"demopublickey"];
     self.uploadWidget.delegate = self;
     __weak USViewController *viewController = self;
     self.uploadWidget.navigationBar.barStyle = UIBarStyleBlack;
@@ -123,7 +123,7 @@
 
 /**
  * User selected a file to upload, dismiss the view controller and animate in the progress bar */
-- (void)uploadcareWidget:(UCWidget*)widget didStartUploadingFileNamed:(NSString*)fileName fromURL:(NSURL*)url withThumbnail:(UIImage*)thumbnail {
+- (void)uploadcareWidget:(UPCUploadController*)widget didStartUploadingFileNamed:(NSString*)fileName fromURL:(NSURL*)url withThumbnail:(UIImage*)thumbnail {
     [self dismissUploadViewController:YES completion:^{
         self.fileName = fileName;
         self.promptLabel.text = nil;

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <UploadcareKit.h>
 
-@class UCWidget;
+@class UPCUploadController;
 
 @protocol UCWidgetDelegate <NSObject>
 @optional
@@ -17,15 +17,15 @@
  * Tells the delegate that the user dismissed the widget.
  *
  * The delegate is expected to dismiss the controller. */
-- (void)uploadcareWidgetDidCancel:(UCWidget *)widget;
+- (void)uploadcareWidgetDidCancel:(UPCUploadController *)widget;
 /** 
  * Tells the delegate that the user picked a file to upload.
  *
  * The delegate is expected to dismiss the controller. */
-- (void)uploadcareWidget:(UCWidget *)widget didStartUploadingFileNamed:(NSString *)fileName fromURL:(NSURL *)url withThumbnail:(UIImage *)thumbnail;
+- (void)uploadcareWidget:(UPCUploadController *)widget didStartUploadingFileNamed:(NSString *)fileName fromURL:(NSURL *)url withThumbnail:(UIImage *)thumbnail;
 @end
 
-@interface UCWidget : UINavigationController
+@interface UPCUploadController : UINavigationController
 
 @property (strong) NSString *navigationTitle;
 @property (nonatomic, weak) id<UINavigationControllerDelegate, UCWidgetDelegate> delegate;

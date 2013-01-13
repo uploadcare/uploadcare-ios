@@ -11,7 +11,7 @@
 #import "UCUploader.h"
 #import "UIImageView+UCHelpers.h"
 #import "QuartzCore/QuartzCore.h"
-#import "UCWidget.h"
+#import "UPCUploadController.h"
 
 @interface UCRecentUploadsViewController ()
 

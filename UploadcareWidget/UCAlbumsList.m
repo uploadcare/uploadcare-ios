@@ -42,7 +42,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
 
 @implementation UCAlbumsList
 
-- (id)initWithGrabber:(id)grabber serviceName:(NSString *)serviceName widget:(UCWidget *)widget {
+- (id)initWithGrabber:(id)grabber serviceName:(NSString *)serviceName widget:(UPCUploadController *)widget {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         _grabber = grabber;
