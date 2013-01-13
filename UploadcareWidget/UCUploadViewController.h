@@ -13,8 +13,6 @@
 
 @interface UCUploadViewController : UCMenuViewController<UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (nonatomic) NSString *navigationTitle;
-
 - (id)initWithWidget:(UPCUploadController *)widget;
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;

@@ -49,11 +49,6 @@
 
 #pragma mark - Public interfaces
 
-- (void)setNavigationTitle:(NSString *)navigationTitle {
-    _navigationTitle = navigationTitle;
-    self.navigationItem.title = navigationTitle;
-}
-
 #pragma mark - UITableViewController doodad
 
 - (void)viewDidLoad {

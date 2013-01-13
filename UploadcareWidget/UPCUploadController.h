@@ -27,7 +27,6 @@
 
 @interface UPCUploadController : UINavigationController
 
-@property (strong) NSString *navigationTitle;
 @property (nonatomic, weak) id<UINavigationControllerDelegate, UCWidgetDelegate> delegate;
 
 - (id)initWithUploadcarePublicKey:(NSString *)publicKey;
