@@ -139,14 +139,12 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
     
     switch (self.state) {
         case UCAlbumsListStateInitial:
-//            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
             [self showLoadingIndicator];
             [self setupServiceConnection];
             break;
             
         case UCAlbumsListStateAlbumsGrabbed:
         case UCAlbumsListStateGrabbing:
-//            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
             [self showLoadingIndicator];
              /* resume retrieving albums (has been interrupted the last time) */
             [self grabMoreAlbums];
@@ -195,6 +193,14 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellIdentifier];
         cell.imageView.layer.cornerRadius = 4.0f;
         cell.imageView.clipsToBounds = YES;
+        
+        /* Title shadow */
+        cell.textLabel.shadowColor = [UIColor whiteColor];
+        cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+        
+        /* Subtitle shadow */
+        cell.detailTextLabel.shadowColor = [UIColor whiteColor];
+        cell.detailTextLabel.shadowOffset = CGSizeMake(0, 1);
     }
     
     GRKAlbum * album = (GRKAlbum*)[self.albums objectAtIndex:indexPath.row];
@@ -274,7 +280,6 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
             }
         }
         [self.tableView reloadRowsAtIndexPaths:indicesToReload withRowAnimation:UITableViewRowAnimationFade];
-//        [SVProgressHUD dismiss];
         [self hideLoadingIndicator];
     } andErrorBlock:^(NSError *error) {
         NSLog(@"Failed to retrive cover photos: %@", error);
@@ -300,7 +305,6 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
                                 
                                 if ( [results count] < kUCNumberOfAlbumsPerPage ){
                                     [self setState:UCAlbumsListStateAllAlbumsGrabbed];
-//                                    [SVProgressHUD dismiss];
                                     [self hideLoadingIndicator];
                                 } else {
                                     [self setState:UCAlbumsListStateAlbumsGrabbed];

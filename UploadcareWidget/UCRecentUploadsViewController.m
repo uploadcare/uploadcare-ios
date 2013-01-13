@@ -23,6 +23,7 @@
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         self.contentSizeForViewInPopover = CGSizeMake(320, 480);
+        self.tableView.backgroundColor = [UIColor colorWithWhite:.95f alpha:1.f];
     }
     return self;
 }
@@ -66,8 +67,16 @@
         cell.imageView.layer.cornerRadius = 4.0f;
         cell.imageView.clipsToBounds = YES;
         
-        /* ...not the following though */
+        /* "Long tex...re" */
         cell.textLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        
+        /* Title shadow */
+        cell.textLabel.shadowColor = [UIColor whiteColor];
+        cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+        
+        /* Subtitle shadow */
+        cell.detailTextLabel.shadowColor = [UIColor whiteColor];
+        cell.detailTextLabel.shadowOffset = CGSizeMake(0, 1);
     }
 
     NSDictionary *uploadInfo = [[UCRecentUploads sortedUploads] objectAtIndex:indexPath.row];
