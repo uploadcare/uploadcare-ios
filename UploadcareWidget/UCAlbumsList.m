@@ -63,7 +63,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
 /* loading indicator */
 - (void)setupLoadingIndicator {
     _loadingLabel = [[UILabel alloc]init];
-    _loadingLabel.text = NSLocalizedString(@"Loading...", @"`Album is loading` label");
+    _loadingLabel.text = NSLocalizedString(@"Loading...", @"Activity indicator label (\"Loading...\")");
     _loadingLabel.backgroundColor = [UIColor clearColor];
     _loadingLabel.textColor = [UIColor colorWithWhite:.33f alpha:1.f];
     _loadingLabel.shadowColor = [UIColor whiteColor];
@@ -80,8 +80,8 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
     CGFloat statusBarHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
     UIScreen *screen = [UIScreen mainScreen];
     CGPoint screenCenter = CGPointMake(CGRectGetWidth(screen.bounds) * .5f - CGRectGetMinX(self.tableView.frame), CGRectGetHeight(screen.bounds) * .5f - CGRectGetMinY(self.tableView.frame) - statusBarHeight);
-    _activityIndicator.center = CGPointMake(screenCenter.x - loadingWidth / 2 + CGRectGetWidth(_activityIndicator.bounds) / 2, screenCenter.y);
-    _loadingLabel.center = CGPointMake(_activityIndicator.center.x+CGRectGetWidth(_activityIndicator.bounds) * .5f + 5.f + CGRectGetWidth(_loadingLabel.bounds) * .5f, screenCenter.y);
+    _activityIndicator.center = CGPointMake(screenCenter.x - loadingWidth * .5f + CGRectGetWidth(_activityIndicator.bounds) * .5f, self.tableView.rowHeight * .5f);
+    _loadingLabel.center = CGPointMake(_activityIndicator.center.x+CGRectGetWidth(_activityIndicator.bounds) * .5f + 5.f + CGRectGetWidth(_loadingLabel.bounds) * .5f, self.tableView.rowHeight * .5f);
 
     [self hideLoadingIndicator];
 }
