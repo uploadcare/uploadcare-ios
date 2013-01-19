@@ -13,6 +13,9 @@ NSUInteger kNumberOfRowsPerSection = 7;
 NSUInteger kNumberOfPhotosPerCell = 4;
 NSUInteger kNumberOfPhotosPerPage = 7 * 4;
 
+static NSString *const kUploadcarePhotoListCell = @"kUploadcarePhotoListCell";
+static NSString *const kUploadcarePhotoListSpinnerCell = @"kUploadcarePhotoListSpinnerCell";
+
 @interface UCPhotosList()
 - (NSArray *)photosForCellAtIndexPath:(NSIndexPath *)indexPath;
 - (void)fillAlbumWithMorePhotos;
@@ -87,15 +90,13 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
         }
         case UCPhotosListStatePhotosGrabbed:{
             dispatch_async(dispatch_get_main_queue(), ^{
-                if ([self.navigationController.topViewController isEqual:self])
-                    [self.tableView reloadData];
+                if ([self.navigationController.topViewController isEqual:self]) [self.tableView reloadData];
             });
             break;
         }
         case UCPhotosListStateAllPhotosGrabbed:{
             dispatch_async(dispatch_get_main_queue(), ^{
-                if ([self.navigationController.topViewController isEqual:self])
-                    [self.tableView reloadData];
+                if ([self.navigationController.topViewController isEqual:self]) [self.tableView reloadData];
             });
             break;
         }
@@ -121,6 +122,7 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
 }
 
 - (void)fillAlbumWithMorePhotos {
+    if (state == UCPhotosListStateAllPhotosGrabbed) return;
     NSUInteger pageToLoad = _nextPageIndexToLoad;
     [self setState:UCPhotosListStateGrabbing];
     [_grabber fillAlbum:_album withPhotosAtPageIndex:pageToLoad withNumberOfPhotosPerPage:kNumberOfPhotosPerPage andCompleteBlock:^(NSArray *results) {
@@ -148,31 +150,23 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
     return res;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return nil;
-    NSUInteger pageNo = section+1;
-    if (state > UCPhotosListStatePhotosGrabbed) {
-        NSUInteger numberOfPhotos = [[_album photosAtPageIndex:section withNumberOfPhotosPerPage:kNumberOfPhotosPerPage] count];
-        return [NSString stringWithFormat:NSLocalizedString(@"Page %d ( %d photos )", nil), pageNo, numberOfPhotos];
-    }
-    return [NSString stringWithFormat:@"Page %d", pageNo];
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSUInteger res = 0;
+    NSInteger res = 0;
     if (state == UCPhotosListStateAllPhotosGrabbed && section == _lastLoadedPageIndex) {
-        NSUInteger photosCount = [_album count];
+        NSInteger photosCount = [_album count];
+
+        if (photosCount <= section*kNumberOfRowsPerSection*kNumberOfPhotosPerCell) return 0;
+        NSInteger numberOfCompleteCell = (photosCount - section*kNumberOfRowsPerSection*kNumberOfPhotosPerCell) / kNumberOfPhotosPerCell;
         
-        NSUInteger numberOfCompleteCell = (photosCount - section*kNumberOfRowsPerSection*kNumberOfPhotosPerCell) / kNumberOfPhotosPerCell;
-        NSUInteger thereIsALastCellWithLessThenFourPhotos = (photosCount % kNumberOfPhotosPerCell)?1:0;
+        NSInteger thereIsALastCellWithLessThenFourPhotos = (photosCount % kNumberOfPhotosPerCell)?1:0;
+
         res =  numberOfCompleteCell + thereIsALastCellWithLessThenFourPhotos  +1 ;
     } else if (section > _lastLoadedPageIndex) {
         res = 1;
     } else {
         res = kNumberOfRowsPerSection;
     }
-    
     return res;
     
 }
@@ -181,26 +175,25 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
     UITableViewCell *cell = nil;
     
     if (indexPath.section > _lastLoadedPageIndex) {
-        static NSString *extraCellIdentifier = @"ExtraCell";
-        
-        cell = [tableView dequeueReusableCellWithIdentifier:extraCellIdentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:kUploadcarePhotoListSpinnerCell];
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:extraCellIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kUploadcarePhotoListSpinnerCell];
+            UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            [cell addSubview:spinner];
+            [spinner setTag:0x1];
+            [spinner setCenter:CGPointMake(CGRectGetWidth(cell.bounds) * .5f, CGRectGetHeight(cell.bounds) * .5f)];
         }
-
-        /* XXX replace with activity indicator */
-//        cell.textLabel.text = NSLocalizedString(@"load more", nil);
-//        cell.textLabel.font = [UIFont fontWithName:@"System" size:8];
-    } else {
-        static NSString *photoCellIdentifier = @"photoCell";
-        
-        cell = [tableView dequeueReusableCellWithIdentifier:photoCellIdentifier];
+        [(UIActivityIndicatorView *)[cell viewWithTag:0x1] startAnimating];
+    } else {        
+        cell = [tableView dequeueReusableCellWithIdentifier:kUploadcarePhotoListCell];
         if (cell == nil) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"UCPhotosListCell" owner:self options:nil] objectAtIndex:0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [(UCPhotosListCell *)cell setPhotoList:self];
             [(UCPhotosListCell *)cell setServiceName:self.albumList.serviceName];
         }
+        NSArray * photosAtIndexPath = [self photosForCellAtIndexPath:indexPath];
+        [(UCPhotosListCell*)cell setPhotos:photosAtIndexPath];
     }
     
     return cell;
@@ -209,22 +202,11 @@ NSUInteger kNumberOfPhotosPerPage = 7 * 4;
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell.reuseIdentifier isEqualToString:@"ExtraCell"]) {
-        if (state == UCPhotosListStateAllPhotosGrabbed) {
-//            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@" %d photos", nil), [[_album photos] count] ];
-        } else {
-//            cell.textLabel.te3xt = [NSString stringWithFormat:NSLocalizedString(@"Loading page %d", nil), _lastLoadedPageIndex+1+1];
+    if ([cell.reuseIdentifier isEqualToString:kUploadcarePhotoListSpinnerCell]) {
+        if (state != UCPhotosListStateAllPhotosGrabbed) {
             [self fillAlbumWithMorePhotos];
         }
-    } else {
-        NSArray * photosAtIndexPath = [self photosForCellAtIndexPath:indexPath];
-        [(UCPhotosListCell*)cell setPhotos:photosAtIndexPath];
     }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    NSLog(@"+%@: line %d", NSStringFromSelector(_cmd), __LINE__);
 }
 
 @end

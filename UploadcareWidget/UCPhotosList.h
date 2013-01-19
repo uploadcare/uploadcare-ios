@@ -26,13 +26,13 @@ typedef NSUInteger UCPhotosListState;
 
 @interface UCPhotosList : UITableViewController {
     __strong GRKServiceGrabber *_grabber;
-    __strong GRKAlbum *_album;
     UCPhotosListState state;
     
     NSUInteger _lastLoadedPageIndex;
     NSUInteger _nextPageIndexToLoad;
 }
 
+@property (strong) GRKAlbum *album;
 @property (strong) UCAlbumsList *albumList;
 
 - (id)initWithGrabber:(GRKServiceGrabber *)grabber album:(GRKAlbum *)album;
