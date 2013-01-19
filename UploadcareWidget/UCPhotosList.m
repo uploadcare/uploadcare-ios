@@ -59,7 +59,7 @@ static NSString *const kUploadcarePhotoListSpinnerCell = @"kUploadcarePhotoListS
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.navigationItem.title = _album.name;
+    self.navigationItem.title = [_album.name isEqualToString:@"self"] ? self.albumList.serviceName : _album.name;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
