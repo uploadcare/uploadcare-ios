@@ -1,4 +1,30 @@
 
+SPEC CHECKSUMS: 
+  uploadcare-ios: 1d08448cc3eb44efa012e805ed484a329c791d7d
+  AFNetworking: 761a418233d280c1e0580bcb76ff9cb4c3073d17
+  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
+  grabKit/facebook: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  grabKit: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  objectiveflickr: 17f5f1fd4b9b9d6761a9545493c79221f65604c3
+  grabKit/device: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  TestFlightSDK: 29e194fb148e4861f92e4c1195b9697e1f3ad19a
+  grabKit/instagram: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  Facebook-iOS-SDK: 5fc068ebfd8c8c9b0fad476bc36dbbf1fffeebc8
+  ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780
+  grabKit/flickr: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
+  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
+
+EXTERNAL SOURCES: 
+  uploadcare-ios: 
+    :local: ../../
+
+DEPENDENCIES: 
+- AFNetworking
+- TestFlightSDK (~> 1.1)
+- uploadcare-ios (from `../../')
+
+COCOAPODS: 0.15.2
+
 PODS: 
 - AFNetworking (1.1.0)
 - Facebook-iOS-SDK (3.1.1)
@@ -24,29 +50,3 @@ PODS:
   - AFNetworking (~> 1.0)
   - grabKit (= 1.2.1)
   - libPusher (~> 1.4)
-
-DEPENDENCIES: 
-- AFNetworking
-- TestFlightSDK (~> 1.1)
-- uploadcare-ios (from `../../')
-
-SPEC CHECKSUMS: 
-  uploadcare-ios: 1d08448cc3eb44efa012e805ed484a329c791d7d
-  objectiveflickr: 17f5f1fd4b9b9d6761a9545493c79221f65604c3
-  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
-  grabKit/facebook: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  Facebook-iOS-SDK: 5fc068ebfd8c8c9b0fad476bc36dbbf1fffeebc8
-  grabKit/device: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780
-  AFNetworking: 761a418233d280c1e0580bcb76ff9cb4c3073d17
-  TestFlightSDK: 29e194fb148e4861f92e4c1195b9697e1f3ad19a
-  grabKit: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  grabKit/instagram: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  grabKit/flickr: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
-
-COCOAPODS: 0.15.2
-
-EXTERNAL SOURCES: 
-  uploadcare-ios: 
-    :local: ../../

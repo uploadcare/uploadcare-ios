@@ -8,6 +8,7 @@
 
 #import "UCAlbumsList.h"
 #import "GRKServiceGrabberConnectionProtocol.h"
+#import "GRKFacebookGrabber.h"
 #import "GRKInstagramGrabber.h"
 #import "UCPhotosList.h"
 #import "UIImageView+UCHelpers.h"
@@ -42,7 +43,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
 
 @implementation UCAlbumsList
 
-- (id)initWithGrabber:(id)grabber serviceName:(NSString *)serviceName widget:(UCWidget *)widget {
+- (id)initWithGrabber:(id)grabber serviceName:(NSString *)serviceName widget:(UPCUploadController *)widget {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         _grabber = grabber;
@@ -52,7 +53,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
         _state = UCAlbumsListStateInitial;
         _widget = widget;
         self.contentSizeForViewInPopover = CGSizeMake(320, 480);
-        self.tableView.rowHeight = 80.f;
+        self.tableView.rowHeight = 88.f; 
         self.tableView.backgroundColor = [UIColor colorWithWhite:.95f alpha:1.f];
         
         [self setupLoadingIndicator];
@@ -63,7 +64,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
 /* loading indicator */
 - (void)setupLoadingIndicator {
     _loadingLabel = [[UILabel alloc]init];
-    _loadingLabel.text = NSLocalizedString(@"Loading...", @"`Album is loading` label");
+    _loadingLabel.text = NSLocalizedString(@"Loading...", @"Activity indicator label (\"Loading...\")");
     _loadingLabel.backgroundColor = [UIColor clearColor];
     _loadingLabel.textColor = [UIColor colorWithWhite:.33f alpha:1.f];
     _loadingLabel.shadowColor = [UIColor whiteColor];
@@ -80,8 +81,8 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
     CGFloat statusBarHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
     UIScreen *screen = [UIScreen mainScreen];
     CGPoint screenCenter = CGPointMake(CGRectGetWidth(screen.bounds) * .5f - CGRectGetMinX(self.tableView.frame), CGRectGetHeight(screen.bounds) * .5f - CGRectGetMinY(self.tableView.frame) - statusBarHeight);
-    _activityIndicator.center = CGPointMake(screenCenter.x - loadingWidth / 2 + CGRectGetWidth(_activityIndicator.bounds) / 2, screenCenter.y);
-    _loadingLabel.center = CGPointMake(_activityIndicator.center.x+CGRectGetWidth(_activityIndicator.bounds) * .5f + 5.f + CGRectGetWidth(_loadingLabel.bounds) * .5f, screenCenter.y);
+    _activityIndicator.center = CGPointMake(screenCenter.x - loadingWidth * .5f + CGRectGetWidth(_activityIndicator.bounds) * .5f, self.tableView.rowHeight * .5f);
+    _loadingLabel.center = CGPointMake(_activityIndicator.center.x+CGRectGetWidth(_activityIndicator.bounds) * .5f + 5.f + CGRectGetWidth(_loadingLabel.bounds) * .5f, self.tableView.rowHeight * .5f);
 
     [self hideLoadingIndicator];
 }
@@ -139,14 +140,12 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
     
     switch (self.state) {
         case UCAlbumsListStateInitial:
-//            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
             [self showLoadingIndicator];
             [self setupServiceConnection];
             break;
             
         case UCAlbumsListStateAlbumsGrabbed:
         case UCAlbumsListStateGrabbing:
-//            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
             [self showLoadingIndicator];
              /* resume retrieving albums (has been interrupted the last time) */
             [self grabMoreAlbums];
@@ -195,6 +194,14 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellIdentifier];
         cell.imageView.layer.cornerRadius = 4.0f;
         cell.imageView.clipsToBounds = YES;
+        
+        /* Title shadow */
+        cell.textLabel.shadowColor = [UIColor whiteColor];
+        cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+        
+        /* Subtitle shadow */
+        cell.detailTextLabel.shadowColor = [UIColor whiteColor];
+        cell.detailTextLabel.shadowOffset = CGSizeMake(0, 1);
     }
     
     GRKAlbum * album = (GRKAlbum*)[self.albums objectAtIndex:indexPath.row];
@@ -274,7 +281,6 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
             }
         }
         [self.tableView reloadRowsAtIndexPaths:indicesToReload withRowAnimation:UITableViewRowAnimationFade];
-//        [SVProgressHUD dismiss];
         [self hideLoadingIndicator];
     } andErrorBlock:^(NSError *error) {
         NSLog(@"Failed to retrive cover photos: %@", error);
@@ -291,6 +297,8 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
                                 
                                 [results enumerateObjectsUsingBlock:^(GRKAlbum *album, NSUInteger idx, BOOL *stop) {
                                     if ([album count] != 0) {
+                                        /* FIXME: This is just fugly, get rid of it ASAP */
+                                        if ([_grabber isKindOfClass:[GRKFacebookGrabber class]] && [album.albumId length] > 16) return;
                                         [self.albums addObject:album];
                                         [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.albums.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
                                     }
@@ -300,12 +308,11 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
                                 
                                 if ( [results count] < kUCNumberOfAlbumsPerPage ){
                                     [self setState:UCAlbumsListStateAllAlbumsGrabbed];
-//                                    [SVProgressHUD dismiss];
-                                    [self hideLoadingIndicator];
                                 } else {
                                     [self setState:UCAlbumsListStateAlbumsGrabbed];
                                     [self grabMoreAlbums];
                                 }
+                                [self hideLoadingIndicator];
                             } andErrorBlock:^(NSError *error) {
                                 NSLog(@" error ! %@", error);
                             }];

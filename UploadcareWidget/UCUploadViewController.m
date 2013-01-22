@@ -11,8 +11,8 @@
 #import "UCGrabkitConfigurator.h"
 #import "UCRecentUploads.h"
 #import "UCRecentUploadsViewController.h"
-#import "UCUploader.h"
 #import "UIImage+UCHelpers.h"
+#import "UPCUpload_Private.h"
 
 #import "GRKConfiguration.h"
 #import "GRKDeviceGrabber.h"
@@ -25,7 +25,7 @@
 @interface UCUploadViewController ()
 @property (strong) GRKServiceGrabber *grabber;
 @property (strong) UCAlbumsList *albumList;
-@property (readonly) UCWidget *widget;
+@property (readonly) UPCUploadController *widget;
 @property (readonly) ALAssetsLibrary* assets;
 @end
 
@@ -36,7 +36,7 @@
     [GRKConfiguration initializeWithConfigurator:[UCGrabkitConfigurator shared]];
 }
 
-- (id)initWithWidget:(UCWidget *)widget {
+- (id)initWithWidget:(UPCUploadController *)widget {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         _widget = widget;
@@ -48,11 +48,6 @@
 }
 
 #pragma mark - Public interfaces
-
-- (void)setNavigationTitle:(NSString *)navigationTitle {
-    _navigationTitle = navigationTitle;
-    self.navigationItem.title = navigationTitle;
-}
 
 #pragma mark - UITableViewController doodad
 
@@ -70,11 +65,12 @@
 
 - (void)dismiss {
     /* The delegate is expected to dismiss the widget if it respons to the corresponding selector */
-    if ([self.widget.delegate respondsToSelector:@selector(uploadcareWidgetDidCancel:)]) {
-        [self.widget.delegate uploadcareWidgetDidCancel:self.widget];
-    }else{
+#warning add didCancel
+//    if ([self.widget.delegate respondsToSelector:@selector(uploadcareWidgetDidCancel:)]) {
+//        [self.widget.delegate uploadcareWidgetDidCancel:self.widget];
+//    }else{
         [self dismissViewControllerAnimated:YES completion:nil];
-    }
+//    }
 }
 
 #pragma mark - Menu declaration
@@ -204,22 +200,11 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (!buttonIndex) return; // cancelled
-    NSURL *fileURL = [NSURL URLWithString:[[alertView textFieldAtIndex:0] text]];
+    NSURL *remoteURL = [NSURL URLWithString:[[alertView textFieldAtIndex:0] text]];
     UIImage *thumbnail = [UIImage imageNamed:@"thumb_from_URL_128x128"];
-    if ([self.widget.delegate respondsToSelector:@selector(uploadcareWidget:didStartUploadingFileNamed:fromURL:withThumbnail:)]) {
-        [self.widget.delegate uploadcareWidget:self.widget didStartUploadingFileNamed:fileURL.lastPathComponent fromURL:fileURL withThumbnail:thumbnail];
-    }else{
-        [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }
-    UCUploadFile(fileURL.absoluteString, ^(NSString *fileId) {
-        [UCRecentUploads recordUploadFromURL:fileURL thumnailURL:nil title:fileURL.absoluteString sourceType:@"an URL" errorType:UCRecentUploadsNoError];
-        self.widget.uploadCompletionBlock(fileId);
-    },
-    self.widget.uploadProgressBlock,
-    ^(NSError *error) {
-        [UCRecentUploads recordUploadFromURL:fileURL thumnailURL:nil title:fileURL.absoluteString sourceType:@"an URL" errorType:UCRecentUploadsSystemError];
-        self.widget.uploadFailureBlock(error);
-    });
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        [UPCUpload uploadRemoteForURL:remoteURL title:nil thumbnailURL:nil thumbnailImage:nil delegate:self.widget.uploadDelegate source:@"an URL"];
+    }];
 }
 
 - (void)showRecentUploads {
@@ -241,117 +226,45 @@
     }
 }
 
-- (void)uploadData:(NSData *)data named:(NSString*)filename {
-    /* TODO: assert data != nil */
-    [[UploadcareKit shared]uploadFileWithName:filename data:data contentType:nil progressBlock:^(long long bytesDone, long long bytesTotal) {
-        /* progress */
-//        [SVProgressHUD showProgress:(float)bytesDone/bytesTotal status:filename maskType:SVProgressHUDMaskTypeNone];
-        if (self.widget.uploadProgressBlock) self.widget.uploadProgressBlock(bytesDone, bytesTotal);
-    } successBlock:^(NSString *fileId) {
-        /* success */
-//        [SVProgressHUD dismiss];
-//        [SVProgressHUD showSuccessWithStatus:filename];
-        self.widget.uploadCompletionBlock(fileId);
-    } failureBlock:^(NSError *error) {
-        /* failure */
-//        [SVProgressHUD dismiss];
-//        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Error", @"Uploading failed HUD text")];
-        self.widget.uploadFailureBlock(error);
-    }];
-}
-
-- (void)uploadAssetWithURL:(NSURL *)assetURL failureBlock:(ALAssetsLibraryAccessFailureBlock)failureBlock {
-    // retrieve the asset from the library
-    [self.assets assetForURL:assetURL resultBlock:^(ALAsset *asset) {
-        // obtain NSData with the default representation
-        ALAssetRepresentation *repr = [asset defaultRepresentation];
-        size_t bufferLength = repr.size;
-        uint8_t *buffer = (uint8_t *)malloc(bufferLength);
-        NSError *retrievalError;
-        [repr getBytes:buffer fromOffset:0 length:bufferLength error:&retrievalError];
-        NSData *data = [NSData dataWithBytes:buffer length:bufferLength];
-        free(buffer);
-        NSString *filename = repr.filename;
-        UIImage *thumbnail = [UIImage imageWithCGImage:asset.thumbnail];
-        // upload
-        [self uploadData:data named:filename];
-        // notify the delegate
-        if ([self.widget.delegate respondsToSelector:@selector(uploadcareWidget:didStartUploadingFileNamed:fromURL:withThumbnail:)]) {
-            [self.widget.delegate uploadcareWidget:self.widget didStartUploadingFileNamed:filename fromURL:assetURL withThumbnail:thumbnail];
-        }else{
-            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        }
-//        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeNone]; // FIXME
-        
-    } failureBlock:^(NSError *error) {
-        failureBlock(error);
-    }];
-}
-
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    /* A picture or a video clip? */
-    NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
-    
-    /* Camera or library? */
-    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
-        /* The user used the camera to snap a new picture or record a video clip */
-        if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-            /* source = CAMERA, type = STILL IMAGE */
-            UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-            if (!image) {
-                image = [info objectForKey:UIImagePickerControllerOriginalImage];
-            }
-            /* anything goes wrong with the Assets Library – just upload the image without
-             * saving it */
-            ALAssetsLibraryAccessFailureBlock fallbackUploadStillImagery = ^(NSError *error) {
-                NSLog(@"Warning! Bypassing the Assets Library. Reason: %@", error);
-                [self uploadData:UIImageJPEGRepresentation(image, 1.0f) named:@"camerapic.JPG"];
-            };
-            /* EXIF/JFIF/etc */
-            NSDictionary *metadata = [info objectForKey:UIImagePickerControllerMediaMetadata];
-            /* write image to the Assets Library */
-            [self.assets writeImageToSavedPhotosAlbum:image.CGImage metadata:metadata completionBlock:^(NSURL *assetURL, NSError *error) {
-                if (error) fallbackUploadStillImagery(error); /* uh-oh, could not save to the lib, just upload */
-                else [self uploadAssetWithURL:assetURL failureBlock:fallbackUploadStillImagery]; /* everything went better than expected */
-            }];
-        }else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie]) {
-            /* source = CAMERA, type = MOVIE CLIP */
-            NSURL *videoURL = [info objectForKey:UIImagePickerControllerMediaURL];
-            /* anything goes wrong with the Assets Library – just upload the video without
-             * saving it */
-            ALAssetsLibraryAccessFailureBlock fallbackMovieClip = ^(NSError *error) {
-                NSLog(@"Warning! Bypassing the Assets Library. Reason: %@", error);
-                [self uploadData:[NSData dataWithContentsOfURL:videoURL] named:[videoURL lastPathComponent]];
-            };
-            
-            /* make sure the video could be stored in the library at all */
-            if ([self.assets videoAtPathIsCompatibleWithSavedPhotosAlbum:videoURL]) {
-                [self.assets writeVideoAtPathToSavedPhotosAlbum:videoURL completionBlock:^(NSURL *assetURL, NSError *error) {
-                    if (error) fallbackMovieClip(error); /* failed to store in the lib, just upload */
-                    else [self uploadAssetWithURL:assetURL failureBlock:fallbackMovieClip]; /* A great success, upload from the library */
-                }];
-            }else{
-                /* video could not be played back or stored on this device, upload the data directly */
-                fallbackMovieClip(nil);
-            }
-        }
-    }else if (picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary
-              || picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
-        /* source = LIBRARY or CAMERA ROLL, type = IMAGE or MOVIE */
-        [self uploadAssetWithURL:[info valueForKey:UIImagePickerControllerReferenceURL] failureBlock:^(NSError *error) {
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        /* A picture or a video clip? */
+        NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
+        
+        /* Camera or library? */
+        if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+            /* The user used the camera to snap a new picture or record a video clip */
             if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+                /* source = CAMERA, type = STILL IMAGE */
                 UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-                if (!image) image = [info objectForKey:UIImagePickerControllerOriginalImage];
                 if (!image) {
-                    /* Uh-oh we're in trouble */
-                    /* TODO: Widget error */
+                    image = [info objectForKey:UIImagePickerControllerOriginalImage];
                 }
-            }else{
-                /* Nothing we can do, fail */
-                /* TODO: Widget error */
+                /* metadata (JFIF etc) */
+                NSDictionary *metadata = [info objectForKey:UIImagePickerControllerMediaMetadata];
+                /* write image to the Assets Library */
+                [self.assets writeImageToSavedPhotosAlbum:image.CGImage metadata:metadata completionBlock:^(NSURL *assetURL, NSError *error) {
+                    if (!error) [UPCUpload uploadAssetForURL:assetURL delegate:self.widget.uploadDelegate];
+                    else NSLog(@"Failed to save photo to the assets library.\n\n%@", error);
+                }];
+            }else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie]) {
+                /* source = CAMERA, type = MOVIE CLIP */
+                NSURL *videoURL = [info objectForKey:UIImagePickerControllerMediaURL];
+                /* make sure the video could be stored in the library at all */
+                if ([self.assets videoAtPathIsCompatibleWithSavedPhotosAlbum:videoURL]) {
+                    [self.assets writeVideoAtPathToSavedPhotosAlbum:videoURL completionBlock:^(NSURL *assetURL, NSError *error) {
+                        if (!error) [UPCUpload uploadAssetForURL:assetURL delegate:self.widget.uploadDelegate];
+                        else NSLog(@"Failed to save video to the assets library.\n\n%@", error);
+                    }];
+                }else{
+                    NSLog(@"Video at path %@ is not compativle with the saved photos album on the device.", videoURL);
+                }
             }
-        }];
-    }
+        }else if (picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary
+                  || picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
+            [UPCUpload uploadAssetForURL:info[UIImagePickerControllerReferenceURL] delegate:self.widget.uploadDelegate];
+        }
+    }];
 }
 
 

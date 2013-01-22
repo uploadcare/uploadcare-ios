@@ -7,16 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <UCWidget.h>
+#import <uploadcare-ios/UPCUploadController.h>
 
-@interface USViewController : UIViewController<UCWidgetDelegate, UINavigationControllerDelegate>
+@interface USViewController : UIViewController<UPCUploadDelegate>
 
 - (IBAction)share:(id)sender;
 - (IBAction)upload:(id)sender;
 
 @property (nonatomic, strong) NSURL *publicURL;
-@property (nonatomic, strong) NSString *fileName;
-@property (nonatomic, strong) UCWidget *uploadWidget;
+@property (nonatomic, strong) UPCUploadController *uploadWidget;
 @property (nonatomic, strong) UIPopoverController *popover;
 @property (nonatomic, weak) IBOutlet UILabel *promptLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;

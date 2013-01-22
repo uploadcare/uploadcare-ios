@@ -93,7 +93,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">uShare has been brought to you by Uploadcare</string>
+						<string key="IBUIText">brought to you by Uploadcare.com</string>
 						<reference key="IBUITextColor" ref="117861666"/>
 						<object class="NSColor" key="IBUIHighlightedColor" id="330217547">
 							<int key="NSColorSpace">3</int>
@@ -190,6 +190,7 @@
 						<string key="NSFrame">{{0, 980}, {768, 44}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>

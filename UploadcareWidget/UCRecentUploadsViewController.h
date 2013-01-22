@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class UCWidget;
+@class UPCUploadController;
 
 @interface UCRecentUploadsViewController : UITableViewController
 
-@property (weak) UCWidget *widget;
+@property (weak) UPCUploadController *widget;
 
 @end

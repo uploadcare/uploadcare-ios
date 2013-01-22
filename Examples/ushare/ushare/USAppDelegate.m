@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Uploadcare. All rights reserved.
 //
 
-#import <UploadcareWidget.h>
+#import <UCAppDelegate.h>
 
 #import "USAppDelegate.h"
 #import "USViewController.h"
@@ -19,7 +19,6 @@
 {
     [TestFlight takeOff:@"75b19a4f-fbae-4f31-ae8e-19211eed7973"];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.viewController = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];

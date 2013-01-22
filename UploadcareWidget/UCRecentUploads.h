@@ -20,9 +20,9 @@ extern NSString *const UCRecentUploadsUserError;
 extern NSString *const UCRecentUploadsSystemError;
 
 @interface UCRecentUploads : NSObject
-+ (void)recordUploadFromURL:(NSURL *)fileURL thumnailURL:(NSURL *)thumbnailURL title:(NSString *)fileTitle sourceType:(NSString *)sourceType errorType:(NSString *)errorType;
-+ (NSArray *)sortedUploads;
 
++ (void)recordUploadWithInfo:(NSDictionary *)uploadInfo;
++ (NSArray *)sortedUploads;
 + (void)deleteRecordWithSortedIndex:(NSInteger)idx;
 
 @end
