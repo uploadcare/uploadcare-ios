@@ -8,32 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <UploadcareKit.h>
+#import <UPCUploadDelegate.h>
 
 @class UPCUploadController;
 
-@protocol UCWidgetDelegate <NSObject>
-@optional
-/** 
- * Tells the delegate that the user dismissed the widget.
- *
- * The delegate is expected to dismiss the controller. */
-- (void)uploadcareWidgetDidCancel:(UPCUploadController *)widget;
-/** 
- * Tells the delegate that the user picked a file to upload.
- *
- * The delegate is expected to dismiss the controller. */
-- (void)uploadcareWidget:(UPCUploadController *)widget didStartUploadingFileNamed:(NSString *)fileName fromURL:(NSURL *)url withThumbnail:(UIImage *)thumbnail;
-@end
-
 @interface UPCUploadController : UINavigationController
 
-@property (nonatomic, weak) id<UINavigationControllerDelegate, UCWidgetDelegate> delegate;
+@property (nonatomic, assign) NSObject<UPCUploadDelegate> *uploadDelegate;
 
 - (id)initWithUploadcarePublicKey:(NSString *)publicKey;
 
-@property (strong) UploadcareProgressBlock uploadProgressBlock;
-@property (strong) UploadcareSuccessBlock uploadCompletionBlock;
-@property (strong) UploadcareFailureBlock uploadFailureBlock;
 @property (nonatomic, weak) UIPopoverController *popover;
 
 - (void)enableFacebook;

@@ -8,6 +8,7 @@
 
 #import "UCAlbumsList.h"
 #import "GRKServiceGrabberConnectionProtocol.h"
+#import "GRKFacebookGrabber.h"
 #import "GRKInstagramGrabber.h"
 #import "UCPhotosList.h"
 #import "UIImageView+UCHelpers.h"
@@ -52,7 +53,7 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
         _state = UCAlbumsListStateInitial;
         _widget = widget;
         self.contentSizeForViewInPopover = CGSizeMake(320, 480);
-        self.tableView.rowHeight = 80.f;
+        self.tableView.rowHeight = 88.f; 
         self.tableView.backgroundColor = [UIColor colorWithWhite:.95f alpha:1.f];
         
         [self setupLoadingIndicator];
@@ -296,6 +297,8 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
                                 
                                 [results enumerateObjectsUsingBlock:^(GRKAlbum *album, NSUInteger idx, BOOL *stop) {
                                     if ([album count] != 0) {
+                                        /* FIXME: This is just fugly, get rid of it ASAP */
+                                        if ([_grabber isKindOfClass:[GRKFacebookGrabber class]] && [album.albumId length] > 16) return;
                                         [self.albums addObject:album];
                                         [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.albums.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
                                     }
@@ -305,11 +308,11 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
                                 
                                 if ( [results count] < kUCNumberOfAlbumsPerPage ){
                                     [self setState:UCAlbumsListStateAllAlbumsGrabbed];
-                                    [self hideLoadingIndicator];
                                 } else {
                                     [self setState:UCAlbumsListStateAlbumsGrabbed];
                                     [self grabMoreAlbums];
                                 }
+                                [self hideLoadingIndicator];
                             } andErrorBlock:^(NSError *error) {
                                 NSLog(@" error ! %@", error);
                             }];

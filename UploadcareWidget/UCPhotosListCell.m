@@ -9,16 +9,14 @@
 #import "UCPhotosListCell.h"
 
 #import "UploadcareKit.h"
-#import "UCUploader.h"
 #import "UCRecentUploads.h"
 #import "UIImageView+UCHelpers.h"
 #import "UploadcareError.h"
 #import "UPCUploadController.h"
+#import "UPCUpload_Private.h"
 
 #import "GRKPhoto.h"
 #import "GRKImage.h"
-
-#define UCImageWillUploadNotification @"UCImageWillUploadNotification" // FIXME extern const NSString
 
 @interface UCPhotosListCell()
 - (void)updateThumbnails;
@@ -89,10 +87,10 @@
 }
 
 
-NSString *UCReadableTitleFromGRKPhoto(GRKPhoto *photo, NSString *serviceName) {
+NSString *UCReadableTitleFromGRKPhotoOrNil(GRKPhoto *photo, NSString *serviceName) {
     if (photo.name && photo.name.length) return photo.name;
     if (photo.caption && photo.caption.length) return photo.caption;
-    return NSLocalizedString(@"Untitled", @"Caption for nameless photos");
+    return nil;
 }
 
 - (IBAction)didSelected:(id)sender {
@@ -101,24 +99,10 @@ NSString *UCReadableTitleFromGRKPhoto(GRKPhoto *photo, NSString *serviceName) {
     UPCUploadController *widget = self.photoList.albumList.widget;
     GRKPhoto *photo = (GRKPhoto *)[_photos objectAtIndex:[tappedImageView tag]];
     NSURL *photoURL = [photo.imagesSortedByHeight.lastObject URL];
-    if ([widget.delegate respondsToSelector:@selector(uploadcareWidget:didStartUploadingFileNamed:fromURL:withThumbnail:)]) {
-        [widget.delegate uploadcareWidget:widget didStartUploadingFileNamed:photoURL.lastPathComponent fromURL:photoURL withThumbnail:tappedImageView.image];
-    }else{
-        [self.photoList.albumList.widget.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }
-//    [self.photoList.albumList.widget]
-    UCUploadFile(photoURL.absoluteString,
-                 ^(NSString *fileId) {
-                     [UCRecentUploads recordUploadFromURL:photoURL thumnailURL:[photo.imagesSortedByHeight[0] URL] title:UCReadableTitleFromGRKPhoto(photo, self.serviceName) sourceType:self.serviceName errorType:UCRecentUploadsNoError];
-                     /* ^ TODO: Select the most suitable thumbnail */
-                     if (self.photoList.albumList.widget.uploadCompletionBlock) self.photoList.albumList.widget.uploadCompletionBlock(fileId);
-                 },
-                 self.photoList.albumList.widget.uploadProgressBlock,
-                 ^(NSError *error) {
-                     [UCRecentUploads recordUploadFromURL:photoURL thumnailURL:[photo.imagesSortedByHeight[0] URL] title:UCReadableTitleFromGRKPhoto(photo, self.serviceName) sourceType:self.serviceName errorType:UCRecentUploadsSystemError];
-                     /* ^ TODO: thumbnail, see above */
-                     if (self.photoList.albumList.widget.uploadFailureBlock) self.photoList.albumList.widget.uploadFailureBlock(error);
-                 });
+    
+    [self.photoList.albumList.widget.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        [UPCUpload uploadRemoteForURL:photoURL title:UCReadableTitleFromGRKPhotoOrNil(photo, self.serviceName) thumbnailURL:[photo.imagesSortedByHeight[0] URL] thumbnailImage:tappedImageView.image delegate:widget.uploadDelegate source:self.serviceName];
+    }];
 }
 
 @end

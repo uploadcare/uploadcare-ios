@@ -8,13 +8,14 @@
 
 #import "UCRecentUploadsViewController.h"
 #import "UCRecentUploads.h"
-#import "UCUploader.h"
 #import "UIImageView+UCHelpers.h"
 #import "QuartzCore/QuartzCore.h"
 #import "UPCUploadController.h"
+#import "UPCUpload_Private.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "UIImage+UCHelpers.h"
 
 @interface UCRecentUploadsViewController ()
-
 @end
 
 @implementation UCRecentUploadsViewController
@@ -66,6 +67,8 @@
         /* TODO: Share the code with the album view cells */
         cell.imageView.layer.cornerRadius = 4.0f;
         cell.imageView.clipsToBounds = YES;
+        cell.imageView.bounds = CGRectMake(0, 0, 75, 75);
+        
         
         /* "Long tex...re" */
         cell.textLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
@@ -92,25 +95,35 @@
     dateFormatter.timeStyle = NSDateFormatterNoStyle;
     dateFormatter.doesRelativeDateFormatting = YES;
     NSString *dateString = [dateFormatter stringFromDate:uploadDate];
-    NSString *detailFormatString = NSLocalizedString(@"%@ from %@", "Recent uploads item subtitle, e.g. `Yesterday from Facebook`, or `22.09.2012 from an URL");
+    NSString *detailFormatString = NSLocalizedString(@"%@ from %@", "Recent uploads item subtitle format string, %1 gets substituted with the relative date and %2 with the source e.g. `Yesterday from Facebook`, `22.09.2012 from an URL");
     cell.detailTextLabel.text = [NSString stringWithFormat:detailFormatString, dateString, uploadSource];
     
-    /* thumbnail */
-    NSURL *thumbnailURL = ([uploadInfo[UCRecentUploadsThumbnailURLKey] length]) ? [NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] : [[NSBundle mainBundle]URLForResource:@"thumb_from_URL_128x128" withExtension:@"png"];
-    [cell.imageView showActivityIndicatorWithStyle:UIActivityIndicatorViewStyleGray placeholderSize:CGSizeMake(75, 75)];
-    if (thumbnailURL) [cell.imageView setImageFromURL:thumbnailURL scaledToSize:CGSizeMake(75, 75) successBlock:^(UIImage *image) {
-        /* remove the activity indicator on success */
-        [cell.imageView removeActivityIndicator];
-    } failureBlock:^(NSError *error) {
-        /* ^ or error */
-        [cell.imageView removeActivityIndicator];
-    }];
-
+    NSURL *sourceURL = [NSURL URLWithString:uploadInfo[UCRecentUploadsURLKey]];
+    if ([sourceURL.scheme isEqualToString:@"assets-library"]) {
+        cell.imageView.image = [UIImage blankImageWithSize:CGSizeMake(75, 75)];
+        ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc]init];
+        [assetsLibrary assetForURL:sourceURL resultBlock:^(ALAsset *asset) {
+            cell.imageView.image = [UIImage imageWithCGImage:asset.thumbnail];
+        } failureBlock:^(NSError *error) {
+            /* ignore for now */
+        }];
+    }else{
+        NSURL *thumbnailURL = ([uploadInfo[UCRecentUploadsThumbnailURLKey] length]) ? [NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] : [[NSBundle mainBundle]URLForResource:@"thumb_from_URL_128x128" withExtension:@"png"];
+        [cell.imageView showActivityIndicatorWithStyle:UIActivityIndicatorViewStyleGray placeholderSize:CGSizeMake(75, 75)];
+        if (thumbnailURL) [cell.imageView setImageFromURL:thumbnailURL scaledToSize:CGSizeMake(75, 75) successBlock:^(UIImage *image) {
+            /* remove the activity indicator on success */
+            [cell.imageView removeActivityIndicator];
+        } failureBlock:^(NSError *error) {
+            /* ^ or error */
+            [cell.imageView removeActivityIndicator];
+        }];
+    }
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80.f;
+    return 88.f;
 }
 
 
@@ -127,24 +140,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *uploadInfo = [[UCRecentUploads sortedUploads] objectAtIndex:indexPath.row];
-    UIImage *thumbnail = [self.tableView cellForRowAtIndexPath:indexPath].imageView.image;
-    if ([self.widget.delegate respondsToSelector:@selector(uploadcareWidget:didStartUploadingFileNamed:fromURL:withThumbnail:)]) {
-        NSURL *photoURL = [NSURL URLWithString:uploadInfo[UCRecentUploadsURLKey]];
-        [self.widget.delegate uploadcareWidget:self.widget didStartUploadingFileNamed:photoURL.lastPathComponent fromURL:photoURL withThumbnail:thumbnail];
-    }else{
-        [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }
+    UIImage *thumbnailImage = [self.tableView cellForRowAtIndexPath:indexPath].imageView.image;
 
-    UCUploadFile(uploadInfo[UCRecentUploadsURLKey],
-                 ^(NSString *fileId) {
-                     [UCRecentUploads recordUploadFromURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsURLKey]] thumnailURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] title:uploadInfo[UCRecentUploadsTitleKey] sourceType:uploadInfo[UCRecentUploadsSourceTypeKey] errorType:UCRecentUploadsNoError];
-                     if (self.widget.uploadCompletionBlock) self.widget.uploadCompletionBlock(fileId);
-                 },
-                 self.widget.uploadProgressBlock,
-                 ^(NSError *error) {
-                     [UCRecentUploads recordUploadFromURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsURLKey]] thumnailURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] title:uploadInfo[UCRecentUploadsTitleKey] sourceType:uploadInfo[UCRecentUploadsSourceTypeKey] errorType:UCRecentUploadsNoError];
-                     if (self.widget.uploadFailureBlock) self.widget.uploadFailureBlock(error);
-                 });
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        NSURL *uploadURL = [NSURL URLWithString:uploadInfo[UCRecentUploadsURLKey]];
+        if (![uploadURL.scheme isEqualToString:@"assets-library"]) {
+            [UPCUpload uploadRemoteForURL:uploadURL title:uploadInfo[UCRecentUploadsTitleKey] thumbnailURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] thumbnailImage:thumbnailImage delegate:self.widget.uploadDelegate source:uploadInfo[UCRecentUploadsSourceTypeKey]];
+        }else{
+            [UPCUpload uploadAssetForURL:uploadURL delegate:self.widget.uploadDelegate];
+        }
+    }];
 }
 
 @end

@@ -10,9 +10,7 @@
 #import "UCUploadViewController.h"
 #import "UCGrabkitConfigurator.h"
 
-@interface UPCUploadController () {
-    id<UINavigationControllerDelegate,UCWidgetDelegate> _delegate;
-}
+@interface UPCUploadController ()
 
 @property (strong) UCUploadViewController *uploadViewController;
 @end
@@ -101,14 +99,6 @@ NSString *const UCGenericURLSchemaNotConfiguredException = @"UCGenericURLSchemaN
     [config setInstagramRedirectUri:[[NSString stringWithFormat:@"%@://", self.genericScheme] lowercaseString]];
     [config setInstagramAppId:instagramAppId];
     [config setInstagramIsEnabled:YES];
-}
-
-- (void)setDelegate:(id<UINavigationControllerDelegate,UCWidgetDelegate>)delegate {
-    [super setDelegate:delegate];
-    _delegate = delegate;
-}
-- (id<UINavigationControllerDelegate,UCWidgetDelegate>)delegate {
-    return _delegate;
 }
 
 @end

@@ -9,6 +9,7 @@
 #import "UIImageView+UCHelpers.h"
 #import "UIImage+UCHelpers.h"
 #import "AFImageRequestOperation.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 static const NSInteger kUCImageViewActivityIndicatorViewTag = 10812; // Random
 

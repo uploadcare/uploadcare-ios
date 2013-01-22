@@ -133,7 +133,7 @@ static NSString *const kUploadcarePhotoListSpinnerCell = @"kUploadcarePhotoListS
             [self setState:UCPhotosListStatePhotosGrabbed];
         }
     } andErrorBlock:^(NSError *error) {
-        NSLog(@" error for page %d : %@", pageToLoad,  error);
+        NSLog(@" Failed to load page %d : %@", pageToLoad,  error);
     }];
     
     _nextPageIndexToLoad++;
