@@ -57,35 +57,21 @@
     [self.shareButton setBackgroundImage:[[UIImage imageNamed:@"USSilverButtonDepressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(16, 16, 16, 16)] forState:UIControlStateHighlighted];
     
     /* Uploadcare widget initialization */
-    self.uploadWidget = [[UPCUploadController alloc]initWithUploadcarePublicKey:@"demopublickey"];
-    self.uploadWidget.delegate = self;
-    __weak USViewController *viewController = self;
+    self.uploadWidget = [[UPCUploadController alloc]initWithUploadcarePublicKey:@"ea0c5eaa31bbaf62ebad"];
+    self.uploadWidget.uploadDelegate = self;
     self.uploadWidget.navigationBar.barStyle = UIBarStyleBlack;
     
     /* Social stuff */
     [self.uploadWidget enableFacebook];
     [self.uploadWidget enableFlickrWithAPIKey:@"2522a6f8bbff8fbb1826d335cad7d9b1" flickrAPISecret:@"4ab550f59749ca42"];
     [self.uploadWidget enableInstagramWithClientId:@"e2a6987a814d4f5d96b24b6971f9eb89"];
-    
-    /* Handlers */
-    self.uploadWidget.uploadCompletionBlock = ^(NSString *fileId) {
-        [viewController didUploadFileWithId:fileId];
-    };
-    self.uploadWidget.uploadProgressBlock = ^(long long bytesDone, long long bytesTotal) {
-        float progress = (float)bytesDone / bytesTotal;
-        [self.progressBar setProgress:progress animated:YES];
-        self.progressLabel.text = [NSString stringWithFormat:@"%@ %.0f%%", self.fileName, progress * 100.f];
-    };
-    self.uploadWidget.uploadFailureBlock = ^(NSError *error) {
-        [viewController didFailToUploadBecauseOfError:error];
-    };
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [self.uploadButtonHint moveInFrom:kCATransitionFromBottom];
-        [self.uploadButtonHintArrow moveInFrom:kCATransitionFromBottom];
+        [self.uploadButtonHint slideInUsing:kCATransitionFromBottom];
+        [self.uploadButtonHintArrow slideInUsing:kCATransitionFromBottom];
     });
 }
 
@@ -110,47 +96,38 @@
     }
 }
 
-/**
- * Dismiss the view controller that was presented using presentUploadViewController */
-- (void)dismissUploadViewController:(BOOL)animated completion:(void(^)(void))completionBlock {
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [self dismissViewControllerAnimated:YES completion:completionBlock];
-    }else{
-        [self.popover dismissPopoverAnimated:YES];
-        completionBlock();
-    }
+- (void)uploadDidStart:(UPCUpload *)upload {
+    self.promptLabel.text = nil;
+    [self addShadowAroundTheThumbnail];
+    [UIView animateWithDuration:0.25f animations:^{
+        self.thumbnailImageView.image = upload.thumbnail ? upload.thumbnail : [UIImage imageNamed:@"USCloud"];
+        self.thumbnailImageView.frame = self.uploadingAnchor.frame;
+    }];
+    [self.progressBar setProgress:0 animated:NO];
+    self.progressLabel.text = upload.filename;
+    [self.progressBar slideInUsing:kCATransitionFromRight];
+    [self.progressLabel slideInUsing:kCATransitionFromRight];
+    [self.shareButton slideOutUsing:kCATransitionFromBottom];
+    [self.toolbar slideOutUsing:kCATransitionFromBottom];
 }
 
-/**
- * User selected a file to upload, dismiss the view controller and animate in the progress bar */
-- (void)uploadcareWidget:(UPCUploadController*)widget didStartUploadingFileNamed:(NSString*)fileName fromURL:(NSURL*)url withThumbnail:(UIImage*)thumbnail {
-    [self dismissUploadViewController:YES completion:^{
-        self.fileName = fileName;
-        self.promptLabel.text = nil;
-        [self addShadowAroundTheThumbnail];
-        [UIView animateWithDuration:0.25f animations:^{
-            self.thumbnailImageView.image = thumbnail;
-            self.thumbnailImageView.frame = self.uploadingAnchor.frame;
-        }];
-        [self.progressBar setProgress:0 animated:NO];
-        self.progressLabel.text = fileName;
-        [self.progressBar moveInFrom:kCATransitionFromRight];
-        [self.progressLabel moveInFrom:kCATransitionFromRight];
-        [self.shareButton moveOutFrom:kCATransitionFromBottom];
-        [self.toolbar moveOutFrom:kCATransitionFromBottom];
-    }];
+- (void)upload:(UPCUpload *)upload didTransferTotalBytes:(long long)totalBytesTransfered expectedTotalBytes:(long long)expectedTotalBytes {
+    float progress = (float)totalBytesTransfered / expectedTotalBytes;
+    [self.progressBar setProgress:progress animated:YES];
+    [self.progressLabel setText:[NSString stringWithFormat:@"%@ %.0f%%", upload.filename, progress * 100.f]];
 }
 
 /**
  * Upload complete, request a public file URL from the service */
-- (void)didUploadFileWithId:(NSString*)fileId {
-    self.promptLabel.text = NSLocalizedString(@"Almost there...", @"post-uploading pre-store text");
+- (void)uploadDidFinish:(UPCUpload *)upload destinationFileId:(NSString *)fileId {
+    self.promptLabel.text = NSLocalizedString(@"Almost there...", @"post-upload pre-store text");
     /* Request our back-end to store the file and return the public URL */
-    NSURLRequest *request = [[USViewController sharedHTTPClient] requestWithMethod:@"POST" path:@"http://ushare.whitescape.com/files/upload/" parameters:@{@"file_obj" : fileId}];
+    NSURLRequest *request = [[USViewController sharedHTTPClient] requestWithMethod:@"POST" path:@"/files/upload/" parameters:@{@"file_obj" : fileId}];
     AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         [self didPublishFileAtAddress:JSON[@"url"]];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        [self didFailToUploadBecauseOfError:error];
+        NSLog(@"FAILURE! Request:\n\n%@", fileId);
+        [self upload:upload didFailWithError:error];
     }];
     [op start];
 }
@@ -160,18 +137,24 @@
 - (void)didPublishFileAtAddress:(NSString*)publicAddress {
     [UIView animateWithDuration:0.25f animations:^{
         self.thumbnailImageView.frame = self.restingAnchor.frame;
-        [self.progressBar moveOutFrom:kCATransitionFromLeft];
-        [self.progressLabel moveOutFrom:kCATransitionFromLeft];
+        [self.progressBar slideOutUsing:kCATransitionFromLeft];
+        [self.progressLabel slideOutUsing:kCATransitionFromLeft];
     }];
     self.publicURL = [NSURL URLWithString:publicAddress];
-    self.promptLabel.text = NSLocalizedString(@"✅ The file has been successfully uploaded!", @"Upload success text");
-    [self.shareButton moveInFrom:kCATransitionFromTop];
-    [self.toolbar moveInFrom:kCATransitionFromTop];
+    self.promptLabel.text = NSLocalizedString(@"✅ Uploaded!", @"Upload success text");
+    [self.shareButton slideInUsing:kCATransitionFromTop];
+    [self.toolbar slideInUsing:kCATransitionFromTop];
 }
 
-- (void)didFailToUploadBecauseOfError:(NSError*)error {
-    self.promptLabel.text = NSLocalizedString(@"❌ Oops, something went wrong. Try again?", @"Upload failure text");
-    [self.uploadWidget dismissViewControllerAnimated:YES completion:nil];
+- (void)upload:(UPCUpload *)upload didFailWithError:(NSError *)error {
+    NSLog(@"Upload failed: %@", error);
+    self.promptLabel.text = NSLocalizedString(@"❌ We are terribly sorry, but something went wrong. Please try again in a few moments.", @"Upload failure text");
+    [UIView animateWithDuration:0.25f animations:^{
+        self.thumbnailImageView.frame = self.restingAnchor.frame;
+        [self.progressBar slideOutUsing:kCATransitionFromLeft];
+        [self.progressLabel slideOutUsing:kCATransitionFromLeft];
+    }];
+    [self.toolbar slideInUsing:kCATransitionFromTop];
 }
 
 #pragma mark - Utility
@@ -182,7 +165,7 @@
     static AFHTTPClient *_sharedUploadClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _sharedUploadClient = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://ushare.whitescape.com"]];
+        _sharedUploadClient = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://www.ushare.io"]];
     });
     return _sharedUploadClient;
 }

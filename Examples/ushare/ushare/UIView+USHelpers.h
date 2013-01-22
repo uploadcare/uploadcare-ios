@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (USHelpers)
-- (void)moveInFrom:(NSString*)transitionSubtype;
-- (void)moveOutFrom:(NSString*)transitionSubtype;
+- (void)slideInUsing:(NSString*)transitionSubtype;
+- (void)slideOutUsing:(NSString*)transitionSubtype;
 @end
