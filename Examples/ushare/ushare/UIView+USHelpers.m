@@ -11,7 +11,7 @@
 
 @implementation UIView (USHelpers)
 
-- (void)moveInFrom:(NSString*)transitionSubtype {
+- (void)slideInUsing:(NSString*)transitionSubtype {
     [CATransaction begin];
     CATransition *moveIn = [[CATransition alloc]init];
     moveIn.duration = .25;
@@ -23,7 +23,7 @@
     [CATransaction commit];
 }
 
-- (void)moveOutFrom:(NSString*)transitionSubtype {
+- (void)slideOutUsing:(NSString*)transitionSubtype {
     [CATransaction begin];
     CATransition *moveOut = [[CATransition alloc]init];
     moveOut.duration = .25;

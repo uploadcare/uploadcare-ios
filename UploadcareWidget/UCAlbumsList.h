@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <UploadcareKit.h>
 
-@class UCWidget;
+@class UPCUploadController;
 @interface UCAlbumsList : UITableViewController
 
 @property (strong) NSString *serviceName;
-@property (readonly) UCWidget *widget;
+@property (readonly) UPCUploadController *widget;
 
-- (id)initWithGrabber:(id)grabber serviceName:(NSString *)serviceName widget:(UCWidget *)widget;
+- (id)initWithGrabber:(id)grabber serviceName:(NSString *)serviceName widget:(UPCUploadController *)widget;
 
 @end

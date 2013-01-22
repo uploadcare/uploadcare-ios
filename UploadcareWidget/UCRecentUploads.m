@@ -30,19 +30,14 @@ static __strong NSArray *_sortedUploads;
 
 @implementation UCRecentUploads
 
-+ (void)recordUploadFromURL:(NSURL *)fileURL thumnailURL:(NSURL *)thumbnailURL title:(NSString*)fileTitle sourceType:(NSString *)sourceType errorType:(NSString *)errorType {
-    NSDictionary *uploadInfo = @{
-                 UCRecentUploadsURLKey : fileURL.absoluteString,
-        UCRecentUploadsThumbnailURLKey : thumbnailURL ? thumbnailURL.absoluteString : @"",
-                UCRecentUploadsDateKey : [NSDate date],
-          UCRecentUploadsSourceTypeKey : sourceType,
-               UCRecentUploadsErrorKey : errorType,
-               UCRecentUploadsTitleKey : fileTitle,
-    };
++ (void)recordUploadWithInfo:(NSDictionary *)uploadInfo {
+    NSMutableDictionary *mutableUploadInfo = [uploadInfo mutableCopy];
+    mutableUploadInfo[UCRecentUploadsDateKey] = [NSDate date];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *uploads = [defaults objectForKey:UCRecentUploadsDefaultsKey];
     NSMutableDictionary *mutableUploads = uploads ? [uploads mutableCopy] : [NSMutableDictionary dictionary];
-    mutableUploads[fileURL.absoluteString] = uploadInfo;
+    NSURL *sourceURL = uploadInfo[UCRecentUploadsURLKey];
+    mutableUploads[sourceURL] = (NSDictionary *)mutableUploadInfo;
     [defaults setObject:mutableUploads forKey:UCRecentUploadsDefaultsKey];
     [defaults synchronize];
     [self updateSortedUploads];

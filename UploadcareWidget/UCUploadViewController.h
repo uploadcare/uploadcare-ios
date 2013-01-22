@@ -9,13 +9,11 @@
 #import <UploadcareKit.h>
 
 #import "UCMenuViewController.h"
-#import "UCWidget.h"
+#import "UPCUploadController.h"
 
 @interface UCUploadViewController : UCMenuViewController<UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (nonatomic) NSString *navigationTitle;
-
-- (id)initWithWidget:(UCWidget *)widget;
+- (id)initWithWidget:(UPCUploadController *)widget;
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 

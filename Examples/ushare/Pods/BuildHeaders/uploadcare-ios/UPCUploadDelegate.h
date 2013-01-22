@@ -1,0 +1,1 @@
+../../../../../UploadcareWidget/UPCUploadDelegate.h
