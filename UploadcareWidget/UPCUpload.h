@@ -20,7 +20,7 @@
 
 /** Thumbnail image URL (if available) or nil.
  
- No guarantee regarding the image on the other end whatsoever, e.g. it may or may not be available, it may have arbitrary dimensions etc. */
+ No guarantee regarding the image on the other end whatsoever, e.g. it may or may not be available, may has any size etc. */
 @property (readonly, strong) NSURL *thumbnailURL;
 
 /** Image title (if available) or nil. */
@@ -29,7 +29,7 @@
 /** Image file name */
 @property (readonly, strong) NSString *filename;
 
-/** An arbitrary user info object associated with the upload */
+/** An arbitrary user info object associated with the upload. */
 @property (strong, nonatomic) id userInfo;
 
 @end

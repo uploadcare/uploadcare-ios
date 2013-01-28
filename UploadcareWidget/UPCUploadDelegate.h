@@ -23,21 +23,27 @@
 - (void)uploadDidStart:(UPCUpload *)upload;
 
 /**
- * Sent to the delegate when the upload is aborted. */
+ * Sent to the delegate when the upload is aborted. 
+ */
 - (void)uploadDidCancel:(UPCUpload *)upload;
 
 /**
- * Sent to the delegate to deliver progress information for the upload. */
+ * Sent to the delegate to deliver the upload progress. 
+ *
+ * @param totalBytesTransfered  The total number of bytes transfered during the upload.
+ * @param expectedTotalBytes    The number of bytes to be transfered during the upload.
+ * @note CGFloat progressPercentage = (CGFloat)totalBytesTransfered / expectedTotalBytes * 100.f;
+ */
 - (void)upload:(UPCUpload *)upload didTransferTotalBytes:(long long)totalBytesTransfered expectedTotalBytes:(long long)expectedTotalBytes;
 
 /**
- * Sent to the delegate when the upload successfully finish.
+ * Sent to the delegate once the upload completes.
  *
- * @param fileId    Uploadcare file_id for the freshly uploaded file. */
+ * @param fileId    Uploadcare file_id for the uploaded file. */
 - (void)uploadDidFinish:(UPCUpload *)upload destinationFileId:(NSString *)fileId;
 
 /**
- * Sent to the delegate when the upload fails due to an error.
+ * Sent to the delegate once the upload fails.
  * 
  * @param error     The error causing the failure. */
 - (void)upload:(UPCUpload *)upload didFailWithError:(NSError *)error;
