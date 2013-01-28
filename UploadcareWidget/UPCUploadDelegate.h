@@ -8,10 +8,15 @@
 #import <Foundation/Foundation.h>
 
 @class UPCUpload;
+@class UPCUploadController;
 
 @protocol UPCUploadDelegate <NSObject>
 
 @optional
+
+/** 
+ * Tells the delegate that the user cancelled the pick operation. */
+- (void)uploadControllerDidCancel:(UPCUploadController*)controller;
 
 /**
  * Sent to the delegate when the upload starts. */
