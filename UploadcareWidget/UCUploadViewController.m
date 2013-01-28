@@ -64,13 +64,11 @@
 }
 
 - (void)dismiss {
-    /* The delegate is expected to dismiss the widget if it respons to the corresponding selector */
-#warning add didCancel
-//    if ([self.widget.delegate respondsToSelector:@selector(uploadcareWidgetDidCancel:)]) {
-//        [self.widget.delegate uploadcareWidgetDidCancel:self.widget];
-//    }else{
-        [self dismissViewControllerAnimated:YES completion:nil];
-//    }
+    [self dismissViewControllerAnimated:YES completion:^{
+        if ([self.widget.uploadDelegate respondsToSelector:@selector(uploadControllerDidCancel:)]) {
+            [self.widget.uploadDelegate uploadControllerDidCancel:self.widget];
+        }
+    }];
 }
 
 #pragma mark - Menu declaration
