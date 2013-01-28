@@ -1,1 +1,0 @@
-../../../../../UploadcareWidget/UIImage+UCHelpers.h
