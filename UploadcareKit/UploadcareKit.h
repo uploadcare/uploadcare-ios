@@ -13,58 +13,56 @@
 
 
 /**
- @typedef Block type used to define blocks called repeatedly during an operation to indicate the operation progress
- 
- @param bytesDone   Number of bytes already processed
- @param bytesTotal  Number of total bytes expexted to process during the operation
+ * @typedef Block type used to define blocks called repeatedly during an operation to indicate the operation progress
+ *
+ * @param bytesDone   Number of bytes already transferred
+ * @param bytesTotal  Number of total bytes expected to be transfered during the operation
  */
 typedef void(^UploadcareProgressBlock)(long long bytesDone, long long bytesTotal);
 /**
- @typedef Blocks of this type are called once per succesfully completed operation
- 
- @param uploadedFile    Object that describes the uploaded file
+ * @typedef Blocks of this type are called once per succesfully completed operation
+ *
+ * @param uploadedFile    Object that describes the uploaded file
  */
 typedef void(^UploadcareSuccessBlock)(NSString *fileId);
 /**
- @typedef Blocks of this type are called when an operation fails due to an error
- 
- @param error   NSError object that contains the error code and description
+ * @typedef Blocks of this type are called when an operation fails due to an error
+ *
+ * @param error   NSError object that contains the error code and description
  */
 typedef void(^UploadcareFailureBlock)(NSError *error);
 
 /**
- * This class provides access to Uploadcare <http://uploadcare.com>
- */
+ * This class provides access to Uploadcare <http://uploadcare.com> */
 @interface UploadcareKit : NSObject 
 
-/* Thread-safe singleton accessor to UploadcareKit */
+/** UploadcareKit shared instance */
 + (id)shared;
 
-/** Uploadcare public key
- */
+/** Uploadcare public key */
 @property (nonatomic) NSString* publicKey;
 
 /**
- Uploads an arbitrary file (e.g. an image, a movie clip, a spreadsheet document, etc.) with the content provided by the NSData argument.
+ Uploads an arbitrary file (e.g. an image, a movie clip, a spreadsheet document, etc.) with its content provided by the `NSData data` argument.
  
- @param filename        The file name to assign to the file uploaded.
- @param data            The data to upload.
- @param contentType     The Internet media type of the file. If `nil`, the type is auto-detected from the file name.
- @param progressBlock   The block to call repeatedly during the upload. Receives two arguments: **long long** `bytesDone` and **long long** `bytesTotal`.
- @param successBlock    The handler block to call when the upload is completed succesfully. Receives a single string argument `fileId`.
- @param failureBlock    The handler block to call when the upload fails due to an error. Receives a single argument NSError `*error`
+ @param filename            The file name to assign to the file uploaded.
+ @param data                The data to upload.
+ @param contentTypeOrNil    The Internet media type of the file. If `nil`, the type will be guessed from the file extension.
+ @param progressBlock       The block to call repeatedly during the upload. Receives two arguments: **long long** `bytesDone` and **long long** `bytesTotal`.
+ @param successBlock        The handler block to call when the upload is completed succesfully. Receives a single string argument `fileId`.
+ @param failureBlock        The handler block to call when the upload fails due to an error. Receives a single argument NSError `*error`
 */
-- (void)uploadFileWithName:(NSString *)filename
-                      data:(NSData *)data
-               contentType:(NSString *)contentType
-             progressBlock:(UploadcareProgressBlock)progressBlock
-              successBlock:(UploadcareSuccessBlock)successBlock
-              failureBlock:(UploadcareFailureBlock)failureBlock;
+- (void)uploadFileNamed:(NSString *)filename
+            contentData:(NSData *)data
+            contentType:(NSString *)contentTypeOrNil
+          progressBlock:(UploadcareProgressBlock)progressBlock
+           successBlock:(UploadcareSuccessBlock)successBlock
+           failureBlock:(UploadcareFailureBlock)failureBlock;
 
 /**
- Uploads a file from URL
+ Transfers a file at URL to Uploadcare
  
- @param url             The URL used to retrieve the file.
+ @param url             The URL to retrieve the file.
  @param progressBlock   The block to call repeatedly during the upload. Receives two arguments: **long long** `bytesDone` and **long long** `bytesTotal`.
  @param successBlock    The handler block to call when the upload is completed succesfully. Receives a single string argument `fileId`.
  @param failureBlock    The handler block to call when the upload fails due to an error. Receives a single argument NSError `*error`

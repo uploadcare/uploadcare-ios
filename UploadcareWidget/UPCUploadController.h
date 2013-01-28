@@ -1,5 +1,5 @@
 //
-//  UCUploadNavigationController.h
+//  UPCUploadController.h
 //  WidgetSample
 //
 //  Created by Zoreslav Khimich on 11/6/12.
@@ -23,8 +23,6 @@
 - (void)enableFacebook;
 - (void)enableFlickrWithAPIKey:(NSString *)flickrAPIKey flickrAPISecret:(NSString *)flickrAPISecret;
 - (void)enableInstagramWithClientId:(NSString *)instagramAppId;
-
-
 
 @end
 

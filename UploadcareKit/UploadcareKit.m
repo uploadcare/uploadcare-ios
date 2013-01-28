@@ -62,13 +62,13 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.uploadcare.com";
 
 #pragma mark - Upload
 
-- (void)uploadFileWithName:(NSString *)filename
-                      data:(NSData *)data
-               contentType:(NSString *)contentType
-             progressBlock:(UploadcareProgressBlock)progressBlock
-              successBlock:(UploadcareSuccessBlock)successBlock
-              failureBlock:(UploadcareFailureBlock)failureBlock {
-        
+- (void)uploadFileNamed:(NSString *)filename
+            contentData:(NSData *)data
+            contentType:(NSString *)contentType
+          progressBlock:(UploadcareProgressBlock)progressBlock
+           successBlock:(UploadcareSuccessBlock)successBlock
+           failureBlock:(UploadcareFailureBlock)failureBlock {
+    
     NSString *const kDataFileId = @"file"; // whatever goes into multipart form data's name becomes the key for the file id in JSON response dict.
     NSString *uploadFilePath = @"/base/";
     

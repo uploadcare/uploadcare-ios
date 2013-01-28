@@ -86,6 +86,7 @@
 
     /* title */
     cell.textLabel.text = uploadInfo[UCRecentUploadsTitleKey];
+    if (![cell.textLabel.text length] && ![uploadInfo[UCRecentUploadsThumbnailURLKey] length]) cell.textLabel.text = uploadInfo[UCRecentUploadsURLKey];
     
     /* subtitle */
     NSDate *uploadDate = uploadInfo[UCRecentUploadsDateKey];
