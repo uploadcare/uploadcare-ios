@@ -1,5 +1,5 @@
 //
-//  UCUploadNavigationController.m
+//  UPCUploadController.m
 //  WidgetSample
 //
 //  Created by Zoreslav Khimich on 11/6/12.
