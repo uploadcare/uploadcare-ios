@@ -41,7 +41,7 @@
         upload.filename = repr.filename;
         
         /* initiate upload */
-        [[UploadcareKit shared]uploadFileWithName:upload.filename data:data contentType:nil progressBlock:^(long long bytesDone, long long bytesTotal) {
+        [[UploadcareKit shared]uploadFileNamed:upload.filename contentData:data contentType:nil progressBlock:^(long long bytesDone, long long bytesTotal) {
             if ([delegate respondsToSelector:@selector(upload:didTransferTotalBytes:expectedTotalBytes:)]) [delegate upload:upload didTransferTotalBytes:bytesDone expectedTotalBytes:bytesTotal];
         } successBlock:^(NSString *fileId) {
             [UCRecentUploads recordUploadWithInfo:@{UCRecentUploadsURLKey:assetURL.absoluteString, UCRecentUploadsSourceTypeKey:@"Library"}];
