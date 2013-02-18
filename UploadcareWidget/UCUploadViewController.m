@@ -90,6 +90,7 @@
                        @"textLabel.enabled"       : @([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]),
                        @"textLabel.textAlignment" : @(NSTextAlignmentCenter),
                        @"action"                  : @"uploadFromLibrary",
+                       @"accessoryType"           : @(UITableViewCellAccessoryNone),
                      },
                  ],
                 },
