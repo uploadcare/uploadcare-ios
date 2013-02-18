@@ -199,7 +199,13 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (!buttonIndex) return; // cancelled
-    NSURL *remoteURL = [NSURL URLWithString:[[alertView textFieldAtIndex:0] text]];
+    NSString *addressString = [[alertView textFieldAtIndex:0]text];
+    NSURL *remoteURL = [NSURL URLWithString:addressString];
+    if (!remoteURL) {
+        UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Failed to process the address", @"Senseless URL error alert title") message:[NSString stringWithFormat:NSLocalizedString(@"\"%@\" does not seem to be a valid internet address.", @"Senseless URL error alert message body, %@ gets substituted with the causal URL"), addressString] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss button title") otherButtonTitles: nil];
+        [errorAlert show];
+        return;
+    }
     UIImage *thumbnail = [UIImage imageNamed:@"thumb_from_URL_128x128"];
     [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:^{
         [UPCUpload uploadRemoteForURL:remoteURL title:nil thumbnailURL:nil thumbnailImage:nil delegate:self.widget.uploadDelegate source:@"an URL"];
