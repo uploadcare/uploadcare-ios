@@ -1,6 +1,6 @@
 # Uploadcare for iOS
 
-This open-source Objective-C library allows you to add [Uploadcare](https://uploadcare.com) to your iOS app.
+This open-source Objective-C library allows you to add [Uploadcare](https://uploadcare.com) to your iOS apps.
 
 Uploadcare for iOS comprises [UploadcareKit](https://github.com/uploadcare/uploadcare-ios/tree/master/UploadcareKit), which provides a way to use Uploadcare programmatically, and the Uploadcare widget – a drop-in component that provides the entire user experience. 
 
