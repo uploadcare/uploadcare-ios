@@ -111,12 +111,13 @@
     }else{
         NSURL *thumbnailURL = ([uploadInfo[UCRecentUploadsThumbnailURLKey] length]) ? [NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] : [[NSBundle mainBundle]URLForResource:@"thumb_from_URL_128x128" withExtension:@"png"];
         [cell.imageView showActivityIndicatorWithStyle:UIActivityIndicatorViewStyleGray placeholderSize:CGSizeMake(75, 75)];
+        __weak UITableViewCell *weakCell = cell;
         if (thumbnailURL) [cell.imageView setImageFromURL:thumbnailURL scaledToSize:CGSizeMake(75, 75) successBlock:^(UIImage *image) {
             /* remove the activity indicator on success */
-            [cell.imageView removeActivityIndicator];
+            [weakCell.imageView removeActivityIndicator];
         } failureBlock:^(NSError *error) {
             /* ^ or error */
-            [cell.imageView removeActivityIndicator];
+            [weakCell.imageView removeActivityIndicator];
         }];
     }
     
