@@ -225,7 +225,7 @@
     self.imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
     self.imagePicker.delegate = self;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone || sourceType == UIImagePickerControllerSourceTypeCamera) {
-        [self presentModalViewController:self.imagePicker animated:YES];
+        [self presentViewController:self.imagePicker animated:YES completion:nil];
     }else{
         [self.widget.popover setContentViewController:self.imagePicker animated:YES];
     }
