@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'uploadcare-ios'
-  s.version      = '1.0.1'
+  s.version      = '2.0.0'
   s.summary      = 'iOS library for Uploadcare.'
   s.homepage     = 'https://uploadcare.com'
   s.license      = 'MIT'
@@ -10,7 +10,8 @@ Pod::Spec.new do |s|
   s.resources    = 'UploadcareWidget/Resources/*.png'
   s.requires_arc = true
   s.platform = :ios, '5.0'
-  s.dependency 'AFNetworking', '~> 1.0'
+  s.dependency 'AFNetworking', :head
+  s.dependency 'AQGridView', :head
   s.dependency 'libPusher', '~> 1.4'
   s.dependency 'grabKit', '1.2.1'
 end

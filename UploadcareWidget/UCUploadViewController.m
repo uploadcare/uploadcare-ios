@@ -56,8 +56,11 @@
     
     /* Don't show the `Cancel` button when presented in a popover on iPad */
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismiss)];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismiss)];
     }
+    
+    self.tableView.backgroundView = nil;
+    [self.tableView setBackgroundColor:[UIColor colorWithWhite:.9294 alpha:1.]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -224,6 +227,7 @@
     self.imagePicker.sourceType = sourceType;
     self.imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
     self.imagePicker.delegate = self;
+    self.imagePicker.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone || sourceType == UIImagePickerControllerSourceTypeCamera) {
         [self presentViewController:self.imagePicker animated:YES completion:nil];
     }else{

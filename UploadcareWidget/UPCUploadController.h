@@ -20,9 +20,5 @@
 
 @property (nonatomic, weak) UIPopoverController *popover;
 
-- (void)enableFacebook;
-- (void)enableFlickrWithAPIKey:(NSString *)flickrAPIKey flickrAPISecret:(NSString *)flickrAPISecret;
-- (void)enableInstagramWithClientId:(NSString *)instagramAppId;
-
 @end
 

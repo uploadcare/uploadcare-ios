@@ -59,7 +59,6 @@
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
     
-    // Configure the cell...
     NSDictionary *section = self.menuItems[indexPath.section];
     NSArray *items = section[@"items"];
     NSDictionary *item = items[indexPath.row];
