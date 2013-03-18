@@ -29,7 +29,7 @@ static NSString *const kUploadcarePhotoListSpinnerCell = @"kUploadcarePhotoListS
 }
 
 - (id)initWithGrabber:(GRKServiceGrabber *)grabber album:(GRKAlbum *)album {
-    self = [super initWithNibName:@"UCPhotosList" bundle:nil];
+    self = [super initWithNibName:nil bundle:nil];
     if (self != nil) {
         _grabber = grabber;
         _album = album;

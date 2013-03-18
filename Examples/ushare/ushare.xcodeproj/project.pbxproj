@@ -60,7 +60,6 @@
 		6F0641D41673AA2C009417A4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6F0641D71673AA2C009417A4 /* USAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USAppDelegate.h; sourceTree = "<group>"; };
 		6F0641D81673AA2C009417A4 /* USAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = USAppDelegate.m; sourceTree = "<group>"; };
-		6F0641DA1673AA2C009417A4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6F0641E01673AA2C009417A4 /* USViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USViewController.h; sourceTree = "<group>"; };
 		6F0641E11673AA2C009417A4 /* USViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = USViewController.m; sourceTree = "<group>"; };
 		6F5D266C1688C7C000C7BDC5 /* ARChromeActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARChromeActivity.h; sourceTree = "<group>"; };
@@ -207,7 +206,6 @@
 				6FD691B31698798800750895 /* USViewController~ipad.xib */,
 				6F0641D11673AA2C009417A4 /* InfoPlist.strings */,
 				6F0641D41673AA2C009417A4 /* main.m */,
-				6F0641DA1673AA2C009417A4 /* Default.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

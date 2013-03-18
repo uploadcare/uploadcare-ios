@@ -217,12 +217,13 @@ NSUInteger kUCNumberOfAlbumsPerPage = kGRKMaximumNumberOfAlbumsPerPage;
     CGSize kAlbumCoverThumbnailSize = CGSizeMake(75, 75);
     /* show the activity indicator */
     [cell.imageView showActivityIndicatorWithStyle:UIActivityIndicatorViewStyleGray placeholderSize:kAlbumCoverThumbnailSize];
+    __weak UITableViewCell *weakCell = cell;
     if (thumbnailURL != nil) [cell.imageView setImageFromURL:thumbnailURL scaledToSize:kAlbumCoverThumbnailSize successBlock:^(UIImage *image) {
         /* remove the activity indicator on success */
-        [cell.imageView removeActivityIndicator];
+        [weakCell.imageView removeActivityIndicator];
     } failureBlock:^(NSError *error) {
         /* ...and on error */
-        [cell.imageView removeActivityIndicator];
+        [weakCell.imageView removeActivityIndicator];
         /* TODO: handle */
     }];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

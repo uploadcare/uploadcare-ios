@@ -56,8 +56,11 @@
     
     /* Don't show the `Cancel` button when presented in a popover on iPad */
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismiss)];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismiss)];
     }
+    
+    self.tableView.backgroundView = nil;
+    [self.tableView setBackgroundColor:[UIColor colorWithWhite:.9294 alpha:1.]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -90,6 +93,7 @@
                        @"textLabel.enabled"       : @([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]),
                        @"textLabel.textAlignment" : @(NSTextAlignmentCenter),
                        @"action"                  : @"uploadFromLibrary",
+                       @"accessoryType"           : @(UITableViewCellAccessoryNone),
                      },
                  ],
                 },
@@ -198,7 +202,13 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (!buttonIndex) return; // cancelled
-    NSURL *remoteURL = [NSURL URLWithString:[[alertView textFieldAtIndex:0] text]];
+    NSString *addressString = [[alertView textFieldAtIndex:0]text];
+    NSURL *remoteURL = [NSURL URLWithString:addressString];
+    if (!remoteURL) {
+        UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Failed to process the address", @"Senseless URL error alert title") message:[NSString stringWithFormat:NSLocalizedString(@"\"%@\" does not seem to be a valid internet address.", @"Senseless URL error alert message body, %@ gets substituted with the causal URL"), addressString] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss button title") otherButtonTitles: nil];
+        [errorAlert show];
+        return;
+    }
     UIImage *thumbnail = [UIImage imageNamed:@"thumb_from_URL_128x128"];
     [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:^{
         [UPCUpload uploadRemoteForURL:remoteURL title:nil thumbnailURL:nil thumbnailImage:nil delegate:self.widget.uploadDelegate source:@"an URL"];
@@ -217,8 +227,9 @@
     self.imagePicker.sourceType = sourceType;
     self.imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
     self.imagePicker.delegate = self;
+    self.imagePicker.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone || sourceType == UIImagePickerControllerSourceTypeCamera) {
-        [self presentModalViewController:self.imagePicker animated:YES];
+        [self presentViewController:self.imagePicker animated:YES completion:nil];
     }else{
         [self.widget.popover setContentViewController:self.imagePicker animated:YES];
     }
