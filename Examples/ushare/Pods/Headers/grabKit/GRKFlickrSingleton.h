@@ -1,1 +1,0 @@
-../../grabKit/grabKit/grabKit/grabKitSources/serviceGrabbers/flickrGrabber/GRKFlickrSingleton.h

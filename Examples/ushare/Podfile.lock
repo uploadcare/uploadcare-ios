@@ -1,55 +1,31 @@
 
-PODS: 
-- AFNetworking (1.1.0)
-- AQGridView (HEAD based on 1.3)
-- Facebook-iOS-SDK (3.1.1)
-- ISO8601DateFormatter (0.6)
-- SocketRocket (0.2.0)
-- TestFlightSDK (1.2)
-- grabKit (1.2.1): 
-  - grabKit/device (= 1.2.1)
-  - grabKit/facebook (= 1.2.1)
-  - grabKit/flickr (= 1.2.1)
-  - grabKit/instagram (= 1.2.1)
-- grabKit/device (1.2.1)
-- grabKit/facebook (1.2.1): 
-  - Facebook-iOS-SDK (= 3.1.1)
-  - ISO8601DateFormatter (= 0.6)
-- grabKit/flickr (1.2.1): 
-  - objectiveflickr (= 2.0.2)
-- grabKit/instagram (1.2.1)
-- libPusher (1.4): 
-  - SocketRocket
-- objectiveflickr (2.0.2)
-- uploadcare-ios (2.0.0): 
-  - AFNetworking (HEAD)
-  - AQGridView (HEAD)
-  - grabKit (= 1.2.1)
-  - libPusher (~> 1.4)
+COCOAPODS: 0.16.2
+
+SPEC CHECKSUMS: 
+  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
+  AFNetworking: 761a418233d280c1e0580bcb76ff9cb4c3073d17
+  TestFlightSDK: 29e194fb148e4861f92e4c1195b9697e1f3ad19a
+  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
+  uploadcare-ios: 0ec45185c1797b768dcf0bb6e12eff86c10723bb
+  AQGridView: ee436c64bc4a972ca7f3ce99971c0204af9e65ea
 
 EXTERNAL SOURCES: 
   uploadcare-ios: 
     :local: ../../
 
-COCOAPODS: 0.16.2
+PODS: 
+- AFNetworking (1.1.0)
+- AQGridView (HEAD based on 1.3)
+- SocketRocket (0.2.0)
+- TestFlightSDK (1.2)
+- libPusher (1.4): 
+  - SocketRocket
+- uploadcare-ios (2.0.0): 
+  - AFNetworking (HEAD)
+  - AQGridView (~> 1.3)
+  - libPusher (~> 1.4)
 
 DEPENDENCIES: 
 - AFNetworking
 - TestFlightSDK (~> 1.1)
 - uploadcare-ios (from `../../')
-
-SPEC CHECKSUMS: 
-  grabKit/flickr: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  Facebook-iOS-SDK: 5fc068ebfd8c8c9b0fad476bc36dbbf1fffeebc8
-  ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780
-  grabKit/facebook: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  grabKit/device: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
-  AQGridView: ee436c64bc4a972ca7f3ce99971c0204af9e65ea
-  uploadcare-ios: 55ae651ddb1e039b6f3be578508fbb313e9d4697
-  AFNetworking: 761a418233d280c1e0580bcb76ff9cb4c3073d17
-  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
-  grabKit/instagram: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  objectiveflickr: 17f5f1fd4b9b9d6761a9545493c79221f65604c3
-  grabKit: 01ea2b39b728e1e247802d21ac5b1a2550f3816b
-  TestFlightSDK: 29e194fb148e4861f92e4c1195b9697e1f3ad19a

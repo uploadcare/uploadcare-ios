@@ -8,11 +8,13 @@
 
 #import "USViewController.h"
 #import "UIView+USHelpers.h"
-#import "UploadcareWidget.h"
 #import "AFNetworking.h"
 #import "AFJSONRequestOperation.h"
 #import "ARChromeActivity.h"
 #import "TUSafariActivity.h"
+
+#import "UPCUpload.h"
+#import "UPCUploadController.h"
 
 #import <QuartzCore/QuartzCore.h>
 
