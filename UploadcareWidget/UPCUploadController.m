@@ -8,7 +8,6 @@
 
 #import "UPCUploadController.h"
 #import "UPCWidgetMenuViewController.h"
-#import "UCGrabkitConfigurator.h"
 
 @interface UPCUploadController ()
 
