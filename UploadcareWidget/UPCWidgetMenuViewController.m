@@ -55,7 +55,7 @@ typedef enum {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         _assets = [[ALAssetsLibrary alloc]init];
-        _socialClient = [[UPCSocialSourceClient alloc]initWithUploadcarePublicKey:@"uploadcare"];
+        _socialClient = [[UPCSocialSourceClient alloc]initWithUploadcarePublicKey:publicKey];
         [[UploadcareKit shared] setPublicKey:publicKey];
         
         [_socialClient querySourcesUsingBlock:^(NSArray *sources, NSError *error) {
