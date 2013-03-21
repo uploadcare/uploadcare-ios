@@ -11,7 +11,7 @@
 #import <AFNetworking/AFHTTPClient.h>
 #import <AFNetworking/AFJSONRequestOperation.h>
 
-NSString *const USSBaseAddress = @"https://social.staging0.uploadcare.com";
+NSString *const USSBaseAddress = @"https://social.uploadcare.com";
 NSString *const USSLoginSuccessLastPathComponent = @"endpoint";
 
 NSString *const USSPublicKeyHeader = @"X-Uploadcare-PublicKey";
