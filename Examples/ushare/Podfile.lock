@@ -1,13 +1,8 @@
 
-COCOAPODS: 0.16.2
-
-SPEC CHECKSUMS: 
-  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
-  AFNetworking: 761a418233d280c1e0580bcb76ff9cb4c3073d17
-  TestFlightSDK: 29e194fb148e4861f92e4c1195b9697e1f3ad19a
-  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
-  uploadcare-ios: 0ec45185c1797b768dcf0bb6e12eff86c10723bb
-  AQGridView: ee436c64bc4a972ca7f3ce99971c0204af9e65ea
+DEPENDENCIES: 
+- AFNetworking
+- TestFlightSDK (~> 1.1)
+- uploadcare-ios (from `../../')
 
 EXTERNAL SOURCES: 
   uploadcare-ios: 
@@ -25,7 +20,12 @@ PODS:
   - AQGridView (~> 1.3)
   - libPusher (~> 1.4)
 
-DEPENDENCIES: 
-- AFNetworking
-- TestFlightSDK (~> 1.1)
-- uploadcare-ios (from `../../')
+COCOAPODS: 0.16.2
+
+SPEC CHECKSUMS: 
+  uploadcare-ios: 0ec45185c1797b768dcf0bb6e12eff86c10723bb
+  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
+  AQGridView: ee436c64bc4a972ca7f3ce99971c0204af9e65ea
+  TestFlightSDK: 29e194fb148e4861f92e4c1195b9697e1f3ad19a
+  libPusher: adf3ab022d3781d519c55e2206bbe2cf362fc175
+  AFNetworking: 761a418233d280c1e0580bcb76ff9cb4c3073d17
