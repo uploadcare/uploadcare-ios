@@ -6,7 +6,7 @@
 
 **Uploadcare for iOS** is an open source Objective-C library that brings Uploadcare features to your iOS apps.
 
-**Uploadcare Widget**, a major component of Uploadcare for iOS, is what a modern, cloud-aware file picker for iOS would be, if iOS would have a notion of files. Since iOS doesn't, you can think of Uploadcare Widget as a *thing* picker – a drop-in component, that allows your users to select and upload their *things* (photos, documents, whatever you want them to) to your service, via Uploadcare.
+**Uploadcare Widget**, a major component of Uploadcare for iOS, is what a modern, cloud-aware file picker for iOS would be, if iOS had a notion of files. Since iOS doesn't, you can think of Uploadcare Widget as a *thing* picker – a drop-in component, that allows your users to select and upload their *things* (photos, documents, whatever you want them to) to your service, via Uploadcare.
 
 Here's what it looks like:
 
@@ -48,7 +48,7 @@ Then, present it like you would present any other `UIViewController` subclass:
 
 ### Delegate object
 
-`UPCUploadController` delivers the results of user interaction to a delegate object that should be set using it's `uploadDelegate` property (not to be confused with `delegate` property). The delegate is expected to conform to [UPCUploadDelegate](https://github.com/uploadcare/uploadcare-ios/blob/master/UploadcareWidget/UPCUploadDelegate.h) formal protocol. Implement it's optional methods to get notified when an upload starts, continues, finishes, or fails, the user closes the controller and so on.
+`UPCUploadController` delivers the results of user interaction to a delegate object that should be set using it's `uploadDelegate` property (not to be confused with `delegate` property). The delegate is expected to conform to [UPCUploadDelegate](https://github.com/uploadcare/uploadcare-ios/blob/master/UploadcareWidget/UPCUploadDelegate.h) formal protocol. Implement it's optional methods to get notified when an upload starts, continues, finishes, or fails, the user dismisses the controller and so on.
 
 
 ## Appearance
