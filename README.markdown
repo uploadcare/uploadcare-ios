@@ -57,7 +57,7 @@ Then, present it like you would present any other `UIViewController` subclass:
 
 ## iPad
 
-`UPCUploadController` expects it will be presented in an [`UIPopoverController`](http://developer.apple.com/library/ios/#documentation/uikit/reference/UIPopoverController_class/Reference/Reference.html) on iPad. You need to pass the presenting popover controller object to `UPCUploadController`'s `popover` property.
+`UPCUploadController` expects it will be presented in a [`UIPopoverController`](http://developer.apple.com/library/ios/#documentation/uikit/reference/UIPopoverController_class/Reference/Reference.html) on iPad. You need to pass the presenting popover controller object to `UPCUploadController`'s `popover` property.
 
 ## Sample App
 
