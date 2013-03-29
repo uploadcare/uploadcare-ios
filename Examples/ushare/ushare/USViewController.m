@@ -8,11 +8,13 @@
 
 #import "USViewController.h"
 #import "UIView+USHelpers.h"
-#import "UploadcareWidget.h"
 #import "AFNetworking.h"
 #import "AFJSONRequestOperation.h"
 #import "ARChromeActivity.h"
 #import "TUSafariActivity.h"
+
+#import "UPCUpload.h"
+#import <UPCUploadController.h>
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -62,9 +64,9 @@
     self.uploadWidget.navigationBar.barStyle = UIBarStyleBlack;
     
     /* Social stuff */
-    [self.uploadWidget enableFacebook];
-    [self.uploadWidget enableFlickrWithAPIKey:@"2522a6f8bbff8fbb1826d335cad7d9b1" flickrAPISecret:@"4ab550f59749ca42"];
-    [self.uploadWidget enableInstagramWithClientId:@"e2a6987a814d4f5d96b24b6971f9eb89"];
+//    [self.uploadWidget enableFacebook];
+//    [self.uploadWidget enableFlickrWithAPIKey:@"2522a6f8bbff8fbb1826d335cad7d9b1" flickrAPISecret:@"4ab550f59749ca42"];
+//    [self.uploadWidget enableInstagramWithClientId:@"e2a6987a814d4f5d96b24b6971f9eb89"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

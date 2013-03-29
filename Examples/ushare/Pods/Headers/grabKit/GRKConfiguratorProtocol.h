@@ -1,1 +1,0 @@
-../../grabKit/grabKit/grabKit/grabKitSources/configuration/GRKConfiguratorProtocol.h

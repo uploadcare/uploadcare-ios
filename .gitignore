@@ -14,3 +14,4 @@ profile
 *.moved-aside
 DerivedData
 docset-installed.txt
+Examples/uShare/Pods/Documentation

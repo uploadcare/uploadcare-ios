@@ -25,6 +25,7 @@
     if (self) {
         self.contentSizeForViewInPopover = CGSizeMake(320, 480);
         self.tableView.backgroundColor = [UIColor colorWithWhite:.95f alpha:1.f];
+        self.tableView.rowHeight = 88.f;
     }
     return self;
 }
@@ -32,14 +33,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = NSLocalizedString(@"Recent", @"Title for the recent uploads view controller");
+    self.title = NSLocalizedString(@"Previous", @"Title for the recent uploads view controller");
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -63,8 +58,7 @@
     
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reusableIdentifier];
-        
-        /* TODO: Share the code with the album view cells */
+
         cell.imageView.layer.cornerRadius = 4.0f;
         cell.imageView.clipsToBounds = YES;
         cell.imageView.bounds = CGRectMake(0, 0, 75, 75);
@@ -111,22 +105,18 @@
     }else{
         NSURL *thumbnailURL = ([uploadInfo[UCRecentUploadsThumbnailURLKey] length]) ? [NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] : [[NSBundle mainBundle]URLForResource:@"thumb_from_URL_128x128" withExtension:@"png"];
         [cell.imageView showActivityIndicatorWithStyle:UIActivityIndicatorViewStyleGray placeholderSize:CGSizeMake(75, 75)];
+        __weak UITableViewCell *weakCell = cell;
         if (thumbnailURL) [cell.imageView setImageFromURL:thumbnailURL scaledToSize:CGSizeMake(75, 75) successBlock:^(UIImage *image) {
             /* remove the activity indicator on success */
-            [cell.imageView removeActivityIndicator];
+            [weakCell.imageView removeActivityIndicator];
         } failureBlock:^(NSError *error) {
             /* ^ or error */
-            [cell.imageView removeActivityIndicator];
+            [weakCell.imageView removeActivityIndicator];
         }];
     }
     
     return cell;
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 88.f;
-}
-
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
