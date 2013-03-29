@@ -7,98 +7,43 @@
 //
 
 #import "UPCUploadController.h"
-#import "UCUploadViewController.h"
-#import "UCGrabkitConfigurator.h"
+#import "UPCWidgetMenuViewController.h"
 
 @interface UPCUploadController ()
 
-@property (strong) UCUploadViewController *uploadViewController;
-@end
+@property (strong, nonatomic) UPCWidgetMenuViewController *menuController;
 
-NSString *const UCFacebookMisconfigurationException = @"UCFacebookConfiguratioException";
-NSString *const UCGenericURLSchemaNotConfiguredException = @"UCGenericURLSchemaNotConfiguredException";
+@end
 
 @implementation UPCUploadController
 
 - (id)initWithUploadcarePublicKey:(NSString *)publicKey {
     self = [super init];
     if (self) {
-        _uploadViewController = [[UCUploadViewController alloc]initWithWidget:self];
-        [[UploadcareKit shared]setPublicKey:publicKey];
-        self.viewControllers = @[_uploadViewController];
+        _menuController = [[UPCWidgetMenuViewController alloc]initWithUploadcarePublicKey:publicKey];
+        self.viewControllers = @[_menuController];
     }
     return self;
 }
 
-#pragma mark - view controller
+#pragma mark - Appearance
 
-- (void)viewDidAppear:(BOOL)animated {
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [self popToRootViewControllerAnimated:NO];
-}
-
-#pragma mark - URL scheme handling related utilities
-/* TODO: Move this elsewhere */
-
-- (BOOL)schemeIsHandled:(NSString*)targetScheme {
-    BOOL schemeHandlerExists = NO;
-    NSArray *bundleURLTypes = [[NSBundle mainBundle]objectForInfoDictionaryKey:@"CFBundleURLTypes"];
-    for(NSDictionary *URLType in bundleURLTypes) {
-        for(NSString *scheme in URLType[@"CFBundleURLSchemes"]) {
-            if ([scheme isEqualToString:targetScheme]) {
-                schemeHandlerExists = YES;
-                break;
-            }
-        }
-    }
-    return schemeHandlerExists;
-}
-
-- (NSString *)genericScheme {
-    return  [NSString stringWithFormat:@"uc-%@", [[[NSBundle mainBundle]bundleIdentifier]stringByReplacingOccurrencesOfString:@"." withString:@"-"]];
-}
-
-- (void)assertGenericSchemeHandled {
-    if (![self schemeIsHandled:self.genericScheme]) {
-        /* FIXME: Better name and description */
-        [NSException raise:UCGenericURLSchemaNotConfiguredException format:@"Please add '%@' to CFBundleURLSchemes in app's Info.plist", self.genericScheme];
-    }
-}
-
-#pragma mark - Services
-
-- (void)enableFacebook {
-    NSString *facebookId = [[NSBundle mainBundle]objectForInfoDictionaryKey:@"FacebookAppID"];
-    if (!facebookId) {
-        [NSException raise:UCFacebookMisconfigurationException format:@"Please add FacebookAppID property to the Info.plist (see 'Adding your Facebook App ID' section of https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/3.1/ )"];
-    }
-    NSString *facebookScheme = [NSString stringWithFormat:@"fb%@", facebookId];
-    if (![self schemeIsHandled:facebookScheme]) {
-        [NSException raise:UCFacebookMisconfigurationException format:@"Please add '%@' to CFBundleURLSchemes in app's Info.plist (see 'Adding your Facebook App ID' section of https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/3.1/ )", facebookScheme];
-    }
++ (void)load {
+    /* navigation bar appearance */
+    id navbarProxy = [UINavigationBar appearanceWhenContainedIn:[UPCUploadController class], nil];
+    [navbarProxy setBackgroundImage:[UIImage imageNamed:@"UPCNavBar"] forBarMetrics:UIBarMetricsDefault];
+    [navbarProxy setShadowImage:[[UIImage alloc] init]];
+    [navbarProxy setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor colorWithRed:107./255 green:112./255 blue:115./255 alpha:1.], UITextAttributeTextShadowColor:[UIColor colorWithWhite:1. alpha:0.7], UITextAttributeTextShadowOffset:[NSValue valueWithUIOffset:UIOffsetMake(0, 1)]}];
+    [navbarProxy setTintColor:[UIColor colorWithRed:151./255 green:155./255 blue:159./255 alpha:1.]];
+        
+    /* table cells */
+    id tableCellProxy = [UITableViewCell appearanceWhenContainedIn:[UPCUploadController class], nil];
+    [tableCellProxy setSelectionStyle:UITableViewCellSelectionStyleGray];
     
-    UCGrabkitConfigurator *config = [UCGrabkitConfigurator shared];
-    [config setFacebookAppId:facebookId];
-    [config setFacebookIsEnabled:YES];
 }
 
-- (void)enableFlickrWithAPIKey:(NSString *)flickrAPIKey flickrAPISecret:(NSString *)flickrAPISecret {
-    [self assertGenericSchemeHandled];
-    UCGrabkitConfigurator *config = [UCGrabkitConfigurator shared];
-    [config setFlickrRedirectUri:[[NSString stringWithFormat:@"%@://", self.genericScheme] lowercaseString]];
-    [config setFlickrApiKey:flickrAPIKey];
-    [config setFlickrApiSecret:flickrAPISecret];
-    [config setFlickrIsEnabled:YES];
-}
-
-- (void)enableInstagramWithClientId:(NSString *)instagramAppId {
-    [self assertGenericSchemeHandled];
-    UCGrabkitConfigurator *config = [UCGrabkitConfigurator shared];
-    [config setInstagramRedirectUri:[[NSString stringWithFormat:@"%@://", self.genericScheme] lowercaseString]];
-    [config setInstagramAppId:instagramAppId];
-    [config setInstagramIsEnabled:YES];
+- (void)viewWillAppear:(BOOL)animated {
+    [self popToRootViewControllerAnimated:NO];
 }
 
 @end
