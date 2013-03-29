@@ -14,7 +14,7 @@
 #import "TUSafariActivity.h"
 
 #import "UPCUpload.h"
-#import "UPCUploadController.h"
+#import <UPCUploadController.h>
 
 #import <QuartzCore/QuartzCore.h>
 
