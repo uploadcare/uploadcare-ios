@@ -148,7 +148,7 @@ typedef enum {
             }
             switch (indexPath.row) {
                 case UPCWidgetDeviceMenuItemCamera:
-                    cell.textLabel.text = NSLocalizedString(@"Camera", @"Widget menu `Camera` item");
+                    cell.textLabel.text = NSLocalizedString(@"Take Photo or Video", @"Widget menu `Camera` item");
                     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
                         cell.textLabel.enabled = NO;
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -156,7 +156,7 @@ typedef enum {
                     break;
                     
                 case UPCWidgetDeviceMenuItemLibrary:
-                    cell.textLabel.text = NSLocalizedString(@"Library", @"Widget menu `Library` item");
+                    cell.textLabel.text = NSLocalizedString(@"Choose Existing", @"Widget menu `Library` item");
                     break;
             }
             return cell;
