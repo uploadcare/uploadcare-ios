@@ -32,7 +32,10 @@
     /* navigation bar appearance */
     id navbarProxy = [UINavigationBar appearanceWhenContainedIn:[UPCUploadController class], nil];
     [navbarProxy setBackgroundImage:[UIImage imageNamed:@"UPCNavBar"] forBarMetrics:UIBarMetricsDefault];
-    [navbarProxy setShadowImage:[[UIImage alloc] init]];
+    
+    if ([navbarProxy respondsToSelector:@selector(setShadowImage:)])
+        [navbarProxy setShadowImage:[[UIImage alloc] init]];
+
     [navbarProxy setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor colorWithRed:107./255 green:112./255 blue:115./255 alpha:1.], UITextAttributeTextShadowColor:[UIColor colorWithWhite:1. alpha:0.7], UITextAttributeTextShadowOffset:[NSValue valueWithUIOffset:UIOffsetMake(0, 1)]}];
     [navbarProxy setTintColor:[UIColor colorWithRed:151./255 green:155./255 blue:159./255 alpha:1.]];
         

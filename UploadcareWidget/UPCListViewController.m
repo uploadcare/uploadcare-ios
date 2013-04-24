@@ -30,8 +30,12 @@
     if (self) {
         self.tableView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1.];
         
-        self.refreshControl = [[UIRefreshControl alloc]init];
-        [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+        if ([self respondsToSelector:@selector(setRefreshControl:)]) {
+            
+            self.refreshControl = [[UIRefreshControl alloc]init];
+            [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+            
+        }
         
         _isLastPage = YES;
     }
@@ -91,9 +95,12 @@
     self.nextPageFetchStarted = NO;
     [self.tableView reloadData];
     
-    if (self.refreshControl.isRefreshing) {
-        [self.refreshControl endRefreshing];
-    }    
+    if ([self respondsToSelector:@selector(refreshControl)]) {
+        
+        if (self.refreshControl.isRefreshing)
+            [self.refreshControl endRefreshing];
+        
+    }
 }
 
 - (USSThing *)thingForRowAtIndexPath:(NSIndexPath *)indexPath {
