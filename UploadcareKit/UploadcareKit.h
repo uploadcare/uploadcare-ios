@@ -37,41 +37,58 @@ typedef void(^UploadcareFailureBlock)(NSError *error);
 @interface UploadcareKit : NSObject 
 
 /** UploadcareKit shared instance */
-+ (id)shared;
++ (UploadcareKit *)shared;
 
 /** Uploadcare public key */
 @property (nonatomic) NSString* publicKey;
 
-/**
- Uploads an arbitrary file (e.g. an image, a movie clip, a spreadsheet document, etc.)
- 
- @param filename            The file name to assign to the file uploaded.
- @param data                The data to upload.
- @param contentTypeOrNil    The Internet media type of the file. If `nil`, the type will be guessed from the file extension.
- @param progressBlock       The block to call repeatedly during the upload. Receives two arguments: **long long** `bytesDone` and **long long** `bytesTotal`.
- @param successBlock        The handler block to call when the upload is completed succesfully. Receives a single string argument `fileId`.
- @param failureBlock        The handler block to call when the upload fails due to an error. Receives a single argument NSError `*error`
-*/
+/** Deprecated, use startUploadingData:withName:contentType:store:progressBlock:successBlock:failureBlock: instead. */
 - (void)uploadFileNamed:(NSString *)filename
             contentData:(NSData *)data
             contentType:(NSString *)contentTypeOrNil
           progressBlock:(UploadcareProgressBlock)progressBlock
            successBlock:(UploadcareSuccessBlock)successBlock
-           failureBlock:(UploadcareFailureBlock)failureBlock;
+           failureBlock:(UploadcareFailureBlock)failureBlock
+    __attribute__((deprecated));
 
-/**
- Makes Uploadcare service upload a file from web
- 
- @param url             The URL to retrieve the file from.
- @param progressBlock   The block to call repeatedly during the upload. Receives two arguments: **long long** `bytesDone` and **long long** `bytesTotal`.
- @param successBlock    The handler block to call when the upload is completed succesfully. Receives a single string argument `fileId`.
- @param failureBlock    The handler block to call when the upload fails due to an error. Receives a single argument NSError `*error`
- 
- @see UploadcareFile
-  */
+/** Deprecated, use startUploadingFromURL:store:progressBlock:successBlock:failureBlock: instead. */
 - (void)uploadFileFromURL:(NSString *)url
             progressBlock:(UploadcareProgressBlock)progressBlock
              successBlock:(UploadcareSuccessBlock)successBlock
-             failureBlock:(UploadcareFailureBlock)failureBlock;
+             failureBlock:(UploadcareFailureBlock)failureBlock
+    __attribute__((deprecated));
+
+
+/** Start uploading a file.
+ 
+ @param filename Destination file name.
+ 
+ @param data Content of the file.
+ 
+ @param contentTypeOrNil Internet media type of the file. If `nil`, the library will attempt to auto-detect content type using the file extension.
+ 
+ @param shouldStore YES if the file should be automatically stored. Requires “automatic file storing” setting to be enabled https://uploadcare.com/accounts/settings/
+ 
+ @param progressBlock The block to call repeatedly during the upload. Receives two arguments: **long long** `bytesDone` and **long long** `bytesTotal`.
+ 
+ @param successBlock The handler block to call when the upload is completed succesfully. Receives a single string argument `fileId`.
+ 
+ @param failureBlock The handler block to call when the upload fails due to an error. Receives a single argument NSError `*error`. */
+
+- (NSOperation *)startUploadingData:(NSData *)data withName:(NSString *)filename contentType:(NSString *)contentTypeOrNil store:(BOOL)shouldStore progressBlock:(UploadcareProgressBlock)progressBlock successBlock:(UploadcareSuccessBlock)successBlock failureBlock:(UploadcareFailureBlock)failureBlock;
+
+/** Start uploading a file found in a resource specified by a given URL.
+ 
+    @param url The URL to retrieve the data from.
+ 
+    @param shouldStore YES if the file should be automatically stored. Requires “automatic file storing” setting to be enabled https://uploadcare.com/accounts/settings/
+ 
+    @param progressBlock The block to call repeatedly during the upload. Receives two arguments: **long long** `bytesDone` and **long long** `bytesTotal`.
+ 
+    @param successBlock The handler block to call when the upload is completed succesfully. Receives a single string argument `fileId`.
+ 
+    @param failureBlock The handler block to call when the upload fails due to an error. Receives a single argument NSError `*error`. */
+
+- (NSOperation *)startUploadingFromURL:(NSURL *)url store:(BOOL)shouldStore progressBlock:(UploadcareProgressBlock)progressBlock successBlock:(UploadcareSuccessBlock)successBlock failureBlock:(UploadcareFailureBlock)failureBlock;
 
 @end

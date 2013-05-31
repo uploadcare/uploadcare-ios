@@ -16,16 +16,25 @@ extern NSString *const UploadcareMissingPublicKeyException;
 /** The error domain of errors used by the Uploadcare Kit */
 extern NSString *const UploadcareErrorDomain;
 
-/* Error codes used by the SDK */
+/* Error codes used by UploadcareKit */
 typedef enum {
+    
     /* Uploadcare back-end failed to process an `upload from URL` request */
     UploadcareErrorUploadingFromURL = 0x1001,
+    
     /* Client application failed to connect to the server */
     UploadcareErrorConnectingHome,
+    
     /* /status/ request on an upload has failed either due to connectivity issues or because of a server-side error */
     UploadcareErrorPollingStatus,
+    
     /* Public key is invalid */
     UploadcareErrorAuthenticatingWithPublicKey,
+    
+    /* Background upload expired */
+    UploadcareErrorBackgroundUploadExpired,
+    
+    
 } UploadcareErrorCode;
 
 NSError *UploadcareMakePubAuthError(NSError *underlyingError);
