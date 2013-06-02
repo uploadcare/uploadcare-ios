@@ -23,11 +23,6 @@
 - (void)uploadDidStart:(UPCUpload *)upload;
 
 /**
- * Sent to the delegate when the upload is aborted. 
- */
-- (void)uploadDidCancel:(UPCUpload *)upload;
-
-/**
  * Sent to the delegate to deliver the upload progress. 
  *
  * @param totalBytesTransfered  The total number of bytes transfered during the upload.
