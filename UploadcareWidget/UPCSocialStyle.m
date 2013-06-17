@@ -40,6 +40,11 @@
         return UPCPresentationTypeList;
     }
     
+    /* VK */
+    if ([source isEqualToString:@"vk"]) {
+        return UPCPresentationTypeGrid;
+    }
+    
     return UPCPresentationTypeUnknown;
 }
 
