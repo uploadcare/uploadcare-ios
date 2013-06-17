@@ -93,7 +93,6 @@ NSURL *USSAbsoluteURL(NSString *address) {
         absolutePath = [[USSBaseAddress stringByAppendingPathComponent:sourceBase] stringByAppendingPathComponent:rootChunkPath];
     }
     
-    NSLog(@"GET %@", absolutePath);
     [self.client getPath:absolutePath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         assert([responseObject isKindOfClass:[NSDictionary class]]);
         NSString *loginAddress = [responseObject objectForKey:USSLoginAddressKey];
@@ -102,13 +101,11 @@ NSURL *USSAbsoluteURL(NSString *address) {
         }else if([[responseObject objectForKey:@"obj_type"]isEqualToString:@"error"]) {
             resultBlock(nil, nil, [NSError errorWithDomain:USSErrorDomain code:1 userInfo:responseObject]);
         }else {
-            NSLog(@"response %@", responseObject);
             USSThingSet *thingSet = [[USSThingSet alloc]initWithJSON:responseObject];
             resultBlock(thingSet, nil, nil);
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"failure %@", error);
         resultBlock(nil, nil, error);
     }];
 }
