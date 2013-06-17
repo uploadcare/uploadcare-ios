@@ -32,4 +32,7 @@
 /** An arbitrary user info object associated with the upload. */
 @property (strong, nonatomic) id userInfo;
 
+/** Cancel the upload */
+- (void)cancel;
+
 @end

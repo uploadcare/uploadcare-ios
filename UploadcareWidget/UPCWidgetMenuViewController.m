@@ -121,6 +121,7 @@ typedef enum {
 }
 
 - (UIImage *)imageForSourceNamed:(NSString *)sourceName {
+    NSLog(@"source %@", sourceName);
     if ([sourceName isEqualToString:@"facebook"]) {
         return [UIImage imageNamed:@"icon_facebook"];
     } else if ([sourceName isEqualToString:@"instagram"]) {
@@ -131,6 +132,8 @@ typedef enum {
         return [UIImage imageNamed:@"icon_flickr"];
     } else if ([sourceName isEqualToString:@"gdrive"]) {
         return [UIImage imageNamed:@"icon_google_drive"];
+    } else if ([sourceName isEqualToString:@"vk"]) {
+        return [UIImage imageNamed:@"icon_vk"];
     }
     return nil;
 }

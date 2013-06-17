@@ -73,7 +73,8 @@ NSURL *USSAbsoluteURL(NSString *address) {
         NSMutableArray *sources = [[NSMutableArray alloc]initWithCapacity:[JSONSources count]];
         for (NSDictionary *JSONSource in JSONSources) {
             USSSource *source = [[USSSource alloc]initWithJSON:JSONSource];
-            [sources addObject:source];
+            if (source.title)
+                [sources addObject:source];
         }
         // pass the results
         resultBlock(sources, nil);
@@ -92,6 +93,7 @@ NSURL *USSAbsoluteURL(NSString *address) {
         absolutePath = [[USSBaseAddress stringByAppendingPathComponent:sourceBase] stringByAppendingPathComponent:rootChunkPath];
     }
     
+    NSLog(@"GET %@", absolutePath);
     [self.client getPath:absolutePath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         assert([responseObject isKindOfClass:[NSDictionary class]]);
         NSString *loginAddress = [responseObject objectForKey:USSLoginAddressKey];
@@ -100,11 +102,13 @@ NSURL *USSAbsoluteURL(NSString *address) {
         }else if([[responseObject objectForKey:@"obj_type"]isEqualToString:@"error"]) {
             resultBlock(nil, nil, [NSError errorWithDomain:USSErrorDomain code:1 userInfo:responseObject]);
         }else {
+            NSLog(@"response %@", responseObject);
             USSThingSet *thingSet = [[USSThingSet alloc]initWithJSON:responseObject];
             resultBlock(thingSet, nil, nil);
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failure %@", error);
         resultBlock(nil, nil, error);
     }];
 }
@@ -256,6 +260,7 @@ NSURL *USSAbsoluteURL(NSString *address) {
                      @"facebook"     : NSLocalizedString(@"Facebook", @"Facebook source title"),
                      @"gdrive"       : NSLocalizedString(@"Google Drive", @"Google Drive source title"),
                      @"dropbox"      : NSLocalizedString(@"Dropbox", @"Dropbox source title"),
+                     @"vk"           : NSLocalizedString(@"VK", @"VK source title"),
                      };
     }
     return kTitles[shortName];
