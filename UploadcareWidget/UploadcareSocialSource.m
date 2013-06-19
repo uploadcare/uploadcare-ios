@@ -138,7 +138,18 @@ NSURL *USSAbsoluteURL(NSString *address) {
 }
 
 - (NSString *)pathChunk {
-    return USSURLEncode(self.JSON[@"path_chunk"]);
+    
+    id pathChunk = self.JSON[@"path_chunk"];
+    NSString *pathChunkString;
+    
+    if ([pathChunk isKindOfClass:[NSString class]])
+        pathChunkString = pathChunk;
+    
+    if ([pathChunk isKindOfClass:[NSValue class]])
+        pathChunkString = [pathChunk stringValue];
+        
+    return USSURLEncode(pathChunkString);
+    
 }
 
 - (NSString *)title {
