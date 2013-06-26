@@ -10,11 +10,81 @@
 #import "UPCUpload_Private.h"
 #import "UploadcareKit.h"
 #import "UCRecentUploads.h"
+
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <ImageIO/ImageIO.h>
 
 @implementation UPCUpload
 
-+ (void)uploadAssetForURL:(NSURL *)assetURL delegate:(id<UPCUploadDelegate>)delegate {
++ (NSData *)dataFromAssetRepresentation:(ALAssetRepresentation *)repr maximumSize:(CGSize)maximumSize lossyCompressionQuality:(double)lossyCompressionQuality error:(NSError **)error {
+    
+    if ((repr.dimensions.width <= maximumSize.width && repr.dimensions.height)
+        ||(maximumSize.width == 0 && maximumSize.height == 0)) {
+        
+        /* Resize is not neccessary, return the representation's data as is */
+        
+        size_t bufferLength = repr.size;
+        uint8_t *buffer = (uint8_t *)malloc(bufferLength);
+        
+        NSUInteger bytesWritten = [repr getBytes:buffer fromOffset:0 length:bufferLength error:error];
+        
+        NSData *resultingData = nil;
+        
+        if (bytesWritten)
+            resultingData = [NSData dataWithBytes:buffer length:bufferLength];
+        
+        free(buffer);
+        
+        return resultingData;
+        
+    } else {
+        
+        CGImageRef imageRef = repr.fullResolutionImage;
+        
+        CGSize imageSize = CGSizeMake(CGImageGetWidth(imageRef), CGImageGetHeight(imageRef));
+        
+        double scaleRatio = MIN(maximumSize.width / imageSize.width, maximumSize.height / imageSize.height);
+        
+        CGSize targetSize = CGSizeMake(imageSize.width * scaleRatio, imageSize.height * scaleRatio);
+        
+        size_t bitsPerComponent = CGImageGetBitsPerComponent(imageRef);
+        size_t bytesPerRow = CGImageGetBytesPerRow(imageRef);
+
+        CGColorSpaceRef colorspace = CGImageGetColorSpace(imageRef);
+        
+        CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
+        
+        CGContextRef ctx = CGBitmapContextCreate(NULL, ceilf(targetSize.width), ceilf(targetSize.height), bitsPerComponent, bytesPerRow, colorspace, bitmapInfo);
+        
+        CGContextDrawImage(ctx, CGRectMake(0, 0, targetSize.width, targetSize.height), imageRef);
+        
+        CGImageRef resultingImageRef = CGBitmapContextCreateImage(ctx);
+        
+        CGContextRelease(ctx);
+        
+        NSMutableData *resultingData = [[NSMutableData alloc] init];
+        
+        CGImageDestinationRef idst = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)resultingData, (__bridge CFStringRef)repr.UTI, 1, NULL);
+        
+        NSMutableDictionary *metadata = [repr.metadata mutableCopy];
+        
+        if ([repr.UTI isEqualToString:(NSString *)kUTTypeJPEG])
+            metadata[(NSString *)kCGImageDestinationLossyCompressionQuality] = @(lossyCompressionQuality);
+
+        CGImageDestinationAddImage(idst, resultingImageRef, (__bridge CFDictionaryRef)metadata);
+        
+        CGImageDestinationFinalize(idst);
+        
+        CFRelease(idst);
+        
+        return resultingData;
+        
+    }
+    
+    
+}
+
++ (void)uploadAssetWithURL:(NSURL *)assetURL delegate:(id<UPCUploadDelegate>)delegate maximumSize:(CGSize)maximumSize lossyCompressionQuality:(double)lossyCompressionQuality {
     __block UPCUpload *upload = [[UPCUpload alloc]init];
     upload.sourceURL = assetURL;
     ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc]init];
@@ -26,19 +96,21 @@
         /* obtain NSData for the default representation */
         
         ALAssetRepresentation *repr = [asset defaultRepresentation];
-        size_t bufferLength = repr.size;
-        uint8_t *buffer = (uint8_t *)malloc(bufferLength);
-        NSError *retrievalError;
-        NSUInteger bytesWritten = [repr getBytes:buffer fromOffset:0 length:bufferLength error:&retrievalError];
-        if (!bytesWritten) {
-            free(buffer);
-            NSLog(@"ALAsset default representation read error: %@", retrievalError);
-            if ([delegate respondsToSelector:@selector(upload:didFailWithError:)]) [delegate upload:upload didFailWithError:retrievalError];
-            return;
-        }
-        NSData *data = [NSData dataWithBytes:buffer length:bufferLength];
-        free(buffer);
         
+        NSError *retrievalError = nil;
+        
+        NSData *data = [self dataFromAssetRepresentation:repr maximumSize:maximumSize lossyCompressionQuality:lossyCompressionQuality error:&retrievalError];
+        
+        if (!data) {
+        
+            NSLog(@"ALAsset default representation read error: %@", retrievalError);
+            
+            if ([delegate respondsToSelector:@selector(upload:didFailWithError:)]) [delegate upload:upload didFailWithError:retrievalError];
+            
+            return;
+            
+        }
+
         upload.filename = repr.filename;
         
         /* start uploading */        

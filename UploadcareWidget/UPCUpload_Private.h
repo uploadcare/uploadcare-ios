@@ -17,6 +17,8 @@
 @property (readwrite, strong) NSString *filename;
 @property (strong, nonatomic) NSOperation *uploadOperation;
 
-+ (void)uploadAssetForURL:(NSURL *)assetURL delegate:(id<UPCUploadDelegate>)delegate;
++ (void)uploadAssetWithURL:(NSURL *)assetURL delegate:(id<UPCUploadDelegate>)delegate maximumSize:(CGSize)maximumSize lossyCompressionQuality:(double)lossyCompressionQuality;
+
 + (void)uploadRemoteForURL:(NSURL *)remoteURL title:(NSString *)title thumbnailURL:(NSURL *)thumbnailURL thumbnailImage:(UIImage *)thumbnailImage delegate:(id<UPCUploadDelegate>)delegate source:(NSString*)sourceName;
+
 @end

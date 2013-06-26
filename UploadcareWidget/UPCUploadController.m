@@ -18,12 +18,21 @@
 @implementation UPCUploadController
 
 - (id)initWithUploadcarePublicKey:(NSString *)publicKey {
+    
     self = [super init];
+    
     if (self) {
+        
         _menuController = [[UPCWidgetMenuViewController alloc]initWithUploadcarePublicKey:publicKey];
+        
         self.viewControllers = @[_menuController];
+        
+        _lossyCompressionQuality = 0.85;
+        
     }
+    
     return self;
+    
 }
 
 #pragma mark - Appearance

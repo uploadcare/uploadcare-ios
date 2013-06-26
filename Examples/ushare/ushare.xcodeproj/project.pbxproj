@@ -139,7 +139,6 @@
 				6F5E11FE16AD73B300A01016 /* Default@2x.png */,
 				6F5E11FC16AD736F00A01016 /* Default.png */,
 				6F5E11F816AD70D600A01016 /* Default-568h@2x.png */,
-				6FD83F96169A14DB00E799DE /* QuartzCore.framework */,
 				6F0641C71673AA2C009417A4 /* Frameworks */,
 				6F5D266B1688C7C000C7BDC5 /* ARChromeActivity */,
 				6F5D267D1688E49300C7BDC5 /* TUSafariActivity */,
@@ -161,6 +160,7 @@
 		6F0641C71673AA2C009417A4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FD83F96169A14DB00E799DE /* QuartzCore.framework */,
 				6F5DC7DE1678BC8D00CEF3D7 /* CoreImage.framework */,
 				6F0641C81673AA2C009417A4 /* UIKit.framework */,
 				6F0641CA1673AA2C009417A4 /* Foundation.framework */,

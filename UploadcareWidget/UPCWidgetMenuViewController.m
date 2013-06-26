@@ -224,34 +224,52 @@ typedef enum {
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     switch (indexPath.section) {
+            
         case UPCWidgetMenuPastUploadsSection:
+            
             [self showRecentUploads];
+            
             break;
             
         case UPCWidgetMenuDeviceSourcesSection:
+            
             if (indexPath.row == UPCWidgetDeviceMenuItemCamera) {
+                
                 if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                    
                     [self presentImagePickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
+                    
                 }
+                
             } else if (indexPath.row == UPCWidgetDeviceMenuItemLibrary) {
+                
                 [self presentImagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+                
             }
+            
             break;
             
         case UPCWidgetMenuSocialSourcesSection:
+            
             if (self.socialSources.count) {
+                
                 USSSource *source = [self.socialSources objectAtIndex:indexPath.row];
-                UPCSourceViewController *sourceController = [[UPCSourceViewController alloc]initWithSocialSourceClient:self.socialClient source:source activeRootChunkIndex:0 path:nil];
+                
+                UPCSourceViewController *sourceController = [[UPCSourceViewController alloc] initWithSocialSourceClient:self.socialClient source:source activeRootChunkIndex:0 path:nil];
+                
                 [self.navigationController pushViewController:sourceController animated:YES];
+                
             }
             
         default:
             break;
     }
+    
 }
 
 #pragma mark - Recent uploads
@@ -265,22 +283,30 @@ typedef enum {
 #pragma mark - Image picker
 
 - (void)presentImagePickerWithSourceType:(UIImagePickerControllerSourceType)sourceType {
-    if (!self.imagePicker) {
+    
+    if (!self.imagePicker)
         self.imagePicker = [[UIImagePickerController alloc]init];
-    }
+    
     self.imagePicker.sourceType = sourceType;
     self.imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
+    
     self.imagePicker.delegate = self;
-    /* self.imagePicker.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal; */
+    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone || sourceType == UIImagePickerControllerSourceTypeCamera) {
+        
         [self presentViewController:self.imagePicker animated:YES completion:nil];
+        
     }else{
+        
         [self.enclosingUploadController.popover setContentViewController:self.imagePicker animated:YES];
+        
     }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
     [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        
         /* A picture or a video clip? */
         NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
         
@@ -297,7 +323,7 @@ typedef enum {
                 NSDictionary *metadata = [info objectForKey:UIImagePickerControllerMediaMetadata];
                 /* write image to the Assets Library */
                 [self.assets writeImageToSavedPhotosAlbum:image.CGImage metadata:metadata completionBlock:^(NSURL *assetURL, NSError *error) {
-                    if (!error) [UPCUpload uploadAssetForURL:assetURL delegate:self.enclosingUploadController.uploadDelegate];
+                    if (!error) [UPCUpload uploadAssetWithURL:assetURL delegate:self.enclosingUploadController.uploadDelegate maximumSize:self.enclosingUploadController.maximumImageSize lossyCompressionQuality:self.enclosingUploadController.lossyCompressionQuality];
                     else NSLog(@"Failed to save photo to the assets library.\n\n%@", error);
                 }];
             }else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie]) {
@@ -306,7 +332,7 @@ typedef enum {
                 /* make sure the video could be stored in the library at all */
                 if ([self.assets videoAtPathIsCompatibleWithSavedPhotosAlbum:videoURL]) {
                     [self.assets writeVideoAtPathToSavedPhotosAlbum:videoURL completionBlock:^(NSURL *assetURL, NSError *error) {
-                        if (!error) [UPCUpload uploadAssetForURL:assetURL delegate:self.enclosingUploadController.uploadDelegate];
+                        if (!error) [UPCUpload uploadAssetWithURL:assetURL delegate:self.enclosingUploadController.uploadDelegate maximumSize:self.enclosingUploadController.maximumImageSize lossyCompressionQuality:self.enclosingUploadController.lossyCompressionQuality];
                         else NSLog(@"Failed to save video to the assets library.\n\n%@", error);
                     }];
                 }else{
@@ -315,7 +341,7 @@ typedef enum {
             }
         }else if (picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary
                   || picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
-            [UPCUpload uploadAssetForURL:info[UIImagePickerControllerReferenceURL] delegate:self.enclosingUploadController.uploadDelegate];
+            [UPCUpload uploadAssetWithURL:info[UIImagePickerControllerReferenceURL] delegate:self.enclosingUploadController.uploadDelegate maximumSize:self.enclosingUploadController.maximumImageSize lossyCompressionQuality:self.enclosingUploadController.lossyCompressionQuality];
         }
     }];
 }

@@ -138,7 +138,9 @@
         if (![uploadURL.scheme isEqualToString:@"assets-library"]) {
             [UPCUpload uploadRemoteForURL:uploadURL title:uploadInfo[UCRecentUploadsTitleKey] thumbnailURL:[NSURL URLWithString:uploadInfo[UCRecentUploadsThumbnailURLKey]] thumbnailImage:thumbnailImage delegate:self.widget.uploadDelegate source:uploadInfo[UCRecentUploadsSourceTypeKey]];
         }else{
-            [UPCUpload uploadAssetForURL:uploadURL delegate:self.widget.uploadDelegate];
+            
+            [UPCUpload uploadAssetWithURL:uploadURL delegate:self.widget.uploadDelegate maximumSize:self.widget.maximumImageSize lossyCompressionQuality:self.widget.lossyCompressionQuality];
+            
         }
     }];
 }

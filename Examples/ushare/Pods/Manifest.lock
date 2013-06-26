@@ -25,6 +25,6 @@ SPEC CHECKSUMS:
   libPusher: ede9d70db138008e0054b0a3c9728eeeed341761
   SocketRocket: bca43a94bd9aac3a629df42c06843402399ee67b
   TestFlightSDK: f3e516c64f61abedeb26a7b184101df54df3db09
-  uploadcare-ios: c1bf938c907ff56a15572f8715cbfc0434813069
+  uploadcare-ios: 6c8a387d4044070e6a45342203e8987cd3e42d2e
 
 COCOAPODS: 0.19.0

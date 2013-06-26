@@ -33,7 +33,7 @@ static const NSInteger kUCImageViewActivityIndicatorViewTag = 10812; // Random
 
 - (void)setImageFromURL:(NSURL *)url scaledToSize:(CGSize)size successBlock:(void (^)(UIImage *))successBlock failureBlock:(void (^)(NSError *))failureBlock {
     [self setImageFromURL:url imageProcessingBlock:^UIImage *(UIImage *sourceImage) {
-        return [sourceImage imageByScalingToSize:size];
+        return [sourceImage imageByScalingToSizeAspectFill:size];
     } successBlock:successBlock failureBlock:failureBlock];
 }
 
@@ -58,7 +58,7 @@ static const NSInteger kUCImageViewActivityIndicatorViewTag = 10812; // Random
     }else{
         /* show the cached image */
         UIImage *cachedImage = [UIImage imageWithData:cachedResponse.data];
-        [self setImage:[cachedImage imageByScalingToSize:size]];
+        [self setImage:[cachedImage imageByScalingToSizeAspectFill:size]];
     }
 }
 

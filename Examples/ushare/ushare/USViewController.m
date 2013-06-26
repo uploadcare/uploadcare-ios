@@ -51,22 +51,23 @@
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
         
     /* thumbnail view */
+    
     self.thumbnailImageView.layer.cornerRadius = 4.0f;
     self.thumbnailImageView.layer.masksToBounds = YES;
     
     /* share button */
+    
     [self.shareButton setBackgroundImage:[[UIImage imageNamed:@"USSilverButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(16, 16, 16, 16)] forState:UIControlStateNormal];
     [self.shareButton setBackgroundImage:[[UIImage imageNamed:@"USSilverButtonDepressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(16, 16, 16, 16)] forState:UIControlStateHighlighted];
     
     /* Uploadcare widget initialization */
+    
     self.uploadWidget = [[UPCUploadController alloc]initWithUploadcarePublicKey:@"ea0c5eaa31bbaf62ebad"];
+    self.uploadWidget.maximumImageSize = CGSizeMake(1024, 1024);
     self.uploadWidget.uploadDelegate = self;
     self.uploadWidget.navigationBar.barStyle = UIBarStyleBlack;
     
-    /* Social stuff */
-//    [self.uploadWidget enableFacebook];
-//    [self.uploadWidget enableFlickrWithAPIKey:@"2522a6f8bbff8fbb1826d335cad7d9b1" flickrAPISecret:@"4ab550f59749ca42"];
-//    [self.uploadWidget enableInstagramWithClientId:@"e2a6987a814d4f5d96b24b6971f9eb89"];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {

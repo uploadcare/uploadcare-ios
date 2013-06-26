@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.resources    = 'UploadcareWidget/Resources/*.png'
   s.requires_arc = true
   s.platform     = :ios, '5.0'
-  s.frameworks   = 'AssetsLibrary'
+  s.frameworks   = 'AssetsLibrary', 'ImageIO'
   s.dependency 'AFNetworking', '~> 1.2.0'
   s.dependency 'AQGridView', '~> 1.3'
   s.dependency 'libPusher', '~> 1.4'

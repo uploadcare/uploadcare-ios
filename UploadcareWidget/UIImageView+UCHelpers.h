@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImageView (UCHelpers)
+
 - (void)setImageFromURL:(NSURL *)url scaledToSize:(CGSize)size successBlock:(void (^)(UIImage *image))successBlock failureBlock:(void (^)(NSError *error))failureBlock;
+
 - (void)setImageFromURL:(NSURL *)url scaledToSize:(CGSize)size placeholderImage:(UIImage *)placeholderImage showActivityIndicator:(BOOL)showIndicator withStyle:(UIActivityIndicatorViewStyle)style;
+
 - (UIActivityIndicatorView *)showActivityIndicatorWithStyle:(UIActivityIndicatorViewStyle)style center:(CGPoint)center;
+
 - (UIActivityIndicatorView *)showActivityIndicatorWithStyle:(UIActivityIndicatorViewStyle)style placeholderSize:(CGSize)size;
+
 - (void)removeActivityIndicator;
+
 - (UIActivityIndicatorView*)activityIndicator;
+
 @end
