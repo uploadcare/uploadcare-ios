@@ -26,11 +26,16 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
     self.parentViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:self.activityIndicator];    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+
     self.parentViewController.navigationItem.rightBarButtonItem = nil;
+    self.URLLoadedBlock = nil;
 }
 
 - (UIWebView *)webView {
