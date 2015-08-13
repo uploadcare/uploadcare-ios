@@ -105,7 +105,7 @@ NSString * const UploadcareBaseUploadURL = @"https://upload.uploadcare.com";
         
     }
     
-    NSURLRequest *uploadFileRequest = [self.client multipartFormRequestWithMethod:@"POST" path:uploadFilePath parameters:@{ @"UPLOADCARE_PUB_KEY" : self.publicKey } constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    NSURLRequest *uploadFileRequest = [self.client multipartFormRequestWithMethod:@"POST" path:uploadFilePath parameters:@{ @"UPLOADCARE_PUB_KEY" : self.publicKey, @"UPLOADCARE_STORE" : @(shouldStore) } constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         [formData appendPartWithFileData:data name:kDataFileId fileName:filename mimeType:contentTypeOrNil];
         
