@@ -17,6 +17,8 @@ static NSString * const UCFileUploadingPath 		= @"/base/";
 static NSString * const UCFileInfoPath				= @"/info/";
 static NSString * const UCRemoteFileUploadingPath 	= @"/from_url/";
 static NSString * const UCRemoteObservingPath	 	= @"/from_url/status/";
+static NSString * const UCGroupUploadingPath		= @"/group/";
+static NSString * const UCGroupInfoPath				= @"/group/info/";
 
 #pragma mark - domains
 

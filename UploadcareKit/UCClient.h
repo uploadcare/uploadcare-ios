@@ -36,15 +36,12 @@
 @end
 
 
-typedef void (^UCProgressBlock)(NSUInteger taskIdentifier, int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend);
+typedef void (^UCProgressBlock)(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend);
 
-typedef void (^UCCompletionBlock)(NSUInteger taskIdentifier, id response, NSError *error);
+typedef void (^UCCompletionBlock)(id response, NSError *error);
 
 
 @interface UCClient : NSObject
-
-@property (nonatomic, copy) UCProgressBlock progressBlock;
-@property (nonatomic, copy) UCCompletionBlock completionBlock;
 
 + (instancetype)defaultClient;
 

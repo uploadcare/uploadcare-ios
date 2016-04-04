@@ -86,15 +86,15 @@ typedef NS_ENUM(NSUInteger, UCStoreOption) {
             NSString *status = responseData[@"status"];
             if ([status isEqualToString:@"success"]) {
                 [self stopObserving];
-                if (self.completionBlock) self.completionBlock(self.pollingTask.taskIdentifier, responseData ?: data, error);
+                if (self.completionBlock) self.completionBlock(responseData ?: data, error);
             } else if ([status isEqualToString:@"error"]) {
                 [self stopObserving];
                 NSError *error = [NSError errorWithDomain:self.errorDomain code:2001 userInfo:@{NSLocalizedDescriptionKey : responseData[@"error"]}];
-                if (self.completionBlock) self.completionBlock(self.pollingTask.taskIdentifier, responseData ?: data, error);
+                if (self.completionBlock) self.completionBlock(responseData ?: data, error);
             } else if ([status isEqualToString:@"progress"]) {
                 NSUInteger done = [responseData[@"done"] unsignedIntegerValue];
                 NSUInteger total = [responseData[@"total"] unsignedIntegerValue];
-                if (self.progressBlock) self.progressBlock(self.pollingTask.taskIdentifier, done, done, total);
+                if (self.progressBlock) self.progressBlock(done, done, total);
             }
         }
     }];
@@ -133,11 +133,13 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
 
 @property (nonatomic, strong) NSString *publicKey;
 @property (nonatomic, strong) NSURLSession *session;
+@property (nonatomic, strong) NSURLSession *pollingSession;
 @property (nonatomic, strong) NSMutableDictionary *responsesData;
 @property (nonatomic, assign) UCStoreOption storeOption;
 @property (nonatomic, strong) NSMutableArray *pollingTasks;
 @property (nonatomic, strong) UCRemoteObserver *remoteObserver;
-
+@property (nonatomic, strong) NSMutableDictionary *completionQueue;
+@property (nonatomic, strong) NSMutableDictionary *progressQueue;
 @end
 
 static UCClient *instanceClient = nil;
@@ -198,11 +200,6 @@ static UCClient *instanceClient = nil;
 - (NSURLSessionDataTask *)performUCRequest:(UCAPIRequest *)ucRequest
                                     progress:(UCProgressBlock)progressBlock
                                   completion:(UCCompletionBlock)completionBlock {
-    
-    _completionBlock = completionBlock;
-    _progressBlock = progressBlock;
-    
-    
     NSURLSessionDataTask *task = nil;
     
     if ([ucRequest isKindOfClass:[UCFileUploadRequest class]]) {
@@ -219,7 +216,8 @@ static UCClient *instanceClient = nil;
                               contentLength:bodyData.contentLength];
         
         task = [self.session uploadTaskWithRequest:urlRequest fromData:[bodyData bodyByFinalizingMultipartData]];
-        [task resume];
+        
+        [self launchTask:task progress:progressBlock completion:completionBlock];
     } else {
         
         [self authorizeApiRequest:ucRequest];
@@ -231,11 +229,26 @@ static UCClient *instanceClient = nil;
         if ([ucRequest isKindOfClass:[UCRemoteFileUploadRequest class]]) {
             [self.pollingTasks addObject:@(task.taskIdentifier)];
         }
-        
-        [task resume];
+        [self launchTask:task progress:progressBlock completion:completionBlock];
     }
     
     return task;
+}
+
+- (void)launchTask:(NSURLSessionDataTask *)task
+          progress:(UCProgressBlock)progress
+        completion:(UCCompletionBlock)completion {
+    if (progress) [self storeProgress:progress forTaskID:task.taskIdentifier];
+    if (completion) [self storeCompletion:completion forTaskID:task.taskIdentifier];
+    [task resume];
+}
+
+- (void)storeCompletion:(UCCompletionBlock)completionBlock forTaskID:(NSUInteger)taskID {
+    [self.completionQueue setObject:completionBlock forKey:@(taskID)];
+}
+
+- (void)storeProgress:(UCProgressBlock)progressBlock forTaskID:(NSUInteger)taskID {
+    [self.progressQueue setObject:progressBlock forKey:@(taskID)];
 }
 
 - (NSString *)currentStoragePolitics {
@@ -257,6 +270,14 @@ static UCClient *instanceClient = nil;
     return returnedValue;
 }
 
+- (NSURLSession *)pollingSession {
+    if (!_pollingSession) {
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        _pollingSession = [NSURLSession sessionWithConfiguration:configuration delegate:nil delegateQueue:nil];
+    }
+    return _pollingSession;
+}
+
 - (NSURLSession *)session {
     if (!_session) {
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -274,6 +295,20 @@ static UCClient *instanceClient = nil;
     return _pollingTasks;
 }
 
+- (NSMutableDictionary *)completionQueue {
+    if (!_completionQueue) {
+        _completionQueue = [NSMutableDictionary new];
+    }
+    return _completionQueue;
+}
+
+- (NSMutableDictionary *)progressQueue {
+    if (!_progressQueue) {
+        _progressQueue = [NSMutableDictionary new];
+    }
+    return _progressQueue;
+}
+
 - (NSMutableDictionary *)responsesData {
     if (!_responsesData) {
         _responsesData = [NSMutableDictionary new];
@@ -284,38 +319,37 @@ static UCClient *instanceClient = nil;
 #pragma mark - NSURLSession delegate
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
-    NSMutableData *responseData = self.responsesData[@(dataTask.taskIdentifier)];
-    if (!responseData) {
-        responseData = [NSMutableData dataWithData:data];
-        self.responsesData[@(dataTask.taskIdentifier)] = responseData;
-    } else {
-        [responseData appendData:data];
-    }
+    self.responsesData[@(dataTask.taskIdentifier)] = data;
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
    didSendBodyData:(int64_t)bytesSent
     totalBytesSent:(int64_t)totalBytesSent
 totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
-    if (self.progressBlock) self.progressBlock(task.taskIdentifier, bytesSent, totalBytesSent, totalBytesExpectedToSend);
+    UCProgressBlock progressBlock = [self.progressQueue objectForKey:@(task.taskIdentifier)];
+    if (progressBlock) progressBlock(bytesSent, totalBytesSent, totalBytesExpectedToSend);
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
 didCompleteWithError:(nullable NSError *)error {
     id response = self.responsesData[@(task.taskIdentifier)];
-    
+    UCCompletionBlock completionBlock = [self.completionQueue objectForKey:@(task.taskIdentifier)];
+    UCProgressBlock progressBlock = [self.progressQueue objectForKey:@(task.taskIdentifier)];
+
     NSError *jsonError = nil;
     id responseJson = [NSJSONSerialization JSONObjectWithData:response options:0 error:&jsonError];
     
     if (!error && [self.pollingTasks containsObject:@(task.taskIdentifier)]) {
         if (jsonError) {
-            if (self.completionBlock) self.completionBlock (task.taskIdentifier, response, nil);
+            NSString *responseString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSLog(@"JSON error occured: %@\nfor response: %@", jsonError.localizedDescription, responseString);
+            if (completionBlock) completionBlock (response, nil);
         } else {
-            self.remoteObserver = [UCRemoteObserver observerWithToken:responseJson[@"token"] session:self.session progress:self.progressBlock completion:self.completionBlock];
+            self.remoteObserver = [UCRemoteObserver observerWithToken:responseJson[@"token"] session:self.pollingSession progress:progressBlock completion:completionBlock];
             [self.remoteObserver startObsrving];
         }
     } else {
-        if (self.completionBlock) self.completionBlock (task.taskIdentifier, responseJson ?: response, error);
+        if (completionBlock) completionBlock (responseJson ?: response, error);
     }
 }
 
