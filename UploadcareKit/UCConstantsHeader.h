@@ -6,11 +6,15 @@
 //  Copyright © 2016 Whitescape. All rights reserved.
 //
 
-#pragma mark - paths
+#pragma mark - root paths
 
 static NSString * const UCAPIProtocol				= @"https";
 static NSString * const UCApiRoot   				= @"upload.uploadcare.com";
+
+#pragma mark - paths
+
 static NSString * const UCFileUploadingPath 		= @"/base/";
+static NSString * const UCFileInfoPath				= @"/info/";
 static NSString * const UCRemoteFileUploadingPath 	= @"/from_url/";
 static NSString * const UCRemoteObservingPath	 	= @"/from_url/status/";
 

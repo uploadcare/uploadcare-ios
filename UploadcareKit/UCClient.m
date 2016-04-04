@@ -86,11 +86,11 @@ typedef NS_ENUM(NSUInteger, UCStoreOption) {
             NSString *status = responseData[@"status"];
             if ([status isEqualToString:@"success"]) {
                 [self stopObserving];
-                if (self.completionBlock) self.completionBlock(self.pollingTask.taskIdentifier, data, error);
+                if (self.completionBlock) self.completionBlock(self.pollingTask.taskIdentifier, responseData ?: data, error);
             } else if ([status isEqualToString:@"error"]) {
                 [self stopObserving];
                 NSError *error = [NSError errorWithDomain:self.errorDomain code:2001 userInfo:@{NSLocalizedDescriptionKey : responseData[@"error"]}];
-                if (self.completionBlock) self.completionBlock(self.pollingTask.taskIdentifier, data, error);
+                if (self.completionBlock) self.completionBlock(self.pollingTask.taskIdentifier, responseData ?: data, error);
             } else if ([status isEqualToString:@"progress"]) {
                 NSUInteger done = [responseData[@"done"] unsignedIntegerValue];
                 NSUInteger total = [responseData[@"total"] unsignedIntegerValue];
@@ -303,19 +303,19 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
 didCompleteWithError:(nullable NSError *)error {
     id response = self.responsesData[@(task.taskIdentifier)];
+    
+    NSError *jsonError = nil;
+    id responseJson = [NSJSONSerialization JSONObjectWithData:response options:0 error:&jsonError];
+    
     if (!error && [self.pollingTasks containsObject:@(task.taskIdentifier)]) {
-        NSError *jsonError = nil;
-        id responseJson = [NSJSONSerialization JSONObjectWithData:response options:0 error:&jsonError];
-        
         if (jsonError) {
-            if (self.completionBlock) self.completionBlock (task.taskIdentifier, response, jsonError);
+            if (self.completionBlock) self.completionBlock (task.taskIdentifier, response, nil);
+        } else {
+            self.remoteObserver = [UCRemoteObserver observerWithToken:responseJson[@"token"] session:self.session progress:self.progressBlock completion:self.completionBlock];
+            [self.remoteObserver startObsrving];
         }
-        
-        self.remoteObserver = [UCRemoteObserver observerWithToken:responseJson[@"token"] session:self.session progress:self.progressBlock completion:self.completionBlock];
-        [self.remoteObserver startObsrving];
-        
     } else {
-        if (self.completionBlock) self.completionBlock (task.taskIdentifier, response, error);
+        if (self.completionBlock) self.completionBlock (task.taskIdentifier, responseJson ?: response, error);
     }
 }
 
