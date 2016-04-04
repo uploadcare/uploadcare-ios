@@ -12,12 +12,12 @@
 @implementation UCGroupPostRequest
 
 + (instancetype)requestWithFileIDs:(NSArray<NSString *> *)fileIDs {
-    NSParameterAssert(fileIDs);
     UCGroupPostRequest *request = [[UCGroupPostRequest alloc] initWithFileIDs:fileIDs];
     return request;
 }
 
 - (id)initWithFileIDs:(NSArray *)fileIDs {
+    NSParameterAssert(fileIDs);
     self = [super init];
     if (self) {
         self.path = UCGroupUploadingPath;
@@ -29,7 +29,7 @@
 - (NSDictionary *)filesDictionaryFromIDs:(NSArray *)fileIDs {
     NSMutableDictionary *returnedValue = @{}.mutableCopy;
     [fileIDs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSString *key = [NSString stringWithFormat:@"files[%i]", idx];
+        NSString *key = [NSString stringWithFormat:@"files[%lu]", (unsigned long)idx];
         [returnedValue setObject:obj forKey:key];
     }];
     return returnedValue.copy;

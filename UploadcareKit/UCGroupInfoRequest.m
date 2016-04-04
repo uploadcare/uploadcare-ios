@@ -17,6 +17,7 @@
 }
 
 - (id)initWithGroupID:(NSString *)groupID {
+    NSParameterAssert(groupID);
     self = [super init];
     if (self) {
         self.path = UCGroupInfoPath;

@@ -18,6 +18,7 @@
 }
 
 - (id)initWithfileID:(NSString *)fileID {
+    NSParameterAssert(fileID);
     self = [super init];
     if (self) {
         self.parameters = @{@"file_id": fileID};

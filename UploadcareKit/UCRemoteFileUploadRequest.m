@@ -12,7 +12,7 @@
 @implementation UCRemoteFileUploadRequest
 
 + (instancetype)requestWithRemoteFileURL:(NSURL *)fileURL {
-    return [[selfClass alloc] initWithRemoteFileURL:fileURL];
+    return [[UCRemoteFileUploadRequest alloc] initWithRemoteFileURL:fileURL];
 }
 
 - (id)initWithRemoteFileURL:(NSURL *)fileURL {

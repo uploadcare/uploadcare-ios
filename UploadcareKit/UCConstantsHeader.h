@@ -25,10 +25,3 @@ static NSString * const UCGroupInfoPath				= @"/group/info/";
 static NSString * const UCRootDomain				= @"com.uploadcare.upload";
 static NSString * const UCLocalFileUploadDomain		= @"local";
 static NSString * const UCRemoteFileUploadDomain	= @"remote";
-
-#pragma mark - macroses
-
-#define selfClass [self class]
-
-
-

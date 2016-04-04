@@ -26,7 +26,7 @@
     [components setScheme:UCAPIProtocol];
     [components setHost:UCApiRoot];
     [components setPath:self.path];
-    [components setQuery:self.parameters.urlOriginalString];
+    [components setQuery:self.parameters.uc_urlOriginalString];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[components URL]];
     

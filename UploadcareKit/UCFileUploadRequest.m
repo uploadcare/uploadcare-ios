@@ -29,11 +29,11 @@
 + (instancetype)requestWithFileData:(NSData *)fileData
                            fileName:(NSString *)fileName
                            mimeType:(NSString *)mimeType {
-    return [[selfClass alloc] initWithFileData:fileData fileName:fileName mimeType:mimeType];
+    return [[UCFileUploadRequest alloc] initWithFileData:fileData fileName:fileName mimeType:mimeType];
 }
 
 + (instancetype)requestWithFileURL:(NSURL *)fileURL {
-    return [[selfClass alloc] initWithFileURL:fileURL];
+    return [[UCFileUploadRequest alloc] initWithFileURL:fileURL];
 }
 
 - (id)initWithFileData:(NSData *)fileData

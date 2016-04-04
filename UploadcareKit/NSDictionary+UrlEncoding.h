@@ -10,7 +10,7 @@
 
 @interface NSDictionary (UrlEncoding)
 
-- (NSString *)urlEncodedString;
-- (NSString *)urlOriginalString;
+- (NSString *)uc_urlEncodedString;
+- (NSString *)uc_urlOriginalString;
 
 @end

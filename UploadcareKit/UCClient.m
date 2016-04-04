@@ -24,6 +24,29 @@ typedef NS_ENUM(NSUInteger, UCStoreOption) {
     UCStoreOptionNO = 2
 };
 
+@protocol UCMultipartFormDataProtocol <NSObject>
+
+- (void)appendPartWithFileData:(NSData *)data
+                          name:(NSString *)name
+                      fileName:(NSString *)fileName
+                      mimeType:(NSString *)mimeType;
+
+- (void)appendPartWithValue:(NSString *)value
+                       name:(NSString *)name;
+
+- (void)appendPartWithPayload:(UCAPIRequestPayload *)payload;
+
+@end
+
+@interface UCMultipartFormData : NSObject <UCMultipartFormDataProtocol>
+
+@property (nonatomic, strong) NSString *boundary;
+
+- (NSUInteger)contentLength;
+- (NSData *)bodyByFinalizingMultipartData;
+
+@end
+
 #ifndef NSFoundationVersionNumber_iOS_8_0
 #define NSFoundationVersionNumber_With_Fixed_5871104061079552_bug 1140.11
 #else
@@ -192,12 +215,14 @@ static NSUInteger const UCErrorUploadcare = 1002;
     return [@[UCRootDomain, UCRemoteFileUploadDomain] componentsJoinedByString:@"."];
 }
 
+static NSString * const UCFileTokenKey = @"token";
+
 - (NSURLRequest *)pollingRequest {
     NSURLComponents *components = [NSURLComponents new];
     [components setScheme:UCAPIProtocol];
     [components setHost:UCApiRoot];
     [components setPath:UCRemoteObservingPath];
-    [components setQuery:@{@"token": self.token}.urlOriginalString];
+    [components setQuery:@{UCFileTokenKey: self.token}.uc_urlOriginalString];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[components URL]];
     return request;
 }
@@ -280,7 +305,7 @@ static UCClient *instanceClient = nil;
 - (void)addMultipartHeadersForRequest:(NSMutableURLRequest *)request boundary:(NSString *)boundary contentLength:(NSUInteger)conentLength {
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
-    NSString *postLength = [NSString stringWithFormat:@"%d", conentLength];
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)conentLength];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
 }
 
@@ -346,24 +371,7 @@ static UCClient *instanceClient = nil;
     }
 }
 
-- (NSString *)currentStoragePolitics {
-    NSString *returnedValue = nil;
-    switch (self.storeOption) {
-        case UCStoreOptionAutomatic: {
-            returnedValue = @"auto";
-            break;
-        }
-        case UCStoreOptionYES: {
-            returnedValue = @"1";
-            break;
-        }
-        case UCStoreOptionNO: {
-            returnedValue = @"0";
-            break;
-        }
-    }
-    return returnedValue;
-}
+#pragma mark - Lazy initializers
 
 - (NSURLSession *)pollingSession {
     if (!_pollingSession) {
@@ -380,8 +388,6 @@ static UCClient *instanceClient = nil;
     }
     return _session;
 }
-
-#pragma mark - lazy initializers
 
 - (NSMutableArray *)pollingTasks {
     if (!_pollingTasks) {
@@ -452,6 +458,27 @@ didCompleteWithError:(nullable NSError *)error {
     }
 }
 
+#pragma mark - Utilities
+
+- (NSString *)currentStoragePolitics {
+    NSString *returnedValue = nil;
+    switch (self.storeOption) {
+        case UCStoreOptionAutomatic: {
+            returnedValue = @"auto";
+            break;
+        }
+        case UCStoreOptionYES: {
+            returnedValue = @"1";
+            break;
+        }
+        case UCStoreOptionNO: {
+            returnedValue = @"0";
+            break;
+        }
+    }
+    return returnedValue;
+}
+
 - (void)removeQueuesForTaskId:(NSUInteger)taskId {
     @synchronized (self.completionQueue) {
         [self.completionQueue removeObjectForKey:@(taskId)];
@@ -477,10 +504,6 @@ didCompleteWithError:(nullable NSError *)error {
         _boundary = UCCreateMultipartFormBoundary();
     }
     return self;
-}
-
-- (NSUInteger)contentLength {
-    return [[self bodyByFinalizingMultipartData] length];
 }
 
 - (void)appendPartWithPayload:(UCAPIRequestPayload *)payload {
@@ -514,6 +537,10 @@ didCompleteWithError:(nullable NSError *)error {
     [data appendData:[UCMultipartFormFinalBoundary(self.boundary)
                       dataUsingEncoding:NSUTF8StringEncoding]];
     return [data copy];
+}
+
+- (NSUInteger)contentLength {
+    return [[self bodyByFinalizingMultipartData] length];
 }
 
 #pragma mark - Utilities

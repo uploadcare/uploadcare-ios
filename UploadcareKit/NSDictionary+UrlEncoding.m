@@ -19,11 +19,11 @@ static NSString *urlEncode(id object) {
 
 @implementation NSDictionary (UrlEncoding)
 
-- (NSString *)urlEncodedString {
+- (NSString *)uc_urlEncodedString {
     return [self urlStringEncoded:YES];
 }
 
-- (NSString *)urlOriginalString {
+- (NSString *)uc_urlOriginalString {
     return [self urlStringEncoded:NO];
 }
 
