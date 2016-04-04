@@ -8,7 +8,9 @@
 
 /* Exceptions thrown by the Uploadcare Kit */
 
-/** 
+#import <Foundation/Foundation.h>
+
+/**
  Uploadcare Kit throws this exception when requested to operate with no public key provided.
  Please consult the documentation: http://github.com/uploadcare/uploadcare-ios */
 extern NSString *const UploadcareMissingPublicKeyException;

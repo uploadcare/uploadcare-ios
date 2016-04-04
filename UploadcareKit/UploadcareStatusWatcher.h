@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PTPusherDelegate.h"
 
-@interface UploadcareStatusWatcher : NSObject<PTPusherDelegate>
+@interface UploadcareStatusWatcher : NSObject
 
 + (id)watchUploadWithToken:(NSString *)token progressBlock:(UploadcareProgressBlock)progressBlock successBlock:(UploadcareSuccessBlock)successBlock failureBlock:(UploadcareFailureBlock)failureBlock;
 

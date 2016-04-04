@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Uploadcare. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "UploadcareError.h"
 
 NSString *const UploadcareMissingPublicKeyException = @"UploadcareMissingPublicKeyException";
