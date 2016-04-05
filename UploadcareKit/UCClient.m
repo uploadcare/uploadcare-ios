@@ -169,20 +169,22 @@ static NSUInteger const UCErrorUploadcare = 1002;
         }
     }
     __block NSURLSessionDataTask *pollingTask = nil;
+    __weak __typeof(self) weakSelf = self;
     url_session_client_create_task_safely(^{
         pollingTask = [self.session dataTaskWithRequest:self.pollingRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
             if (!error && data) {
                 NSError *jsonError = nil;
                 id responseData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
                 if (responseData) {
-                    [self handleStatusData:responseData];
+                    [strongSelf handleStatusData:responseData];
                 } else {
-                    [self stopObserving];
-                    [self handleError:jsonError data:data];
+                    [strongSelf stopObserving];
+                    [strongSelf handleError:jsonError data:data];
                 }
             } else if (error) {
-                [self stopObserving];
-                [self handleError:error data:data];
+                [strongSelf stopObserving];
+                [strongSelf handleError:error data:data];
             }
         }];
     });
@@ -191,7 +193,8 @@ static NSUInteger const UCErrorUploadcare = 1002;
 }
 
 - (void)handleError:(NSError *)error data:(NSData *)data {
-    if (self.completionBlock) self.completionBlock([self appropriateResponseObjectFromData:data error:nil], error);
+    __weak __typeof(self) weakSelf = self;
+    if (self.completionBlock) self.completionBlock([weakSelf appropriateResponseObjectFromData:data error:nil], error);
 }
 
 - (void)handleStatusData:(id)statusData {
