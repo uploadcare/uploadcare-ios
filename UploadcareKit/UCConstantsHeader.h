@@ -11,7 +11,7 @@
 static NSString * const UCAPIProtocol				= @"https";
 static NSString * const UCApiRoot   				= @"upload.uploadcare.com";
 
-#pragma mark - paths
+#pragma mark - api paths
 
 static NSString * const UCFileUploadingPath 		= @"/base/";
 static NSString * const UCFileInfoPath				= @"/info/";

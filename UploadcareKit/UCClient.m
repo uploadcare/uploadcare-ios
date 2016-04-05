@@ -7,6 +7,7 @@
 //
 
 #import "UCClient.h"
+#import "UCClient_Private.h"
 #import "UCAPIRequest.h"
 #import "UCFileUploadRequest.h"
 #import "UCRemoteFileUploadRequest.h"
@@ -330,9 +331,7 @@ static UCClient *instanceClient = nil;
                                    boundary:bodyData.boundary
                               contentLength:bodyData.contentLength];
         
-        url_session_client_create_task_safely(^{
-            task = [self.session uploadTaskWithRequest:urlRequest fromData:[bodyData bodyByFinalizingMultipartData]];
-        });
+        task = [self uploadTaskWithRequest:urlRequest data:[bodyData bodyByFinalizingMultipartData]];
         
         [self launchTask:task progress:progressBlock completion:completionBlock];
     } else {
@@ -341,9 +340,7 @@ static UCClient *instanceClient = nil;
 
         NSMutableURLRequest *urlRequest = [ucRequest request];
         
-        url_session_client_create_task_safely(^{
-            task = [self.session dataTaskWithRequest:urlRequest];
-        });
+        task = [self dataTaskWithRequest:urlRequest completion:nil];
         
         if ([ucRequest isKindOfClass:[UCRemoteFileUploadRequest class]]) {
             [self.pollingTasks addObject:@(task.taskIdentifier)];
@@ -351,6 +348,27 @@ static UCClient *instanceClient = nil;
         [self launchTask:task progress:progressBlock completion:completionBlock];
     }
     
+    return task;
+}
+
+- (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request data:(NSData *)data {
+    __block NSURLSessionUploadTask *task = nil;
+    url_session_client_create_task_safely(^{
+        task = [self.session uploadTaskWithRequest:request fromData:data];
+    });
+    return task;
+}
+
+- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request
+                                   completion:(void (^)(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error))completionHandler {
+    __block NSURLSessionDataTask *task = nil;
+    url_session_client_create_task_safely(^{
+        if (completionHandler) {
+            task = [self.session dataTaskWithRequest:request];
+        } else {
+            task = [self.session dataTaskWithRequest:request completionHandler:completionHandler];
+        }
+    });
     return task;
 }
 

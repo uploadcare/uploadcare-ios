@@ -23,6 +23,8 @@
 		06A6DACB1CB3E063000B4E8A /* UCGroupPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DAC21CB3E063000B4E8A /* UCGroupPostRequest.m */; };
 		06A6DACC1CB3E063000B4E8A /* UCRemoteFileUploadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DAC41CB3E063000B4E8A /* UCRemoteFileUploadRequest.m */; };
 		06A6DAD11CB3E134000B4E8A /* testimage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06A6DAD01CB3E134000B4E8A /* testimage.jpg */; };
+		06A6DBB51CB4073E000B4E8A /* UCSocialRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DBB41CB4073E000B4E8A /* UCSocialRequest.m */; };
+		06A6DBB91CB408B6000B4E8A /* UCClient+Social.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DBB81CB408B6000B4E8A /* UCClient+Social.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,12 @@
 		06A6DAC41CB3E063000B4E8A /* UCRemoteFileUploadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCRemoteFileUploadRequest.m; sourceTree = "<group>"; };
 		06A6DAD01CB3E134000B4E8A /* testimage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = testimage.jpg; path = Resources/testimage.jpg; sourceTree = "<group>"; };
 		06A6DAD21CB3E69B000B4E8A /* UCKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCKit.h; sourceTree = "<group>"; };
+		06A6DBB31CB4073E000B4E8A /* UCSocialRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCSocialRequest.h; sourceTree = "<group>"; };
+		06A6DBB41CB4073E000B4E8A /* UCSocialRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialRequest.m; sourceTree = "<group>"; };
+		06A6DBB61CB407B0000B4E8A /* UCSocialConstantsHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCSocialConstantsHeader.h; sourceTree = "<group>"; };
+		06A6DBB71CB408B6000B4E8A /* UCClient+Social.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UCClient+Social.h"; sourceTree = "<group>"; };
+		06A6DBB81CB408B6000B4E8A /* UCClient+Social.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UCClient+Social.m"; sourceTree = "<group>"; };
+		06A6DBBB1CB40A72000B4E8A /* UCClient_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCClient_Private.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +101,7 @@
 				06A6DAB31CB3E063000B4E8A /* UploadcareKit */,
 				06A6DA9C1CB3D746000B4E8A /* AppDelegate.h */,
 				06A6DA9D1CB3D746000B4E8A /* AppDelegate.m */,
+				06A6DBBA1CB408BB000B4E8A /* New widget */,
 				06A6DA9F1CB3D746000B4E8A /* ViewController.h */,
 				06A6DAA01CB3D746000B4E8A /* ViewController.m */,
 				06A6DAB01CB3DA14000B4E8A /* DetailViewController.h */,
@@ -121,6 +130,7 @@
 				06A6DAB51CB3E063000B4E8A /* NSDictionary+UrlEncoding.m */,
 				06A6DAB61CB3E063000B4E8A /* UCAPIRequest.h */,
 				06A6DAB71CB3E063000B4E8A /* UCAPIRequest.m */,
+				06A6DBBB1CB40A72000B4E8A /* UCClient_Private.h */,
 				06A6DAB81CB3E063000B4E8A /* UCClient.h */,
 				06A6DAB91CB3E063000B4E8A /* UCClient.m */,
 				06A6DABA1CB3E063000B4E8A /* UCConstantsHeader.h */,
@@ -146,6 +156,19 @@
 				06A6DAD01CB3E134000B4E8A /* testimage.jpg */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		06A6DBBA1CB408BB000B4E8A /* New widget */ = {
+			isa = PBXGroup;
+			children = (
+				06A6DBB71CB408B6000B4E8A /* UCClient+Social.h */,
+				06A6DBB81CB408B6000B4E8A /* UCClient+Social.m */,
+				06A6DBB31CB4073E000B4E8A /* UCSocialRequest.h */,
+				06A6DBB41CB4073E000B4E8A /* UCSocialRequest.m */,
+				06A6DBB61CB407B0000B4E8A /* UCSocialConstantsHeader.h */,
+			);
+			name = "New widget";
+			path = ../../UploadcareWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,7 +245,9 @@
 				06A6DAC61CB3E063000B4E8A /* UCAPIRequest.m in Sources */,
 				06A6DAA11CB3D746000B4E8A /* ViewController.m in Sources */,
 				06A6DACB1CB3E063000B4E8A /* UCGroupPostRequest.m in Sources */,
+				06A6DBB51CB4073E000B4E8A /* UCSocialRequest.m in Sources */,
 				06A6DAC71CB3E063000B4E8A /* UCClient.m in Sources */,
+				06A6DBB91CB408B6000B4E8A /* UCClient+Social.m in Sources */,
 				06A6DACC1CB3E063000B4E8A /* UCRemoteFileUploadRequest.m in Sources */,
 				06A6DAC81CB3E063000B4E8A /* UCFileInfoRequest.m in Sources */,
 				06A6DA9E1CB3D746000B4E8A /* AppDelegate.m in Sources */,
