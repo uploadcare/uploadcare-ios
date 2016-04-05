@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "DetailViewController.h"
 #import "UCKit.h"
+#import "UCWidgetVC.h"
 
 #define RLog(fmt, ...)  { [self presentLogMessage:[NSString stringWithFormat:fmt, ##__VA_ARGS__]];}
 
@@ -24,16 +25,27 @@ typedef NS_ENUM(NSUInteger, kCellType) {
     kCellTypeUploadVeryBigRemote,
     kCellTypeGetFileInfo,
     kCellTypeCreateGroup,
-    kCellTypeGetGroupInfo
+    kCellTypeGetGroupInfo,
+};
+
+typedef NS_ENUM(NSUInteger, kSectionType) {
+    kSectionTypeCore,
+    kSectionTypeWidget
 };
 
 #define ROWS_COUNT 7
+#define SECTIONS_COUNT 2
 
-@interface ViewController () <UITableViewDataSource>
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @end
 
 @implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.tableView.delegate = self;
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"detailSegue"]) {
@@ -45,16 +57,57 @@ typedef NS_ENUM(NSUInteger, kCellType) {
     }
 }
 
-#pragma mark - <UITableViewDelegate>
+#pragma mark - <UITableViewDelegate> <UITableViewDataSource>
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == kSectionTypeCore) {
+        return @"Core";
+    } else if (section == kSectionTypeWidget) {
+        return @"Widget";
+    } else {
+        return nil;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == kSectionTypeCore) {
+        [self performSegueWithIdentifier:@"detailSegue" sender:[tableView cellForRowAtIndexPath:indexPath]];
+    } else if (indexPath.section == kSectionTypeWidget) {
+        [self showWidget];
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return ROWS_COUNT;
+    switch (section) {
+        case kSectionTypeCore:
+            return ROWS_COUNT;
+            break;
+            
+        default:
+            return 1;
+            break;
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return SECTIONS_COUNT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    [cell.textLabel setText:cellTitleForType(indexPath.row)];
+    if (indexPath.section == 0) {
+        [cell.textLabel setText:cellTitleForType(indexPath.row)];
+    } else {
+        [cell.textLabel setText:@"Show widget"];
+    }
     return cell;
+}
+
+#pragma mark - Uploadcare widget calls
+
+- (void)showWidget {
+    UCWidgetVC *wvc = [UCWidgetVC new];
+    [self.navigationController pushViewController:wvc animated:YES];
 }
 
 #pragma mark - Uploadcare requests
@@ -99,8 +152,6 @@ typedef NS_ENUM(NSUInteger, kCellType) {
         }
     }
 }
-
-
 
 - (void)testDataUpload:(NSData *)data completion:(void(^)(NSString *fileID))completion {
     UCFileUploadRequest *request = [UCFileUploadRequest requestWithFileData:[self localFileData] fileName:@"file" mimeType:@"image/jpeg"];

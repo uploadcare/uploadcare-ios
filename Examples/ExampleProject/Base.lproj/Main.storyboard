@@ -37,7 +37,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="7Vr-uk-dz0" style="IBUITableViewCellStyleDefault" id="v89-yB-l7S">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="7Vr-uk-dz0" style="IBUITableViewCellStyleDefault" id="v89-yB-l7S">
                                         <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v89-yB-l7S" id="DrE-ht-sk7">
@@ -53,9 +53,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Ffe-HD-4ez" kind="modal" identifier="detailSegue" modalTransitionStyle="crossDissolve" id="LJf-kO-Yhb"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -74,6 +71,7 @@
                     <navigationItem key="navigationItem" title="Uploadcare" id="v2x-VV-Hgm"/>
                     <connections>
                         <outlet property="tableView" destination="1XD-ri-4r0" id="jvN-mI-Zg2"/>
+                        <segue destination="Ffe-HD-4ez" kind="modal" identifier="detailSegue" id="TTW-Dv-na8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -113,6 +111,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jhN-Cd-dDJ" firstAttribute="leading" secondItem="Vrm-Oy-UWD" secondAttribute="leading" constant="20" id="SlI-br-8PK"/>
                             <constraint firstAttribute="trailing" secondItem="jhN-Cd-dDJ" secondAttribute="trailing" constant="20" id="ZaU-r5-9sn"/>

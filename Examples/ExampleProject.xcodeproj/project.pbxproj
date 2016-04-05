@@ -25,6 +25,7 @@
 		06A6DAD11CB3E134000B4E8A /* testimage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06A6DAD01CB3E134000B4E8A /* testimage.jpg */; };
 		06A6DBB51CB4073E000B4E8A /* UCSocialRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DBB41CB4073E000B4E8A /* UCSocialRequest.m */; };
 		06A6DBB91CB408B6000B4E8A /* UCClient+Social.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DBB81CB408B6000B4E8A /* UCClient+Social.m */; };
+		06A6DCAC1CB41C9B000B4E8A /* UCWidgetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DCAB1CB41C9B000B4E8A /* UCWidgetVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,8 @@
 		06A6DBB71CB408B6000B4E8A /* UCClient+Social.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UCClient+Social.h"; sourceTree = "<group>"; };
 		06A6DBB81CB408B6000B4E8A /* UCClient+Social.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UCClient+Social.m"; sourceTree = "<group>"; };
 		06A6DBBB1CB40A72000B4E8A /* UCClient_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCClient_Private.h; sourceTree = "<group>"; };
+		06A6DCAA1CB41C9B000B4E8A /* UCWidgetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCWidgetVC.h; sourceTree = "<group>"; };
+		06A6DCAB1CB41C9B000B4E8A /* UCWidgetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCWidgetVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +169,8 @@
 				06A6DBB31CB4073E000B4E8A /* UCSocialRequest.h */,
 				06A6DBB41CB4073E000B4E8A /* UCSocialRequest.m */,
 				06A6DBB61CB407B0000B4E8A /* UCSocialConstantsHeader.h */,
+				06A6DCAA1CB41C9B000B4E8A /* UCWidgetVC.h */,
+				06A6DCAB1CB41C9B000B4E8A /* UCWidgetVC.m */,
 			);
 			name = "New widget";
 			path = ../../UploadcareWidget;
@@ -249,6 +254,7 @@
 				06A6DAC71CB3E063000B4E8A /* UCClient.m in Sources */,
 				06A6DBB91CB408B6000B4E8A /* UCClient+Social.m in Sources */,
 				06A6DACC1CB3E063000B4E8A /* UCRemoteFileUploadRequest.m in Sources */,
+				06A6DCAC1CB41C9B000B4E8A /* UCWidgetVC.m in Sources */,
 				06A6DAC81CB3E063000B4E8A /* UCFileInfoRequest.m in Sources */,
 				06A6DA9E1CB3D746000B4E8A /* AppDelegate.m in Sources */,
 				06A6DA9B1CB3D746000B4E8A /* main.m in Sources */,
