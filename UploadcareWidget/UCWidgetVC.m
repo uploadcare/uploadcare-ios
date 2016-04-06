@@ -8,27 +8,75 @@
 
 #import "UCWidgetVC.h"
 #import "UCClient+Social.h"
-#import "UCSocialRequest.h"
+#import "UCSocialSourcesRequest.h"
+#import "UCSocialMacroses.h"
+#import "UCSocialSource.h"
 
-@interface UCSocialSource : NSObject
+@interface UCThingAction : NSObject
+@property (nonatomic, strong) NSString *action;
+@property (nonatomic, strong) NSString *objectType;
+@property (nonatomic, strong) NSString *urlString;
 
-@property (nonatomic, strong) NSString *sourceName;
-@property (nonatomic, strong) NSArray *rootChunks;
-@property (nonatomic, strong) NSArray *urls;
+- (id)initWithObject:(id)object;
+@end
 
-+ (instancetype)sourceFromDictionary:(NSDictionary *)dictionary;
+@implementation UCThingAction
+- (id)initWithObject:(id)object {
+    self = [super init];
+    if (self) {
+        self.action = object[@"action"];
+        self.objectType = object[@"obj_type"];
+        self.urlString = object[@"url"];
+    }
+    return self;
+}
+@end
+
+@interface UCThing : NSObject
+
+@property (nonatomic, strong) UCThingAction *action;
+@property (nonatomic, strong) NSString *mimeType;
+@property (nonatomic, strong) NSString *objType;
+@property (nonatomic, strong) NSString *thumbnail;
+@property (nonatomic, strong) NSString *title;
+
+- (id)initWithObject:(id)object;
+@end
+
+@implementation UCThing
+
+- (id)initWithObject:(id)object {
+    self = [super init];
+    if (self) {
+        self.action = [[UCThingAction alloc] initWithObject:object[@"action"]];
+        SetIfNotNull(self.mimeType, object[@"mimetype"])
+        SetIfNotNull(self.thumbnail, object[@"thumbnail"])
+        SetIfNotNull(self.title, object[@"title"]);
+    }
+    return self;
+}
 
 @end
 
-@implementation UCSocialSource
+@interface UCThingsCollection : NSObject
 
-+ (instancetype)sourceFromDictionary:(NSDictionary *)dictionary {
-    UCSocialSource *source = [[UCSocialSource alloc] initWithDictionary:dictionary];
-    return source;
+@property (nonatomic, strong) NSDictionary *nextPage;
+@property (nonatomic, strong) NSDictionary *path;
+@property (nonatomic, strong) NSDictionary *root;
+@property (nonatomic, strong) NSArray<UCThing*> *things;
+
++ (instancetype)collectionFromDictionary:(NSDictionary *)dictionary;
+
+@end
+
+@implementation UCThingsCollection
+
++ (instancetype)collectionFromDictionary:(NSDictionary *)dictionary {
+    UCThingsCollection *collection = [[UCThingsCollection alloc] initWithDeserializedObject:dictionary];
+    return collection;
 }
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
-    NSParameterAssert(dictionary);
+- (id)initWithDeserializedObject:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
         [self updateWithDeserializedObject:dictionary];
@@ -37,10 +85,15 @@
 }
 
 - (void)updateWithDeserializedObject:(id)object {
-    self.sourceName = object[@"name"];
-    self.rootChunks = object[@"root_chunks"];
-    self.urls = object[@"urls"];
-    NSLog(@"Object: %@", object);
+    SetIfNotNull(self.nextPage, object[@"next_page"]);
+    SetIfNotNull(self.path, object[@"path"])
+    SetIfNotNull(self.root, object[@"root"])
+    NSMutableArray *things = @[].mutableCopy;
+    [object[@"things"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UCThing *thing = [[UCThing alloc] initWithObject:obj];
+        if (thing) [things addObject:thing];
+    }];
+    self.things = things;
 }
 
 @end
@@ -54,13 +107,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    [[UCClient defaultClient] performUCSocialRequest:[UCSocialRequest new] completion:^(id response, NSError *error) {
+    [self fetchSocialSources];
+}
+
+- (void)fetchSocialSources {
+    [[UCClient defaultClient] performUCSocialRequest:[UCSocialSourcesRequest new] completion:^(id response, NSError *error) {
         if (!error) {
             NSArray *sources = response[@"sources"];
             NSMutableArray *result = @[].mutableCopy;
             for (id source in sources) {
-                UCSocialSource *socialSource = [UCSocialSource sourceFromDictionary:source];
-                [result addObject:socialSource];
+                UCSocialSource *socialSource = [[UCSocialSource alloc] initWithSerializedObject:source];
+                if (socialSource) [result addObject:socialSource];
             }
             self.tableData = result.copy;
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -71,12 +128,28 @@
             [self handleError:error];
         }
     }];
+}
+
+- (void)queryObjectOrLoginAddressForSourceBase:(NSString *)sourceBase rootChunkPath:(NSString *)rootChunkPath path:(id)path {
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+//    NSString *absolutePath;
+//    absolutePath = [[USSBaseAddress stringByAppendingPathComponent:sourceBase] stringByAppendingPathComponent:rootChunkPath];
+//    
+//    [self.client getPath:absolutePath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        assert([responseObject isKindOfClass:[NSDictionary class]]);
+//        NSString *loginAddress = [responseObject objectForKey:USSLoginAddressKey];
+//        if (loginAddress) {
+//            resultBlock(nil, loginAddress, nil);
+//        }else if([[responseObject objectForKey:@"obj_type"]isEqualToString:@"error"]) {
+//            resultBlock(nil, nil, [NSError errorWithDomain:USSErrorDomain code:1 userInfo:responseObject]);
+//        }else {
+//            USSThingSet *thingSet = [[USSThingSet alloc]initWithJSON:responseObject];
+//            resultBlock(thingSet, nil, nil);
+//        }
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        resultBlock(nil, nil, error);
+//    }];
 }
 
 - (void)handleError:(NSError *)error {
@@ -103,6 +176,13 @@
     UCSocialSource *social = self.tableData[indexPath.row];
     cell.textLabel.text = social.sourceName;
     return cell;
+}
+
+#pragma mark - <UITableViewDelegate>
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UCSocialSource *social = self.tableData[indexPath.row];
+    [self queryObjectOrLoginAddressForSourceBase:social.urls[@"source_base"] rootChunkPath:social.rootChunks.firstObject[@"path_chunk"] path:nil];
 }
 
 /*

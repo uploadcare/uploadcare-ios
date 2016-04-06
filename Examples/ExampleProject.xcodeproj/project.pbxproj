@@ -26,6 +26,10 @@
 		06A6DBB51CB4073E000B4E8A /* UCSocialRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DBB41CB4073E000B4E8A /* UCSocialRequest.m */; };
 		06A6DBB91CB408B6000B4E8A /* UCClient+Social.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DBB81CB408B6000B4E8A /* UCClient+Social.m */; };
 		06A6DCAC1CB41C9B000B4E8A /* UCWidgetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DCAB1CB41C9B000B4E8A /* UCWidgetVC.m */; };
+		06A6DCAF1CB51552000B4E8A /* UCSocialSourcesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DCAE1CB51552000B4E8A /* UCSocialSourcesRequest.m */; };
+		06A6DCB31CB515FC000B4E8A /* UCSocialSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DCB21CB515FC000B4E8A /* UCSocialSource.m */; };
+		06A6DCB71CB516E7000B4E8A /* UCSocialChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DCB61CB516E7000B4E8A /* UCSocialChunk.m */; };
+		06A6DCBB1CB51901000B4E8A /* UCSocialObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DCBA1CB51901000B4E8A /* UCSocialObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +72,15 @@
 		06A6DBBB1CB40A72000B4E8A /* UCClient_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCClient_Private.h; sourceTree = "<group>"; };
 		06A6DCAA1CB41C9B000B4E8A /* UCWidgetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCWidgetVC.h; sourceTree = "<group>"; };
 		06A6DCAB1CB41C9B000B4E8A /* UCWidgetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCWidgetVC.m; sourceTree = "<group>"; };
+		06A6DCAD1CB51552000B4E8A /* UCSocialSourcesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCSocialSourcesRequest.h; sourceTree = "<group>"; };
+		06A6DCAE1CB51552000B4E8A /* UCSocialSourcesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialSourcesRequest.m; sourceTree = "<group>"; };
+		06A6DCB11CB515FC000B4E8A /* UCSocialSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCSocialSource.h; path = Model/UCSocialSource.h; sourceTree = "<group>"; };
+		06A6DCB21CB515FC000B4E8A /* UCSocialSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCSocialSource.m; path = Model/UCSocialSource.m; sourceTree = "<group>"; };
+		06A6DCB41CB51636000B4E8A /* UCSocialMacroses.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCSocialMacroses.h; sourceTree = "<group>"; };
+		06A6DCB51CB516E7000B4E8A /* UCSocialChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCSocialChunk.h; path = Model/UCSocialChunk.h; sourceTree = "<group>"; };
+		06A6DCB61CB516E7000B4E8A /* UCSocialChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCSocialChunk.m; path = Model/UCSocialChunk.m; sourceTree = "<group>"; };
+		06A6DCB91CB51901000B4E8A /* UCSocialObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCSocialObject.h; path = Model/UCSocialObject.h; sourceTree = "<group>"; };
+		06A6DCBA1CB51901000B4E8A /* UCSocialObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCSocialObject.m; path = Model/UCSocialObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,16 +177,33 @@
 		06A6DBBA1CB408BB000B4E8A /* New widget */ = {
 			isa = PBXGroup;
 			children = (
+				06A6DCB01CB515C4000B4E8A /* Model */,
 				06A6DBB71CB408B6000B4E8A /* UCClient+Social.h */,
 				06A6DBB81CB408B6000B4E8A /* UCClient+Social.m */,
+				06A6DCAD1CB51552000B4E8A /* UCSocialSourcesRequest.h */,
+				06A6DCAE1CB51552000B4E8A /* UCSocialSourcesRequest.m */,
 				06A6DBB31CB4073E000B4E8A /* UCSocialRequest.h */,
 				06A6DBB41CB4073E000B4E8A /* UCSocialRequest.m */,
 				06A6DBB61CB407B0000B4E8A /* UCSocialConstantsHeader.h */,
+				06A6DCB41CB51636000B4E8A /* UCSocialMacroses.h */,
 				06A6DCAA1CB41C9B000B4E8A /* UCWidgetVC.h */,
 				06A6DCAB1CB41C9B000B4E8A /* UCWidgetVC.m */,
 			);
 			name = "New widget";
 			path = ../../UploadcareWidget;
+			sourceTree = "<group>";
+		};
+		06A6DCB01CB515C4000B4E8A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				06A6DCB11CB515FC000B4E8A /* UCSocialSource.h */,
+				06A6DCB21CB515FC000B4E8A /* UCSocialSource.m */,
+				06A6DCB51CB516E7000B4E8A /* UCSocialChunk.h */,
+				06A6DCB61CB516E7000B4E8A /* UCSocialChunk.m */,
+				06A6DCB91CB51901000B4E8A /* UCSocialObject.h */,
+				06A6DCBA1CB51901000B4E8A /* UCSocialObject.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,16 +280,20 @@
 				06A6DAC61CB3E063000B4E8A /* UCAPIRequest.m in Sources */,
 				06A6DAA11CB3D746000B4E8A /* ViewController.m in Sources */,
 				06A6DACB1CB3E063000B4E8A /* UCGroupPostRequest.m in Sources */,
+				06A6DCAF1CB51552000B4E8A /* UCSocialSourcesRequest.m in Sources */,
 				06A6DBB51CB4073E000B4E8A /* UCSocialRequest.m in Sources */,
 				06A6DAC71CB3E063000B4E8A /* UCClient.m in Sources */,
+				06A6DCBB1CB51901000B4E8A /* UCSocialObject.m in Sources */,
 				06A6DBB91CB408B6000B4E8A /* UCClient+Social.m in Sources */,
 				06A6DACC1CB3E063000B4E8A /* UCRemoteFileUploadRequest.m in Sources */,
 				06A6DCAC1CB41C9B000B4E8A /* UCWidgetVC.m in Sources */,
 				06A6DAC81CB3E063000B4E8A /* UCFileInfoRequest.m in Sources */,
+				06A6DCB71CB516E7000B4E8A /* UCSocialChunk.m in Sources */,
 				06A6DA9E1CB3D746000B4E8A /* AppDelegate.m in Sources */,
 				06A6DA9B1CB3D746000B4E8A /* main.m in Sources */,
 				06A6DAB21CB3DA14000B4E8A /* DetailViewController.m in Sources */,
 				06A6DAC91CB3E063000B4E8A /* UCFileUploadRequest.m in Sources */,
+				06A6DCB31CB515FC000B4E8A /* UCSocialSource.m in Sources */,
 				06A6DAC51CB3E063000B4E8A /* NSDictionary+UrlEncoding.m in Sources */,
 				06A6DACA1CB3E063000B4E8A /* UCGroupInfoRequest.m in Sources */,
 			);
@@ -373,6 +407,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ExampleProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = UC.ExampleProject;
@@ -384,6 +419,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ExampleProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = UC.ExampleProject;

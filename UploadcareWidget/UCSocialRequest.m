@@ -16,7 +16,6 @@
     self = [super init];
     if (self) {
         _parameters = @{};
-        _path = UCSourcesPath;
     }
     return self;
 }
