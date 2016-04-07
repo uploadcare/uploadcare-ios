@@ -10,8 +10,6 @@
 #import "UCSocialRequest.h"
 #import "UCClient_Private.h"
 
-NSString *const USSLoginSuccessLastPathComponent = @"endpoint";
-
 NSString *const USSPublicKeyHeader = @"X-Uploadcare-PublicKey";
 NSString *const UCAcceptHeader = @"Accept";
 NSString *const USSContentType = @"application/vnd.ucare.ss-v0.1+json";

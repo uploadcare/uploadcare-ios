@@ -11,6 +11,11 @@
 #import "UCSocialSourcesRequest.h"
 #import "UCSocialMacroses.h"
 #import "UCSocialSource.h"
+#import "UCSocialChunk.h"
+#import "UCSocialEntriesRequest.h"
+#import "UCWebViewController.h"
+#import <SafariServices/SafariServices.h>
+#import "UCSocialConstantsHeader.h"
 
 @interface UCThingAction : NSObject
 @property (nonatomic, strong) NSString *action;
@@ -98,8 +103,9 @@
 
 @end
 
-@interface UCWidgetVC ()
+@interface UCWidgetVC () <SFSafariViewControllerDelegate>
 @property (nonatomic, strong) NSArray<UCSocialSource *> *tableData;
+@property (nonatomic, strong) UCWebViewController *webVC;
 @end
 
 @implementation UCWidgetVC
@@ -130,26 +136,44 @@
     }];
 }
 
-- (void)queryObjectOrLoginAddressForSourceBase:(NSString *)sourceBase rootChunkPath:(NSString *)rootChunkPath path:(id)path {
+- (void)loginUsingAddress:(NSString *)loginAddress {
     
-//    NSString *absolutePath;
-//    absolutePath = [[USSBaseAddress stringByAppendingPathComponent:sourceBase] stringByAppendingPathComponent:rootChunkPath];
-//    
-//    [self.client getPath:absolutePath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        assert([responseObject isKindOfClass:[NSDictionary class]]);
-//        NSString *loginAddress = [responseObject objectForKey:USSLoginAddressKey];
-//        if (loginAddress) {
-//            resultBlock(nil, loginAddress, nil);
-//        }else if([[responseObject objectForKey:@"obj_type"]isEqualToString:@"error"]) {
-//            resultBlock(nil, nil, [NSError errorWithDomain:USSErrorDomain code:1 userInfo:responseObject]);
-//        }else {
-//            USSThingSet *thingSet = [[USSThingSet alloc]initWithJSON:responseObject];
-//            resultBlock(thingSet, nil, nil);
-//        }
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        resultBlock(nil, nil, error);
-//    }];
+//    SFSafariViewController *svc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:loginAddress]];
+//    svc.delegate = self;
+//    [self.navigationController presentViewController:svc animated:YES completion:nil];
+    
+    self.webVC = [[UCWebViewController alloc] init];
+    [self.navigationController presentViewController:self.webVC animated:YES completion:nil];
+    [self.webVC loadUrl:[NSURL URLWithString:loginAddress] withLoadingBlock:^(NSURL *url) {
+        if ([url.host isEqual:[[NSURL URLWithString:UCSocialAPIRoot] host]] && [url.lastPathComponent isEqual:@"endpoint"]) {
+            [self.webVC dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
+
+}
+
+- (void)queryObjectOrLoginAddressForSource:(UCSocialSource *)source rootChunk:(UCSocialChunk *)rootChunk path:(id)path {
+    
+    __weak __typeof(self) weakSelf = self;
+    [[UCClient defaultClient] performUCSocialRequest:[UCSocialEntriesRequest requestWithSource:source chunk:rootChunk] completion:^(id response, NSError *error) {
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
+        if (!error) {
+            NSLog(@"Response: %@", response);
+            NSString *loginAddress = [response objectForKey:@"login_link"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (loginAddress) {
+                    [strongSelf loginUsingAddress:loginAddress];
+                } else if ([response[@"obj_type"] isEqualToString:@"error"]) {
+                    
+                } else {
+                    
+                }
+            });
+
+        } else {
+            [self handleError:error];
+        }
+    }];
 }
 
 - (void)handleError:(NSError *)error {
@@ -182,51 +206,29 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UCSocialSource *social = self.tableData[indexPath.row];
-    [self queryObjectOrLoginAddressForSourceBase:social.urls[@"source_base"] rootChunkPath:social.rootChunks.firstObject[@"path_chunk"] path:nil];
+    UCSocialChunk *chunk = social.rootChunks.firstObject;
+    [self queryObjectOrLoginAddressForSource:social rootChunk:chunk path:nil];
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+#pragma mark - <SFSafariViewControllerDelegate>
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (NSArray<UIActivity *> *)safariViewController:(SFSafariViewController *)controller activityItemsForURL:(NSURL *)URL title:(nullable NSString *)title {
+    NSLog(@"SF URL: %@", URL.absoluteString);
+    return nil;
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+/*! @abstract Delegate callback called when the user taps the Done button. Upon this call, the view controller is dismissed modally. */
+- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
+    NSLog(@"SF DID FINISH");
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+/*! @abstract Invoked when the initial URL load is complete.
+ @param success YES if loading completed successfully, NO if loading failed.
+ @discussion This method is invoked when SFSafariViewController completes the loading of the URL that you pass
+ to its initializer. It is not invoked for any subsequent page loads in the same SFSafariViewController instance.
+ */
+- (void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
+    NSLog(@"SF DID COMPLETE INITIAL: %@", didLoadSuccessfully ? @"YES" : @"NO");
 }
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

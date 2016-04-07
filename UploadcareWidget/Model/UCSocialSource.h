@@ -9,10 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "UCSocialObject.h"
 
-@interface UCSocialSource : UCSocialObject
+@interface UCSocialSourceURLs : UCSocialObject
+@property (nonatomic, strong) NSString *done;
+@property (nonatomic, strong) NSString *session;
+@property (nonatomic, strong) NSString *sourceBase;
+@end
 
+@interface UCSocialSource : UCSocialObject
 @property (nonatomic, strong) NSString *sourceName;
 @property (nonatomic, strong) NSArray *rootChunks;
-@property (nonatomic, strong) NSDictionary *urls;
-
+@property (nonatomic, strong) UCSocialSourceURLs *urls;
 @end

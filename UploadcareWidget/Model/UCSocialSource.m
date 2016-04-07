@@ -24,3 +24,18 @@
 }
 
 @end
+
+@implementation UCSocialSourceURLs
+
++ (NSDictionary *)mapping {
+    
+    return @{@"done":@"done",
+             @"session":@"session",
+             @"sourceBase":@"source_base"};
+}
+
++ (NSDictionary *)collectionMapping {
+    return nil;
+}
+
+@end

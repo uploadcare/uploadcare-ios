@@ -10,6 +10,8 @@
 #import "UCSocialMacroses.h"
 #import <ObjC/Runtime.h>
 
+#define MAPPING_DEBUG (0 && DEBUG)
+
 @interface NSObject(Properties)
 + (Class)classOfPropertyNamed:(NSString *)name;
 @end
@@ -84,6 +86,9 @@ Class property_getClass( objc_property_t property )
 }
 
 - (void)performMapping {
+#if MAPPING_DEBUG
+    NSLog(@"%@ mapping started", self.description);
+#endif
     for (NSString *key in [self class].mapping) {
         NSAssert([self respondsToSelector:NSSelectorFromString(key)], @"Class %@ does not repond for selector %@", NSStringFromClass([self class]), key);
         Class type = [[self class] classOfPropertyNamed:key];
@@ -91,7 +96,8 @@ Class property_getClass( objc_property_t property )
 
         // collection
         if ([type isSubclassOfClass:[NSArray class]]) {
-            Class socialClass = [[self class] collectionMapping][key];
+            NSDictionary *collectionMapping = [[self class] collectionMapping];
+            Class socialClass = collectionMapping ? collectionMapping[key] : nil;
             if (socialClass) {
                 if ([socialClass isSubclassOfClass:[UCSocialObject class]]) {
                     NSMutableArray *temp = @[].mutableCopy;
@@ -115,6 +121,9 @@ Class property_getClass( objc_property_t property )
             [self setValue:value forKey:key];
         }
     }
+#if MAPPING_DEBUG
+    NSLog(@"%@ mapping finished", self.description);
+#endif
 }
 
 - (void)setValue:(id)value forKey:(NSString *)key {

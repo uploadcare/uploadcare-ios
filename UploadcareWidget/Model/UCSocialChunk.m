@@ -17,7 +17,7 @@
 }
 
 + (NSDictionary *)collectionMapping {
-    return @{};
+    return nil;
 }
 
 @end
