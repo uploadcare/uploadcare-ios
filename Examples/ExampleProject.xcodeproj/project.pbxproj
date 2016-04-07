@@ -33,6 +33,9 @@
 		06A6DCBE1CB545FD000B4E8A /* UCSocialEntriesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DCBD1CB545FD000B4E8A /* UCSocialEntriesRequest.m */; };
 		06A6DCC01CB54BD4000B4E8A /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A6DCBF1CB54BD4000B4E8A /* SafariServices.framework */; };
 		06A6DCC31CB56D5D000B4E8A /* UCWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A6DCC21CB56D5D000B4E8A /* UCWebViewController.m */; };
+		06D9EE081CB6DF110043405C /* UCSocialEntriesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE071CB6DF110043405C /* UCSocialEntriesCollection.m */; };
+		06D9EE0B1CB6DF5E0043405C /* UCSocialEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE0A1CB6DF5E0043405C /* UCSocialEntry.m */; };
+		06D9EE0F1CB6E04A0043405C /* UCSocialEntryAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE0E1CB6E04A0043405C /* UCSocialEntryAction.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +92,12 @@
 		06A6DCBF1CB54BD4000B4E8A /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		06A6DCC11CB56D5D000B4E8A /* UCWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCWebViewController.h; sourceTree = "<group>"; };
 		06A6DCC21CB56D5D000B4E8A /* UCWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCWebViewController.m; sourceTree = "<group>"; };
+		06D9EE061CB6DF110043405C /* UCSocialEntriesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCSocialEntriesCollection.h; path = Model/UCSocialEntriesCollection.h; sourceTree = "<group>"; };
+		06D9EE071CB6DF110043405C /* UCSocialEntriesCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCSocialEntriesCollection.m; path = Model/UCSocialEntriesCollection.m; sourceTree = "<group>"; };
+		06D9EE091CB6DF5E0043405C /* UCSocialEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCSocialEntry.h; path = Model/UCSocialEntry.h; sourceTree = "<group>"; };
+		06D9EE0A1CB6DF5E0043405C /* UCSocialEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCSocialEntry.m; path = Model/UCSocialEntry.m; sourceTree = "<group>"; };
+		06D9EE0D1CB6E04A0043405C /* UCSocialEntryAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCSocialEntryAction.h; path = Model/UCSocialEntryAction.h; sourceTree = "<group>"; };
+		06D9EE0E1CB6E04A0043405C /* UCSocialEntryAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCSocialEntryAction.m; path = Model/UCSocialEntryAction.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +225,12 @@
 				06A6DCB61CB516E7000B4E8A /* UCSocialChunk.m */,
 				06A6DCB91CB51901000B4E8A /* UCSocialObject.h */,
 				06A6DCBA1CB51901000B4E8A /* UCSocialObject.m */,
+				06D9EE0D1CB6E04A0043405C /* UCSocialEntryAction.h */,
+				06D9EE0E1CB6E04A0043405C /* UCSocialEntryAction.m */,
+				06D9EE091CB6DF5E0043405C /* UCSocialEntry.h */,
+				06D9EE0A1CB6DF5E0043405C /* UCSocialEntry.m */,
+				06D9EE061CB6DF110043405C /* UCSocialEntriesCollection.h */,
+				06D9EE071CB6DF110043405C /* UCSocialEntriesCollection.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -302,9 +317,12 @@
 				06A6DBB91CB408B6000B4E8A /* UCClient+Social.m in Sources */,
 				06A6DACC1CB3E063000B4E8A /* UCRemoteFileUploadRequest.m in Sources */,
 				06A6DCAC1CB41C9B000B4E8A /* UCWidgetVC.m in Sources */,
+				06D9EE0F1CB6E04A0043405C /* UCSocialEntryAction.m in Sources */,
 				06A6DAC81CB3E063000B4E8A /* UCFileInfoRequest.m in Sources */,
 				06A6DCC31CB56D5D000B4E8A /* UCWebViewController.m in Sources */,
+				06D9EE081CB6DF110043405C /* UCSocialEntriesCollection.m in Sources */,
 				06A6DCB71CB516E7000B4E8A /* UCSocialChunk.m in Sources */,
+				06D9EE0B1CB6DF5E0043405C /* UCSocialEntry.m in Sources */,
 				06A6DA9E1CB3D746000B4E8A /* AppDelegate.m in Sources */,
 				06A6DA9B1CB3D746000B4E8A /* main.m in Sources */,
 				06A6DAB21CB3DA14000B4E8A /* DetailViewController.m in Sources */,

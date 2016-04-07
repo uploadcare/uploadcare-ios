@@ -11,9 +11,19 @@
 @interface UCWebViewController () <UIWebViewDelegate>
 @property (nonatomic, copy) void (^loadingBlock)(NSURL *url);
 @property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) NSURL *url;
 @end
 
 @implementation UCWebViewController
+
+- (id)initWithURL:(NSURL *)url loadingBlock:(void(^)(NSURL *url))loadingBlock {
+    self = [super init];
+    if (self) {
+        _url = url;
+        _loadingBlock = loadingBlock;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,11 +40,8 @@
     
     [self.view addConstraints:horizontal];
     [self.view addConstraints:vertical];
-}
-
-- (void)loadUrl:(NSURL *)url withLoadingBlock:(void(^)(NSURL *url))loadingBlock {
-    _loadingBlock = loadingBlock;
-    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
+    
+    [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
 
 #pragma mark - <UIWebViewDelegate>

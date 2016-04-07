@@ -10,6 +10,6 @@
 
 @interface UCWebViewController : UIViewController
 
-- (void)loadUrl:(NSURL *)url withLoadingBlock:(void(^)(NSURL *url))loadingBlock;
+- (id)initWithURL:(NSURL *)url loadingBlock:(void(^)(NSURL *url))loadingBlock;
 
 @end

@@ -16,92 +16,7 @@
 #import "UCWebViewController.h"
 #import <SafariServices/SafariServices.h>
 #import "UCSocialConstantsHeader.h"
-
-@interface UCThingAction : NSObject
-@property (nonatomic, strong) NSString *action;
-@property (nonatomic, strong) NSString *objectType;
-@property (nonatomic, strong) NSString *urlString;
-
-- (id)initWithObject:(id)object;
-@end
-
-@implementation UCThingAction
-- (id)initWithObject:(id)object {
-    self = [super init];
-    if (self) {
-        self.action = object[@"action"];
-        self.objectType = object[@"obj_type"];
-        self.urlString = object[@"url"];
-    }
-    return self;
-}
-@end
-
-@interface UCThing : NSObject
-
-@property (nonatomic, strong) UCThingAction *action;
-@property (nonatomic, strong) NSString *mimeType;
-@property (nonatomic, strong) NSString *objType;
-@property (nonatomic, strong) NSString *thumbnail;
-@property (nonatomic, strong) NSString *title;
-
-- (id)initWithObject:(id)object;
-@end
-
-@implementation UCThing
-
-- (id)initWithObject:(id)object {
-    self = [super init];
-    if (self) {
-        self.action = [[UCThingAction alloc] initWithObject:object[@"action"]];
-        SetIfNotNull(self.mimeType, object[@"mimetype"])
-        SetIfNotNull(self.thumbnail, object[@"thumbnail"])
-        SetIfNotNull(self.title, object[@"title"]);
-    }
-    return self;
-}
-
-@end
-
-@interface UCThingsCollection : NSObject
-
-@property (nonatomic, strong) NSDictionary *nextPage;
-@property (nonatomic, strong) NSDictionary *path;
-@property (nonatomic, strong) NSDictionary *root;
-@property (nonatomic, strong) NSArray<UCThing*> *things;
-
-+ (instancetype)collectionFromDictionary:(NSDictionary *)dictionary;
-
-@end
-
-@implementation UCThingsCollection
-
-+ (instancetype)collectionFromDictionary:(NSDictionary *)dictionary {
-    UCThingsCollection *collection = [[UCThingsCollection alloc] initWithDeserializedObject:dictionary];
-    return collection;
-}
-
-- (id)initWithDeserializedObject:(NSDictionary *)dictionary {
-    self = [super init];
-    if (self) {
-        [self updateWithDeserializedObject:dictionary];
-    }
-    return self;
-}
-
-- (void)updateWithDeserializedObject:(id)object {
-    SetIfNotNull(self.nextPage, object[@"next_page"]);
-    SetIfNotNull(self.path, object[@"path"])
-    SetIfNotNull(self.root, object[@"root"])
-    NSMutableArray *things = @[].mutableCopy;
-    [object[@"things"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        UCThing *thing = [[UCThing alloc] initWithObject:obj];
-        if (thing) [things addObject:thing];
-    }];
-    self.things = things;
-}
-
-@end
+#import "UCSocialEntriesCollection.h"
 
 @interface UCWidgetVC () <SFSafariViewControllerDelegate>
 @property (nonatomic, strong) NSArray<UCSocialSource *> *tableData;
@@ -138,18 +53,19 @@
 
 - (void)loginUsingAddress:(NSString *)loginAddress {
     
-//    SFSafariViewController *svc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:loginAddress]];
-//    svc.delegate = self;
-//    [self.navigationController presentViewController:svc animated:YES completion:nil];
-    
-    self.webVC = [[UCWebViewController alloc] init];
-    [self.navigationController presentViewController:self.webVC animated:YES completion:nil];
-    [self.webVC loadUrl:[NSURL URLWithString:loginAddress] withLoadingBlock:^(NSURL *url) {
-        if ([url.host isEqual:[[NSURL URLWithString:UCSocialAPIRoot] host]] && [url.lastPathComponent isEqual:@"endpoint"]) {
-            [self.webVC dismissViewControllerAnimated:YES completion:nil];
-        }
-    }];
-
+//    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_4) {
+//        SFSafariViewController *svc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:loginAddress]];
+//        svc.delegate = self;
+//        [self.navigationController pushViewController:svc animated:YES];
+//    } else {
+        self.webVC = [[UCWebViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] loadingBlock:^(NSURL *url) {
+            NSLog(@"URL: %@", url);
+            if ([url.host isEqual:[[NSURL URLWithString:UCSocialAPIRoot] host]] && [url.lastPathComponent isEqual:@"endpoint"]) {
+                [self.webVC dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+        [self.navigationController pushViewController:self.webVC animated:YES];
+//    }
 }
 
 - (void)queryObjectOrLoginAddressForSource:(UCSocialSource *)source rootChunk:(UCSocialChunk *)rootChunk path:(id)path {
@@ -166,7 +82,7 @@
                 } else if ([response[@"obj_type"] isEqualToString:@"error"]) {
                     
                 } else {
-                    
+                    [self processData:response];
                 }
             });
 
@@ -174,6 +90,11 @@
             [self handleError:error];
         }
     }];
+}
+
+- (void)processData:(id)responseData {
+    UCSocialEntriesCollection *collection = [[UCSocialEntriesCollection alloc] initWithSerializedObject:responseData];
+    NSLog(@"Collection: %@", collection);
 }
 
 - (void)handleError:(NSError *)error {
