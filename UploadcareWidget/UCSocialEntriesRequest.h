@@ -18,6 +18,5 @@
                             chunk:(UCSocialChunk *)chunk;
 
 + (instancetype)nextPageRequestWithSource:(UCSocialSource *)source
-                                  entries:(UCSocialEntriesCollection *)collection
-                                    chunk:(UCSocialChunk *)chunk;
+                                  entries:(UCSocialEntriesCollection *)collection;
 @end

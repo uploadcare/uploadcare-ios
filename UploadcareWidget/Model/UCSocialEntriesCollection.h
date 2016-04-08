@@ -9,12 +9,13 @@
 #import "UCSocialObject.h"
 
 @class UCSocialEntry;
+@class UCSocialChunk;
 
 @interface UCSocialEntriesCollection : UCSocialObject
 
 @property (nonatomic, strong) NSDictionary *nextPage;
 @property (nonatomic, strong) NSDictionary *path;
-@property (nonatomic, strong) NSDictionary *root;
+@property (nonatomic, strong) UCSocialChunk *root;
 @property (nonatomic, strong) NSDictionary *userInfo;
 @property (nonatomic, strong) NSArray<UCSocialEntry*> *entries;
 

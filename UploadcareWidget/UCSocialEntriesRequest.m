@@ -19,9 +19,8 @@
 @implementation UCSocialEntriesRequest
 
 + (instancetype)nextPageRequestWithSource:(UCSocialSource *)source
-                                  entries:(UCSocialEntriesCollection *)collection
-                                    chunk:(UCSocialChunk *)chunk {
-    UCSocialEntriesRequest *req = [[UCSocialEntriesRequest alloc] initNextPageWithSource:source collection:collection chunk:chunk];
+                                  entries:(UCSocialEntriesCollection *)collection {
+    UCSocialEntriesRequest *req = [[UCSocialEntriesRequest alloc] initNextPageWithSource:source collection:collection];
     return req;
 
 }
@@ -42,9 +41,8 @@
 }
 
 - (id)initNextPageWithSource:(UCSocialSource *)source
-                  collection:(UCSocialEntriesCollection *)collection
-                       chunk:(UCSocialChunk *)chunk {
-    self = [self initWithSource:source chunk:chunk];
+                  collection:(UCSocialEntriesCollection *)collection {
+    self = [self initWithSource:source chunk:collection.root];
     if (self) {
         self.path = [self.path stringByAppendingPathComponent:collection.nextPagePath];
     }

@@ -17,6 +17,7 @@ typedef void (^UCCompletionBlock)(id response, NSError *error);
 @interface UCClient : NSObject
 
 @property (nonatomic, strong, readonly) NSString *publicKey;
+@property (nonatomic, strong, readonly) NSCache *cache;
 
 + (instancetype)defaultClient;
 

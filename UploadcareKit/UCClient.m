@@ -256,6 +256,7 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
 @property (nonatomic, strong) UCRemoteObserver *remoteObserver;
 @property (nonatomic, strong) NSMutableDictionary *completionQueue;
 @property (nonatomic, strong) NSMutableDictionary *progressQueue;
+@property (nonatomic, strong) NSCache *cache;
 @end
 
 static UCClient *instanceClient = nil;
@@ -268,6 +269,13 @@ static UCClient *instanceClient = nil;
         instanceClient = [[UCClient alloc] init];
     });
     return instanceClient;
+}
+
+- (NSCache *)cache {
+    if (!_cache) {
+        _cache = [[NSCache alloc] init];
+    }
+    return _cache;
 }
 
 - (void)setPublicKey:(NSString *)publicKey {

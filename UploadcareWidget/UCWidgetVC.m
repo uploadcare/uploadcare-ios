@@ -74,7 +74,6 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
             });
-            NSLog(@"Response: %@", response);
         } else {
             [self handleError:error];
         }
@@ -82,30 +81,33 @@
 }
 
 - (void)loginUsingAddress:(NSString *)loginAddress {
-    
+    __weak __typeof(self) weakSelf = self;
+
 //    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_4) {
 //        SFSafariViewController *svc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:loginAddress]];
 //        svc.delegate = self;
 //        [self.navigationController pushViewController:svc animated:YES];
 //    } else {
         self.webVC = [[UCWebViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] loadingBlock:^(NSURL *url) {
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
             NSLog(@"URL: %@", url);
-            if ([url.host isEqual:[[NSURL URLWithString:UCSocialAPIRoot] host]] && [url.lastPathComponent isEqual:@"endpoint"]) {
-                [self.webVC dismissViewControllerAnimated:YES completion:nil];
+            if ([url.host isEqual:UCSocialAPIRoot] && [url.lastPathComponent isEqual:@"endpoint"]) {
+                [strongSelf.navigationController popViewControllerAnimated:YES];
+                [strongSelf queryObjectOrLoginAddressForSource:strongSelf.source rootChunk:strongSelf.chunk];
             }
         }];
         [self.navigationController pushViewController:self.webVC animated:YES];
 //    }
 }
 
-- (void)queryObjectOrLoginAddressForSource:(UCSocialSource *)source rootChunk:(UCSocialChunk *)rootChunk path:(id)path {
+- (void)queryObjectOrLoginAddressForSource:(UCSocialSource *)source rootChunk:(UCSocialChunk *)rootChunk {
     self.source = source;
     self.chunk = rootChunk;
     [[UCClient defaultClient] performUCSocialRequest:[UCSocialEntriesRequest requestWithSource:source chunk:rootChunk] completion:self.responseBlock];
 }
 
-- (void)queryNextPageForSource:(UCSocialSource *)source entries:(UCSocialEntriesCollection *)entries rootChunk:(UCSocialChunk *)rootChunk {
-    [[UCClient defaultClient] performUCSocialRequest:[UCSocialEntriesRequest nextPageRequestWithSource:source entries:entries chunk:rootChunk] completion:self.responseBlock];
+- (void)queryNextPageForSource:(UCSocialSource *)source entries:(UCSocialEntriesCollection *)entries {
+    [[UCClient defaultClient] performUCSocialRequest:[UCSocialEntriesRequest nextPageRequestWithSource:source entries:entries] completion:self.responseBlock];
 }
 
 - (void)processData:(id)responseData {
@@ -160,7 +162,7 @@
     UCSocialSource *social = self.tableData[indexPath.row];
     UCSocialChunk *chunk = social.rootChunks.firstObject;
     self.gallery = nil;
-    [self queryObjectOrLoginAddressForSource:social rootChunk:chunk path:nil];
+    [self queryObjectOrLoginAddressForSource:social rootChunk:chunk];
 }
 
 #pragma mark - <SFSafariViewControllerDelegate>
@@ -187,7 +189,7 @@
 #pragma mark - <UCGalleryVCDelegate>
 
 - (void)fetchNextPageForCollection:(UCSocialEntriesCollection *)collection {
-    [self queryNextPageForSource:self.source entries:collection rootChunk:self.chunk];
+    [self queryNextPageForSource:self.source entries:collection];
 }
 
 @end

@@ -65,8 +65,18 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 
 - (void)appendDataFromCollection:(UCSocialEntriesCollection *)entriesCollection {
     self.nextPageFetchStarted = NO;
+    NSUInteger index = _entriesCollection.entries.count - 1;
+    NSUInteger length = entriesCollection.entries.count;
     _entriesCollection = [self collectionMergedWith:entriesCollection];
-    [self.collectionView reloadData];
+    [self.collectionView performBatchUpdates:^{
+        NSMutableArray *indexPaths = @[].mutableCopy;
+        for (NSUInteger i = index; i < index + length; i++) {
+            [indexPaths addObject:[NSIndexPath indexPathForItem:i+1 inSection:0]];
+        }
+        [self.collectionView insertItemsAtIndexPaths:indexPaths];
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 - (UCSocialEntriesCollection *)collectionMergedWith:(UCSocialEntriesCollection *)collection {

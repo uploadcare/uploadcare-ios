@@ -10,7 +10,6 @@
 
 @interface UIImageView (Uploadcare)
 
--(void)uc_setImageWithURL:(NSURL*)imageURL usingSession:(NSURLSession*)session;
-
+- (void)uc_setImageWithURL:(NSURL*)imageURL usingSession:(NSURLSession*)session cache:(NSCache *)cache;
 
 @end

@@ -37,7 +37,7 @@
 - (void)setSocialEntry:(UCSocialEntry *)socialEntry {
     if (![_socialEntry isEqual:socialEntry]) {
         self.imageView.image = nil;
-        [self.imageView uc_setImageWithURL:[NSURL URLWithString:socialEntry.thumbnail] usingSession:[[UCClient defaultClient] session]];
+        [self.imageView uc_setImageWithURL:[NSURL URLWithString:socialEntry.thumbnail] usingSession:[[UCClient defaultClient] session] cache:[[UCClient defaultClient] cache]];
     }
     _socialEntry = socialEntry;
 }
