@@ -13,6 +13,8 @@
 static NSString *const kCellIdentifier = @"UCGalleryVCCellIdentifier";
 static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 
+#define ELEMENTS_PER_ROW 3
+
 @interface UCGalleryVC ()
 @property (nonatomic, strong) UCSocialEntriesCollection *entriesCollection;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -31,25 +33,30 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 + (UICollectionViewLayout *)layout {
+    NSUInteger inLineCount = ELEMENTS_PER_ROW;
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    CGFloat horizontalOffset = 1.0;
+    CGFloat verticalOffset = 1.0;
+    CGFloat width = floor(screenSize.width / inLineCount) - horizontalOffset * 2;
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.sectionInset = UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0);
+    layout.sectionInset = UIEdgeInsetsMake(verticalOffset, horizontalOffset, verticalOffset, horizontalOffset);
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    layout.itemSize = CGSizeMake(100.0, 106.0);
-    layout.minimumInteritemSpacing = 1.0;
-    layout.minimumLineSpacing = 3.0;
+    layout.itemSize = CGSizeMake(width, width);
+    layout.minimumInteritemSpacing = horizontalOffset;
+    layout.minimumLineSpacing = verticalOffset;
     return layout;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [super viewDidLoad];
+    self.collectionView.delegate = self;
     [self.collectionView registerClass:[UCGalleryCell class] forCellWithReuseIdentifier:kCellIdentifier];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kBusyCellIdentifyer];
     self.collectionView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1.];
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
-    _isLastPage = YES;
 }
 
 
@@ -58,7 +65,9 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 - (void)loadNextPage {
-    
+    if ([self.delegate respondsToSelector:@selector(fetchNextPageForCollection:)]) {
+        [self.delegate fetchNextPageForCollection:self.entriesCollection];
+    }
 }
 
 #pragma mark - UISearchBarDelegate
@@ -104,9 +113,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 #pragma mark <UICollectionViewDelegate>
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    const NSUInteger kPrefetchStartsAtCell = 20;
-    
-    if (!self.isLastPage && self.entriesCollection.entries.count - indexPath.row <= kPrefetchStartsAtCell && !self.nextPageFetchStarted) {
+    if (!self.isLastPage && ![cell isKindOfClass:[UCGalleryCell class]] && !self.nextPageFetchStarted) {
         self.nextPageFetchStarted = YES;
         [self loadNextPage];
     }

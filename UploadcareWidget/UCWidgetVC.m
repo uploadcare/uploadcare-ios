@@ -19,9 +19,10 @@
 #import "UCSocialEntriesCollection.h"
 #import "UCGalleryVC.h"
 
-@interface UCWidgetVC () <SFSafariViewControllerDelegate>
+@interface UCWidgetVC () <SFSafariViewControllerDelegate, UCGalleryVCDelegate>
 @property (nonatomic, strong) NSArray<UCSocialSource *> *tableData;
 @property (nonatomic, strong) UCWebViewController *webVC;
+@property (nonatomic, strong) UCGalleryVC *gallery;
 @end
 
 @implementation UCWidgetVC
@@ -99,8 +100,9 @@
 }
 
 - (void)showGalleryWithCollection:(UCSocialEntriesCollection *)collection {
-    UCGalleryVC *vc = [[UCGalleryVC alloc] initWitSocialEntriesCollection:collection];
-    [self.navigationController pushViewController:vc animated:YES];
+    self.gallery = [[UCGalleryVC alloc] initWitSocialEntriesCollection:collection];
+    self.gallery.delegate = self;
+    [self.navigationController pushViewController:self.gallery animated:YES];
 }
 
 - (void)handleError:(NSError *)error {
@@ -156,6 +158,12 @@
  */
 - (void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
     NSLog(@"SF DID COMPLETE INITIAL: %@", didLoadSuccessfully ? @"YES" : @"NO");
+}
+
+#pragma mark - <UCGalleryVCDelegate>
+
+- (void)fetchNextPageForCollection:(UCSocialEntriesCollection *)collection {
+    NSLog(@"Fetch next page: %@", collection.nextPage);
 }
 
 @end

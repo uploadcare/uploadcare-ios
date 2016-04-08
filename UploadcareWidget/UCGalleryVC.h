@@ -9,8 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "UCSocialEntriesCollection.h"
 
+@protocol UCGalleryVCDelegate <NSObject>
+
+- (void)fetchNextPageForCollection:(UCSocialEntriesCollection *)collection;
+
+@end
+
 @interface UCGalleryVC : UICollectionViewController
+
+@property (nonatomic, weak) id<UCGalleryVCDelegate> delegate;
 
 - (id)initWitSocialEntriesCollection:(UCSocialEntriesCollection *)collection;
 
 @end
+
+
