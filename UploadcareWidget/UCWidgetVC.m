@@ -23,6 +23,9 @@
 @property (nonatomic, strong) NSArray<UCSocialSource *> *tableData;
 @property (nonatomic, strong) UCWebViewController *webVC;
 @property (nonatomic, strong) UCGalleryVC *gallery;
+@property (nonatomic, strong) UCSocialSource *source;
+@property (nonatomic, strong) UCSocialChunk *chunk;
+@property (nonatomic, copy) void (^responseBlock)(id response, NSError *error);
 @end
 
 @implementation UCWidgetVC
@@ -31,6 +34,31 @@
     [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     [self fetchSocialSources];
+}
+
+- (void(^)(id response, NSError *error))responseBlock {
+    if (!_responseBlock) {
+        __weak __typeof(self) weakSelf = self;
+        _responseBlock = ^(id response, NSError *error){
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            if (!error) {
+                NSString *loginAddress = [response objectForKey:@"login_link"];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (loginAddress) {
+                        [strongSelf loginUsingAddress:loginAddress];
+                    } else if ([response[@"obj_type"] isEqualToString:@"error"]) {
+                        
+                    } else {
+                        [strongSelf processData:response];
+                    }
+                });
+                
+            } else {
+                [strongSelf handleError:error];
+            }
+        };
+    }
+    return _responseBlock;
 }
 
 - (void)fetchSocialSources {
@@ -71,32 +99,26 @@
 }
 
 - (void)queryObjectOrLoginAddressForSource:(UCSocialSource *)source rootChunk:(UCSocialChunk *)rootChunk path:(id)path {
-    
-    __weak __typeof(self) weakSelf = self;
-    [[UCClient defaultClient] performUCSocialRequest:[UCSocialEntriesRequest requestWithSource:source chunk:rootChunk] completion:^(id response, NSError *error) {
-        __strong __typeof__(weakSelf) strongSelf = weakSelf;
-        if (!error) {
-            NSLog(@"Response: %@", response);
-            NSString *loginAddress = [response objectForKey:@"login_link"];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (loginAddress) {
-                    [strongSelf loginUsingAddress:loginAddress];
-                } else if ([response[@"obj_type"] isEqualToString:@"error"]) {
-                    
-                } else {
-                    [self processData:response];
-                }
-            });
+    self.source = source;
+    self.chunk = rootChunk;
+    [[UCClient defaultClient] performUCSocialRequest:[UCSocialEntriesRequest requestWithSource:source chunk:rootChunk] completion:self.responseBlock];
+}
 
-        } else {
-            [self handleError:error];
-        }
-    }];
+- (void)queryNextPageForSource:(UCSocialSource *)source entries:(UCSocialEntriesCollection *)entries rootChunk:(UCSocialChunk *)rootChunk {
+    [[UCClient defaultClient] performUCSocialRequest:[UCSocialEntriesRequest nextPageRequestWithSource:source entries:entries chunk:rootChunk] completion:self.responseBlock];
 }
 
 - (void)processData:(id)responseData {
     UCSocialEntriesCollection *collection = [[UCSocialEntriesCollection alloc] initWithSerializedObject:responseData];
-    [self showGalleryWithCollection:collection];
+    if (!self.gallery) {
+        [self showGalleryWithCollection:collection];
+    } else {
+        [self appendGalleryCollection:collection];
+    }
+}
+
+- (void)appendGalleryCollection:(UCSocialEntriesCollection *)collection {
+    self.gallery.entriesCollection = collection;
 }
 
 - (void)showGalleryWithCollection:(UCSocialEntriesCollection *)collection {
@@ -136,6 +158,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UCSocialSource *social = self.tableData[indexPath.row];
     UCSocialChunk *chunk = social.rootChunks.firstObject;
+    self.gallery = nil;
     [self queryObjectOrLoginAddressForSource:social rootChunk:chunk path:nil];
 }
 
@@ -163,7 +186,7 @@
 #pragma mark - <UCGalleryVCDelegate>
 
 - (void)fetchNextPageForCollection:(UCSocialEntriesCollection *)collection {
-    NSLog(@"Fetch next page: %@", collection.nextPage);
+    [self queryNextPageForSource:self.source entries:collection rootChunk:self.chunk];
 }
 
 @end

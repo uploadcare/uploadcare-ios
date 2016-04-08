@@ -17,6 +17,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        [self.contentView.layer setShouldRasterize:YES];
         self.contentView.backgroundColor = [UIColor colorWithWhite:.73 alpha:1.0];
         _imageView = [[UIImageView alloc]init];
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -35,6 +36,7 @@
 
 - (void)setSocialEntry:(UCSocialEntry *)socialEntry {
     if (![_socialEntry isEqual:socialEntry]) {
+        self.imageView.image = nil;
         [self.imageView uc_setImageWithURL:[NSURL URLWithString:socialEntry.thumbnail] usingSession:[[UCClient defaultClient] session]];
     }
     _socialEntry = socialEntry;

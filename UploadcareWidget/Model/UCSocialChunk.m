@@ -11,8 +11,7 @@
 @implementation UCSocialChunk
 
 + (NSDictionary *)mapping {
-    return @{@"type":@"obj_type",
-             @"path":@"path_chunk",
+    return @{@"path":@"path_chunk",
              @"title":@"title"};
 }
 

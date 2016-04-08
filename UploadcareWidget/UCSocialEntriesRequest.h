@@ -10,9 +10,14 @@
 
 @class UCSocialSource;
 @class UCSocialChunk;
+@class UCSocialEntriesCollection;
 
 @interface UCSocialEntriesRequest : UCSocialRequest
 
-+ (instancetype)requestWithSource:(UCSocialSource *)source chunk:(UCSocialChunk *)chunk;
++ (instancetype)requestWithSource:(UCSocialSource *)source
+                            chunk:(UCSocialChunk *)chunk;
 
++ (instancetype)nextPageRequestWithSource:(UCSocialSource *)source
+                                  entries:(UCSocialEntriesCollection *)collection
+                                    chunk:(UCSocialChunk *)chunk;
 @end

@@ -16,7 +16,6 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 #define ELEMENTS_PER_ROW 3
 
 @interface UCGalleryVC ()
-@property (nonatomic, strong) UCSocialEntriesCollection *entriesCollection;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, assign) BOOL isLastPage;
 @property (nonatomic, assign) BOOL nextPageFetchStarted;
@@ -59,6 +58,26 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     [self.collectionView addSubview:self.refreshControl];
 }
 
+- (void)setEntriesCollection:(UCSocialEntriesCollection *)entriesCollection {
+    self.isLastPage = !entriesCollection.nextPagePath.length;
+    if (!_entriesCollection) {
+        _entriesCollection = entriesCollection;
+    } else {
+        [self appendDataFromCollection:entriesCollection];
+    }
+}
+
+- (void)appendDataFromCollection:(UCSocialEntriesCollection *)entriesCollection {
+    self.nextPageFetchStarted = NO;
+    _entriesCollection = [self collectionMergedWith:entriesCollection];
+    [self.collectionView reloadData];
+}
+
+- (UCSocialEntriesCollection *)collectionMergedWith:(UCSocialEntriesCollection *)collection {
+    NSArray *entries = [self.entriesCollection.entries arrayByAddingObjectsFromArray:collection.entries];
+    collection.entries = entries;
+    return collection;
+}
 
 - (void)refresh {
     

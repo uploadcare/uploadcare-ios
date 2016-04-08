@@ -11,7 +11,12 @@
 
 @implementation UCSocialEntriesCollection
 
-
+- (NSString *)nextPagePath {
+    if (!self.nextPage) return nil;
+    NSArray *chunks = self.nextPage[@"chunks"];
+    id chunk = chunks.firstObject;
+    return chunk[@"path_chunk"];
+}
 
 + (NSDictionary *)mapping {
     return @{@"nextPage":@"next_page",
