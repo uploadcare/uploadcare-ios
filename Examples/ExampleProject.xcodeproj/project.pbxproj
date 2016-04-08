@@ -39,6 +39,7 @@
 		06D9EE121CB7C4100043405C /* UCGalleryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE111CB7C4100043405C /* UCGalleryVC.m */; };
 		06D9EE151CB7C5410043405C /* UCGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE141CB7C5410043405C /* UCGalleryCell.m */; };
 		06D9EE181CB7C9C20043405C /* UIImageView+Uploadcare.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE171CB7C9C20043405C /* UIImageView+Uploadcare.m */; };
+		06D9EE211CB8182C0043405C /* UCSocialPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE201CB8182C0043405C /* UCSocialPath.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +108,8 @@
 		06D9EE141CB7C5410043405C /* UCGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCGalleryCell.m; sourceTree = "<group>"; };
 		06D9EE161CB7C9C20043405C /* UIImageView+Uploadcare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Uploadcare.h"; sourceTree = "<group>"; };
 		06D9EE171CB7C9C20043405C /* UIImageView+Uploadcare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Uploadcare.m"; sourceTree = "<group>"; };
+		06D9EE1F1CB8182C0043405C /* UCSocialPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCSocialPath.h; path = Model/UCSocialPath.h; sourceTree = "<group>"; };
+		06D9EE201CB8182C0043405C /* UCSocialPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCSocialPath.m; path = Model/UCSocialPath.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +249,8 @@
 				06D9EE0A1CB6DF5E0043405C /* UCSocialEntry.m */,
 				06D9EE061CB6DF110043405C /* UCSocialEntriesCollection.h */,
 				06D9EE071CB6DF110043405C /* UCSocialEntriesCollection.m */,
+				06D9EE1F1CB8182C0043405C /* UCSocialPath.h */,
+				06D9EE201CB8182C0043405C /* UCSocialPath.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -334,6 +339,7 @@
 				06A6DBB91CB408B6000B4E8A /* UCClient+Social.m in Sources */,
 				06A6DACC1CB3E063000B4E8A /* UCRemoteFileUploadRequest.m in Sources */,
 				06D9EE121CB7C4100043405C /* UCGalleryVC.m in Sources */,
+				06D9EE211CB8182C0043405C /* UCSocialPath.m in Sources */,
 				06A6DCAC1CB41C9B000B4E8A /* UCWidgetVC.m in Sources */,
 				06D9EE0F1CB6E04A0043405C /* UCSocialEntryAction.m in Sources */,
 				06A6DAC81CB3E063000B4E8A /* UCFileInfoRequest.m in Sources */,

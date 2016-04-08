@@ -7,10 +7,20 @@
 //
 
 #import "UCSocialObject.h"
+#import "UCSocialPath.h"
+
+typedef NS_ENUM(NSUInteger, UCSocialEntryActionType) {
+    UCSocialEntryActionTypeUnknown,
+    UCSocialEntryActionTypeSelectFile,
+    UCSocialEntryActionTypeOpenPath
+};
 
 @interface UCSocialEntryAction : UCSocialObject
 
 @property (nonatomic, strong) NSString *action;
 @property (nonatomic, strong) NSString *urlString;
+@property (nonatomic, strong) UCSocialPath *path;
+
+- (UCSocialEntryActionType)actionType;
 
 @end

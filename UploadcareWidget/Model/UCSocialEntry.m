@@ -7,7 +7,6 @@
 //
 
 #import "UCSocialEntry.h"
-#import "UCSocialEntryAction.h"
 
 @implementation UCSocialEntry
 

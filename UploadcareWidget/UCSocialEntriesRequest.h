@@ -15,8 +15,10 @@
 @interface UCSocialEntriesRequest : UCSocialRequest
 
 + (instancetype)requestWithSource:(UCSocialSource *)source
-                            chunk:(UCSocialChunk *)chunk;
+                            chunk:(UCSocialChunk *)chunk
+                             path:(NSString *)path;
 
 + (instancetype)nextPageRequestWithSource:(UCSocialSource *)source
-                                  entries:(UCSocialEntriesCollection *)collection;
+                                  entries:(UCSocialEntriesCollection *)collection
+                                     path:(NSString *)path;
 @end

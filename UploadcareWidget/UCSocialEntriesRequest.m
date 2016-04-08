@@ -19,30 +19,33 @@
 @implementation UCSocialEntriesRequest
 
 + (instancetype)nextPageRequestWithSource:(UCSocialSource *)source
-                                  entries:(UCSocialEntriesCollection *)collection {
-    UCSocialEntriesRequest *req = [[UCSocialEntriesRequest alloc] initNextPageWithSource:source collection:collection];
+                                  entries:(UCSocialEntriesCollection *)collection
+                                     path:(NSString *)path {
+    UCSocialEntriesRequest *req = [[UCSocialEntriesRequest alloc] initNextPageWithSource:source collection:collection path:path];
     return req;
 
 }
 
-+ (instancetype)requestWithSource:(UCSocialSource *)source chunk:(UCSocialChunk *)chunk {
-    UCSocialEntriesRequest *req = [[UCSocialEntriesRequest alloc] initWithSource:source chunk:chunk];
++ (instancetype)requestWithSource:(UCSocialSource *)source chunk:(UCSocialChunk *)chunk path:(NSString *)path {
+    UCSocialEntriesRequest *req = [[UCSocialEntriesRequest alloc] initWithSource:source chunk:chunk path:path];
     return req;
 }
 
-- (id)initWithSource:(UCSocialSource *)source chunk:(UCSocialChunk *)chunk {
+- (id)initWithSource:(UCSocialSource *)source chunk:(UCSocialChunk *)chunk path:(NSString *)path {
     self = [super init];
     if (self) {
         self.source = source;
         self.chunk = chunk;
         self.path = [source.urls.sourceBase stringByAppendingString:chunk.path];
+        if (path) self.path = [self.path stringByAppendingPathComponent:path];
     }
     return self;
 }
 
 - (id)initNextPageWithSource:(UCSocialSource *)source
-                  collection:(UCSocialEntriesCollection *)collection {
-    self = [self initWithSource:source chunk:collection.root];
+                  collection:(UCSocialEntriesCollection *)collection
+                        path:(NSString *)path {
+    self = [self initWithSource:source chunk:collection.root path:path];
     if (self) {
         self.path = [self.path stringByAppendingPathComponent:collection.nextPagePath];
     }

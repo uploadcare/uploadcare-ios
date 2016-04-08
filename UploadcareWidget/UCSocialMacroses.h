@@ -8,4 +8,4 @@
 
 #define SetIfNotNull(a,b) {a = [b isKindOfClass:[NSNull class]] ? nil : b;}
 
-#define UCAbstractAssert {NSAssert(NO, @"%@ is abstract class, you should override %@ method", NSStringFromClass([self class]), NSStringFromSelector(_cmd));}
+#define UCAbstractAssert {NSAssert(NO, @"You should override %@ method", NSStringFromSelector(_cmd));}

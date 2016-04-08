@@ -19,12 +19,17 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, assign) BOOL isLastPage;
 @property (nonatomic, assign) BOOL nextPageFetchStarted;
+@property (nonatomic, copy) void (^completionBlock)(UCSocialEntry *socialEntry);
+@property (nonatomic, strong) NSString *path;
 @end
 
 @implementation UCGalleryVC
 
-- (id)init {
+- (id)initWithCompletion:(void(^)(UCSocialEntry *socialEntry))completion {
     self = [super initWithCollectionViewLayout:[[self class] layout]];
+    if (self) {
+        _completionBlock = completion;
+    }
     return self;
 }
 
@@ -90,8 +95,8 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 - (void)loadNextPage {
-    if ([self.delegate respondsToSelector:@selector(fetchNextPageForCollection:)]) {
-        [self.delegate fetchNextPageForCollection:self.entriesCollection];
+    if ([self.delegate respondsToSelector:@selector(fetchNextPagePath:forCollection:)]) {
+        [self.delegate fetchNextPagePath:self.path forCollection:self.entriesCollection];
     }
 }
 
@@ -150,9 +155,32 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     UCSocialEntry *entry = self.entriesCollection.entries[indexPath.row];
-    NSLog(@"Entry selected: %@", entry);
-//    UPCGalleryViewCell *cell = (UPCGalleryViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    [self.sourceViewController performSocialSourceAction:thing.action forItemTitled:thing.title withThumbnailURL:thing.thumbnailURL thumbnailImage:cell.imageView.image];
+    UCSocialEntryActionType actionType = entry.action.actionType;
+    switch (actionType) {
+        case UCSocialEntryActionTypeUnknown: {
+            if (self.completionBlock) self.completionBlock (entry);
+            break;
+        }
+        case UCSocialEntryActionTypeSelectFile: {
+            if (self.completionBlock) self.completionBlock (entry);
+            break;
+        }
+        case UCSocialEntryActionTypeOpenPath: {
+            [self openGalleryWithEntry:entry];
+            NSLog(@"Opening additional path: %@", entry.action.urlString);
+            break;
+        }
+    }
+}
+
+- (void)openGalleryWithEntry:(UCSocialEntry *)entry {
+    NSString *resultPath = nil;
+    NSString *newPathComponent = [self.path stringByAppendingPathComponent:entry.action.path.chunks.firstObject.path];
+    if (self.path) resultPath = [self.path stringByAppendingPathComponent:newPathComponent];
+    else resultPath = newPathComponent;
+    if ([self.delegate respondsToSelector:@selector(fetchPath:forCollection:)]) {
+        [self.delegate fetchPath:resultPath forCollection:self.entriesCollection];
+    }
 }
 
 @end

@@ -7,8 +7,7 @@
 //
 
 #import "UCSocialObject.h"
-
-@class UCSocialEntryAction;
+#import "UCSocialEntryAction.h"
 
 @interface UCSocialEntry : UCSocialObject
 
