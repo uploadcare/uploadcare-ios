@@ -122,7 +122,8 @@
 }
 
 - (void)showGalleryWithCollection:(UCSocialEntriesCollection *)collection {
-    self.gallery = [[UCGalleryVC alloc] initWitSocialEntriesCollection:collection];
+    self.gallery = [UCGalleryVC new];
+    self.gallery.entriesCollection = collection;
     self.gallery.delegate = self;
     [self.navigationController pushViewController:self.gallery animated:YES];
 }

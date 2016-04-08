@@ -19,8 +19,6 @@
 @property (nonatomic, strong) UCSocialEntriesCollection *entriesCollection;
 @property (nonatomic, weak) id<UCGalleryVCDelegate> delegate;
 
-- (id)initWitSocialEntriesCollection:(UCSocialEntriesCollection *)collection;
-
 @end
 
 

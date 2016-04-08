@@ -23,11 +23,8 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 
 @implementation UCGalleryVC
 
-- (id)initWitSocialEntriesCollection:(UCSocialEntriesCollection *)collection {
+- (id)init {
     self = [super initWithCollectionViewLayout:[[self class] layout]];
-    if (self) {
-        _entriesCollection = collection;
-    }
     return self;
 }
 
@@ -47,7 +44,6 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     [super viewDidLoad];
     self.collectionView.delegate = self;
     [self.collectionView registerClass:[UCGalleryCell class] forCellWithReuseIdentifier:kCellIdentifier];
