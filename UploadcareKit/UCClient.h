@@ -20,6 +20,8 @@ typedef void (^UCCompletionBlock)(id response, NSError *error);
 
 + (instancetype)defaultClient;
 
+- (NSURLSession *)session;
+
 - (void)setPublicKey:(NSString *)publicKey;
 
 - (NSURLSessionDataTask *)performUCRequest:(UCAPIRequest *)ucRequest

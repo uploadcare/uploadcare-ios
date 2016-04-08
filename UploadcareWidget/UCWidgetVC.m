@@ -17,6 +17,7 @@
 #import <SafariServices/SafariServices.h>
 #import "UCSocialConstantsHeader.h"
 #import "UCSocialEntriesCollection.h"
+#import "UCGalleryVC.h"
 
 @interface UCWidgetVC () <SFSafariViewControllerDelegate>
 @property (nonatomic, strong) NSArray<UCSocialSource *> *tableData;
@@ -94,7 +95,12 @@
 
 - (void)processData:(id)responseData {
     UCSocialEntriesCollection *collection = [[UCSocialEntriesCollection alloc] initWithSerializedObject:responseData];
-    NSLog(@"Collection: %@", collection);
+    [self showGalleryWithCollection:collection];
+}
+
+- (void)showGalleryWithCollection:(UCSocialEntriesCollection *)collection {
+    UCGalleryVC *vc = [[UCGalleryVC alloc] initWitSocialEntriesCollection:collection];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)handleError:(NSError *)error {

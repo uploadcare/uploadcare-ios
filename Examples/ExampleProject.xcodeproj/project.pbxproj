@@ -36,6 +36,9 @@
 		06D9EE081CB6DF110043405C /* UCSocialEntriesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE071CB6DF110043405C /* UCSocialEntriesCollection.m */; };
 		06D9EE0B1CB6DF5E0043405C /* UCSocialEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE0A1CB6DF5E0043405C /* UCSocialEntry.m */; };
 		06D9EE0F1CB6E04A0043405C /* UCSocialEntryAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE0E1CB6E04A0043405C /* UCSocialEntryAction.m */; };
+		06D9EE121CB7C4100043405C /* UCGalleryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE111CB7C4100043405C /* UCGalleryVC.m */; };
+		06D9EE151CB7C5410043405C /* UCGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE141CB7C5410043405C /* UCGalleryCell.m */; };
+		06D9EE181CB7C9C20043405C /* UIImageView+Uploadcare.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE171CB7C9C20043405C /* UIImageView+Uploadcare.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +101,12 @@
 		06D9EE0A1CB6DF5E0043405C /* UCSocialEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCSocialEntry.m; path = Model/UCSocialEntry.m; sourceTree = "<group>"; };
 		06D9EE0D1CB6E04A0043405C /* UCSocialEntryAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UCSocialEntryAction.h; path = Model/UCSocialEntryAction.h; sourceTree = "<group>"; };
 		06D9EE0E1CB6E04A0043405C /* UCSocialEntryAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCSocialEntryAction.m; path = Model/UCSocialEntryAction.m; sourceTree = "<group>"; };
+		06D9EE101CB7C4100043405C /* UCGalleryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCGalleryVC.h; sourceTree = "<group>"; };
+		06D9EE111CB7C4100043405C /* UCGalleryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCGalleryVC.m; sourceTree = "<group>"; };
+		06D9EE131CB7C5410043405C /* UCGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCGalleryCell.h; sourceTree = "<group>"; };
+		06D9EE141CB7C5410043405C /* UCGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCGalleryCell.m; sourceTree = "<group>"; };
+		06D9EE161CB7C9C20043405C /* UIImageView+Uploadcare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Uploadcare.h"; sourceTree = "<group>"; };
+		06D9EE171CB7C9C20043405C /* UIImageView+Uploadcare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Uploadcare.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +220,12 @@
 				06A6DCB41CB51636000B4E8A /* UCSocialMacroses.h */,
 				06A6DCAA1CB41C9B000B4E8A /* UCWidgetVC.h */,
 				06A6DCAB1CB41C9B000B4E8A /* UCWidgetVC.m */,
+				06D9EE101CB7C4100043405C /* UCGalleryVC.h */,
+				06D9EE111CB7C4100043405C /* UCGalleryVC.m */,
+				06D9EE131CB7C5410043405C /* UCGalleryCell.h */,
+				06D9EE141CB7C5410043405C /* UCGalleryCell.m */,
+				06D9EE161CB7C9C20043405C /* UIImageView+Uploadcare.h */,
+				06D9EE171CB7C9C20043405C /* UIImageView+Uploadcare.m */,
 			);
 			name = "New widget";
 			path = ../../UploadcareWidget;
@@ -308,14 +323,17 @@
 			files = (
 				06A6DAC61CB3E063000B4E8A /* UCAPIRequest.m in Sources */,
 				06A6DCBE1CB545FD000B4E8A /* UCSocialEntriesRequest.m in Sources */,
+				06D9EE151CB7C5410043405C /* UCGalleryCell.m in Sources */,
 				06A6DAA11CB3D746000B4E8A /* ViewController.m in Sources */,
 				06A6DACB1CB3E063000B4E8A /* UCGroupPostRequest.m in Sources */,
 				06A6DCAF1CB51552000B4E8A /* UCSocialSourcesRequest.m in Sources */,
 				06A6DBB51CB4073E000B4E8A /* UCSocialRequest.m in Sources */,
 				06A6DAC71CB3E063000B4E8A /* UCClient.m in Sources */,
 				06A6DCBB1CB51901000B4E8A /* UCSocialObject.m in Sources */,
+				06D9EE181CB7C9C20043405C /* UIImageView+Uploadcare.m in Sources */,
 				06A6DBB91CB408B6000B4E8A /* UCClient+Social.m in Sources */,
 				06A6DACC1CB3E063000B4E8A /* UCRemoteFileUploadRequest.m in Sources */,
+				06D9EE121CB7C4100043405C /* UCGalleryVC.m in Sources */,
 				06A6DCAC1CB41C9B000B4E8A /* UCWidgetVC.m in Sources */,
 				06D9EE0F1CB6E04A0043405C /* UCSocialEntryAction.m in Sources */,
 				06A6DAC81CB3E063000B4E8A /* UCFileInfoRequest.m in Sources */,
