@@ -18,7 +18,4 @@
                             chunk:(UCSocialChunk *)chunk
                              path:(NSString *)path;
 
-+ (instancetype)nextPageRequestWithSource:(UCSocialSource *)source
-                                  entries:(UCSocialEntriesCollection *)collection
-                                     path:(NSString *)path;
 @end

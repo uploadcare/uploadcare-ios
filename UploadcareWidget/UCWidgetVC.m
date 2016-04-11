@@ -137,17 +137,9 @@
     [[UCClient defaultClient] performUCSocialRequest:[UCSocialEntriesRequest requestWithSource:source chunk:rootChunk path:path] completion:self.responseBlock];
 }
 
-- (void)queryNextPageForSource:(UCSocialSource *)source entries:(UCSocialEntriesCollection *)entries path:(NSString *)path {
-    [[UCClient defaultClient] performUCSocialRequest:[UCSocialEntriesRequest nextPageRequestWithSource:source entries:entries path:path] completion:self.responseBlock];
-}
-
 - (void)processData:(id)responseData {
     UCSocialEntriesCollection *collection = [[UCSocialEntriesCollection alloc] initWithSerializedObject:responseData];
-//    if (![self.gallery.entriesCollection.path.chunks isEqual:collection.path.chunks]) {
-//        [self showGalleryWithCollection:collection];
-//    } else {
-        [self appendGalleryCollection:collection];
-//    }
+    [self appendGalleryCollection:collection];
 }
 
 - (void)appendGalleryCollection:(UCSocialEntriesCollection *)collection {
@@ -237,13 +229,16 @@
 
 #pragma mark - <UCGalleryVCDelegate>
 
-- (void)fetchNextPagePath:(NSString *)path forCollection:(UCSocialEntriesCollection *)collection {
-    [self queryNextPageForSource:self.source entries:collection path:path];
+- (void)fetchNextPageWithChunk:(UCSocialChunk *)chunk pathChunk:(UCSocialChunk *)pathChunk forCollection:(UCSocialEntriesCollection *)collection {
+    [self queryObjectOrLoginAddressForSource:self.source rootChunk:chunk path:collection.nextPagePath];
+}
+- (void)fetchChunk:(UCSocialChunk *)chunk pathChunk:(UCSocialChunk *)pathChunk forCollection:(UCSocialEntriesCollection *)collection {
+    [self showGalleryWithRoot:chunk];
+    [self queryObjectOrLoginAddressForSource:self.source rootChunk:chunk path:pathChunk.path];
 }
 
-- (void)fetchChunk:(UCSocialChunk *)chunk forCollection:(UCSocialEntriesCollection *)collection {
-    [self showGalleryWithRoot:chunk];
-    [self queryObjectOrLoginAddressForSource:self.source rootChunk:collection.root path:chunk.path];
+- (NSArray<UCSocialChunk*> *)availableSocialChunks {
+    return self.source.rootChunks;
 }
 
 @end

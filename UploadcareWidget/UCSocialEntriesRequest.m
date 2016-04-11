@@ -18,14 +18,6 @@
 
 @implementation UCSocialEntriesRequest
 
-+ (instancetype)nextPageRequestWithSource:(UCSocialSource *)source
-                                  entries:(UCSocialEntriesCollection *)collection
-                                     path:(NSString *)path {
-    UCSocialEntriesRequest *req = [[UCSocialEntriesRequest alloc] initWithSource:source chunk:collection.root path:collection.nextPagePath];
-    return req;
-
-}
-
 + (instancetype)requestWithSource:(UCSocialSource *)source chunk:(UCSocialChunk *)chunk path:(NSString *)path {
     UCSocialEntriesRequest *req = [[UCSocialEntriesRequest alloc] initWithSource:source chunk:chunk path:path];
     return req;

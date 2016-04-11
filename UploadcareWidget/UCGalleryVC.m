@@ -57,6 +57,35 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
     self.navigationItem.title = self.root.title;
+    [self setupNavigationButtons];
+}
+
+- (void)setupNavigationButtons {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Source" style:UIBarButtonItemStylePlain target:self action:@selector(didPressChunkSelector)];
+}
+
+- (void)didPressChunkSelector {
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Choose option" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }]];
+    
+    NSArray<UCSocialChunk*> *availableChunks = nil;
+    if ([self.delegate respondsToSelector:@selector(availableSocialChunks)]) {
+        availableChunks = [self.delegate availableSocialChunks];
+    }
+    
+    for (UCSocialChunk *chunk in availableChunks) {
+        __block UCSocialChunk *blockChunk = chunk;
+        [actionSheet addAction:[UIAlertAction actionWithTitle:chunk.title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"Chunk %@ selected", blockChunk.title);
+            if ([self.delegate respondsToSelector:@selector(fetchChunk:pathChunk:forCollection:)]) {
+                [self.delegate fetchChunk:blockChunk pathChunk:self.pathChunk forCollection:self.entriesCollection];
+            }
+        }]];
+
+    }
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 - (void)setEntriesCollection:(UCSocialEntriesCollection *)entriesCollection {
@@ -93,8 +122,8 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 - (void)loadNextPage {
-    if ([self.delegate respondsToSelector:@selector(fetchNextPagePath:forCollection:)]) {
-        [self.delegate fetchNextPagePath:self.root.path forCollection:self.entriesCollection];
+    if ([self.delegate respondsToSelector:@selector(fetchNextPageWithChunk:pathChunk:forCollection:)]) {
+        [self.delegate fetchNextPageWithChunk:self.root pathChunk:self.pathChunk forCollection:self.entriesCollection];
     }
 }
 
@@ -154,8 +183,8 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 - (void)openGalleryWithEntry:(UCSocialEntry *)entry {
-    if ([self.delegate respondsToSelector:@selector(fetchChunk:forCollection:)]) {
-        [self.delegate fetchChunk:entry.action.path.chunks.firstObject forCollection:self.entriesCollection];
+    if ([self.delegate respondsToSelector:@selector(fetchChunk:pathChunk:forCollection:)]) {
+        [self.delegate fetchChunk:self.root pathChunk:entry.action.path.chunks.firstObject forCollection:self.entriesCollection];
     }
 }
 
