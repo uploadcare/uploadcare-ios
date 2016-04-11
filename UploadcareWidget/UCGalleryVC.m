@@ -20,7 +20,6 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 @property (nonatomic, assign) BOOL isLastPage;
 @property (nonatomic, assign) BOOL nextPageFetchStarted;
 @property (nonatomic, copy) void (^completionBlock)(UCSocialEntry *socialEntry);
-@property (nonatomic, strong) NSString *path;
 @end
 
 @implementation UCGalleryVC
@@ -68,7 +67,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 - (void)appendDataFromCollection:(UCSocialEntriesCollection *)entriesCollection {
     self.nextPageFetchStarted = NO;
     NSUInteger index = 0;
-    if (_entriesCollection.entries.count) index = _entriesCollection.entries.count - 1;
+    if (_entriesCollection.entries.count) index = _entriesCollection.entries.count;
     NSUInteger length = entriesCollection.entries.count;
     _entriesCollection = [self collectionMergedWith:entriesCollection];
     [self.collectionView performBatchUpdates:^{
@@ -95,7 +94,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 
 - (void)loadNextPage {
     if ([self.delegate respondsToSelector:@selector(fetchNextPagePath:forCollection:)]) {
-        [self.delegate fetchNextPagePath:self.path forCollection:self.entriesCollection];
+        [self.delegate fetchNextPagePath:self.root.path forCollection:self.entriesCollection];
     }
 }
 

@@ -49,6 +49,20 @@
     [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     [self fetchSocialSources];
+    [self setupNavigationItems];
+}
+
+- (void)setupNavigationItems {
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(didPressClose:)];
+    [self.navigationItem setRightBarButtonItem:rightItem];
+}
+
+- (void)didPressClose:(id)sender {
+    [self closeController];
+}
+
+- (void)closeController {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void(^)(id response, NSError *error))responseBlock {
@@ -141,8 +155,10 @@
 }
 
 - (void)showGalleryWithRoot:(UCSocialChunk *)root {
+    __weak __typeof(self) weakSelf = self;
     self.gallery = [[UCGalleryVC alloc] initWithCompletion:^(UCSocialEntry *socialEntry) {
-        [self uploadSocialEntry:socialEntry];
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
+        [strongSelf uploadSocialEntry:socialEntry];
     }];
     self.gallery.root = root;
     self.gallery.delegate = self;
@@ -159,6 +175,7 @@
         } else {
             if (self.completionBlock) self.completionBlock(NO, response, error);
         }
+        [self closeController];
     }];
 }
 

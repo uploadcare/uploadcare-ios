@@ -118,7 +118,8 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
             }
         }
     }];;
-    [self.navigationController pushViewController:wvc animated:YES];
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:wvc];
+    [self.navigationController presentViewController:navc animated:YES completion:nil];
 }
 
 #pragma mark - Uploadcare requests
@@ -256,12 +257,7 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
 #pragma mark - Utilities
 
 - (void)handleError:(NSError *)error {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [alertController addAction:ok];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
+    NSLog(@"Widget error: %@", error.localizedDescription);
 }
 
 - (NSData *)localFileData {

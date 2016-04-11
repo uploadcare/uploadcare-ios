@@ -14,7 +14,7 @@
 
 @interface UCSocialEntriesCollection : UCSocialObject
 
-@property (nonatomic, strong) NSDictionary *nextPage;
+@property (nonatomic, strong) UCSocialPath *nextPage;
 @property (nonatomic, strong) UCSocialPath *path;
 @property (nonatomic, strong) UCSocialChunk *root;
 @property (nonatomic, strong) NSDictionary *userInfo;

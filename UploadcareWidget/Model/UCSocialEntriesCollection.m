@@ -8,14 +8,17 @@
 
 #import "UCSocialEntriesCollection.h"
 #import "UCSocialEntry.h"
+#import "UCSocialChunk.h"
 
 @implementation UCSocialEntriesCollection
 
 - (NSString *)nextPagePath {
     if (!self.nextPage) return nil;
-    NSArray *chunks = self.nextPage[@"chunks"];
-    id chunk = chunks.firstObject;
-    return chunk[@"path_chunk"];
+    NSString *path = [[NSString alloc] init];
+    for (UCSocialChunk *chunk in self.nextPage.chunks) {
+        path = [path stringByAppendingPathComponent:chunk.path];
+    }
+    return path;
 }
 
 + (NSDictionary *)mapping {

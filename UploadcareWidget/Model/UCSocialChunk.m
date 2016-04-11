@@ -19,6 +19,10 @@
     return nil;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ path: '%@'", [super description], self.path];
+}
+
 - (NSUInteger)hash {
     return self.path.length;
 }

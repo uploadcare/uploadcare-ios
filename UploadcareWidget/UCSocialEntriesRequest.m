@@ -21,7 +21,7 @@
 + (instancetype)nextPageRequestWithSource:(UCSocialSource *)source
                                   entries:(UCSocialEntriesCollection *)collection
                                      path:(NSString *)path {
-    UCSocialEntriesRequest *req = [[UCSocialEntriesRequest alloc] initNextPageWithSource:source collection:collection path:path];
+    UCSocialEntriesRequest *req = [[UCSocialEntriesRequest alloc] initWithSource:source chunk:collection.root path:collection.nextPagePath];
     return req;
 
 }
@@ -36,18 +36,7 @@
     if (self) {
         self.source = source;
         self.chunk = chunk;
-        self.path = [source.urls.sourceBase stringByAppendingString:chunk.path];
-        if (path) self.path = [self.path stringByAppendingPathComponent:path];
-    }
-    return self;
-}
-
-- (id)initNextPageWithSource:(UCSocialSource *)source
-                  collection:(UCSocialEntriesCollection *)collection
-                        path:(NSString *)path {
-    self = [self initWithSource:source chunk:collection.root path:path];
-    if (self) {
-        self.path = [self.path stringByAppendingPathComponent:collection.nextPagePath];
+        self.path = [source.urls.sourceBase stringByAppendingPathComponent:path?[chunk.path stringByAppendingPathComponent:path]:chunk.path];
     }
     return self;
 }
