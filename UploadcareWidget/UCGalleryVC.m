@@ -175,9 +175,9 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 
 - (void)openGalleryWithEntry:(UCSocialEntry *)entry {
     NSString *resultPath = nil;
-    NSString *newPathComponent = [self.path stringByAppendingPathComponent:entry.action.path.chunks.firstObject.path];
-    if (self.path) resultPath = [self.path stringByAppendingPathComponent:newPathComponent];
-    else resultPath = newPathComponent;
+    NSString *oldPath = self.path ?: @"";
+    NSString *newPathComponent = [oldPath stringByAppendingPathComponent:entry.action.path.chunks.firstObject.path];
+    resultPath = [oldPath stringByAppendingPathComponent:newPathComponent];
     if ([self.delegate respondsToSelector:@selector(fetchPath:forCollection:)]) {
         [self.delegate fetchPath:resultPath forCollection:self.entriesCollection];
     }

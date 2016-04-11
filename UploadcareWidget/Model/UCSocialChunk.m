@@ -19,4 +19,16 @@
     return nil;
 }
 
+- (NSUInteger)hash {
+    return self.path.length;
+}
+
+- (BOOL) isEqual:(id)object {
+    if ([[object class] isSubclassOfClass:[self class]]) {
+        return [self.path isEqual:((UCSocialChunk*)object).path];
+    } else {
+        return [super isEqual:object];
+    }
+}
+
 @end

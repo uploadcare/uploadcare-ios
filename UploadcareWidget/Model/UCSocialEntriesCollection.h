@@ -7,6 +7,7 @@
 //
 
 #import "UCSocialObject.h"
+#import "UCSocialPath.h"
 
 @class UCSocialEntry;
 @class UCSocialChunk;
@@ -14,7 +15,7 @@
 @interface UCSocialEntriesCollection : UCSocialObject
 
 @property (nonatomic, strong) NSDictionary *nextPage;
-@property (nonatomic, strong) NSDictionary *path;
+@property (nonatomic, strong) UCSocialPath *path;
 @property (nonatomic, strong) UCSocialChunk *root;
 @property (nonatomic, strong) NSDictionary *userInfo;
 @property (nonatomic, strong) NSArray<UCSocialEntry*> *entries;

@@ -117,6 +117,8 @@ Class property_getClass( objc_property_t property )
                 id obj = [[type alloc] initWithSerializedObject:value];
                 [self setValue:obj forKey:key];
             }
+        } else if ([type isSubclassOfClass:[NSString class]] && [value respondsToSelector:@selector(stringValue)]) {
+            [self setValue:[value stringValue] forKey:key];
         } else {
             [self setValue:value forKey:key];
         }

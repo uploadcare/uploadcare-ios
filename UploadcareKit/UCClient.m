@@ -482,7 +482,7 @@ didCompleteWithError:(nullable NSError *)error {
             [self.remoteObserver startObsrving];
         }
     } else {
-        if (completionBlock) completionBlock (responseJson ?: response, error);
+        if (completionBlock) completionBlock (responseJson ?: response, responseJson ? error : jsonError);
         [self removeQueuesForTaskId:task.taskIdentifier];
     }
 }

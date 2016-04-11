@@ -112,7 +112,7 @@
 
 - (void)processData:(id)responseData {
     UCSocialEntriesCollection *collection = [[UCSocialEntriesCollection alloc] initWithSerializedObject:responseData];
-    if (!self.gallery) {
+    if (![self.gallery.entriesCollection.path.chunks isEqual:collection.path.chunks]) {
         [self showGalleryWithCollection:collection];
     } else {
         [self appendGalleryCollection:collection];
