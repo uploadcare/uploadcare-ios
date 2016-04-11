@@ -20,6 +20,7 @@
 #import "UCGalleryVC.h"
 #import "UCSocialEntry.h"
 #import "UCRemoteFileUploadRequest.h"
+#import "UCSocialEntryRequest.h"
 #import "UCConstantsHeader.h"
 
 @interface UCWidgetVC () <SFSafariViewControllerDelegate, UCGalleryVCDelegate>
@@ -62,7 +63,19 @@
 }
 
 - (void)closeController {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    __weak __typeof(self) weakSelf = self;
+    void (^dismissBlock)() = ^void() {
+        [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
+    };
+    
+    if ([[NSThread currentThread] isMainThread]) {
+        dismissBlock();
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            dismissBlock();
+        });
+    }
+
 }
 
 - (void(^)(id response, NSError *error))responseBlock {
@@ -158,16 +171,29 @@
 }
 
 - (void)uploadSocialEntry:(UCSocialEntry *)entry {
-    UCRemoteFileUploadRequest *request = [UCRemoteFileUploadRequest requestWithRemoteFileURL:[NSURL URLWithString:entry.action.urlString]];
-    [[UCClient defaultClient] performUCRequest:request progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
-        if (self.progressBlock) self.progressBlock (totalBytesSent, totalBytesExpectedToSend);
-    } completion:^(id response, NSError *error) {
-        if (!error) {
-            if (self.completionBlock) self.completionBlock(YES, response[@"file_id"], nil);
+    __weak __typeof(self) weakSelf = self;
+    UCSocialEntryRequest *req = [UCSocialEntryRequest requestWithSource:self.source file:entry.action.urlString];
+    [[UCClient defaultClient] performUCSocialRequest:req completion:^(id response, NSError *error) {
+        if (!error && [response isKindOfClass:[NSDictionary class]]) {
+            NSString *fileURL = response[@"url"];
+            UCRemoteFileUploadRequest *request = [UCRemoteFileUploadRequest requestWithRemoteFileURL:[NSURL URLWithString:fileURL]];
+            [[UCClient defaultClient] performUCRequest:request progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
+                __strong __typeof__(weakSelf) strongSelf = weakSelf;
+                if (strongSelf.progressBlock) strongSelf.progressBlock (totalBytesSent, totalBytesExpectedToSend);
+            } completion:^(id response, NSError *error) {
+                __strong __typeof__(weakSelf) strongSelf = weakSelf;
+                if (!error) {
+                    if (strongSelf.completionBlock) strongSelf.completionBlock(YES, response[@"file_id"], nil);
+                } else {
+                    if (strongSelf.completionBlock) strongSelf.completionBlock(NO, response, error);
+                }
+                [strongSelf closeController];
+            }];
         } else {
-            if (self.completionBlock) self.completionBlock(NO, response, error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self handleError:error];
+            });
         }
-        [self closeController];
     }];
 }
 
