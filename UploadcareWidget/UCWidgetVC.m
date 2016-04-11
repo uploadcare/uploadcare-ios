@@ -18,6 +18,8 @@
 #import "UCSocialConstantsHeader.h"
 #import "UCSocialEntriesCollection.h"
 #import "UCGalleryVC.h"
+#import "UCSocialEntry.h"
+#import "UCRemoteFileUploadRequest.h"
 
 @interface UCWidgetVC () <SFSafariViewControllerDelegate, UCGalleryVCDelegate>
 @property (nonatomic, strong) NSArray<UCSocialSource *> *tableData;
@@ -25,10 +27,22 @@
 @property (nonatomic, strong) UCGalleryVC *gallery;
 @property (nonatomic, strong) UCSocialSource *source;
 @property (nonatomic, strong) UCSocialChunk *chunk;
+@property (nonatomic, copy) void (^completionBlock)(BOOL completed, NSString *fileId, NSError *error);
+@property (nonatomic, copy) void (^progressBlock)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend);
 @property (nonatomic, copy) void (^responseBlock)(id response, NSError *error);
 @end
 
 @implementation UCWidgetVC
+
+- (id)initWithProgress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
+            completion:(void(^)(BOOL completed, NSString *fileId, NSError *error))completion {
+    self = [super init];
+    if (self) {
+        _completionBlock = completion;
+        _progressBlock = progress;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -125,11 +139,24 @@
 
 - (void)showGalleryWithCollection:(UCSocialEntriesCollection *)collection {
     self.gallery = [[UCGalleryVC alloc] initWithCompletion:^(UCSocialEntry *socialEntry) {
-        NSLog(@"Completed with %@", socialEntry);
+        [self uploadSocialEntry:socialEntry];
     }];
     self.gallery.entriesCollection = collection;
     self.gallery.delegate = self;
     [self.navigationController pushViewController:self.gallery animated:YES];
+}
+
+- (void)uploadSocialEntry:(UCSocialEntry *)entry {
+    UCRemoteFileUploadRequest *request = [UCRemoteFileUploadRequest requestWithRemoteFileURL:[NSURL URLWithString:entry.action.urlString]];
+    [[UCClient defaultClient] performUCRequest:request progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
+        if (self.progressBlock) self.progressBlock (totalBytesSent, totalBytesExpectedToSend);
+    } completion:^(id response, NSError *error) {
+        if (!error) {
+            if (self.completionBlock) self.completionBlock(YES, response[@"file_id"], nil);
+        } else {
+            if (self.completionBlock) self.completionBlock(NO, response, error);
+        }
+    }];
 }
 
 - (void)handleError:(NSError *)error {

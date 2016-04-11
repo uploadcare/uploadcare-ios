@@ -156,7 +156,7 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
 - (void)testDataUpload:(NSData *)data completion:(void(^)(NSString *fileID))completion {
     UCFileUploadRequest *request = [UCFileUploadRequest requestWithFileData:[self localFileData] fileName:@"file" mimeType:@"image/jpeg"];
     if (request) RLog(@"Local file upload request created: %@", request);
-    [[UCClient defaultClient] performUCRequest:request progress:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
+    [[UCClient defaultClient] performUCRequest:request progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
         float progress = (float)totalBytesSent / (float)totalBytesExpectedToSend;
         RLog(@"Progress: %f", progress);
     } completion:^(id response, NSError *error) {
@@ -173,7 +173,7 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
     
     UCRemoteFileUploadRequest *req = [UCRemoteFileUploadRequest requestWithRemoteFileURL:remoteURL];
     if (req) RLog(@"Remote url request created: %@", req);
-    [[UCClient defaultClient] performUCRequest:req progress:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
+    [[UCClient defaultClient] performUCRequest:req progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
         float progress = (float)totalBytesSent / (float)totalBytesExpectedToSend;
         RLog(@"Progress: %f", progress);
     } completion:^(id response, NSError *error) {

@@ -10,4 +10,7 @@
 
 @interface UCWidgetVC : UITableViewController
 
+- (id)initWithProgress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
+            completion:(void(^)(BOOL completed, NSString *fileId, NSError *error))completion;
+
 @end

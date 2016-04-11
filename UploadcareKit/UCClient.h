@@ -11,7 +11,7 @@
 @class UCAPIRequest;
 @class UCAPIRequestPayload;
 
-typedef void (^UCProgressBlock)(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend);
+typedef void (^UCProgressBlock)(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend);
 typedef void (^UCCompletionBlock)(id response, NSError *error);
 
 @interface UCClient : NSObject

@@ -211,7 +211,7 @@ static NSUInteger const UCErrorUploadcare = 1002;
     } else if ([status isEqualToString:UCPollingStatusProgress]) {
         NSUInteger done = [statusData[UCPollingStatusDoneBytesKey] unsignedIntegerValue];
         NSUInteger total = [statusData[UCPollingStatusTotalBytesKey] unsignedIntegerValue];
-        if (self.progressBlock) self.progressBlock(done, done, total);
+        if (self.progressBlock) self.progressBlock(done, total);
     }
 }
 
@@ -457,7 +457,7 @@ static UCClient *instanceClient = nil;
     totalBytesSent:(int64_t)totalBytesSent
 totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
     UCProgressBlock progressBlock = [self.progressQueue objectForKey:@(task.taskIdentifier)];
-    if (progressBlock) progressBlock(bytesSent, totalBytesSent, totalBytesExpectedToSend);
+    if (progressBlock) progressBlock(totalBytesSent, totalBytesExpectedToSend);
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
