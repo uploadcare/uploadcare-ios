@@ -15,4 +15,6 @@
 - (NSURLSessionDataTask *)performUCSocialRequest:(UCSocialRequest *)ucSocialRequest
                                       completion:(UCCompletionBlock)completionBlock;
 
++ (NSString *)socialErrorDomain;
+
 @end

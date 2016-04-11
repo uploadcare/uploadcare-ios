@@ -106,7 +106,18 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
 #pragma mark - Uploadcare widget calls
 
 - (void)showWidget {
-    UCWidgetVC *wvc = [UCWidgetVC new];
+    UCWidgetVC *wvc = [[UCWidgetVC alloc] initWithProgress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
+        float progress = (float)bytesSent / (float)bytesExpectedToSend;
+        NSLog(@"Widget progress: %f", progress);
+    } completion:^(BOOL completed, NSString *fileId, NSError *error) {
+        if (completed) {
+            NSLog(@"Successfully uploaded media with id: %@", fileId);
+        } else {
+            if (error) {
+                [self handleError:error];
+            }
+        }
+    }];;
     [self.navigationController pushViewController:wvc animated:YES];
 }
 
@@ -243,6 +254,15 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
 }
 
 #pragma mark - Utilities
+
+- (void)handleError:(NSError *)error {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:ok];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 
 - (NSData *)localFileData {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"testimage" ofType:@"jpg"];

@@ -155,16 +155,12 @@ static NSString * const UCPollingStatusDoneBytesKey = @"done";
 static NSString * const UCPollingStatusTotalBytesKey = @"total";
 static NSString * const UCPollingStatusErrorMessageUnknown = @"Unknown error";
 
-static NSUInteger const UCErrorUnknown = 1001;
-static NSUInteger const UCErrorUploadcare = 1002;
-
-
 - (void)sendPollingRequest {
     if (self.pollingTask.state == NSURLSessionTaskStateRunning) {
         self.observerRetryCount -= 1;
         if (self.observerRetryCount == 0) {
             [self stopObserving];
-            NSError *error = [NSError errorWithDomain:self.errorDomain code:UCErrorUnknown
+            NSError *error = [NSError errorWithDomain:[[self class] errorDomain] code:UCErrorUnknown
                                              userInfo:@{NSLocalizedDescriptionKey : UCPollingStatusErrorMessageUnknown}];
             if (self.completionBlock) self.completionBlock(nil, error);
         }
@@ -205,7 +201,7 @@ static NSUInteger const UCErrorUploadcare = 1002;
         if (self.completionBlock) self.completionBlock(statusData, nil);
     } else if ([status isEqualToString:UCPollingStatusError]) {
         [self stopObserving];
-        NSError *error = [NSError errorWithDomain:self.errorDomain code:UCErrorUploadcare
+        NSError *error = [NSError errorWithDomain:[[self class] errorDomain] code:UCErrorUploadcare
                                          userInfo:@{NSLocalizedDescriptionKey : statusData[UCPollingStatusErrorKey]}];
         if (self.completionBlock) self.completionBlock(statusData, error);
     } else if ([status isEqualToString:UCPollingStatusProgress]) {
@@ -215,7 +211,7 @@ static NSUInteger const UCErrorUploadcare = 1002;
     }
 }
 
-- (NSString *)errorDomain {
++ (NSString *)errorDomain {
     return [@[UCRootDomain, UCRemoteFileUploadDomain] componentsJoinedByString:@"."];
 }
 
@@ -449,7 +445,14 @@ static UCClient *instanceClient = nil;
 #pragma mark - NSURLSession delegate
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
-    self.responsesData[@(dataTask.taskIdentifier)] = data;
+    NSData *existingData = self.responsesData[@(dataTask.taskIdentifier)];
+    if (existingData) {
+        NSMutableData *mutableData = existingData.mutableCopy;
+        [mutableData appendData:data];
+        self.responsesData[@(dataTask.taskIdentifier)] = mutableData.copy;
+    } else {
+        self.responsesData[@(dataTask.taskIdentifier)] = data;
+    }
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
@@ -485,6 +488,8 @@ didCompleteWithError:(nullable NSError *)error {
         if (completionBlock) completionBlock (responseJson ?: response, responseJson ? error : jsonError);
         [self removeQueuesForTaskId:task.taskIdentifier];
     }
+    
+    [self.responsesData removeObjectForKey:@(task.taskIdentifier)];
 }
 
 #pragma mark - Utilities

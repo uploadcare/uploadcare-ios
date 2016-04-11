@@ -57,35 +57,34 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
+    self.navigationItem.title = self.root.title;
 }
 
 - (void)setEntriesCollection:(UCSocialEntriesCollection *)entriesCollection {
     self.isLastPage = !entriesCollection.nextPagePath.length;
-    if (!_entriesCollection) {
-        _entriesCollection = entriesCollection;
-    } else {
-        [self appendDataFromCollection:entriesCollection];
-    }
+    [self appendDataFromCollection:entriesCollection];
 }
 
 - (void)appendDataFromCollection:(UCSocialEntriesCollection *)entriesCollection {
     self.nextPageFetchStarted = NO;
-    NSUInteger index = _entriesCollection.entries.count - 1;
+    NSUInteger index = 0;
+    if (_entriesCollection.entries.count) index = _entriesCollection.entries.count - 1;
     NSUInteger length = entriesCollection.entries.count;
     _entriesCollection = [self collectionMergedWith:entriesCollection];
     [self.collectionView performBatchUpdates:^{
         NSMutableArray *indexPaths = @[].mutableCopy;
         for (NSUInteger i = index; i < index + length; i++) {
-            [indexPaths addObject:[NSIndexPath indexPathForItem:i+1 inSection:0]];
+            [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
         }
         [self.collectionView insertItemsAtIndexPaths:indexPaths];
+
     } completion:^(BOOL finished) {
         
     }];
 }
 
 - (UCSocialEntriesCollection *)collectionMergedWith:(UCSocialEntriesCollection *)collection {
-    NSArray *entries = [self.entriesCollection.entries arrayByAddingObjectsFromArray:collection.entries];
+    NSArray *entries = [self.entriesCollection.entries ?: @[] arrayByAddingObjectsFromArray:collection.entries];
     collection.entries = entries;
     return collection;
 }
@@ -112,38 +111,21 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     return 1;
 }
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.entriesCollection.entries.count + (self.isLastPage ? 0 : 1);
+    return self.entriesCollection.entries.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.row < self.entriesCollection.entries.count) {
-        UCGalleryCell *cell = (UCGalleryCell*)[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
-        UCSocialEntry *entry = self.entriesCollection.entries[indexPath.row];
-        [cell setSocialEntry:entry];
-        return cell;
-    } else {
-        /* activity indicator cell */
-        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBusyCellIdentifyer forIndexPath:indexPath];
-        if (!cell.contentView.subviews.count) {
-            cell.contentView.backgroundColor = collectionView.backgroundColor;
-            
-            UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            [cell.contentView addSubview:activityIndicator];
-            [activityIndicator setCenter:CGPointMake(CGRectGetWidth(cell.bounds) * .5, CGRectGetHeight(cell.bounds) * .5)];
-            [activityIndicator setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
-            [activityIndicator startAnimating];
-        }
-        return cell;
-    }
+    UCGalleryCell *cell = (UCGalleryCell*)[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
+    UCSocialEntry *entry = self.entriesCollection.entries[indexPath.row];
+    [cell setSocialEntry:entry];
+    return cell;
 }
 
 #pragma mark <UICollectionViewDelegate>
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (!self.isLastPage && ![cell isKindOfClass:[UCGalleryCell class]] && !self.nextPageFetchStarted) {
+    if (!self.isLastPage && indexPath.row == self.entriesCollection.entries.count - 1 && !self.nextPageFetchStarted && self.entriesCollection) {
         self.nextPageFetchStarted = YES;
         [self loadNextPage];
     }
@@ -167,19 +149,14 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
         }
         case UCSocialEntryActionTypeOpenPath: {
             [self openGalleryWithEntry:entry];
-            NSLog(@"Opening additional path: %@", entry.action.urlString);
             break;
         }
     }
 }
 
 - (void)openGalleryWithEntry:(UCSocialEntry *)entry {
-    NSString *resultPath = nil;
-    NSString *oldPath = self.path ?: @"";
-    NSString *newPathComponent = [oldPath stringByAppendingPathComponent:entry.action.path.chunks.firstObject.path];
-    resultPath = [oldPath stringByAppendingPathComponent:newPathComponent];
-    if ([self.delegate respondsToSelector:@selector(fetchPath:forCollection:)]) {
-        [self.delegate fetchPath:resultPath forCollection:self.entriesCollection];
+    if ([self.delegate respondsToSelector:@selector(fetchChunk:forCollection:)]) {
+        [self.delegate fetchChunk:entry.action.path.chunks.firstObject forCollection:self.entriesCollection];
     }
 }
 

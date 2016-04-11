@@ -12,12 +12,13 @@
 @protocol UCGalleryVCDelegate <NSObject>
 
 - (void)fetchNextPagePath:(NSString *)path forCollection:(UCSocialEntriesCollection *)collection;
-- (void)fetchPath:(NSString *)path forCollection:(UCSocialEntriesCollection *)collection;
+- (void)fetchChunk:(UCSocialChunk *)chunk forCollection:(UCSocialEntriesCollection *)collection;
 @end
 
 @interface UCGalleryVC : UICollectionViewController
 @property (nonatomic, strong) UCSocialEntriesCollection *entriesCollection;
 @property (nonatomic, weak) id<UCGalleryVCDelegate> delegate;
+@property (nonatomic, strong) UCSocialChunk *root;
 
 - (id)initWithCompletion:(void(^)(UCSocialEntry *socialEntry))completion;
 

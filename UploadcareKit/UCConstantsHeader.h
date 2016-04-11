@@ -25,3 +25,8 @@ static NSString * const UCGroupInfoPath				= @"/group/info/";
 static NSString * const UCRootDomain				= @"com.uploadcare.upload";
 static NSString * const UCLocalFileUploadDomain		= @"local";
 static NSString * const UCRemoteFileUploadDomain	= @"remote";
+
+#pragma mark - error codes
+
+static NSUInteger const UCErrorUnknown = 1001;
+static NSUInteger const UCErrorUploadcare = 1002;

@@ -12,3 +12,7 @@ static NSString * const UCSocialAPIRoot				= @"social.uploadcare.com";
 #pragma mark - social api paths
 
 static NSString * const UCSourcesPath		 		= @"/sources";
+
+#pragma mark - error domain
+
+static NSString * const UCSocialErrorDomain			= @"com.uploadcare.widget.upload";

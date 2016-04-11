@@ -9,6 +9,8 @@
 #import "UCClient+Social.h"
 #import "UCSocialRequest.h"
 #import "UCClient_Private.h"
+#import "UCSocialConstantsHeader.h"
+#import "UCConstantsHeader.h"
 
 NSString *const USSPublicKeyHeader = @"X-Uploadcare-PublicKey";
 NSString *const UCAcceptHeader = @"Accept";
@@ -40,6 +42,10 @@ NSString *const USSLoginAddressKey = @"login_link";
 - (void)authorizeSocialRequest:(UCSocialRequest *)request {
     request.headers = @{UCAcceptHeader:USSContentType,
                         USSPublicKeyHeader:self.publicKey};
+}
+
++ (NSString *)socialErrorDomain {
+    return [@[UCSocialErrorDomain, UCRemoteFileUploadDomain] componentsJoinedByString:@"."];
 }
 
 @end
