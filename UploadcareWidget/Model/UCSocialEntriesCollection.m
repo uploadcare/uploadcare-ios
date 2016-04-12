@@ -12,15 +12,6 @@
 
 @implementation UCSocialEntriesCollection
 
-- (NSString *)nextPagePath {
-    if (!self.nextPage) return nil;
-    NSString *path = [[NSString alloc] init];
-    for (UCSocialChunk *chunk in self.nextPage.chunks) {
-        path = [path stringByAppendingPathComponent:chunk.path];
-    }
-    return path;
-}
-
 + (NSDictionary *)mapping {
     return @{@"nextPage":@"next_page",
              @"path":@"path",

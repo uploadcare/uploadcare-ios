@@ -106,7 +106,9 @@
 }
 
 - (void)fetchSocialSources {
+    __weak __typeof(self) weakSelf = self;
     [[UCClient defaultClient] performUCSocialRequest:[UCSocialSourcesRequest new] completion:^(id response, NSError *error) {
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
         if (!error) {
             NSArray *sources = response[@"sources"];
             NSMutableArray *result = @[].mutableCopy;
@@ -114,12 +116,12 @@
                 UCSocialSource *socialSource = [[UCSocialSource alloc] initWithSerializedObject:source];
                 if (socialSource) [result addObject:socialSource];
             }
-            self.tableData = result.copy;
+            strongSelf.tableData = result.copy;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
             });
         } else {
-            [self handleError:error];
+            [strongSelf handleError:error];
         }
     }];
 }
@@ -132,15 +134,17 @@
 //        svc.delegate = self;
 //        [self.navigationController pushViewController:svc animated:YES];
 //    } else {
+    [self.navigationController popToRootViewControllerAnimated:YES];
         self.webVC = [[UCWebViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] loadingBlock:^(NSURL *url) {
             __strong __typeof__(weakSelf) strongSelf = weakSelf;
             NSLog(@"URL: %@", url);
             if ([url.host isEqual:UCSocialAPIRoot] && [url.lastPathComponent isEqual:@"endpoint"]) {
-                [strongSelf.navigationController popViewControllerAnimated:YES];
+                [strongSelf.webVC dismissViewControllerAnimated:YES completion:nil];
                 [strongSelf queryObjectOrLoginAddressForSource:strongSelf.source rootChunk:strongSelf.chunk path:nil];
             }
         }];
-        [self.navigationController pushViewController:self.webVC animated:YES];
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.webVC];
+    [self.navigationController presentViewController:navc animated:YES completion:nil];
 //    }
 }
 
@@ -161,13 +165,17 @@
 
 - (void)showGalleryWithRoot:(UCSocialChunk *)root {
     __weak __typeof(self) weakSelf = self;
-    self.gallery = [[UCGalleryVC alloc] initWithCompletion:^(UCSocialEntry *socialEntry) {
+    self.gallery = [[UCGalleryVC alloc] initWithMode:self.currentMode completion:^(UCSocialEntry *socialEntry) {
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
         [strongSelf uploadSocialEntry:socialEntry];
     }];
-    self.gallery.root = root;
     self.gallery.delegate = self;
     [self.navigationController pushViewController:self.gallery animated:YES];
+}
+
+- (UCGalleryMode)currentMode {
+    NSArray *fileProviders = @[@"box", @"skydrive", @"dropbox", @"gdrive"];
+    return [fileProviders containsObject:self.source.sourceName] ? UCGalleryModeList : UCGalleryModeGrid;
 }
 
 - (void)uploadSocialEntry:(UCSocialEntry *)entry {
@@ -228,8 +236,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UCSocialSource *social = self.tableData[indexPath.row];
     UCSocialChunk *chunk = social.rootChunks.firstObject;
-    [self showGalleryWithRoot:chunk];
     [self queryObjectOrLoginAddressForSource:social rootChunk:chunk path:nil];
+    [self showGalleryWithRoot:chunk];
 }
 
 #pragma mark - <SFSafariViewControllerDelegate>
@@ -254,13 +262,13 @@
 }
 
 #pragma mark - <UCGalleryVCDelegate>
-
-- (void)fetchNextPageWithChunk:(UCSocialChunk *)chunk pathChunk:(UCSocialChunk *)pathChunk forCollection:(UCSocialEntriesCollection *)collection {
-    [self queryObjectOrLoginAddressForSource:self.source rootChunk:chunk path:collection.nextPagePath];
+- (void)fetchNextPageWithChunk:(UCSocialChunk *)chunk nextPagePath:(NSString *)nextPagePath {
+    [self queryObjectOrLoginAddressForSource:self.source rootChunk:chunk path:nextPagePath];
 }
-- (void)fetchChunk:(UCSocialChunk *)chunk pathChunk:(UCSocialChunk *)pathChunk forCollection:(UCSocialEntriesCollection *)collection {
-    [self showGalleryWithRoot:chunk];
-    [self queryObjectOrLoginAddressForSource:self.source rootChunk:chunk path:pathChunk.path];
+
+- (void)fetchChunk:(UCSocialChunk *)chunk path:(UCSocialPath *)path newWindow:(BOOL)newWindow {
+    if (newWindow) [self showGalleryWithRoot:chunk];
+    [self queryObjectOrLoginAddressForSource:self.source rootChunk:chunk path:path.fullPath];
 }
 
 - (NSArray<UCSocialChunk*> *)availableSocialChunks {

@@ -41,6 +41,7 @@
 		06D9EE181CB7C9C20043405C /* UIImageView+Uploadcare.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE171CB7C9C20043405C /* UIImageView+Uploadcare.m */; };
 		06D9EE211CB8182C0043405C /* UCSocialPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE201CB8182C0043405C /* UCSocialPath.m */; };
 		06D9EE241CBC06EA0043405C /* UCSocialEntryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE231CBC06EA0043405C /* UCSocialEntryRequest.m */; };
+		06D9EE271CBD3F9A0043405C /* UCFlatGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE261CBD3F9A0043405C /* UCFlatGalleryCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +114,8 @@
 		06D9EE201CB8182C0043405C /* UCSocialPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UCSocialPath.m; path = Model/UCSocialPath.m; sourceTree = "<group>"; };
 		06D9EE221CBC06EA0043405C /* UCSocialEntryRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCSocialEntryRequest.h; sourceTree = "<group>"; };
 		06D9EE231CBC06EA0043405C /* UCSocialEntryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialEntryRequest.m; sourceTree = "<group>"; };
+		06D9EE251CBD3F9A0043405C /* UCFlatGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFlatGalleryCell.h; sourceTree = "<group>"; };
+		06D9EE261CBD3F9A0043405C /* UCFlatGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFlatGalleryCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +233,8 @@
 				06A6DCAB1CB41C9B000B4E8A /* UCWidgetVC.m */,
 				06D9EE101CB7C4100043405C /* UCGalleryVC.h */,
 				06D9EE111CB7C4100043405C /* UCGalleryVC.m */,
+				06D9EE251CBD3F9A0043405C /* UCFlatGalleryCell.h */,
+				06D9EE261CBD3F9A0043405C /* UCFlatGalleryCell.m */,
 				06D9EE131CB7C5410043405C /* UCGalleryCell.h */,
 				06D9EE141CB7C5410043405C /* UCGalleryCell.m */,
 				06D9EE161CB7C9C20043405C /* UIImageView+Uploadcare.h */,
@@ -360,6 +365,7 @@
 				06A6DCB31CB515FC000B4E8A /* UCSocialSource.m in Sources */,
 				06A6DAC51CB3E063000B4E8A /* NSDictionary+UrlEncoding.m in Sources */,
 				06A6DACA1CB3E063000B4E8A /* UCGroupInfoRequest.m in Sources */,
+				06D9EE271CBD3F9A0043405C /* UCFlatGalleryCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

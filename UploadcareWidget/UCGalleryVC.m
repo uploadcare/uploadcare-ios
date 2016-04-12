@@ -8,32 +8,65 @@
 
 #import "UCGalleryVC.h"
 #import "UCGalleryCell.h"
+#import "UCFlatGalleryCell.h"
 #import "UCSocialEntry.h"
 
 static NSString *const kCellIdentifier = @"UCGalleryVCCellIdentifier";
 static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 
-#define ELEMENTS_PER_ROW 3
+#define GRID_ELEMENTS_PER_ROW 3
+#define LIST_ROW_HEIGHT 40
 
 @interface UCGalleryVC ()
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, assign) BOOL isLastPage;
 @property (nonatomic, assign) BOOL nextPageFetchStarted;
+@property (nonatomic, assign) UCGalleryMode currentMode;
 @property (nonatomic, copy) void (^completionBlock)(UCSocialEntry *socialEntry);
 @end
 
 @implementation UCGalleryVC
 
-- (id)initWithCompletion:(void(^)(UCSocialEntry *socialEntry))completion {
-    self = [super initWithCollectionViewLayout:[[self class] layout]];
+- (id)initWithMode:(UCGalleryMode)mode completion:(void(^)(UCSocialEntry *socialEntry))completion {
+    self = [super initWithCollectionViewLayout:[[self class] layoutForMode:mode]];
     if (self) {
         _completionBlock = completion;
+        _currentMode = mode;
     }
     return self;
 }
 
-+ (UICollectionViewLayout *)layout {
-    NSUInteger inLineCount = ELEMENTS_PER_ROW;
++ (UICollectionViewLayout *)layoutForMode:(UCGalleryMode)mode {
+    switch (mode) {
+        case UCGalleryModeGrid: {
+            return [[self class] gridLayout];
+            break;
+        }
+        case UCGalleryModeList: {
+            return [[self class] listLayout];
+            break;
+        }
+    }
+}
+
++ (UICollectionViewLayout *)listLayout {
+    CGFloat rowHeight = LIST_ROW_HEIGHT;
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    CGFloat horizontalOffset = 1.0;
+    CGFloat verticalOffset = 4.0;
+    CGFloat width = floor(screenSize.width) - horizontalOffset * 2;
+    CGFloat height = rowHeight;
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.sectionInset = UIEdgeInsetsMake(verticalOffset, horizontalOffset, verticalOffset, horizontalOffset);
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.itemSize = CGSizeMake(width, height);
+    layout.minimumInteritemSpacing = horizontalOffset;
+    layout.minimumLineSpacing = verticalOffset;
+    return layout;
+}
+
++ (UICollectionViewLayout *)gridLayout {
+    NSUInteger inLineCount = GRID_ELEMENTS_PER_ROW;
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
     CGFloat horizontalOffset = 1.0;
     CGFloat verticalOffset = 1.0;
@@ -50,13 +83,12 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.collectionView.delegate = self;
-    [self.collectionView registerClass:[UCGalleryCell class] forCellWithReuseIdentifier:kCellIdentifier];
+    [self.collectionView registerClass:self.currentMode == UCGalleryModeGrid ? [UCGalleryCell class] : [UCFlatGalleryCell class] forCellWithReuseIdentifier:kCellIdentifier];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kBusyCellIdentifyer];
     self.collectionView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1.];
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
-    self.navigationItem.title = self.root.title;
     [self setupNavigationButtons];
 }
 
@@ -78,9 +110,8 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     for (UCSocialChunk *chunk in availableChunks) {
         __block UCSocialChunk *blockChunk = chunk;
         [actionSheet addAction:[UIAlertAction actionWithTitle:chunk.title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            NSLog(@"Chunk %@ selected", blockChunk.title);
-            if ([self.delegate respondsToSelector:@selector(fetchChunk:pathChunk:forCollection:)]) {
-                [self.delegate fetchChunk:blockChunk pathChunk:self.pathChunk forCollection:self.entriesCollection];
+            if ([self.delegate respondsToSelector:@selector(fetchChunk:path:newWindow:)]) {
+                [self.delegate fetchChunk:blockChunk path:self.entriesCollection.path newWindow:YES];
             }
         }]];
 
@@ -89,7 +120,9 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 - (void)setEntriesCollection:(UCSocialEntriesCollection *)entriesCollection {
-    self.isLastPage = !entriesCollection.nextPagePath.length;
+    if ([self.refreshControl isRefreshing]) [self.refreshControl endRefreshing];
+    self.navigationItem.title = entriesCollection.root.title;
+    self.isLastPage = !entriesCollection.nextPage.fullPath.length;
     [self appendDataFromCollection:entriesCollection];
 }
 
@@ -118,12 +151,16 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 - (void)refresh {
-    
+    _entriesCollection = nil;
+    [self.collectionView reloadData];
+    if ([self.delegate respondsToSelector:@selector(fetchChunk:path:newWindow:)]) {
+        [self.delegate fetchChunk:self.entriesCollection.root path:self.entriesCollection.path newWindow:NO];
+    }
 }
 
 - (void)loadNextPage {
-    if ([self.delegate respondsToSelector:@selector(fetchNextPageWithChunk:pathChunk:forCollection:)]) {
-        [self.delegate fetchNextPageWithChunk:self.root pathChunk:self.pathChunk forCollection:self.entriesCollection];
+    if ([self.delegate respondsToSelector:@selector(fetchNextPageWithChunk:nextPagePath:)]) {
+        [self.delegate fetchNextPageWithChunk:self.entriesCollection.root nextPagePath:self.entriesCollection.nextPage.fullPath];
     }
 }
 
@@ -144,10 +181,16 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UCGalleryCell *cell = (UCGalleryCell*)[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
     UCSocialEntry *entry = self.entriesCollection.entries[indexPath.row];
-    [cell setSocialEntry:entry];
-    return cell;
+    if (self.currentMode == UCGalleryModeGrid) {
+        UCGalleryCell *cell = (UCGalleryCell*)[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
+        [cell setSocialEntry:entry];
+        return cell;
+    } else {
+        UCFlatGalleryCell *cell = (UCFlatGalleryCell*)[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
+        [cell setSocialEntry:entry];
+        return cell;
+    }
 }
 
 #pragma mark <UICollectionViewDelegate>
@@ -183,8 +226,8 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 - (void)openGalleryWithEntry:(UCSocialEntry *)entry {
-    if ([self.delegate respondsToSelector:@selector(fetchChunk:pathChunk:forCollection:)]) {
-        [self.delegate fetchChunk:self.root pathChunk:entry.action.path.chunks.firstObject forCollection:self.entriesCollection];
+    if ([self.delegate respondsToSelector:@selector(fetchChunk:path:newWindow:)]) {
+        [self.delegate fetchChunk:self.entriesCollection.root path:entry.action.path newWindow:YES];
     }
 }
 

@@ -20,6 +20,4 @@
 @property (nonatomic, strong) NSDictionary *userInfo;
 @property (nonatomic, strong) NSArray<UCSocialEntry*> *entries;
 
-- (NSString *)nextPagePath;
-
 @end

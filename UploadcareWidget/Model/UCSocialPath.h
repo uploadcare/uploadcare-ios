@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) NSArray<UCSocialChunk*> *chunks;
 
+- (NSString *)fullPath;
+
 @end

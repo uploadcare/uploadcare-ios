@@ -9,10 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "UCSocialEntriesCollection.h"
 
+typedef NS_ENUM(NSUInteger, UCGalleryMode) {
+    UCGalleryModeGrid,
+    UCGalleryModeList
+};
+
 @protocol UCGalleryVCDelegate <NSObject>
 
-- (void)fetchNextPageWithChunk:(UCSocialChunk *)chunk pathChunk:(UCSocialChunk *)pathChunk forCollection:(UCSocialEntriesCollection *)collection;
-- (void)fetchChunk:(UCSocialChunk *)chunk pathChunk:(UCSocialChunk *)pathChunk forCollection:(UCSocialEntriesCollection *)collection;
+- (void)fetchNextPageWithChunk:(UCSocialChunk *)chunk nextPagePath:(NSString *)nextPagePath;
+
+- (void)fetchChunk:(UCSocialChunk *)chunk path:(UCSocialPath *)path newWindow:(BOOL)newWindow;
 
 - (NSArray<UCSocialChunk*> *)availableSocialChunks;
 @end
@@ -20,10 +26,8 @@
 @interface UCGalleryVC : UICollectionViewController
 @property (nonatomic, strong) UCSocialEntriesCollection *entriesCollection;
 @property (nonatomic, weak) id<UCGalleryVCDelegate> delegate;
-@property (nonatomic, strong) UCSocialChunk *root;
-@property (nonatomic, strong) UCSocialChunk *pathChunk;
 
-- (id)initWithCompletion:(void(^)(UCSocialEntry *socialEntry))completion;
+- (id)initWithMode:(UCGalleryMode)mode completion:(void(^)(UCSocialEntry *socialEntry))completion;
 
 @end
 

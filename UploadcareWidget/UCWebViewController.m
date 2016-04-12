@@ -42,6 +42,13 @@
     [self.view addConstraints:vertical];
     
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(close)];
+    self.navigationItem.rightBarButtonItem = cancelButton;
+}
+
+- (void)close {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - <UIWebViewDelegate>
