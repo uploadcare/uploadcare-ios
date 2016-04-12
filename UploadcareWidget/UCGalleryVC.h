@@ -14,21 +14,14 @@ typedef NS_ENUM(NSUInteger, UCGalleryMode) {
     UCGalleryModeList
 };
 
-@protocol UCGalleryVCDelegate <NSObject>
-
-- (void)fetchNextPageWithChunk:(UCSocialChunk *)chunk nextPagePath:(NSString *)nextPagePath;
-
-- (void)fetchChunk:(UCSocialChunk *)chunk path:(UCSocialPath *)path newWindow:(BOOL)newWindow;
-
-- (NSArray<UCSocialChunk*> *)availableSocialChunks;
-@end
+@class UCSocialSource;
 
 @interface UCGalleryVC : UICollectionViewController
-@property (nonatomic, strong) UCSocialEntriesCollection *entriesCollection;
-@property (nonatomic, weak) id<UCGalleryVCDelegate> delegate;
+@property (nonatomic, strong) NSString *path;
 
-- (id)initWithMode:(UCGalleryMode)mode completion:(void(^)(UCSocialEntry *socialEntry))completion;
+- (id)initWithMode:(UCGalleryMode)mode
+            source:(UCSocialSource *)source
+         rootChunk:(UCSocialChunk *)rootChunk
+        completion:(void(^)(UCSocialEntry *socialEntry))completion;
 
 @end
-
-

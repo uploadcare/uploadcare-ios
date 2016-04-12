@@ -10,6 +10,13 @@
 #import "UCGalleryCell.h"
 #import "UCFlatGalleryCell.h"
 #import "UCSocialEntry.h"
+#import "UCWebViewController.h"
+#import "UCSocialSource.h"
+#import "UCConstantsHeader.h"
+#import "UCSocialConstantsHeader.h"
+#import "UCClient+Social.h"
+#import "UCSocialEntriesRequest.h"
+#import "UCSocialEntry.h"
 
 static NSString *const kCellIdentifier = @"UCGalleryVCCellIdentifier";
 static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
@@ -22,16 +29,23 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 @property (nonatomic, assign) BOOL isLastPage;
 @property (nonatomic, assign) BOOL nextPageFetchStarted;
 @property (nonatomic, assign) UCGalleryMode currentMode;
+@property (nonatomic, strong) UCSocialSource *source;
+@property (nonatomic, strong) UCSocialChunk *rootChunk;
+@property (nonatomic, strong) UCSocialEntriesCollection *entriesCollection;
+@property (nonatomic, strong) UCWebViewController *webVC;
 @property (nonatomic, copy) void (^completionBlock)(UCSocialEntry *socialEntry);
+@property (nonatomic, copy) void (^responseBlock)(id response, NSError *error);
 @end
 
 @implementation UCGalleryVC
 
-- (id)initWithMode:(UCGalleryMode)mode completion:(void(^)(UCSocialEntry *socialEntry))completion {
+- (id)initWithMode:(UCGalleryMode)mode source:(UCSocialSource *)source rootChunk:(UCSocialChunk *)rootChunk completion:(void(^)(UCSocialEntry *socialEntry))completion {
     self = [super initWithCollectionViewLayout:[[self class] layoutForMode:mode]];
     if (self) {
         _completionBlock = completion;
         _currentMode = mode;
+        _source = source;
+        _rootChunk = rootChunk;
     }
     return self;
 }
@@ -90,6 +104,75 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
     [self setupNavigationButtons];
+    [self initialFetch];
+}
+
+- (void)initialFetch {
+    [self queryObjectOrLoginAddressForSource:self.source rootChunk:self.rootChunk path:self.path];
+}
+
+- (void(^)(id response, NSError *error))responseBlock {
+    if (!_responseBlock) {
+        __weak __typeof(self) weakSelf = self;
+        _responseBlock = ^(id response, NSError *error){
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (!error) {
+                    NSString *loginAddress = [response objectForKey:@"login_link"];
+                    if (loginAddress) {
+                        [strongSelf loginUsingAddress:loginAddress];
+                    } else if ([response[@"obj_type"] isEqualToString:@"error"]) {
+                        NSError *error = [NSError errorWithDomain:[UCClient socialErrorDomain] code:UCErrorUploadcare
+                                                         userInfo:@{NSLocalizedDescriptionKey : response[@"error"]}];
+                        [strongSelf handleError:error];
+                    } else {
+                        [strongSelf processData:response];
+                    }
+                    
+                } else {
+                    [strongSelf handleError:error];
+                }
+            });
+        };
+    }
+    return _responseBlock;
+}
+
+- (void)handleError:(NSError *)error {
+    
+}
+
+- (void)loginUsingAddress:(NSString *)loginAddress {
+    __weak __typeof(self) weakSelf = self;
+    
+    //    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_4) {
+    //        SFSafariViewController *svc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:loginAddress]];
+    //        svc.delegate = self;
+    //        [self.navigationController pushViewController:svc animated:YES];
+    //    } else {
+    self.webVC = [[UCWebViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] loadingBlock:^(NSURL *url) {
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
+        NSLog(@"URL: %@", url);
+        if ([url.host isEqual:UCSocialAPIRoot] && [url.lastPathComponent isEqual:@"endpoint"]) {
+            [strongSelf.webVC dismissViewControllerAnimated:YES completion:nil];
+            [strongSelf initialFetch];
+        }
+    } cancelBlock:^{
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
+        [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+    }];
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.webVC];
+    [self.navigationController presentViewController:navc animated:YES completion:nil];
+    //    }
+}
+
+- (void)queryObjectOrLoginAddressForSource:(UCSocialSource *)source rootChunk:(UCSocialChunk *)rootChunk path:(NSString *)path {
+    [[UCClient defaultClient] performUCSocialRequest:[UCSocialEntriesRequest requestWithSource:source chunk:rootChunk path:path] completion:self.responseBlock];
+}
+
+- (void)processData:(id)responseData {
+    UCSocialEntriesCollection *collection = [[UCSocialEntriesCollection alloc] initWithSerializedObject:responseData];
+    self.entriesCollection = collection;
 }
 
 - (void)setupNavigationButtons {
@@ -101,20 +184,14 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     }]];
-    
-    NSArray<UCSocialChunk*> *availableChunks = nil;
-    if ([self.delegate respondsToSelector:@selector(availableSocialChunks)]) {
-        availableChunks = [self.delegate availableSocialChunks];
-    }
-    
-    for (UCSocialChunk *chunk in availableChunks) {
+    for (UCSocialChunk *chunk in self.source.rootChunks) {
         __block UCSocialChunk *blockChunk = chunk;
         [actionSheet addAction:[UIAlertAction actionWithTitle:chunk.title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            if ([self.delegate respondsToSelector:@selector(fetchChunk:path:newWindow:)]) {
-                [self.delegate fetchChunk:blockChunk path:self.entriesCollection.path newWindow:YES];
-            }
+            _entriesCollection = nil;
+            _rootChunk = blockChunk;
+            [self.collectionView reloadData];
+            [self queryObjectOrLoginAddressForSource:self.source rootChunk:blockChunk path:self.entriesCollection.path.fullPath];
         }]];
-
     }
     [self presentViewController:actionSheet animated:YES completion:nil];
 }
@@ -153,15 +230,11 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 - (void)refresh {
     _entriesCollection = nil;
     [self.collectionView reloadData];
-    if ([self.delegate respondsToSelector:@selector(fetchChunk:path:newWindow:)]) {
-        [self.delegate fetchChunk:self.entriesCollection.root path:self.entriesCollection.path newWindow:NO];
-    }
+    [self queryObjectOrLoginAddressForSource:self.source rootChunk:self.entriesCollection.root path:self.entriesCollection.path.fullPath];
 }
 
 - (void)loadNextPage {
-    if ([self.delegate respondsToSelector:@selector(fetchNextPageWithChunk:nextPagePath:)]) {
-        [self.delegate fetchNextPageWithChunk:self.entriesCollection.root nextPagePath:self.entriesCollection.nextPage.fullPath];
-    }
+    [self queryObjectOrLoginAddressForSource:self.source rootChunk:self.entriesCollection.root path:self.entriesCollection.nextPage.fullPath];
 }
 
 #pragma mark - UISearchBarDelegate
@@ -226,9 +299,9 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 - (void)openGalleryWithEntry:(UCSocialEntry *)entry {
-    if ([self.delegate respondsToSelector:@selector(fetchChunk:path:newWindow:)]) {
-        [self.delegate fetchChunk:self.entriesCollection.root path:entry.action.path newWindow:YES];
-    }
+    UCGalleryVC *gallery = [[UCGalleryVC alloc] initWithMode:self.currentMode source:self.source rootChunk:self.rootChunk completion:self.completionBlock];
+    gallery.path = entry.action.path.fullPath;
+    [self.navigationController pushViewController:gallery animated:YES];
 }
 
 @end
