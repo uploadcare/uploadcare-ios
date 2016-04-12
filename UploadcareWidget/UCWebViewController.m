@@ -10,17 +10,19 @@
 
 @interface UCWebViewController () <UIWebViewDelegate>
 @property (nonatomic, copy) void (^loadingBlock)(NSURL *url);
+@property (nonatomic, copy) void (^cancelBlock)();
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) NSURL *url;
 @end
 
 @implementation UCWebViewController
 
-- (id)initWithURL:(NSURL *)url loadingBlock:(void(^)(NSURL *url))loadingBlock {
+- (id)initWithURL:(NSURL *)url loadingBlock:(void(^)(NSURL *url))loadingBlock cancelBlock:(void(^)())cancelBlock {
     self = [super init];
     if (self) {
         _url = url;
         _loadingBlock = loadingBlock;
+        _cancelBlock = cancelBlock;
     }
     return self;
 }
@@ -48,6 +50,7 @@
 }
 
 - (void)close {
+    if (self.cancelBlock) self.cancelBlock();
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

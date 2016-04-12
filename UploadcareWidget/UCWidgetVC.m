@@ -134,7 +134,6 @@
 //        svc.delegate = self;
 //        [self.navigationController pushViewController:svc animated:YES];
 //    } else {
-    [self.navigationController popToRootViewControllerAnimated:YES];
         self.webVC = [[UCWebViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] loadingBlock:^(NSURL *url) {
             __strong __typeof__(weakSelf) strongSelf = weakSelf;
             NSLog(@"URL: %@", url);
@@ -142,9 +141,12 @@
                 [strongSelf.webVC dismissViewControllerAnimated:YES completion:nil];
                 [strongSelf queryObjectOrLoginAddressForSource:strongSelf.source rootChunk:strongSelf.chunk path:nil];
             }
+        } cancelBlock:^{
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            [strongSelf.navigationController popToRootViewControllerAnimated:YES];
         }];
-    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.webVC];
-    [self.navigationController presentViewController:navc animated:YES completion:nil];
+    	UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.webVC];
+    	[self.navigationController presentViewController:navc animated:YES completion:nil];
 //    }
 }
 
