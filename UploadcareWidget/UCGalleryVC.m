@@ -98,6 +98,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.collectionView.delegate = self;
+    self.collectionView.alwaysBounceVertical = YES;
     self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     [self.collectionView registerClass:self.currentMode == UCGalleryModeGrid ? [UCGalleryCell class] : [UCFlatGalleryCell class] forCellWithReuseIdentifier:kCellIdentifier];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kBusyCellIdentifyer];
@@ -157,7 +158,8 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 - (void)handleError:(NSError *)error {
-    
+    if ([self.refreshControl isRefreshing]) [self.refreshControl endRefreshing];
+    NSLog(@"Gallery error: %@", error.localizedDescription);
 }
 
 - (void)loginUsingAddress:(NSString *)loginAddress {
@@ -255,7 +257,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 - (void)refresh {
     _entriesCollection = nil;
     [self.collectionView reloadData];
-    [self queryObjectOrLoginAddressForSource:self.source rootChunk:self.entriesCollection.root path:self.entriesCollection.path.fullPath];
+    [self initialFetch];
 }
 
 - (void)search:(NSString *)text {
