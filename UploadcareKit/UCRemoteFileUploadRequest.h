@@ -10,6 +10,6 @@
 
 @interface UCRemoteFileUploadRequest : UCAPIRequest
 
-+ (instancetype)requestWithRemoteFileURL:(NSURL *)fileURL;
++ (instancetype)requestWithRemoteFileURL:(NSString *)fileURL;
 
 @end

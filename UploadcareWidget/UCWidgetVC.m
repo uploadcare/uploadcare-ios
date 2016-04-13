@@ -20,6 +20,7 @@
 #import "UCRemoteFileUploadRequest.h"
 #import "UCSocialEntryRequest.h"
 #import "UCConstantsHeader.h"
+#import "NSString+EncodeRFC3986.h"
 
 @interface UCWidgetVC () <SFSafariViewControllerDelegate>
 @property (nonatomic, strong) NSArray<UCSocialSource *> *tableData;
@@ -115,7 +116,7 @@
     [[UCClient defaultClient] performUCSocialRequest:req completion:^(id response, NSError *error) {
         if (!error && [response isKindOfClass:[NSDictionary class]]) {
             NSString *fileURL = response[@"url"];
-            UCRemoteFileUploadRequest *request = [UCRemoteFileUploadRequest requestWithRemoteFileURL:[NSURL URLWithString:fileURL]];
+            UCRemoteFileUploadRequest *request = [UCRemoteFileUploadRequest requestWithRemoteFileURL:fileURL];
             [[UCClient defaultClient] performUCRequest:request progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
                 __strong __typeof__(weakSelf) strongSelf = weakSelf;
                 if (strongSelf.progressBlock) strongSelf.progressBlock (totalBytesSent, totalBytesExpectedToSend);

@@ -7,6 +7,7 @@
 //
 
 #import "NSDictionary+UrlEncoding.h"
+#import "NSString+EncodeRFC3986.h"
 
 static NSString *toString(id object) {
     return [NSString stringWithFormat: @"%@", object];
@@ -14,7 +15,7 @@ static NSString *toString(id object) {
 
 static NSString *urlEncode(id object) {
     NSString *string = toString(object);
-    return [string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+    return string.encodedRFC3986;
 }
 
 @implementation NSDictionary (UrlEncoding)

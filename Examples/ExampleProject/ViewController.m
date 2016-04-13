@@ -183,7 +183,7 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
 
 - (void)testRemoteURL:(NSURL *)remoteURL completion:(void(^)(NSString *fileID))completion  {
     
-    UCRemoteFileUploadRequest *req = [UCRemoteFileUploadRequest requestWithRemoteFileURL:remoteURL];
+    UCRemoteFileUploadRequest *req = [UCRemoteFileUploadRequest requestWithRemoteFileURL:remoteURL.absoluteString];
     if (req) RLog(@"Remote url request created: %@", req);
     [[UCClient defaultClient] performUCRequest:req progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
         float progress = (float)totalBytesSent / (float)totalBytesExpectedToSend;

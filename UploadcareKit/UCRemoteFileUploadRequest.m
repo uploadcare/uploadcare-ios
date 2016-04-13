@@ -8,19 +8,40 @@
 
 #import "UCRemoteFileUploadRequest.h"
 #import "UCConstantsHeader.h"
+#import "NSDictionary+UrlEncoding.h"
+#import "NSString+EncodeRFC3986.h"
+
+@interface UCRemoteFileUploadRequest ()
+@property (nonatomic, strong) NSString *fileURL;
+
+@end
 
 @implementation UCRemoteFileUploadRequest
 
-+ (instancetype)requestWithRemoteFileURL:(NSURL *)fileURL {
++ (instancetype)requestWithRemoteFileURL:(NSString *)fileURL {
     return [[UCRemoteFileUploadRequest alloc] initWithRemoteFileURL:fileURL];
 }
 
-- (id)initWithRemoteFileURL:(NSURL *)fileURL {
+// We need to override this method because setQuery: method of NSURLComponents corrupts embed link parameter
+- (NSMutableURLRequest *)request {
+    NSURLComponents *components = [NSURLComponents new];
+    [components setScheme:UCAPIProtocol];
+    [components setHost:UCApiRoot];
+    [components setPath:self.path];
+    [components setQuery:self.parameters.uc_urlOriginalString];
+    NSString *requestString = [components string];
+    NSString *finalRequestString = [requestString stringByAppendingFormat:@"&source_url=%@", self.fileURL.encodedRFC3986];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:finalRequestString]];
+    return request;
+}
+
+- (id)initWithRemoteFileURL:(NSString *)fileURL {
     NSParameterAssert(fileURL);
     self = [super init];
     if (self) {
         self.path = UCRemoteFileUploadingPath;
-        self.parameters = @{@"source_url": fileURL.absoluteString};
+        self.fileURL = fileURL;
+        self.parameters = @{};
     }
     return self;
 }
