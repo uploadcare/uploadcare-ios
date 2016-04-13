@@ -113,7 +113,7 @@
 - (void)uploadSocialEntry:(UCSocialEntry *)entry {
     if (self.progressBlock) self.progressBlock (0, NSUIntegerMax);
     __weak __typeof(self) weakSelf = self;
-    UCSocialEntryRequest *req = [UCSocialEntryRequest requestWithSource:self.source file:entry.action.urlString];
+    UCSocialEntryRequest *req = [UCSocialEntryRequest requestWithSource:self.source file:entry.action.urlString.encodedRFC3986];
     [[UCClient defaultClient] performUCSocialRequest:req completion:^(id response, NSError *error) {
         if (!error && [response isKindOfClass:[NSDictionary class]]) {
             NSString *fileURL = response[@"url"];
