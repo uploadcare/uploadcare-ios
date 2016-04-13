@@ -24,7 +24,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 #define GRID_ELEMENTS_PER_ROW 3
 #define LIST_ROW_HEIGHT 40
 
-@interface UCGalleryVC ()
+@interface UCGalleryVC () <UISearchBarDelegate>
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, assign) BOOL isLastPage;
 @property (nonatomic, assign) BOOL nextPageFetchStarted;
@@ -33,6 +33,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 @property (nonatomic, strong) UCSocialChunk *rootChunk;
 @property (nonatomic, strong) UCSocialEntriesCollection *entriesCollection;
 @property (nonatomic, strong) UCWebViewController *webVC;
+@property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, copy) void (^completionBlock)(UCSocialEntry *socialEntry);
 @property (nonatomic, copy) void (^responseBlock)(id response, NSError *error);
 @end
@@ -50,7 +51,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     return self;
 }
 
-+ (UICollectionViewLayout *)layoutForMode:(UCGalleryMode)mode {
++ (UICollectionViewFlowLayout *)layoutForMode:(UCGalleryMode)mode {
     switch (mode) {
         case UCGalleryModeGrid: {
             return [[self class] gridLayout];
@@ -63,7 +64,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     }
 }
 
-+ (UICollectionViewLayout *)listLayout {
++ (UICollectionViewFlowLayout *)listLayout {
     CGFloat rowHeight = LIST_ROW_HEIGHT;
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
     CGFloat horizontalOffset = 1.0;
@@ -79,7 +80,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     return layout;
 }
 
-+ (UICollectionViewLayout *)gridLayout {
++ (UICollectionViewFlowLayout *)gridLayout {
     NSUInteger inLineCount = GRID_ELEMENTS_PER_ROW;
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
     CGFloat horizontalOffset = 1.0;
@@ -97,18 +98,35 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.collectionView.delegate = self;
+    self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     [self.collectionView registerClass:self.currentMode == UCGalleryModeGrid ? [UCGalleryCell class] : [UCFlatGalleryCell class] forCellWithReuseIdentifier:kCellIdentifier];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kBusyCellIdentifyer];
     self.collectionView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1.];
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
+    [self setupSearchBarIfNeeded];
     [self setupNavigationButtons];
     [self initialFetch];
 }
 
 - (void)initialFetch {
-    [self queryObjectOrLoginAddressForSource:self.source rootChunk:self.rootChunk path:self.path];
+    [self queryObjectOrLoginAddressForSource:self.source rootChunk:self.rootChunk path:self.entry ? self.entry.action.path.fullPath : nil];
+}
+
+- (void)setupSearchBarIfNeeded {
+    if ([self.rootChunk.path isEqualToString:@"search"] && !self.searchBar) {
+        self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.collectionView.frame), 44)];
+        self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+        self.searchBar.delegate = self;
+        [self.collectionView addSubview:self.searchBar];
+        [self.collectionView setContentOffset:CGPointMake(0, 44)];
+    } else {
+        if (self.searchBar) {
+            [self.searchBar removeFromSuperview];
+            self.searchBar = nil;
+        }
+    }
 }
 
 - (void(^)(id response, NSError *error))responseBlock {
@@ -176,6 +194,8 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 - (void)setupNavigationButtons {
+    if (self.entry) self.navigationItem.title = self.entry.action.path.chunks.lastObject.title;
+    else self.navigationItem.title = self.rootChunk.title;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Source" style:UIBarButtonItemStylePlain target:self action:@selector(didPressChunkSelector)];
 }
 
@@ -188,7 +208,9 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
         __block UCSocialChunk *blockChunk = chunk;
         [actionSheet addAction:[UIAlertAction actionWithTitle:chunk.title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             _entriesCollection = nil;
-            _rootChunk = blockChunk;
+            self.rootChunk = blockChunk;
+            [self updateNavigationTitle];
+            [self setupSearchBarIfNeeded];
             [self.collectionView reloadData];
             [self queryObjectOrLoginAddressForSource:self.source rootChunk:blockChunk path:self.entriesCollection.path.fullPath];
         }]];
@@ -196,9 +218,12 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
+- (void)updateNavigationTitle {
+    self.navigationItem.title = self.rootChunk.title;
+}
+
 - (void)setEntriesCollection:(UCSocialEntriesCollection *)entriesCollection {
     if ([self.refreshControl isRefreshing]) [self.refreshControl endRefreshing];
-    self.navigationItem.title = entriesCollection.root.title;
     self.isLastPage = !entriesCollection.nextPage.fullPath.length;
     [self appendDataFromCollection:entriesCollection];
 }
@@ -233,17 +258,29 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     [self queryObjectOrLoginAddressForSource:self.source rootChunk:self.entriesCollection.root path:self.entriesCollection.path.fullPath];
 }
 
+- (void)search:(NSString *)text {
+    [self queryObjectOrLoginAddressForSource:self.source rootChunk:self.entriesCollection.root path:[NSString stringWithFormat:@"-/%@", text]];
+    self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeNone;
+    if (self.entriesCollection) {
+        _entriesCollection = nil;
+        [self.collectionView reloadData];
+    }
+    self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+}
+
 - (void)loadNextPage {
     [self queryObjectOrLoginAddressForSource:self.source rootChunk:self.entriesCollection.root path:self.entriesCollection.nextPage.fullPath];
 }
 
-#pragma mark - UISearchBarDelegate
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-//    [self.sourceViewController search:searchBar.text];
-}
-
 #pragma mark <UICollectionViewDataSource>
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    UICollectionViewFlowLayout *layout = [[self class] layoutForMode:self.currentMode];
+    UIEdgeInsets insets = layout.sectionInset;
+    if (self.searchBar) insets.top = insets.top + 44.0;
+    return insets;
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
@@ -300,8 +337,28 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 
 - (void)openGalleryWithEntry:(UCSocialEntry *)entry {
     UCGalleryVC *gallery = [[UCGalleryVC alloc] initWithMode:self.currentMode source:self.source rootChunk:self.rootChunk completion:self.completionBlock];
-    gallery.path = entry.action.path.fullPath;
+    gallery.entry = entry;
     [self.navigationController pushViewController:gallery animated:YES];
+}
+
+#pragma mark - <UISearchBarDelegate>
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
+    if ([searchBar.text rangeOfCharacterFromSet:[NSCharacterSet whitespaceAndNewlineCharacterSet].invertedSet].location != NSNotFound) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        [self search:searchBar.text];
+    }
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
 }
 
 @end

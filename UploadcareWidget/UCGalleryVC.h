@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, UCGalleryMode) {
 @class UCSocialSource;
 
 @interface UCGalleryVC : UICollectionViewController
-@property (nonatomic, strong) NSString *path;
+@property (nonatomic, strong) UCSocialEntry *entry;
 
 - (id)initWithMode:(UCGalleryMode)mode
             source:(UCSocialSource *)source
