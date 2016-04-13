@@ -55,13 +55,13 @@
 }
 
 - (void)didPressClose:(id)sender {
-    [self closeController];
+    [self closeControllerWithCompletion:nil];
 }
 
-- (void)closeController {
+- (void)closeControllerWithCompletion:(void(^)())completion {
     __weak __typeof(self) weakSelf = self;
     void (^dismissBlock)() = ^void() {
-        [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [weakSelf.navigationController dismissViewControllerAnimated:YES completion:completion];
     };
     
     if ([[NSThread currentThread] isMainThread]) {
@@ -111,6 +111,7 @@
 }
 
 - (void)uploadSocialEntry:(UCSocialEntry *)entry {
+    if (self.progressBlock) self.progressBlock (0, NSUIntegerMax);
     __weak __typeof(self) weakSelf = self;
     UCSocialEntryRequest *req = [UCSocialEntryRequest requestWithSource:self.source file:entry.action.urlString];
     [[UCClient defaultClient] performUCSocialRequest:req completion:^(id response, NSError *error) {
@@ -122,12 +123,13 @@
                 if (strongSelf.progressBlock) strongSelf.progressBlock (totalBytesSent, totalBytesExpectedToSend);
             } completion:^(id response, NSError *error) {
                 __strong __typeof__(weakSelf) strongSelf = weakSelf;
-                if (!error) {
-                    if (strongSelf.completionBlock) strongSelf.completionBlock(YES, response[@"file_id"], nil);
-                } else {
-                    if (strongSelf.completionBlock) strongSelf.completionBlock(NO, response, error);
-                }
-                [strongSelf closeController];
+                [strongSelf closeControllerWithCompletion:^{
+                    if (!error) {
+                        if (strongSelf.completionBlock) strongSelf.completionBlock(YES, response[@"file_id"], nil);
+                    } else {
+                        if (strongSelf.completionBlock) strongSelf.completionBlock(NO, response, error);
+                    }
+                }];
             }];
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{

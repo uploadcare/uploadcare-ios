@@ -205,9 +205,18 @@ static NSString * const UCPollingStatusErrorMessageUnknown = @"Unknown error";
                                          userInfo:@{NSLocalizedDescriptionKey : statusData[UCPollingStatusErrorKey]}];
         if (self.completionBlock) self.completionBlock(statusData, error);
     } else if ([status isEqualToString:UCPollingStatusProgress]) {
-        NSUInteger done = [statusData[UCPollingStatusDoneBytesKey] unsignedIntegerValue];
-        NSUInteger total = [statusData[UCPollingStatusTotalBytesKey] unsignedIntegerValue];
+        NSUInteger done = [self progressFromValue:statusData withKey:UCPollingStatusDoneBytesKey];
+        NSUInteger total = [self progressFromValue:statusData withKey:UCPollingStatusTotalBytesKey];
         if (self.progressBlock) self.progressBlock(done, total);
+    }
+}
+
+- (NSUInteger)progressFromValue:(id)value withKey:(NSString *)key {
+    id progress = value[key];
+    if ([progress isKindOfClass:[NSNumber class]]) {
+        return [progress unsignedIntegerValue];
+    } else {
+        return NSUIntegerMax;
     }
 }
 
