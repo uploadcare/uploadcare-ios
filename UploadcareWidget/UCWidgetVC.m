@@ -21,6 +21,7 @@
 #import "UCSocialEntryRequest.h"
 #import "UCConstantsHeader.h"
 #import "NSString+EncodeRFC3986.h"
+#import "UCSocialManager.h"
 
 @interface UCWidgetVC () <SFSafariViewControllerDelegate>
 @property (nonatomic, strong) NSArray<UCSocialSource *> *tableData;
@@ -76,20 +77,12 @@
 
 - (void)fetchSocialSources {
     __weak __typeof(self) weakSelf = self;
-    [[UCClient defaultClient] performUCSocialRequest:[UCSocialSourcesRequest new] completion:^(id response, NSError *error) {
+    [UCSocialManager fetchSocialSourcesWithCompletion:^(NSArray<UCSocialSource *> *response, NSError *error) {
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
-        if (!error) {
-            NSArray *sources = response[@"sources"];
-            NSMutableArray *result = @[].mutableCopy;
-            for (id source in sources) {
-                UCSocialSource *socialSource = [[UCSocialSource alloc] initWithSerializedObject:source];
-                if (socialSource) [result addObject:socialSource];
-            }
-            strongSelf.tableData = result.copy;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
-        } else {
+        if (response) {
+            strongSelf.tableData = response;
+            [strongSelf.tableView reloadData];
+        } else if (error) {
             [strongSelf handleError:error];
         }
     }];
@@ -113,29 +106,18 @@
 - (void)uploadSocialEntry:(UCSocialEntry *)entry {
     if (self.progressBlock) self.progressBlock (0, NSUIntegerMax);
     __weak __typeof(self) weakSelf = self;
-    UCSocialEntryRequest *req = [UCSocialEntryRequest requestWithSource:self.source file:entry.action.urlString.encodedRFC3986];
-    [[UCClient defaultClient] performUCSocialRequest:req completion:^(id response, NSError *error) {
-        if (!error && [response isKindOfClass:[NSDictionary class]]) {
-            NSString *fileURL = response[@"url"];
-            UCRemoteFileUploadRequest *request = [UCRemoteFileUploadRequest requestWithRemoteFileURL:fileURL];
-            [[UCClient defaultClient] performUCRequest:request progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
-                __strong __typeof__(weakSelf) strongSelf = weakSelf;
-                if (strongSelf.progressBlock) strongSelf.progressBlock (totalBytesSent, totalBytesExpectedToSend);
-            } completion:^(id response, NSError *error) {
-                __strong __typeof__(weakSelf) strongSelf = weakSelf;
-                [strongSelf closeControllerWithCompletion:^{
-                    if (!error) {
-                        if (strongSelf.completionBlock) strongSelf.completionBlock(YES, response[@"file_id"], nil);
-                    } else {
-                        if (strongSelf.completionBlock) strongSelf.completionBlock(NO, response, error);
-                    }
-                }];
-            }];
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self handleError:error];
-            });
-        }
+    [UCSocialManager uploadSocialEntry:entry forSource:self.source progress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
+        if (strongSelf.progressBlock) strongSelf.progressBlock (bytesSent, bytesExpectedToSend);
+    } completion:^(BOOL completed, NSString *fileId, NSError *error) {
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
+        [strongSelf closeControllerWithCompletion:^{
+            if (!error) {
+                if (strongSelf.completionBlock) strongSelf.completionBlock(YES, fileId, nil);
+            } else {
+                if (strongSelf.completionBlock) strongSelf.completionBlock(NO, nil, error);
+            }
+        }];
     }];
 }
 
