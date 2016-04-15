@@ -177,6 +177,7 @@
 		06D9EE8D1CBE860B0043405C /* UIImageView+Uploadcare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Uploadcare.m"; sourceTree = "<group>"; };
 		06D9EEF61CC009C90043405C /* UCSocialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCSocialManager.h; sourceTree = "<group>"; };
 		06D9EEF71CC009CA0043405C /* UCSocialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialManager.m; sourceTree = "<group>"; };
+		06D9EEF91CC02D050043405C /* ExampleProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ExampleProject.entitlements; sourceTree = "<group>"; };
 		1D1C9D8DB4B2CB49EA37D55D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D4755E2E7313DD45D07ECD69 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -224,6 +225,7 @@
 		06A6DA981CB3D746000B4E8A /* ExampleProject */ = {
 			isa = PBXGroup;
 			children = (
+				06D9EEF91CC02D050043405C /* ExampleProject.entitlements */,
 				06D9EE2E1CBE860B0043405C /* UploadcareKit */,
 				06D9EE441CBE860B0043405C /* UploadcareWidget */,
 				06A6DACD1CB3E0E4000B4E8A /* Resources */,
@@ -421,6 +423,12 @@
 				TargetAttributes = {
 					06A6DA951CB3D746000B4E8A = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = JLF9U7D9ND;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -679,6 +687,7 @@
 			baseConfigurationReference = D4755E2E7313DD45D07ECD69 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ExampleProject/ExampleProject.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ExampleProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -692,6 +701,7 @@
 			baseConfigurationReference = 1D1C9D8DB4B2CB49EA37D55D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ExampleProject/ExampleProject.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ExampleProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

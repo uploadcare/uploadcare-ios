@@ -35,7 +35,7 @@
 
 - (id)initWithProgress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
             completion:(void(^)(BOOL completed, NSString *fileId, NSError *error))completion {
-    self = [super init];
+    self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         _completionBlock = completion;
         _progressBlock = progress;
@@ -59,6 +59,10 @@
     [self closeControllerWithCompletion:nil];
 }
 
+- (void)showDocumentPicker {
+    [SharedSocialManager presentDocumentControllerFrom:self.navigationController progress:self.progressBlock completion:self.completionBlock];
+}
+
 - (void)closeControllerWithCompletion:(void(^)())completion {
     __weak __typeof(self) weakSelf = self;
     void (^dismissBlock)() = ^void() {
@@ -77,7 +81,7 @@
 
 - (void)fetchSocialSources {
     __weak __typeof(self) weakSelf = self;
-    [UCSocialManager fetchSocialSourcesWithCompletion:^(NSArray<UCSocialSource *> *response, NSError *error) {
+    [SharedSocialManager fetchSocialSourcesWithCompletion:^(NSArray<UCSocialSource *> *response, NSError *error) {
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
         if (response) {
             strongSelf.tableData = response;
@@ -106,7 +110,7 @@
 - (void)uploadSocialEntry:(UCSocialEntry *)entry {
     if (self.progressBlock) self.progressBlock (0, NSUIntegerMax);
     __weak __typeof(self) weakSelf = self;
-    [UCSocialManager uploadSocialEntry:entry forSource:self.source progress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
+    [SharedSocialManager uploadSocialEntry:entry forSource:self.source progress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
         if (strongSelf.progressBlock) strongSelf.progressBlock (bytesSent, bytesExpectedToSend);
     } completion:^(BOOL completed, NSString *fileId, NSError *error) {
@@ -132,26 +136,47 @@
 
 #pragma mark - Table view data source
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return @"Social sources";
+    } else {
+        return @"Local sources";
+    }
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.tableData.count;
+    if (section == 0) {
+        return self.tableData.count;
+    } else {
+        return 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    UCSocialSource *social = self.tableData[indexPath.row];
-    cell.textLabel.text = social.sourceName;
+    if (indexPath.section == 0) {
+        UCSocialSource *social = self.tableData[indexPath.row];
+        cell.textLabel.text = social.sourceName;
+    } else {
+        cell.textLabel.text = @"Choose local file";
+    }
+
     return cell;
 }
 
 #pragma mark - <UITableViewDelegate>
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UCSocialSource *social = self.tableData[indexPath.row];
-    [self showGalleryWithSource:social];
+    if (indexPath.section == 0) {
+        UCSocialSource *social = self.tableData[indexPath.row];
+        [self showGalleryWithSource:social];
+    } else {
+        [self showDocumentPicker];
+    }
 }
 
 #pragma mark - <SFSafariViewControllerDelegate>
@@ -174,5 +199,9 @@
 - (void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
     NSLog(@"SF DID COMPLETE INITIAL: %@", didLoadSuccessfully ? @"YES" : @"NO");
 }
+
+#pragma mark - <UIDocumentPickerDelegate>
+
+
 
 @end
