@@ -70,6 +70,7 @@
 		06D9EEE31CBE860B0043405C /* UCWidgetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE871CBE860B0043405C /* UCWidgetVC.m */; };
 		06D9EEE61CBE860B0043405C /* UIImageView+Uploadcare.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE8D1CBE860B0043405C /* UIImageView+Uploadcare.m */; };
 		06D9EEF81CC009CA0043405C /* UCSocialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EEF71CC009CA0043405C /* UCSocialManager.m */; };
+		06D9EEFF1CC11E1F0043405C /* NSString+UCDN.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EEFE1CC11E1F0043405C /* NSString+UCDN.m */; };
 		21B14A73E92537B3D11741A2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 011BBB43CDC7233A9D39C9B0 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -178,6 +179,8 @@
 		06D9EEF61CC009C90043405C /* UCSocialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCSocialManager.h; sourceTree = "<group>"; };
 		06D9EEF71CC009CA0043405C /* UCSocialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialManager.m; sourceTree = "<group>"; };
 		06D9EEF91CC02D050043405C /* ExampleProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ExampleProject.entitlements; sourceTree = "<group>"; };
+		06D9EEFD1CC11E1F0043405C /* NSString+UCDN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UCDN.h"; sourceTree = "<group>"; };
+		06D9EEFE1CC11E1F0043405C /* NSString+UCDN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UCDN.m"; sourceTree = "<group>"; };
 		1D1C9D8DB4B2CB49EA37D55D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D4755E2E7313DD45D07ECD69 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -322,6 +325,8 @@
 				06D9EEF71CC009CA0043405C /* UCSocialManager.m */,
 				06D9EE8C1CBE860B0043405C /* UIImageView+Uploadcare.h */,
 				06D9EE8D1CBE860B0043405C /* UIImageView+Uploadcare.m */,
+				06D9EEFD1CC11E1F0043405C /* NSString+UCDN.h */,
+				06D9EEFE1CC11E1F0043405C /* NSString+UCDN.m */,
 			);
 			name = UploadcareWidget;
 			path = ../../../UploadcareWidget;
@@ -565,6 +570,7 @@
 				06D9EEF81CC009CA0043405C /* UCSocialManager.m in Sources */,
 				06D9EEE11CBE860B0043405C /* UCSocialSourcesRequest.m in Sources */,
 				06D9EEE61CBE860B0043405C /* UIImageView+Uploadcare.m in Sources */,
+				06D9EEFF1CC11E1F0043405C /* NSString+UCDN.m in Sources */,
 				06D9EEAF1CBE860B0043405C /* NSDictionary+UrlEncoding.m in Sources */,
 				06D9EEDB1CBE860B0043405C /* UCGalleryVC.m in Sources */,
 				06D9EEB51CBE860B0043405C /* UCGroupInfoRequest.m in Sources */,
