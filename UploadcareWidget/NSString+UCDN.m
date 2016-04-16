@@ -8,7 +8,7 @@
 
 #import "NSString+UCDN.h"
 
-static NSString * const UCDNParameterSeparator = @"/-/";
+static NSString * const UCDNParameterSeparator = @"-";
 static NSString * const UCDNRootHost = @"https://ucarecdn.com";
 
 
@@ -17,7 +17,7 @@ static NSString * const UCDNRootHost = @"https://ucarecdn.com";
 #pragma mark - lifecycle
 
 + (instancetype)pathWithUUID:(NSString *)uuid {
-    NSString *path = [[self class] initWithString:[UCDNRootHost stringByAppendingPathComponent:uuid]];
+    NSString *path = [[[self class] alloc] initWithString:[UCDNRootHost stringByAppendingFormat:@"/%@/",uuid]];
     return path;
 }
 
@@ -312,7 +312,7 @@ static NSString * const UCDNInvertKey = @"invert";
 #pragma mark - utilities
 
 - (NSString *)addParameter:(NSString *)parameter {
-    return [self stringByAppendingFormat:@"%@%@", UCDNParameterSeparator, parameter];
+    return [self stringByAppendingFormat:@"%@/%@/", UCDNParameterSeparator, parameter];
 }
 
 - (NSString *)ucHexStringFromColor:(UIColor *)color
