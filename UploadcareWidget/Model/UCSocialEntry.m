@@ -7,6 +7,7 @@
 //
 
 #import "UCSocialEntry.h"
+#import "UCSocialConstantsHeader.h"
 
 @implementation UCSocialEntry
 
@@ -19,6 +20,22 @@
 
 + (NSDictionary *)collectionMapping {
     return @{@"action":[UCSocialEntryAction class]};
+}
+
+- (NSURL *)thumbnailUrl {
+    return UCAbsoluteURL(self.thumbnail);
+}
+
+NSURL *UCAbsoluteURL(NSString *address) {
+    NSURL *resultURL = [NSURL URLWithString:address];
+    if (!resultURL.host) {
+        NSURLComponents *components = [[NSURLComponents alloc] init];
+        [components setScheme:UCSocialProtocol];
+        [components setHost:UCSocialAPIRoot];
+        NSURL *baseURL = [components URL];
+        resultURL = [NSURL URLWithString:address relativeToURL:baseURL];
+    }
+    return resultURL;
 }
 
 @end
