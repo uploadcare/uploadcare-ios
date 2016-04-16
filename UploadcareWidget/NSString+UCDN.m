@@ -16,7 +16,13 @@ static NSString * const UCDNRootHost = @"https://ucarecdn.com";
 
 #pragma mark - lifecycle
 
-+ (instancetype)pathWithUUID:(NSString *)uuid {
++ (instancetype)uc_pathWithRoot:(NSString *)root UUID:(NSString *)uuid {
+    NSParameterAssert(root);
+    NSString *path = [[[self class] alloc] initWithString:[root stringByAppendingFormat:@"/%@/",uuid]];
+    return path;
+}
+
++ (instancetype)uc_pathWithUUID:(NSString *)uuid {
     NSString *path = [[[self class] alloc] initWithString:[UCDNRootHost stringByAppendingFormat:@"/%@/",uuid]];
     return path;
 }
@@ -27,8 +33,8 @@ static NSString * const UCDNFormatKey = @"format";
 static NSString * const UCDNFormatJpegValue = @"jpeg";
 static NSString * const UCDNFormatPngValue = @"png";
 
-- (NSString *)format:(UCDNFormat)format {
-    return [self addParameter:[NSString stringWithFormat:@"%@/%@", UCDNFormatKey, [self formatValueFromFormat:format]]];
+- (NSString *)uc_format:(UCDNFormat)format {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%@", UCDNFormatKey, [self formatValueFromFormat:format]]];
 }
 
 - (NSString *)formatValueFromFormat:(UCDNFormat)format {
@@ -59,8 +65,8 @@ static NSString * const UCDNQualityLevelBest = @"best";
 static NSString * const UCDNQualityLevelLighter = @"lighter";
 static NSString * const UCDNQualityLevelLightest = @"lightest";
 
-- (NSString *)quality:(UCDNQuality)quality {
-    return [self addParameter:[NSString stringWithFormat:@"%@/%@", UCDNQualityKey, [self qualityForLevel:quality]]];
+- (NSString *)uc_quality:(UCDNQuality)quality {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%@", UCDNQualityKey, [self qualityForLevel:quality]]];
 }
 
 - (NSString *)qualityForLevel:(UCDNQuality)qualityLevel {
@@ -101,28 +107,28 @@ static NSString * const UCDNProgressiveYes = @"yes";
 static NSString * const UCDNProgressiveNo = @"no";
 
 
-- (NSString *)progressive:(BOOL)progressive {
-    return [self addParameter:[NSString stringWithFormat:@"%@/%@", UCDNProgressiveKey, progressive ? UCDNProgressiveYes : UCDNProgressiveNo]];
+- (NSString *)uc_progressive:(BOOL)progressive {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%@", UCDNProgressiveKey, progressive ? UCDNProgressiveYes : UCDNProgressiveNo]];
 }
 
 #pragma mark - preview
 
 static NSString * const UCDNPreviewKey = @"preview";
 
-- (NSString *)preview {
-    return [self addParameter:UCDNPreviewKey];
+- (NSString *)uc_preview {
+    return [self uc_addParameter:UCDNPreviewKey];
 }
 
-- (NSString *)preview:(CGSize)size {
-    return [self addParameter:[NSString stringWithFormat:@"%@/%@", UCDNPreviewKey, [self dimensionsFromSize:size]]];
+- (NSString *)uc_preview:(CGSize)size {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%@", UCDNPreviewKey, [self uc_dimensionsFromSize:size]]];
 }
 
 #pragma mark - resize
 
 static NSString * const UCDNResizeKey = @"resize";
 
-- (NSString *)resize:(CGSize)size {
-    return [self addParameter:[NSString stringWithFormat:@"%@/%@", UCDNResizeKey, [self dimensionsFromSize:size]]];
+- (NSString *)uc_resize:(CGSize)size {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%@", UCDNResizeKey, [self uc_oneOrTwoDimensionsFromSize:size]]];
 }
 
 #pragma mark - crop
@@ -131,16 +137,16 @@ static NSString * const UCDNCropKey = @"crop";
 static NSString * const UCDNCropCenter = @"center";
 
 
-- (NSString *)crop:(CGSize)size {
-    return [self addParameter:[NSString stringWithFormat:@"%@/%@", UCDNCropKey, [self dimensionsFromSize:size]]];
+- (NSString *)uc_crop:(CGSize)size {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%@", UCDNCropKey, [self uc_dimensionsFromSize:size]]];
 }
 
-- (NSString *)crop:(CGSize)size center:(CGPoint)center {
-    return [self addParameter:[NSString stringWithFormat:@"%@/%@/%@", UCDNCropKey, [self dimensionsFromSize:size], [self coordinatesFromPoint:center]]];
+- (NSString *)uc_crop:(CGSize)size center:(CGPoint)center {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%@/%@", UCDNCropKey, [self uc_dimensionsFromSize:size], [self uc_coordinatesFromPoint:center]]];
 }
 
-- (NSString *)cropToCenter:(CGSize)size {
-    return [self addParameter:[NSString stringWithFormat:@"%@/%@/%@", UCDNCropKey, [self dimensionsFromSize:size], UCDNCropCenter]];
+- (NSString *)uc_cropToCenter:(CGSize)size {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%@/%@", UCDNCropKey, [self uc_dimensionsFromSize:size], UCDNCropCenter]];
 }
 
 #pragma mark - scale_crop
@@ -148,12 +154,12 @@ static NSString * const UCDNCropCenter = @"center";
 static NSString * const UCDNScaleCropKey = @"scale_crop";
 static NSString * const UCDNScaleCropCenter = @"center";
 
-- (NSString *)scaleCrop:(CGSize)size {
-    return [self addParameter:[NSString stringWithFormat:@"%@/%@", UCDNScaleCropKey, [self dimensionsFromSize:size]]];
+- (NSString *)uc_scaleCrop:(CGSize)size {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%@", UCDNScaleCropKey, [self uc_dimensionsFromSize:size]]];
 }
 
-- (NSString *)scaleCropToCenter:(CGSize)size {
-    return [self addParameter:[NSString stringWithFormat:@"%@/%@/%@", UCDNScaleCropKey, [self dimensionsFromSize:size], UCDNScaleCropCenter]];
+- (NSString *)uc_scaleCropToCenter:(CGSize)size {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%@/%@", UCDNScaleCropKey, [self uc_dimensionsFromSize:size], UCDNScaleCropCenter]];
 }
 
 #pragma mark - stretch
@@ -163,8 +169,8 @@ static NSString * const UCDNStretchOn = @"on";
 static NSString * const UCDNStretchOff = @"off";
 static NSString * const UCDNStretchFill = @"fill";
 
-- (NSString *)stretch:(UCDNStretchMode)mode {
-    return [self addParameter:[NSString stringWithFormat:@"%@/%@", UCDNStretchKey, [self stretchValueFromMode:mode]]];
+- (NSString *)uc_stretch:(UCDNStretchMode)mode {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%@", UCDNStretchKey, [self stretchValueFromMode:mode]]];
 }
 
 - (NSString *)stretchValueFromMode:(UCDNStretchMode)mode {
@@ -190,9 +196,9 @@ static NSString * const UCDNStretchFill = @"fill";
 
 static NSString * const UCDNSetFillKey = @"setfill";
 
-- (NSString *)setFill:(UIColor *)color {
+- (NSString *)uc_setFill:(UIColor *)color {
     NSParameterAssert(color);
-    return [self addParameter:[NSString stringWithFormat:@"%@/%@", UCDNSetFillKey, [self ucHexStringFromColor:color]]];
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%@", UCDNSetFillKey, [self uc_HexStringFromColor:color]]];
 }
 
 #pragma mark - overlay
@@ -200,43 +206,43 @@ static NSString * const UCDNSetFillKey = @"setfill";
 static NSString * const UCDNOverlayKey = @"overlay";
 static NSString * const UCDNOverlayCenter = @"center";
 
-- (NSString *)overlay:(NSString *)uuid
+- (NSString *)uc_overlay:(NSString *)uuid
    relativeDimensions:(CGSize)relativeDimensions
   relativeCoordinates:(CGPoint)relativeCoordinates
               opacity:(CGFloat)opacity {
     NSParameterAssert(uuid);
-    return [self addParameter:[NSString stringWithFormat:@"%@/%i%%" , [self rawOverlay:uuid relativeDimensions:relativeDimensions relativeCoordinates:relativeCoordinates], (int)opacity * 100]];
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%i%%" , [self rawOverlay:uuid relativeDimensions:relativeDimensions relativeCoordinates:relativeCoordinates], (int)opacity * 100]];
 }
 
-- (NSString *)overlay:(NSString *)uuid
+- (NSString *)uc_overlay:(NSString *)uuid
       relativeDimensions:(CGSize)relativeDimensions
      relativeCoordinates:(CGPoint)relativeCoordinates {
     NSParameterAssert(uuid);
-    return [self addParameter:[self rawOverlay:uuid relativeDimensions:relativeDimensions relativeCoordinates:relativeCoordinates]];
+    return [self uc_addParameter:[self rawOverlay:uuid relativeDimensions:relativeDimensions relativeCoordinates:relativeCoordinates]];
 }
 
-- (NSString *)overlayAtCenter:(NSString *)uuid
+- (NSString *)uc_overlayAtCenter:(NSString *)uuid
            relativeDimensions:(CGSize)relativeDimensions
                       opacity:(CGFloat)opacity {
     NSParameterAssert(uuid);
-    return [self addParameter:[NSString stringWithFormat:@"%@/%i%%" , [self rawOverlayAtCenter:uuid relativeDimensions:relativeDimensions], (int)opacity * 100]];
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%i%%" , [self rawOverlayAtCenter:uuid relativeDimensions:relativeDimensions], (int)opacity * 100]];
 }
 
-- (NSString *)overlayAtCenter:(NSString *)uuid
+- (NSString *)uc_overlayAtCenter:(NSString *)uuid
            relativeDimensions:(CGSize)relativeDimensions {
     NSParameterAssert(uuid);
-    return [self addParameter:[self rawOverlayAtCenter:uuid relativeDimensions:relativeDimensions]];
+    return [self uc_addParameter:[self rawOverlayAtCenter:uuid relativeDimensions:relativeDimensions]];
 }
 
 - (NSString *)rawOverlay:(NSString *)uuid
    relativeDimensions:(CGSize)relativeDimensions
   relativeCoordinates:(CGPoint)relativeCoordinates {
-    return [NSString stringWithFormat:@"%@/%@/%@/%@" , UCDNOverlayKey, uuid, [self dimensionsFromSize:relativeDimensions], [self coordinatesFromPoint:relativeCoordinates]];
+    return [NSString stringWithFormat:@"%@/%@/%@/%@" , UCDNOverlayKey, uuid, [self uc_dimensionsFromSize:relativeDimensions], [self uc_coordinatesFromPoint:relativeCoordinates]];
 }
 
 - (NSString *)rawOverlayAtCenter:(NSString *)uuid
            relativeDimensions:(CGSize)relativeDimensions {
-    return [NSString stringWithFormat:@"%@/%@/%@/%@" , UCDNOverlayKey, uuid, [self dimensionsFromSize:relativeDimensions], UCDNOverlayCenter];
+    return [NSString stringWithFormat:@"%@/%@/%@/%@" , UCDNOverlayKey, uuid, [self uc_dimensionsFromSize:relativeDimensions], UCDNOverlayCenter];
 }
 
 #pragma mark - autorotate
@@ -245,77 +251,74 @@ static NSString * const UCDNAutorotateKey = @"autorotate";
 static NSString * const UCDNAutorotateYes = @"yes";
 static NSString * const UCDNAutorotateNo = @"no";
 
-- (NSString *)autorotate:(BOOL)autorotate {
-    return [self addParameter:[NSString stringWithFormat:@"%@/%@", UCDNAutorotateKey, autorotate ? UCDNAutorotateYes : UCDNAutorotateNo]];
+- (NSString *)uc_autorotate:(BOOL)autorotate {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%@", UCDNAutorotateKey, autorotate ? UCDNAutorotateYes : UCDNAutorotateNo]];
 }
 
 #pragma mark - sharp
 
 static NSString * const UCDNSharpKey = @"sharp";
 
-- (NSString *)sharp:(NSUInteger)sharp {
-    NSAssert(sharp >= 0 && sharp <= 20, @"Sharp value must be in interval [0; 20]");
-    return [self addParameter:[NSString stringWithFormat:@"%@/%lu", UCDNSharpKey, (unsigned long)sharp]];
+- (NSString *)uc_sharp:(NSUInteger)sharp {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%lu", UCDNSharpKey, (unsigned long)sharp]];
 }
 
 #pragma mark - blur
 
 static NSString * const UCDNBlurKey = @"blur";
 
-- (NSString *)blur:(NSUInteger)blur {
-    NSAssert(blur >= 0 && blur <= 5000, @"Blur value must be in interval [0; 5000]");
-    return [self addParameter:[NSString stringWithFormat:@"%@/%lu", UCDNBlurKey, (unsigned long)blur]];
+- (NSString *)uc_blur:(NSUInteger)blur {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%lu", UCDNBlurKey, (unsigned long)blur]];
 }
 
 #pragma mark - rotate
 
 static NSString * const UCDNRotateKey = @"rotate";
 
-- (NSString *)rotate:(NSUInteger)angle {
-    NSAssert(angle % 90 == 0, @"Angle must be multiple of 90");
-    return [self addParameter:[NSString stringWithFormat:@"%@/%lu", UCDNRotateKey, (unsigned long)angle]];
+- (NSString *)uc_rotate:(NSUInteger)angle {
+    return [self uc_addParameter:[NSString stringWithFormat:@"%@/%lu", UCDNRotateKey, (unsigned long)angle]];
 }
 
 #pragma mark - flip
 
 static NSString * const UCDNFlipKey = @"flip";
 
-- (NSString *)flip {
-    return [self addParameter:UCDNFlipKey];
+- (NSString *)uc_flip {
+    return [self uc_addParameter:UCDNFlipKey];
 }
 
 #pragma mark - mirror
 
 static NSString * const UCDNMirrorKey = @"mirror";
 
-- (NSString *)mirror {
-    return [self addParameter:UCDNMirrorKey];
+- (NSString *)uc_mirror {
+    return [self uc_addParameter:UCDNMirrorKey];
 }
 
 #pragma mark - grayscale
 
 static NSString * const UCDNGrayscaleKey = @"grayscale";
 
-- (NSString *)grayscale {
-    return [self addParameter:UCDNGrayscaleKey];
+- (NSString *)uc_grayscale {
+    return [self uc_addParameter:UCDNGrayscaleKey];
 }
 
 #pragma mark - invert
 
 static NSString * const UCDNInvertKey = @"invert";
 
-- (NSString *)invert {
-    return [self addParameter:UCDNInvertKey];
+- (NSString *)uc_invert {
+    return [self uc_addParameter:UCDNInvertKey];
 }
 
 
 #pragma mark - utilities
 
-- (NSString *)addParameter:(NSString *)parameter {
+- (NSString *)uc_addParameter:(NSString *)parameter {
     return [self stringByAppendingFormat:@"%@/%@/", UCDNParameterSeparator, parameter];
 }
 
-- (NSString *)ucHexStringFromColor:(UIColor *)color
+- (NSString *)uc_HexStringFromColor:(UIColor *)color
 {
     CGColorSpaceModel colorSpace = CGColorSpaceGetModel(CGColorGetColorSpace(color.CGColor));
     const CGFloat *components = CGColorGetComponents(color.CGColor);
@@ -342,13 +345,19 @@ static NSString * const UCDNInvertKey = @"invert";
             lroundf(a * 255)];
 }
 
-- (NSString *)dimensionsFromSize:(CGSize)size {
+- (NSString *)uc_oneOrTwoDimensionsFromSize:(CGSize)size {
     NSString *width = ceil(size.width) != 0 ? [NSString stringWithFormat:@"%.0f", ceil(size.width)] : @"";
     NSString *height = ceil(size.width) != 0 ? [NSString stringWithFormat:@"%.0f", ceil(size.height)] : @"";
     return [NSString stringWithFormat:@"%@x%@", width, height];
 }
 
-- (NSString *)coordinatesFromPoint:(CGPoint)point {
+- (NSString *)uc_dimensionsFromSize:(CGSize)size {
+    NSString *width = [NSString stringWithFormat:@"%.0f", ceil(size.width)];
+    NSString *height = [NSString stringWithFormat:@"%.0f", ceil(size.height)];
+    return [NSString stringWithFormat:@"%@x%@", width, height];
+}
+
+- (NSString *)uc_coordinatesFromPoint:(CGPoint)point {
     NSString *x = [NSString stringWithFormat:@"%.0f", ceil(point.x)];
     NSString *y = [NSString stringWithFormat:@"%.0f", ceil(point.y)];
     return [NSString stringWithFormat:@"%@,%@", x, y];
