@@ -10,7 +10,7 @@
 
 @class UCSocialEntry;
 
-@interface UCFlatGalleryCell : UICollectionViewCell
+@interface UCListGalleryCell : UICollectionViewCell
 @property (nonatomic, strong, readonly) UIImageView *imageView;
 @property (nonatomic, strong, readonly) UILabel *titleLabel;
 @property (nonatomic, strong) UCSocialEntry *socialEntry;

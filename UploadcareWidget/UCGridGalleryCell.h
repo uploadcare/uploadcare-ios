@@ -1,5 +1,5 @@
 //
-//  UCGalleryCell.h
+//  UCGridGalleryCell.h
 //  ExampleProject
 //
 //  Created by Yury Nechaev on 08.04.16.
@@ -10,7 +10,7 @@
 
 @class UCSocialEntry;
 
-@interface UCGalleryCell : UICollectionViewCell
+@interface UCGridGalleryCell : UICollectionViewCell
 @property (nonatomic, strong, readonly) UIImageView *imageView;
 @property (nonatomic, strong) UCSocialEntry *socialEntry;
 @end

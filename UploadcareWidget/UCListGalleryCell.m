@@ -6,12 +6,12 @@
 //  Copyright © 2016 Uploadcare. All rights reserved.
 //
 
-#import "UCFlatGalleryCell.h"
+#import "UCListGalleryCell.h"
 #import "UCSocialEntry.h"
 #import "UCClient.h"
 #import "UIImageView+Uploadcare.h"
 
-@implementation UCFlatGalleryCell
+@implementation UCListGalleryCell
 
 - (id)initWithFrame:(CGRect)frame
 {

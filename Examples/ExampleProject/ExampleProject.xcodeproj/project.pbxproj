@@ -58,10 +58,9 @@
 		06D9EED61CBE860B0043405C /* UPCSelectorBarItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06D9EE6C1CBE860B0043405C /* UPCSelectorBarItemIcon.png */; };
 		06D9EED71CBE860B0043405C /* UPCSelectorBarItemIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06D9EE6D1CBE860B0043405C /* UPCSelectorBarItemIcon@2x.png */; };
 		06D9EED81CBE860B0043405C /* UCClient+Social.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE6F1CBE860B0043405C /* UCClient+Social.m */; };
-		06D9EED91CBE860B0043405C /* UCFlatGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE711CBE860B0043405C /* UCFlatGalleryCell.m */; };
-		06D9EEDA1CBE860B0043405C /* UCGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE731CBE860B0043405C /* UCGalleryCell.m */; };
+		06D9EED91CBE860B0043405C /* UCListGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE711CBE860B0043405C /* UCListGalleryCell.m */; };
+		06D9EEDA1CBE860B0043405C /* UCGridGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE731CBE860B0043405C /* UCGridGalleryCell.m */; };
 		06D9EEDB1CBE860B0043405C /* UCGalleryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE751CBE860B0043405C /* UCGalleryVC.m */; };
-		06D9EEDC1CBE860B0043405C /* UCRecentUploads.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE771CBE860B0043405C /* UCRecentUploads.m */; };
 		06D9EEDE1CBE860B0043405C /* UCSocialEntriesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE7C1CBE860B0043405C /* UCSocialEntriesRequest.m */; };
 		06D9EEDF1CBE860B0043405C /* UCSocialEntryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE7E1CBE860B0043405C /* UCSocialEntryRequest.m */; };
 		06D9EEE01CBE860B0043405C /* UCSocialRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE811CBE860B0043405C /* UCSocialRequest.m */; };
@@ -153,14 +152,12 @@
 		06D9EE6D1CBE860B0043405C /* UPCSelectorBarItemIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UPCSelectorBarItemIcon@2x.png"; sourceTree = "<group>"; };
 		06D9EE6E1CBE860B0043405C /* UCClient+Social.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UCClient+Social.h"; sourceTree = "<group>"; };
 		06D9EE6F1CBE860B0043405C /* UCClient+Social.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UCClient+Social.m"; sourceTree = "<group>"; };
-		06D9EE701CBE860B0043405C /* UCFlatGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFlatGalleryCell.h; sourceTree = "<group>"; };
-		06D9EE711CBE860B0043405C /* UCFlatGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCFlatGalleryCell.m; sourceTree = "<group>"; };
-		06D9EE721CBE860B0043405C /* UCGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCGalleryCell.h; sourceTree = "<group>"; };
-		06D9EE731CBE860B0043405C /* UCGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCGalleryCell.m; sourceTree = "<group>"; };
+		06D9EE701CBE860B0043405C /* UCListGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCListGalleryCell.h; sourceTree = "<group>"; };
+		06D9EE711CBE860B0043405C /* UCListGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCListGalleryCell.m; sourceTree = "<group>"; };
+		06D9EE721CBE860B0043405C /* UCGridGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCGridGalleryCell.h; sourceTree = "<group>"; };
+		06D9EE731CBE860B0043405C /* UCGridGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCGridGalleryCell.m; sourceTree = "<group>"; };
 		06D9EE741CBE860B0043405C /* UCGalleryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCGalleryVC.h; sourceTree = "<group>"; };
 		06D9EE751CBE860B0043405C /* UCGalleryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCGalleryVC.m; sourceTree = "<group>"; };
-		06D9EE761CBE860B0043405C /* UCRecentUploads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCRecentUploads.h; sourceTree = "<group>"; };
-		06D9EE771CBE860B0043405C /* UCRecentUploads.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCRecentUploads.m; sourceTree = "<group>"; };
 		06D9EE7A1CBE860B0043405C /* UCSocialConstantsHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCSocialConstantsHeader.h; sourceTree = "<group>"; };
 		06D9EE7B1CBE860B0043405C /* UCSocialEntriesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCSocialEntriesRequest.h; sourceTree = "<group>"; };
 		06D9EE7C1CBE860B0043405C /* UCSocialEntriesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialEntriesRequest.m; sourceTree = "<group>"; };
@@ -302,14 +299,12 @@
 				06D9EE541CBE860B0043405C /* resources */,
 				06D9EE6E1CBE860B0043405C /* UCClient+Social.h */,
 				06D9EE6F1CBE860B0043405C /* UCClient+Social.m */,
-				06D9EE701CBE860B0043405C /* UCFlatGalleryCell.h */,
-				06D9EE711CBE860B0043405C /* UCFlatGalleryCell.m */,
-				06D9EE721CBE860B0043405C /* UCGalleryCell.h */,
-				06D9EE731CBE860B0043405C /* UCGalleryCell.m */,
+				06D9EE701CBE860B0043405C /* UCListGalleryCell.h */,
+				06D9EE711CBE860B0043405C /* UCListGalleryCell.m */,
+				06D9EE721CBE860B0043405C /* UCGridGalleryCell.h */,
+				06D9EE731CBE860B0043405C /* UCGridGalleryCell.m */,
 				06D9EE741CBE860B0043405C /* UCGalleryVC.h */,
 				06D9EE751CBE860B0043405C /* UCGalleryVC.m */,
-				06D9EE761CBE860B0043405C /* UCRecentUploads.h */,
-				06D9EE771CBE860B0043405C /* UCRecentUploads.m */,
 				06D9EE7A1CBE860B0043405C /* UCSocialConstantsHeader.h */,
 				06D9EE7B1CBE860B0043405C /* UCSocialEntriesRequest.h */,
 				06D9EE7C1CBE860B0043405C /* UCSocialEntriesRequest.m */,
@@ -556,7 +551,7 @@
 				06A6DAA11CB3D746000B4E8A /* ViewController.m in Sources */,
 				06A6DA9E1CB3D746000B4E8A /* AppDelegate.m in Sources */,
 				06D9EEB11CBE860B0043405C /* UCAPIRequest.m in Sources */,
-				06D9EEDA1CBE860B0043405C /* UCGalleryCell.m in Sources */,
+				06D9EEDA1CBE860B0043405C /* UCGridGalleryCell.m in Sources */,
 				06A6DA9B1CB3D746000B4E8A /* main.m in Sources */,
 				06D9EEE01CBE860B0043405C /* UCSocialRequest.m in Sources */,
 				06D9EEB81CBE860B0043405C /* UCSocialChunk.m in Sources */,
@@ -565,9 +560,8 @@
 				06D9EEBE1CBE860B0043405C /* UCSocialSource.m in Sources */,
 				06D9EEDE1CBE860B0043405C /* UCSocialEntriesRequest.m in Sources */,
 				06D9EEBD1CBE860B0043405C /* UCSocialPath.m in Sources */,
-				06D9EEDC1CBE860B0043405C /* UCRecentUploads.m in Sources */,
 				06D9EEB01CBE860B0043405C /* NSString+EncodeRFC3986.m in Sources */,
-				06D9EED91CBE860B0043405C /* UCFlatGalleryCell.m in Sources */,
+				06D9EED91CBE860B0043405C /* UCListGalleryCell.m in Sources */,
 				06D9EEB41CBE860B0043405C /* UCFileUploadRequest.m in Sources */,
 				06D9EEB91CBE860B0043405C /* UCSocialEntriesCollection.m in Sources */,
 				06A6DAB21CB3DA14000B4E8A /* DetailViewController.m in Sources */,

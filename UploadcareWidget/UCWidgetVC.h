@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ This is example implementation of UIViewController which can lead to the root level of presentation.
+ At this layer user selects appropriate social network source and opens UCGalleryVC controller.
+ */
 @interface UCWidgetVC : UITableViewController
 
 - (id)initWithProgress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress

@@ -1,17 +1,17 @@
 //
-//  UCGalleryCell.m
+//  UCGridGalleryCell.m
 //  ExampleProject
 //
 //  Created by Yury Nechaev on 08.04.16.
 //  Copyright © 2016 Uploadcare. All rights reserved.
 //
 
-#import "UCGalleryCell.h"
+#import "UCGridGalleryCell.h"
 #import "UCSocialEntry.h"
 #import "UCClient.h"
 #import "UIImageView+Uploadcare.h"
 
-@implementation UCGalleryCell
+@implementation UCGridGalleryCell
 
 - (id)initWithFrame:(CGRect)frame
 {

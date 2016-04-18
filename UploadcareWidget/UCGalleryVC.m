@@ -7,8 +7,8 @@
 //
 
 #import "UCGalleryVC.h"
-#import "UCGalleryCell.h"
-#import "UCFlatGalleryCell.h"
+#import "UCGridGalleryCell.h"
+#import "UCListGalleryCell.h"
 #import "UCSocialEntry.h"
 #import "UCWebViewController.h"
 #import "UCSocialSource.h"
@@ -113,7 +113,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     self.collectionView.delegate = self;
     self.collectionView.alwaysBounceVertical = YES;
     self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-    [self.collectionView registerClass:self.currentMode == UCGalleryModeGrid ? [UCGalleryCell class] : [UCFlatGalleryCell class] forCellWithReuseIdentifier:kCellIdentifier];
+    [self.collectionView registerClass:self.currentMode == UCGalleryModeGrid ? [UCGridGalleryCell class] : [UCListGalleryCell class] forCellWithReuseIdentifier:kCellIdentifier];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kBusyCellIdentifyer];
     self.collectionView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1.];
     self.refreshControl = [[UIRefreshControl alloc]init];
@@ -351,11 +351,11 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UCSocialEntry *entry = self.entriesCollection.entries[indexPath.row];
     if (self.currentMode == UCGalleryModeGrid) {
-        UCGalleryCell *cell = (UCGalleryCell*)[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
+        UCGridGalleryCell *cell = (UCGridGalleryCell*)[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
         [cell setSocialEntry:entry];
         return cell;
     } else {
-        UCFlatGalleryCell *cell = (UCFlatGalleryCell*)[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
+        UCListGalleryCell *cell = (UCListGalleryCell*)[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
         [cell setSocialEntry:entry];
         return cell;
     }
