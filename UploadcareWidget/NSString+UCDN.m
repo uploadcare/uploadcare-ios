@@ -20,6 +20,7 @@ static NSString * const UCDNRootHost = @"https://ucarecdn.com";
 + (instancetype)uc_pathWithRoot:(NSString *)root UUID:(NSString *)uuid {
     NSParameterAssert(root);
     NSString *path = [[[self class] alloc] initWithString:[root stringByAppendingFormat:@"/%@/",uuid]];
+    [path set_ucRootHost:root];
     return path;
 }
 
@@ -315,6 +316,15 @@ static NSString * const UCDNInvertKey = @"invert";
 
 #pragma mark - utilities
 
+- (void)set_ucRootHost:(NSString *)_ucRootHost {
+    objc_setAssociatedObject(self, @selector(_ucRootHost), _ucRootHost, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+}
+
+- (NSString *)_ucRootHost {
+    return objc_getAssociatedObject(self, @selector(_ucRootHost));
+}
+
 - (void)setIgnoreScreenScale:(BOOL)ignoreScreenScale {
     objc_setAssociatedObject(self, @selector(ignoreScreenScale), @(ignoreScreenScale), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
@@ -325,7 +335,13 @@ static NSString * const UCDNInvertKey = @"invert";
 }
 
 - (NSString *)uc_addParameter:(NSString *)parameter {
-    return [self stringByAppendingFormat:@"%@/%@/", UCDNParameterSeparator, parameter];
+    return [self isProperPath] ? [self stringByAppendingFormat:@"%@/%@/", UCDNParameterSeparator, parameter] : self;
+}
+
+- (BOOL)isProperPath {
+    NSURLComponents *selfComponents = [NSURLComponents componentsWithString:self];
+    NSURLComponents *hostComponents = [NSURLComponents componentsWithString:[self _ucRootHost] ?: UCDNRootHost];
+    return [selfComponents.host isEqualToString:hostComponents.host];
 }
 
 - (NSString *)uc_HexStringFromColor:(UIColor *)color
