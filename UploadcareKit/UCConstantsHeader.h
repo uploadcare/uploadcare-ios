@@ -3,7 +3,7 @@
 //  Riders
 //
 //  Created by Yury Nechaev on 31.03.16.
-//  Copyright © 2016 Whitescape. All rights reserved.
+//  Copyright © 2016 Uploadcare. All rights reserved.
 //
 
 #pragma mark - root paths
