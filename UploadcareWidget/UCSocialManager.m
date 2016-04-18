@@ -54,31 +54,6 @@ static UCSocialManager *instanceSocialManager = nil;
     }];
 }
 
-- (void)uploadSocialEntry:(UCSocialEntry *)entry
-                forSource:(UCSocialSource *)source
-                 progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
-               completion:(void(^)(BOOL completed, NSString *fileId, NSError *error))completionBlock {
-    if (progressBlock) progressBlock (0, NSUIntegerMax);
-    UCSocialEntryRequest *req = [UCSocialEntryRequest requestWithSource:source file:entry.action.urlString.encodedRFC3986];
-    [[UCClient defaultClient] performUCSocialRequest:req completion:^(id response, NSError *error) {
-        if (!error && [response isKindOfClass:[NSDictionary class]]) {
-            NSString *fileURL = response[@"url"];
-            UCRemoteFileUploadRequest *request = [UCRemoteFileUploadRequest requestWithRemoteFileURL:fileURL];
-            [[UCClient defaultClient] performUCRequest:request progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
-                if (progressBlock) progressBlock (totalBytesSent, totalBytesExpectedToSend);
-            } completion:^(id response, NSError *error) {
-                if (!error) {
-                    if (completionBlock) completionBlock(YES, response[@"file_id"], nil);
-                } else {
-                    if (completionBlock) completionBlock(NO, response, error);
-                }
-            }];
-        } else {
-            if (completionBlock) completionBlock(NO, response, error);
-        }
-    }];
-}
-
 - (void)presentDocumentControllerFrom:(UIViewController *)viewController
                              progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
                            completion:(void(^)(BOOL completed, NSString *fileId, NSError *error))completionBlock {

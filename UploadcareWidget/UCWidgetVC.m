@@ -110,7 +110,7 @@
 - (void)uploadSocialEntry:(UCSocialEntry *)entry {
     if (self.progressBlock) self.progressBlock (0, NSUIntegerMax);
     __weak __typeof(self) weakSelf = self;
-    [SharedSocialManager uploadSocialEntry:entry forSource:self.source progress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
+    [self uploadSocialEntry:entry forSource:self.source progress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
         if (strongSelf.progressBlock) strongSelf.progressBlock (bytesSent, bytesExpectedToSend);
     } completion:^(BOOL completed, NSString *fileId, NSError *error) {
@@ -122,6 +122,31 @@
                 if (strongSelf.completionBlock) strongSelf.completionBlock(NO, nil, error);
             }
         }];
+    }];
+}
+
+- (void)uploadSocialEntry:(UCSocialEntry *)entry
+                forSource:(UCSocialSource *)source
+                 progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
+               completion:(void(^)(BOOL completed, NSString *fileId, NSError *error))completionBlock {
+    if (progressBlock) progressBlock (0, NSUIntegerMax);
+    UCSocialEntryRequest *req = [UCSocialEntryRequest requestWithSource:source file:entry.action.urlString.encodedRFC3986];
+    [[UCClient defaultClient] performUCSocialRequest:req completion:^(id response, NSError *error) {
+        if (!error && [response isKindOfClass:[NSDictionary class]]) {
+            NSString *fileURL = response[@"url"];
+            UCRemoteFileUploadRequest *request = [UCRemoteFileUploadRequest requestWithRemoteFileURL:fileURL];
+            [[UCClient defaultClient] performUCRequest:request progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
+                if (progressBlock) progressBlock (totalBytesSent, totalBytesExpectedToSend);
+            } completion:^(id response, NSError *error) {
+                if (!error) {
+                    if (completionBlock) completionBlock(YES, response[@"file_id"], nil);
+                } else {
+                    if (completionBlock) completionBlock(NO, response, error);
+                }
+            }];
+        } else {
+            if (completionBlock) completionBlock(NO, response, error);
+        }
     }];
 }
 
@@ -199,9 +224,5 @@
 - (void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
     NSLog(@"SF DID COMPLETE INITIAL: %@", didLoadSuccessfully ? @"YES" : @"NO");
 }
-
-#pragma mark - <UIDocumentPickerDelegate>
-
-
 
 @end
