@@ -21,6 +21,6 @@
 
 - (void)presentDocumentControllerFrom:(UIViewController *)viewController
                              progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
-                           completion:(void(^)(BOOL completed, NSString *fileId, NSError *error))completionBlock;
+                           completion:(void(^)(NSString *fileId, NSError *error))completionBlock;
 
 @end

@@ -26,7 +26,7 @@
 @interface UCWidgetVC () <SFSafariViewControllerDelegate>
 @property (nonatomic, strong) NSArray<UCSocialSource *> *tableData;
 @property (nonatomic, strong) UCSocialSource *source;
-@property (nonatomic, copy) void (^completionBlock)(BOOL completed, NSString *fileId, NSError *error);
+@property (nonatomic, copy) void (^completionBlock)(NSString *fileId, NSError *error);
 @property (nonatomic, copy) void (^progressBlock)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend);
 
 @end
@@ -34,7 +34,7 @@
 @implementation UCWidgetVC
 
 - (id)initWithProgress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
-            completion:(void(^)(BOOL completed, NSString *fileId, NSError *error))completion {
+            completion:(void(^)(NSString *fileId, NSError *error))completion {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         _completionBlock = completion;
@@ -113,13 +113,13 @@
     [self uploadSocialEntry:entry forSource:self.source progress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
         if (strongSelf.progressBlock) strongSelf.progressBlock (bytesSent, bytesExpectedToSend);
-    } completion:^(BOOL completed, NSString *fileId, NSError *error) {
+    } completion:^(NSString *fileId, NSError *error) {
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
         [strongSelf closeControllerWithCompletion:^{
             if (!error) {
-                if (strongSelf.completionBlock) strongSelf.completionBlock(YES, fileId, nil);
+                if (strongSelf.completionBlock) strongSelf.completionBlock(fileId, nil);
             } else {
-                if (strongSelf.completionBlock) strongSelf.completionBlock(NO, nil, error);
+                if (strongSelf.completionBlock) strongSelf.completionBlock(nil, error);
             }
         }];
     }];
@@ -128,7 +128,7 @@
 - (void)uploadSocialEntry:(UCSocialEntry *)entry
                 forSource:(UCSocialSource *)source
                  progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
-               completion:(void(^)(BOOL completed, NSString *fileId, NSError *error))completionBlock {
+               completion:(void(^)(NSString *fileId, NSError *error))completionBlock {
     if (progressBlock) progressBlock (0, NSUIntegerMax);
     UCSocialEntryRequest *req = [UCSocialEntryRequest requestWithSource:source file:entry.action.urlString.encodedRFC3986];
     [[UCClient defaultClient] performUCSocialRequest:req completion:^(id response, NSError *error) {
@@ -139,19 +139,19 @@
                 if (progressBlock) progressBlock (totalBytesSent, totalBytesExpectedToSend);
             } completion:^(id response, NSError *error) {
                 if (!error) {
-                    if (completionBlock) completionBlock(YES, response[@"file_id"], nil);
+                    if (completionBlock) completionBlock(response[@"file_id"], nil);
                 } else {
-                    if (completionBlock) completionBlock(NO, response, error);
+                    if (completionBlock) completionBlock(nil, error);
                 }
             }];
         } else {
-            if (completionBlock) completionBlock(NO, response, error);
+            if (completionBlock) completionBlock(nil, error);
         }
     }];
 }
 
 - (void)handleError:(NSError *)error {
-    if (self.completionBlock) self.completionBlock(NO, nil, error);
+    if (self.completionBlock) self.completionBlock(nil, error);
 }
 
 - (void)didReceiveMemoryWarning {

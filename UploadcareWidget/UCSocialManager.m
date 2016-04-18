@@ -19,7 +19,7 @@
 @interface UCSocialManager () <UIDocumentMenuDelegate, UIDocumentPickerDelegate>
 @property (nonatomic, weak) UIViewController *rootController;
 @property (nonatomic, copy) void(^progressBlock)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend);
-@property (nonatomic, copy) void(^completionBlock)(BOOL completed, NSString *fileId, NSError *error);
+@property (nonatomic, copy) void(^completionBlock)(NSString *fileId, NSError *error);
 @end
 
 static UCSocialManager *instanceSocialManager = nil;
@@ -56,7 +56,7 @@ static UCSocialManager *instanceSocialManager = nil;
 
 - (void)presentDocumentControllerFrom:(UIViewController *)viewController
                              progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
-                           completion:(void(^)(BOOL completed, NSString *fileId, NSError *error))completionBlock {
+                           completion:(void(^)(NSString *fileId, NSError *error))completionBlock {
     self.completionBlock = completionBlock;
     self.progressBlock = progressBlock;
     self.rootController = viewController;
@@ -80,7 +80,7 @@ static UCSocialManager *instanceSocialManager = nil;
     [[UCClient defaultClient] performUCRequest:req progress:self.progressBlock
                                     completion:^(id response, NSError *error) {
                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                            if (self.completionBlock) self.completionBlock (!error, response[@"file"], error);
+                                            if (self.completionBlock) self.completionBlock (response[@"file"], error);
                                         });
                                     }];
 }

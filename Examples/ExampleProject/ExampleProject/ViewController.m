@@ -191,16 +191,14 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
         });
         float progress = (float)bytesSent / (float)bytesExpectedToSend;
         NSLog(@"Widget progress: %f", progress);
-    } completion:^(BOOL completed, NSString *fileId, NSError *error) {
+    } completion:^(NSString *fileId, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self finishProgress];
         });
-        if (completed) {
+        if (!error) {
             NSLog(@"Successfully uploaded media with id: %@", fileId);
         } else {
-            if (error) {
-                [self handleError:error];
-            }
+            [self handleError:error];
         }
     }];;
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:wvc];
