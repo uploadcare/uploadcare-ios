@@ -8,6 +8,9 @@
 
 #import "UCAPIRequest.h"
 
+/**
+ *  Requests group information from Uploadcare service.
+ */
 @interface UCGroupInfoRequest : UCAPIRequest
 
 + (instancetype)requestWithGroupID:(NSString *)groupID;

@@ -8,6 +8,9 @@
 
 #import "UCAPIRequest.h"
 
+/**
+ *  Requests file information from Uploadcare service.
+ */
 @interface UCFileInfoRequest : UCAPIRequest
 
 + (instancetype)requestWithFileID:(NSString *)fileID;

@@ -8,6 +8,10 @@
 
 #import "UCAPIRequest.h"
 
+/**
+ *  Creates group with the provided file uuids.
+ *  @see https://uploadcare.com/documentation/upload/#create-group
+ */
 @interface UCGroupPostRequest : UCAPIRequest
 
 + (instancetype)requestWithFileIDs:(NSArray<NSString *> *)fileIDs;

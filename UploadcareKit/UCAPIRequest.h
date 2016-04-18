@@ -10,6 +10,10 @@
 
 @class UCAPIRequestPayload;
 
+/**
+ *  Base API request class which contains all necessary data for NSURLSession.
+ *  Use this class for subclassing only.
+ */
 @interface UCAPIRequest : NSObject
 @property (nonatomic, strong) NSDictionary *parameters;
 @property (nonatomic, strong) NSString *path;
@@ -19,6 +23,10 @@
 
 @end
 
+/**
+ *  UCAPIRequestPayload is used for multipart/form-data requests and contains
+ *  all necessary values for it's construction.
+ */
 @interface UCAPIRequestPayload : NSObject
 @property (nonatomic, strong, readonly) NSData *payload;
 @property (nonatomic, strong, readonly) NSString *name;
