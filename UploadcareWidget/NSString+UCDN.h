@@ -61,6 +61,12 @@ typedef NS_ENUM(NSUInteger, UCDNStretchMode) {
 @interface NSString (UCDN)
 
 /**
+ *  This value determines if the screen scale will be ignored in coordinates and sizes.
+ *  Default value is NO.
+ */
+@property (nonatomic, assign) BOOL ignoreScreenScale;
+
+/**
  *  Instantiates CDN path with given root host and UUID.
  *
  *  @param root Root host.

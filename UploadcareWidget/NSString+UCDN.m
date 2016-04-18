@@ -7,6 +7,7 @@
 //
 
 #import "NSString+UCDN.h"
+#import <objc/runtime.h>
 
 static NSString * const UCDNParameterSeparator = @"-";
 static NSString * const UCDNRootHost = @"https://ucarecdn.com";
@@ -314,6 +315,15 @@ static NSString * const UCDNInvertKey = @"invert";
 
 #pragma mark - utilities
 
+- (void)setIgnoreScreenScale:(BOOL)ignoreScreenScale {
+    objc_setAssociatedObject(self, @selector(ignoreScreenScale), @(ignoreScreenScale), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)ignoreScreenScale {
+    NSNumber *value = objc_getAssociatedObject(self, @selector(ignoreScreenScale));
+    return [value boolValue];
+}
+
 - (NSString *)uc_addParameter:(NSString *)parameter {
     return [self stringByAppendingFormat:@"%@/%@/", UCDNParameterSeparator, parameter];
 }
@@ -346,21 +356,25 @@ static NSString * const UCDNInvertKey = @"invert";
 }
 
 - (NSString *)uc_oneOrTwoDimensionsFromSize:(CGSize)size {
-    NSString *width = ceil(size.width) != 0 ? [NSString stringWithFormat:@"%.0f", ceil(size.width)] : @"";
-    NSString *height = ceil(size.width) != 0 ? [NSString stringWithFormat:@"%.0f", ceil(size.height)] : @"";
+    NSString *width = ceil(size.width) != 0 ? [NSString stringWithFormat:@"%.0f", [self scaledValue:size.width]] : @"";
+    NSString *height = ceil(size.height) != 0 ? [NSString stringWithFormat:@"%.0f", [self scaledValue:size.height]] : @"";
     return [NSString stringWithFormat:@"%@x%@", width, height];
 }
 
 - (NSString *)uc_dimensionsFromSize:(CGSize)size {
-    NSString *width = [NSString stringWithFormat:@"%.0f", ceil(size.width)];
-    NSString *height = [NSString stringWithFormat:@"%.0f", ceil(size.height)];
+    NSString *width = [NSString stringWithFormat:@"%.0f", [self scaledValue:size.width]];
+    NSString *height = [NSString stringWithFormat:@"%.0f", [self scaledValue:size.height]];
     return [NSString stringWithFormat:@"%@x%@", width, height];
 }
 
 - (NSString *)uc_coordinatesFromPoint:(CGPoint)point {
-    NSString *x = [NSString stringWithFormat:@"%.0f", ceil(point.x)];
-    NSString *y = [NSString stringWithFormat:@"%.0f", ceil(point.y)];
+    NSString *x = [NSString stringWithFormat:@"%.0f", [self scaledValue:point.x]];
+    NSString *y = [NSString stringWithFormat:@"%.0f", [self scaledValue:point.y]];
     return [NSString stringWithFormat:@"%@,%@", x, y];
 }
+
+- (CGFloat) scaledValue:(CGFloat)value {
+    return [self ignoreScreenScale] ? ceil(value) : ceil(value * [[UIScreen mainScreen] scale]);
+};
 
 @end

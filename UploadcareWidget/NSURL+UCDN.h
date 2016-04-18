@@ -12,6 +12,12 @@
 @interface NSURL (UCDN)
 
 /**
+ *  This value determines if the screen scale will be ignored in coordinates and sizes.
+ *  Default value is NO.
+ */
+@property (nonatomic, assign) BOOL ignoreScreenScale;
+
+/**
  *  Instantiates CDN url path with given root host and UUID.
  *
  *  @param root Root host.
