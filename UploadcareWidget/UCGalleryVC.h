@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, UCGalleryMode) {
 - (id)initWithMode:(UCGalleryMode)mode
             source:(UCSocialSource *)source
          rootChunk:(UCSocialChunk *)rootChunk
-        completion:(void(^)(UCSocialEntry *socialEntry))completion;
+          progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
+        completion:(void(^)(NSString *fileId, NSError *error))completion;
 
 @end

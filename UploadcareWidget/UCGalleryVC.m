@@ -16,13 +16,17 @@
 #import "UCSocialConstantsHeader.h"
 #import "UCClient+Social.h"
 #import "UCSocialEntriesRequest.h"
+#import "UCSocialEntryRequest.h"
 #import "UCSocialEntry.h"
+#import "UCRemoteFileUploadRequest.h"
+#import "NSString+EncodeRFC3986.h"
 
 static NSString *const kCellIdentifier = @"UCGalleryVCCellIdentifier";
 static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 
 #define GRID_ELEMENTS_PER_ROW 3
 #define LIST_ROW_HEIGHT 40
+#define MAX_RETRY_COUNT 2
 
 @interface UCGalleryVC () <UISearchBarDelegate>
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -34,16 +38,25 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 @property (nonatomic, strong) UCSocialEntriesCollection *entriesCollection;
 @property (nonatomic, strong) UCWebViewController *webVC;
 @property (nonatomic, strong) UISearchBar *searchBar;
-@property (nonatomic, copy) void (^completionBlock)(UCSocialEntry *socialEntry);
+@property (nonatomic, assign) NSUInteger retryCount;
+
+@property (nonatomic, copy) void (^completionBlock)(NSString *fileId, NSError *error);
+@property (nonatomic, copy) void (^progressBlock)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend);
+
 @property (nonatomic, copy) void (^responseBlock)(id response, NSError *error);
 @end
 
 @implementation UCGalleryVC
 
-- (id)initWithMode:(UCGalleryMode)mode source:(UCSocialSource *)source rootChunk:(UCSocialChunk *)rootChunk completion:(void(^)(UCSocialEntry *socialEntry))completion {
+- (id)initWithMode:(UCGalleryMode)mode
+            source:(UCSocialSource *)source
+         rootChunk:(UCSocialChunk *)rootChunk
+          progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
+        completion:(void(^)(NSString *fileId, NSError *error))completion {
     self = [super initWithCollectionViewLayout:[[self class] layoutForMode:mode]];
     if (self) {
         _completionBlock = completion;
+        _progressBlock = progress;
         _currentMode = mode;
         _source = source;
         _rootChunk = rootChunk;
@@ -160,6 +173,14 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 - (void)handleError:(NSError *)error {
     if ([self.refreshControl isRefreshing]) [self.refreshControl endRefreshing];
     NSLog(@"Gallery error: %@", error.localizedDescription);
+    if ([error.localizedDescription isEqualToString:@"service error"]) {
+        if (self.retryCount < MAX_RETRY_COUNT) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self initialFetch];
+            });
+            self.retryCount += 1;
+        }
+    }
 }
 
 - (void)loginUsingAddress:(NSString *)loginAddress {
@@ -274,6 +295,41 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     [self queryObjectOrLoginAddressForSource:self.source rootChunk:self.entriesCollection.root path:self.entriesCollection.nextPage.fullPath];
 }
 
+- (void)uploadSocialEntry:(UCSocialEntry *)entry {
+    if (self.progressBlock) self.progressBlock (0, NSUIntegerMax);
+    [self uploadSocialEntry:entry forSource:self.source progress:self.progressBlock completion:self.completionBlock];
+}
+
+- (void)uploadSocialEntry:(UCSocialEntry *)entry
+                forSource:(UCSocialSource *)source
+                 progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
+               completion:(void(^)(NSString *fileId, NSError *error))completionBlock {
+    UCSocialEntryRequest *req = [UCSocialEntryRequest requestWithSource:source file:entry.action.urlString.encodedRFC3986];
+    [[UCClient defaultClient] performUCSocialRequest:req completion:^(id response, NSError *error) {
+        if (!error && [response isKindOfClass:[NSDictionary class]]) {
+            NSString *fileURL = response[@"url"];
+            UCRemoteFileUploadRequest *request = [UCRemoteFileUploadRequest requestWithRemoteFileURL:fileURL];
+            [[UCClient defaultClient] performUCRequest:request progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (progressBlock) progressBlock (totalBytesSent, totalBytesExpectedToSend);
+                });
+            } completion:^(id response, NSError *error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (!error) {
+                        if (completionBlock) completionBlock(response[@"file_id"], nil);
+                    } else {
+                        if (completionBlock) completionBlock(nil, error);
+                    }
+                });
+            }];
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (completionBlock) completionBlock(nil, error);
+            });
+        }
+    }];
+}
+
 #pragma mark <UICollectionViewDataSource>
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -323,11 +379,11 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     UCSocialEntryActionType actionType = entry.action.actionType;
     switch (actionType) {
         case UCSocialEntryActionTypeUnknown: {
-            if (self.completionBlock) self.completionBlock (entry);
+            [self uploadSocialEntry:entry];
             break;
         }
         case UCSocialEntryActionTypeSelectFile: {
-            if (self.completionBlock) self.completionBlock (entry);
+            [self uploadSocialEntry:entry];
             break;
         }
         case UCSocialEntryActionTypeOpenPath: {
@@ -338,7 +394,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 - (void)openGalleryWithEntry:(UCSocialEntry *)entry {
-    UCGalleryVC *gallery = [[UCGalleryVC alloc] initWithMode:self.currentMode source:self.source rootChunk:self.rootChunk completion:self.completionBlock];
+    UCGalleryVC *gallery = [[UCGalleryVC alloc] initWithMode:self.currentMode source:self.source rootChunk:self.rootChunk progress:self.progressBlock completion:self.completionBlock];
     gallery.entry = entry;
     [self.navigationController pushViewController:gallery animated:YES];
 }

@@ -39,6 +39,7 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UCWidgetVC *widget;
 @property (nonatomic, strong) MBCircularProgressBarView *progressView;
 @property (nonatomic, strong) UIWindow *topWindow;
 @property (nonatomic, assign) BOOL progressViewPresented;
@@ -175,6 +176,7 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
 #pragma mark - Uploadcare widget calls
 
 - (void)finishProgress {
+    [self.widget dismissViewControllerAnimated:YES completion:nil];
     [self.progressView setValue:self.progressView.maxValue animateWithDuration:0.2];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.progressViewPresented = NO;
@@ -183,25 +185,21 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
 
 - (void)showWidget {
     
-    UCWidgetVC *wvc = [[UCWidgetVC alloc] initWithProgress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.progressViewPresented = YES;
-            [self.progressView setMaxValue:bytesExpectedToSend];
-            [self.progressView setValue:bytesSent animateWithDuration:0.2];
-        });
+    self.widget = [[UCWidgetVC alloc] initWithProgress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
+        self.progressViewPresented = YES;
+        [self.progressView setMaxValue:bytesExpectedToSend];
+        [self.progressView setValue:bytesSent animateWithDuration:0.2];
         float progress = (float)bytesSent / (float)bytesExpectedToSend;
         NSLog(@"Widget progress: %f", progress);
     } completion:^(NSString *fileId, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self finishProgress];
-        });
+        [self finishProgress];
         if (!error) {
             NSLog(@"Successfully uploaded media with id: %@", fileId);
         } else {
             [self handleError:error];
         }
     }];;
-    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:wvc];
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.widget];
     [self.navigationController presentViewController:navc animated:YES completion:nil];
 }
 

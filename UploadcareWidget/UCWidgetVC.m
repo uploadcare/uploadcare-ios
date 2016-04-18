@@ -17,10 +17,7 @@
 #import "UCSocialEntriesCollection.h"
 #import "UCGalleryVC.h"
 #import "UCSocialEntry.h"
-#import "UCRemoteFileUploadRequest.h"
-#import "UCSocialEntryRequest.h"
 #import "UCConstantsHeader.h"
-#import "NSString+EncodeRFC3986.h"
 #import "UCSocialManager.h"
 
 @interface UCWidgetVC () <SFSafariViewControllerDelegate>
@@ -60,7 +57,7 @@
 }
 
 - (void)showDocumentPicker {
-    [SharedSocialManager presentDocumentControllerFrom:self.navigationController progress:self.progressBlock completion:self.completionBlock];
+    [SharedSocialManager presentDocumentControllerFrom:self progress:self.progressBlock completion:self.completionBlock];
 }
 
 - (void)closeControllerWithCompletion:(void(^)())completion {
@@ -94,60 +91,21 @@
 
 - (void)showGalleryWithSource:(UCSocialSource *)source {
     self.source = source;
-    __weak __typeof(self) weakSelf = self;
-    UCGalleryVC *gallery = [[UCGalleryVC alloc] initWithMode:self.currentMode source:source rootChunk:source.rootChunks.firstObject completion:^(UCSocialEntry *socialEntry) {
-        __strong __typeof__(weakSelf) strongSelf = weakSelf;
-        [strongSelf uploadSocialEntry:socialEntry];
-    }];
-    [self.navigationController pushViewController:gallery animated:YES];
+    UCGalleryVC *gallery = [[UCGalleryVC alloc] initWithMode:self.currentMode
+                                                      source:source
+                                                   rootChunk:source.rootChunks.firstObject
+                                                    progress:self.progressBlock
+                                                  completion:self.completionBlock];
+    if (self.navigationController) {
+        [self.navigationController pushViewController:gallery animated:YES];
+    } else {
+        [self presentViewController:gallery animated:YES completion:nil];
+    }
 }
 
 - (UCGalleryMode)currentMode {
     NSArray *fileProviders = @[@"box", @"skydrive", @"dropbox", @"gdrive"];
     return [fileProviders containsObject:self.source.sourceName] ? UCGalleryModeList : UCGalleryModeGrid;
-}
-
-- (void)uploadSocialEntry:(UCSocialEntry *)entry {
-    if (self.progressBlock) self.progressBlock (0, NSUIntegerMax);
-    __weak __typeof(self) weakSelf = self;
-    [self uploadSocialEntry:entry forSource:self.source progress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
-        __strong __typeof__(weakSelf) strongSelf = weakSelf;
-        if (strongSelf.progressBlock) strongSelf.progressBlock (bytesSent, bytesExpectedToSend);
-    } completion:^(NSString *fileId, NSError *error) {
-        __strong __typeof__(weakSelf) strongSelf = weakSelf;
-        [strongSelf closeControllerWithCompletion:^{
-            if (!error) {
-                if (strongSelf.completionBlock) strongSelf.completionBlock(fileId, nil);
-            } else {
-                if (strongSelf.completionBlock) strongSelf.completionBlock(nil, error);
-            }
-        }];
-    }];
-}
-
-- (void)uploadSocialEntry:(UCSocialEntry *)entry
-                forSource:(UCSocialSource *)source
-                 progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
-               completion:(void(^)(NSString *fileId, NSError *error))completionBlock {
-    if (progressBlock) progressBlock (0, NSUIntegerMax);
-    UCSocialEntryRequest *req = [UCSocialEntryRequest requestWithSource:source file:entry.action.urlString.encodedRFC3986];
-    [[UCClient defaultClient] performUCSocialRequest:req completion:^(id response, NSError *error) {
-        if (!error && [response isKindOfClass:[NSDictionary class]]) {
-            NSString *fileURL = response[@"url"];
-            UCRemoteFileUploadRequest *request = [UCRemoteFileUploadRequest requestWithRemoteFileURL:fileURL];
-            [[UCClient defaultClient] performUCRequest:request progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
-                if (progressBlock) progressBlock (totalBytesSent, totalBytesExpectedToSend);
-            } completion:^(id response, NSError *error) {
-                if (!error) {
-                    if (completionBlock) completionBlock(response[@"file_id"], nil);
-                } else {
-                    if (completionBlock) completionBlock(nil, error);
-                }
-            }];
-        } else {
-            if (completionBlock) completionBlock(nil, error);
-        }
-    }];
 }
 
 - (void)handleError:(NSError *)error {
