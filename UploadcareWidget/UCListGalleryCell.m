@@ -17,7 +17,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.contentView.backgroundColor = [UIColor colorWithWhite:.73 alpha:1.0];
+        self.contentView.backgroundColor = [UIColor whiteColor];
         _imageView = [[UIImageView alloc]init];
         _titleLabel = [[UILabel alloc] init];
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -29,13 +29,34 @@
                                 @"titleLabel":self.titleLabel};
         [self.imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-        NSDictionary *metrics = @{@"frameHeight":@(frame.size.height)};
-        NSArray *horizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[imageView(frameHeight)]-4-[titleLabel]|" options:0 metrics:metrics views:views];
-        NSArray *vertical1 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageView]|" options:0 metrics:nil views:views];
-        NSArray *vertical2 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[titleLabel]|" options:0 metrics:nil views:views];
+        NSArray *horizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-25-[imageView]-20-[titleLabel]|" options:0 metrics:nil views:views];
+        NSArray *vertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[titleLabel]|" options:0 metrics:nil views:views];
+        
+        [self.contentView  addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView
+                                                                    attribute:NSLayoutAttributeWidth
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:nil
+                                                                    attribute:NSLayoutAttributeNotAnAttribute
+                                                                   multiplier:1.0
+                                                                     constant:15]];
+        [self.contentView  addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView
+                                                                    attribute:NSLayoutAttributeHeight
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:nil
+                                                                    attribute:NSLayoutAttributeNotAnAttribute
+                                                                   multiplier:1.0
+                                                                     constant:15]];
+        [self.contentView addConstraint:
+         [NSLayoutConstraint constraintWithItem:self.imageView
+                                      attribute:NSLayoutAttributeCenterY
+                                      relatedBy:NSLayoutRelationEqual
+                                         toItem:self.contentView
+                                      attribute:NSLayoutAttributeCenterY
+                                     multiplier:1
+                                       constant:0]];
+        
         [self.contentView addConstraints:horizontal];
-        [self.contentView addConstraints:vertical1];
-        [self.contentView addConstraints:vertical2];
+        [self.contentView addConstraints:vertical];
     }
     return self;
 }

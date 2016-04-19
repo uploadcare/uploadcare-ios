@@ -25,7 +25,7 @@ static NSString *const kCellIdentifier = @"UCGalleryVCCellIdentifier";
 static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 
 #define GRID_ELEMENTS_PER_ROW 3
-#define LIST_ROW_HEIGHT 40
+#define LIST_ROW_HEIGHT 60
 #define MAX_RETRY_COUNT 2
 
 @interface UCGalleryVC () <UISearchBarDelegate>
@@ -81,7 +81,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     CGFloat rowHeight = LIST_ROW_HEIGHT;
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
     CGFloat horizontalOffset = 1.0;
-    CGFloat verticalOffset = 4.0;
+    CGFloat verticalOffset = 1.0;
     CGFloat width = floor(screenSize.width) - horizontalOffset * 2;
     CGFloat height = rowHeight;
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
