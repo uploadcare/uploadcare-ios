@@ -20,6 +20,7 @@
 		06AFDE541CC65AA600ACED94 /* nav-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06AFDE521CC65AA600ACED94 /* nav-arrow@3x.png */; };
 		06AFDE591CC65C6600ACED94 /* nav-arrow-10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06AFDE571CC65C6600ACED94 /* nav-arrow-10@2x.png */; };
 		06AFDE5A1CC65C6600ACED94 /* nav-arrow-10@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06AFDE581CC65C6600ACED94 /* nav-arrow-10@3x.png */; };
+		06AFDE5D1CC6670900ACED94 /* UCNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AFDE5C1CC6670900ACED94 /* UCNavButton.m */; };
 		06D9EEAF1CBE860B0043405C /* NSDictionary+UrlEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE301CBE860B0043405C /* NSDictionary+UrlEncoding.m */; };
 		06D9EEB01CBE860B0043405C /* NSString+EncodeRFC3986.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE321CBE860B0043405C /* NSString+EncodeRFC3986.m */; };
 		06D9EEB11CBE860B0043405C /* UCAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE341CBE860B0043405C /* UCAPIRequest.m */; };
@@ -73,6 +74,8 @@
 		06AFDE521CC65AA600ACED94 /* nav-arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-arrow@3x.png"; sourceTree = "<group>"; };
 		06AFDE571CC65C6600ACED94 /* nav-arrow-10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-arrow-10@2x.png"; sourceTree = "<group>"; };
 		06AFDE581CC65C6600ACED94 /* nav-arrow-10@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-arrow-10@3x.png"; sourceTree = "<group>"; };
+		06AFDE5B1CC6670900ACED94 /* UCNavButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCNavButton.h; sourceTree = "<group>"; };
+		06AFDE5C1CC6670900ACED94 /* UCNavButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCNavButton.m; sourceTree = "<group>"; };
 		06D9EE2F1CBE860B0043405C /* NSDictionary+UrlEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncoding.h"; sourceTree = "<group>"; };
 		06D9EE301CBE860B0043405C /* NSDictionary+UrlEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncoding.m"; sourceTree = "<group>"; };
 		06D9EE311CBE860B0043405C /* NSString+EncodeRFC3986.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EncodeRFC3986.h"; sourceTree = "<group>"; };
@@ -281,6 +284,8 @@
 				06D9EEF71CC009CA0043405C /* UCSocialManager.m */,
 				06D9EE8C1CBE860B0043405C /* UIImageView+Uploadcare.h */,
 				06D9EE8D1CBE860B0043405C /* UIImageView+Uploadcare.m */,
+				06AFDE5B1CC6670900ACED94 /* UCNavButton.h */,
+				06AFDE5C1CC6670900ACED94 /* UCNavButton.m */,
 				06D9EEFD1CC11E1F0043405C /* NSString+UCDN.h */,
 				06D9EEFE1CC11E1F0043405C /* NSString+UCDN.m */,
 				06D9EF031CC2728C0043405C /* NSURL+UCDN.h */,
@@ -486,6 +491,7 @@
 				06D9EEE11CBE860B0043405C /* UCSocialSourcesRequest.m in Sources */,
 				06D9EEE61CBE860B0043405C /* UIImageView+Uploadcare.m in Sources */,
 				06D9EEFF1CC11E1F0043405C /* NSString+UCDN.m in Sources */,
+				06AFDE5D1CC6670900ACED94 /* UCNavButton.m in Sources */,
 				06D9EEAF1CBE860B0043405C /* NSDictionary+UrlEncoding.m in Sources */,
 				06D9EEDB1CBE860B0043405C /* UCGalleryVC.m in Sources */,
 				06D9EEB51CBE860B0043405C /* UCGroupInfoRequest.m in Sources */,

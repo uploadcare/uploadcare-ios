@@ -20,6 +20,7 @@
 #import "UCSocialEntry.h"
 #import "UCRemoteFileUploadRequest.h"
 #import "NSString+EncodeRFC3986.h"
+#import "UCNavButton.h"
 
 static NSString *const kCellIdentifier = @"UCGalleryVCCellIdentifier";
 static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
@@ -120,7 +121,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
     [self setupSearchBarIfNeeded];
-    [self setupNavigationButtons];
+    [self setupCenterButton];
     [self initialFetch];
 }
 
@@ -217,10 +218,20 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     self.entriesCollection = collection;
 }
 
-- (void)setupNavigationButtons {
-    if (self.entry) self.navigationItem.title = self.entry.action.path.chunks.lastObject.title;
-    else self.navigationItem.title = self.rootChunk.title;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Source" style:UIBarButtonItemStylePlain target:self action:@selector(didPressChunkSelector)];
+- (void)setupCenterButton {
+    if (![self.navigationItem.titleView isKindOfClass:[UIButton class]]) {
+        UCNavButton *button = [[UCNavButton alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+        NSString *title = nil;
+        if (self.entry) title = self.entry.action.path.chunks.lastObject.title;
+        else title = self.rootChunk.title;
+        [button setTitle:title forState:UIControlStateNormal];
+        self.navigationItem.titleView = button;
+        [button addTarget:self action:@selector(expandButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+
+- (void)expandButtonPressed:(UIButton *)sender {
+    [self didPressChunkSelector];
 }
 
 - (void)didPressChunkSelector {
@@ -243,7 +254,10 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 }
 
 - (void)updateNavigationTitle {
-    self.navigationItem.title = self.rootChunk.title;
+    UIButton *button = (UIButton *)self.navigationItem.titleView;
+    if ([button isKindOfClass:[UIButton class]]) {
+        [button setTitle:self.rootChunk.title forState:UIControlStateNormal];
+    }
 }
 
 - (void)setEntriesCollection:(UCSocialEntriesCollection *)entriesCollection {
