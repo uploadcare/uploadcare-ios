@@ -21,6 +21,7 @@
 #import "UCRemoteFileUploadRequest.h"
 #import "NSString+EncodeRFC3986.h"
 #import "UCNavButton.h"
+#import "UCPersonGalleryCell.h"
 
 static NSString *const kCellIdentifier = @"UCGalleryVCCellIdentifier";
 static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
@@ -74,6 +75,14 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
         case UCGalleryModeList: {
             return [[self class] listLayout];
             break;
+        case UCGalleryModePersonList: {
+            return [[self class] listLayout];
+            break;
+        }
+        case UCGalleryModeAlbumsGrid: {
+            return [[self class] gridLayout];
+            break;
+        }
         }
     }
 }
@@ -114,7 +123,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     self.collectionView.delegate = self;
     self.collectionView.alwaysBounceVertical = YES;
     self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-    [self.collectionView registerClass:self.currentMode == UCGalleryModeGrid ? [UCGridGalleryCell class] : [UCListGalleryCell class] forCellWithReuseIdentifier:kCellIdentifier];
+    [self.collectionView registerClass:[self cellClassForMode:self.currentMode] forCellWithReuseIdentifier:kCellIdentifier];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kBusyCellIdentifyer];
     self.collectionView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1.];
     self.refreshControl = [[UIRefreshControl alloc]init];
@@ -123,6 +132,27 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     [self setupSearchBarIfNeeded];
     [self setupCenterButton];
     [self initialFetch];
+}
+
+- (Class)cellClassForMode:(UCGalleryMode)mode {
+    switch (mode) {
+        case UCGalleryModeGrid: {
+            return [UCGridGalleryCell class];
+            break;
+        }
+        case UCGalleryModeList: {
+            return [UCListGalleryCell class];
+            break;
+        }
+        case UCGalleryModePersonList: {
+            return [UCPersonGalleryCell class];
+            break;
+        }
+        case UCGalleryModeAlbumsGrid: {
+            return [UCGridGalleryCell class];
+            break;
+        }
+    }
 }
 
 - (void)initialFetch {
@@ -365,15 +395,9 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UCSocialEntry *entry = self.entriesCollection.entries[indexPath.row];
-    if (self.currentMode == UCGalleryModeGrid) {
-        UCGridGalleryCell *cell = (UCGridGalleryCell*)[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
-        [cell setSocialEntry:entry];
-        return cell;
-    } else {
-        UCListGalleryCell *cell = (UCListGalleryCell*)[collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
-        [cell setSocialEntry:entry];
-        return cell;
-    }
+    UICollectionViewCell<UCGalleryCellProtocol> *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
+    [cell setSocialEntry:entry];
+    return cell;
 }
 
 #pragma mark <UICollectionViewDelegate>

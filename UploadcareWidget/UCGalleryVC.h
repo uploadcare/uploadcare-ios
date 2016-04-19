@@ -22,7 +22,16 @@ typedef NS_ENUM(NSUInteger, UCGalleryMode) {
      *  Cells are presented in list manner, best suitable for file providers,
      *  such as dropbox etc.
      */
-    UCGalleryModeList
+    UCGalleryModeList,
+    /**
+     *  Cells are presented in list manner, with rounded images of bigger size.
+     */
+    UCGalleryModePersonList,
+    /**
+     *  Cells are presented in grid manner with spacing, allowing to put album
+     *  information below the image.
+     */
+    UCGalleryModeAlbumsGrid
 };
 
 @class UCSocialSource;

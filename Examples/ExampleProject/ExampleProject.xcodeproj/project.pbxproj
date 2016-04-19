@@ -21,6 +21,8 @@
 		06AFDE591CC65C6600ACED94 /* nav-arrow-10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06AFDE571CC65C6600ACED94 /* nav-arrow-10@2x.png */; };
 		06AFDE5A1CC65C6600ACED94 /* nav-arrow-10@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06AFDE581CC65C6600ACED94 /* nav-arrow-10@3x.png */; };
 		06AFDE5D1CC6670900ACED94 /* UCNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AFDE5C1CC6670900ACED94 /* UCNavButton.m */; };
+		06AFDE601CC675DB00ACED94 /* UCGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AFDE5F1CC675DB00ACED94 /* UCGalleryCell.m */; };
+		06AFDE631CC6770400ACED94 /* UCPersonGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AFDE621CC6770400ACED94 /* UCPersonGalleryCell.m */; };
 		06D9EEAF1CBE860B0043405C /* NSDictionary+UrlEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE301CBE860B0043405C /* NSDictionary+UrlEncoding.m */; };
 		06D9EEB01CBE860B0043405C /* NSString+EncodeRFC3986.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE321CBE860B0043405C /* NSString+EncodeRFC3986.m */; };
 		06D9EEB11CBE860B0043405C /* UCAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE341CBE860B0043405C /* UCAPIRequest.m */; };
@@ -76,6 +78,11 @@
 		06AFDE581CC65C6600ACED94 /* nav-arrow-10@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-arrow-10@3x.png"; sourceTree = "<group>"; };
 		06AFDE5B1CC6670900ACED94 /* UCNavButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCNavButton.h; sourceTree = "<group>"; };
 		06AFDE5C1CC6670900ACED94 /* UCNavButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCNavButton.m; sourceTree = "<group>"; };
+		06AFDE5E1CC675DB00ACED94 /* UCGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCGalleryCell.h; sourceTree = "<group>"; };
+		06AFDE5F1CC675DB00ACED94 /* UCGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCGalleryCell.m; sourceTree = "<group>"; };
+		06AFDE611CC6770400ACED94 /* UCPersonGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPersonGalleryCell.h; sourceTree = "<group>"; };
+		06AFDE621CC6770400ACED94 /* UCPersonGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPersonGalleryCell.m; sourceTree = "<group>"; };
+		06AFDE641CC679A200ACED94 /* UCGalleryCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCGalleryCellProtocol.h; sourceTree = "<group>"; };
 		06D9EE2F1CBE860B0043405C /* NSDictionary+UrlEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncoding.h"; sourceTree = "<group>"; };
 		06D9EE301CBE860B0043405C /* NSDictionary+UrlEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncoding.m"; sourceTree = "<group>"; };
 		06D9EE311CBE860B0043405C /* NSString+EncodeRFC3986.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EncodeRFC3986.h"; sourceTree = "<group>"; };
@@ -262,8 +269,13 @@
 				06D9EE6F1CBE860B0043405C /* UCClient+Social.m */,
 				06D9EE701CBE860B0043405C /* UCListGalleryCell.h */,
 				06D9EE711CBE860B0043405C /* UCListGalleryCell.m */,
+				06AFDE611CC6770400ACED94 /* UCPersonGalleryCell.h */,
+				06AFDE621CC6770400ACED94 /* UCPersonGalleryCell.m */,
+				06AFDE5E1CC675DB00ACED94 /* UCGalleryCell.h */,
+				06AFDE5F1CC675DB00ACED94 /* UCGalleryCell.m */,
 				06D9EE721CBE860B0043405C /* UCGridGalleryCell.h */,
 				06D9EE731CBE860B0043405C /* UCGridGalleryCell.m */,
+				06AFDE641CC679A200ACED94 /* UCGalleryCellProtocol.h */,
 				06D9EE741CBE860B0043405C /* UCGalleryVC.h */,
 				06D9EE751CBE860B0043405C /* UCGalleryVC.m */,
 				06D9EE7A1CBE860B0043405C /* UCSocialConstantsHeader.h */,
@@ -478,6 +490,7 @@
 				06D9EEB81CBE860B0043405C /* UCSocialChunk.m in Sources */,
 				06D9EEB71CBE860B0043405C /* UCRemoteFileUploadRequest.m in Sources */,
 				06D9EEB21CBE860B0043405C /* UCClient.m in Sources */,
+				06AFDE601CC675DB00ACED94 /* UCGalleryCell.m in Sources */,
 				06D9EEBE1CBE860B0043405C /* UCSocialSource.m in Sources */,
 				06D9EEDE1CBE860B0043405C /* UCSocialEntriesRequest.m in Sources */,
 				06D9EEBD1CBE860B0043405C /* UCSocialPath.m in Sources */,
@@ -495,6 +508,7 @@
 				06D9EEAF1CBE860B0043405C /* NSDictionary+UrlEncoding.m in Sources */,
 				06D9EEDB1CBE860B0043405C /* UCGalleryVC.m in Sources */,
 				06D9EEB51CBE860B0043405C /* UCGroupInfoRequest.m in Sources */,
+				06AFDE631CC6770400ACED94 /* UCPersonGalleryCell.m in Sources */,
 				06D9EEBC1CBE860B0043405C /* UCSocialObject.m in Sources */,
 				06D9EF051CC2728C0043405C /* NSURL+UCDN.m in Sources */,
 				06D9EEE21CBE860B0043405C /* UCWebViewController.m in Sources */,

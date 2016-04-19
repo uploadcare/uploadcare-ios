@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UCGalleryCell.h"
 
-@class UCSocialEntry;
-
-@interface UCGridGalleryCell : UICollectionViewCell
-@property (nonatomic, strong, readonly) UIImageView *imageView;
-@property (nonatomic, strong) UCSocialEntry *socialEntry;
+@interface UCGridGalleryCell : UCGalleryCell
 @end
