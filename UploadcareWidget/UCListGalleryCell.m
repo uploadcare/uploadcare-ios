@@ -8,6 +8,8 @@
 
 #import "UCListGalleryCell.h"
 
+static NSString *const kCellIdentifier = @"fileCell";
+
 @implementation UCListGalleryCell
 
 - (id)initWithFrame:(CGRect)frame
@@ -51,6 +53,8 @@
     return self;
 }
 
-
++ (NSString *)cellIdentifier {
+    return kCellIdentifier;
+}
 
 @end

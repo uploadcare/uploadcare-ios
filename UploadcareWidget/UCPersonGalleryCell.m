@@ -8,6 +8,8 @@
 
 #import "UCPersonGalleryCell.h"
 
+static NSString *const kCellIdentifier = @"personCell";
+
 @implementation UCPersonGalleryCell
 
 #define IMAGE_SIZE 40
@@ -55,6 +57,10 @@
         [self.contentView addConstraints:vertical];
     }
     return self;
+}
+
++ (NSString *)cellIdentifier {
+    return kCellIdentifier;
 }
 
 @end

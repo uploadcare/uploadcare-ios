@@ -11,5 +11,8 @@
 @class UCSocialEntry;
 
 @protocol UCGalleryCellProtocol <NSObject>
+
++ (NSString *)cellIdentifier;
+
 @property (nonatomic, strong) UCSocialEntry *socialEntry;
 @end

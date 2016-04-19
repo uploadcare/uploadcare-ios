@@ -23,6 +23,7 @@
 		06AFDE5D1CC6670900ACED94 /* UCNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AFDE5C1CC6670900ACED94 /* UCNavButton.m */; };
 		06AFDE601CC675DB00ACED94 /* UCGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AFDE5F1CC675DB00ACED94 /* UCGalleryCell.m */; };
 		06AFDE631CC6770400ACED94 /* UCPersonGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AFDE621CC6770400ACED94 /* UCPersonGalleryCell.m */; };
+		06AFDE671CC685C100ACED94 /* UCAlbumGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AFDE661CC685C100ACED94 /* UCAlbumGalleryCell.m */; };
 		06D9EEAF1CBE860B0043405C /* NSDictionary+UrlEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE301CBE860B0043405C /* NSDictionary+UrlEncoding.m */; };
 		06D9EEB01CBE860B0043405C /* NSString+EncodeRFC3986.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE321CBE860B0043405C /* NSString+EncodeRFC3986.m */; };
 		06D9EEB11CBE860B0043405C /* UCAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE341CBE860B0043405C /* UCAPIRequest.m */; };
@@ -83,6 +84,8 @@
 		06AFDE611CC6770400ACED94 /* UCPersonGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPersonGalleryCell.h; sourceTree = "<group>"; };
 		06AFDE621CC6770400ACED94 /* UCPersonGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPersonGalleryCell.m; sourceTree = "<group>"; };
 		06AFDE641CC679A200ACED94 /* UCGalleryCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCGalleryCellProtocol.h; sourceTree = "<group>"; };
+		06AFDE651CC685C100ACED94 /* UCAlbumGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCAlbumGalleryCell.h; sourceTree = "<group>"; };
+		06AFDE661CC685C100ACED94 /* UCAlbumGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCAlbumGalleryCell.m; sourceTree = "<group>"; };
 		06D9EE2F1CBE860B0043405C /* NSDictionary+UrlEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncoding.h"; sourceTree = "<group>"; };
 		06D9EE301CBE860B0043405C /* NSDictionary+UrlEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncoding.m"; sourceTree = "<group>"; };
 		06D9EE311CBE860B0043405C /* NSString+EncodeRFC3986.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EncodeRFC3986.h"; sourceTree = "<group>"; };
@@ -275,6 +278,8 @@
 				06AFDE5F1CC675DB00ACED94 /* UCGalleryCell.m */,
 				06D9EE721CBE860B0043405C /* UCGridGalleryCell.h */,
 				06D9EE731CBE860B0043405C /* UCGridGalleryCell.m */,
+				06AFDE651CC685C100ACED94 /* UCAlbumGalleryCell.h */,
+				06AFDE661CC685C100ACED94 /* UCAlbumGalleryCell.m */,
 				06AFDE641CC679A200ACED94 /* UCGalleryCellProtocol.h */,
 				06D9EE741CBE860B0043405C /* UCGalleryVC.h */,
 				06D9EE751CBE860B0043405C /* UCGalleryVC.m */,
@@ -498,6 +503,7 @@
 				06D9EED91CBE860B0043405C /* UCListGalleryCell.m in Sources */,
 				06D9EEB41CBE860B0043405C /* UCFileUploadRequest.m in Sources */,
 				06D9EEB91CBE860B0043405C /* UCSocialEntriesCollection.m in Sources */,
+				06AFDE671CC685C100ACED94 /* UCAlbumGalleryCell.m in Sources */,
 				06A6DAB21CB3DA14000B4E8A /* DetailViewController.m in Sources */,
 				06D9EEDF1CBE860B0043405C /* UCSocialEntryRequest.m in Sources */,
 				06D9EEF81CC009CA0043405C /* UCSocialManager.m in Sources */,

@@ -40,4 +40,8 @@
     _socialEntry = socialEntry;
 }
 
++ (NSString *)cellIdentifier {
+    return @"cell";
+}
+
 @end

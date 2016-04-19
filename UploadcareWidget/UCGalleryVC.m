@@ -22,13 +22,28 @@
 #import "NSString+EncodeRFC3986.h"
 #import "UCNavButton.h"
 #import "UCPersonGalleryCell.h"
+#import "UCAlbumGalleryCell.h"
 
-static NSString *const kCellIdentifier = @"UCGalleryVCCellIdentifier";
 static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 
 #define GRID_ELEMENTS_PER_ROW 3
+#define ALBUMS_ELEMENTS_PER_ROW 2
 #define LIST_ROW_HEIGHT 60
 #define MAX_RETRY_COUNT 2
+#define DEFAULT_SPACING 1.0
+#define ALBUM_SPACING 20.0
+
+@interface UCCollectionViewFlowLayout : UICollectionViewFlowLayout
+@end
+
+@implementation UCCollectionViewFlowLayout
+
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
+{
+    return YES;
+}
+
+@end
 
 @interface UCGalleryVC () <UISearchBarDelegate>
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -55,7 +70,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
          rootChunk:(UCSocialChunk *)rootChunk
           progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
         completion:(void(^)(NSString *fileId, NSError *error))completion {
-    self = [super initWithCollectionViewLayout:[[self class] layoutForMode:mode]];
+    self = [super initWithCollectionViewLayout:[[UCCollectionViewFlowLayout alloc] init]];
     if (self) {
         _completionBlock = completion;
         _progressBlock = progress;
@@ -66,64 +81,13 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     return self;
 }
 
-+ (UICollectionViewFlowLayout *)layoutForMode:(UCGalleryMode)mode {
-    switch (mode) {
-        case UCGalleryModeGrid: {
-            return [[self class] gridLayout];
-            break;
-        }
-        case UCGalleryModeList: {
-            return [[self class] listLayout];
-            break;
-        case UCGalleryModePersonList: {
-            return [[self class] listLayout];
-            break;
-        }
-        case UCGalleryModeAlbumsGrid: {
-            return [[self class] gridLayout];
-            break;
-        }
-        }
-    }
-}
-
-+ (UICollectionViewFlowLayout *)listLayout {
-    CGFloat rowHeight = LIST_ROW_HEIGHT;
-    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-    CGFloat horizontalOffset = 1.0;
-    CGFloat verticalOffset = 1.0;
-    CGFloat width = floor(screenSize.width) - horizontalOffset * 2;
-    CGFloat height = rowHeight;
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.sectionInset = UIEdgeInsetsMake(verticalOffset, horizontalOffset, verticalOffset, horizontalOffset);
-    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    layout.itemSize = CGSizeMake(width, height);
-    layout.minimumInteritemSpacing = horizontalOffset;
-    layout.minimumLineSpacing = verticalOffset;
-    return layout;
-}
-
-+ (UICollectionViewFlowLayout *)gridLayout {
-    NSUInteger inLineCount = GRID_ELEMENTS_PER_ROW;
-    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-    CGFloat horizontalOffset = 1.0;
-    CGFloat verticalOffset = 1.0;
-    CGFloat width = floor(screenSize.width / inLineCount) - horizontalOffset * 2;
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.sectionInset = UIEdgeInsetsMake(verticalOffset, horizontalOffset, verticalOffset, horizontalOffset);
-    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    layout.itemSize = CGSizeMake(width, width);
-    layout.minimumInteritemSpacing = horizontalOffset;
-    layout.minimumLineSpacing = verticalOffset;
-    return layout;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.collectionView.delegate = self;
     self.collectionView.alwaysBounceVertical = YES;
     self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-    [self.collectionView registerClass:[self cellClassForMode:self.currentMode] forCellWithReuseIdentifier:kCellIdentifier];
+    Class<UCGalleryCellProtocol> cellClass = [self cellClassForMode:self.currentMode];
+    [self.collectionView registerClass:cellClass forCellWithReuseIdentifier:[cellClass cellIdentifier]];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kBusyCellIdentifyer];
     self.collectionView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1.];
     self.refreshControl = [[UIRefreshControl alloc]init];
@@ -134,7 +98,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     [self initialFetch];
 }
 
-- (Class)cellClassForMode:(UCGalleryMode)mode {
+- (Class<UCGalleryCellProtocol>)cellClassForMode:(UCGalleryMode)mode {
     switch (mode) {
         case UCGalleryModeGrid: {
             return [UCGridGalleryCell class];
@@ -149,7 +113,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
             break;
         }
         case UCGalleryModeAlbumsGrid: {
-            return [UCGridGalleryCell class];
+            return [UCAlbumGalleryCell class];
             break;
         }
     }
@@ -274,6 +238,15 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
         [actionSheet addAction:[UIAlertAction actionWithTitle:chunk.title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             _entriesCollection = nil;
             self.rootChunk = blockChunk;
+#warning remove me
+            if ([self.rootChunk.path isEqualToString:@"follows"]) {
+                self.currentMode = UCGalleryModePersonList;
+            } else {
+                self.currentMode = UCGalleryModeGrid;
+            }
+            Class<UCGalleryCellProtocol> cellClass = [self cellClassForMode:self.currentMode];
+            [self.collectionView registerClass:cellClass forCellWithReuseIdentifier:[cellClass cellIdentifier]];
+#warning end remove
             [self updateNavigationTitle];
             [self setupSearchBarIfNeeded];
             [self.collectionView reloadData];
@@ -375,15 +348,72 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     }];
 }
 
-#pragma mark <UICollectionViewDataSource>
+#pragma mark - <UICollectionViewDelegateFlowLayout>
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    UICollectionViewFlowLayout *layout = [[self class] layoutForMode:self.currentMode];
-    UIEdgeInsets insets = layout.sectionInset;
-    if (self.searchBar) insets.top = insets.top + 44.0;
-    return insets;
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGSize bounds = self.view.bounds.size;
+    switch (self.currentMode) {
+        case UCGalleryModeGrid: {
+            CGFloat spacing = DEFAULT_SPACING;
+            NSUInteger perRow = GRID_ELEMENTS_PER_ROW;
+            CGFloat size = ceil(MIN(bounds.width, bounds.height) / perRow - spacing * 2);
+            return CGSizeMake(size, size);
+            break;
+        }
+        case UCGalleryModeList: {
+            return [self listItemSizeForBounds:bounds];
+            break;
+        }
+        case UCGalleryModePersonList: {
+            return [self listItemSizeForBounds:bounds];
+            break;
+        }
+        case UCGalleryModeAlbumsGrid: {
+            CGFloat spacing = ALBUM_SPACING;
+            NSUInteger perRow = ALBUMS_ELEMENTS_PER_ROW;
+            CGFloat size = ceil(MIN(bounds.width, bounds.height) / perRow - spacing * 2);
+            return CGSizeMake(size, size + [UCAlbumGalleryCell heightFromWidthConstant:size]);
+            break;
+        }
+    }
 }
+
+- (CGSize)listItemSizeForBounds:(CGSize)bounds {
+    CGFloat spacing = DEFAULT_SPACING;
+    return CGSizeMake(bounds.width - spacing * 2, LIST_ROW_HEIGHT);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    if (self.currentMode == UCGalleryModeAlbumsGrid) {
+        CGFloat spacing = ALBUM_SPACING;
+        return UIEdgeInsetsMake(self.searchBar ? spacing + 44.0 : spacing, spacing, spacing, spacing);
+    } else {
+        CGFloat spacing = DEFAULT_SPACING;
+        return UIEdgeInsetsMake(self.searchBar ? spacing + 44.0 : spacing, spacing, spacing, spacing);
+    }
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    if (self.currentMode == UCGalleryModeAlbumsGrid) {
+        CGFloat spacing = ALBUM_SPACING;
+        return spacing;
+    } else {
+        CGFloat spacing = DEFAULT_SPACING;
+        return spacing;
+    }
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    if (self.currentMode == UCGalleryModeAlbumsGrid) {
+        CGFloat spacing = ALBUM_SPACING;
+        return spacing;
+    } else {
+        CGFloat spacing = DEFAULT_SPACING;
+        return spacing;
+    }
+}
+
+#pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
@@ -395,7 +425,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UCSocialEntry *entry = self.entriesCollection.entries[indexPath.row];
-    UICollectionViewCell<UCGalleryCellProtocol> *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
+    UICollectionViewCell<UCGalleryCellProtocol> *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[[self cellClassForMode:self.currentMode] cellIdentifier] forIndexPath:indexPath];
     [cell setSocialEntry:entry];
     return cell;
 }

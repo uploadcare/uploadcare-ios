@@ -8,6 +8,8 @@
 
 #import "UCGridGalleryCell.h"
 
+static NSString *const kCellIdentifier = @"gridCell";
+
 @implementation UCGridGalleryCell
 
 - (id)initWithFrame:(CGRect)frame
@@ -25,6 +27,10 @@
         [self.contentView addConstraints:vertical];
     }
     return self;
+}
+
++ (NSString *)cellIdentifier {
+    return kCellIdentifier;
 }
 
 @end
