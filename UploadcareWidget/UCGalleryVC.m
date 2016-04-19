@@ -203,6 +203,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
         [strongSelf.navigationController popToRootViewControllerAnimated:YES];
     }];
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.webVC];
+    navc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self.navigationController presentViewController:navc animated:YES completion:nil];
     //    }
 }
