@@ -16,7 +16,7 @@
 #import "NSString+EncodeRFC3986.h"
 #import "UCFileUploadRequest.h"
 
-@interface UCSocialManager () <UIDocumentMenuDelegate, UIDocumentPickerDelegate>
+@interface UCSocialManager () <UIDocumentMenuDelegate, UIDocumentPickerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic, weak) UIViewController *rootController;
 @property (nonatomic, copy) void(^progressBlock)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend);
 @property (nonatomic, copy) void(^completionBlock)(NSString *fileId, NSError *error);
@@ -61,8 +61,36 @@ static UCSocialManager *instanceSocialManager = nil;
     self.progressBlock = progressBlock;
     self.rootController = viewController;
     UIDocumentMenuViewController *menu = [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[@"public.data"] inMode:UIDocumentPickerModeImport];
+    [menu addOptionWithTitle:@"Photo and video" image:nil order:UIDocumentMenuOrderFirst handler:^{
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.modalPresentationStyle = UIModalPresentationFormSheet;
+        [viewController presentViewController:picker animated:YES completion:nil];
+    }];
     menu.delegate = self;
     [viewController presentViewController:menu animated:YES completion:nil];    
+}
+
+#pragma mark - <UIImagePickerControllerDelegate>
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+    NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.85);
+    if (imageData) {
+        if (self.progressBlock) self.progressBlock (0, NSUIntegerMax);
+        UCFileUploadRequest *req = [UCFileUploadRequest requestWithFileData:imageData fileName:@"image" mimeType:@"image/jpeg"];
+        [[UCClient defaultClient] performUCRequest:req
+                                          progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  if (self.progressBlock) self.progressBlock(totalBytesSent, totalBytesExpectedToSend);
+                                              });
+                                          } completion:^(id response, NSError *error) {
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  if (self.completionBlock) self.completionBlock (response[@"file"], error);
+                                              });
+                                          }];
+    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - <UIDocumentMenuDelegate>
@@ -77,12 +105,15 @@ static UCSocialManager *instanceSocialManager = nil;
 - (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url {
     if (self.progressBlock) self.progressBlock (0, NSUIntegerMax);
     UCFileUploadRequest *req = [UCFileUploadRequest requestWithFileURL:url];
-    [[UCClient defaultClient] performUCRequest:req progress:self.progressBlock
-                                    completion:^(id response, NSError *error) {
-                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                            if (self.completionBlock) self.completionBlock (response[@"file"], error);
-                                        });
-                                    }];
+    [[UCClient defaultClient] performUCRequest:req progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.progressBlock) self.progressBlock(totalBytesSent, totalBytesExpectedToSend);
+        });
+    } completion:^(id response, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.completionBlock) self.completionBlock (response[@"file"], error);
+        });
+    }];
 }
 
 @end
