@@ -37,9 +37,11 @@
  *  @param progressBlock   Progress handler is invoked during upload progress callbacks, 
  *  showing the amount of the uploaded data.
  *  @param completionBlock Completion handler is invoked when the request is finished and deserialized.
+ *
+ *  @return UIDocumentMenuViewController controller instance which user can present by the preffered style.
  */
-- (void)presentDocumentControllerFrom:(UIViewController *)viewController
-                             progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
-                           completion:(void(^)(NSString *fileId, NSError *error))completionBlock;
+- (UIDocumentMenuViewController *)documentControllerFrom:(UIViewController *)viewController
+                                                progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
+                                              completion:(void(^)(NSString *fileId, NSError *error))completionBlock;
 
 @end

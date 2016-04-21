@@ -54,14 +54,13 @@ static UCSocialManager *instanceSocialManager = nil;
     }];
 }
 
-- (void)presentDocumentControllerFrom:(UIViewController *)viewController
-                             progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
-                           completion:(void(^)(NSString *fileId, NSError *error))completionBlock {
+- (UIDocumentMenuViewController *)documentControllerFrom:(UIViewController *)viewController
+                                                progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
+                                              completion:(void(^)(NSString *fileId, NSError *error))completionBlock {
     self.completionBlock = completionBlock;
     self.progressBlock = progressBlock;
     self.rootController = viewController;
     UIDocumentMenuViewController *menu = [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[@"public.data"] inMode:UIDocumentPickerModeImport];
-    [menu addOptionWithTitle:@"Photo and video" image:nil order:UIDocumentMenuOrderFirst handler:^{
     [menu addOptionWithTitle:@"Photo and video" image:[UIImage imageNamed:@"film-icon"] order:UIDocumentMenuOrderFirst handler:^{
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
@@ -69,7 +68,7 @@ static UCSocialManager *instanceSocialManager = nil;
         [viewController presentViewController:picker animated:YES completion:nil];
     }];
     menu.delegate = self;
-    [viewController presentViewController:menu animated:YES completion:nil];    
+    return menu;
 }
 
 #pragma mark - <UIImagePickerControllerDelegate>

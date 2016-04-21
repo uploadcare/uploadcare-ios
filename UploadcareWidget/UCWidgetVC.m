@@ -56,8 +56,11 @@
     [self closeControllerWithCompletion:nil];
 }
 
-- (void)showDocumentPicker {
-    [SharedSocialManager presentDocumentControllerFrom:self progress:self.progressBlock completion:self.completionBlock];
+- (void)showDocumentPicker:(UITableViewCell *)sender {
+    UIDocumentMenuViewController *menu = [SharedSocialManager documentControllerFrom:self progress:self.progressBlock completion:self.completionBlock];
+    menu.popoverPresentationController.sourceView = sender.contentView;
+    menu.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    [self presentViewController:menu animated:YES completion:nil];
 }
 
 - (void)closeControllerWithCompletion:(void(^)())completion {
@@ -158,7 +161,7 @@
         UCSocialSource *social = self.tableData[indexPath.row];
         [self showGalleryWithSource:social];
     } else {
-        [self showDocumentPicker];
+        [self showDocumentPicker:[tableView cellForRowAtIndexPath:indexPath]];
     }
 }
 
