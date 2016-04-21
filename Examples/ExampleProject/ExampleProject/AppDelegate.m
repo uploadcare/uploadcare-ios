@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "UCClient.h"
+#import "UCClient+Social.h"
 
 @interface AppDelegate ()
 
@@ -41,6 +41,17 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+// IOS 9
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    NSLog(@"URL OPEN: %@", url);
+    return [[UCClient defaultClient] handleURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    NSLog(@"URL OPEN: %@", url);
+    return [[UCClient defaultClient] handleURL:url];
 }
 
 @end

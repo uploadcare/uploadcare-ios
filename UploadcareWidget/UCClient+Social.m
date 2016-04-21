@@ -48,4 +48,15 @@ NSString *const USSLoginAddressKey = @"login_link";
     return [@[UCSocialErrorDomain, UCRemoteFileUploadDomain] componentsJoinedByString:@"."];
 }
 
+- (BOOL)handleURL:(NSURL *)url {
+    if (!self.publicKey) return NO;
+    NSURLComponents *components = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
+    if ([components.scheme isEqualToString:[@"uploadcare" stringByAppendingString:self.publicKey]]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:UCURLSchemeDidReceiveCallbackNotification object:url];
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 @end

@@ -23,8 +23,10 @@
 #import "UCNavButton.h"
 #import "UCPersonGalleryCell.h"
 #import "UCAlbumGalleryCell.h"
+@import SafariServices;
 
-static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
+static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
+
 
 #define GRID_ELEMENTS_PER_ROW 3
 #define ALBUMS_ELEMENTS_PER_ROW 2
@@ -53,7 +55,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 @property (nonatomic, strong) UCSocialSource *source;
 @property (nonatomic, strong) UCSocialChunk *rootChunk;
 @property (nonatomic, strong) UCSocialEntriesCollection *entriesCollection;
-@property (nonatomic, strong) UCWebViewController *webVC;
+@property (nonatomic, strong) UIViewController *webVC;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, assign) NSUInteger retryCount;
 
@@ -88,7 +90,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     Class<UCGalleryCellProtocol> cellClass = [self cellClassForMode:self.currentMode];
     [self.collectionView registerClass:cellClass forCellWithReuseIdentifier:[cellClass cellIdentifier]];
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kBusyCellIdentifyer];
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:UCBusyCellIdentifyer];
     self.collectionView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1.];
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
@@ -96,6 +98,19 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
     [self setupSearchBarIfNeeded];
     [self setupCenterButton];
     [self initialFetch];
+    [self registerObservers];
+}
+
+- (void)registerObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveURLSchemeNotification:) name:UCURLSchemeDidReceiveCallbackNotification object:nil];
+}
+
+- (void)unregisterObservers {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)didReceiveURLSchemeNotification:(NSNotification *)notification {
+    [self.webVC dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (Class<UCGalleryCellProtocol>)cellClassForMode:(UCGalleryMode)mode {
@@ -145,7 +160,7 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
             __strong __typeof__(weakSelf) strongSelf = weakSelf;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (!error) {
-                    NSString *loginAddress = [response objectForKey:@"login_link"];
+                    NSString *loginAddress = [response objectForKey:@"inapp_login_link"];
                     if (loginAddress) {
                         [strongSelf loginUsingAddress:loginAddress];
                     } else if ([response[@"obj_type"] isEqualToString:@"error"]) {
@@ -181,26 +196,29 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
 - (void)loginUsingAddress:(NSString *)loginAddress {
     __weak __typeof(self) weakSelf = self;
     
-    //    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_4) {
-    //        SFSafariViewController *svc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:loginAddress]];
-    //        svc.delegate = self;
-    //        [self.navigationController pushViewController:svc animated:YES];
-    //    } else {
-    self.webVC = [[UCWebViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] loadingBlock:^(NSURL *url) {
-        __strong __typeof__(weakSelf) strongSelf = weakSelf;
-        NSLog(@"URL: %@", url);
-        if ([url.host isEqual:UCSocialAPIRoot] && [url.lastPathComponent isEqual:@"endpoint"]) {
-            [strongSelf.webVC dismissViewControllerAnimated:YES completion:nil];
-            [strongSelf initialFetch];
-        }
-    } cancelBlock:^{
-        __strong __typeof__(weakSelf) strongSelf = weakSelf;
-        [strongSelf.navigationController popToRootViewControllerAnimated:YES];
-    }];
-    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.webVC];
-    navc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self.navigationController presentViewController:navc animated:YES completion:nil];
-    //    }
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_4) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            self.webVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] entersReaderIfAvailable:NO];
+            self.webVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+            [strongSelf presentViewController:self.webVC animated:YES completion:nil];
+        });
+    } else {
+        self.webVC = [[UCWebViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] loadingBlock:^(NSURL *url) {
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            NSLog(@"URL: %@", url);
+            if ([url.host isEqual:UCSocialAPIRoot] && [url.lastPathComponent isEqual:@"endpoint"]) {
+                [strongSelf.webVC dismissViewControllerAnimated:YES completion:nil];
+                [strongSelf initialFetch];
+            }
+        } cancelBlock:^{
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+        }];
+        UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.webVC];
+        navc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self presentViewController:navc animated:YES completion:nil];
+    }
 }
 
 - (void)queryObjectOrLoginAddressForSource:(UCSocialSource *)source rootChunk:(UCSocialChunk *)rootChunk path:(NSString *)path {
@@ -346,6 +364,10 @@ static NSString *const kBusyCellIdentifyer = @"UCGalleryVCBusyCellIdentifier";
             });
         }
     }];
+}
+
+- (void)dealloc {
+    [self unregisterObservers];
 }
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>

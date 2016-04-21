@@ -11,6 +11,7 @@
 #import "UCKit.h"
 #import "UCWidgetVC.h"
 #import <MBCircularProgressBar/MBCircularProgressBarView.h>
+@import SafariServices;
 
 #define RLog(fmt, ...)  { [self presentLogMessage:[NSString stringWithFormat:fmt, ##__VA_ARGS__]];}
 
@@ -143,7 +144,7 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
     if (indexPath.section == kSectionTypeCore) {
         [self performSegueWithIdentifier:@"detailSegue" sender:[tableView cellForRowAtIndexPath:indexPath]];
     } else if (indexPath.section == kSectionTypeWidget) {
-        [self showWidget];
+        [self showWidget:[tableView cellForRowAtIndexPath:indexPath]];
     }
 }
 
@@ -183,8 +184,7 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
     });
 }
 
-- (void)showWidget {
-    
+- (void)showWidget:(UITableViewCell *)sender {
     self.widget = [[UCWidgetVC alloc] initWithProgress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
         self.progressViewPresented = YES;
         [self.progressView setMaxValue:bytesExpectedToSend];
@@ -198,8 +198,10 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
         } else {
             [self handleError:error];
         }
-    }];;
+    }];
+
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.widget];
+    navc.modalPresentationStyle = UIModalPresentationFormSheet;
     [self.navigationController presentViewController:navc animated:YES completion:nil];
 }
 
