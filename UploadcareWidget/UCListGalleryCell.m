@@ -20,8 +20,8 @@ static NSString *const kCellIdentifier = @"fileCell";
         [self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
         NSDictionary *views = @{@"imageView":self.imageView,
                                 @"titleLabel":self.titleLabel};
-        NSDictionary *metrics = @{@"offset":@(25)};
-        NSArray *horizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-offset-[imageView]-20-[titleLabel]|" options:0 metrics:metrics views:views];
+        NSDictionary *metrics = @{@"offset":@(15)};
+        NSArray *horizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-offset-[imageView]-offset-[titleLabel]|" options:0 metrics:metrics views:views];
         NSArray *vertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[titleLabel]|" options:0 metrics:nil views:views];
         
         [self.contentView  addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView

@@ -21,7 +21,7 @@ static NSString *const UCURLSchemeDidReceiveFailureCallbackNotification = @"UCUR
  *  @param ucSocialRequest social API request object with corresponding data.
  *  @param completionBlock @b UCCompletionBlock handler, invoked when task is complete.
  *
- *  @return <#return value description#>
+ *  @return NSURLSessionDataTask object.
  */
 - (NSURLSessionDataTask *)performUCSocialRequest:(UCSocialRequest *)ucSocialRequest
                                       completion:(UCCompletionBlock)completionBlock;
@@ -36,7 +36,9 @@ static NSString *const UCURLSchemeDidReceiveFailureCallbackNotification = @"UCUR
 /**
  *  Processes URL if can handle
  *
- *  @param url NSURL object received by the application delegate method
+ *  @param url NSURL object received by the application delegate method.
+ *  Use UIApplicationDelegate's application:openURL:options: method for ios 9 and
+ *  application:handleOpenURL: method for prior.
  *
  *  @return BOOL value showing if Uploadcare is capable of handling provided URL
  */

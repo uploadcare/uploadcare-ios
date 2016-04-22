@@ -30,7 +30,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
 #define GRID_ELEMENTS_PER_ROW 3
 #define ALBUMS_ELEMENTS_PER_ROW 2
-#define LIST_ROW_HEIGHT 60
+#define LIST_ROW_HEIGHT 43.0
 #define MAX_RETRY_COUNT 2
 #define DEFAULT_SPACING 1.0
 #define ALBUM_SPACING 20.0
@@ -91,7 +91,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
     Class<UCGalleryCellProtocol> cellClass = [self cellClassForMode:self.currentMode];
     [self.collectionView registerClass:cellClass forCellWithReuseIdentifier:[cellClass cellIdentifier]];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:UCBusyCellIdentifyer];
-    self.collectionView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1.];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
@@ -99,6 +99,12 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
     [self setupCenterButton];
     [self initialFetch];
     [self registerObservers];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self.refreshControl.superview sendSubviewToBack:self.refreshControl];
 }
 
 - (void)registerObservers {
@@ -380,7 +386,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
         case UCGalleryModeGrid: {
             CGFloat spacing = DEFAULT_SPACING;
             NSUInteger perRow = GRID_ELEMENTS_PER_ROW;
-            CGFloat size = ceil(MIN(bounds.width, bounds.height) / perRow - spacing * 2);
+            CGFloat size = ceil(MIN(bounds.width, bounds.height) / perRow - spacing);
             return CGSizeMake(size, size);
             break;
         }
@@ -395,7 +401,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
         case UCGalleryModeAlbumsGrid: {
             CGFloat spacing = ALBUM_SPACING;
             NSUInteger perRow = ALBUMS_ELEMENTS_PER_ROW;
-            CGFloat size = ceil(MIN(bounds.width, bounds.height) / perRow - spacing * 2);
+            CGFloat size = ceil(MIN(bounds.width, bounds.height) / perRow - spacing);
             return CGSizeMake(size, size + [UCAlbumGalleryCell heightFromWidthConstant:size]);
             break;
         }
@@ -403,8 +409,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 }
 
 - (CGSize)listItemSizeForBounds:(CGSize)bounds {
-    CGFloat spacing = DEFAULT_SPACING;
-    return CGSizeMake(bounds.width - spacing * 2, LIST_ROW_HEIGHT);
+    return CGSizeMake(bounds.width, LIST_ROW_HEIGHT);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
@@ -412,8 +417,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
         CGFloat spacing = ALBUM_SPACING;
         return UIEdgeInsetsMake(self.searchBar ? spacing + 44.0 : spacing, spacing, spacing, spacing);
     } else {
-        CGFloat spacing = DEFAULT_SPACING;
-        return UIEdgeInsetsMake(self.searchBar ? spacing + 44.0 : spacing, spacing, spacing, spacing);
+        return UIEdgeInsetsZero;
     }
 }
 
@@ -431,9 +435,11 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
     if (self.currentMode == UCGalleryModeAlbumsGrid) {
         CGFloat spacing = ALBUM_SPACING;
         return spacing;
-    } else {
+    } else if (self.currentMode == UCGalleryModeGrid) {
         CGFloat spacing = DEFAULT_SPACING;
         return spacing;
+    } else {
+        return 0;
     }
 }
 
