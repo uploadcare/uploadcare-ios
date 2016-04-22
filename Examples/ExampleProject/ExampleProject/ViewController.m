@@ -9,9 +9,8 @@
 #import "ViewController.h"
 #import "DetailViewController.h"
 #import "UCKit.h"
-#import "UCWidgetVC.h"
 #import <MBCircularProgressBar/MBCircularProgressBarView.h>
-@import SafariServices;
+#import "UCMenuViewController.h"
 
 #define RLog(fmt, ...)  { [self presentLogMessage:[NSString stringWithFormat:fmt, ##__VA_ARGS__]];}
 
@@ -40,7 +39,7 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) UCWidgetVC *widget;
+@property (nonatomic, strong) UCMenuViewController *menu;
 @property (nonatomic, strong) MBCircularProgressBarView *progressView;
 @property (nonatomic, strong) UIWindow *topWindow;
 @property (nonatomic, assign) BOOL progressViewPresented;
@@ -177,7 +176,7 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
 #pragma mark - Uploadcare widget calls
 
 - (void)finishProgress {
-    [self.widget dismissViewControllerAnimated:YES completion:nil];
+    [self.menu dismissViewControllerAnimated:YES completion:nil];
     [self.progressView setValue:self.progressView.maxValue animateWithDuration:0.2];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.progressViewPresented = NO;
@@ -185,7 +184,7 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
 }
 
 - (void)showWidget:(UITableViewCell *)sender {
-    self.widget = [[UCWidgetVC alloc] initWithProgress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
+    self.menu = [[UCMenuViewController alloc] initWithProgress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
         self.progressViewPresented = YES;
         [self.progressView setMaxValue:bytesExpectedToSend];
         [self.progressView setValue:bytesSent animateWithDuration:0.2];
@@ -199,8 +198,8 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
             [self handleError:error];
         }
     }];
-
-    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.widget];
+    
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.menu];
     navc.modalPresentationStyle = UIModalPresentationFormSheet;
     [self.navigationController presentViewController:navc animated:YES completion:nil];
 }

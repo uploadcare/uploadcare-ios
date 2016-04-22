@@ -12,7 +12,6 @@
 #import "UCSocialMacroses.h"
 #import "UCSocialSource.h"
 #import "UCSocialChunk.h"
-#import <SafariServices/SafariServices.h>
 #import "UCSocialConstantsHeader.h"
 #import "UCSocialEntriesCollection.h"
 #import "UCGalleryVC.h"
@@ -20,7 +19,7 @@
 #import "UCConstantsHeader.h"
 #import "UCSocialManager.h"
 
-@interface UCWidgetVC () <SFSafariViewControllerDelegate>
+@interface UCWidgetVC ()
 @property (nonatomic, strong) NSArray<UCSocialSource *> *tableData;
 @property (nonatomic, strong) UCSocialSource *source;
 @property (nonatomic, copy) void (^completionBlock)(NSString *fileId, NSError *error);
@@ -54,13 +53,6 @@
 
 - (void)didPressClose:(id)sender {
     [self closeControllerWithCompletion:nil];
-}
-
-- (void)showDocumentPicker:(UITableViewCell *)sender {
-    UIDocumentMenuViewController *menu = [SharedSocialManager documentControllerFrom:self progress:self.progressBlock completion:self.completionBlock];
-    menu.popoverPresentationController.sourceView = sender.contentView;
-    menu.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionDown;
-    [self presentViewController:menu animated:YES completion:nil];
 }
 
 - (void)closeControllerWithCompletion:(void(^)())completion {
@@ -123,67 +115,29 @@
 #pragma mark - Table view data source
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return @"Social sources";
-    } else {
-        return @"Local sources";
-    }
+    return @"Social sources";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return self.tableData.count;
-    } else {
-        return 1;
-    }
+    return self.tableData.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    if (indexPath.section == 0) {
-        UCSocialSource *social = self.tableData[indexPath.row];
-        cell.textLabel.text = social.sourceName;
-    } else {
-        cell.textLabel.text = @"Choose local file";
-    }
-
+    UCSocialSource *social = self.tableData[indexPath.row];
+    cell.textLabel.text = social.sourceName;
     return cell;
 }
 
 #pragma mark - <UITableViewDelegate>
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        UCSocialSource *social = self.tableData[indexPath.row];
-        [self showGalleryWithSource:social];
-    } else {
-        [self showDocumentPicker:[tableView cellForRowAtIndexPath:indexPath]];
-    }
-}
-
-#pragma mark - <SFSafariViewControllerDelegate>
-
-- (NSArray<UIActivity *> *)safariViewController:(SFSafariViewController *)controller activityItemsForURL:(NSURL *)URL title:(nullable NSString *)title {
-    NSLog(@"SF URL: %@", URL.absoluteString);
-    return nil;
-}
-
-/*! @abstract Delegate callback called when the user taps the Done button. Upon this call, the view controller is dismissed modally. */
-- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
-    NSLog(@"SF DID FINISH");
-}
-
-/*! @abstract Invoked when the initial URL load is complete.
- @param success YES if loading completed successfully, NO if loading failed.
- @discussion This method is invoked when SFSafariViewController completes the loading of the URL that you pass
- to its initializer. It is not invoked for any subsequent page loads in the same SFSafariViewController instance.
- */
-- (void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
-    NSLog(@"SF DID COMPLETE INITIAL: %@", didLoadSuccessfully ? @"YES" : @"NO");
+    UCSocialSource *social = self.tableData[indexPath.row];
+    [self showGalleryWithSource:social];
 }
 
 @end
