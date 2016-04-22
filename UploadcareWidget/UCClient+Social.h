@@ -8,7 +8,8 @@
 
 #import "UCClient.h"
 
-static NSString *const UCURLSchemeDidReceiveCallbackNotification = @"UCURLSchemeDidReceiveCallbackNotification";
+static NSString *const UCURLSchemeDidReceiveSuccessCallbackNotification = @"UCURLSchemeDidReceiveSuccessCallbackNotification";
+static NSString *const UCURLSchemeDidReceiveFailureCallbackNotification = @"UCURLSchemeDidReceiveFailureCallbackNotification";
 
 @class UCSocialRequest;
 

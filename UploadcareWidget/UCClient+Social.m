@@ -16,8 +16,6 @@ NSString *const USSPublicKeyHeader = @"X-Uploadcare-PublicKey";
 NSString *const UCAcceptHeader = @"Accept";
 NSString *const USSContentType = @"application/vnd.ucare.ss-v0.1+json";
 
-NSString *const USSLoginAddressKey = @"login_link";
-
 @implementation UCClient (Social)
 
 - (NSURLSessionDataTask *)performUCSocialRequest:(UCSocialRequest *)ucSocialRequest
@@ -52,7 +50,11 @@ NSString *const USSLoginAddressKey = @"login_link";
     if (!self.publicKey) return NO;
     NSURLComponents *components = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
     if ([components.scheme isEqualToString:[@"uploadcare" stringByAppendingString:self.publicKey]]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:UCURLSchemeDidReceiveCallbackNotification object:url];
+        if ([components.path.pathComponents.lastObject isEqualToString:@"fail"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:UCURLSchemeDidReceiveFailureCallbackNotification object:url];
+        } else if ([components.path.pathComponents.lastObject isEqualToString:@"success"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:UCURLSchemeDidReceiveSuccessCallbackNotification object:url];
+        }
         return YES;
     } else {
         return NO;

@@ -47,7 +47,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
 @end
 
-@interface UCGalleryVC () <UISearchBarDelegate>
+@interface UCGalleryVC () <UISearchBarDelegate, SFSafariViewControllerDelegate>
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, assign) BOOL isLastPage;
 @property (nonatomic, assign) BOOL nextPageFetchStarted;
@@ -102,15 +102,22 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 }
 
 - (void)registerObservers {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveURLSchemeNotification:) name:UCURLSchemeDidReceiveCallbackNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveSuccessURLSchemeNotification:) name:UCURLSchemeDidReceiveSuccessCallbackNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFailureURLSchemeNotification:) name:UCURLSchemeDidReceiveFailureCallbackNotification object:nil];
 }
 
 - (void)unregisterObservers {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)didReceiveURLSchemeNotification:(NSNotification *)notification {
+- (void)didReceiveFailureURLSchemeNotification:(NSNotification *)notification {
     [self.webVC dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+- (void)didReceiveSuccessURLSchemeNotification:(NSNotification *)notification {
+    [self.webVC dismissViewControllerAnimated:YES completion:nil];
+    [self initialFetch];
 }
 
 - (Class<UCGalleryCellProtocol>)cellClassForMode:(UCGalleryMode)mode {
@@ -199,19 +206,14 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_4) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             __strong __typeof__(weakSelf) strongSelf = weakSelf;
-            self.webVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] entersReaderIfAvailable:NO];
-            self.webVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+            SFSafariViewController *svc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] entersReaderIfAvailable:NO];
+            svc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+            svc.delegate = self;
+            self.webVC = svc;
             [strongSelf presentViewController:self.webVC animated:YES completion:nil];
         });
     } else {
-        self.webVC = [[UCWebViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] loadingBlock:^(NSURL *url) {
-            __strong __typeof__(weakSelf) strongSelf = weakSelf;
-            NSLog(@"URL: %@", url);
-            if ([url.host isEqual:UCSocialAPIRoot] && [url.lastPathComponent isEqual:@"endpoint"]) {
-                [strongSelf.webVC dismissViewControllerAnimated:YES completion:nil];
-                [strongSelf initialFetch];
-            }
-        } cancelBlock:^{
+        self.webVC = [[UCWebViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] cancelBlock:^{
             __strong __typeof__(weakSelf) strongSelf = weakSelf;
             [strongSelf.navigationController popToRootViewControllerAnimated:YES];
         }];
@@ -508,6 +510,12 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
+}
+
+#pragma mark - <SFSafariViewControllerDelegate>
+
+- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 @end

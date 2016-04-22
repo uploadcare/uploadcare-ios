@@ -49,6 +49,7 @@
     return [[UCClient defaultClient] handleURL:url];
 }
 
+// IOS 8
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     NSLog(@"URL OPEN: %@", url);
     return [[UCClient defaultClient] handleURL:url];
