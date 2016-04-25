@@ -10,8 +10,8 @@
 
 Here's what it looks like:
 
-![Uploadcare for iOS menu](https://ucarecdn.com/a51ee0de-b775-40fb-98e3-81f683938431/-/stretch/off/-/resize/300x/) ![Facebook albums](https://ucarecdn.com/81da28a4-1522-4b44-8d03-8eea18b94dd4/-/stretch/off/-/resize/300x/)
-![Instagram gallery](https://ucarecdn.com/2405cae1-e653-424f-af21-c244dda2d77f/-/stretch/off/-/resize/300x/)
+![Uploadcare for iOS menu](https://ucarecdn.com/a51ee0de-b775-40fb-98e3-81f683938431/-/stretch/off/-/resize/250x/) ![Facebook albums](https://ucarecdn.com/81da28a4-1522-4b44-8d03-8eea18b94dd4/-/stretch/off/-/resize/250x/)
+![Instagram gallery](https://ucarecdn.com/2405cae1-e653-424f-af21-c244dda2d77f/-/stretch/off/-/resize/250x/)
 
 ## Quickstart
 
