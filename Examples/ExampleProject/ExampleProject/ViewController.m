@@ -72,6 +72,7 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
     view.showUnitString = NO;
     view.layer.cornerRadius = 4.0;
     [view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.topWindow setRootViewController:[UIViewController new]];
     [self.topWindow addSubview:view];
     
     [self.topWindow addConstraint:
