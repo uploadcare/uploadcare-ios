@@ -66,6 +66,8 @@ In order to add custom url scheme, perform the following steps:
 
 ![Custom url scheme](https://ucarecdn.com/1738621a-8016-44c4-918d-d90f8e23336f/)
 
+#### Init and present widget
+
 To display the Uploadcare Widget, you must create and initialize an instance of [`UCWidgetVC`](https://github.com/uploadcare/uploadcare-ios/blob/core-refactoring/UploadcareWidget/UCWidgetVC.h) by invoking `initWithProgress:completion:` method:
 
 ```objc
@@ -92,6 +94,21 @@ Then, present it with `UIModalPresentationFormSheet` modalPresentationStyle:
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:menu];
     navc.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navc animated:YES completion:nil];
+```
+
+### Customization
+
+You can easily customize your social networks list apperance by implementing your own menu.
+In order to receive available social sources, you can use `fetchSocialSourcesWithCompletion:` method from
+`UCSocialManager`.
+After you receive a list of social sources, you can choose one and use it for instantiating
+`UCGalleryVC` with the following method:
+```objc
+- (id)initWithMode:(UCGalleryMode)mode
+            source:(UCSocialSource *)source
+         rootChunk:(UCSocialChunk *)rootChunk
+          progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
+        completion:(void(^)(NSString *fileId, NSError *error))completion;
 ```
 
 ## Sample App
