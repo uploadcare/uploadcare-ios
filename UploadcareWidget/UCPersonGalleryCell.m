@@ -10,10 +10,6 @@
 
 static NSString *const kCellIdentifier = @"personCell";
 
-@interface UCPersonGalleryCell ()
-@property (nonatomic, strong) UIView *pixelView;
-@end
-
 @implementation UCPersonGalleryCell
 
 #define IMAGE_SIZE 30
@@ -56,23 +52,6 @@ static NSString *const kCellIdentifier = @"personCell";
                                       attribute:NSLayoutAttributeCenterY
                                      multiplier:1
                                        constant:0]];
-        
-
-        
-        self.pixelView = [[UIView alloc] init];
-        self.pixelView.backgroundColor = [UIColor lightGrayColor];
-        [self.pixelView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.contentView addSubview:self.pixelView];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.pixelView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.pixelView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.pixelView attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f]];
-        [self.contentView  addConstraint:[NSLayoutConstraint constraintWithItem:self.pixelView
-                                                                      attribute:NSLayoutAttributeHeight
-                                                                      relatedBy:NSLayoutRelationEqual
-                                                                         toItem:nil
-                                                                      attribute:NSLayoutAttributeNotAnAttribute
-                                                                     multiplier:1.0
-                                                                       constant:1.0 / [UIScreen mainScreen].scale]];
         
         [self.contentView addConstraints:horizontal];
         [self.contentView addConstraints:vertical];

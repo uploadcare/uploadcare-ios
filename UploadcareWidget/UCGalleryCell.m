@@ -10,6 +10,7 @@
 #import "UCSocialEntry.h"
 #import "UCClient.h"
 #import "UIImageView+Uploadcare.h"
+#import "UIView+UCBottomLine.h"
 
 @implementation UCGalleryCell
 
@@ -27,6 +28,8 @@
         [self.contentView addSubview:self.titleLabel];
         [self.contentView.layer setShouldRasterize:YES];
         [self.contentView.layer setRasterizationScale:[UIScreen mainScreen].scale];
+        [self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self.contentView uc_addBottomLineWithLeading:self.titleLabel];
     }
     return self;
 }
