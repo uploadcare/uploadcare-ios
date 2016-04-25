@@ -24,7 +24,6 @@
 		06AFDE601CC675DB00ACED94 /* UCGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AFDE5F1CC675DB00ACED94 /* UCGalleryCell.m */; };
 		06AFDE631CC6770400ACED94 /* UCPersonGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AFDE621CC6770400ACED94 /* UCPersonGalleryCell.m */; };
 		06AFDE671CC685C100ACED94 /* UCAlbumGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06AFDE661CC685C100ACED94 /* UCAlbumGalleryCell.m */; };
-		06AFDE6A1CC7BB7800ACED94 /* film-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06AFDE681CC7BB7800ACED94 /* film-icon.png */; };
 		06AFDE6B1CC7BB7800ACED94 /* film-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06AFDE691CC7BB7800ACED94 /* film-icon@2x.png */; };
 		06D9EEAF1CBE860B0043405C /* NSDictionary+UrlEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE301CBE860B0043405C /* NSDictionary+UrlEncoding.m */; };
 		06D9EEB01CBE860B0043405C /* NSString+EncodeRFC3986.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE321CBE860B0043405C /* NSString+EncodeRFC3986.m */; };
@@ -120,7 +119,6 @@
 		06AFDE641CC679A200ACED94 /* UCGalleryCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCGalleryCellProtocol.h; sourceTree = "<group>"; };
 		06AFDE651CC685C100ACED94 /* UCAlbumGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCAlbumGalleryCell.h; sourceTree = "<group>"; };
 		06AFDE661CC685C100ACED94 /* UCAlbumGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCAlbumGalleryCell.m; sourceTree = "<group>"; };
-		06AFDE681CC7BB7800ACED94 /* film-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "film-icon.png"; sourceTree = "<group>"; };
 		06AFDE691CC7BB7800ACED94 /* film-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "film-icon@2x.png"; sourceTree = "<group>"; };
 		06D9EE2F1CBE860B0043405C /* NSDictionary+UrlEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncoding.h"; sourceTree = "<group>"; };
 		06D9EE301CBE860B0043405C /* NSDictionary+UrlEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncoding.m"; sourceTree = "<group>"; };
@@ -422,7 +420,6 @@
 				06F611211CCA63F80044DC58 /* files-intro.png */,
 				06F611221CCA63F80044DC58 /* files-intro@2x.png */,
 				06F611231CCA63F80044DC58 /* files-intro@3x.png */,
-				06AFDE681CC7BB7800ACED94 /* film-icon.png */,
 				06AFDE691CC7BB7800ACED94 /* film-icon@2x.png */,
 				06AFDE571CC65C6600ACED94 /* nav-arrow-10@2x.png */,
 				06AFDE581CC65C6600ACED94 /* nav-arrow-10@3x.png */,
@@ -545,7 +542,6 @@
 				06F6112B1CCA66F90044DC58 /* socials@2x.png in Resources */,
 				06F6115D1CCE191F0044DC58 /* UCSocialSourceCell.xib in Resources */,
 				06A6DAA91CB3D746000B4E8A /* LaunchScreen.storyboard in Resources */,
-				06AFDE6A1CC7BB7800ACED94 /* film-icon.png in Resources */,
 				06F611801CCE1E8D0044DC58 /* gdrive.png in Resources */,
 				06F611811CCE1E8D0044DC58 /* gdrive@2x.png in Resources */,
 				06F6117C1CCE1E8D0044DC58 /* evernote@3x.png in Resources */,
