@@ -10,7 +10,8 @@
 
 Here's what it looks like:
 
-![Uploadcare for iOS menu](https://ucarecdn.com/dcc15365-1cb7-4428-876d-be39b7d2b480/-/stretch/off/-/resize/210x/) ![Instagram gallery](https://ucarecdn.com/a9ff39d2-1eed-4e23-8005-d39751070c28/-/stretch/off/-/resize/210x/) ![Facebook album list with the drawer opened](https://ucarecdn.com/16a8a1d7-d346-4201-a507-8dd484f53398/-/stretch/off/-/resize/210x/) ![Google drive](https://ucarecdn.com/33b4c383-b53c-450a-a1eb-c18fd84e6ef1/-/stretch/off/-/resize/210x/)
+![Uploadcare for iOS menu](https://ucarecdn.com/a51ee0de-b775-40fb-98e3-81f683938431/-/stretch/off/-/resize/250x/) ![Facebook albums](https://ucarecdn.com/81da28a4-1522-4b44-8d03-8eea18b94dd4/-/stretch/off/-/resize/250x/)
+![Instagram gallery](https://ucarecdn.com/2405cae1-e653-424f-af21-c244dda2d77f/-/stretch/off/-/resize/250x/)
 
 ## Quickstart
 
@@ -59,28 +60,30 @@ scheme from application delegate methods:
 }
 ```
 In order to add custom url scheme, perform the following steps:
-* Go to Target -> Info -> URL types
+* Go to **Target** -> **Info** -> **URL types**
 * Add new url scheme with the following format: uploadcare\<public key\>
 * The final result should look similar to this:
 
-[image here]
+![Custom url scheme](https://ucarecdn.com/1738621a-8016-44c4-918d-d90f8e23336f/)
 
-To display the Uploadcare Widget, you must create and initialize an instance of [`UCWidgetVC`](https://github.com/uploadcare/uploadcare-ios/blob/core-refactoring/UploadcareWidget/UCWidgetVC.h) by invoking `initWithProgress:completion:` method:
+#### Init and present widget
+
+To display the Uploadcare Widget, you must create and initialize an instance of [`UCMenuViewController`](https://github.com/uploadcare/uploadcare-ios/blob/core-refactoring/UploadcareWidget/UCMenuViewController.h) by invoking `initWithProgress:completion:` method:
 
 ```objc
 #import "UCMenuViewController.h"
 
 /* ... */
 
-    UCMenuViewController *menu = [[UCMenuViewController alloc] initWithProgress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
-        // handle progress here
-    } completion:^(NSString *fileId, NSError *error) {
-        if (!error) {
-            // handle success
-        } else {
-            // handle error
-        }
-    }];
+UCMenuViewController *menu = [[UCMenuViewController alloc] initWithProgress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
+    // handle progress here
+} completion:^(NSString *fileId, NSError *error) {
+    if (!error) {
+        // handle success
+    } else {
+        // handle error
+    }
+}];
     
     
 ```
@@ -88,9 +91,24 @@ To display the Uploadcare Widget, you must create and initialize an instance of 
 Then, present it with `UIModalPresentationFormSheet` modalPresentationStyle:
 
 ```objc
-    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:menu];
-    navc.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:navc animated:YES completion:nil];
+UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:menu];
+navc.modalPresentationStyle = UIModalPresentationFormSheet;
+[self presentViewController:navc animated:YES completion:nil];
+```
+
+### Customization
+
+You can easily customize your social networks list apperance by implementing your own menu.
+In order to receive available social sources, you can use `fetchSocialSourcesWithCompletion:` method from
+`UCSocialManager`.
+After you receive a list of social sources, you can choose one and use it for instantiating
+`UCGalleryVC` with the following method:
+```objc
+- (id)initWithMode:(UCGalleryMode)mode
+            source:(UCSocialSource *)source
+         rootChunk:(UCSocialChunk *)rootChunk
+          progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
+        completion:(void(^)(NSString *fileId, NSError *error))completion;
 ```
 
 ## Sample App
