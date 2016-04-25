@@ -20,6 +20,7 @@ static NSString *const kCellIdentifier = @"personCell";
     if (self) {
         [self.imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+        self.titleLabel.hidden = NO;
         self.imageView.layer.cornerRadius = IMAGE_SIZE /2;
         self.imageView.layer.masksToBounds = YES;
         self.imageView.layer.borderWidth = 1.0 / [UIScreen mainScreen].scale;

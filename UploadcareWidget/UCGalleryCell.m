@@ -21,6 +21,7 @@
         self.contentView.backgroundColor = [UIColor whiteColor];
         _imageView = [[UIImageView alloc]init];
         _titleLabel = [[UILabel alloc] init];
+        _titleLabel.hidden = YES;
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
         self.imageView.clipsToBounds = YES;
         self.imageView.frame = frame;
@@ -29,7 +30,6 @@
         [self.contentView.layer setShouldRasterize:YES];
         [self.contentView.layer setRasterizationScale:[UIScreen mainScreen].scale];
         [self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.contentView uc_addBottomLineWithLeading:self.titleLabel];
     }
     return self;
 }

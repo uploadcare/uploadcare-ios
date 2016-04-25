@@ -65,6 +65,7 @@ static NSString *const kCellIdentifier = @"albumCell";
         self.contentView.backgroundColor = [UIColor clearColor];
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
         self.imageView.clipsToBounds = YES;
+        self.titleLabel.hidden = NO;
         self.titleLabel.numberOfLines = 3;
         self.titleLabel.adjustsFontSizeToFitWidth = YES;
         self.titleLabel.minimumScaleFactor = 0.5;

@@ -18,6 +18,7 @@ static NSString *const kCellIdentifier = @"fileCell";
     if (self) {
         [self.imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+        self.titleLabel.hidden = NO;
         NSDictionary *views = @{@"imageView":self.imageView,
                                 @"titleLabel":self.titleLabel};
         NSDictionary *metrics = @{@"offset":@(15)};
