@@ -26,40 +26,76 @@ Then, run `pod install` in your project directory.
 
 Make sure to use the `.xcworkspace` file from now on.
 
-### Use
+### Widget quick install guide
+#### Setup environment
 
-To display the Uploadcare Widget, you must create and initialize an instance of [`UPCUploadController`](https://github.com/uploadcare/uploadcare-ios/blob/master/UploadcareWidget/UPCUploadController.h) by invoking `initWithUploadcarePublicKey:` method, using your Uploadcare [public key](https://uploadcare.com/accounts/settings/) as the argument:
-
+Import `UCClient+Social.h` header to your implementation.
+Set up uploadcare public key as following in your application delegate:
 ```objc
-#import <UPCUploadController.h>
+#import "UCClient+Social.h"
 
 /* ... */
 
-UPCUploadController *uploadController = [[UPCUploadController alloc]initWithUploadcarePublicKey:@"demopublickey"]; // <-- replace with your actual public key
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[UCClient defaultClient] setPublicKey:<#your key#>];
+    return YES;
+}
 ```
 
-Then, present it like you would present any other `UIViewController` subclass:
+#### Set up custom url scheme
+Uploadcare widget uses `SFSafariViewController` on IOS 9 and `UIWebView` on prior versions
+for authentification. In this case it should handle url callbacks through custom url
+scheme from application delegate methods:
 
 ```objc
-[myController presentViewController:uploadController animated:YES completion:nil];
+// IOS 9
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    return [[UCClient defaultClient] handleURL:url];
+}
+
+// IOS 8
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [[UCClient defaultClient] handleURL:url];
+}
+```
+In order to add custom url scheme, perform the following steps:
+* Go to Target -> Info -> URL types
+* Add new url scheme with the following format: uploadcare\<public key\>
+* The final result should look similar to this:
+
+[image here]
+
+To display the Uploadcare Widget, you must create and initialize an instance of [`UCWidgetVC`](https://github.com/uploadcare/uploadcare-ios/blob/core-refactoring/UploadcareWidget/UCWidgetVC.h) by invoking `initWithProgress:completion:` method:
+
+```objc
+#import "UCMenuViewController.h"
+
+/* ... */
+
+    UCMenuViewController *menu = [[UCMenuViewController alloc] initWithProgress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
+        // handle progress here
+    } completion:^(NSString *fileId, NSError *error) {
+        if (!error) {
+            // handle success
+        } else {
+            // handle error
+        }
+    }];
+    
+    
 ```
 
-### Delegate object
+Then, present it with `UIModalPresentationFormSheet` modalPresentationStyle:
 
-`UPCUploadController` delivers the results of user interaction to a delegate object that should be set using it's `uploadDelegate` property (not to be confused with `delegate` property). The delegate is expected to conform to [UPCUploadDelegate](https://github.com/uploadcare/uploadcare-ios/blob/master/UploadcareWidget/UPCUploadDelegate.h) formal protocol. Implement it's optional methods to get notified when an upload starts, continues, finishes, or fails, the user dismisses the controller and so on.
-
-
-## Appearance
-
-`UPCUploadController` is compatible with [`UIAppearance` protocol](http://developer.apple.com/library/ios/#documentation/uikit/reference/UIAppearance_Protocol/Reference/Reference.html).
-
-## iPad
-
-`UPCUploadController` expects it will be presented in a [`UIPopoverController`](http://developer.apple.com/library/ios/#documentation/uikit/reference/UIPopoverController_class/Reference/Reference.html) on iPad. You need to pass the presenting popover controller object to `UPCUploadController`'s `popover` property.
+```objc
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:menu];
+    navc.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:navc animated:YES completion:nil];
+```
 
 ## Sample App
 
-Please take a look at [uShare app](https://github.com/uploadcare/uploadcare-ios/tree/master/Examples/ushare). 
+Please take a look at the [Example Project](https://github.com/uploadcare/uploadcare-ios/tree/core-refactoring/Examples/ExampleProject). 
 
 ## Contact
 
