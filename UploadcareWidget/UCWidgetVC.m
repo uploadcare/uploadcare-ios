@@ -18,13 +18,13 @@
 #import "UCSocialEntry.h"
 #import "UCConstantsHeader.h"
 #import "UCSocialManager.h"
+#import "UCSocialSourceCell.h"
 
 @interface UCWidgetVC ()
 @property (nonatomic, strong) NSArray<UCSocialSource *> *tableData;
 @property (nonatomic, strong) UCSocialSource *source;
 @property (nonatomic, copy) void (^completionBlock)(NSString *fileId, NSError *error);
 @property (nonatomic, copy) void (^progressBlock)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend);
-
 @end
 
 @implementation UCWidgetVC
@@ -41,7 +41,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"UCSocialSourceCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     [self fetchSocialSources];
     [self setupNavigationItems];
 }
@@ -127,9 +127,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    UCSocialSourceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     UCSocialSource *social = self.tableData[indexPath.row];
-    cell.textLabel.text = social.sourceName;
+    cell.socialName.text = social.sourceName;
+    UIImage *image = [UIImage imageNamed:social.sourceName];
+    [cell.socialImage setImage:image];
     return cell;
 }
 
