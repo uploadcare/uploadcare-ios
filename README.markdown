@@ -60,7 +60,7 @@ scheme from application delegate methods:
 }
 ```
 In order to add custom url scheme, perform the following steps:
-* Go to Target -> Info -> URL types
+* Go to **Target** -> **Info** -> **URL types**
 * Add new url scheme with the following format: uploadcare\<public key\>
 * The final result should look similar to this:
 
@@ -75,15 +75,15 @@ To display the Uploadcare Widget, you must create and initialize an instance of 
 
 /* ... */
 
-    UCMenuViewController *menu = [[UCMenuViewController alloc] initWithProgress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
-        // handle progress here
-    } completion:^(NSString *fileId, NSError *error) {
-        if (!error) {
-            // handle success
-        } else {
-            // handle error
-        }
-    }];
+UCMenuViewController *menu = [[UCMenuViewController alloc] initWithProgress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
+    // handle progress here
+} completion:^(NSString *fileId, NSError *error) {
+    if (!error) {
+        // handle success
+    } else {
+        // handle error
+    }
+}];
     
     
 ```
@@ -91,9 +91,9 @@ To display the Uploadcare Widget, you must create and initialize an instance of 
 Then, present it with `UIModalPresentationFormSheet` modalPresentationStyle:
 
 ```objc
-    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:menu];
-    navc.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:navc animated:YES completion:nil];
+UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:menu];
+navc.modalPresentationStyle = UIModalPresentationFormSheet;
+[self presentViewController:navc animated:YES completion:nil];
 ```
 
 ### Customization
