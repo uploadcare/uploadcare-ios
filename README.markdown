@@ -88,12 +88,10 @@ UCMenuViewController *menu = [[UCMenuViewController alloc] initWithProgress:^(NS
     
 ```
 
-Then, present it with `UIModalPresentationFormSheet` modalPresentationStyle:
+Then, present it with `presentFrom:` method:
 
 ```objc
-UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:menu];
-navc.modalPresentationStyle = UIModalPresentationFormSheet;
-[self presentViewController:navc animated:YES completion:nil];
+[menu presentFrom:self];
 ```
 
 ### Customization
