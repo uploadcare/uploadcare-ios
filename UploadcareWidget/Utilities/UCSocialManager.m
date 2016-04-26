@@ -61,7 +61,7 @@ static UCSocialManager *instanceSocialManager = nil;
     self.progressBlock = progressBlock;
     self.rootController = viewController;
     UIDocumentMenuViewController *menu = [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[@"public.data"] inMode:UIDocumentPickerModeImport];
-    [menu addOptionWithTitle:@"Photo and video" image:[UIImage imageNamed:@"film-icon"] order:UIDocumentMenuOrderFirst handler:^{
+    [menu addOptionWithTitle:@"Photo and video" image:[UIImage imageNamed:@"camera"] order:UIDocumentMenuOrderFirst handler:^{
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
         picker.modalPresentationStyle = UIModalPresentationFormSheet;

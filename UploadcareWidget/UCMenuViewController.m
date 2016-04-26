@@ -51,7 +51,7 @@
     [super viewDidLayoutSubviews];
     self.socialButton.layer.cornerRadius = self.socialButton.frame.size.height / 2;
     self.socialButton.layer.borderWidth = 1.0;
-    self.socialButton.layer.borderColor = [UIColor colorWithWhite:155.0/255.0 alpha:1.0].CGColor;
+    self.socialButton.layer.borderColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;
     
     self.localFileButton.layer.cornerRadius = self.localFileButton.frame.size.height / 2;
 }
@@ -70,6 +70,10 @@
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.widget];
     navc.modalPresentationStyle = UIModalPresentationCurrentContext;
     [self presentViewController:navc animated:YES completion:nil];
+}
+
+- (IBAction)didPressUploadcare:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://uploadcare.com/"]];
 }
 
 @end
