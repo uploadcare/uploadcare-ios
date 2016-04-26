@@ -20,6 +20,8 @@
 #import "UCSocialManager.h"
 #import "UCSocialSourceCell.h"
 
+#define SCREEN_NAME @"Social sources"
+
 @interface UCWidgetVC ()
 @property (nonatomic, strong) NSArray<UCSocialSource *> *tableData;
 @property (nonatomic, strong) UCSocialSource *source;
@@ -42,6 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:@"UCSocialSourceCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+    self.navigationItem.title = SCREEN_NAME;
     [self fetchSocialSources];
     [self setupNavigationItems];
 }
@@ -109,14 +112,6 @@
 
 #pragma mark - Table view data source
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"Social sources";
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.tableData.count;
 }
@@ -124,7 +119,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UCSocialSourceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     UCSocialSource *social = self.tableData[indexPath.row];
-    cell.socialName.text = social.sourceName;
+    NSString *socialName = [social.sourceName stringByReplacingCharactersInRange:NSMakeRange(0,1)
+                                                              withString:[[social.sourceName substringToIndex:1] capitalizedString]];
+    cell.socialName.text = socialName;
     UIImage *image = [UIImage imageNamed:social.sourceName];
     [cell.socialImage setImage:image];
     return cell;
