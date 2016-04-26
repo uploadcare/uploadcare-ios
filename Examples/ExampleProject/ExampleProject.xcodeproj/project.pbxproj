@@ -24,7 +24,6 @@
 		06BF44081CCF99390040738E /* UCSocialObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BF43CA1CCF99390040738E /* UCSocialObject.m */; };
 		06BF44091CCF99390040738E /* UCSocialPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BF43CC1CCF99390040738E /* UCSocialPath.m */; };
 		06BF440A1CCF99390040738E /* UCSocialSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BF43CE1CCF99390040738E /* UCSocialSource.m */; };
-		06BF440B1CCF99390040738E /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06BF43D01CCF99390040738E /* Media.xcassets */; };
 		06BF440F1CCF99390040738E /* UCClient+Social.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BF43D51CCF99390040738E /* UCClient+Social.m */; };
 		06BF44101CCF99390040738E /* UCGalleryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BF43D71CCF99390040738E /* UCGalleryVC.m */; };
 		06BF44111CCF99390040738E /* UCMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BF43D91CCF99390040738E /* UCMenuViewController.m */; };
@@ -47,6 +46,7 @@
 		06BF44221CCF99390040738E /* UCSocialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BF43FE1CCF99390040738E /* UCSocialManager.m */; };
 		06BF44231CCF99390040738E /* UCSocialRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BF44001CCF99390040738E /* UCSocialRequest.m */; };
 		06BF44241CCF99390040738E /* UCSocialSourcesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BF44021CCF99390040738E /* UCSocialSourcesRequest.m */; };
+		06BF44491CCFE3F30040738E /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06BF44481CCFE3F30040738E /* Media.xcassets */; };
 		06D9EEAF1CBE860B0043405C /* NSDictionary+UrlEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE301CBE860B0043405C /* NSDictionary+UrlEncoding.m */; };
 		06D9EEB01CBE860B0043405C /* NSString+EncodeRFC3986.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE321CBE860B0043405C /* NSString+EncodeRFC3986.m */; };
 		06D9EEB11CBE860B0043405C /* UCAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D9EE341CBE860B0043405C /* UCAPIRequest.m */; };
@@ -91,7 +91,6 @@
 		06BF43CC1CCF99390040738E /* UCSocialPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialPath.m; sourceTree = "<group>"; };
 		06BF43CD1CCF99390040738E /* UCSocialSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCSocialSource.h; sourceTree = "<group>"; };
 		06BF43CE1CCF99390040738E /* UCSocialSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialSource.m; sourceTree = "<group>"; };
-		06BF43D01CCF99390040738E /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		06BF43D41CCF99390040738E /* UCClient+Social.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UCClient+Social.h"; sourceTree = "<group>"; };
 		06BF43D51CCF99390040738E /* UCClient+Social.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UCClient+Social.m"; sourceTree = "<group>"; };
 		06BF43D61CCF99390040738E /* UCGalleryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCGalleryVC.h; sourceTree = "<group>"; };
@@ -137,6 +136,7 @@
 		06BF44001CCF99390040738E /* UCSocialRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialRequest.m; sourceTree = "<group>"; };
 		06BF44011CCF99390040738E /* UCSocialSourcesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCSocialSourcesRequest.h; sourceTree = "<group>"; };
 		06BF44021CCF99390040738E /* UCSocialSourcesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialSourcesRequest.m; sourceTree = "<group>"; };
+		06BF44481CCFE3F30040738E /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		06D9EE2F1CBE860B0043405C /* NSDictionary+UrlEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncoding.h"; sourceTree = "<group>"; };
 		06D9EE301CBE860B0043405C /* NSDictionary+UrlEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncoding.m"; sourceTree = "<group>"; };
 		06D9EE311CBE860B0043405C /* NSString+EncodeRFC3986.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EncodeRFC3986.h"; sourceTree = "<group>"; };
@@ -244,9 +244,9 @@
 		06BF43BC1CCF99390040738E /* UploadcareWidget */ = {
 			isa = PBXGroup;
 			children = (
+				06BF44481CCFE3F30040738E /* Media.xcassets */,
 				06BF43BD1CCF99390040738E /* Helpers */,
 				06BF43C01CCF99390040738E /* Model */,
-				06BF43CF1CCF99390040738E /* Resources */,
 				06BF43D41CCF99390040738E /* UCClient+Social.h */,
 				06BF43D51CCF99390040738E /* UCClient+Social.m */,
 				06BF43D61CCF99390040738E /* UCGalleryVC.h */,
@@ -291,14 +291,6 @@
 				06BF43CE1CCF99390040738E /* UCSocialSource.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		06BF43CF1CCF99390040738E /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				06BF43D01CCF99390040738E /* Media.xcassets */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		06BF43DD1CCF99390040738E /* UI */ = {
@@ -455,9 +447,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06BF440B1CCF99390040738E /* Media.xcassets in Resources */,
 				06BF44121CCF99390040738E /* UCMenuViewController.xib in Resources */,
 				06BF441B1CCF99390040738E /* UCSocialSourceCell.xib in Resources */,
+				06BF44491CCFE3F30040738E /* Media.xcassets in Resources */,
 				06A6DAA91CB3D746000B4E8A /* LaunchScreen.storyboard in Resources */,
 				06A6DAA61CB3D746000B4E8A /* Assets.xcassets in Resources */,
 				06A6DAA41CB3D746000B4E8A /* Main.storyboard in Resources */,
