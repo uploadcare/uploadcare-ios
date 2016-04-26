@@ -43,6 +43,11 @@ Set up uploadcare public key as following in your application delegate:
 }
 ```
 
+#### Set up iCloud entitlements
+Uploadcare widget uses `UIDocumentMenuViewController`, so you need to enable iCloud in your application. 
+Go to **Target** -> **Capabilities** and enable iCloud. Set both `Key-value storage` and `iCloud Documents` options enabled:
+![iCloud settings](https://ucarecdn.com/738d9b6f-517d-417c-b048-d0d08a411e80/)
+
 #### Set up custom url scheme
 Uploadcare widget uses `SFSafariViewController` on IOS 9 and `UIWebView` on prior versions
 for authentification. In this case it should handle url callbacks through custom url
