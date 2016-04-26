@@ -36,6 +36,8 @@
         labelFrame.origin.x = imageFrame.origin.x;
         imageFrame.origin.x = labelFrame.origin.x + CGRectGetWidth(labelFrame);
         
+        imageFrame.origin.y = labelFrame.size.height + labelFrame.origin.y - label.font.lineHeight + label.font.xHeight;
+        
         imageView.frame = imageFrame;
         label.frame = labelFrame;
     }
