@@ -1,1 +1,0 @@
-../../../../../UploadcareWidget/UPCUploadController.h

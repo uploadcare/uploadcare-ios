@@ -1,1 +1,0 @@
-../../../../../UploadcareWidget/UPCSourceViewController.h

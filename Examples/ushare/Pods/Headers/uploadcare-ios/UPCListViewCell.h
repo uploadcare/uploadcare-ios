@@ -1,1 +1,0 @@
-../../../../../UploadcareWidget/UPCListViewCell.h
