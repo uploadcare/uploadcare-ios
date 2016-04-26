@@ -47,10 +47,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     self.socialButton.layer.cornerRadius = self.socialButton.frame.size.height / 2;

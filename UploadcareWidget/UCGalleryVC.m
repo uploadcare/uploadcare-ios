@@ -264,17 +264,8 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
         [actionSheet addAction:[UIAlertAction actionWithTitle:chunk.title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             _entriesCollection = nil;
             self.rootChunk = blockChunk;
-#warning remove me
-            if ([self.rootChunk.path isEqualToString:@"follows"]) {
-                self.currentMode = UCGalleryModePersonList;
-            } if ([self.rootChunk.title isEqualToString:@"My Albums"]) {
-                self.currentMode = UCGalleryModeAlbumsGrid;
-            } else {
-                self.currentMode = UCGalleryModeGrid;
-            }
             Class<UCGalleryCellProtocol> cellClass = [self cellClassForMode:self.currentMode];
             [self.collectionView registerClass:cellClass forCellWithReuseIdentifier:[cellClass cellIdentifier]];
-#warning end remove
             [self updateNavigationTitle];
             [self setupSearchBarIfNeeded];
             [self.collectionView reloadData];

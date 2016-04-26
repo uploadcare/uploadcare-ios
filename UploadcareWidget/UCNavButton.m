@@ -17,7 +17,7 @@
         self.titleLabel.adjustsFontSizeToFitWidth = YES;
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self setBackgroundColor:[UIColor clearColor]];
-        [self setImage:[UIImage imageNamed:@"nav-arrow-10"] forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"nav-arrow"] forState:UIControlStateNormal];
     }
     return self;
 }
