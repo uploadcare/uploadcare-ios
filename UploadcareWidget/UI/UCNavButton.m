@@ -15,6 +15,7 @@
     if (self) {
         self.titleLabel.minimumScaleFactor = 0.7;
         self.titleLabel.adjustsFontSizeToFitWidth = YES;
+        [self.titleLabel setFont:[UIFont boldSystemFontOfSize:[UIFont labelFontSize]]];
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self setBackgroundColor:[UIColor clearColor]];
         [self setImage:[UIImage imageNamed:@"nav-arrow"] forState:UIControlStateNormal];
