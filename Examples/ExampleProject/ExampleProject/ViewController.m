@@ -200,9 +200,7 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
         }
     }];
     
-    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.menu];
-    navc.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self.navigationController presentViewController:navc animated:YES completion:nil];
+    [self.menu presentFrom:self];
 }
 
 #pragma mark - Uploadcare requests

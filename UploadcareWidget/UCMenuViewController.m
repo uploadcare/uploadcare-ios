@@ -32,6 +32,12 @@
     return self;
 }
 
+- (void)presentFrom:(UIViewController *)controller {
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self];
+    navc.modalPresentationStyle = UIModalPresentationFormSheet;
+    [controller presentViewController:navc animated:YES completion:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didPressClose:)]];
