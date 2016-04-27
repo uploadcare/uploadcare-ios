@@ -26,7 +26,7 @@
                                 <constraint firstAttribute="height" constant="48" id="8nO-J4-E9j"/>
                                 <constraint firstAttribute="width" constant="240" id="ffJ-AG-hH8"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                             <state key="normal" title="  and more" image="socials">
                                 <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -51,7 +51,7 @@
                                 <constraint firstAttribute="height" constant="48" id="06F-en-GTS"/>
                                 <constraint firstAttribute="width" constant="240" id="hJJ-6b-HTj"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                             <state key="normal" title="Choose a local file">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -93,7 +93,7 @@
                         <constraint firstAttribute="height" constant="30" id="4Km-kv-nrN"/>
                         <constraint firstAttribute="width" constant="129" id="4lr-jL-QFp"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                     <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
