@@ -138,6 +138,6 @@
     <resources>
         <image name="files-intro" width="151" height="105"/>
         <image name="socials" width="96" height="17"/>
-        <image name="uploadcare" width="30" height="30"/>
+        <image name="uploadcare" width="15" height="15"/>
     </resources>
 </document>
