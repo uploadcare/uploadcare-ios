@@ -469,7 +469,7 @@ static UCClient *instanceClient = nil;
     totalBytesSent:(int64_t)totalBytesSent
 totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
     UCProgressBlock progressBlock = [self.progressQueue objectForKey:@(task.taskIdentifier)];
-    if (progressBlock) progressBlock(totalBytesSent, totalBytesExpectedToSend);
+    if (progressBlock) progressBlock((NSUInteger)totalBytesSent, (NSUInteger)totalBytesExpectedToSend);
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task

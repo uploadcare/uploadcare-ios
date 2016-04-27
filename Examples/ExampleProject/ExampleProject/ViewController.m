@@ -8,9 +8,8 @@
 
 #import "ViewController.h"
 #import "DetailViewController.h"
-#import "UCKit.h"
 #import <MBCircularProgressBar/MBCircularProgressBarView.h>
-#import "UCMenuViewController.h"
+#import "Uploadcare.h"
 
 #define RLog(fmt, ...)  { [self presentLogMessage:[NSString stringWithFormat:fmt, ##__VA_ARGS__]];}
 

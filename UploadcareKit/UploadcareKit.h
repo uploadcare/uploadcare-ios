@@ -1,5 +1,5 @@
 //
-//  UCKit.h
+//  UploadcareKit.h
 //  ExampleProject
 //
 //  Created by Yury Nechaev on 05.04.16.

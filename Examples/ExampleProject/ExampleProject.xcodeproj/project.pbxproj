@@ -137,6 +137,8 @@
 		06BF44011CCF99390040738E /* UCSocialSourcesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCSocialSourcesRequest.h; sourceTree = "<group>"; };
 		06BF44021CCF99390040738E /* UCSocialSourcesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialSourcesRequest.m; sourceTree = "<group>"; };
 		06BF44481CCFE3F30040738E /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		06BF444B1CD0CD370040738E /* UploadcareWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadcareWidget.h; sourceTree = "<group>"; };
+		06BF444C1CD0CDF50040738E /* Uploadcare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Uploadcare.h; sourceTree = "<group>"; };
 		06D9EE2F1CBE860B0043405C /* NSDictionary+UrlEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncoding.h"; sourceTree = "<group>"; };
 		06D9EE301CBE860B0043405C /* NSDictionary+UrlEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncoding.m"; sourceTree = "<group>"; };
 		06D9EE311CBE860B0043405C /* NSString+EncodeRFC3986.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EncodeRFC3986.h"; sourceTree = "<group>"; };
@@ -155,7 +157,7 @@
 		06D9EE3E1CBE860B0043405C /* UCGroupInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCGroupInfoRequest.m; sourceTree = "<group>"; };
 		06D9EE3F1CBE860B0043405C /* UCGroupPostRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCGroupPostRequest.h; sourceTree = "<group>"; };
 		06D9EE401CBE860B0043405C /* UCGroupPostRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCGroupPostRequest.m; sourceTree = "<group>"; };
-		06D9EE411CBE860B0043405C /* UCKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCKit.h; sourceTree = "<group>"; };
+		06D9EE411CBE860B0043405C /* UploadcareKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadcareKit.h; sourceTree = "<group>"; };
 		06D9EE421CBE860B0043405C /* UCRemoteFileUploadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCRemoteFileUploadRequest.h; sourceTree = "<group>"; };
 		06D9EE431CBE860B0043405C /* UCRemoteFileUploadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCRemoteFileUploadRequest.m; sourceTree = "<group>"; };
 		06D9EEF91CC02D050043405C /* ExampleProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ExampleProject.entitlements; sourceTree = "<group>"; };
@@ -258,6 +260,8 @@
 				06BF43DC1CCF99390040738E /* UCWidgetVC.m */,
 				06BF43DD1CCF99390040738E /* UI */,
 				06BF43F21CCF99390040738E /* Utilities */,
+				06BF444B1CD0CD370040738E /* UploadcareWidget.h */,
+				06BF444C1CD0CDF50040738E /* Uploadcare.h */,
 			);
 			name = UploadcareWidget;
 			path = ../../../UploadcareWidget;
@@ -364,7 +368,7 @@
 				06D9EE3E1CBE860B0043405C /* UCGroupInfoRequest.m */,
 				06D9EE3F1CBE860B0043405C /* UCGroupPostRequest.h */,
 				06D9EE401CBE860B0043405C /* UCGroupPostRequest.m */,
-				06D9EE411CBE860B0043405C /* UCKit.h */,
+				06D9EE411CBE860B0043405C /* UploadcareKit.h */,
 				06D9EE421CBE860B0043405C /* UCRemoteFileUploadRequest.h */,
 				06D9EE431CBE860B0043405C /* UCRemoteFileUploadRequest.m */,
 			);
