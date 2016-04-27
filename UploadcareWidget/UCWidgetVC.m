@@ -95,6 +95,8 @@
                                                     progress:self.progressBlock
                                                   completion:self.completionBlock];
     if (self.navigationController) {
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+
         [self.navigationController pushViewController:gallery animated:YES];
     } else {
         [self presentViewController:gallery animated:YES completion:nil];
