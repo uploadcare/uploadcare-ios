@@ -120,7 +120,7 @@ Please take a look at the [Example Project](https://github.com/uploadcare/upload
 
 ## Contact
 
-If you have any questions, bug reports or suggestions, [drop us a line](hello@uploadcare.com).
+If you have any questions, bug reports or suggestions, [drop us a line](mailto:hello@uploadcare.com).
 
 ## License 
 
