@@ -20,7 +20,7 @@ Here's what it looks like:
 Uploadcare for iOS uses [CocoaPods](http://cocoapods.org), a library dependency management tool for Objective-C projects. To install Uploadcare for iOS in your project, just add the following line to your [Podfile](https://github.com/CocoaPods/CocoaPods/wiki/A-Podfile):
 
 ```ruby
-pod 'uploadcare-ios'
+pod 'Uploadcare'
 ```
 
 Then, run `pod install` in your project directory.
@@ -30,10 +30,10 @@ Make sure to use the `.xcworkspace` file from now on.
 ### Widget quick install guide
 #### Setup environment
 
-Import `UCClient+Social.h` header to your implementation.
+Import `Uploadcare.h` header to your implementation.
 Set up uploadcare public key as following in your application delegate:
 ```objc
-#import "UCClient+Social.h"
+#import <Uploadcare/Uploadcare.h>
 
 /* ... */
 
@@ -76,7 +76,7 @@ In order to add custom url scheme, perform the following steps:
 To display the Uploadcare Widget, you must create and initialize an instance of [`UCMenuViewController`](https://github.com/uploadcare/uploadcare-ios/blob/core-refactoring/UploadcareWidget/UCMenuViewController.h) by invoking `initWithProgress:completion:` method:
 
 ```objc
-#import "UCMenuViewController.h"
+#import <Uploadcare/Uploadcare.h>
 
 /* ... */
 
