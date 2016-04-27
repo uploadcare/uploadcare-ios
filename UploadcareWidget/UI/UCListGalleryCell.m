@@ -7,6 +7,7 @@
 //
 
 #import "UCListGalleryCell.h"
+#import "UIView+UCBottomLine.h"
 
 static NSString *const kCellIdentifier = @"fileCell";
 
@@ -50,6 +51,8 @@ static NSString *const kCellIdentifier = @"fileCell";
         
         [self.contentView addConstraints:horizontal];
         [self.contentView addConstraints:vertical];
+        
+        [self.contentView uc_addBottomLineWithLeading:self.titleLabel];
     }
     return self;
 }

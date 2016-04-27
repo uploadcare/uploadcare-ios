@@ -7,6 +7,7 @@
 //
 
 #import "UCPersonGalleryCell.h"
+#import "UIView+UCBottomLine.h"
 
 static NSString *const kCellIdentifier = @"personCell";
 
@@ -56,6 +57,8 @@ static NSString *const kCellIdentifier = @"personCell";
         
         [self.contentView addConstraints:horizontal];
         [self.contentView addConstraints:vertical];
+        
+        [self.contentView uc_addBottomLineWithLeading:self.titleLabel];
     }
     return self;
 }
