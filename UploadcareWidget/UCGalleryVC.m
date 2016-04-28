@@ -209,16 +209,16 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 - (void)loginUsingAddress:(NSString *)loginAddress {
     __weak __typeof(self) weakSelf = self;
     
-//    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_4) {
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            __strong __typeof__(weakSelf) strongSelf = weakSelf;
-//            SFSafariViewController *svc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] entersReaderIfAvailable:NO];
-//            svc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-//            svc.delegate = self;
-//            self.webVC = svc;
-//            [strongSelf presentViewController:self.webVC animated:YES completion:nil];
-//        });
-//    } else {
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_4) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            SFSafariViewController *svc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] entersReaderIfAvailable:NO];
+            svc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+            svc.delegate = self;
+            self.webVC = svc;
+            [strongSelf presentViewController:self.webVC animated:YES completion:nil];
+        });
+    } else {
         self.webVC = [[UCWebViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] cancelBlock:^{
             __strong __typeof__(weakSelf) strongSelf = weakSelf;
             [strongSelf.navigationController popToRootViewControllerAnimated:YES];
@@ -226,7 +226,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
         UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.webVC];
         navc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         [self presentViewController:navc animated:YES completion:nil];
-//    }
+    }
 }
 
 - (void)queryObjectOrLoginAddressForSource:(UCSocialSource *)source rootChunk:(UCSocialChunk *)rootChunk path:(NSString *)path {

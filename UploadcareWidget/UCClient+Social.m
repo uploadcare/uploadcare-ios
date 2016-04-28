@@ -53,12 +53,27 @@ NSString *const USSContentType = @"application/vnd.ucare.ss-v0.1+json";
         if ([components.path.pathComponents.lastObject isEqualToString:@"fail"]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:UCURLSchemeDidReceiveFailureCallbackNotification object:url];
         } else if ([components.path.pathComponents.lastObject isEqualToString:@"success"]) {
+            [self storeCookiesFromComponents:components];
             [[NSNotificationCenter defaultCenter] postNotificationName:UCURLSchemeDidReceiveSuccessCallbackNotification object:url];
         }
         return YES;
     } else {
         return NO;
     }
+}
+
+- (void)storeCookiesFromComponents:(NSURLComponents *)components {
+    for (NSURLQueryItem *item in components.queryItems) {
+        NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:
+                                [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [components host], NSHTTPCookieDomain,
+                                 [components path], NSHTTPCookiePath,
+                                 item.name,  NSHTTPCookieName,
+                                 item.value, NSHTTPCookieValue,
+                                 nil]];
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];;
+    }
+    
 }
 
 @end
