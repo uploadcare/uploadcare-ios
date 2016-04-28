@@ -10,7 +10,7 @@
 
 Here's what it looks like:
 
-![Uploadcare for iOS menu](https://ucarecdn.com/a51ee0de-b775-40fb-98e3-81f683938431/-/stretch/off/-/resize/250x/) ![Facebook albums](https://ucarecdn.com/81da28a4-1522-4b44-8d03-8eea18b94dd4/-/stretch/off/-/resize/250x/)
+![Uploadcare for iOS menu](https://ucarecdn.com/6fd1868d-6cda-4282-b932-683fd1c0b837/-/stretch/off/-/resize/250x/) ![Facebook albums](https://ucarecdn.com/81da28a4-1522-4b44-8d03-8eea18b94dd4/-/stretch/off/-/resize/250x/)
 ![Instagram gallery](https://ucarecdn.com/2405cae1-e653-424f-af21-c244dda2d77f/-/stretch/off/-/resize/250x/)
 
 ## Quickstart
@@ -120,7 +120,7 @@ Please take a look at the [Example Project](https://github.com/uploadcare/upload
 
 ## Contact
 
-If you have any questions, bug reports or suggestions, [drop us a line](hello@uploadcare.com).
+If you have any questions, bug reports or suggestions, [drop us a line](mailto:hello@uploadcare.com).
 
 ## License 
 
