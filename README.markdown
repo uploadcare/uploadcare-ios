@@ -66,10 +66,10 @@ scheme from application delegate methods:
 ```
 In order to add custom url scheme, perform the following steps:
 * Go to **Target** -> **Info** -> **URL types**
-* Add new url scheme with the following format: uploadcare\<public key\>
+* Add new url scheme with the following format: uc-\<public key\>
 * The final result should look similar to this:
 
-![Custom url scheme](https://ucarecdn.com/1738621a-8016-44c4-918d-d90f8e23336f/)
+![Custom url scheme](https://ucarecdn.com/7426b014-7888-49dc-a44d-3c8655567796/)
 
 #### Init and present widget
 
