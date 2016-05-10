@@ -9,31 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UCSocialEntriesCollection.h"
 
-/**
- *  Gallery presentation mode.
- */
-typedef NS_ENUM(NSUInteger, UCGalleryMode) {
-    /**
-     *  Cells are presented in grid manner, best suitable for image providers,
-     *  such as instagram etc.
-     */
-    UCGalleryModeGrid,
-    /**
-     *  Cells are presented in list manner, best suitable for file providers,
-     *  such as dropbox etc.
-     */
-    UCGalleryModeList,
-    /**
-     *  Cells are presented in list manner, with rounded images of bigger size.
-     */
-    UCGalleryModePersonList,
-    /**
-     *  Cells are presented in grid manner with spacing, allowing to put album
-     *  information below the image.
-     */
-    UCGalleryModeAlbumsGrid
-};
-
 @class UCSocialSource;
 
 @interface UCGalleryVC : UICollectionViewController
@@ -47,7 +22,6 @@ typedef NS_ENUM(NSUInteger, UCGalleryMode) {
 /**
  *  Initializes gallery with provided settings and values.
  *
- *  @param mode       UCGalleryMode mode of the gallery.
  *  @param source     UCSocialSource object instance carrying all necessary root chunks information
  *  and url schemes.
  *  @param rootChunk  UCSocialChunk object instance is used for determining which root chunk 
@@ -57,10 +31,9 @@ typedef NS_ENUM(NSUInteger, UCGalleryMode) {
  *
  *  @return UCGalleryVC instance.
  */
-- (id)initWithMode:(UCGalleryMode)mode
-            source:(UCSocialSource *)source
-         rootChunk:(UCSocialChunk *)rootChunk
-          progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
-        completion:(void(^)(NSString *fileId, NSError *error))completion;
+- (id)initWithSource:(UCSocialSource *)source
+           rootChunk:(UCSocialChunk *)rootChunk
+            progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
+          completion:(void(^)(NSString *fileId, NSError *error))completion;
 
 @end

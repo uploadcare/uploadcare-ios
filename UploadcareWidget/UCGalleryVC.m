@@ -51,7 +51,6 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, assign) BOOL isLastPage;
 @property (nonatomic, assign) BOOL nextPageFetchStarted;
-@property (nonatomic, assign) UCGalleryMode currentMode;
 @property (nonatomic, strong) UCSocialSource *source;
 @property (nonatomic, strong) UCSocialChunk *rootChunk;
 @property (nonatomic, strong) UCSocialEntriesCollection *entriesCollection;
@@ -67,16 +66,14 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
 @implementation UCGalleryVC
 
-- (id)initWithMode:(UCGalleryMode)mode
-            source:(UCSocialSource *)source
-         rootChunk:(UCSocialChunk *)rootChunk
-          progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
-        completion:(void(^)(NSString *fileId, NSError *error))completion {
+- (id)initWithSource:(UCSocialSource *)source
+           rootChunk:(UCSocialChunk *)rootChunk
+            progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
+          completion:(void(^)(NSString *fileId, NSError *error))completion {
     self = [super initWithCollectionViewLayout:[[UCCollectionViewFlowLayout alloc] init]];
     if (self) {
         _completionBlock = completion;
         _progressBlock = progress;
-        _currentMode = mode;
         _source = source;
         _rootChunk = rootChunk;
     }
@@ -85,20 +82,26 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupCollectionView];
+    [self setupSearchBarIfNeeded];
+    [self setupCenterButton];
+    [self initialFetch];
+    [self registerObservers];
+}
+
+- (void)setupCollectionView {
     self.collectionView.delegate = self;
     self.collectionView.alwaysBounceVertical = YES;
     self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-    Class<UCGalleryCellProtocol> cellClass = [self cellClassForMode:self.currentMode];
-    [self.collectionView registerClass:cellClass forCellWithReuseIdentifier:[cellClass cellIdentifier]];
+    for (UCGalleryMode mode = UCGalleryModeGrid; mode <= UCGalleryModeAlbumsGrid; mode++) {
+        Class<UCGalleryCellProtocol> cellClass = [self cellClassForMode:mode];
+        [self.collectionView registerClass:cellClass forCellWithReuseIdentifier:[cellClass cellIdentifier]];
+    }
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:UCBusyCellIdentifyer];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
-    [self setupSearchBarIfNeeded];
-    [self setupCenterButton];
-    [self initialFetch];
-    [self registerObservers];
 }
 
 - (void)viewDidLayoutSubviews
@@ -264,7 +267,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
         [actionSheet addAction:[UIAlertAction actionWithTitle:chunk.title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             _entriesCollection = nil;
             self.rootChunk = blockChunk;
-            Class<UCGalleryCellProtocol> cellClass = [self cellClassForMode:self.currentMode];
+            Class<UCGalleryCellProtocol> cellClass = [self cellClassForMode:self.entriesCollection.galleryMode];
             [self.collectionView registerClass:cellClass forCellWithReuseIdentifier:[cellClass cellIdentifier]];
             [self updateNavigationTitle];
             [self setupSearchBarIfNeeded];
@@ -375,7 +378,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGSize bounds = self.view.bounds.size;
-    switch (self.currentMode) {
+    switch (self.entriesCollection.galleryMode) {
         case UCGalleryModeGrid: {
             CGFloat spacing = DEFAULT_SPACING;
             NSUInteger perRow = GRID_ELEMENTS_PER_ROW;
@@ -406,7 +409,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    if (self.currentMode == UCGalleryModeAlbumsGrid) {
+    if (self.entriesCollection.galleryMode == UCGalleryModeAlbumsGrid) {
         CGFloat spacing = ALBUM_SPACING;
         return UIEdgeInsetsMake(self.searchBar ? spacing + 44.0 : spacing, spacing, spacing, spacing);
     } else {
@@ -415,7 +418,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    if (self.currentMode == UCGalleryModeAlbumsGrid) {
+    if (self.entriesCollection.galleryMode == UCGalleryModeAlbumsGrid) {
         CGFloat spacing = ALBUM_SPACING;
         return spacing;
     } else {
@@ -425,10 +428,10 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    if (self.currentMode == UCGalleryModeAlbumsGrid) {
+    if (self.entriesCollection.galleryMode == UCGalleryModeAlbumsGrid) {
         CGFloat spacing = ALBUM_SPACING;
         return spacing;
-    } else if (self.currentMode == UCGalleryModeGrid) {
+    } else if (self.entriesCollection.galleryMode == UCGalleryModeGrid) {
         CGFloat spacing = DEFAULT_SPACING;
         return spacing;
     } else {
@@ -448,7 +451,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UCSocialEntry *entry = self.entriesCollection.entries[indexPath.row];
-    UICollectionViewCell<UCGalleryCellProtocol> *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[[self cellClassForMode:self.currentMode] cellIdentifier] forIndexPath:indexPath];
+    UICollectionViewCell<UCGalleryCellProtocol> *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[[self cellClassForMode:self.entriesCollection.galleryMode] cellIdentifier] forIndexPath:indexPath];
     [cell setSocialEntry:entry];
     return cell;
 }
@@ -486,7 +489,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 }
 
 - (void)openGalleryWithEntry:(UCSocialEntry *)entry {
-    UCGalleryVC *gallery = [[UCGalleryVC alloc] initWithMode:self.currentMode source:self.source rootChunk:self.rootChunk progress:self.progressBlock completion:self.completionBlock];
+    UCGalleryVC *gallery = [[UCGalleryVC alloc] initWithSource:self.source rootChunk:self.rootChunk progress:self.progressBlock completion:self.completionBlock];
     gallery.entry = entry;
     [self.navigationController pushViewController:gallery animated:YES];
 }

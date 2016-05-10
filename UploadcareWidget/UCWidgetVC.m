@@ -89,11 +89,10 @@
 
 - (void)showGalleryWithSource:(UCSocialSource *)source {
     self.source = source;
-    UCGalleryVC *gallery = [[UCGalleryVC alloc] initWithMode:self.currentMode
-                                                      source:source
-                                                   rootChunk:source.rootChunks.firstObject
-                                                    progress:self.progressBlock
-                                                  completion:self.completionBlock];
+    UCGalleryVC *gallery = [[UCGalleryVC alloc] initWithSource:source
+                                                     rootChunk:source.rootChunks.firstObject
+                                                      progress:self.progressBlock
+                                                    completion:self.completionBlock];
     if (self.navigationController) {
         self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
 

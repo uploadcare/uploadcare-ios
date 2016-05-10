@@ -10,6 +10,10 @@
 #import "UCSocialEntry.h"
 #import "UCSocialChunk.h"
 
+@interface UCSocialEntriesCollection ()
+@property (nonatomic, strong) NSString *viewType;
+@end
+
 @implementation UCSocialEntriesCollection
 
 + (NSDictionary *)mapping {
@@ -17,11 +21,26 @@
              @"path":@"path",
              @"root":@"root",
              @"userInfo":@"userinfo",
-             @"entries":@"things"};
+             @"entries":@"things",
+             @"viewType":@"view"};
 }
 
 + (NSDictionary *)collectionMapping {
     return @{@"entries": [UCSocialEntry class]};
+}
+
+- (UCGalleryMode)galleryMode {
+    if ([self.viewType isEqualToString:@"icons"]) {
+        return UCGalleryModeGrid;
+    } else if ([self.viewType isEqualToString:@"table"]) {
+        return UCGalleryModeList;
+    } else if ([self.viewType isEqualToString:@"stacks"]) {
+        return UCGalleryModeAlbumsGrid;
+    } else if ([self.viewType isEqualToString:@"tiles"]) {
+        return UCGalleryModePersonList;
+    }
+    
+    return UCGalleryModeGrid;
 }
 
 @end
