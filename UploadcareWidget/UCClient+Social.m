@@ -49,7 +49,7 @@ NSString *const USSContentType = @"application/vnd.ucare.ss-v0.1+json";
 - (BOOL)handleURL:(NSURL *)url {
     if (!self.publicKey) return NO;
     NSURLComponents *components = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
-    if ([components.scheme isEqualToString:[@"uploadcare" stringByAppendingString:self.publicKey]]) {
+    if ([components.scheme isEqualToString:[@"uc-" stringByAppendingString:self.publicKey]]) {
         if ([components.path.pathComponents.lastObject isEqualToString:@"fail"]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:UCURLSchemeDidReceiveFailureCallbackNotification object:url];
         } else if ([components.path.pathComponents.lastObject isEqualToString:@"success"]) {
@@ -64,12 +64,17 @@ NSString *const USSContentType = @"application/vnd.ucare.ss-v0.1+json";
 
 - (void)storeCookiesFromComponents:(NSURLComponents *)components {
     for (NSURLQueryItem *item in components.queryItems) {
+        NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+        dayComponent.year = 1;
+        NSCalendar *theCalendar = [NSCalendar currentCalendar];
+        NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
         NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:
                                 [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [components host], NSHTTPCookieDomain,
-                                 [components path], NSHTTPCookiePath,
+                                 UCSocialAPIRoot, NSHTTPCookieDomain,
+                                 [NSString stringWithFormat:@"/%@/", components.host], NSHTTPCookiePath,
                                  item.name,  NSHTTPCookieName,
                                  item.value, NSHTTPCookieValue,
+                                 nextDate, NSHTTPCookieExpires,
                                  nil]];
         [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];;
     }
