@@ -50,11 +50,11 @@ NSString *const USSContentType = @"application/vnd.ucare.ss-v0.1+json";
     if (!self.publicKey) return NO;
     NSURLComponents *components = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
     if ([components.scheme isEqualToString:[@"uc-" stringByAppendingString:self.publicKey]]) {
-        if ([components.path.pathComponents.lastObject isEqualToString:@"fail"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:UCURLSchemeDidReceiveFailureCallbackNotification object:url];
-        } else if ([components.path.pathComponents.lastObject isEqualToString:@"success"]) {
+        if ([components.path.pathComponents.lastObject isEqualToString:@"success"]) {
             [self storeCookiesFromComponents:components];
             [[NSNotificationCenter defaultCenter] postNotificationName:UCURLSchemeDidReceiveSuccessCallbackNotification object:url];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:UCURLSchemeDidReceiveFailureCallbackNotification object:url];
         }
         return YES;
     } else {
