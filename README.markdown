@@ -2,9 +2,11 @@
 
 ## What it is
 
-**Uploadcare** is a one-stop service for dealing with files on the web. You should probably visit [the site](http://uploadcare.com).
+**[Uploadcare](http://uploadcare.com)** is a [PaaS](https://en.wikipedia.org/wiki/Platform_as_a_service), providing file handling mechanisms for web sites and mobile applications.
 
-**Uploadcare for iOS** is an open source Objective-C library that brings Uploadcare features to your iOS apps.
+**Uploadcare for iOS** is an open source Objective-C component that brings Uploadcare features to your iOS apps. It consists of two general parts: **UploadcareKit** and **Uploadcare Widget**.
+
+**UploadcareKit** is a core-level abstract layer, responsible for API communication within upload and download tasks.
 
 **Uploadcare Widget**, a major component of Uploadcare for iOS, is what a modern, cloud-aware file picker for iOS would be, if iOS had a notion of files. Since iOS doesn't, you can think of Uploadcare Widget as a *thing* picker – a drop-in component, that allows your users to select and upload their *things* (photos, documents, whatever you want them to) to your service, via Uploadcare.
 
