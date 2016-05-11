@@ -109,11 +109,10 @@ In order to receive available social sources, you can use `fetchSocialSourcesWit
 After you receive a list of social sources, you can choose one and use it for instantiating
 `UCGalleryVC` with the following method:
 ```objc
-- (id)initWithMode:(UCGalleryMode)mode
-            source:(UCSocialSource *)source
-         rootChunk:(UCSocialChunk *)rootChunk
-          progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
-        completion:(void(^)(NSString *fileId, NSError *error))completion;
+- (id)initWithSource:(UCSocialSource *)source
+           rootChunk:(UCSocialChunk *)rootChunk
+            progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
+          completion:(void(^)(NSString *fileId, NSError *error))completion;
 ```
 
 ## Sample App
