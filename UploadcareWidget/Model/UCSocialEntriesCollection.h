@@ -44,5 +44,5 @@ typedef NS_ENUM(NSUInteger, UCGalleryMode) {
 @property (nonatomic, strong) UCSocialChunk *root;
 @property (nonatomic, strong) NSDictionary *userInfo;
 @property (nonatomic, strong) NSArray<UCSocialEntry*> *entries;
-@property (nonatomic, assign) UCGalleryMode galleryMode;
+@property (nonatomic, assign, readonly) UCGalleryMode galleryMode;
 @end

@@ -12,6 +12,7 @@
 
 @interface UCSocialEntriesCollection ()
 @property (nonatomic, strong) NSString *viewType;
+@property (nonatomic, assign) UCGalleryMode galleryMode;
 @end
 
 @implementation UCSocialEntriesCollection
@@ -31,16 +32,16 @@
 
 - (UCGalleryMode)galleryMode {
     if ([self.viewType isEqualToString:@"icons"]) {
-        return UCGalleryModeGrid;
+        _galleryMode = UCGalleryModeGrid;
     } else if ([self.viewType isEqualToString:@"table"]) {
-        return UCGalleryModeList;
+        _galleryMode = UCGalleryModeList;
     } else if ([self.viewType isEqualToString:@"stacks"]) {
-        return UCGalleryModeAlbumsGrid;
+        _galleryMode = UCGalleryModeAlbumsGrid;
     } else if ([self.viewType isEqualToString:@"tiles"]) {
-        return UCGalleryModePersonList;
+        _galleryMode = UCGalleryModePersonList;
     }
     
-    return UCGalleryModeGrid;
+    return _galleryMode;
 }
 
 @end
