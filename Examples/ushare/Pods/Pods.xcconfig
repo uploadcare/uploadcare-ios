@@ -1,9 +1,0 @@
-ALWAYS_SEARCH_USER_PATHS = YES
-GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
-HEADER_SEARCH_PATHS = ${PODS_HEADERS_SEARCH_PATHS}
-LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/TestFlightSDK"
-OTHER_LDFLAGS = -ObjC -lTestFlight -licucore -lz -framework AssetsLibrary -framework CFNetwork -framework ImageIO -framework MobileCoreServices -framework QuartzCore -framework Security -framework SystemConfiguration -framework UIKit
-PODS_BUILD_HEADERS_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/AFNetworking" "${PODS_ROOT}/BuildHeaders/AQGridView" "${PODS_ROOT}/BuildHeaders/SocketRocket" "${PODS_ROOT}/BuildHeaders/TestFlightSDK" "${PODS_ROOT}/BuildHeaders/libPusher" "${PODS_ROOT}/BuildHeaders/uploadcare-ios"
-PODS_HEADERS_SEARCH_PATHS = ${PODS_PUBLIC_HEADERS_SEARCH_PATHS}
-PODS_PUBLIC_HEADERS_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/AQGridView" "${PODS_ROOT}/Headers/SocketRocket" "${PODS_ROOT}/Headers/TestFlightSDK" "${PODS_ROOT}/Headers/libPusher" "${PODS_ROOT}/Headers/uploadcare-ios"
-PODS_ROOT = ${SRCROOT}/Pods
