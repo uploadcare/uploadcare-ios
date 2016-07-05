@@ -17,6 +17,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Replace demopublickey with your key
     [[UCClient defaultClient] setPublicKey:@"demopublickey"];
     return YES;
 }

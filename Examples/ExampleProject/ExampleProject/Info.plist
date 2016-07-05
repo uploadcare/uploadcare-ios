@@ -27,7 +27,7 @@
 			<string>uploadcare</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>uploadcaredemopublickey</string>
+				<string>uc-demopublickey</string>
 			</array>
 		</dict>
 	</array>
