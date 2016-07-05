@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,12 +16,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qYG-nu-Urs">
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" placeholderIntrinsicWidth="40" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="qYG-nu-Urs">
                         <rect key="frame" x="8" y="2" width="40" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="5E5-4w-3yW"/>
-                            <constraint firstAttribute="width" constant="40" id="PHB-AW-MWJ"/>
-                        </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6j-s9-B2x">
                         <rect key="frame" x="56" y="11" width="256" height="21"/>
@@ -29,11 +27,10 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="z6j-s9-B2x" secondAttribute="bottom" constant="11" id="Q6a-hQ-epH"/>
-                    <constraint firstItem="z6j-s9-B2x" firstAttribute="leading" secondItem="qYG-nu-Urs" secondAttribute="trailing" constant="8" id="RWs-cD-lgu"/>
-                    <constraint firstItem="qYG-nu-Urs" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="aTM-pT-EMc"/>
-                    <constraint firstItem="qYG-nu-Urs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="hRo-6v-dCe"/>
-                    <constraint firstItem="z6j-s9-B2x" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="q7w-18-5ms"/>
+                    <constraint firstItem="qYG-nu-Urs" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="0UN-SZ-EW8"/>
+                    <constraint firstItem="qYG-nu-Urs" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="GKv-RK-bf4"/>
+                    <constraint firstItem="z6j-s9-B2x" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="TVp-lI-unN"/>
+                    <constraint firstItem="z6j-s9-B2x" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="48" id="ndy-j2-Oar"/>
                     <constraint firstAttribute="trailing" secondItem="z6j-s9-B2x" secondAttribute="trailing" constant="8" id="soq-iW-SSE"/>
                 </constraints>
             </tableViewCellContentView>
