@@ -64,21 +64,24 @@ NSString *const USSContentType = @"application/vnd.ucare.ss-v0.1+json";
 
 - (void)storeCookiesFromComponents:(NSURLComponents *)components {
     for (NSURLQueryItem *item in components.queryItems) {
-        NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
-        dayComponent.year = 1;
-        NSCalendar *theCalendar = [NSCalendar currentCalendar];
-        NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
-        NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:
-                                [NSDictionary dictionaryWithObjectsAndKeys:
-                                 UCSocialAPIRoot, NSHTTPCookieDomain,
-                                 [NSString stringWithFormat:@"/%@/", components.host], NSHTTPCookiePath,
-                                 item.name,  NSHTTPCookieName,
-                                 item.value, NSHTTPCookieValue,
-                                 nextDate, NSHTTPCookieExpires,
-                                 nil]];
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];;
+        [self storeCookieWithHost:components.host name:item.name value:item.value];
     }
-    
+}
+
+- (void)storeCookieWithHost:(NSString *)host name:(NSString *)name value:(NSString *)value {
+    NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+    dayComponent.year = 1; // Default expire time is 1 year
+    NSCalendar *theCalendar = [NSCalendar currentCalendar];
+    NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
+    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:
+                            [NSDictionary dictionaryWithObjectsAndKeys:
+                             UCSocialAPIRoot, NSHTTPCookieDomain,
+                             [NSString stringWithFormat:@"/%@/", host], NSHTTPCookiePath,
+                             name,  NSHTTPCookieName,
+                             value, NSHTTPCookieValue,
+                             nextDate, NSHTTPCookieExpires,
+                             nil]];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
 }
 
 @end

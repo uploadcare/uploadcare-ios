@@ -44,4 +44,13 @@ static NSString *const UCURLSchemeDidReceiveFailureCallbackNotification = @"UCUR
  */
 - (BOOL)handleURL:(NSURL *)url;
 
+/**
+ *  Use this method in order to set previously obtained cookies for social sources.
+ *
+ *  @param host  Host name
+ *  @param name  Name property of cookie
+ *  @param value Value of cookie
+ */
+- (void)storeCookieWithHost:(NSString *)host name:(NSString *)name value:(NSString *)value;
+
 @end
