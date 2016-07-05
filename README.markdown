@@ -117,7 +117,7 @@ After you receive a list of social sources, you can choose one and use it for in
 
 ### Core level features only
 
-In order to integrate core level features only, such as local and remote file upload oeprations, 
+In order to integrate core level features only, such as local and remote file upload operations, 
 you can use the following subspec:
 
 ```ruby
