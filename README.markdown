@@ -75,7 +75,7 @@ In order to add custom url scheme, perform the following steps:
 
 #### Init and present widget
 
-To display the Uploadcare Widget, you must create and initialize an instance of [`UCMenuViewController`](https://github.com/uploadcare/uploadcare-ios/blob/core-refactoring/UploadcareWidget/UCMenuViewController.h) by invoking `initWithProgress:completion:` method:
+To display the Uploadcare Widget, you must create and initialize an instance of [`UCMenuViewController`](https://github.com/uploadcare/uploadcare-ios/UploadcareWidget/UCMenuViewController.h) by invoking `initWithProgress:completion:` method:
 
 ```objc
 #import <Uploadcare/Uploadcare.h>
@@ -128,7 +128,7 @@ Please notice, that `Uploadcare.h` header won't be included in this case, so you
 
 ## Sample App
 
-Please take a look at the [Example Project](https://github.com/uploadcare/uploadcare-ios/tree/core-refactoring/Examples/ExampleProject). 
+Please take a look at the [Example Project](https://github.com/uploadcare/uploadcare-ios/Examples/ExampleProject). 
 
 ## Contact
 
