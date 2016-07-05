@@ -115,6 +115,17 @@ After you receive a list of social sources, you can choose one and use it for in
           completion:(void(^)(NSString *fileId, NSError *error))completion;
 ```
 
+### Core level features only
+
+In order to integrate core level features only, such as local and remote file upload oeprations, 
+you can use the following subspec:
+
+```ruby
+pod 'Uploadcare/Core'
+```
+
+Please notice, that `Uploadcare.h` header won't be included in this case, so you'll have to use `UploadcareKit.h` instead.
+
 ## Sample App
 
 Please take a look at the [Example Project](https://github.com/uploadcare/uploadcare-ios/tree/core-refactoring/Examples/ExampleProject). 
