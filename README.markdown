@@ -128,7 +128,7 @@ Please notice, that `Uploadcare.h` header won't be included in this case, so you
 
 ## Sample App
 
-Please take a look at the [Example Project](https://github.com/uploadcare/uploadcare-ios/Examples/ExampleProject). 
+Please take a look at the [Example Project](https://github.com/uploadcare/uploadcare-ios/tree/master/Examples/ExampleProject). 
 
 ## Contact
 
