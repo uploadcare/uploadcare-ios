@@ -22,17 +22,21 @@
 
 #define SCREEN_NAME @"Social sources"
 
+NSString * const UCWidgetResponseLocalThumbnailResponseKey = @"local_thumbnail";
+
 @interface UCWidgetVC ()
+
 @property (nonatomic, strong) NSArray<UCSocialSource *> *tableData;
 @property (nonatomic, strong) UCSocialSource *source;
-@property (nonatomic, copy) void (^completionBlock)(NSString *fileId, NSError *error);
-@property (nonatomic, copy) void (^progressBlock)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend);
+@property (nonatomic, copy) UCWidgetCompletionBlock completionBlock;
+@property (nonatomic, copy) UCProgressBlock progressBlock;
+
 @end
 
 @implementation UCWidgetVC
 
-- (id)initWithProgress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
-            completion:(void(^)(NSString *fileId, NSError *error))completion {
+- (id)initWithProgress:(UCProgressBlock)progress
+            completion:(UCWidgetCompletionBlock)completion {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         _completionBlock = completion;
@@ -108,7 +112,7 @@
 }
 
 - (void)handleError:(NSError *)error {
-    if (self.completionBlock) self.completionBlock(nil, error);
+    if (self.completionBlock) self.completionBlock(nil, nil, error);
 }
 
 #pragma mark - Table view data source
@@ -123,8 +127,7 @@
     NSString *socialName = [social.sourceName stringByReplacingCharactersInRange:NSMakeRange(0,1)
                                                               withString:[[social.sourceName substringToIndex:1] capitalizedString]];
     cell.socialName.text = socialName;
-    UIImage *image = [UIImage imageNamed:social.sourceName];
-    [cell.socialImage setImage:image];
+    cell.socialImage.image = [UIImage imageNamed:social.sourceName];
     return cell;
 }
 
@@ -133,6 +136,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UCSocialSource *social = self.tableData[indexPath.row];
     [self showGalleryWithSource:social];
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

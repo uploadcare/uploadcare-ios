@@ -19,7 +19,7 @@
 @interface UCSocialManager () <UIDocumentMenuDelegate, UIDocumentPickerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic, weak) UIViewController *rootController;
 @property (nonatomic, copy) void(^progressBlock)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend);
-@property (nonatomic, copy) void(^completionBlock)(NSString *fileId, NSError *error);
+@property (nonatomic, copy) UCWidgetCompletionBlock completionBlock;
 @end
 
 static UCSocialManager *instanceSocialManager = nil;
@@ -55,8 +55,8 @@ static UCSocialManager *instanceSocialManager = nil;
 }
 
 - (UIDocumentMenuViewController *)documentControllerFrom:(UIViewController *)viewController
-                                                progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
-                                              completion:(void(^)(NSString *fileId, NSError *error))completionBlock {
+                                                progress:(UCProgressBlock)progressBlock
+                                              completion:(UCWidgetCompletionBlock)completionBlock {
     self.completionBlock = completionBlock;
     self.progressBlock = progressBlock;
     self.rootController = viewController;
@@ -80,15 +80,18 @@ static UCSocialManager *instanceSocialManager = nil;
         if (self.progressBlock) self.progressBlock (0, NSUIntegerMax);
         UCFileUploadRequest *req = [UCFileUploadRequest requestWithFileData:imageData fileName:@"image" mimeType:@"image/jpeg"];
         [[UCClient defaultClient] performUCRequest:req
-                                          progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
-                                              dispatch_async(dispatch_get_main_queue(), ^{
-                                                  if (self.progressBlock) self.progressBlock(totalBytesSent, totalBytesExpectedToSend);
-                                              });
-                                          } completion:^(id response, NSError *error) {
-                                              dispatch_async(dispatch_get_main_queue(), ^{
-                                                  if (self.completionBlock) self.completionBlock (response[@"file"], error);
-                                              });
-                                          }];
+                                          progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self.progressBlock) self.progressBlock(totalBytesSent, totalBytesExpectedToSend);
+            });
+
+        } completion:^(id response, NSError *error) {
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self.completionBlock) self.completionBlock (response[@"file"], response, error);
+            });
+        }];
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -111,7 +114,7 @@ static UCSocialManager *instanceSocialManager = nil;
         });
     } completion:^(id response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (self.completionBlock) self.completionBlock (response[@"file"], error);
+            if (self.completionBlock) self.completionBlock (response[@"file"], response, error);
         });
     }];
 }

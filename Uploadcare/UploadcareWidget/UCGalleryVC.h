@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UCSocialEntriesCollection.h"
+#import "UCWidgetVC.h"
 
 @class UCSocialSource;
 
@@ -33,7 +34,7 @@
  */
 - (id)initWithSource:(UCSocialSource *)source
            rootChunk:(UCSocialChunk *)rootChunk
-            progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
-          completion:(void(^)(NSString *fileId, NSError *error))completion;
+            progress:(UCProgressBlock)progress
+          completion:(UCWidgetCompletionBlock)completion;
 
 @end

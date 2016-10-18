@@ -10,7 +10,9 @@
 #import "UCGalleryCellProtocol.h"
 
 @interface UCGalleryCell : UICollectionViewCell <UCGalleryCellProtocol>
+
 @property (nonatomic, strong, readonly) UIImageView *imageView;
 @property (nonatomic, strong, readonly) UILabel *titleLabel;
 @property (nonatomic, strong) UCSocialEntry *socialEntry;
+
 @end

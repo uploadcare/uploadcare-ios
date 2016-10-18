@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UploadcareWidget.h"
 
 @class UCSocialEntry;
 @class UCSocialSource;
@@ -41,7 +42,7 @@
  *  @return UIDocumentMenuViewController controller instance which user can present by the preffered style.
  */
 - (UIDocumentMenuViewController *)documentControllerFrom:(UIViewController *)viewController
-                                                progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
-                                              completion:(void(^)(NSString *fileId, NSError *error))completionBlock;
+                                                progress:(UCProgressBlock)progressBlock
+                                              completion:(UCWidgetCompletionBlock)completionBlock;
 
 @end

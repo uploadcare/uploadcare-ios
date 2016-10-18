@@ -9,4 +9,5 @@
 #import "UCGalleryCell.h"
 
 @interface UCGridGalleryCell : UCGalleryCell
+
 @end

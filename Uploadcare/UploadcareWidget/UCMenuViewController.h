@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UCWidgetVC.h"
 
 @interface UCMenuViewController : UIViewController
 
-
-- (id)initWithProgress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress completion:(void(^)(NSString *fileId, NSError *error))completion;
+- (id)initWithProgress:(UCProgressBlock)progress completion:(UCWidgetCompletionBlock)completion;
 
 - (void)presentFrom:(UIViewController *)controller;
 

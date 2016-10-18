@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface UCSocialSourceCell : UITableViewCell
+
 @property (nonatomic, strong) IBOutlet UIImageView *socialImage;
 @property (nonatomic, strong) IBOutlet UILabel *socialName;
+
 @end

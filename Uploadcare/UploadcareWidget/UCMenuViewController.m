@@ -11,19 +11,19 @@
 #import "UCSocialManager.h"
 
 @interface UCMenuViewController ()
+
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) IBOutlet UIButton *socialButton;
 @property (nonatomic, strong) IBOutlet UIButton *localFileButton;
 @property (nonatomic, strong) UCWidgetVC *widget;
-@property (nonatomic, copy) void (^completionBlock)(NSString *fileId, NSError *error);
-@property (nonatomic, copy) void (^progressBlock)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend);
+@property (nonatomic, copy) UCWidgetCompletionBlock completionBlock;
+@property (nonatomic, copy) UCProgressBlock progressBlock;
 
-- (IBAction)didPressLocalFile:(id)sender;
-- (IBAction)didPressSocial:(id)sender;
 @end
 
 @implementation UCMenuViewController
 
-- (id)initWithProgress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress completion:(void(^)(NSString *fileId, NSError *error))completion {
+- (id)initWithProgress:(UCProgressBlock)progress completion:(UCWidgetCompletionBlock)completion {
     self = [super init];
     if (self) {
         self.completionBlock = completion;
@@ -40,8 +40,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     self.navigationItem.title = @"Uploadcare";
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didPressClose:)]];
+
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView
+                                                          attribute:NSLayoutAttributeTop
+                                                          relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                             toItem:self.topLayoutGuide
+                                                          attribute:NSLayoutAttributeBottom
+                                                         multiplier:1 constant:20]];
 }
 
 - (void)didPressClose:(id)sender {

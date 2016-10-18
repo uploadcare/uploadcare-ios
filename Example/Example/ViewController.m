@@ -115,11 +115,11 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
         float progress = (float)bytesSent / (float)bytesExpectedToSend;
         [SVProgressHUD showProgress:progress];
         NSLog(@"Widget progress: %f", progress);
-    } completion:^(NSString *fileId, NSError *error) {
+    } completion:^(NSString *fileId, id response, NSError *error) {
         [SVProgressHUD dismiss];
         [self.menu dismissViewControllerAnimated:YES completion:nil];
         if (!error) {
-            NSLog(@"Successfully uploaded media with id: %@", fileId);
+            NSLog(@"Successfully uploaded media with id: %@, info: %@", fileId, response);
         } else {
             [self handleError:error];
         }

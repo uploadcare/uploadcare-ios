@@ -48,6 +48,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 @end
 
 @interface UCGalleryVC () <UISearchBarDelegate, SFSafariViewControllerDelegate>
+
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, assign) BOOL isLastPage;
 @property (nonatomic, assign) BOOL nextPageFetchStarted;
@@ -58,18 +59,18 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, assign) NSUInteger retryCount;
 
-@property (nonatomic, copy) void (^completionBlock)(NSString *fileId, NSError *error);
-@property (nonatomic, copy) void (^progressBlock)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend);
+@property (nonatomic, copy) UCWidgetCompletionBlock completionBlock;
+@property (nonatomic, copy) UCProgressBlock progressBlock;
+@property (nonatomic, copy) UCCompletionBlock responseBlock;
 
-@property (nonatomic, copy) void (^responseBlock)(id response, NSError *error);
 @end
 
 @implementation UCGalleryVC
 
 - (id)initWithSource:(UCSocialSource *)source
            rootChunk:(UCSocialChunk *)rootChunk
-            progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
-          completion:(void(^)(NSString *fileId, NSError *error))completion {
+            progress:(UCProgressBlock)progress
+          completion:(UCWidgetCompletionBlock)completion {
     self = [super initWithCollectionViewLayout:[[UCCollectionViewFlowLayout alloc] init]];
     if (self) {
         _completionBlock = completion;
@@ -304,9 +305,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
         }
         [self.collectionView insertItemsAtIndexPaths:indexPaths];
 
-    } completion:^(BOOL finished) {
-        
-    }];
+    } completion:nil];
 }
 
 - (UCSocialEntriesCollection *)collectionMergedWith:(UCSocialEntriesCollection *)collection {
@@ -335,36 +334,51 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
     [self queryObjectOrLoginAddressForSource:self.source rootChunk:self.entriesCollection.root path:self.entriesCollection.nextPage.fullPath];
 }
 
-- (void)uploadSocialEntry:(UCSocialEntry *)entry {
+- (void)uploadSocialEntry:(UCSocialEntry *)entry withThumbnail:(UIImage *)thumbnail {
     if (self.progressBlock) self.progressBlock (0, NSUIntegerMax);
-    [self uploadSocialEntry:entry forSource:self.source progress:self.progressBlock completion:self.completionBlock];
+    [self uploadSocialEntry:entry
+              withThumbnail:thumbnail
+                  forSource:self.source];
 }
 
 - (void)uploadSocialEntry:(UCSocialEntry *)entry
+            withThumbnail:(UIImage *)thumbnail
                 forSource:(UCSocialSource *)source
-                 progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progressBlock
-               completion:(void(^)(NSString *fileId, NSError *error))completionBlock {
+{
     UCSocialEntryRequest *req = [UCSocialEntryRequest requestWithSource:source file:entry.action.urlString.encodedRFC3986];
+
+    __weak __typeof(self) weakSelf = self;
     [[UCClient defaultClient] performUCSocialRequest:req completion:^(id response, NSError *error) {
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
+
         if (!error && [response isKindOfClass:[NSDictionary class]]) {
             NSString *fileURL = response[@"url"];
             UCRemoteFileUploadRequest *request = [UCRemoteFileUploadRequest requestWithRemoteFileURL:fileURL];
+
             [[UCClient defaultClient] performUCRequest:request progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    if (progressBlock) progressBlock (totalBytesSent, totalBytesExpectedToSend);
+                    if (weakSelf.progressBlock) weakSelf.progressBlock (totalBytesSent, totalBytesExpectedToSend);
                 });
+
             } completion:^(id response, NSError *error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (!error) {
-                        if (completionBlock) completionBlock(response[@"file_id"], nil);
+                        NSDictionary *result = response;
+                        if (thumbnail) {
+                            NSMutableDictionary *responseWithThumbnail = [@{UCWidgetResponseLocalThumbnailResponseKey : thumbnail} mutableCopy];
+                            [responseWithThumbnail addEntriesFromDictionary:result];
+                            result = responseWithThumbnail.copy;
+                        }
+                        if (weakSelf.completionBlock) weakSelf.completionBlock(response[@"file_id"], result, nil);
                     } else {
-                        if (completionBlock) completionBlock(nil, error);
+                        if (weakSelf.completionBlock) weakSelf.completionBlock(nil, response, error);
                     }
                 });
             }];
+
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (completionBlock) completionBlock(nil, error);
+                if (weakSelf.completionBlock) weakSelf.completionBlock(nil, nil, error);
             });
         }
     }];
@@ -472,19 +486,22 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     UCSocialEntry *entry = self.entriesCollection.entries[indexPath.row];
     UCSocialEntryActionType actionType = entry.action.actionType;
+
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    UIImage *localFileThumbnail;
+    if ([cell isKindOfClass:UCGalleryCell.class]) {
+        UCGalleryCell *galleryCell = (UCGalleryCell *)cell;
+        localFileThumbnail = galleryCell.imageView.image;
+    }
+
     switch (actionType) {
-        case UCSocialEntryActionTypeUnknown: {
-            [self uploadSocialEntry:entry];
+        case UCSocialEntryActionTypeUnknown:
+        case UCSocialEntryActionTypeSelectFile:
+            [self uploadSocialEntry:entry withThumbnail:localFileThumbnail];
             break;
-        }
-        case UCSocialEntryActionTypeSelectFile: {
-            [self uploadSocialEntry:entry];
-            break;
-        }
-        case UCSocialEntryActionTypeOpenPath: {
+        case UCSocialEntryActionTypeOpenPath:
             [self openGalleryWithEntry:entry];
             break;
-        }
     }
 }
 
