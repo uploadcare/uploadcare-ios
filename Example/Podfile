@@ -3,6 +3,6 @@ platform :ios, '8.0'
 inhibit_all_warnings! #ignore all warnings from all pods
 
 target 'Example' do
-	pod "MBCircularProgressBar"
+	pod 'SVProgressHUD'
 	pod 'Uploadcare', :path => '../'
 end

@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "DetailViewController.h"
-#import <MBCircularProgressBar/MBCircularProgressBarView.h>
+#import "SVProgressHUD.h"
 #import "Uploadcare.h"
 
 #define RLog(fmt, ...)  { [self presentLogMessage:[NSString stringWithFormat:fmt, ##__VA_ARGS__]];}
@@ -39,82 +39,14 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UCMenuViewController *menu;
-@property (nonatomic, strong) MBCircularProgressBarView *progressView;
-@property (nonatomic, strong) UIWindow *topWindow;
-@property (nonatomic, assign) BOOL progressViewPresented;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupProgressView];
     self.tableView.delegate = self;
-}
-
-- (void)setupProgressView {
-    
-    self.topWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self.topWindow setUserInteractionEnabled:NO];
-    self.topWindow.windowLevel = UIWindowLevelStatusBar;
-    self.topWindow.hidden = NO;
-    self.topWindow.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
-    [self.topWindow setAlpha:0.0];
-    
-    MBCircularProgressBarView *view = [[MBCircularProgressBarView alloc] init];
-    view.backgroundColor = [UIColor colorWithRed:79.0/255.0 green:160.0/255.0 blue:207.0/255.0 alpha:1.0];
-    view.emptyLineColor = [UIColor whiteColor];
-    view.progressStrokeColor = [UIColor colorWithRed:238.0/255.0 green:142.0/255.0 blue:25.0/255.0 alpha:1.0];
-    view.progressLineWidth = 5.0;
-    view.progressAngle = 99.0;
-    view.showValueString = NO;
-    view.showUnitString = NO;
-    view.layer.cornerRadius = 4.0;
-    [view setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.topWindow setRootViewController:[UIViewController new]];
-    [self.topWindow addSubview:view];
-    
-    [self.topWindow addConstraint:
-     [NSLayoutConstraint constraintWithItem:view
-                                  attribute:NSLayoutAttributeCenterX
-                                  relatedBy:NSLayoutRelationEqual
-                                     toItem:self.topWindow
-                                  attribute:NSLayoutAttributeCenterX
-                                 multiplier:1
-                                   constant:0]];
-    [self.topWindow addConstraint:
-     [NSLayoutConstraint constraintWithItem:view
-                                  attribute:NSLayoutAttributeCenterY
-                                  relatedBy:NSLayoutRelationEqual
-                                     toItem:self.topWindow
-                                  attribute:NSLayoutAttributeCenterY
-                                 multiplier:1
-                                   constant:0]];
-    
-    [self.topWindow  addConstraint:[NSLayoutConstraint constraintWithItem:view
-                                                           attribute:NSLayoutAttributeWidth
-                                                           relatedBy:NSLayoutRelationEqual
-                                                              toItem:nil
-                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                          multiplier:1.0
-                                                            constant:100]];
-    [self.topWindow  addConstraint:[NSLayoutConstraint constraintWithItem:view
-                                                           attribute:NSLayoutAttributeHeight
-                                                           relatedBy:NSLayoutRelationEqual
-                                                              toItem:nil
-                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                          multiplier:1.0
-                                                            constant:100]];
-    self.progressView = view;
-}
-
-- (void)setProgressViewPresented:(BOOL)progressViewPresented {
-    if (_progressViewPresented != progressViewPresented) {
-        _progressViewPresented = progressViewPresented;
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.topWindow setAlpha:progressViewPresented ? 1.0 : 0];
-        }];
-    }
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -145,6 +77,8 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
     } else if (indexPath.section == kSectionTypeWidget) {
         [self showWidget:[tableView cellForRowAtIndexPath:indexPath]];
     }
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -175,23 +109,15 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
 
 #pragma mark - Uploadcare widget calls
 
-- (void)finishProgress {
-    [self.menu dismissViewControllerAnimated:YES completion:nil];
-    [self.progressView setValue:self.progressView.maxValue animateWithDuration:0.2];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.progressViewPresented = NO;
-    });
-}
-
 - (void)showWidget:(UITableViewCell *)sender {
+
     self.menu = [[UCMenuViewController alloc] initWithProgress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
-        self.progressViewPresented = YES;
-        [self.progressView setMaxValue:bytesExpectedToSend];
-        [self.progressView setValue:bytesSent animateWithDuration:0.2];
         float progress = (float)bytesSent / (float)bytesExpectedToSend;
+        [SVProgressHUD showProgress:progress];
         NSLog(@"Widget progress: %f", progress);
     } completion:^(NSString *fileId, NSError *error) {
-        [self finishProgress];
+        [SVProgressHUD dismiss];
+        [self.menu dismissViewControllerAnimated:YES completion:nil];
         if (!error) {
             NSLog(@"Successfully uploaded media with id: %@", fileId);
         } else {
@@ -269,7 +195,6 @@ typedef NS_ENUM(NSUInteger, kSectionType) {
         float progress = (float)totalBytesSent / (float)totalBytesExpectedToSend;
         RLog(@"Progress: %f", progress);
     } completion:^(id response, NSError *error) {
-        
         if (!error) {
             RLog(@"Response: %@", response);
         } else {

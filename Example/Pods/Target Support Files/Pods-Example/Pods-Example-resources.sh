@@ -80,13 +80,13 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "$PODS_CONFIGURATION_BUILD_DIR/MBCircularProgressBar/MBCircularProgressBar.bundle"
+  install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
   install_resource "../../Uploadcare/UploadcareWidget/Media.xcassets"
   install_resource "../../Uploadcare/UploadcareWidget/UCMenuViewController.xib"
   install_resource "../../Uploadcare/UploadcareWidget/UI/UCSocialSourceCell.xib"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "$PODS_CONFIGURATION_BUILD_DIR/MBCircularProgressBar/MBCircularProgressBar.bundle"
+  install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
   install_resource "../../Uploadcare/UploadcareWidget/Media.xcassets"
   install_resource "../../Uploadcare/UploadcareWidget/UCMenuViewController.xib"
   install_resource "../../Uploadcare/UploadcareWidget/UI/UCSocialSourceCell.xib"
