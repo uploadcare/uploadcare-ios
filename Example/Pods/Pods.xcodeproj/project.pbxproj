@@ -35,6 +35,8 @@
 		391104D4B1C963827493F10EDA230996 /* UCSocialRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E7BC41C0D78438937B77748E0985896 /* UCSocialRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AC7F29AED0AF010DD261DE9935637E2 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64C68F19C7FDB89739A12A754AC192B9 /* SVIndefiniteAnimatedView.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		3DA06402F48BC795D4EB5E469346F938 /* UCGalleryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AF484236D18BD91FD10107A6EB09EE /* UCGalleryVC.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		44B0D3DA1DB7B45E003CE6EB /* UIImage+Bundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 44B0D3D81DB7B45E003CE6EB /* UIImage+Bundle.h */; };
+		44B0D3DC1DB7B45E003CE6EB /* UIImage+Bundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B0D3D91DB7B45E003CE6EB /* UIImage+Bundle.m */; };
 		45D589DD4E914C0EE9DBB64A627CB856 /* UCGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 136F26FA6EA5A1A276C1328D631F9758 /* UCGalleryCell.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		4A8242FDF802C660A2DD5265BC96BCDD /* UCAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C09619530D82DC8C0360D62E2C30DC91 /* UCAPIRequest.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		4DC676D6BAED10D1C471D81E89B51BF1 /* UCSocialEntriesRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 49B22B6BD299DD1221A3B8D5C6875CAB /* UCSocialEntriesRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -165,6 +167,8 @@
 		42F22E5EBAFB7B9700AED91D35C4EF6B /* UCClient+Social.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UCClient+Social.h"; sourceTree = "<group>"; };
 		43797D4FEFDDA578A178C26C63E75348 /* UCSocialManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = UCSocialManager.m; sourceTree = "<group>"; };
 		43DE5CF2DCB16AF8B2C8A0B6D09E9AEC /* UCSocialEntryRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = UCSocialEntryRequest.m; sourceTree = "<group>"; };
+		44B0D3D81DB7B45E003CE6EB /* UIImage+Bundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Bundle.h"; sourceTree = "<group>"; };
+		44B0D3D91DB7B45E003CE6EB /* UIImage+Bundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Bundle.m"; sourceTree = "<group>"; };
 		46296D6AAE1AA24D1BDA2115AC3298C0 /* flickr@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "flickr@3x.png"; sourceTree = "<group>"; };
 		47654A41BBA6CD6FDDFCEC8C1764107A /* UCSocialEntriesRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = UCSocialEntriesRequest.m; sourceTree = "<group>"; };
 		49105BE4B4F5974B683146B916BA4539 /* UCClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = UCClient.m; sourceTree = "<group>"; };
@@ -323,6 +327,8 @@
 			children = (
 				37485661A2263D1E00D2E46FF105F392 /* UIImageView+Uploadcare.h */,
 				618D2CB2697E77322CAAE298627DF5A0 /* UIImageView+Uploadcare.m */,
+				44B0D3D81DB7B45E003CE6EB /* UIImage+Bundle.h */,
+				44B0D3D91DB7B45E003CE6EB /* UIImage+Bundle.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -729,6 +735,7 @@
 				A6BA7331C6B88B8DBD151FAAFDA175E4 /* NSURL+UCDN.h in Headers */,
 				A5A75CFE77F9E4E2E4190E06DD8DE00F /* UCAlbumGalleryCell.h in Headers */,
 				E2C4FF4A56633268DA3E3D7CC239B133 /* UCAPIRequest.h in Headers */,
+				44B0D3DA1DB7B45E003CE6EB /* UIImage+Bundle.h in Headers */,
 				5D8E7E1B73CE6FD5F9161D665668A108 /* UCClient+Social.h in Headers */,
 				5A85B6F8020C5DB713BBEA83A62B4B1A /* UCClient.h in Headers */,
 				D4AE09EED3CF97E4344524125FB27F94 /* UCClient_Private.h in Headers */,
@@ -908,6 +915,7 @@
 				003B1403D05E7C9811BB3DA496C9D792 /* UCSocialManager.m in Sources */,
 				CD7F0B8402DEA066E9972F944B3E81C3 /* UCSocialObject.m in Sources */,
 				8CE1C52F8282D4F4EC65B7FCF4F88864 /* UCSocialPath.m in Sources */,
+				44B0D3DC1DB7B45E003CE6EB /* UIImage+Bundle.m in Sources */,
 				963D6F9359686E37AFEE34802A6C6F07 /* UCSocialRequest.m in Sources */,
 				9E3CFC527B28F760C06BEC1B0E0C6346 /* UCSocialSource.m in Sources */,
 				678270A5AFD7AC8C8E8EB49B4FE6893F /* UCSocialSourceCell.m in Sources */,

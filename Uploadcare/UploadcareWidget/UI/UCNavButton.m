@@ -7,6 +7,7 @@
 //
 
 #import "UCNavButton.h"
+#import "UIImage+Bundle.h"
 
 @implementation UCNavButton
 
@@ -18,7 +19,7 @@
         [self.titleLabel setFont:[UIFont boldSystemFontOfSize:[UIFont labelFontSize]]];
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self setBackgroundColor:[UIColor clearColor]];
-        [self setImage:[UIImage imageNamed:@"nav-arrow.png"] forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"nav-arrow.png" inBundle:[NSBundle bundleForClass:self.class]] forState:UIControlStateNormal];
     }
     return self;
 }

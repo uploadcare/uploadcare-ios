@@ -19,6 +19,7 @@
 #import "UCConstantsHeader.h"
 #import "UCSocialManager.h"
 #import "UCSocialSourceCell.h"
+#import "UIImage+Bundle.h"
 
 #define SCREEN_NAME @"Social sources"
 
@@ -160,7 +161,7 @@ NSString * const UCWidgetResponseLocalThumbnailResponseKey = @"local_thumbnail";
     NSString *socialName = [social.sourceName stringByReplacingCharactersInRange:NSMakeRange(0,1)
                                                               withString:[[social.sourceName substringToIndex:1] capitalizedString]];
     cell.socialName.text = socialName;
-    cell.socialImage.image = [UIImage imageNamed:[social.sourceName stringByAppendingPathExtension:@"png"]];
+    cell.socialImage.image = [UIImage imageNamed:[social.sourceName stringByAppendingPathExtension:@"png"] inBundle:[NSBundle bundleForClass:self.class]];
     return cell;
 }
 
