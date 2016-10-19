@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.authors      = { 'Ruslan Kavetsky' => 'rusya.182@gmail.com' }
   s.source       = { :git => 'https://github.com/uploadcare/uploadcare-ios.git', :tag => s.version.to_s }
   s.source_files = 'Uploadcare/UploadcareWidget/**/*.{h,m}'
-  s.resources    = 'Uploadcare/UploadcareWidget/*.xcassets', 'Uploadcare/UploadcareWidget/**/*.xib'
+  s.resources    = 'Uploadcare/UploadcareWidget/Resources/**/*.{png,xib}'
   s.requires_arc = true
   s.platform     = :ios, '8.0'
   s.frameworks   = 'SafariServices'

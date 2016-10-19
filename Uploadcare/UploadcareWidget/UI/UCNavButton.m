@@ -18,7 +18,7 @@
         [self.titleLabel setFont:[UIFont boldSystemFontOfSize:[UIFont labelFontSize]]];
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self setBackgroundColor:[UIColor clearColor]];
-        [self setImage:[UIImage imageNamed:@"nav-arrow"] forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"nav-arrow.png"] forState:UIControlStateNormal];
     }
     return self;
 }

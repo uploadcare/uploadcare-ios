@@ -49,7 +49,7 @@ NSString * const UCWidgetResponseLocalThumbnailResponseKey = @"local_thumbnail";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.tableView registerNib:[UINib nibWithNibName:@"UCSocialSourceCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass(UCSocialSourceCell.class) bundle:[NSBundle bundleForClass:UCSocialSourceCell.class]] forCellReuseIdentifier:@"cell"];
     self.navigationItem.title = SCREEN_NAME;
 
     [self setupLoadingSpinner];
@@ -160,7 +160,7 @@ NSString * const UCWidgetResponseLocalThumbnailResponseKey = @"local_thumbnail";
     NSString *socialName = [social.sourceName stringByReplacingCharactersInRange:NSMakeRange(0,1)
                                                               withString:[[social.sourceName substringToIndex:1] capitalizedString]];
     cell.socialName.text = socialName;
-    cell.socialImage.image = [UIImage imageNamed:social.sourceName];
+    cell.socialImage.image = [UIImage imageNamed:[social.sourceName stringByAppendingPathExtension:@"png"]];
     return cell;
 }
 

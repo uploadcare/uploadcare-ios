@@ -24,7 +24,7 @@
 @implementation UCMenuViewController
 
 - (id)initWithProgress:(UCProgressBlock)progress completion:(UCWidgetCompletionBlock)completion {
-    self = [super init];
+    self = [super initWithNibName:NSStringFromClass(self.class) bundle:[NSBundle bundleForClass:self.class]];
     if (self) {
         self.completionBlock = completion;
         self.progressBlock = progress;

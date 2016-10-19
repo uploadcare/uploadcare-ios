@@ -12,10 +12,7 @@
     "tag": "3.0.1"
   },
   "source_files": "Uploadcare/UploadcareWidget/**/*.{h,m}",
-  "resources": [
-    "Uploadcare/UploadcareWidget/*.xcassets",
-    "Uploadcare/UploadcareWidget/**/*.xib"
-  ],
+  "resources": "Uploadcare/UploadcareWidget/Resources/**/*.{png,xib}",
   "requires_arc": true,
   "platforms": {
     "ios": "8.0"

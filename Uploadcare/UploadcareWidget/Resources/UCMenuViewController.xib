@@ -16,12 +16,12 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="fVP-B4-Av9">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2x-WV-nHr">
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" image="files-intro" translatesAutoresizingMaskIntoConstraints="NO" id="5rP-b6-z3f">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" image="files-intro.png" translatesAutoresizingMaskIntoConstraints="NO" id="5rP-b6-z3f">
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="5rP-b6-z3f" secondAttribute="height" multiplier="151:105" id="wuy-WA-xkb"/>
                             </constraints>
@@ -32,7 +32,8 @@
                                 <constraint firstAttribute="width" constant="240" id="ffJ-AG-hH8"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                            <state key="normal" title="  and more" image="socials"/>
+                            <color key="tintColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" title="  and more" image="socials.png"/>
                             <connections>
                                 <action selector="didPressSocial:" destination="-1" eventType="touchUpInside" id="Itd-TF-Fvc"/>
                             </connections>
@@ -111,13 +112,13 @@
         </view>
     </objects>
     <resources>
-        <image name="files-intro" width="151" height="105"/>
-        <image name="socials" width="96" height="17"/>
+        <image name="files-intro.png" width="151" height="105"/>
+        <image name="socials.png" width="96" height="17"/>
         <image name="uploadcare" width="15" height="15"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_0.fullscreen"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
 </document>
