@@ -26,6 +26,7 @@ NSString * const UCWidgetResponseLocalThumbnailResponseKey = @"local_thumbnail";
 
 @interface UCWidgetVC ()
 
+@property (nonatomic, strong) UIActivityIndicatorView *loadingSpinner;
 @property (nonatomic, strong) NSArray<UCSocialSource *> *tableData;
 @property (nonatomic, strong) UCSocialSource *source;
 @property (nonatomic, copy) UCWidgetCompletionBlock completionBlock;
@@ -47,14 +48,40 @@ NSString * const UCWidgetResponseLocalThumbnailResponseKey = @"local_thumbnail";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [self.tableView registerNib:[UINib nibWithNibName:@"UCSocialSourceCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.navigationItem.title = SCREEN_NAME;
-    [self fetchSocialSources];
+
+    [self setupLoadingSpinner];
     [self setupNavigationItems];
+    [self fetchSocialSources];
+}
+
+- (void)setupLoadingSpinner {
+    self.loadingSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.loadingSpinner.color = [UIColor lightGrayColor];
+    self.loadingSpinner.hidesWhenStopped = YES;
+    self.loadingSpinner.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:self.loadingSpinner];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.loadingSpinner
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1 constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.loadingSpinner
+                                                          attribute:NSLayoutAttributeCenterY
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterY
+                                                         multiplier:1 constant:0]];
 }
 
 - (void)setupNavigationItems {
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(didPressClose:)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Close"
+                                                                  style:UIBarButtonItemStyleDone
+                                                                 target:self
+                                                                 action:@selector(didPressClose:)];
     [self.navigationItem setRightBarButtonItem:rightItem];
 }
 
@@ -79,9 +106,15 @@ NSString * const UCWidgetResponseLocalThumbnailResponseKey = @"local_thumbnail";
 }
 
 - (void)fetchSocialSources {
+
+    [self.loadingSpinner startAnimating];
+    self.tableView.scrollEnabled = NO;
+
     __weak __typeof(self) weakSelf = self;
     [SharedSocialManager fetchSocialSourcesWithCompletion:^(NSArray<UCSocialSource *> *response, NSError *error) {
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
+        self.tableView.scrollEnabled = YES;
+        [self.loadingSpinner stopAnimating];
         if (response) {
             strongSelf.tableData = response;
             [strongSelf.tableView reloadData];

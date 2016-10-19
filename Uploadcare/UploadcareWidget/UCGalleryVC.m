@@ -58,10 +58,10 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 @property (nonatomic, strong) UIViewController *webVC;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, assign) NSUInteger retryCount;
+@property (nonatomic, strong) UIActivityIndicatorView *loadingSpinner;
 
 @property (nonatomic, copy) UCWidgetCompletionBlock completionBlock;
 @property (nonatomic, copy) UCProgressBlock progressBlock;
-@property (nonatomic, copy) UCCompletionBlock responseBlock;
 
 @end
 
@@ -70,7 +70,8 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 - (id)initWithSource:(UCSocialSource *)source
            rootChunk:(UCSocialChunk *)rootChunk
             progress:(UCProgressBlock)progress
-          completion:(UCWidgetCompletionBlock)completion {
+          completion:(UCWidgetCompletionBlock)completion
+{
     self = [super initWithCollectionViewLayout:[[UCCollectionViewFlowLayout alloc] init]];
     if (self) {
         _completionBlock = completion;
@@ -83,11 +84,33 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [self setupCollectionView];
+    [self setupLoadingSpinner];
     [self setupSearchBarIfNeeded];
-    [self setupCenterButton];
+    [self setupCenterButtonIfNeeded];
     [self initialFetch];
     [self registerObservers];
+}
+
+- (void)setupLoadingSpinner {
+    self.loadingSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.loadingSpinner.color = [UIColor lightGrayColor];
+    self.loadingSpinner.hidesWhenStopped = YES;
+    self.loadingSpinner.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:self.loadingSpinner];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.loadingSpinner
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1 constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.loadingSpinner
+                                                          attribute:NSLayoutAttributeCenterY
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterY
+                                                         multiplier:1 constant:0]];
 }
 
 - (void)setupCollectionView {
@@ -152,49 +175,53 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 }
 
 - (void)initialFetch {
-    [self queryObjectOrLoginAddressForSource:self.source rootChunk:self.rootChunk path:self.entry ? self.entry.action.path.fullPath : nil];
+    [self queryObjectOrLoginAddressForSource:self.source
+                                   rootChunk:self.rootChunk
+                                        path:self.entry ? self.entry.action.path.fullPath : nil
+                                 showSpinner:YES];
 }
 
 - (void)setupSearchBarIfNeeded {
     if ([self.rootChunk.path isEqualToString:@"search"] && !self.searchBar) {
-        self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.collectionView.frame), 44)];
+
+        CGFloat const searchBarHeight = 44;
+
+        UISearchBar *searchBar = self.searchBar = [UISearchBar new];
+        self.searchBar.translatesAutoresizingMaskIntoConstraints = NO;
+        self.searchBar.placeholder = @"Search";
+        [self.view addSubview:self.searchBar];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[searchBar]|"
+                                                                          options:0
+                                                                          metrics:0
+                                                                            views:NSDictionaryOfVariableBindings(searchBar)]];
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.searchBar
+                                                              attribute:NSLayoutAttributeTop
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.topLayoutGuide
+                                                              attribute:NSLayoutAttributeBottom
+                                                             multiplier:1 constant:0]];
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.searchBar
+                                                              attribute:NSLayoutAttributeHeight
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:nil
+                                                              attribute:NSLayoutAttributeNotAnAttribute
+                                                             multiplier:1 constant:searchBarHeight]];
+
         self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
         self.searchBar.delegate = self;
-        [self.collectionView addSubview:self.searchBar];
-        [self.collectionView setContentOffset:CGPointMake(0, 44)];
+        [self.collectionView setContentInset:UIEdgeInsetsMake(self.topLayoutGuide.length + searchBarHeight, 0, 0, 0)];
+
+        [self.searchBar becomeFirstResponder];
+
     } else {
         if (self.searchBar) {
             [self.searchBar removeFromSuperview];
             self.searchBar = nil;
+            [self.collectionView setContentInset:UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0)];
+
+            [self.searchBar resignFirstResponder];
         }
     }
-}
-
-- (void(^)(id response, NSError *error))responseBlock {
-    if (!_responseBlock) {
-        __weak __typeof(self) weakSelf = self;
-        _responseBlock = ^(id response, NSError *error){
-            __strong __typeof__(weakSelf) strongSelf = weakSelf;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (!error) {
-                    NSString *loginAddress = [response objectForKey:@"inapp_login_link"];
-                    if (loginAddress) {
-                        [strongSelf loginUsingAddress:loginAddress];
-                    } else if ([response[@"obj_type"] isEqualToString:@"error"]) {
-                        NSError *error = [NSError errorWithDomain:[UCClient socialErrorDomain] code:UCErrorUploadcare
-                                                         userInfo:@{NSLocalizedDescriptionKey : response[@"error"]}];
-                        [strongSelf handleError:error];
-                    } else {
-                        [strongSelf processData:response];
-                    }
-                    
-                } else {
-                    [strongSelf handleError:error];
-                }
-            });
-        };
-    }
-    return _responseBlock;
 }
 
 - (void)handleError:(NSError *)error {
@@ -233,8 +260,36 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
     }
 }
 
-- (void)queryObjectOrLoginAddressForSource:(UCSocialSource *)source rootChunk:(UCSocialChunk *)rootChunk path:(NSString *)path {
-    [[UCClient defaultClient] performUCSocialRequest:[UCSocialEntriesRequest requestWithSource:source chunk:rootChunk path:path] completion:self.responseBlock];
+- (void)queryObjectOrLoginAddressForSource:(UCSocialSource *)source
+                                 rootChunk:(UCSocialChunk *)rootChunk
+                                      path:(NSString *)path
+                               showSpinner:(BOOL)showSpinner
+{
+    if (showSpinner) [self.loadingSpinner startAnimating];
+
+    __weak __typeof(self) weakSelf = self;
+    [[UCClient defaultClient] performUCSocialRequest:[UCSocialEntriesRequest requestWithSource:source chunk:rootChunk path:path]
+                                          completion:^(id response, NSError *error)
+    {
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!error) {
+                NSString *loginAddress = [response objectForKey:@"inapp_login_link"];
+                if (loginAddress) {
+                    [strongSelf loginUsingAddress:loginAddress];
+                } else if ([response[@"obj_type"] isEqualToString:@"error"]) {
+                    NSError *error = [NSError errorWithDomain:[UCClient socialErrorDomain] code:UCErrorUploadcare
+                                                     userInfo:@{NSLocalizedDescriptionKey : response[@"error"]}];
+                    [strongSelf handleError:error];
+                } else {
+                    [strongSelf processData:response];
+                }
+
+            } else {
+                [strongSelf handleError:error];
+            }
+        });
+    }];
 }
 
 - (void)processData:(id)responseData {
@@ -242,15 +297,20 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
     self.entriesCollection = collection;
 }
 
-- (void)setupCenterButton {
-    if (![self.navigationItem.titleView isKindOfClass:[UIButton class]]) {
+- (void)setupCenterButtonIfNeeded {
+
+    if (self.source.rootChunks.count > 1 && !self.entry && ![self.navigationItem.titleView isKindOfClass:[UIButton class]]) {
         UCNavButton *button = [[UCNavButton alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
         NSString *title = nil;
-        if (self.entry) title = self.entry.action.path.chunks.lastObject.title;
-        else title = self.rootChunk.title;
+        if (self.entry)
+            title = self.entry.action.path.chunks.lastObject.title;
+        else
+            title = self.rootChunk.title;
         [button setTitle:title forState:UIControlStateNormal];
         self.navigationItem.titleView = button;
         [button addTarget:self action:@selector(expandButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        self.navigationItem.title = self.entry.action.path.chunks.lastObject.title ?: self.rootChunk.title;
     }
 }
 
@@ -261,8 +321,8 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 - (void)didPressChunkSelector {
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Choose option" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-    }]];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+
     for (UCSocialChunk *chunk in self.source.rootChunks) {
         __block UCSocialChunk *blockChunk = chunk;
         [actionSheet addAction:[UIAlertAction actionWithTitle:chunk.title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -273,7 +333,10 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
             [self updateNavigationTitle];
             [self setupSearchBarIfNeeded];
             [self.collectionView reloadData];
-            [self queryObjectOrLoginAddressForSource:self.source rootChunk:blockChunk path:self.entriesCollection.path.fullPath];
+            [self queryObjectOrLoginAddressForSource:self.source
+                                           rootChunk:blockChunk
+                                                path:self.entriesCollection.path.fullPath
+                                         showSpinner:YES];
         }]];
     }
     [self presentViewController:actionSheet animated:YES completion:nil];
@@ -288,16 +351,26 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
 - (void)setEntriesCollection:(UCSocialEntriesCollection *)entriesCollection {
     if ([self.refreshControl isRefreshing]) [self.refreshControl endRefreshing];
+    [self.loadingSpinner stopAnimating];
     self.isLastPage = !entriesCollection.nextPage.fullPath.length;
-    [self appendDataFromCollection:entriesCollection];
+
+    if (self.nextPageFetchStarted) {
+        [self appendDataFromCollection:entriesCollection];
+    } else {
+        _entriesCollection = entriesCollection;
+        [self.collectionView reloadData];
+    }
 }
 
 - (void)appendDataFromCollection:(UCSocialEntriesCollection *)entriesCollection {
     self.nextPageFetchStarted = NO;
+
     NSUInteger index = 0;
     if (_entriesCollection.entries.count) index = _entriesCollection.entries.count;
     NSUInteger length = entriesCollection.entries.count;
+
     _entriesCollection = [self collectionMergedWith:entriesCollection];
+
     [self.collectionView performBatchUpdates:^{
         NSMutableArray *indexPaths = @[].mutableCopy;
         for (NSUInteger i = index; i < index + length; i++) {
@@ -316,12 +389,18 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
 - (void)refresh {
     _entriesCollection = nil;
-    [self.collectionView reloadData];
-    [self initialFetch];
+
+    [self queryObjectOrLoginAddressForSource:self.source
+                                   rootChunk:self.rootChunk
+                                        path:self.entry ? self.entry.action.path.fullPath : nil
+                                 showSpinner:NO];
 }
 
 - (void)search:(NSString *)text {
-    [self queryObjectOrLoginAddressForSource:self.source rootChunk:self.entriesCollection.root path:[NSString stringWithFormat:@"-/%@", text]];
+    [self queryObjectOrLoginAddressForSource:self.source
+                                   rootChunk:self.entriesCollection.root
+                                        path:[NSString stringWithFormat:@"-/%@", text]
+                                 showSpinner:YES];
     self.collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeNone;
     if (self.entriesCollection) {
         _entriesCollection = nil;
@@ -331,7 +410,10 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 }
 
 - (void)loadNextPage {
-    [self queryObjectOrLoginAddressForSource:self.source rootChunk:self.entriesCollection.root path:self.entriesCollection.nextPage.fullPath];
+    [self queryObjectOrLoginAddressForSource:self.source
+                                   rootChunk:self.entriesCollection.root
+                                        path:self.entriesCollection.nextPage.fullPath
+                                 showSpinner:NO];
 }
 
 - (void)uploadSocialEntry:(UCSocialEntry *)entry withThumbnail:(UIImage *)thumbnail {
@@ -390,7 +472,10 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     CGSize bounds = self.view.bounds.size;
     switch (self.entriesCollection.galleryMode) {
         case UCGalleryModeGrid: {
@@ -422,7 +507,10 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
     return CGSizeMake(bounds.width, LIST_ROW_HEIGHT);
 }
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+                        layout:(UICollectionViewLayout*)collectionViewLayout
+        insetForSectionAtIndex:(NSInteger)section
+{
     if (self.entriesCollection.galleryMode == UCGalleryModeAlbumsGrid) {
         CGFloat spacing = ALBUM_SPACING;
         return UIEdgeInsetsMake(self.searchBar ? spacing + 44.0 : spacing, spacing, spacing, spacing);
@@ -431,7 +519,10 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
     }
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout*)collectionViewLayout
+minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
     if (self.entriesCollection.galleryMode == UCGalleryModeAlbumsGrid) {
         CGFloat spacing = ALBUM_SPACING;
         return spacing;
@@ -441,7 +532,10 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
     }
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout*)collectionViewLayout
+minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
     if (self.entriesCollection.galleryMode == UCGalleryModeAlbumsGrid) {
         CGFloat spacing = ALBUM_SPACING;
         return spacing;
@@ -463,7 +557,9 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
     return self.entriesCollection.entries.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     UCSocialEntry *entry = self.entriesCollection.entries[indexPath.row];
     UICollectionViewCell<UCGalleryCellProtocol> *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[[self cellClassForMode:self.entriesCollection.galleryMode] cellIdentifier] forIndexPath:indexPath];
     [cell setSocialEntry:entry];
@@ -472,7 +568,10 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
 #pragma mark <UICollectionViewDelegate>
 
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(UICollectionView *)collectionView
+       willDisplayCell:(UICollectionViewCell *)cell
+    forItemAtIndexPath:(NSIndexPath *)indexPath
+{
     if (!self.isLastPage && indexPath.row == self.entriesCollection.entries.count - 1 && !self.nextPageFetchStarted && self.entriesCollection) {
         self.nextPageFetchStarted = YES;
         [self loadNextPage];
@@ -484,6 +583,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+
     UCSocialEntry *entry = self.entriesCollection.entries[indexPath.row];
     UCSocialEntryActionType actionType = entry.action.actionType;
 
@@ -506,7 +606,10 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 }
 
 - (void)openGalleryWithEntry:(UCSocialEntry *)entry {
-    UCGalleryVC *gallery = [[UCGalleryVC alloc] initWithSource:self.source rootChunk:self.rootChunk progress:self.progressBlock completion:self.completionBlock];
+    UCGalleryVC *gallery = [[UCGalleryVC alloc] initWithSource:self.source
+                                                     rootChunk:self.rootChunk
+                                                      progress:self.progressBlock
+                                                    completion:self.completionBlock];
     gallery.entry = entry;
     [self.navigationController pushViewController:gallery animated:YES];
 }

@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface UCSocialRequest : NSObject
+
 @property (nonatomic, strong) NSDictionary *parameters;
 @property (nonatomic, strong) NSDictionary *headers;
 @property (nonatomic, strong) NSString *path;
 
 - (NSMutableURLRequest *)request;
+
 @end

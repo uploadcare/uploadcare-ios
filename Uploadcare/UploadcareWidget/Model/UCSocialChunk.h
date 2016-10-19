@@ -10,6 +10,8 @@
 #import "UCSocialObject.h"
 
 @interface UCSocialChunk : UCSocialObject
+
 @property (nonatomic, strong) NSString *path;
 @property (nonatomic, strong) NSString *title;
+
 @end
