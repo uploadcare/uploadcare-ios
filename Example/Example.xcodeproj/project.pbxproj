@@ -15,7 +15,6 @@
 		44739F831DB6281400C19841 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44739F821DB6281400C19841 /* Assets.xcassets */; };
 		44739F8F1DB6282900C19841 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44739F8B1DB6282900C19841 /* LaunchScreen.storyboard */; };
 		44739F901DB6282900C19841 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44739F8D1DB6282900C19841 /* Main.storyboard */; };
-		44739F921DB6283300C19841 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44739F911DB6283300C19841 /* Info.plist */; };
 		44739F941DB6283B00C19841 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 44739F931DB6283B00C19841 /* main.m */; };
 		EA6C6F8853C527EF8AF7FDF4 /* libPods-Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2345076892959ACAE061CBBA /* libPods-Example.a */; };
 /* End PBXBuildFile section */
@@ -196,7 +195,6 @@
 				44739F8F1DB6282900C19841 /* LaunchScreen.storyboard in Resources */,
 				44739F781DB6276800C19841 /* testimage.jpg in Resources */,
 				44739F831DB6281400C19841 /* Assets.xcassets in Resources */,
-				44739F921DB6283300C19841 /* Info.plist in Resources */,
 				44739F901DB6282900C19841 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
