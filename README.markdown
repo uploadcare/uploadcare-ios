@@ -86,7 +86,7 @@ To display the Uploadcare Widget, you must create and initialize an instance of 
 
 UCMenuViewController *menu = [[UCMenuViewController alloc] initWithProgress:^(NSUInteger bytesSent, NSUInteger bytesExpectedToSend) {
     // handle progress here
-} completion:^(NSString *fileId, NSError *error) {
+} completion:^(NSString *fileId, id response, NSError *error) {
     if (!error) {
         // handle success
     } else {
@@ -113,8 +113,8 @@ After you receive a list of social sources, you can choose one and use it for in
 ```objc
 - (id)initWithSource:(UCSocialSource *)source
            rootChunk:(UCSocialChunk *)rootChunk
-            progress:(void(^)(NSUInteger bytesSent, NSUInteger bytesExpectedToSend))progress
-          completion:(void(^)(NSString *fileId, NSError *error))completion;
+            progress:(UCProgressBlock)progress
+          completion:(UCWidgetCompletionBlock)completion;
 ```
 
 ### Core level features only
