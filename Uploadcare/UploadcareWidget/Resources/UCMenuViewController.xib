@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UCMenuViewController">
+            <connections>
+                <outlet property="imageView" destination="5rP-b6-z3f" id="NsV-K4-PF6"/>
+                <outlet property="localFileButton" destination="uH9-h6-xjY" id="2LR-7M-mpZ"/>
+                <outlet property="socialButton" destination="aM1-L8-6zS" id="L3a-J7-IX5"/>
+                <outlet property="view" destination="fVP-B4-Av9" id="edb-aE-iX3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="fVP-B4-Av9">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2x-WV-nHr">
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" image="files-intro.png" translatesAutoresizingMaskIntoConstraints="NO" id="5rP-b6-z3f">
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="5rP-b6-z3f" secondAttribute="height" multiplier="151:105" id="wuy-WA-xkb"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aM1-L8-6zS">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="SOX-T0-TIB"/>
+                                <constraint firstAttribute="width" constant="240" id="ffJ-AG-hH8"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                            <color key="tintColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" title="  and more" image="socials.png"/>
+                            <connections>
+                                <action selector="didPressSocial:" destination="-1" eventType="touchUpInside" id="Itd-TF-Fvc"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="or choose from" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mnh-rg-iuU">
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uH9-h6-xjY">
+                            <color key="backgroundColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="06F-en-GTS"/>
+                                <constraint firstAttribute="width" constant="240" id="hJJ-6b-HTj"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                            <state key="normal" title="Choose a local file">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="didPressLocalFile:" destination="-1" eventType="touchUpInside" id="M8T-Ah-lZm"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="Mnh-rg-iuU" firstAttribute="top" secondItem="uH9-h6-xjY" secondAttribute="bottom" constant="15" id="06Y-Jh-Oxk"/>
+                        <constraint firstItem="5rP-b6-z3f" firstAttribute="centerX" secondItem="u2x-WV-nHr" secondAttribute="centerX" id="Zkk-48-doQ"/>
+                        <constraint firstItem="aM1-L8-6zS" firstAttribute="centerX" secondItem="u2x-WV-nHr" secondAttribute="centerX" id="bpH-oL-sAl"/>
+                        <constraint firstItem="Mnh-rg-iuU" firstAttribute="centerX" secondItem="u2x-WV-nHr" secondAttribute="centerX" id="cr0-hW-zgk"/>
+                        <constraint firstItem="aM1-L8-6zS" firstAttribute="top" secondItem="Mnh-rg-iuU" secondAttribute="bottom" constant="15" id="lEC-AN-K7o"/>
+                        <constraint firstAttribute="bottom" secondItem="aM1-L8-6zS" secondAttribute="bottom" id="p1q-A5-lU3"/>
+                        <constraint firstItem="5rP-b6-z3f" firstAttribute="top" secondItem="u2x-WV-nHr" secondAttribute="top" id="s4n-l9-yAW"/>
+                        <constraint firstItem="uH9-h6-xjY" firstAttribute="centerX" secondItem="u2x-WV-nHr" secondAttribute="centerX" id="w47-PF-PeB"/>
+                        <constraint firstItem="uH9-h6-xjY" firstAttribute="top" secondItem="5rP-b6-z3f" secondAttribute="bottom" constant="30" id="zJW-p9-xaj"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NuX-YG-20v">
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="uploadcare" translatesAutoresizingMaskIntoConstraints="NO" id="oEZ-VP-g1z"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uploadcare" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fTq-Y6-BaT">
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCq-3y-cOk">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="Oqe-KH-HCS"/>
+                    </constraints>
+                    <connections>
+                        <action selector="didPressUploadcare:" destination="-1" eventType="touchUpInside" id="H8S-BH-ext"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="u2x-WV-nHr" firstAttribute="leading" secondItem="fVP-B4-Av9" secondAttribute="leading" id="2Gy-Eg-8M3"/>
+                <constraint firstAttribute="bottom" secondItem="oEZ-VP-g1z" secondAttribute="bottom" constant="13" id="38z-PO-J2o"/>
+                <constraint firstItem="oEZ-VP-g1z" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aM1-L8-6zS" secondAttribute="bottom" constant="20" id="7MW-LV-IZv"/>
+                <constraint firstItem="u2x-WV-nHr" firstAttribute="centerY" secondItem="fVP-B4-Av9" secondAttribute="centerY" priority="740" id="9hb-OA-kcr"/>
+                <constraint firstItem="RCq-3y-cOk" firstAttribute="centerX" secondItem="u2x-WV-nHr" secondAttribute="centerX" id="9zG-e2-G7r"/>
+                <constraint firstItem="RCq-3y-cOk" firstAttribute="trailing" secondItem="fTq-Y6-BaT" secondAttribute="trailing" id="M03-tw-dd3"/>
+                <constraint firstItem="NuX-YG-20v" firstAttribute="baseline" secondItem="fTq-Y6-BaT" secondAttribute="baseline" id="Pxx-ze-vrg"/>
+                <constraint firstAttribute="bottom" secondItem="RCq-3y-cOk" secondAttribute="bottom" id="QMD-UP-V56"/>
+                <constraint firstItem="fTq-Y6-BaT" firstAttribute="centerY" secondItem="oEZ-VP-g1z" secondAttribute="centerY" id="TYB-Ul-86Z"/>
+                <constraint firstItem="5rP-b6-z3f" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fVP-B4-Av9" secondAttribute="top" constant="20" placeholder="YES" id="WdP-Iy-xve"/>
+                <constraint firstAttribute="trailing" secondItem="u2x-WV-nHr" secondAttribute="trailing" id="Y3K-rO-dej"/>
+                <constraint firstItem="fTq-Y6-BaT" firstAttribute="leading" secondItem="oEZ-VP-g1z" secondAttribute="trailing" constant="3" id="YMh-Kl-OMv"/>
+                <constraint firstItem="oEZ-VP-g1z" firstAttribute="leading" secondItem="NuX-YG-20v" secondAttribute="trailing" constant="6" id="bs7-fn-3YB"/>
+                <constraint firstItem="RCq-3y-cOk" firstAttribute="leading" secondItem="NuX-YG-20v" secondAttribute="leading" id="yK0-sl-Gwc"/>
+            </constraints>
+            <point key="canvasLocation" x="688" y="416"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="files-intro.png" width="151" height="105"/>
+        <image name="socials.png" width="96" height="17"/>
+        <image name="uploadcare" width="15" height="15"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
+</document>
