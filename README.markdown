@@ -1,7 +1,5 @@
 # Uploadcare for iOS
 
-## What it is
-
 **[Uploadcare](http://uploadcare.com)** is a [PaaS](https://en.wikipedia.org/wiki/Platform_as_a_service), providing file handling mechanisms for web sites and mobile applications.
 
 **Uploadcare for iOS** is an open source Objective-C component that brings Uploadcare features to your iOS apps. It consists of two general parts: **UploadcareKit** and **Uploadcare Widget**.
@@ -17,7 +15,7 @@ Here's what it looks like:
 
 ## Quickstart
 
-### Installation
+### Install
 
 Uploadcare for iOS uses [CocoaPods](http://cocoapods.org), a library dependency management tool for Objective-C projects. To install Uploadcare for iOS in your project, just add the following line to your [Podfile](https://github.com/CocoaPods/CocoaPods/wiki/A-Podfile):
 
@@ -29,8 +27,8 @@ Then, run `pod install` in your project directory.
 
 Make sure to use the `.xcworkspace` file from now on.
 
-### Widget quick install guide
-#### Setup environment
+### Setup
+#### Environment
 
 Import `Uploadcare.h` header to your implementation.
 Set up uploadcare public key as following in your application delegate:
@@ -45,18 +43,18 @@ Set up uploadcare public key as following in your application delegate:
 }
 ```
 
-#### Set up iCloud entitlements
+#### iCloud entitlements
 Uploadcare widget uses `UIDocumentMenuViewController`, so you need to enable iCloud in your application. 
 Go to **Target** -> **Capabilities** and enable iCloud. Set both `Key-value storage` and `iCloud Documents` options enabled:
 ![iCloud settings](https://ucarecdn.com/738d9b6f-517d-417c-b048-d0d08a411e80/)
 
-#### Set up custom url scheme
-Uploadcare widget uses `SFSafariViewController` on IOS 9 and `UIWebView` on prior versions
+#### Custom url scheme
+Uploadcare widget uses `SFSafariViewController` on iOS 9+ and `UIWebView` on prior versions
 for authentification. In this case it should handle url callbacks through custom url
 scheme from application delegate methods:
 
 ```objc
-// IOS 9
+// IOS 9+
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
     return [[UCClient defaultClient] handleURL:url];
 }
@@ -73,6 +71,10 @@ In order to add custom url scheme, perform the following steps:
 
 ![Custom url scheme](https://ucarecdn.com/7426b014-7888-49dc-a44d-3c8655567796/)
 
+#### `NSPhotoLibraryUsageDescription` on iOS 10
+Uploadcare widget uses `UIImagePickerController` to upload files from camera roll. Don't forget to add  `NSPhotoLibraryUsageDescription` key to your project `Info.plist` file to prevent app from crash in runtime.
+
+### Show
 #### Init and present widget
 
 To display the Uploadcare Widget, you must create and initialize an instance of [`UCMenuViewController`](https://github.com/uploadcare/uploadcare-ios/UploadcareWidget/UCMenuViewController.h) by invoking `initWithProgress:completion:` method:
@@ -128,7 +130,7 @@ Please notice, that `Uploadcare.h` header won't be included in this case, so you
 
 ## Sample App
 
-Please take a look at the [Example Project](https://github.com/uploadcare/uploadcare-ios/tree/master/Examples/ExampleProject). 
+Please take a look at the [Example Project](https://github.com/uploadcare/uploadcare-ios/tree/master/Example). 
 
 ## Contact
 
