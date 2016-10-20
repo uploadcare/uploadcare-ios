@@ -15,7 +15,6 @@
 #import "UCSocialSource.h"
 #import "NSString+EncodeRFC3986.h"
 #import "UCFileUploadRequest.h"
-#import "UIImage+Bundle.h"
 
 @interface UCSocialManager () <UIDocumentMenuDelegate, UIDocumentPickerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -64,7 +63,7 @@ static UCSocialManager *instanceSocialManager = nil;
     self.progressBlock = progressBlock;
     self.rootController = viewController;
     UIDocumentMenuViewController *menu = [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[@"public.data"] inMode:UIDocumentPickerModeImport];
-    [menu addOptionWithTitle:@"Photo and video" image:[UIImage imageNamed:@"camera.png" inBundle:[NSBundle bundleForClass:self.class]] order:UIDocumentMenuOrderFirst handler:^{
+    [menu addOptionWithTitle:@"Photo and video" image:[UIImage imageNamed:@"camera.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] order:UIDocumentMenuOrderFirst handler:^{
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
         picker.modalPresentationStyle = UIModalPresentationFormSheet;
