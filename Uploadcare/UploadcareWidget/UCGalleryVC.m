@@ -209,7 +209,9 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
         self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
         self.searchBar.delegate = self;
-        [self.collectionView setContentInset:UIEdgeInsetsMake(self.topLayoutGuide.length + searchBarHeight, 0, 0, 0)];
+        self.collectionView.scrollIndicatorInsets =
+        self.collectionView.contentInset = UIEdgeInsetsMake(self.topLayoutGuide.length + searchBarHeight, 0, 0, 0);
+
 
         [self.searchBar becomeFirstResponder];
 
@@ -217,7 +219,8 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
         if (self.searchBar) {
             [self.searchBar removeFromSuperview];
             self.searchBar = nil;
-            [self.collectionView setContentInset:UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0)];
+            self.collectionView.scrollIndicatorInsets =
+            self.collectionView.contentInset = UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0);
 
             [self.searchBar resignFirstResponder];
         }
