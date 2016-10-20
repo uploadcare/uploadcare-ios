@@ -112,7 +112,7 @@ NSString * const UCWidgetResponseLocalThumbnailResponseKey = @"local_thumbnail";
 
     __weak __typeof(self) weakSelf = self;
     [SharedSocialManager fetchSocialSourcesWithCompletion:^(NSArray<UCSocialSource *> *response, NSError *error) {
-        __strong __typeof__(weakSelf) strongSelf = weakSelf;
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
         self.tableView.scrollEnabled = YES;
         [self.loadingSpinner stopAnimating];
         if (response) {

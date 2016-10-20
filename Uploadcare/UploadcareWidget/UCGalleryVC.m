@@ -245,7 +245,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
     
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_4) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            __strong __typeof(weakSelf) strongSelf = weakSelf;
             SFSafariViewController *svc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] entersReaderIfAvailable:NO];
             svc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
             svc.delegate = self;
@@ -254,7 +254,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
         });
     } else {
         self.webVC = [[UCWebViewController alloc] initWithURL:[NSURL URLWithString:loginAddress] cancelBlock:^{
-            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            __strong __typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf.navigationController popToRootViewControllerAnimated:YES];
         }];
         UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:self.webVC];
@@ -274,7 +274,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
     [[UCClient defaultClient] performUCSocialRequest:[UCSocialEntriesRequest requestWithSource:source chunk:rootChunk path:path]
                                           completion:^(id response, NSError *error)
     {
-        __strong __typeof__(weakSelf) strongSelf = weakSelf;
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
         dispatch_async(dispatch_get_main_queue(), ^{
             if (!error) {
                 NSString *loginAddress = [response objectForKey:@"inapp_login_link"];
@@ -434,7 +434,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
     __weak __typeof(self) weakSelf = self;
     [[UCClient defaultClient] performUCSocialRequest:req completion:^(id response, NSError *error) {
-        __strong __typeof__(weakSelf) strongSelf = weakSelf;
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
 
         if (!error && [response isKindOfClass:[NSDictionary class]]) {
             NSString *fileURL = response[@"url"];
@@ -442,7 +442,7 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
             [[UCClient defaultClient] performUCRequest:request progress:^(NSUInteger totalBytesSent, NSUInteger totalBytesExpectedToSend) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    if (weakSelf.progressBlock) weakSelf.progressBlock (totalBytesSent, totalBytesExpectedToSend);
+                    if (strongSelf.progressBlock) strongSelf.progressBlock (totalBytesSent, totalBytesExpectedToSend);
                 });
 
             } completion:^(id response, NSError *error) {
@@ -454,16 +454,16 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
                             [responseWithThumbnail addEntriesFromDictionary:result];
                             result = responseWithThumbnail.copy;
                         }
-                        if (weakSelf.completionBlock) weakSelf.completionBlock(response[@"file_id"], result, nil);
+                        if (strongSelf.completionBlock) strongSelf.completionBlock(response[@"file_id"], result, nil);
                     } else {
-                        if (weakSelf.completionBlock) weakSelf.completionBlock(nil, response, error);
+                        if (strongSelf.completionBlock) strongSelf.completionBlock(nil, response, error);
                     }
                 });
             }];
 
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (weakSelf.completionBlock) weakSelf.completionBlock(nil, nil, error);
+                if (strongSelf.completionBlock) strongSelf.completionBlock(nil, nil, error);
             });
         }
     }];
