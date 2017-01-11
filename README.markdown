@@ -136,6 +136,26 @@ Please take a look at the [Example Project](https://github.com/uploadcare/upload
 
 If you have any questions, bug reports or suggestions, [drop us a line](mailto:hello@uploadcare.com).
 
+## Contributors
+
+- [@zrxq](https://github.com/zrxq)
+- [@ynechaev](https://github.com/ynechaev)
+- [@dive](https://github.com/dive)
+- [@Rusik](https://github.com/Rusik)
+- [@dmitry-mukhin](https://github.com/dmitry-mukhin)
+- [@markbao](https://github.com/markbao)
+- [@homm](https://github.com/homm)
+
+## Security issues
+
+If you think you ran into something in Uploadcare libraries
+which might have security implications, please hit us up at
+[bugbounty@uploadcare.com](mailto:bugbounty@uploadcare.com)
+or Hackerone.
+
+We'll contact you personally in a short time to fix an issue
+through co-op and prior to any public disclosure.
+
 ## License 
 
 Uploadcare iOS is licensed under the MIT license (see `LICENSE`).
