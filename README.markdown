@@ -1,14 +1,26 @@
 # Uploadcare for iOS
 
-**[Uploadcare](http://uploadcare.com)** is a [PaaS](https://en.wikipedia.org/wiki/Platform_as_a_service), providing file handling mechanisms for web sites and mobile applications.
+[Uploadcare](https://uploadcare.com) is a
+[PaaS](https://en.wikipedia.org/wiki/Platform_as_a_service)
+providing file handling mechanisms for websites and apps.
+This also includes on-the-fly image processing
+with Uploadcare [CDN API](https://uploadcare.com/documentation/cdn/).
 
-**Uploadcare for iOS** is an open source Objective-C component that brings Uploadcare features to your iOS apps. It consists of two general parts: **UploadcareKit** and **Uploadcare Widget**.
+**Uploadcare for iOS** is an open source Objective-C component that
+powers your iOS apps with Uploadcare features.
+It's made up of the two key parts: **UploadcareKit** and **Uploadcare Widget**.
 
-**UploadcareKit** is a core-level abstract layer, responsible for API communication within upload and download tasks.
+**UploadcareKit** is a core-level abstract layer responsible
+for API communications within upload and download tasks.
 
-**Uploadcare Widget**, a major component of Uploadcare for iOS, is what a modern, cloud-aware file picker for iOS would be, if iOS had a notion of files. Since iOS doesn't, you can think of Uploadcare Widget as a *thing* picker – a drop-in component, that allows your users to select and upload their *things* (photos, documents, whatever you want them to) to your service, via Uploadcare.
+**Uploadcare Widget** is a modern and cloud-aware file picker for iOS.
+Well, it could be if iOS had a notion of files. Since it doesn't, you
+can think of [Uploadcare Widget](https://uploadcare.com/documentation/widget/)
+as a *stuff* picker — a drop-in component that allows your users to pick
+and upload their digital *stuff* (photos, docs, and whatnot) to your website
+or app.
 
-Here's what it looks like:
+Here's what it looks like,
 
 ![Uploadcare for iOS menu](https://ucarecdn.com/6fd1868d-6cda-4282-b932-683fd1c0b837/-/stretch/off/-/resize/250x/) ![Facebook albums](https://ucarecdn.com/81da28a4-1522-4b44-8d03-8eea18b94dd4/-/stretch/off/-/resize/250x/)
 ![Instagram gallery](https://ucarecdn.com/2405cae1-e653-424f-af21-c244dda2d77f/-/stretch/off/-/resize/250x/)
@@ -17,7 +29,11 @@ Here's what it looks like:
 
 ### Install
 
-Uploadcare for iOS uses [CocoaPods](http://cocoapods.org), a library dependency management tool for Objective-C projects. To install Uploadcare for iOS in your project, just add the following line to your [Podfile](https://github.com/CocoaPods/CocoaPods/wiki/A-Podfile):
+Uploadcare for iOS uses [CocoaPods](http://cocoapods.org),
+a library dependency management tool for Objective-C projects.
+Implementing Uploadcare into your project is as simple as adding
+the following line to your
+[Podfile](https://github.com/CocoaPods/CocoaPods/wiki/A-Podfile),
 
 ```ruby
 pod 'Uploadcare'
@@ -31,7 +47,10 @@ Make sure to use the `.xcworkspace` file from now on.
 #### Environment
 
 Import `Uploadcare.h` header to your implementation.
-Set up uploadcare public key as following in your application delegate:
+[Grab](http://kb.uploadcare.com/article/234-uc-project-and-account)
+your Uploadcare API keys and use a public key
+as follows in your application delegate,
+
 ```objc
 #import <Uploadcare/Uploadcare.h>
 
@@ -44,14 +63,17 @@ Set up uploadcare public key as following in your application delegate:
 ```
 
 #### iCloud entitlements
-Uploadcare widget uses `UIDocumentMenuViewController`, so you need to enable iCloud in your application. 
-Go to **Target** -> **Capabilities** and enable iCloud. Set both `Key-value storage` and `iCloud Documents` options enabled:
+Uploadcare Widget uses `UIDocumentMenuViewController`,
+so you need to enable iCloud in your application. 
+Go to **Target** -> **Capabilities** and enable iCloud.
+Enable both `Key-value storage` and `iCloud Documents` options,
 ![iCloud settings](https://ucarecdn.com/738d9b6f-517d-417c-b048-d0d08a411e80/)
 
-#### Custom url scheme
-Uploadcare widget uses `SFSafariViewController` on iOS 9+ and `UIWebView` on prior versions
-for authentification. In this case it should handle url callbacks through custom url
-scheme from application delegate methods:
+#### Custom URL scheme
+Uploadcare Widget uses `SFSafariViewController` on iOS 9+ and
+`UIWebView` on prior versions for authentification.
+This allows it to handle URL callbacks through a custom URL
+scheme from application delegate methods,
 
 ```objc
 // IOS 9+
@@ -64,20 +86,27 @@ scheme from application delegate methods:
     return [[UCClient defaultClient] handleURL:url];
 }
 ```
-In order to add custom url scheme, perform the following steps:
-* Go to **Target** -> **Info** -> **URL types**
-* Add new url scheme with the following format: uc-\<public key\>
-* The final result should look similar to this:
+Adding a custom URL scheme requires taking the following steps:
+
+* Go to **Target** -> **Info** -> **URL types**.
+* Add a new URL scheme formatted like this, uc-\<public key\>.
+* The final result should look similar to this,
 
 ![Custom url scheme](https://ucarecdn.com/7426b014-7888-49dc-a44d-3c8655567796/)
 
 #### `NSPhotoLibraryUsageDescription` on iOS 10
-Uploadcare widget uses `UIImagePickerController` to upload files from camera roll. Don't forget to add  `NSPhotoLibraryUsageDescription` key to your project `Info.plist` file to prevent app from crash in runtime.
+Uploadcare Widget uses `UIImagePickerController` to upload files
+from Camera Roll. Don't forget to add `NSPhotoLibraryUsageDescription`
+key to your project `Info.plist` file to prevent an app from crashing
+in runtime.
 
 ### Show
 #### Init and present widget
 
-To display the Uploadcare Widget, you must create and initialize an instance of [`UCMenuViewController`](https://github.com/uploadcare/uploadcare-ios/UploadcareWidget/UCMenuViewController.h) by invoking `initWithProgress:completion:` method:
+Displaying Uploadcare Widget is done via creating and initializing
+an instance of 
+[`UCMenuViewController`](https://github.com/uploadcare/uploadcare-ios/UploadcareWidget/UCMenuViewController.h)
+by invoking the `initWithProgress:completion:` method,
 
 ```objc
 #import <Uploadcare/Uploadcare.h>
@@ -93,11 +122,9 @@ UCMenuViewController *menu = [[UCMenuViewController alloc] initWithProgress:^(NS
         // handle error
     }
 }];
-    
-    
 ```
 
-Then, present it with `presentFrom:` method:
+Then, present it with the `presentFrom:` method,
 
 ```objc
 [menu presentFrom:self];
@@ -105,11 +132,14 @@ Then, present it with `presentFrom:` method:
 
 ### Customization
 
-You can easily customize your social networks list apperance by implementing your own menu.
-In order to receive available social sources, you can use `fetchSocialSourcesWithCompletion:` method from
-`UCSocialManager`.
-After you receive a list of social sources, you can choose one and use it for instantiating
-`UCGalleryVC` with the following method:
+You can easily customize the appearance of a social sources list
+by implementing your own menu.
+In order to receive available social sources, you can use the
+`fetchSocialSourcesWithCompletion:` method from `UCSocialManager`.
+Upon receiving a list of social sources,
+you can choose one and use it for instantiating
+`UCGalleryVC` via the following method,
+
 ```objc
 - (id)initWithSource:(UCSocialSource *)source
            rootChunk:(UCSocialChunk *)rootChunk
@@ -119,22 +149,24 @@ After you receive a list of social sources, you can choose one and use it for in
 
 ### Core level features only
 
-In order to integrate core level features only, such as local and remote file upload operations, 
-you can use the following subspec:
+In order to integrate core level features only such as local
+and remote file upload operations, you can use the following subspec:
 
 ```ruby
 pod 'Uploadcare/Core'
 ```
 
-Please notice, that `Uploadcare.h` header won't be included in this case, so you'll have to use `UploadcareKit.h` instead.
+Please note, `Uploadcare.h` header won't be included in this case,
+and you'll have to use `UploadcareKit.h` instead.
 
 ## Sample App
 
-Please take a look at the [Example Project](https://github.com/uploadcare/uploadcare-ios/tree/master/Example). 
+Here's the [Example Project](https://github.com/uploadcare/uploadcare-ios/tree/master/Example). 
 
 ## Contact
 
-If you have any questions, bug reports or suggestions, [drop us a line](mailto:hello@uploadcare.com).
+If you got any questions, bug reports or suggestions —
+[drop us a line](mailto:hello@uploadcare.com).
 
 ## Contributors
 
