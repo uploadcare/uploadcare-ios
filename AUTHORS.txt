@@ -1,0 +1,10 @@
+# git log --format='%aN <%aE>' | sort -u
+
+Alexander Karpinsky <ak@uploadcare.com>
+Artyom Loenko <artyom.loenko@mac.com>
+Dmitry Mukhin <dm@uploadcare.com>
+Elijah <ilya@uploadcare.com>
+Mark Bao <mark@markbao.com>
+Ruslan Kavetsky <rusya.182@gmail.com>
+Yury Nechaev <nechaev.main@gmail.com>
+Zoreslav Khimich <zoreslav.khimich@gmail.com>
