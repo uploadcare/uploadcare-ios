@@ -39,7 +39,7 @@
 /**
  *  Turn an image to one of the following formats: JPEG or PNG.
  *
- *  @param Format UCDNFormat option.
+ *  @param format UCDNFormat option.
  *
  *  @return Formatted path url.
  */

@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareKit/NSDictionary+UrlEncoding.h
+../../../../../Uploadcare/Sources/UploadcareKit/NSDictionary+UrlEncoding.h

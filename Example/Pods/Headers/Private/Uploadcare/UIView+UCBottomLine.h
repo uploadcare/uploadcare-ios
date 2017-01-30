@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/UI/UIView+UCBottomLine.h
+../../../../../Uploadcare/Sources/UploadcareWidget/UI/UIView+UCBottomLine.h

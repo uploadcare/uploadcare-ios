@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareKit/UCConstantsHeader.h
+../../../../../Uploadcare/Sources/UploadcareKit/UCConstantsHeader.h

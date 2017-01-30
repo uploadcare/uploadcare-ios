@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareKit/UCClient.h
+../../../../../Uploadcare/Sources/UploadcareKit/UCClient.h

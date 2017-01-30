@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareKit/UCGroupInfoRequest.h
+../../../../../Uploadcare/Sources/UploadcareKit/UCGroupInfoRequest.h

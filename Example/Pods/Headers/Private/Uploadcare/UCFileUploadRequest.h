@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareKit/UCFileUploadRequest.h
+../../../../../Uploadcare/Sources/UploadcareKit/UCFileUploadRequest.h

@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/UI/UCWebViewController.h
+../../../../../Uploadcare/Sources/UploadcareWidget/UI/UCWebViewController.h

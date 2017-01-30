@@ -1,0 +1,8 @@
+language: objective-c
+osx_image: xcode8.2
+
+before_script:
+- gem install xcpretty-travis-formatter
+
+script:
+- xcodebuild -project Uploadcare/Uploadcare.xcodeproj -target Uploadcare clean build | xcpretty -f `xcpretty-travis-formatter`

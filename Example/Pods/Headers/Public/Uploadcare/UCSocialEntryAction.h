@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/Model/UCSocialEntryAction.h
+../../../../../Uploadcare/Sources/UploadcareWidget/Model/UCSocialEntryAction.h

@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/UploadcareWidget.h
+../../../../../Uploadcare/Sources/UploadcareWidget/UploadcareWidget.h

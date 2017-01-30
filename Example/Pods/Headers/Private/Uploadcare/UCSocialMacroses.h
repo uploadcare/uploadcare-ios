@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/Utilities/UCSocialMacroses.h
+../../../../../Uploadcare/Sources/UploadcareWidget/Utilities/UCSocialMacroses.h

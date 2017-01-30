@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/UCClient+Social.h
+../../../../../Uploadcare/Sources/UploadcareWidget/UCClient+Social.h

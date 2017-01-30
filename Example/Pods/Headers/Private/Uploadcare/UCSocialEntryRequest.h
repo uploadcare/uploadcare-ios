@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/Utilities/UCSocialEntryRequest.h
+../../../../../Uploadcare/Sources/UploadcareWidget/Utilities/UCSocialEntryRequest.h

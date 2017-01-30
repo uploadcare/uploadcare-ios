@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/UI/UCNavButton.h
+../../../../../Uploadcare/Sources/UploadcareWidget/UI/UCNavButton.h

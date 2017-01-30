@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/Model/UCSocialPath.h
+../../../../../Uploadcare/Sources/UploadcareWidget/Model/UCSocialPath.h

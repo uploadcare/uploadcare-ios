@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/Utilities/NSString+UCDN.h
+../../../../../Uploadcare/Sources/UploadcareWidget/Utilities/NSString+UCDN.h

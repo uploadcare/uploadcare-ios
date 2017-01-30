@@ -11,8 +11,8 @@
     "git": "https://github.com/uploadcare/uploadcare-ios.git",
     "tag": "3.0.1"
   },
-  "source_files": "Uploadcare/UploadcareWidget/**/*.{h,m}",
-  "resources": "Uploadcare/UploadcareWidget/Resources/**/*.{png,xib}",
+  "source_files": "Uploadcare/Sources/UploadcareWidget/**/*.{h,m}",
+  "resources": "Uploadcare/Sources/UploadcareWidget/Resources/**/*.{png,xib}",
   "requires_arc": true,
   "platforms": {
     "ios": "8.0"
@@ -21,8 +21,8 @@
   "subspecs": [
     {
       "name": "Core",
-      "source_files": "Uploadcare/UploadcareKit/*.{h,m}",
-      "private_header_files": "Uploadcare/UploadcareKit/UCClient_Private.h",
+      "source_files": "Uploadcare/Sources/UploadcareKit/*.{h,m}",
+      "private_header_files": "Uploadcare/Sources/UploadcareKit/UCClient_Private.h",
       "requires_arc": true,
       "platforms": {
         "ios": "8.0"

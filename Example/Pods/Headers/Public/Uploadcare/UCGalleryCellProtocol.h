@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/UI/UCGalleryCellProtocol.h
+../../../../../Uploadcare/Sources/UploadcareWidget/UI/UCGalleryCellProtocol.h

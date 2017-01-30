@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/Model/UCSocialChunk.h
+../../../../../Uploadcare/Sources/UploadcareWidget/Model/UCSocialChunk.h

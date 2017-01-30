@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/UI/UCGalleryCell.h
+../../../../../Uploadcare/Sources/UploadcareWidget/UI/UCGalleryCell.h

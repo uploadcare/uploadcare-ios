@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/Utilities/UCSocialManager.h
+../../../../../Uploadcare/Sources/UploadcareWidget/Utilities/UCSocialManager.h

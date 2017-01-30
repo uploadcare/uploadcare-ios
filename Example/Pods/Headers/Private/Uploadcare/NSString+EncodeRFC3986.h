@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareKit/NSString+EncodeRFC3986.h
+../../../../../Uploadcare/Sources/UploadcareKit/NSString+EncodeRFC3986.h

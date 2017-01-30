@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/Utilities/UCSocialConstantsHeader.h
+../../../../../Uploadcare/Sources/UploadcareWidget/Utilities/UCSocialConstantsHeader.h

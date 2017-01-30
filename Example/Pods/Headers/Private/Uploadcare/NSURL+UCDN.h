@@ -1,1 +1,1 @@
-../../../../../Uploadcare/UploadcareWidget/Utilities/NSURL+UCDN.h
+../../../../../Uploadcare/Sources/UploadcareWidget/Utilities/NSURL+UCDN.h
