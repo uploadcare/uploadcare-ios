@@ -11,4 +11,4 @@ before_script:
 - gem install xcpretty-travis-formatter
 
 script:
-- xcodebuild clean build $PARAMS | xcpretty -f `xcpretty-travis-formatter`
+- set -o pipefail && xcodebuild clean build $PARAMS | xcpretty -f `xcpretty-travis-formatter`
