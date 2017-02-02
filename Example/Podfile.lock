@@ -1,0 +1,21 @@
+PODS:
+  - SVProgressHUD (2.1.2)
+  - Uploadcare (3.0.1):
+    - Uploadcare/Core (= 3.0.1)
+  - Uploadcare/Core (3.0.1)
+
+DEPENDENCIES:
+  - SVProgressHUD
+  - Uploadcare (from `../`)
+
+EXTERNAL SOURCES:
+  Uploadcare:
+    :path: ../
+
+SPEC CHECKSUMS:
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  Uploadcare: e6c74a0091a3de11a96879bc38fe0cdf94639e1c
+
+PODFILE CHECKSUM: eb3b424ff41ed6bb29721d9e52a6b78db1124773
+
+COCOAPODS: 1.1.1
