@@ -74,13 +74,23 @@ NSString *const USSContentType = @"application/vnd.ucare.ss-v0.1+json";
     NSCalendar *theCalendar = [NSCalendar currentCalendar];
     NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
     NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:
-                            [NSDictionary dictionaryWithObjectsAndKeys:
-                             UCSocialAPIRoot, NSHTTPCookieDomain,
-                             [NSString stringWithFormat:@"/%@/", host], NSHTTPCookiePath,
-                             name,  NSHTTPCookieName,
-                             value, NSHTTPCookieValue,
-                             nextDate, NSHTTPCookieExpires,
-                             nil]];
+                            @{
+                              NSHTTPCookieDomain   : UCSocialAPIRoot,
+                              NSHTTPCookiePath     : [NSString stringWithFormat:@"/%@/", host],
+                              NSHTTPCookieName     : name,
+                              NSHTTPCookieValue    : value,
+                              NSHTTPCookieExpires  : nextDate
+                              }];
+
+    // `setCookie` method doesn't override the existing cookie which was created by Safari, so we have to delete it manually first and set new after that
+    NSHTTPCookie *cookieToDelete;
+    for (NSHTTPCookie *c in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
+        if ([c.path isEqualToString:cookie.path] && [c.domain isEqualToString:cookie.domain] && [c.name isEqualToString:cookie.name]) {
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:c];
+            break;
+        }
+    }
+
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
 }
 
