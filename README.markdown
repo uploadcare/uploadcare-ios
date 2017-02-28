@@ -1,5 +1,7 @@
 # Uploadcare for iOS
 
+[![Build Status](https://travis-ci.org/uploadcare/uploadcare-ios.svg?branch=master)](https://travis-ci.org/uploadcare/uploadcare-ios)
+
 [Uploadcare](https://uploadcare.com) is a
 [PaaS](https://en.wikipedia.org/wiki/Platform_as_a_service)
 providing file handling mechanisms for websites and apps.
