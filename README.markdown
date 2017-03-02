@@ -179,7 +179,7 @@ If you got any questions, bug reports or suggestions —
 - [@zrxq](https://github.com/zrxq)
 - [@ynechaev](https://github.com/ynechaev)
 - [@dive](https://github.com/dive)
-- [@Rusik](https://github.com/Rusik)
+- [@rusik](https://github.com/rusik)
 - [@dmitry-mukhin](https://github.com/dmitry-mukhin)
 - [@markbao](https://github.com/markbao)
 - [@homm](https://github.com/homm)
