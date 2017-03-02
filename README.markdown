@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/uploadcare/uploadcare-ios.svg?branch=master)](https://travis-ci.org/uploadcare/uploadcare-ios)
 [![Pod Version](https://img.shields.io/cocoapods/v/Uploadcare.svg)](http://cocoadocs.org/docsets/Uploadcare)
 [![Pod Platform](https://img.shields.io/cocoapods/p/Uploadcare.svg)](http://cocoadocs.org/docsets/Uploadcare)
-[![Pod License](http://img.shields.io/cocoapods/l/Uploadcare.svg)](https://opensource.org/licenses/MIT)
+[![Pod License](http://img.shields.io/cocoapods/l/Uploadcare.svg)](https://github.com/uploadcare/uploadcare-ios/blob/master/LICENSE)
 
 
 [Uploadcare](https://uploadcare.com) is a
