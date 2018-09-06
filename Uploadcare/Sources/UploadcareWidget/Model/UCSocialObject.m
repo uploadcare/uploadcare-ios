@@ -8,7 +8,7 @@
 
 #import "UCSocialObject.h"
 #import "UCSocialMacroses.h"
-#import <ObjC/Runtime.h>
+#import <objc/runtime.h>
 
 #define MAPPING_DEBUG (0 && DEBUG)
 
