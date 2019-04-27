@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'Uploadcare'
-  s.version      = '3.0.2'
+  s.version      = '4.0.0'
   s.summary      = 'Uploadcare iOS library.'
   s.homepage     = 'https://uploadcare.com'
   s.license      = 'MIT'
