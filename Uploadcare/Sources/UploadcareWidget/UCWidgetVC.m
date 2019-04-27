@@ -89,9 +89,9 @@ NSString * const UCWidgetResponseLocalThumbnailResponseKey = @"local_thumbnail";
     [self closeControllerWithCompletion:nil];
 }
 
-- (void)closeControllerWithCompletion:(void(^)())completion {
+- (void)closeControllerWithCompletion:(void(^)(void))completion {
     __weak __typeof(self) weakSelf = self;
-    void (^dismissBlock)() = ^void() {
+    void (^dismissBlock)(void) = ^void() {
         [weakSelf.navigationController dismissViewControllerAnimated:YES completion:completion];
     };
     

@@ -9,14 +9,14 @@
 #import "UCWebViewController.h"
 
 @interface UCWebViewController () <UIWebViewDelegate>
-@property (nonatomic, copy) void (^cancelBlock)();
+@property (nonatomic, copy) void (^cancelBlock)(void);
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) NSURL *url;
 @end
 
 @implementation UCWebViewController
 
-- (id)initWithURL:(NSURL *)url cancelBlock:(void(^)())cancelBlock {
+- (id)initWithURL:(NSURL *)url cancelBlock:(void(^)(void))cancelBlock {
     self = [super init];
     if (self) {
         _url = url;
