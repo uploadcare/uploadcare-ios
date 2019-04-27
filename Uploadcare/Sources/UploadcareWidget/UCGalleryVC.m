@@ -328,18 +328,19 @@ static NSString *const UCBusyCellIdentifyer = @"UCBusyCellIdentifyer";
 
     for (UCSocialChunk *chunk in self.source.rootChunks) {
         __block UCSocialChunk *blockChunk = chunk;
+        UCGalleryVC * __weak weakSelf = self;
         [actionSheet addAction:[UIAlertAction actionWithTitle:chunk.title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            _entriesCollection = nil;
-            self.rootChunk = blockChunk;
-            Class<UCGalleryCellProtocol> cellClass = [self cellClassForMode:self.entriesCollection.galleryMode];
-            [self.collectionView registerClass:cellClass forCellWithReuseIdentifier:[cellClass cellIdentifier]];
-            [self updateNavigationTitle];
-            [self setupSearchBarIfNeeded];
-            [self.collectionView reloadData];
-            [self queryObjectOrLoginAddressForSource:self.source
-                                           rootChunk:blockChunk
-                                                path:self.entriesCollection.path.fullPath
-                                         showSpinner:YES];
+            self->_entriesCollection = nil;
+            weakSelf.rootChunk = blockChunk;
+            Class<UCGalleryCellProtocol> cellClass = [weakSelf cellClassForMode:weakSelf.entriesCollection.galleryMode];
+            [weakSelf.collectionView registerClass:cellClass forCellWithReuseIdentifier:[cellClass cellIdentifier]];
+            [weakSelf updateNavigationTitle];
+            [weakSelf setupSearchBarIfNeeded];
+            [weakSelf.collectionView reloadData];
+            [weakSelf queryObjectOrLoginAddressForSource:weakSelf.source
+                                               rootChunk:blockChunk
+                                                    path:weakSelf.entriesCollection.path.fullPath
+                                             showSpinner:YES];
         }]];
     }
     [self presentViewController:actionSheet animated:YES completion:nil];
