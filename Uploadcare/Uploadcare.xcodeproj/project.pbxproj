@@ -625,11 +625,11 @@
 			};
 			buildConfigurationList = 44D2669C1E3F8C64000DF8EA /* Build configuration list for PBXProject "Uploadcare" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = 44D266981E3F8C64000DF8EA;
 			productRefGroup = 44D266A31E3F8C64000DF8EA /* Products */;
