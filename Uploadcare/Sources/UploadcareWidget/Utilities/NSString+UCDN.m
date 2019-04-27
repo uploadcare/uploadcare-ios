@@ -363,6 +363,9 @@ static NSString * const UCDNInvertKey = @"invert";
         b = components[2];
         a = components[3];
     }
+    else {
+        [NSException raise:NSGenericException format:@"Unsupported color space mode"];
+    }
     
     return [NSString stringWithFormat:@"#%02lX%02lX%02lX%02lX",
             lroundf(r * 255),
