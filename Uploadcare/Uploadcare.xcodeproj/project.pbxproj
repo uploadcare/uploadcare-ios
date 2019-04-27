@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		44D266B51E3F8CD0000DF8EA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44D266B31E3F8CD0000DF8EA /* Info.plist */; };
 		44D266B61E3F8CD0000DF8EA /* Uploadcare.h in Headers */ = {isa = PBXBuildFile; fileRef = 44D266B41E3F8CD0000DF8EA /* Uploadcare.h */; };
 		44D267461E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 44D266B91E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.h */; };
 		44D267471E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D266BA1E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.m */; };
@@ -629,6 +628,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 44D266981E3F8C64000DF8EA;
@@ -678,7 +678,6 @@
 				44D2678F1E3F8D0F000DF8EA /* camera@2x.png in Resources */,
 				44D267941E3F8D0F000DF8EA /* files-intro@3x.png in Resources */,
 				44D2678A1E3F8D0F000DF8EA /* vk@2x.png in Resources */,
-				44D266B51E3F8CD0000DF8EA /* Info.plist in Resources */,
 				44D2678D1E3F8D0F000DF8EA /* UCSocialSourceCell.xib in Resources */,
 				44D2676D1E3F8D0F000DF8EA /* box@3x.png in Resources */,
 				44D2676F1E3F8D0F000DF8EA /* dropbox@2x.png in Resources */,
