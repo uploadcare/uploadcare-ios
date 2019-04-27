@@ -72,10 +72,10 @@ static NSString * const UCDNQualityLevelLightest = @"lightest";
 }
 
 - (NSString *)qualityForLevel:(UCDNQuality)qualityLevel {
-    NSString *returnedValue = UCDNQualityNormal;
+    NSString *returnedValue = UCDNQualityLevelNormal;
     switch (qualityLevel) {
         case UCDNQualityNormal: {
-            returnedValue = UCDNQualityNormal;
+            returnedValue = UCDNQualityLevelNormal;
             break;
         }
         case UCDNQualityBetter: {
