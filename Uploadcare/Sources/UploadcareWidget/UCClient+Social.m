@@ -83,7 +83,6 @@ NSString *const USSContentType = @"application/vnd.ucare.ss-v0.1+json";
                               }];
 
     // `setCookie` method doesn't override the existing cookie which was created by Safari, so we have to delete it manually first and set new after that
-    NSHTTPCookie *cookieToDelete;
     for (NSHTTPCookie *c in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
         if ([c.path isEqualToString:cookie.path] && [c.domain isEqualToString:cookie.domain] && [c.name isEqualToString:cookie.name]) {
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:c];
