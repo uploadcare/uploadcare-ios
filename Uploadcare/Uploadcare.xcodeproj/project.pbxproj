@@ -141,7 +141,19 @@
 		44D267C81E3F8D0F000DF8EA /* UCSocialRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D267431E3F8D0F000DF8EA /* UCSocialRequest.m */; };
 		44D267C91E3F8D0F000DF8EA /* UCSocialSourcesRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 44D267441E3F8D0F000DF8EA /* UCSocialSourcesRequest.h */; };
 		44D267CA1E3F8D0F000DF8EA /* UCSocialSourcesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D267451E3F8D0F000DF8EA /* UCSocialSourcesRequest.m */; };
+		54D2E83C22747A0200630F7D /* UploadcareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E83B22747A0200630F7D /* UploadcareTests.swift */; };
+		54D2E83E22747A0200630F7D /* Uploadcare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D266A21E3F8C64000DF8EA /* Uploadcare.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		54D2E83F22747A0200630F7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 44D266991E3F8C64000DF8EA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 44D266A11E3F8C64000DF8EA;
+			remoteInfo = Uploadcare;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		44D266A21E3F8C64000DF8EA /* Uploadcare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Uploadcare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -280,6 +292,9 @@
 		44D267431E3F8D0F000DF8EA /* UCSocialRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialRequest.m; sourceTree = "<group>"; };
 		44D267441E3F8D0F000DF8EA /* UCSocialSourcesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCSocialSourcesRequest.h; sourceTree = "<group>"; };
 		44D267451E3F8D0F000DF8EA /* UCSocialSourcesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialSourcesRequest.m; sourceTree = "<group>"; };
+		54D2E83922747A0200630F7D /* UploadcareTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UploadcareTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		54D2E83B22747A0200630F7D /* UploadcareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadcareTests.swift; sourceTree = "<group>"; };
+		54D2E83D22747A0200630F7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +302,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		54D2E83622747A0200630F7D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54D2E83E22747A0200630F7D /* Uploadcare.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +321,7 @@
 			children = (
 				44D266B71E3F8D0F000DF8EA /* Sources */,
 				44D266B21E3F8CD0000DF8EA /* Supporting Files */,
+				54D2E83A22747A0200630F7D /* UploadcareTests */,
 				44D266A31E3F8C64000DF8EA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -306,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				44D266A21E3F8C64000DF8EA /* Uploadcare.framework */,
+				54D2E83922747A0200630F7D /* UploadcareTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -531,6 +556,15 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		54D2E83A22747A0200630F7D /* UploadcareTests */ = {
+			isa = PBXGroup;
+			children = (
+				54D2E83B22747A0200630F7D /* UploadcareTests.swift */,
+				54D2E83D22747A0200630F7D /* Info.plist */,
+			);
+			path = UploadcareTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -608,18 +642,41 @@
 			productReference = 44D266A21E3F8C64000DF8EA /* Uploadcare.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		54D2E83822747A0200630F7D /* UploadcareTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 54D2E84122747A0200630F7D /* Build configuration list for PBXNativeTarget "UploadcareTests" */;
+			buildPhases = (
+				54D2E83522747A0200630F7D /* Sources */,
+				54D2E83622747A0200630F7D /* Frameworks */,
+				54D2E83722747A0200630F7D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				54D2E84022747A0200630F7D /* PBXTargetDependency */,
+			);
+			name = UploadcareTests;
+			productName = UploadcareTests;
+			productReference = 54D2E83922747A0200630F7D /* UploadcareTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		44D266991E3F8C64000DF8EA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Uploadcare;
 				TargetAttributes = {
 					44D266A11E3F8C64000DF8EA = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Manual;
+					};
+					54D2E83822747A0200630F7D = {
+						CreatedOnToolsVersion = 10.2.1;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -637,6 +694,7 @@
 			projectRoot = "";
 			targets = (
 				44D266A11E3F8C64000DF8EA /* Uploadcare */,
+				54D2E83822747A0200630F7D /* UploadcareTests */,
 			);
 		};
 /* End PBXProject section */
@@ -700,6 +758,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		54D2E83722747A0200630F7D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -747,7 +812,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		54D2E83522747A0200630F7D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54D2E83C22747A0200630F7D /* UploadcareTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		54D2E84022747A0200630F7D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 44D266A11E3F8C64000DF8EA /* Uploadcare */;
+			targetProxy = 54D2E83F22747A0200630F7D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		44D266A81E3F8C64000DF8EA /* Debug */ = {
@@ -900,6 +981,52 @@
 			};
 			name = Release;
 		};
+		54D2E84222747A0200630F7D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = UploadcareTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uploadcare.UploadcareTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		54D2E84322747A0200630F7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = UploadcareTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uploadcare.UploadcareTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -917,6 +1044,15 @@
 			buildConfigurations = (
 				44D266AB1E3F8C64000DF8EA /* Debug */,
 				44D266AC1E3F8C64000DF8EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		54D2E84122747A0200630F7D /* Build configuration list for PBXNativeTarget "UploadcareTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54D2E84222747A0200630F7D /* Debug */,
+				54D2E84322747A0200630F7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
