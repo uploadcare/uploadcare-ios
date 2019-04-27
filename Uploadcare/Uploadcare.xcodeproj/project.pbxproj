@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		44D266B61E3F8CD0000DF8EA /* Uploadcare.h in Headers */ = {isa = PBXBuildFile; fileRef = 44D266B41E3F8CD0000DF8EA /* Uploadcare.h */; };
+		44D266B61E3F8CD0000DF8EA /* Uploadcare.h in Headers */ = {isa = PBXBuildFile; fileRef = 44D266B41E3F8CD0000DF8EA /* Uploadcare.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		44D267461E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 44D266B91E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.h */; };
 		44D267471E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D266BA1E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.m */; };
 		44D267481E3F8D0F000DF8EA /* NSString+EncodeRFC3986.h in Headers */ = {isa = PBXBuildFile; fileRef = 44D266BB1E3F8D0F000DF8EA /* NSString+EncodeRFC3986.h */; };
@@ -141,8 +141,11 @@
 		44D267C81E3F8D0F000DF8EA /* UCSocialRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D267431E3F8D0F000DF8EA /* UCSocialRequest.m */; };
 		44D267C91E3F8D0F000DF8EA /* UCSocialSourcesRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 44D267441E3F8D0F000DF8EA /* UCSocialSourcesRequest.h */; };
 		44D267CA1E3F8D0F000DF8EA /* UCSocialSourcesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D267451E3F8D0F000DF8EA /* UCSocialSourcesRequest.m */; };
-		54D2E83C22747A0200630F7D /* UploadcareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E83B22747A0200630F7D /* UploadcareTests.swift */; };
+		54D2E83C22747A0200630F7D /* RequestProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */; };
 		54D2E83E22747A0200630F7D /* Uploadcare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D266A21E3F8C64000DF8EA /* Uploadcare.framework */; };
+		54D2E847227484E100630F7D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E846227484E100630F7D /* Configuration.swift */; };
+		54D2E84922748C3300630F7D /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E84822748C3300630F7D /* RequestProtocol.swift */; };
+		54D2E84B22748CCF00630F7D /* RequestPayloadProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E84A22748CCF00630F7D /* RequestPayloadProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -293,8 +296,11 @@
 		44D267441E3F8D0F000DF8EA /* UCSocialSourcesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCSocialSourcesRequest.h; sourceTree = "<group>"; };
 		44D267451E3F8D0F000DF8EA /* UCSocialSourcesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialSourcesRequest.m; sourceTree = "<group>"; };
 		54D2E83922747A0200630F7D /* UploadcareTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UploadcareTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		54D2E83B22747A0200630F7D /* UploadcareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadcareTests.swift; sourceTree = "<group>"; };
+		54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocolTests.swift; sourceTree = "<group>"; };
 		54D2E83D22747A0200630F7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54D2E846227484E100630F7D /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		54D2E84822748C3300630F7D /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
+		54D2E84A22748CCF00630F7D /* RequestPayloadProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPayloadProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -356,6 +362,7 @@
 		44D266B81E3F8D0F000DF8EA /* UploadcareKit */ = {
 			isa = PBXGroup;
 			children = (
+				54D2E8442274847B00630F7D /* REST */,
 				44D266B91E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.h */,
 				44D266BA1E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.m */,
 				44D266BB1E3F8D0F000DF8EA /* NSString+EncodeRFC3986.h */,
@@ -559,10 +566,28 @@
 		54D2E83A22747A0200630F7D /* UploadcareTests */ = {
 			isa = PBXGroup;
 			children = (
-				54D2E83B22747A0200630F7D /* UploadcareTests.swift */,
+				54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */,
 				54D2E83D22747A0200630F7D /* Info.plist */,
 			);
 			path = UploadcareTests;
+			sourceTree = "<group>";
+		};
+		54D2E8442274847B00630F7D /* REST */ = {
+			isa = PBXGroup;
+			children = (
+				54D2E8452274848A00630F7D /* Upload */,
+				54D2E846227484E100630F7D /* Configuration.swift */,
+				54D2E84822748C3300630F7D /* RequestProtocol.swift */,
+				54D2E84A22748CCF00630F7D /* RequestPayloadProtocol.swift */,
+			);
+			path = REST;
+			sourceTree = "<group>";
+		};
+		54D2E8452274848A00630F7D /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Upload;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -672,6 +697,7 @@
 				TargetAttributes = {
 					44D266A11E3F8C64000DF8EA = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Manual;
 					};
 					54D2E83822747A0200630F7D = {
@@ -792,9 +818,12 @@
 				44D267AC1E3F8D0F000DF8EA /* UCGridGalleryCell.m in Sources */,
 				44D267BE1E3F8D0F000DF8EA /* NSURL+UCDN.m in Sources */,
 				44D267681E3F8D0F000DF8EA /* UCSocialPath.m in Sources */,
+				54D2E84B22748CCF00630F7D /* RequestPayloadProtocol.swift in Sources */,
 				44D267BC1E3F8D0F000DF8EA /* NSString+UCDN.m in Sources */,
 				44D267CA1E3F8D0F000DF8EA /* UCSocialSourcesRequest.m in Sources */,
+				54D2E847227484E100630F7D /* Configuration.swift in Sources */,
 				44D267B21E3F8D0F000DF8EA /* UCPersonGalleryCell.m in Sources */,
+				54D2E84922748C3300630F7D /* RequestProtocol.swift in Sources */,
 				44D267491E3F8D0F000DF8EA /* NSString+EncodeRFC3986.m in Sources */,
 				44D267A51E3F8D0F000DF8EA /* UCWidgetVC.m in Sources */,
 				44D267B41E3F8D0F000DF8EA /* UCSocialSourceCell.m in Sources */,
@@ -816,7 +845,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54D2E83C22747A0200630F7D /* UploadcareTests.swift in Sources */,
+				54D2E83C22747A0200630F7D /* RequestProtocolTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,6 +965,7 @@
 		44D266AB1E3F8C64000DF8EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -948,12 +978,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = UC.Uploadcare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		44D266AC1E3F8C64000DF8EA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -966,12 +999,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = UC.Uploadcare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
 		54D2E84222747A0200630F7D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -996,6 +1031,7 @@
 		54D2E84322747A0200630F7D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
