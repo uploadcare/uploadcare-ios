@@ -146,6 +146,8 @@
 		54D2E847227484E100630F7D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E846227484E100630F7D /* Configuration.swift */; };
 		54D2E84922748C3300630F7D /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E84822748C3300630F7D /* RequestProtocol.swift */; };
 		54D2E84B22748CCF00630F7D /* RequestPayloadProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E84A22748CCF00630F7D /* RequestPayloadProtocol.swift */; };
+		54D2E84D2275BDB800630F7D /* FileInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E84C2275BDB800630F7D /* FileInfoRequest.swift */; };
+		54D2E84F2275BFBE00630F7D /* FileInfoRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E84E2275BFBE00630F7D /* FileInfoRequestTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -301,6 +303,8 @@
 		54D2E846227484E100630F7D /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		54D2E84822748C3300630F7D /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
 		54D2E84A22748CCF00630F7D /* RequestPayloadProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPayloadProtocol.swift; sourceTree = "<group>"; };
+		54D2E84C2275BDB800630F7D /* FileInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoRequest.swift; sourceTree = "<group>"; };
+		54D2E84E2275BFBE00630F7D /* FileInfoRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoRequestTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -566,8 +570,9 @@
 		54D2E83A22747A0200630F7D /* UploadcareTests */ = {
 			isa = PBXGroup;
 			children = (
-				54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */,
+				54D2E84E2275BFBE00630F7D /* FileInfoRequestTests.swift */,
 				54D2E83D22747A0200630F7D /* Info.plist */,
+				54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */,
 			);
 			path = UploadcareTests;
 			sourceTree = "<group>";
@@ -579,6 +584,7 @@
 				54D2E846227484E100630F7D /* Configuration.swift */,
 				54D2E84822748C3300630F7D /* RequestProtocol.swift */,
 				54D2E84A22748CCF00630F7D /* RequestPayloadProtocol.swift */,
+				54D2E84C2275BDB800630F7D /* FileInfoRequest.swift */,
 			);
 			path = REST;
 			sourceTree = "<group>";
@@ -807,6 +813,7 @@
 				44D267A91E3F8D0F000DF8EA /* UCGalleryCell.m in Sources */,
 				44D267621E3F8D0F000DF8EA /* UCSocialEntry.m in Sources */,
 				44D267C81E3F8D0F000DF8EA /* UCSocialRequest.m in Sources */,
+				54D2E84D2275BDB800630F7D /* FileInfoRequest.swift in Sources */,
 				44D267C11E3F8D0F000DF8EA /* UCSocialEntriesRequest.m in Sources */,
 				44D267601E3F8D0F000DF8EA /* UCSocialEntriesCollection.m in Sources */,
 				44D267471E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.m in Sources */,
@@ -846,6 +853,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54D2E83C22747A0200630F7D /* RequestProtocolTests.swift in Sources */,
+				54D2E84F2275BFBE00630F7D /* FileInfoRequestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

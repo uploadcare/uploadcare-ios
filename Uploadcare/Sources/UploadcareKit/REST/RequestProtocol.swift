@@ -12,9 +12,9 @@ import Foundation
  *  Base API request class which contains all necessary data for NSURLSession.
  */
 public protocol RequestProtocol {
-    var parameters: Dictionary<String, String> { get set }
-    var path: String { get set }
-    var payload: RequestPayloadProtocol { get set }
+    var parameters: Dictionary<String, String> { get }
+    var path: String { get }
+    var payload: RequestPayloadProtocol? { get }
     var request: URLRequest? { get }
 }
 

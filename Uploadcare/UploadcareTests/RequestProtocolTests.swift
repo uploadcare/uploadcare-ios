@@ -40,7 +40,7 @@ class UploadcareTests: XCTestCase {
 private final class Request: RequestProtocol {
     var parameters: Dictionary<String, String>
     var path: String
-    var payload: RequestPayloadProtocol
+    var payload: RequestPayloadProtocol?
 
     init(parameters: Dictionary<String, String> = [ "Key" : "Value" ],
          path: String = "/path",
