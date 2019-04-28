@@ -570,9 +570,8 @@
 		54D2E83A22747A0200630F7D /* UploadcareTests */ = {
 			isa = PBXGroup;
 			children = (
-				54D2E84E2275BFBE00630F7D /* FileInfoRequestTests.swift */,
+				54D2E8502275C19600630F7D /* REST */,
 				54D2E83D22747A0200630F7D /* Info.plist */,
-				54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */,
 			);
 			path = UploadcareTests;
 			sourceTree = "<group>";
@@ -594,6 +593,15 @@
 			children = (
 			);
 			path = Upload;
+			sourceTree = "<group>";
+		};
+		54D2E8502275C19600630F7D /* REST */ = {
+			isa = PBXGroup;
+			children = (
+				54D2E84E2275BFBE00630F7D /* FileInfoRequestTests.swift */,
+				54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */,
+			);
+			path = REST;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
