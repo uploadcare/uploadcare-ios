@@ -152,6 +152,9 @@
 		54D2E8542275C3D600630F7D /* RequestPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E8532275C3D600630F7D /* RequestPayload.swift */; };
 		54D43DE3227DAB6D0027EFC1 /* URL+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DE2227DAB6D0027EFC1 /* URL+ContentType.swift */; };
 		54D43DE6227DC0E00027EFC1 /* ContentTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DE5227DC0E00027EFC1 /* ContentTypeTests.swift */; };
+		54D43DE8227DC60B0027EFC1 /* FileUploadRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DE7227DC60B0027EFC1 /* FileUploadRequestTests.swift */; };
+		54D43DEA227DC7AD0027EFC1 /* String+MIMEType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DE9227DC7AD0027EFC1 /* String+MIMEType.swift */; };
+		54D43DEC227DC7FA0027EFC1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DEB227DC7FA0027EFC1 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -313,6 +316,9 @@
 		54D2E8532275C3D600630F7D /* RequestPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPayload.swift; sourceTree = "<group>"; };
 		54D43DE2227DAB6D0027EFC1 /* URL+ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+ContentType.swift"; sourceTree = "<group>"; };
 		54D43DE5227DC0E00027EFC1 /* ContentTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTypeTests.swift; sourceTree = "<group>"; };
+		54D43DE7227DC60B0027EFC1 /* FileUploadRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadRequestTests.swift; sourceTree = "<group>"; };
+		54D43DE9227DC7AD0027EFC1 /* String+MIMEType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MIMEType.swift"; sourceTree = "<group>"; };
+		54D43DEB227DC7FA0027EFC1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -595,6 +601,7 @@
 				54D2E84A22748CCF00630F7D /* RequestPayloadProtocol.swift */,
 				54D2E84C2275BDB800630F7D /* FileInfoRequest.swift */,
 				54D2E8532275C3D600630F7D /* RequestPayload.swift */,
+				54D43DEB227DC7FA0027EFC1 /* Constants.swift */,
 			);
 			path = REST;
 			sourceTree = "<group>";
@@ -611,6 +618,7 @@
 			isa = PBXGroup;
 			children = (
 				54D2E84E2275BFBE00630F7D /* FileInfoRequestTests.swift */,
+				54D43DE7227DC60B0027EFC1 /* FileUploadRequestTests.swift */,
 				54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */,
 			);
 			path = REST;
@@ -620,6 +628,7 @@
 			isa = PBXGroup;
 			children = (
 				54D43DE2227DAB6D0027EFC1 /* URL+ContentType.swift */,
+				54D43DE9227DC7AD0027EFC1 /* String+MIMEType.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -848,6 +857,7 @@
 				44D267AE1E3F8D0F000DF8EA /* UCListGalleryCell.m in Sources */,
 				44D267A91E3F8D0F000DF8EA /* UCGalleryCell.m in Sources */,
 				44D267621E3F8D0F000DF8EA /* UCSocialEntry.m in Sources */,
+				54D43DEA227DC7AD0027EFC1 /* String+MIMEType.swift in Sources */,
 				44D267C81E3F8D0F000DF8EA /* UCSocialRequest.m in Sources */,
 				54D2E84D2275BDB800630F7D /* FileInfoRequest.swift in Sources */,
 				44D267C11E3F8D0F000DF8EA /* UCSocialEntriesRequest.m in Sources */,
@@ -868,6 +878,7 @@
 				44D267CA1E3F8D0F000DF8EA /* UCSocialSourcesRequest.m in Sources */,
 				54D2E847227484E100630F7D /* Configuration.swift in Sources */,
 				44D267B21E3F8D0F000DF8EA /* UCPersonGalleryCell.m in Sources */,
+				54D43DEC227DC7FA0027EFC1 /* Constants.swift in Sources */,
 				54D43DE3227DAB6D0027EFC1 /* URL+ContentType.swift in Sources */,
 				54D2E84922748C3300630F7D /* RequestProtocol.swift in Sources */,
 				44D267491E3F8D0F000DF8EA /* NSString+EncodeRFC3986.m in Sources */,
@@ -891,6 +902,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54D43DE8227DC60B0027EFC1 /* FileUploadRequestTests.swift in Sources */,
 				54D43DE6227DC0E00027EFC1 /* ContentTypeTests.swift in Sources */,
 				54D2E83C22747A0200630F7D /* RequestProtocolTests.swift in Sources */,
 				54D2E84F2275BFBE00630F7D /* FileInfoRequestTests.swift in Sources */,

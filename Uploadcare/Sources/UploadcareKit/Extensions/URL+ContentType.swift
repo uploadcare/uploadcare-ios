@@ -10,15 +10,11 @@ import MobileCoreServices
 
 extension URL {
 
-    private struct Constants {
-        static let defaultContentType = "application/octet-stream"
-    }
-
     var contentType: String {
-        guard let UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, self.pathExtension as CFString, nil)?.takeUnretainedValue(), let contentType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType) else {
+        guard let UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, self.pathExtension as CFString, nil)?.takeUnretainedValue() else {
             return Constants.defaultContentType
         }
-        return String(contentType.takeUnretainedValue())
+        return String(UTI).MIMEType
     }
 
     var UTI: String? {

@@ -14,8 +14,8 @@ public final class FileUploadRequest: RequestProtocol {
         static let defaultName = "file"
     }
 
-    public var parameters: Dictionary<String, String>
-    public var path: String
+    public var parameters: Dictionary<String, String> = [:]
+    public var path: String = Configuration.File.uploadingPath
     public var payload: RequestPayloadProtocol?
 
     public init?(fileURL: URL) {
@@ -28,8 +28,29 @@ public final class FileUploadRequest: RequestProtocol {
             filename: fileURL.lastPathComponent,
             mimeType: fileURL.contentType)
         self.payload = payload
-        self.path = Configuration.File.uploadingPath
-        self.parameters = [:]
     }
 
+    public init(data: Data, filename: String, mimeType: String) {
+        let payload: RequestPayloadProtocol = RequestPayload(
+            payload: data,
+            name: Constants.defaultName,
+            filename: filename,
+            mimeType: mimeType)
+        self.payload = payload
+    }
+
+    public var request: URLRequest? {
+        guard let url: URL = {
+            var components = URLComponents()
+            components.scheme = Configuration.API.scheme
+            components.host = Configuration.API.host
+            components.path = self.path
+            components.queryItems = self.parameters.map { parameter in
+                URLQueryItem(name: parameter.key, value: parameter.value)
+            }
+            guard let url = components.url else { return nil }
+            return url
+            }() else { return nil }
+        return URLRequest(url: url)
+    }
 }
