@@ -4,7 +4,7 @@ osx_image: xcode10.2
 env:
  matrix:
   - SCRIPT="set -o pipefail && xcodebuild clean build -project Uploadcare/Uploadcare.xcodeproj -target Uploadcare | xcpretty -f `xcpretty-travis-formatter`"
-  - SCRIPT="set -o pipefail && xcodebuild clean build -workspace Example/Example.xcworkspace -scheme Example CODE_SIGN_IDENTITY='' CODE_SIGNING_REQUIRED=NO | xcpretty -f `xcpretty-travis-formatter`"
+  - SCRIPT="set -o pipefail && xcodebuild clean build -workspace Example/Example.xcworkspace -scheme Example -destination 'platform=iOS Simulator,name=iPhone 8,OS=12.2' CODE_SIGN_IDENTITY='' CODE_SIGNING_REQUIRED=NO | xcpretty -f `xcpretty-travis-formatter`"
 
 notifications:
   email: false
