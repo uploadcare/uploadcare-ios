@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode8.2
+osx_image: xcode10.2
 
 env:
  matrix:
@@ -14,3 +14,4 @@ before_script:
 
 script:
  - eval $SCRIPT
+ 
