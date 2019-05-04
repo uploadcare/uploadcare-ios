@@ -148,6 +148,10 @@
 		54D2E84B22748CCF00630F7D /* RequestPayloadProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E84A22748CCF00630F7D /* RequestPayloadProtocol.swift */; };
 		54D2E84D2275BDB800630F7D /* FileInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E84C2275BDB800630F7D /* FileInfoRequest.swift */; };
 		54D2E84F2275BFBE00630F7D /* FileInfoRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E84E2275BFBE00630F7D /* FileInfoRequestTests.swift */; };
+		54D2E8522275C1CC00630F7D /* FileUploadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E8512275C1CC00630F7D /* FileUploadRequest.swift */; };
+		54D2E8542275C3D600630F7D /* RequestPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E8532275C3D600630F7D /* RequestPayload.swift */; };
+		54D43DE3227DAB6D0027EFC1 /* URL+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DE2227DAB6D0027EFC1 /* URL+ContentType.swift */; };
+		54D43DE6227DC0E00027EFC1 /* ContentTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DE5227DC0E00027EFC1 /* ContentTypeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -305,6 +309,10 @@
 		54D2E84A22748CCF00630F7D /* RequestPayloadProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPayloadProtocol.swift; sourceTree = "<group>"; };
 		54D2E84C2275BDB800630F7D /* FileInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoRequest.swift; sourceTree = "<group>"; };
 		54D2E84E2275BFBE00630F7D /* FileInfoRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoRequestTests.swift; sourceTree = "<group>"; };
+		54D2E8512275C1CC00630F7D /* FileUploadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadRequest.swift; sourceTree = "<group>"; };
+		54D2E8532275C3D600630F7D /* RequestPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPayload.swift; sourceTree = "<group>"; };
+		54D43DE2227DAB6D0027EFC1 /* URL+ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+ContentType.swift"; sourceTree = "<group>"; };
+		54D43DE5227DC0E00027EFC1 /* ContentTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTypeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -366,6 +374,7 @@
 		44D266B81E3F8D0F000DF8EA /* UploadcareKit */ = {
 			isa = PBXGroup;
 			children = (
+				54D43DE1227DAB420027EFC1 /* Extensions */,
 				54D2E8442274847B00630F7D /* REST */,
 				44D266B91E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.h */,
 				44D266BA1E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.m */,
@@ -570,6 +579,7 @@
 		54D2E83A22747A0200630F7D /* UploadcareTests */ = {
 			isa = PBXGroup;
 			children = (
+				54D43DE4227DC0CF0027EFC1 /* Extensions */,
 				54D2E8502275C19600630F7D /* REST */,
 				54D2E83D22747A0200630F7D /* Info.plist */,
 			);
@@ -584,6 +594,7 @@
 				54D2E84822748C3300630F7D /* RequestProtocol.swift */,
 				54D2E84A22748CCF00630F7D /* RequestPayloadProtocol.swift */,
 				54D2E84C2275BDB800630F7D /* FileInfoRequest.swift */,
+				54D2E8532275C3D600630F7D /* RequestPayload.swift */,
 			);
 			path = REST;
 			sourceTree = "<group>";
@@ -591,6 +602,7 @@
 		54D2E8452274848A00630F7D /* Upload */ = {
 			isa = PBXGroup;
 			children = (
+				54D2E8512275C1CC00630F7D /* FileUploadRequest.swift */,
 			);
 			path = Upload;
 			sourceTree = "<group>";
@@ -602,6 +614,22 @@
 				54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */,
 			);
 			path = REST;
+			sourceTree = "<group>";
+		};
+		54D43DE1227DAB420027EFC1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				54D43DE2227DAB6D0027EFC1 /* URL+ContentType.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		54D43DE4227DC0CF0027EFC1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				54D43DE5227DC0E00027EFC1 /* ContentTypeTests.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -824,12 +852,14 @@
 				54D2E84D2275BDB800630F7D /* FileInfoRequest.swift in Sources */,
 				44D267C11E3F8D0F000DF8EA /* UCSocialEntriesRequest.m in Sources */,
 				44D267601E3F8D0F000DF8EA /* UCSocialEntriesCollection.m in Sources */,
+				54D2E8522275C1CC00630F7D /* FileUploadRequest.swift in Sources */,
 				44D267471E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.m in Sources */,
 				44D2675E1E3F8D0F000DF8EA /* UCSocialChunk.m in Sources */,
 				44D267B61E3F8D0F000DF8EA /* UCWebViewController.m in Sources */,
 				44D267571E3F8D0F000DF8EA /* UCGroupPostRequest.m in Sources */,
 				44D267551E3F8D0F000DF8EA /* UCGroupInfoRequest.m in Sources */,
 				44D2679F1E3F8D0F000DF8EA /* UCClient+Social.m in Sources */,
+				54D2E8542275C3D600630F7D /* RequestPayload.swift in Sources */,
 				44D267AC1E3F8D0F000DF8EA /* UCGridGalleryCell.m in Sources */,
 				44D267BE1E3F8D0F000DF8EA /* NSURL+UCDN.m in Sources */,
 				44D267681E3F8D0F000DF8EA /* UCSocialPath.m in Sources */,
@@ -838,6 +868,7 @@
 				44D267CA1E3F8D0F000DF8EA /* UCSocialSourcesRequest.m in Sources */,
 				54D2E847227484E100630F7D /* Configuration.swift in Sources */,
 				44D267B21E3F8D0F000DF8EA /* UCPersonGalleryCell.m in Sources */,
+				54D43DE3227DAB6D0027EFC1 /* URL+ContentType.swift in Sources */,
 				54D2E84922748C3300630F7D /* RequestProtocol.swift in Sources */,
 				44D267491E3F8D0F000DF8EA /* NSString+EncodeRFC3986.m in Sources */,
 				44D267A51E3F8D0F000DF8EA /* UCWidgetVC.m in Sources */,
@@ -860,6 +891,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54D43DE6227DC0E00027EFC1 /* ContentTypeTests.swift in Sources */,
 				54D2E83C22747A0200630F7D /* RequestProtocolTests.swift in Sources */,
 				54D2E84F2275BFBE00630F7D /* FileInfoRequestTests.swift in Sources */,
 			);

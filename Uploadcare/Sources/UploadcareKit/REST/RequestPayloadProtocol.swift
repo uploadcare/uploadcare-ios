@@ -14,8 +14,8 @@ import Foundation
  */
 @objc
 public protocol RequestPayloadProtocol {
-    var payload: Data { get set }
-    var name: String { get set }
-    var filename: String { get set }
-    var mimeType: String { get set }
+    var payload: Data { get }
+    var name: String { get }
+    var filename: String { get }
+    var mimeType: String { get }
 }
