@@ -5,6 +5,7 @@
 [![Pod Platform](https://img.shields.io/cocoapods/p/Uploadcare.svg)](http://cocoadocs.org/docsets/Uploadcare)
 [![Pod License](http://img.shields.io/cocoapods/l/Uploadcare.svg)](https://github.com/uploadcare/uploadcare-ios/blob/master/LICENSE)
 
+> **Note**: We are migrating the SDK to Swift 5, and this branch is work in progress. Do not use it on production until it stabilizes.
 
 [Uploadcare](https://uploadcare.com) is a
 [PaaS](https://en.wikipedia.org/wiki/Platform_as_a_service)
