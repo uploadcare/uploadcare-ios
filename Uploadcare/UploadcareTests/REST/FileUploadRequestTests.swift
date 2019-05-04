@@ -23,6 +23,17 @@ class FileUploadRequestTests: XCTestCase {
         XCTAssertEqual(sut.payload?.payload, data)
     }
 
+    func testThatRequestIsCorrectWhenProperFileURLIsProvided() {
+        let URL = Bundle(for: type(of: self)).url(forResource: "uploadcare_logo", withExtension: "png")!
+        let sut = FileUploadRequest(fileURL: URL)
+
+        XCTAssertNotNil(sut)
+        XCTAssertEqual(sut?.path, Configuration.File.uploadingPath)
+        XCTAssertEqual(sut?.payload?.mimeType, URL.contentType)
+        XCTAssertEqual(sut?.payload?.filename, URL.lastPathComponent)
+        XCTAssertEqual(sut?.payload?.payload, FileManager.default.contents(atPath: URL.path))
+    }
+
     func testThatInitializerWillFailWhenFileURLPointsToDirectory() {
         let fakeURL = URL(string: "/var/temp/")!
         let sut = FileUploadRequest(fileURL: fakeURL)

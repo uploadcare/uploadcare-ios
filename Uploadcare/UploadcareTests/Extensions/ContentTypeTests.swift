@@ -26,6 +26,11 @@ class ContentTypeTests: XCTestCase {
         XCTAssertEqual("application/octet-stream", self.url(with: "...").contentType)
     }
 
+    func testThatContentTypeIsCorrectWhenGatheredFromURL() {
+        let URL = Bundle(for: type(of: self)).url(forResource: "uploadcare_logo", withExtension: "png")!
+        XCTAssertEqual("image/png", URL.contentType)
+    }
+
     private func url(with pathExtension: String) -> URL {
         let base = URL(string: "/var/temp")
         let url = URL(fileURLWithPath: "testFile.\(pathExtension)", relativeTo: base)

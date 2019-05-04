@@ -155,6 +155,7 @@
 		54D43DE8227DC60B0027EFC1 /* FileUploadRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DE7227DC60B0027EFC1 /* FileUploadRequestTests.swift */; };
 		54D43DEA227DC7AD0027EFC1 /* String+MIMEType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DE9227DC7AD0027EFC1 /* String+MIMEType.swift */; };
 		54D43DEC227DC7FA0027EFC1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DEB227DC7FA0027EFC1 /* Constants.swift */; };
+		54D43DF3227DCE8A0027EFC1 /* uploadcare_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 54D43DF2227DCE8A0027EFC1 /* uploadcare_logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -319,6 +320,7 @@
 		54D43DE7227DC60B0027EFC1 /* FileUploadRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadRequestTests.swift; sourceTree = "<group>"; };
 		54D43DE9227DC7AD0027EFC1 /* String+MIMEType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MIMEType.swift"; sourceTree = "<group>"; };
 		54D43DEB227DC7FA0027EFC1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		54D43DF2227DCE8A0027EFC1 /* uploadcare_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uploadcare_logo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -585,6 +587,7 @@
 		54D2E83A22747A0200630F7D /* UploadcareTests */ = {
 			isa = PBXGroup;
 			children = (
+				54D43DF1227DCE7E0027EFC1 /* TestData */,
 				54D43DE4227DC0CF0027EFC1 /* Extensions */,
 				54D2E8502275C19600630F7D /* REST */,
 				54D2E83D22747A0200630F7D /* Info.plist */,
@@ -639,6 +642,14 @@
 				54D43DE5227DC0E00027EFC1 /* ContentTypeTests.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		54D43DF1227DCE7E0027EFC1 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				54D43DF2227DCE8A0027EFC1 /* uploadcare_logo.png */,
+			);
+			path = TestData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -839,6 +850,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54D43DF3227DCE8A0027EFC1 /* uploadcare_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
