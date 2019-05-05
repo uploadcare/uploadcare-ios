@@ -12,7 +12,6 @@ import Foundation
  *  UCAPIRequestPayload is used for multipart/form-data requests and contains
  *  all necessary values for it's construction.
  */
-@objc
 public protocol RequestPayloadProtocol {
     var payload: Data { get }
     var name: String { get }
