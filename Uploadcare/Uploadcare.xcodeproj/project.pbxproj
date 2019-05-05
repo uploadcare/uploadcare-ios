@@ -156,6 +156,8 @@
 		54D43DEA227DC7AD0027EFC1 /* String+MIMEType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DE9227DC7AD0027EFC1 /* String+MIMEType.swift */; };
 		54D43DEC227DC7FA0027EFC1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DEB227DC7FA0027EFC1 /* Constants.swift */; };
 		54D43DF3227DCE8A0027EFC1 /* uploadcare_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 54D43DF2227DCE8A0027EFC1 /* uploadcare_logo.png */; };
+		54D43DF5227EDE390027EFC1 /* GroupInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DF4227EDE390027EFC1 /* GroupInfoRequest.swift */; };
+		54D43DF7227EDF290027EFC1 /* GroupInfoRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DF6227EDF290027EFC1 /* GroupInfoRequestTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -321,6 +323,8 @@
 		54D43DE9227DC7AD0027EFC1 /* String+MIMEType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MIMEType.swift"; sourceTree = "<group>"; };
 		54D43DEB227DC7FA0027EFC1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		54D43DF2227DCE8A0027EFC1 /* uploadcare_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uploadcare_logo.png; sourceTree = "<group>"; };
+		54D43DF4227EDE390027EFC1 /* GroupInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoRequest.swift; sourceTree = "<group>"; };
+		54D43DF6227EDF290027EFC1 /* GroupInfoRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoRequestTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -605,6 +609,7 @@
 				54D2E84C2275BDB800630F7D /* FileInfoRequest.swift */,
 				54D2E8532275C3D600630F7D /* RequestPayload.swift */,
 				54D43DEB227DC7FA0027EFC1 /* Constants.swift */,
+				54D43DF4227EDE390027EFC1 /* GroupInfoRequest.swift */,
 			);
 			path = REST;
 			sourceTree = "<group>";
@@ -623,6 +628,7 @@
 				54D2E84E2275BFBE00630F7D /* FileInfoRequestTests.swift */,
 				54D43DE7227DC60B0027EFC1 /* FileUploadRequestTests.swift */,
 				54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */,
+				54D43DF6227EDF290027EFC1 /* GroupInfoRequestTests.swift */,
 			);
 			path = REST;
 			sourceTree = "<group>";
@@ -904,6 +910,7 @@
 				44D2676A1E3F8D0F000DF8EA /* UCSocialSource.m in Sources */,
 				44D267B81E3F8D0F000DF8EA /* UIView+UCBottomLine.m in Sources */,
 				44D267661E3F8D0F000DF8EA /* UCSocialObject.m in Sources */,
+				54D43DF5227EDE390027EFC1 /* GroupInfoRequest.swift in Sources */,
 				44D267C61E3F8D0F000DF8EA /* UCSocialManager.m in Sources */,
 				44D267641E3F8D0F000DF8EA /* UCSocialEntryAction.m in Sources */,
 				44D267C31E3F8D0F000DF8EA /* UCSocialEntryRequest.m in Sources */,
@@ -917,6 +924,7 @@
 				54D43DE8227DC60B0027EFC1 /* FileUploadRequestTests.swift in Sources */,
 				54D43DE6227DC0E00027EFC1 /* ContentTypeTests.swift in Sources */,
 				54D2E83C22747A0200630F7D /* RequestProtocolTests.swift in Sources */,
+				54D43DF7227EDF290027EFC1 /* GroupInfoRequestTests.swift in Sources */,
 				54D2E84F2275BFBE00630F7D /* FileInfoRequestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
