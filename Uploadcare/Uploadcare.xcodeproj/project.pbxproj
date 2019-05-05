@@ -160,6 +160,8 @@
 		54D43DF7227EDF290027EFC1 /* GroupInfoRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DF6227EDF290027EFC1 /* GroupInfoRequestTests.swift */; };
 		54D43DF9227EE0370027EFC1 /* GroupPostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DF8227EE0370027EFC1 /* GroupPostRequest.swift */; };
 		54D43DFB227EE22D0027EFC1 /* GroupPostRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DFA227EE22D0027EFC1 /* GroupPostRequestTests.swift */; };
+		54D43DFD227EE4EF0027EFC1 /* RemoteFileUploadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DFC227EE4EF0027EFC1 /* RemoteFileUploadRequest.swift */; };
+		54D43DFF227EE78D0027EFC1 /* RemoteFileUploadRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DFE227EE78D0027EFC1 /* RemoteFileUploadRequestTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -329,6 +331,8 @@
 		54D43DF6227EDF290027EFC1 /* GroupInfoRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoRequestTests.swift; sourceTree = "<group>"; };
 		54D43DF8227EE0370027EFC1 /* GroupPostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPostRequest.swift; sourceTree = "<group>"; };
 		54D43DFA227EE22D0027EFC1 /* GroupPostRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPostRequestTests.swift; sourceTree = "<group>"; };
+		54D43DFC227EE4EF0027EFC1 /* RemoteFileUploadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFileUploadRequest.swift; sourceTree = "<group>"; };
+		54D43DFE227EE78D0027EFC1 /* RemoteFileUploadRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFileUploadRequestTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -623,6 +627,7 @@
 			children = (
 				54D2E8512275C1CC00630F7D /* FileUploadRequest.swift */,
 				54D43DF8227EE0370027EFC1 /* GroupPostRequest.swift */,
+				54D43DFC227EE4EF0027EFC1 /* RemoteFileUploadRequest.swift */,
 			);
 			path = Upload;
 			sourceTree = "<group>";
@@ -635,6 +640,7 @@
 				54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */,
 				54D43DF6227EDF290027EFC1 /* GroupInfoRequestTests.swift */,
 				54D43DFA227EE22D0027EFC1 /* GroupPostRequestTests.swift */,
+				54D43DFE227EE78D0027EFC1 /* RemoteFileUploadRequestTests.swift */,
 			);
 			path = REST;
 			sourceTree = "<group>";
@@ -878,6 +884,7 @@
 				44D267A11E3F8D0F000DF8EA /* UCGalleryVC.m in Sources */,
 				44D267B01E3F8D0F000DF8EA /* UCNavButton.m in Sources */,
 				44D2675C1E3F8D0F000DF8EA /* UIImageView+Uploadcare.m in Sources */,
+				54D43DFD227EE4EF0027EFC1 /* RemoteFileUploadRequest.swift in Sources */,
 				44D267AE1E3F8D0F000DF8EA /* UCListGalleryCell.m in Sources */,
 				44D267A91E3F8D0F000DF8EA /* UCGalleryCell.m in Sources */,
 				44D267621E3F8D0F000DF8EA /* UCSocialEntry.m in Sources */,
@@ -929,6 +936,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54D43DE8227DC60B0027EFC1 /* FileUploadRequestTests.swift in Sources */,
+				54D43DFF227EE78D0027EFC1 /* RemoteFileUploadRequestTests.swift in Sources */,
 				54D43DE6227DC0E00027EFC1 /* ContentTypeTests.swift in Sources */,
 				54D2E83C22747A0200630F7D /* RequestProtocolTests.swift in Sources */,
 				54D43DF7227EDF290027EFC1 /* GroupInfoRequestTests.swift in Sources */,

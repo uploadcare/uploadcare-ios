@@ -10,7 +10,7 @@ import Foundation
 
 public final class FileUploadRequest: RequestProtocol {
 
-    private struct Constants {
+    struct Constants {
         static let defaultName = "file"
     }
 
@@ -48,9 +48,9 @@ public final class FileUploadRequest: RequestProtocol {
             components.queryItems = self.parameters.map { parameter in
                 URLQueryItem(name: parameter.key, value: parameter.value)
             }
-            guard let url = components.url else { return nil }
-            return url
+            return components.url
             }() else { return nil }
         return URLRequest(url: url)
     }
+
 }
