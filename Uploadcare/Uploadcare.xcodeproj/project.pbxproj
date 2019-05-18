@@ -162,6 +162,8 @@
 		54D43DFB227EE22D0027EFC1 /* GroupPostRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DFA227EE22D0027EFC1 /* GroupPostRequestTests.swift */; };
 		54D43DFD227EE4EF0027EFC1 /* RemoteFileUploadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DFC227EE4EF0027EFC1 /* RemoteFileUploadRequest.swift */; };
 		54D43DFF227EE78D0027EFC1 /* RemoteFileUploadRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D43DFE227EE78D0027EFC1 /* RemoteFileUploadRequestTests.swift */; };
+		54E3DFED22901A4B008C564E /* Uploadcare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E3DFEC22901A4B008C564E /* Uploadcare.swift */; };
+		54E3DFEF22902306008C564E /* UploadcareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E3DFEE22902306008C564E /* UploadcareTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -333,6 +335,8 @@
 		54D43DFA227EE22D0027EFC1 /* GroupPostRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPostRequestTests.swift; sourceTree = "<group>"; };
 		54D43DFC227EE4EF0027EFC1 /* RemoteFileUploadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFileUploadRequest.swift; sourceTree = "<group>"; };
 		54D43DFE227EE78D0027EFC1 /* RemoteFileUploadRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFileUploadRequestTests.swift; sourceTree = "<group>"; };
+		54E3DFEC22901A4B008C564E /* Uploadcare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uploadcare.swift; sourceTree = "<group>"; };
+		54E3DFEE22902306008C564E /* UploadcareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadcareTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -602,6 +606,7 @@
 				54D43DF1227DCE7E0027EFC1 /* TestData */,
 				54D43DE4227DC0CF0027EFC1 /* Extensions */,
 				54D2E8502275C19600630F7D /* REST */,
+				54E3DFEE22902306008C564E /* UploadcareTests.swift */,
 				54D2E83D22747A0200630F7D /* Info.plist */,
 			);
 			path = UploadcareTests;
@@ -618,6 +623,7 @@
 				54D2E8532275C3D600630F7D /* RequestPayload.swift */,
 				54D43DEB227DC7FA0027EFC1 /* Constants.swift */,
 				54D43DF4227EDE390027EFC1 /* GroupInfoRequest.swift */,
+				54E3DFEC22901A4B008C564E /* Uploadcare.swift */,
 			);
 			path = REST;
 			sourceTree = "<group>";
@@ -890,6 +896,7 @@
 				44D267621E3F8D0F000DF8EA /* UCSocialEntry.m in Sources */,
 				54D43DEA227DC7AD0027EFC1 /* String+MIMEType.swift in Sources */,
 				44D267C81E3F8D0F000DF8EA /* UCSocialRequest.m in Sources */,
+				54E3DFED22901A4B008C564E /* Uploadcare.swift in Sources */,
 				54D2E84D2275BDB800630F7D /* FileInfoRequest.swift in Sources */,
 				44D267C11E3F8D0F000DF8EA /* UCSocialEntriesRequest.m in Sources */,
 				44D267601E3F8D0F000DF8EA /* UCSocialEntriesCollection.m in Sources */,
@@ -938,6 +945,7 @@
 				54D43DE8227DC60B0027EFC1 /* FileUploadRequestTests.swift in Sources */,
 				54D43DFF227EE78D0027EFC1 /* RemoteFileUploadRequestTests.swift in Sources */,
 				54D43DE6227DC0E00027EFC1 /* ContentTypeTests.swift in Sources */,
+				54E3DFEF22902306008C564E /* UploadcareTests.swift in Sources */,
 				54D2E83C22747A0200630F7D /* RequestProtocolTests.swift in Sources */,
 				54D43DF7227EDF290027EFC1 /* GroupInfoRequestTests.swift in Sources */,
 				54D2E84F2275BFBE00630F7D /* FileInfoRequestTests.swift in Sources */,

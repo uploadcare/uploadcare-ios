@@ -12,6 +12,7 @@ public struct Configuration {
     struct API {
         static let scheme = "https"
         static let host = "upload.uploadcare.com"
+        static let publicKeyIdentifier = "com.uploadcare.publicKey"
     }
     struct File {
         static let uploadingPath = "/base/"

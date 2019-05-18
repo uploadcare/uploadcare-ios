@@ -9,7 +9,7 @@
 import XCTest
 @testable import Uploadcare
 
-class UploadcareTests: XCTestCase {
+class RequestProtocolTests: XCTestCase {
 
     func testThatRequestIsValidWhenConstructedWithExpectedValues() {
         let path = "/some/path/components"
