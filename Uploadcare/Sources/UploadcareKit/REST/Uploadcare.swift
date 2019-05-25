@@ -14,6 +14,18 @@ enum UploadcareError: Error {
 
 public class Uploadcare {
 
+    typealias UploadcareResult = Result<Any, Error>
+
+    /// Progress block for all types of operations.
+    ///
+    /// - Parameters:
+    ///   - bytesSent: Contains number of bytes already sent to the receiver.
+    ///   - bytesLeft: Contains overall number of bytes needed to be sent. In a case if this value is unknown, nil may be returned.
+    typealias UploadProgressBlock = (_ bytesSent: UInt?, _ bytesLeft: UInt?) -> Void
+
+    /// Completion block for all types of operations.
+    typealias CompletionBlock = (UploadcareResult) -> Void
+
     /// Uploadcare service public key for accessing uploading API.
     /// @see https://uploadcare.com/documentation/keys/
     public let publicKey: String

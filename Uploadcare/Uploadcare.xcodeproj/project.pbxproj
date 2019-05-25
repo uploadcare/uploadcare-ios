@@ -141,6 +141,7 @@
 		44D267C81E3F8D0F000DF8EA /* UCSocialRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D267431E3F8D0F000DF8EA /* UCSocialRequest.m */; };
 		44D267C91E3F8D0F000DF8EA /* UCSocialSourcesRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 44D267441E3F8D0F000DF8EA /* UCSocialSourcesRequest.h */; };
 		44D267CA1E3F8D0F000DF8EA /* UCSocialSourcesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D267451E3F8D0F000DF8EA /* UCSocialSourcesRequest.m */; };
+		543AFBBD22994E2A00A488D7 /* RemoteObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543AFBBC22994E2A00A488D7 /* RemoteObserver.swift */; };
 		547085BE22916A6700996122 /* MultipartFormDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547085BD22916A6700996122 /* MultipartFormDataTests.swift */; };
 		54D2E83C22747A0200630F7D /* RequestProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */; };
 		54D2E83E22747A0200630F7D /* Uploadcare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D266A21E3F8C64000DF8EA /* Uploadcare.framework */; };
@@ -315,6 +316,7 @@
 		44D267431E3F8D0F000DF8EA /* UCSocialRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialRequest.m; sourceTree = "<group>"; };
 		44D267441E3F8D0F000DF8EA /* UCSocialSourcesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCSocialSourcesRequest.h; sourceTree = "<group>"; };
 		44D267451E3F8D0F000DF8EA /* UCSocialSourcesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCSocialSourcesRequest.m; sourceTree = "<group>"; };
+		543AFBBC22994E2A00A488D7 /* RemoteObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteObserver.swift; sourceTree = "<group>"; };
 		547085BD22916A6700996122 /* MultipartFormDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataTests.swift; sourceTree = "<group>"; };
 		54D2E83922747A0200630F7D /* UploadcareTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UploadcareTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocolTests.swift; sourceTree = "<group>"; };
@@ -694,6 +696,7 @@
 			isa = PBXGroup;
 			children = (
 				54E3DFF1229158CD008C564E /* MultipartFormData.swift */,
+				543AFBBC22994E2A00A488D7 /* RemoteObserver.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -946,6 +949,7 @@
 				44D267A51E3F8D0F000DF8EA /* UCWidgetVC.m in Sources */,
 				44D267B41E3F8D0F000DF8EA /* UCSocialSourceCell.m in Sources */,
 				44D267A71E3F8D0F000DF8EA /* UCAlbumGalleryCell.m in Sources */,
+				543AFBBD22994E2A00A488D7 /* RemoteObserver.swift in Sources */,
 				54E3DFF322915980008C564E /* MultipartFormData.swift in Sources */,
 				44D267A31E3F8D0F000DF8EA /* UCMenuViewController.m in Sources */,
 				44D267531E3F8D0F000DF8EA /* UCFileUploadRequest.m in Sources */,
