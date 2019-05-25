@@ -8,17 +8,17 @@
 
 import Foundation
 
-enum RemoteObserverError: Error {
-    case noResponseAfterMaximumRetries
-    case cannotBuildRequest
-    case requestHasFailedWithoutError
-    case unableToSerializeJSONWithoutError
-    case cannotExtractStatusFromResponse
-    case serverError(description: String?)
-    case taskIsInProgress
-}
-
 final class RemoteObserver {
+
+    enum Errors: Error {
+        case noResponseAfterMaximumRetries
+        case cannotBuildRequest
+        case requestHasFailedWithoutError
+        case unableToSerializeJSONWithoutError
+        case cannotExtractStatusFromResponse
+        case serverError(description: String?)
+        case taskIsInProgress
+    }
 
     typealias JSON = [String: Any]
 
@@ -90,7 +90,7 @@ final class RemoteObserver {
         // If the task is nil or not running then create one and run it
         guard let pollingTask = self.pollingTask, pollingTask.state == .running else {
             guard let pollingRequest = self.pollingRequest else {
-                self.completionBlock(.failure(RemoteObserverError.cannotBuildRequest))
+                self.completionBlock(.failure(Errors.cannotBuildRequest))
                 return
             }
             let task = self.session.dataTask(with: pollingRequest) { [weak self] (data, response, error) in
@@ -111,18 +111,18 @@ final class RemoteObserver {
                         }
                     }()
                     guard let json = jsonObject else {
-                        completeWithError(RemoteObserverError.unableToSerializeJSONWithoutError)
+                        completeWithError(Errors.unableToSerializeJSONWithoutError)
                         return
                     }
                     guard let processResult = self?.process(response: json) else {
-                        completeWithError(RemoteObserverError.requestHasFailedWithoutError)
+                        completeWithError(Errors.requestHasFailedWithoutError)
                         return
                     }
                     switch processResult {
                     case .failure(let error):
                         switch error {
                         // FIXME: bad design, progress completion is called within .process function
-                        case RemoteObserverError.taskIsInProgress:
+                        case Errors.taskIsInProgress:
                             break
                         default:
                             completeWithError(error)
@@ -132,7 +132,7 @@ final class RemoteObserver {
                         self?.completionBlock(processResult)
                     }
                 case (.none, .none):
-                    completeWithError(RemoteObserverError.requestHasFailedWithoutError)
+                    completeWithError(Errors.requestHasFailedWithoutError)
                 }
             }
             task.resume()
@@ -143,7 +143,7 @@ final class RemoteObserver {
         self.stopObserving()
         // If we reached the maximum amount of attempts then stop the task and call the completion
         guard self.retryCounter <= Constants.observerRetryCount else {
-            self.completionBlock(.failure(RemoteObserverError.noResponseAfterMaximumRetries))
+            self.completionBlock(.failure(Errors.noResponseAfterMaximumRetries))
             return
         }
         // Worst case, task in running but stucked. We cancelled it previously, let's try to create a new one
@@ -152,7 +152,7 @@ final class RemoteObserver {
 
     func process(response: JSON) -> Uploadcare.UploadcareResult {
         guard let status = response[PollingStatus.Keys.status] as? String else {
-            return .failure(RemoteObserverError.cannotExtractStatusFromResponse)
+            return .failure(Errors.cannotExtractStatusFromResponse)
         }
         switch status {
         case PollingStatus.success:
@@ -160,14 +160,14 @@ final class RemoteObserver {
         case PollingStatus.error:
             // FIXME: propogate data to the completion?
             let description = response[PollingStatus.Keys.error] as? String
-            return .failure(RemoteObserverError.serverError(description: description))
+            return .failure(Errors.serverError(description: description))
         case PollingStatus.progress:
             let done = response[PollingStatus.Keys.doneBytes] as? UInt
             let total = response[PollingStatus.Keys.totalBytes] as? UInt
             self.progressBlock(done, total)
-            return .failure(RemoteObserverError.taskIsInProgress)
+            return .failure(Errors.taskIsInProgress)
         default:
-            return .failure(RemoteObserverError.cannotExtractStatusFromResponse)
+            return .failure(Errors.cannotExtractStatusFromResponse)
         }
     }
 }
