@@ -41,8 +41,8 @@ final class RemoteObserver {
         static let errorMessageUnknown = "Unknown error"
     }
 
-    let progressBlock: Uploadcare.UploadProgressBlock
-    let completionBlock: Uploadcare.CompletionBlock
+    let progressBlock: Uploadcare.UploadProgressBlock?
+    let completionBlock: Uploadcare.CompletionBlock?
     let token: String
     var retryCounter: Int = 0
     // FIXME: hide behind protocol all the below
@@ -62,7 +62,7 @@ final class RemoteObserver {
         return request
     }()
 
-    init(token: String, session: URLSession, progress: @escaping Uploadcare.UploadProgressBlock, completion: @escaping Uploadcare.CompletionBlock) {
+    init(token: String, session: URLSession, progress: Uploadcare.UploadProgressBlock? = nil, completion: Uploadcare.CompletionBlock? = nil) {
         self.token = token
         self.session = session
         self.progressBlock = progress
@@ -86,18 +86,19 @@ final class RemoteObserver {
     }
 
     // FIXME: throws?
+    // FIXME: simplify
     func sendPollingRequest() {
         // If the task is nil or not running then create one and run it
         guard let pollingTask = self.pollingTask, pollingTask.state == .running else {
             guard let pollingRequest = self.pollingRequest else {
-                self.completionBlock(.failure(Errors.cannotBuildRequest))
+                self.completionBlock?(.failure(Errors.cannotBuildRequest))
                 return
             }
             let task = self.session.dataTask(with: pollingRequest) { [weak self] (data, response, error) in
                 let completeWithError = { (error: Error) in
                     self?.stopObserving()
                     // FIXME: add a helper to retrieve an error message from the data
-                    self?.completionBlock(.failure(error))
+                    self?.completionBlock?(.failure(error))
                 }
                 switch (data, error) {
                 case let (_, error?):
@@ -129,7 +130,7 @@ final class RemoteObserver {
                         }
                     case .success(_):
                         self?.stopObserving()
-                        self?.completionBlock(processResult)
+                        self?.completionBlock?(processResult)
                     }
                 case (.none, .none):
                     completeWithError(Errors.requestHasFailedWithoutError)
@@ -143,7 +144,7 @@ final class RemoteObserver {
         self.stopObserving()
         // If we reached the maximum amount of attempts then stop the task and call the completion
         guard self.retryCounter <= Constants.observerRetryCount else {
-            self.completionBlock(.failure(Errors.noResponseAfterMaximumRetries))
+            self.completionBlock?(.failure(Errors.noResponseAfterMaximumRetries))
             return
         }
         // Worst case, task in running but stucked. We cancelled it previously, let's try to create a new one
@@ -164,7 +165,7 @@ final class RemoteObserver {
         case PollingStatus.progress:
             let done = response[PollingStatus.Keys.doneBytes] as? UInt
             let total = response[PollingStatus.Keys.totalBytes] as? UInt
-            self.progressBlock(done, total)
+            self.progressBlock?(done, total)
             return .failure(Errors.taskIsInProgress)
         default:
             return .failure(Errors.cannotExtractStatusFromResponse)
