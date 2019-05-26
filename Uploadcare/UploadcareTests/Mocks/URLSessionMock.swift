@@ -6,4 +6,21 @@
 //  Copyright © 2019 Uploadcare. All rights reserved.
 //
 
-import Foundation
+import XCTest
+@testable import Uploadcare
+
+final class URLSessionMock: URLSessionProtocol {
+
+    var onDataTaskCreation: ((URLRequest, URLSessionMock.CompletionHandler) -> URLSessionDataTaskProtocol)?
+
+    private(set) var request: URLRequest?
+
+    func dataTask(with request: URLRequest, completionHandler: @escaping URLSessionMock.CompletionHandler) -> URLSessionDataTaskProtocol {
+        self.request = request
+        guard let task = self.onDataTaskCreation?(request, completionHandler) else {
+            fatalError("Mock in not configured properly.")
+        }
+        return task
+    }
+
+}
