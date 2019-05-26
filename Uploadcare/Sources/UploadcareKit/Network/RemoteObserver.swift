@@ -47,8 +47,8 @@ final class RemoteObserver {
     var retryCounter: Int = 0
     // FIXME: hide behind protocol all the below
     var timerSource: DispatchSourceTimer?
-    let session: URLSession
-    var pollingTask: URLSessionDataTask?
+    let session: URLSessionProtocol
+    var pollingTask: URLSessionDataTaskProtocol?
     lazy var pollingRequest: URLRequest? = {
         guard let requestURL: URL = {
             var components = URLComponents()
@@ -62,7 +62,7 @@ final class RemoteObserver {
         return request
     }()
 
-    init(token: String, session: URLSession, progress: Uploadcare.UploadProgressBlock? = nil, completion: Uploadcare.CompletionBlock? = nil) {
+    init(token: String, session: URLSessionProtocol, progress: Uploadcare.UploadProgressBlock? = nil, completion: Uploadcare.CompletionBlock? = nil) {
         self.token = token
         self.session = session
         self.progressBlock = progress
@@ -77,6 +77,7 @@ final class RemoteObserver {
             source.setEventHandler { self.sendPollingRequest() }
             return source
         }()
+        timerSource.resume()
         self.timerSource = timerSource
     }
 
