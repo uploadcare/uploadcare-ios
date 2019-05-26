@@ -12,12 +12,24 @@ import XCTest
 final class URLSessionDataTaskMock {
 
     var onResume: (() -> Void)?
+    var onSuspend: (() -> Void)?
+    var onCancel: (() -> Void)?
 
     var state: URLSessionTask.State = .suspended
 
     func resume() {
         self.state = .running
         self.onResume?()
+    }
+
+    func suspend() {
+        self.state = .suspended
+        self.onSuspend?()
+    }
+
+    func cancel() {
+        self.state = .canceling
+        self.onCancel?()
     }
 
 }

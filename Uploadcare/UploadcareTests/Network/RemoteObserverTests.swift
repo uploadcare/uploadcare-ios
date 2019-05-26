@@ -24,7 +24,7 @@ class RemoteObserverTests: XCTestCase {
         XCTAssertNil(sut.timerSource)
     }
 
-    func testThanObserverCallsCompletionHandlerWhenServerDoesNotRespond() {
+    func testThanObserverCallsCompletionHandlerWithProperErrorWhenServerDoesNotRespond() {
         // Given
         let token = UUID().uuidString
         let onResumeExpectation = expectation(description: ".resume was called on the task")
@@ -53,14 +53,62 @@ class RemoteObserverTests: XCTestCase {
             }
             completionExpectation.fulfill()
         }
-        let sut = RemoteObserver(token: token, session: session, completion: completion)
+        let sut = RemoteObserver(token: token, session: session, requestRetryInterval: 0.1, completion: completion)
 
         // When
         sut.startObserving()
 
         // Then
-        let timeout = TimeInterval(RemoteObserver.Constants.observerRequestInterval * RemoteObserver.Constants.observerRetryCount)
+        let timeout = TimeInterval(sut.requestRetryInterval * Double(RemoteObserver.Constants.observerRetryCount))
         wait(for: [ onResumeExpectation, completionExpectation ], timeout: timeout)
+    }
+
+    func testThanObserverRetriesRequestWithProperCounterWhenServerDoesNotRespond() {
+        // Given
+        let token = UUID().uuidString
+        let session: URLSessionProtocol = {
+            let mock = URLSessionMock()
+            mock.onDataTaskCreation = { request, completionHandler in return URLSessionDataTaskMock() }
+            return mock
+        }()
+        let completionExpectation = expectation(description: "Completion block was called")
+        let completion: Uploadcare.CompletionBlock = { result in
+            completionExpectation.fulfill()
+        }
+        let sut = RemoteObserver(token: token, session: session, requestRetryInterval: 0.1, completion: completion)
+
+        // When
+        sut.startObserving()
+
+        // Then
+        let timeout = TimeInterval(sut.requestRetryInterval * Double(RemoteObserver.Constants.observerRetryCount))
+        wait(for: [ completionExpectation ], timeout: timeout)
+
+        XCTAssertEqual(sut.retryCounter, RemoteObserver.Constants.observerRetryCount)
+    }
+
+    func testThanObserverDeallocatesTaskWhenServerDoesNotRespond() {
+        // Given
+        let token = UUID().uuidString
+        let session: URLSessionProtocol = {
+            let mock = URLSessionMock()
+            mock.onDataTaskCreation = { request, completionHandler in return URLSessionDataTaskMock() }
+            return mock
+        }()
+        let completionExpectation = expectation(description: "Completion block was called")
+        let completion: Uploadcare.CompletionBlock = { result in
+            completionExpectation.fulfill()
+        }
+        let sut = RemoteObserver(token: token, session: session, requestRetryInterval: 0.1, completion: completion)
+
+        // When
+        sut.startObserving()
+
+        // Then
+        let timeout = TimeInterval(sut.requestRetryInterval * Double(RemoteObserver.Constants.observerRetryCount))
+        wait(for: [ completionExpectation ], timeout: timeout)
+
+        XCTAssertNil(sut.pollingTask)
     }
 
 }

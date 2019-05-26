@@ -25,7 +25,7 @@ final class RemoteObserver {
     struct Constants {
         static let tokenQueryItemKey = "token"
         static let observerRetryCount: Int = 3
-        static let observerRequestInterval: Int = 2
+        static let observerRequestDefaultInterval: TimeInterval = 2
     }
 
     struct PollingStatus {
@@ -44,8 +44,8 @@ final class RemoteObserver {
     let progressBlock: Uploadcare.UploadProgressBlock?
     let completionBlock: Uploadcare.CompletionBlock?
     let token: String
+    let requestRetryInterval: TimeInterval
     var retryCounter: Int = 0
-    // FIXME: hide behind protocol all the below
     var timerSource: DispatchSourceTimer?
     let session: URLSessionProtocol
     var pollingTask: URLSessionDataTaskProtocol?
@@ -62,18 +62,23 @@ final class RemoteObserver {
         return request
     }()
 
-    init(token: String, session: URLSessionProtocol, progress: Uploadcare.UploadProgressBlock? = nil, completion: Uploadcare.CompletionBlock? = nil) {
+    init(token: String,
+         session: URLSessionProtocol,
+         requestRetryInterval: TimeInterval = Constants.observerRequestDefaultInterval,
+         progress: Uploadcare.UploadProgressBlock? = nil,
+         completion: Uploadcare.CompletionBlock? = nil) {
         self.token = token
         self.session = session
         self.progressBlock = progress
         self.completionBlock = completion
+        self.requestRetryInterval = requestRetryInterval
     }
 
     func startObserving() {
         let timerSource: DispatchSourceTimer = {
             let queue = DispatchQueue.global(qos: .default)
             let source: DispatchSourceTimer = DispatchSource.makeTimerSource(queue: queue)
-            source.schedule(deadline: .now(), repeating: .seconds(Constants.observerRequestInterval))
+            source.schedule(deadline: .now(), repeating: self.requestRetryInterval)
             source.setEventHandler { self.sendPollingRequest() }
             return source
         }()
@@ -84,10 +89,13 @@ final class RemoteObserver {
     func stopObserving() {
         self.timerSource?.cancel()
         self.timerSource = nil
+        if self.pollingTask?.state != .completed {
+            self.pollingTask?.cancel()
+            self.pollingTask = nil
+        }
     }
 
-    // FIXME: throws?
-    // FIXME: simplify
+    // FIXME: throws? +simplify
     func sendPollingRequest() {
         // If the task is nil or not running then create one and run it
         guard let pollingTask = self.pollingTask, pollingTask.state == .running else {
@@ -142,9 +150,10 @@ final class RemoteObserver {
             return
         }
         self.retryCounter += 1
-        self.stopObserving()
         // If we reached the maximum amount of attempts then stop the task and call the completion
-        guard self.retryCounter <= Constants.observerRetryCount else {
+        guard self.retryCounter < Constants.observerRetryCount else {
+            // FIXME: re-check the behaviour
+            self.stopObserving()
             self.completionBlock?(.failure(Errors.noResponseAfterMaximumRetries))
             return
         }
