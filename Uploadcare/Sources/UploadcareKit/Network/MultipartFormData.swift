@@ -6,6 +6,8 @@
 //  Copyright © 2019 Uploadcare. All rights reserved.
 //
 
+import Foundation
+
 enum MultipartFormDataError: Error {
     case cannotCreateData
 }

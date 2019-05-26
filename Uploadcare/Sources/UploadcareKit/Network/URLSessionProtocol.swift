@@ -6,6 +6,8 @@
 //  Copyright © 2019 Uploadcare. All rights reserved.
 //
 
+import Foundation
+
 protocol URLSessionProtocol {
     typealias CompletionHandler = (Data?, URLResponse?, Error?) -> Void
 
@@ -14,6 +16,6 @@ protocol URLSessionProtocol {
 
 extension URLSession: URLSessionProtocol {
     func dataTask(with request: URLRequest, completionHandler: @escaping URLSession.CompletionHandler) -> URLSessionDataTaskProtocol {
-        return self.dataTask(with: request, completionHandler: completionHandler) as URLSessionDataTask as URLSessionDataTaskProtocol
+        return (self.dataTask(with: request, completionHandler: completionHandler) as URLSessionDataTask) as URLSessionDataTaskProtocol
     }
 }

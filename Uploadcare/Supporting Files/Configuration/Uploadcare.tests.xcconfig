@@ -1,0 +1,12 @@
+// Specific .xcodeproj settings for TESTING configurations
+
+#include "Uploadcare.shared.xcconfig"
+
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+
+CODE_SIGN_STYLE = Automatic;
+INFOPLIST_FILE = UploadcareTests/Info.plist;
+MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+MTL_FAST_MATH = YES;
+PRODUCT_BUNDLE_IDENTIFIER = com.uploadcare.UploadcareTests;
+PRODUCT_NAME = $(TARGET_NAME);

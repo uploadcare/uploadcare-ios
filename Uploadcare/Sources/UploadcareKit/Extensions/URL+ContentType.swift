@@ -6,6 +6,7 @@
 //  Copyright © 2019 Uploadcare. All rights reserved.
 //
 
+import Foundation
 import MobileCoreServices
 
 extension URL {
