@@ -17,13 +17,13 @@ final class URLRequestBuilder {
         return URLRequest(url: url)
     }
 
-    private class func baseComponents(with path: String) -> URLComponents {
+    class func baseComponents(with path: String) -> URLComponents {
         var components = self.baseComponents
         components.path = path
         return components
     }
 
-    private static var baseComponents: URLComponents = {
+    static var baseComponents: URLComponents = {
         var components = URLComponents()
         components.scheme = Configuration.API.scheme
         components.host = Configuration.API.host
