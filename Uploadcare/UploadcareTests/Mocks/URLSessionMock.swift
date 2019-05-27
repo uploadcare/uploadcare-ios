@@ -11,7 +11,7 @@ import XCTest
 
 final class URLSessionMock: URLSessionProtocol {
 
-    var onDataTaskCreation: ((URLRequest, URLSessionMock.CompletionHandler) -> URLSessionDataTaskProtocol)?
+    var onDataTaskCreation: ((URLRequest, @escaping URLSessionMock.CompletionHandler) -> URLSessionDataTaskProtocol)?
 
     private(set) var request: URLRequest?
 

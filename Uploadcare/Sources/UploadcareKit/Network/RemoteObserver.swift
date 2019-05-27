@@ -133,7 +133,7 @@ final class RemoteObserver {
                         switch error {
                         // FIXME: bad design, progress completion is called within .process function
                         case Errors.taskIsInProgress:
-                            break
+                            return
                         default:
                             completeWithError(error)
                         }
@@ -161,6 +161,8 @@ final class RemoteObserver {
         self.sendPollingRequest()
     }
 
+    // FIXME: extend status handling with all possible values
+    // https://uploadcare.com/docs/api_reference/upload/from_url/#status-check
     func process(response: JSON) -> Uploadcare.UploadcareResult {
         guard let status = response[PollingStatus.Keys.status] as? String else {
             return .failure(Errors.cannotExtractStatusFromResponse)
