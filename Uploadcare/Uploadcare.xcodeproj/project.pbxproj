@@ -151,6 +151,7 @@
 		543AFBCD229A9DDB00A488D7 /* Uploadcare.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 543AFBCC229A9DDB00A488D7 /* Uploadcare.debug.xcconfig */; };
 		543AFBCF229A9DE700A488D7 /* Uploadcare.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 543AFBCE229A9DE700A488D7 /* Uploadcare.release.xcconfig */; };
 		543AFBD1229AA0C900A488D7 /* Uploadcare.tests.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 543AFBD0229AA0C900A488D7 /* Uploadcare.tests.xcconfig */; };
+		546A8354229BFF39003299C8 /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A8353229BFF39003299C8 /* URLRequestBuilder.swift */; };
 		547085BE22916A6700996122 /* MultipartFormDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547085BD22916A6700996122 /* MultipartFormDataTests.swift */; };
 		54D2E83C22747A0200630F7D /* RequestProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */; };
 		54D2E83E22747A0200630F7D /* Uploadcare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D266A21E3F8C64000DF8EA /* Uploadcare.framework */; };
@@ -335,6 +336,7 @@
 		543AFBCC229A9DDB00A488D7 /* Uploadcare.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Uploadcare.debug.xcconfig; sourceTree = "<group>"; };
 		543AFBCE229A9DE700A488D7 /* Uploadcare.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Uploadcare.release.xcconfig; sourceTree = "<group>"; };
 		543AFBD0229AA0C900A488D7 /* Uploadcare.tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Uploadcare.tests.xcconfig; sourceTree = "<group>"; };
+		546A8353229BFF39003299C8 /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 		547085BD22916A6700996122 /* MultipartFormDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataTests.swift; sourceTree = "<group>"; };
 		54D2E83922747A0200630F7D /* UploadcareTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UploadcareTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D2E83B22747A0200630F7D /* RequestProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocolTests.swift; sourceTree = "<group>"; };
@@ -423,8 +425,9 @@
 		44D266B81E3F8D0F000DF8EA /* UploadcareKit */ = {
 			isa = PBXGroup;
 			children = (
-				54E3DFF0229158BE008C564E /* Network */,
 				54D43DE1227DAB420027EFC1 /* Extensions */,
+				546A8352229BFF1A003299C8 /* Helpers */,
+				54E3DFF0229158BE008C564E /* Network */,
 				54D2E8442274847B00630F7D /* REST */,
 				44D266B91E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.h */,
 				44D266BA1E3F8D0F000DF8EA /* NSDictionary+UrlEncoding.m */,
@@ -644,6 +647,14 @@
 				543AFBD0229AA0C900A488D7 /* Uploadcare.tests.xcconfig */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		546A8352229BFF1A003299C8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				546A8353229BFF39003299C8 /* URLRequestBuilder.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		547085BC22916A4500996122 /* Network */ = {
@@ -968,6 +979,7 @@
 				44D267621E3F8D0F000DF8EA /* UCSocialEntry.m in Sources */,
 				54D43DEA227DC7AD0027EFC1 /* String+MIMEType.swift in Sources */,
 				44D267C81E3F8D0F000DF8EA /* UCSocialRequest.m in Sources */,
+				546A8354229BFF39003299C8 /* URLRequestBuilder.swift in Sources */,
 				54E3DFED22901A4B008C564E /* Uploadcare.swift in Sources */,
 				54D2E84D2275BDB800630F7D /* FileInfoRequest.swift in Sources */,
 				44D267C11E3F8D0F000DF8EA /* UCSocialEntriesRequest.m in Sources */,

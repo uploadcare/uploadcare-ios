@@ -20,17 +20,11 @@ public protocol RequestProtocol {
 
 public extension RequestProtocol {
     var request: URLRequest? {
-        guard let url: URL = {
-            var components = URLComponents()
-            components.scheme = Configuration.API.scheme
-            components.host = Configuration.API.host
-            components.path = self.path
-            components.queryItems = self.parameters.map { parameter in
+        let request = URLRequestBuilder.build(
+            with: self.path,
+            queryItems: self.parameters.map { parameter in
                 URLQueryItem(name: parameter.key, value: parameter.value)
-            }
-            guard let url = components.url else { return nil }
-            return url
-        }() else { return nil }
-        return URLRequest(url: url)
+        })
+        return request
     }
 }

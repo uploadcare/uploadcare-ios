@@ -50,15 +50,9 @@ final class RemoteObserver {
     let session: URLSessionProtocol
     var pollingTask: URLSessionDataTaskProtocol?
     lazy var pollingRequest: URLRequest? = {
-        guard let requestURL: URL = {
-            var components = URLComponents()
-            components.scheme = Configuration.API.scheme
-            components.host = Configuration.API.host
-            components.path = Configuration.RemoteFile.statusPath
-            components.queryItems = [ URLQueryItem(name: Constants.tokenQueryItemKey, value: self.token) ]
-            return components.url
-            }() else { return nil }
-        let request = URLRequest(url: requestURL)
+        let request = URLRequestBuilder.build(
+            with: Configuration.RemoteFile.statusPath,
+            queryItems: [ URLQueryItem(name: Constants.tokenQueryItemKey, value: self.token) ])
         return request
     }()
 

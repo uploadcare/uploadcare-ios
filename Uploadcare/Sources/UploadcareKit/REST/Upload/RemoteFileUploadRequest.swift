@@ -24,20 +24,15 @@ public final class RemoteFileUploadRequest: RequestProtocol {
     }
 
     public var request: URLRequest? {
-        guard let url: URL = {
-            // This structure parses and constructs URLs according to RFC 3986.
-            var components = URLComponents()
-            components.scheme = Configuration.API.scheme
-            components.host = Configuration.API.host
-            components.path = self.path
-            components.queryItems = self.parameters.map { parameter in
+        let queryItems: [ URLQueryItem ] = {
+            var items = self.parameters.map { parameter in
                 URLQueryItem(name: parameter.key, value: parameter.value)
             }
-            let sourceURLQueryItem = URLQueryItem(name: Constants.sourceURLKey, value: self.fileURL)
-            components.queryItems?.append(sourceURLQueryItem)
-            return components.url
-            }() else { return nil }
-        return URLRequest(url: url)
+            items.append(URLQueryItem(name: Constants.sourceURLKey, value: self.fileURL))
+            return items
+        }()
+        let request = URLRequestBuilder.build(with: self.path, queryItems: queryItems)
+        return request
     }
 
 }
