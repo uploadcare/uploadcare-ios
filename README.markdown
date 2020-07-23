@@ -1,6 +1,6 @@
 # Uploadcare for iOS
 
-**Currently outdated. Will be completely revamped this spring as an iOS Uploader. For using REST and Upload API — use our brand new [Swift library](https://github.com/uploadcare/uploadcare-swift).**
+**Depricated. Check out our brand new [Swift library](https://github.com/uploadcare/uploadcare-swift).**
 
 [![Build Status](https://travis-ci.org/uploadcare/uploadcare-ios.svg?branch=master)](https://travis-ci.org/uploadcare/uploadcare-ios)
 [![Pod Version](https://img.shields.io/cocoapods/v/Uploadcare.svg)](http://cocoadocs.org/docsets/Uploadcare)
