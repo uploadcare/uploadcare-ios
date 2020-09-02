@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
-  s.name         = 'Uploadcare'
+  s.name         = 'uploadcare-ios'
   s.version      = '3.0.2'
   s.summary      = 'Uploadcare iOS library.'
   s.homepage     = 'https://uploadcare.com'
   s.license      = 'MIT'
-  s.authors      = { 'Ruslan Kavetsky' => 'rusya.182@gmail.com' }
+  s.authors      = { 'Uploadcare, Inc' => 'hello@uploadcare.com' }
   s.source       = { :git => 'https://github.com/uploadcare/uploadcare-ios.git', :tag => s.version.to_s }
   s.source_files = 'Uploadcare/Sources/UploadcareWidget/**/*.{h,m}'
   s.resources    = 'Uploadcare/Sources/UploadcareWidget/Resources/**/*.{png,xib}'
