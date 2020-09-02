@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = 'uploadcare-ios'
-  s.version      = '3.0.2'
-  s.summary      = 'Uploadcare iOS library.'
+  s.version      = '3.0.3'
+  s.summary      = 'Deprecated — use Uploadcare (Swift library) instead | Uploadcare Objective-C library.'
   s.homepage     = 'https://uploadcare.com'
   s.license      = 'MIT'
   s.authors      = { 'Uploadcare, Inc' => 'hello@uploadcare.com' }
