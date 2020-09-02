@@ -11,6 +11,8 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.platform     = :ios, '8.0'
   s.frameworks   = 'SafariServices'
+  s.deprecated   = true
+  s.deprecated_in_favor_of = 'Uploadcare'
 
   s.subspec 'Core' do |sp|
     sp.source_files         = 'Uploadcare/Sources/UploadcareKit/*.{h,m}'
