@@ -250,11 +250,12 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
 
 @end
 
-@interface UCClient () <NSURLSessionTaskDelegate>
+@interface UCClient () <NSURLSessionTaskDelegate, NSURLSessionDataDelegate>
 
 @property (nonatomic, strong) NSString *publicKey;
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, strong) NSURLSession *pollingSession;
+@property (nonatomic, strong) NSMutableDictionary<NSNumber*, NSURLResponse*>* responses;
 @property (nonatomic, strong) NSMutableDictionary *responsesData;
 @property (nonatomic, assign) UCStoreOption storeOption;
 @property (nonatomic, strong) NSMutableArray *pollingTasks;
@@ -444,6 +445,14 @@ static UCClient *instanceClient = nil;
     return _progressQueue;
 }
 
+-(NSMutableDictionary<NSNumber *,NSURLResponse *> *)responses
+{
+    if (!_responses) {
+        _responses = [NSMutableDictionary new];
+    }
+    return _responses;
+}
+
 - (NSMutableDictionary *)responsesData {
     if (!_responsesData) {
         _responsesData = [NSMutableDictionary new];
@@ -452,6 +461,15 @@ static UCClient *instanceClient = nil;
 }
 
 #pragma mark - NSURLSession delegate
+
+-(void) URLSession:(NSURLSession *)session
+          dataTask:(NSURLSessionDataTask *)dataTask
+didReceiveResponse:(NSURLResponse *)response
+ completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler
+{
+    self.responses[@(dataTask.taskIdentifier)] = response;
+    completionHandler(NSURLSessionResponseAllow);
+}
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
     NSData *existingData = self.responsesData[@(dataTask.taskIdentifier)];
@@ -474,20 +492,31 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
 didCompleteWithError:(nullable NSError *)error {
-    id response = self.responsesData[@(task.taskIdentifier)];
-    UCCompletionBlock completionBlock = [self.completionQueue objectForKey:@(task.taskIdentifier)];
-    UCProgressBlock progressBlock = [self.progressQueue objectForKey:@(task.taskIdentifier)];
+    NSNumber* taskIdentifier = @(task.taskIdentifier);
+    NSURLResponse *response = self.responses[taskIdentifier];
+    NSHTTPURLResponse *httpResponse = [response isKindOfClass:[NSHTTPURLResponse class]] ? (NSHTTPURLResponse*)response : nil;
+    id responseData = self.responsesData[taskIdentifier];
+    UCCompletionBlock completionBlock = [self.completionQueue objectForKey:taskIdentifier];
+    UCProgressBlock progressBlock = [self.progressQueue objectForKey:taskIdentifier];
 
     NSError *jsonError = nil;
     id responseJson = nil;
-    if (response) responseJson = [NSJSONSerialization JSONObjectWithData:response options:0 error:&jsonError];
+    if (httpResponse && 200 <= httpResponse.statusCode && httpResponse.statusCode < 300 && [httpResponse.allHeaderFields[@"Content-Type"] hasPrefix:@"application/json"] && responseData) {
+        responseJson = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonError];
+    } else if (httpResponse && 400 <= httpResponse.statusCode && httpResponse.statusCode < 600 && [responseData isKindOfClass:[NSData class]]) {
+        NSString* description = [[NSString alloc] initWithData:(NSData*)responseData
+                                                      encoding:NSUTF8StringEncoding];
+        jsonError = [NSError errorWithDomain:[UCRemoteObserver errorDomain]
+                                        code:httpResponse.statusCode
+                                    userInfo:@{NSLocalizedDescriptionKey : description ? description : [NSNull null]}];
+    }
     
     if (!error && [self.pollingTasks containsObject:@(task.taskIdentifier)]) {
         @synchronized (self.pollingTasks) {
             [self.pollingTasks removeObject:@(task.taskIdentifier)];
         }
         if (jsonError || !responseJson) {
-            if (completionBlock) completionBlock (responseJson ?: response, jsonError);
+            if (completionBlock) completionBlock (responseJson ?: responseData, jsonError);
             [self removeQueuesForTaskId:task.taskIdentifier];
         } else {
             self.remoteObserver = [UCRemoteObserver observerWithToken:responseJson[@"token"] session:self.pollingSession progress:progressBlock completion:completionBlock];
@@ -498,7 +527,8 @@ didCompleteWithError:(nullable NSError *)error {
         [self removeQueuesForTaskId:task.taskIdentifier];
     }
     
-    [self.responsesData removeObjectForKey:@(task.taskIdentifier)];
+    [self.responses removeObjectForKey:taskIdentifier];
+    [self.responsesData removeObjectForKey:taskIdentifier];
 }
 
 #pragma mark - Utilities
